@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Feature;
+namespace Koodilab\Tests\Feature;
 
-use Tests\TestCase;
+use Koodilab\Tests\TestCase;
 
 class ExampleTest extends TestCase
 {

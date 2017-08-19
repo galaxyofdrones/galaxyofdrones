@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit;
+namespace Koodilab\Tests\Unit;
 
-use Tests\TestCase;
+use Koodilab\Tests\TestCase;
 
 class ExampleTest extends TestCase
 {

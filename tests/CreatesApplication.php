@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Koodilab\Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 

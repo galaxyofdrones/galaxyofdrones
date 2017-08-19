@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Koodilab\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Koodilab\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use Koodilab\User;
+use Koodilab\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -58,7 +58,7 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return \App\User
+     * @return \Koodilab\User
      */
     protected function create(array $data)
     {

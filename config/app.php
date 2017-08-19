@@ -170,11 +170,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Koodilab\Providers\AppServiceProvider::class,
+        Koodilab\Providers\AuthServiceProvider::class,
+        // Koodilab\Providers\BroadcastServiceProvider::class,
+        Koodilab\Providers\EventServiceProvider::class,
+        Koodilab\Providers\RouteServiceProvider::class,
 
     ],
 

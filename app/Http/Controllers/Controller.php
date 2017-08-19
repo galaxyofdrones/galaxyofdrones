@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Koodilab\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

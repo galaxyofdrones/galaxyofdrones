@@ -23,12 +23,12 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "Koodilab\\": "app/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Koodilab\\Tests\\": "tests/"
         }
     },
     "extra": {
