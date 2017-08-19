@@ -36,4 +36,16 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function bootstrap()
+    {
+        parent::bootstrap();
+
+        if ($this->app->environment() != 'production') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
+    }
 }

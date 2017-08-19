@@ -58,4 +58,17 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function bootstrap()
+    {
+        parent::bootstrap();
+
+        if ($this->app->environment() != 'production') {
+            $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
+            $this->prependMiddleware(\Clockwork\Support\Laravel\ClockworkMiddleware::class);
+        }
+    }
 }
