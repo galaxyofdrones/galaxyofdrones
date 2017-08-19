@@ -63,6 +63,7 @@ return [
             'head',
             'last',
             'mix',
+            'setting',
         ],
 
         /*

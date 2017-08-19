@@ -1,0 +1,18 @@
+{% extends 'layouts.base' %}
+
+{% set title = setting('title') %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block head %}
+    {% set description = setting('description') %}
+    {% set author = setting('author') %}
+
+    {% if description %}
+        <meta name="description" content="{{ description }}">
+    {% endif %}
+    {% if author %}
+        <meta name="author" content="{{ author }}">
+    {% endif %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}

@@ -13,7 +13,17 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
+/* @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(Koodilab\Models\Setting::class, function (Faker $faker) {
+    return [
+        'key' => $faker->word,
+        'value' => [
+            'en' => $faker->word,
+        ],
+    ];
+});
+
+$factory->define(Koodilab\Models\User::class, function (Faker $faker) {
     static $password;
 
     return [

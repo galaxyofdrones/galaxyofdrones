@@ -3,6 +3,7 @@
 namespace Koodilab\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Koodilab\Support\SettingManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,5 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(SettingManager::class);
     }
 }

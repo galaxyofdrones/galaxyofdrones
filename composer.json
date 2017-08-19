@@ -27,7 +27,10 @@
         ],
         "psr-4": {
             "Koodilab\\": "app/"
-        }
+        },
+        "files": [
+            "app/Support/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
