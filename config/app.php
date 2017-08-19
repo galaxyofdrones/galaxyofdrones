@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Passport\PassportServiceProvider::class,
+        TwigBridge\ServiceProvider::class,
 
         /*
          * Application Service Providers...
