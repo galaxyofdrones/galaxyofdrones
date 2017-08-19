@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Auth;
+namespace Koodilab\Http\Controllers\Site;
 
-use Koodilab\User;
+use Koodilab\Models\User;
 use Koodilab\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;

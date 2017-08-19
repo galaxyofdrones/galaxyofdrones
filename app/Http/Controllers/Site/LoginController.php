@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Auth;
+namespace Koodilab\Http\Controllers\Site;
 
 use Koodilab\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
