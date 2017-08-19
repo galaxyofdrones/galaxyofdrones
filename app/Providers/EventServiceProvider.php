@@ -3,6 +3,7 @@
 namespace Koodilab\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,5 +18,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Passport::routes();
     }
 }
