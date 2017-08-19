@@ -8,16 +8,12 @@ use Fideloper\Proxy\TrustProxies as Middleware;
 class TrustProxies extends Middleware
 {
     /**
-     * The trusted proxies for this application.
-     *
-     * @var array
+     * {@inheritdoc}
      */
     protected $proxies;
 
     /**
-     * The current proxy header mappings.
-     *
-     * @var array
+     * {@inheritdoc}
      */
     protected $headers = [
         Request::HEADER_FORWARDED => 'FORWARDED',

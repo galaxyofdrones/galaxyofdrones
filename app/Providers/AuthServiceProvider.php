@@ -7,9 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
-     *
-     * @var array
+     * {@inheritdoc}
      */
     protected $policies = [
         'Koodilab\Model' => 'Koodilab\Policies\ModelPolicy',

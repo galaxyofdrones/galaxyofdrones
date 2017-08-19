@@ -58,7 +58,7 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return \Koodilab\User
+     * @return \Koodilab\Models\User
      */
     protected function create(array $data)
     {
