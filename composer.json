@@ -1,7 +1,7 @@
 {
     "name": "koodilab/galaxyofdrones-online",
-    "description": "The Galaxy of Drones Online game.",
-    "license": "proprietary",
+    "description": "A multiplayer space strategy game based on Laravel.",
+    "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=7.0.0",

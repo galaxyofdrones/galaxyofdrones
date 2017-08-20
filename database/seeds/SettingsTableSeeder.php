@@ -20,7 +20,7 @@ class SettingsTableSeeder extends Seeder
         Setting::create([
             'key' => 'description',
             'value' => [
-                'en' => 'The Galaxy of Drones Online game.',
+                'en' => 'A multiplayer space strategy game based on Laravel.',
             ],
         ]);
 
