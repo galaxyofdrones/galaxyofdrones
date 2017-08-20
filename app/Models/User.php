@@ -10,27 +10,47 @@ use Laravel\Passport\HasApiTokens;
  * User.
  *
  * @property int $id
+ * @property int|null $capital_id
+ * @property int|null $current_id
  * @property string $username
  * @property string $email
  * @property string $password
  * @property string|null $remember_token
  * @property bool $is_enabled
  * @property int $role
+ * @property int $energy
+ * @property int $experience
+ * @property int $production_rate
  * @property \Carbon\Carbon|null $last_login
+ * @property \Carbon\Carbon|null $last_capital_changed
+ * @property \Carbon\Carbon|null $last_production_changed
+ * @property \Carbon\Carbon|null $last_mission_log_read
+ * @property \Carbon\Carbon|null $last_battle_log_read
+ * @property \Carbon\Carbon|null $started_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastBattleLogRead($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastCapitalChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastMissionLogRead($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastProductionChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereProductionRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
  * @mixin \Eloquent
@@ -66,6 +86,9 @@ class User extends Authenticatable
     protected $attributes = [
         'is_enabled' => true,
         'role' => self::ROLE_USER,
+        'energy' => 1000,
+        'experience' => 0,
+        'production_rate' => 0,
     ];
 
     /**
@@ -86,7 +109,8 @@ class User extends Authenticatable
      * {@inheritdoc}
      */
     protected $dates = [
-        'last_login',
+        'last_login', 'last_capital_changed', 'last_production_changed',
+        'last_mission_log_read', 'last_battle_log_read', 'started_at',
     ];
 
     /**
