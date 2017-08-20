@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aafb7061a4733829bb23ba40b49c5c13",
+    "content-hash": "ffc4726a7bd5f8d60532602ab1c0c6a9",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -691,17 +691,71 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
+            "name": "kalnoy/nestedset",
+            "version": "v4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lazychaser/laravel-nestedset.git",
+                "reference": "b47019351e4e044c94ec69c27653efa6ddf1ba8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/b47019351e4e044c94ec69c27653efa6ddf1ba8a",
+                "reference": "b47019351e4e044c94ec69c27653efa6ddf1ba8a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.0 - 5.5",
+                "illuminate/events": "5.0 - 5.5",
+                "illuminate/support": "5.0 - 5.5",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v4.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kalnoy\\Nestedset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kalnoy",
+                    "email": "lazychaser@gmail.com"
+                }
+            ],
+            "description": "Nested Set Model for Laravel 4-5",
+            "keywords": [
+                "database",
+                "hierarchy",
+                "laravel",
+                "nested sets",
+                "nsm"
+            ],
+            "time": "2017-07-30 05:47:02"
+        },
+        {
             "name": "laravel/framework",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "30931bc62bd3ce3f23f2cbddcf1face395f1b97f"
+                "reference": "9c2c25b92a5d17af57a408a39e72aaa2dc2ed593"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/30931bc62bd3ce3f23f2cbddcf1face395f1b97f",
-                "reference": "30931bc62bd3ce3f23f2cbddcf1face395f1b97f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9c2c25b92a5d17af57a408a39e72aaa2dc2ed593",
+                "reference": "9c2c25b92a5d17af57a408a39e72aaa2dc2ed593",
                 "shasum": ""
             },
             "require": {
@@ -820,7 +874,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-19T14:54:25+00:00"
+            "time": "2017-08-19T21:39:19+00:00"
         },
         {
             "name": "laravel/passport",
@@ -4474,16 +4528,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "ecb0b2cdaa0add708fe6f329ef65ae0c5225130b"
+                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/ecb0b2cdaa0add708fe6f329ef65ae0c5225130b",
-                "reference": "ecb0b2cdaa0add708fe6f329ef65ae0c5225130b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/9a02332089ac48e704c70f6cefed30c224e3c0b0",
+                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0",
                 "shasum": ""
             },
             "require": {
@@ -4519,7 +4573,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-08-03T14:17:41+00:00"
+            "time": "2017-08-20T05:47:52+00:00"
         },
         {
             "name": "phpunit/phpunit",

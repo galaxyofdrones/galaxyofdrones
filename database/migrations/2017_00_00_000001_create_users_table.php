@@ -13,13 +13,23 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('capital_id')->unsigned()->nullable();
+            $table->integer('current_id')->unsigned()->nullable();
             $table->string('username', 20)->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_enabled');
             $table->integer('role')->unsigned();
+            $table->bigInteger('energy')->unsigned();
+            $table->bigInteger('experience')->unsigned();
+            $table->bigInteger('production_rate')->unsigned();
             $table->timestamp('last_login')->nullable();
+            $table->timestamp('last_capital_changed')->nullable();
+            $table->timestamp('last_production_changed')->nullable();
+            $table->timestamp('last_mission_log_read')->nullable();
+            $table->timestamp('last_battle_log_read')->nullable();
+            $table->timestamp('started_at')->nullable();
             $table->timestamps();
         });
     }
