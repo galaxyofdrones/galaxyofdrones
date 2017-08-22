@@ -4,14 +4,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBattleLogAttackerUnitTable extends Migration
+class CreateBattleLogUnitTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('battle_log_attacker_unit', function (Blueprint $table) {
+        Schema::create('battle_log_unit', function (Blueprint $table) {
             $table->bigInteger('battle_log_id')->unsigned();
             $table->foreign('battle_log_id')
                 ->references('id')
@@ -24,10 +24,11 @@ class CreateBattleLogAttackerUnitTable extends Migration
                 ->on('units')
                 ->onDelete('cascade');
 
+            $table->integer('owner')->unsigned();
             $table->integer('quantity')->unsigned();
             $table->integer('losses')->unsigned();
 
-            $table->primary(['battle_log_id', 'unit_id']);
+            $table->primary(['battle_log_id', 'unit_id', 'owner']);
         });
     }
 
@@ -36,6 +37,6 @@ class CreateBattleLogAttackerUnitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('battle_log_attacker_unit');
+        Schema::dropIfExists('battle_log_unit');
     }
 }

@@ -24,8 +24,6 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon|null $last_login
  * @property \Carbon\Carbon|null $last_capital_changed
  * @property \Carbon\Carbon|null $last_production_changed
- * @property \Carbon\Carbon|null $last_mission_log_read
- * @property \Carbon\Carbon|null $last_battle_log_read
  * @property \Carbon\Carbon|null $started_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -41,10 +39,8 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsEnabled($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastBattleLogRead($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastCapitalChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastMissionLogRead($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastProductionChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProductionRate($value)
@@ -109,8 +105,7 @@ class User extends Authenticatable
      * {@inheritdoc}
      */
     protected $dates = [
-        'last_login', 'last_capital_changed', 'last_production_changed',
-        'last_mission_log_read', 'last_battle_log_read', 'started_at',
+        'last_login', 'last_capital_changed', 'last_production_changed', 'started_at',
     ];
 
     /**
