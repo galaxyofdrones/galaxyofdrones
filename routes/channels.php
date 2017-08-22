@@ -1,5 +1,8 @@
 <?php
 
+use Koodilab\Models\Planet;
+use Koodilab\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -11,6 +14,6 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('planet.{planet}', function (User $user, Planet $planet) {
+    return $user->id == $planet->user_id;
 });

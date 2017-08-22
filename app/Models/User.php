@@ -4,6 +4,7 @@ namespace Koodilab\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Koodilab\Models\Relations\HasManyPlanet;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -29,6 +30,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|Planet[] $planets
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
@@ -53,7 +55,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, HasManyPlanet;
 
     /**
      * The user role.

@@ -17,7 +17,6 @@ class CreateBuildingsTable extends Migration
             NestedSet::columns($table);
             $table->json('name');
             $table->integer('type')->unsigned();
-            $table->integer('start_level')->unsigned();
             $table->integer('end_level')->unsigned();
             $table->integer('construction_experience')->unsigned();
             $table->integer('construction_cost')->unsigned();
