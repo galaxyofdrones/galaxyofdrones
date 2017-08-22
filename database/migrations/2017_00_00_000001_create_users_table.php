@@ -27,8 +27,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_login')->nullable();
             $table->timestamp('last_capital_changed')->nullable();
             $table->timestamp('last_production_changed')->nullable();
-            $table->timestamp('last_mission_log_read')->nullable();
-            $table->timestamp('last_battle_log_read')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamps();
         });
