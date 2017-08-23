@@ -750,12 +750,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9c2c25b92a5d17af57a408a39e72aaa2dc2ed593"
+                "reference": "60860f3fdb277154606a1f3584104ed97d24d16a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9c2c25b92a5d17af57a408a39e72aaa2dc2ed593",
-                "reference": "9c2c25b92a5d17af57a408a39e72aaa2dc2ed593",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/60860f3fdb277154606a1f3584104ed97d24d16a",
+                "reference": "60860f3fdb277154606a1f3584104ed97d24d16a",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
             "require-dev": {
                 "aws/aws-sdk-php": "~3.0",
                 "doctrine/dbal": "~2.5",
-                "filp/whoops": "~2.0",
+                "filp/whoops": "^2.1.4",
                 "mockery/mockery": "~0.9.4",
                 "orchestra/testbench-core": "3.5.*",
                 "pda/pheanstalk": "~3.0",
@@ -874,7 +874,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-19T21:39:19+00:00"
+            "time": "2017-08-23T13:02:52+00:00"
         },
         {
             "name": "laravel/passport",
@@ -3123,21 +3123,21 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "424a840dc3bedcdeea510b42e056c77c2d6c4bef"
+                "reference": "1d23172f9dc1687a97c195a777b0199f14f7b26e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/424a840dc3bedcdeea510b42e056c77c2d6c4bef",
-                "reference": "424a840dc3bedcdeea510b42e056c77c2d6c4bef",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/1d23172f9dc1687a97c195a777b0199f14f7b26e",
+                "reference": "1d23172f9dc1687a97c195a777b0199f14f7b26e",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.4 || ^7.0",
-                "psr/http-message": "~1.0"
+                "php": "^5.6 || ^7.0",
+                "psr/http-message": "^1.0"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
@@ -3145,14 +3145,14 @@
             "require-dev": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
-                "phpunit/phpunit": "^4.6 || ^5.5",
-                "zendframework/zend-coding-standard": "~1.0.0"
+                "phpunit/phpunit": "^5.7.16 || ^6.0.8",
+                "zendframework/zend-coding-standard": "~1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev",
-                    "dev-develop": "1.5-dev"
+                    "dev-master": "1.5-dev",
+                    "dev-develop": "1.6-dev"
                 }
             },
             "autoload": {
@@ -3171,7 +3171,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2017-08-17T21:21:00+00:00"
+            "time": "2017-08-22T20:38:56+00:00"
         }
     ],
     "packages-dev": [
