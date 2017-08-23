@@ -3,6 +3,7 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Koodilab\Models\Behaviors\Positionable;
 use Koodilab\Models\Relations\BelongsToResource;
 use Koodilab\Models\Relations\BelongsToUser;
@@ -50,7 +51,7 @@ use Koodilab\Models\Relations\BelongsToUser;
  * @method static \Illuminate\Database\Eloquent\Builder|Planet whereY($value)
  * @mixin \Eloquent
  */
-class Planet extends Model
+class Planet extends Model implements PositionableContract
 {
     use Positionable, BelongsToResource, BelongsToUser;
 
@@ -148,9 +149,7 @@ class Planet extends Model
     }
 
     /**
-     * To feature.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function toFeature()
     {

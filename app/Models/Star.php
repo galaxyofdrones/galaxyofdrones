@@ -3,6 +3,7 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Koodilab\Models\Behaviors\Positionable;
 use Koodilab\Models\Relations\HasManyBookmark;
 
@@ -26,7 +27,7 @@ use Koodilab\Models\Relations\HasManyBookmark;
  * @method static \Illuminate\Database\Eloquent\Builder|Star whereY($value)
  * @mixin \Eloquent
  */
-class Star extends Model
+class Star extends Model implements PositionableContract
 {
     use Positionable, HasManyBookmark;
 
@@ -43,9 +44,7 @@ class Star extends Model
     ];
 
     /**
-     * To feature.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function toFeature()
     {
