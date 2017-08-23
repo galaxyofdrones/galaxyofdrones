@@ -78,4 +78,11 @@ class Construction extends Model implements TimeableContract
 
         event(new PlanetUpdated($this->grid->planet_id));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cancel()
+    {
+    }
 }

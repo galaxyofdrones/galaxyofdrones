@@ -3,10 +3,27 @@
 namespace Koodilab\Models\Behaviors;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Koodilab\Support\Bounds;
 
 trait Positionable
 {
+    /**
+     * Get the travel time to the other.
+     *
+     * @param Model $other
+     *
+     * @return int
+     */
+    public function travelTimeTo(Model $other)
+    {
+        $distance = sqrt(pow($other->x - $this->x, 2) + pow($other->y - $this->y, 2));
+
+        return round(
+            $distance / static::AU_PER_PIXEL * static::TIME_OFFSET
+        );
+    }
+
     /**
      * In bounds scope.
      *

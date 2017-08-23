@@ -13,8 +13,11 @@ interface Timeable
 
     /**
      * Finish.
-     *
-     * @return int
      */
     public function finish();
+
+    /**
+     * Cancel.
+     */
+    public function cancel();
 }

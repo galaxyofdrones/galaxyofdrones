@@ -7,6 +7,10 @@ use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Koodilab\Models\Behaviors\Positionable;
 use Koodilab\Models\Relations\BelongsToResource;
 use Koodilab\Models\Relations\BelongsToUser;
+use Koodilab\Models\Relations\HasManyGrid;
+use Koodilab\Models\Relations\HasManyMission;
+use Koodilab\Models\Relations\HasManyPopulation;
+use Koodilab\Models\Relations\HasManyStock;
 
 /**
  * Planet.
@@ -27,9 +31,21 @@ use Koodilab\Models\Relations\BelongsToUser;
  * @property float|null $construction_time_bonus
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
  * @property-read string $display_name
  * @property-read int $resource_quantity
+ * @property-read int $used_capacity
+ * @property-read int $used_supply
+ * @property-read int $used_training_supply
+ * @property-read \Illuminate\Database\Eloquent\Collection|Grid[] $grids
+ * @property-read \Illuminate\Database\Eloquent\Collection|Movement[] $incomingMovements
+ * @property-read \Illuminate\Database\Eloquent\Collection|Mission[] $missions
+ * @property-read \Illuminate\Database\Eloquent\Collection|Movement[] $outgoingMovements
+ * @property-read \Illuminate\Database\Eloquent\Collection|Population[] $populations
  * @property-read resource $resource
+ * @property-read \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
+ * @property-read \Illuminate\Database\Eloquent\Collection|Training[] $trainings
+ * @property-read \Illuminate\Database\Eloquent\Collection|Upgrade[] $upgrades
  * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Planet inBounds(\Koodilab\Support\Bounds $bounds)
@@ -53,7 +69,7 @@ use Koodilab\Models\Relations\BelongsToUser;
  */
 class Planet extends Model implements PositionableContract
 {
-    use Positionable, BelongsToResource, BelongsToUser;
+    use Positionable, BelongsToResource, BelongsToUser, HasManyStock, HasManyPopulation, HasManyGrid, HasManyMission;
 
     /**
      * The small size.
@@ -91,20 +107,6 @@ class Planet extends Model implements PositionableContract
     const SETTLER_COUNT = 1;
 
     /**
-     * Astronomical unit per pixel.
-     *
-     * @var int
-     */
-    const AU_PER_PIXEL = 256;
-
-    /**
-     * Time offset.
-     *
-     * @var int
-     */
-    const TIME_OFFSET = 500;
-
-    /**
      * {@inheritdoc}
      */
     protected $perPage = 30;
@@ -115,6 +117,86 @@ class Planet extends Model implements PositionableContract
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];
+
+    /**
+     * Is occupiable?
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function isOccupiable(User $user)
+    {
+        if (User::where('capital_id', $this->id)->exists()) {
+            return false;
+        }
+
+        if (!$user->resources()->where('resources.id', $this->resource_id)->exists()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get the incoming movements.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incomingMovements()
+    {
+        return $this->hasMany(Movement::class, 'end_id');
+    }
+
+    /**
+     * Get the outgoing movements.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outgoingMovements()
+    {
+        return $this->hasMany(Movement::class, 'start_id');
+    }
+
+    /**
+     * Get the constructions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function constructions()
+    {
+        return $this->hasManyThrough(Construction::class, Grid::class);
+    }
+
+    /**
+     * Get the upgrades.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function upgrades()
+    {
+        return $this->hasManyThrough(Upgrade::class, Grid::class);
+    }
+
+    /**
+     * Get the trainings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function trainings()
+    {
+        return $this->hasManyThrough(Training::class, Grid::class);
+    }
+
+    /**
+     * Get the display name attribute.
+     *
+     * @return string
+     */
+    public function getDisplayNameAttribute()
+    {
+        return $this->custom_name ?: $this->name;
+    }
 
     /**
      * Set the custom name attribute.
@@ -139,13 +221,55 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Get the display name attribute.
+     * Get the used capacity attribute.
      *
-     * @return string
+     * @return int
      */
-    public function getDisplayNameAttribute()
+    public function getUsedCapacityAttribute()
     {
-        return $this->custom_name ?: $this->name;
+        return $this->stocks()
+            ->get(['resource_id', 'quantity', 'updated_at'])
+            ->reduce(function ($carry, Stock $stock) {
+                return $carry + $stock->setRelation('planet', $this)->quantity;
+            }, 0);
+    }
+
+    /**
+     * Get the used supply attribute.
+     *
+     * @return int
+     */
+    public function getUsedSupplyAttribute()
+    {
+        return $this->populations()
+            ->with([
+                'unit' => function ($query) {
+                    $query->select('id', 'supply');
+                },
+            ])
+            ->get(['unit_id', 'quantity'])
+            ->reduce(function ($carry, Population $population) {
+                return $carry + $population->quantity * $population->unit->supply;
+            }, 0);
+    }
+
+    /**
+     * Get the used training supply attribute.
+     *
+     * @return int
+     */
+    public function getUsedTrainingSupplyAttribute()
+    {
+        return $this->trainings()
+            ->with([
+                'unit' => function ($query) {
+                    $query->select('id', 'supply');
+                },
+            ])
+            ->get(['unit_id', 'quantity'])
+            ->reduce(function ($carry, Training $training) {
+                return $carry + $training->quantity * $training->unit->supply;
+            }, 0);
     }
 
     /**
@@ -158,15 +282,16 @@ class Planet extends Model implements PositionableContract
         if ($this->user_id) {
             /** @var User $user */
             $user = auth()->user();
+            $status = 'hostile';
 
-            if ($user && $user->current_id == $this->id) {
-                $status = 'current';
-            } elseif ($user && $user->id == $this->user_id) {
-                $status = 'friendly';
+            if ($user) {
+                if ($user->current_id == $this->id) {
+                    $status = 'current';
+                } elseif ($user->id == $this->user_id) {
+                    $status = 'friendly';
+                }
             } elseif ($this->user->capital_id == $this->id) {
                 $status = 'capital';
-            } else {
-                $status = 'hostile';
             }
         }
 
