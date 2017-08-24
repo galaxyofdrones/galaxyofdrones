@@ -273,6 +273,111 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
+     * Occupy.
+     *
+     * @param User $user
+     */
+    public function occupy(User $user)
+    {
+        if ($this->user_id && $this->user->current_id == $this->id) {
+            $this->user->current()->associate($this->user->capital_id);
+            $this->user->save();
+        }
+
+        $this->user()->associate($user);
+        $this->save();
+
+        $building = Building::where('type', Building::TYPE_CENTRAL)
+            ->first(['id', 'start_level']);
+
+        /** @var Grid $grid */
+        $grid = $this->grids()
+            ->where('type', Grid::TYPE_CENTRAL)
+            ->first();
+
+        $grid->fill([
+            'level' => $building->start_level,
+        ]);
+
+        $grid->building()->associate($building);
+        $grid->save();
+    }
+
+    /**
+     * Has required buildings.
+     *
+     * @param int $except
+     *
+     * @return bool
+     */
+    public function hasRequiredBuildings($except = null)
+    {
+        $constructedBuildingIds = $this->grids()
+            ->whereNotNull('building_id')
+            ->pluck('building_id');
+
+        if ($except) {
+            $constructedBuildingIds->forget($except);
+        }
+
+        foreach (Building::whereIsRoot()->pluck('id') as $buildingId) {
+            if (!$constructedBuildingIds->contains($buildingId)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Synchronize the buildings.
+     */
+    public function syncBuildings()
+    {
+        /** @var Stock $stock */
+        $stock = $this->stocks()->firstOrNew([
+            'resource_id' => $this->resource_id,
+        ]);
+
+        $stock->setRelation('planet', $this)->syncQuantity();
+
+        /** @var \Illuminate\Database\Eloquent\Collection|Grid[] $grids */
+        $grids = $this->grids()
+            ->whereNotNull('building_id')
+            ->where('enabled', true)
+            ->get(['building_id', 'level']);
+
+        $attributes = collect($this->attributes)->only([
+            'capacity', 'supply', 'mining_rate', 'production_rate', 'defense_bonus', 'construction_time_bonus',
+        ])->transform(function () {
+            return 0;
+        });
+
+        foreach ($grids as $grid) {
+            $grid->building->applyModifiers([
+                'level' => $grid->level,
+            ]);
+
+            $attributes->transform(function ($value, $key) use ($grid) {
+                return $value + $grid->building->{$key};
+            });
+        }
+
+        $this->fill($attributes->filter()->toArray());
+
+        if (!empty($this->attributes['mining_rate']) && !empty($this->attributes['production_rate'])) {
+            if ($this->attributes['mining_rate'] > $this->attributes['production_rate']) {
+                $this->attributes['mining_rate'] -= $this->attributes['production_rate'];
+            } else {
+                $this->attributes['production_rate'] = $this->attributes['mining_rate'];
+                $this->attributes['mining_rate'] = null;
+            }
+        }
+
+        $this->save();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toFeature()
