@@ -77,6 +77,8 @@ class Construction extends Model implements TimeableContract
         $this->delete();
 
         event(new PlanetUpdated($this->grid->planet_id));
+
+        return true;
     }
 
     /**

@@ -201,13 +201,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getConstructionExperienceAttribute()
     {
+        $constructionExperience = $this->attributes['construction_experience'];
+
         if ($this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($this->attributes['construction_experience'])
+                $this->applyExpFormula($constructionExperience)
             );
         }
 
-        return $this->attributes['construction_experience'];
+        return $constructionExperience;
     }
 
     /**
@@ -217,13 +219,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getConstructionCostAttribute()
     {
+        $constructionCost = $this->attributes['construction_cost'];
+
         if ($this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($this->attributes['construction_cost'])
+                $this->applyExpFormula($constructionCost)
             );
         }
 
-        return $this->attributes['construction_cost'];
+        return $constructionCost;
     }
 
     /**
@@ -255,9 +259,9 @@ class Building extends Model implements TranslatableContract
      */
     public function getDefenseAttribute()
     {
-        if ($this->type == static::TYPE_DEFENSIVE && $this->attributes['defense']) {
-            $defense = $this->attributes['defense'];
+        $defense = $this->attributes['defense'];
 
+        if ($this->type == static::TYPE_DEFENSIVE && $defense) {
             if ($this->hasLowerLevel()) {
                 $defense = $this->applyLinearForumla($defense);
             }
@@ -269,7 +273,7 @@ class Building extends Model implements TranslatableContract
             return round($defense);
         }
 
-        return $this->attributes['defense'];
+        return $defense;
     }
 
     /**
@@ -279,13 +283,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getDetectionAttribute()
     {
-        if ($this->type == static::TYPE_SCOUT && $this->attributes['detection'] && $this->hasLowerLevel()) {
+        $detection = $this->attributes['detection'];
+
+        if ($this->type == static::TYPE_SCOUT && $detection && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($this->attributes['detection'])
+                $this->applyLinearForumla($detection)
             );
         }
 
-        return $this->attributes['detection'];
+        return $detection;
     }
 
     /**
@@ -295,13 +301,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getCapacityAttribute()
     {
-        if ($this->type == static::TYPE_CONTAINER && $this->attributes['capacity'] && $this->hasLowerLevel()) {
+        $capacity = $this->attributes['capacity'];
+
+        if ($this->type == static::TYPE_CONTAINER && $capacity && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($this->attributes['capacity'])
+                $this->applyExpFormula($capacity)
             );
         }
 
-        return $this->attributes['capacity'];
+        return $capacity;
     }
 
     /**
@@ -311,13 +319,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getSupplyAttribute()
     {
-        if ($this->type == static::TYPE_CONTAINER && $this->attributes['supply'] && $this->hasLowerLevel()) {
+        $supply = $this->attributes['supply'];
+
+        if ($this->type == static::TYPE_CONTAINER && $supply && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($this->attributes['supply'])
+                $this->applyExpFormula($supply)
             );
         }
 
-        return $this->attributes['supply'];
+        return $supply;
     }
 
     /**
@@ -327,17 +337,19 @@ class Building extends Model implements TranslatableContract
      */
     public function getMiningRateAttribute()
     {
-        if ($this->type == static::TYPE_MINER && $this->attributes['mining_rate']) {
+        $miningRate = $this->attributes['mining_rate'];
+
+        if ($this->type == static::TYPE_MINER && $miningRate) {
             if ($this->hasLowerLevel()) {
                 return round(
-                    $this->applyLinearForumla($this->attributes['mining_rate']) * config('app.speed')
+                    $this->applyLinearForumla($miningRate) * config('app.speed')
                 );
             }
 
-            return $this->attributes['mining_rate'] * config('app.speed');
+            return $miningRate * config('app.speed');
         }
 
-        return $this->attributes['mining_rate'];
+        return $miningRate;
     }
 
     /**
@@ -347,17 +359,19 @@ class Building extends Model implements TranslatableContract
      */
     public function getProductionRateAttribute()
     {
-        if ($this->type == static::TYPE_PRODUCER && $this->attributes['production_rate']) {
+        $productionRate = $this->attributes['production_rate'];
+
+        if ($this->type == static::TYPE_PRODUCER && $productionRate) {
             if ($this->hasLowerLevel()) {
                 return round(
-                    $this->applyLinearForumla($this->attributes['production_rate']) * config('app.speed')
+                    $this->applyLinearForumla($productionRate) * config('app.speed')
                 );
             }
 
-            return $this->attributes['production_rate'] * config('app.speed');
+            return $productionRate * config('app.speed');
         }
 
-        return $this->attributes['production_rate'];
+        return $productionRate;
     }
 
     /**
@@ -367,13 +381,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getMissionTimeAttribute()
     {
-        if ($this->type == static::TYPE_TRADER && $this->attributes['mission_time'] && $this->hasLowerLevel()) {
+        $missionTime = $this->attributes['mission_time'];
+
+        if ($this->type == static::TYPE_TRADER && $missionTime && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($this->attributes['mission_time'])
+                $this->applyLinearForumla($missionTime)
             );
         }
 
-        return $this->attributes['mission_time'];
+        return $missionTime;
     }
 
     /**
@@ -383,13 +399,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getDefenseBonusAttribute()
     {
-        if ($this->type == static::TYPE_DEFENSIVE && $this->attributes['defense_bonus'] && $this->hasLowerLevel()) {
+        $defenseBonus = $this->attributes['defense_bonus'];
+
+        if ($this->type == static::TYPE_DEFENSIVE && $defenseBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($this->attributes['defense_bonus']), 2
+                $this->applyLinearForumla($defenseBonus), 2
             );
         }
 
-        return $this->attributes['defense_bonus'];
+        return $defenseBonus;
     }
 
     /**
@@ -399,13 +417,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getConstructionTimeBonusAttribute()
     {
-        if ($this->type == static::TYPE_CENTRAL && $this->attributes['construction_time_bonus'] && $this->hasLowerLevel()) {
+        $constructionTimeBonus = $this->attributes['construction_time_bonus'];
+
+        if ($this->type == static::TYPE_CENTRAL && $constructionTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($this->attributes['construction_time_bonus']), 2
+                $this->applyExpFormula($constructionTimeBonus), 2
             );
         }
 
-        return $this->attributes['construction_time_bonus'];
+        return $constructionTimeBonus;
     }
 
     /**
@@ -415,13 +435,15 @@ class Building extends Model implements TranslatableContract
      */
     public function getTrainTimeBonusAttribute()
     {
-        if ($this->type == static::TYPE_TRAINER && $this->attributes['train_time_bonus'] && $this->hasLowerLevel()) {
+        $trainTimeBonus = $this->attributes['train_time_bonus'];
+
+        if ($this->type == static::TYPE_TRAINER && $trainTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($this->attributes['train_time_bonus']), 2
+                $this->applyExpFormula($trainTimeBonus), 2
             );
         }
 
-        return $this->attributes['train_time_bonus'];
+        return $trainTimeBonus;
     }
 
     /**

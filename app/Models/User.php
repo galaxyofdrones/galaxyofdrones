@@ -2,9 +2,16 @@
 
 namespace Koodilab\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Koodilab\Models\Relations\BelongsToManyResource;
+use Koodilab\Models\Relations\BelongsToManyUnit;
+use Koodilab\Models\Relations\HasManyBookmark;
+use Koodilab\Models\Relations\HasManyMissionLog;
+use Koodilab\Models\Relations\HasManyMovement;
 use Koodilab\Models\Relations\HasManyPlanet;
+use Koodilab\Models\Relations\HasManyResearch;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -28,10 +35,25 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon|null $started_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|BattleLog[] $attackBattleLogs
+ * @property-read \Illuminate\Database\Eloquent\Collection|Bookmark[] $bookmarks
+ * @property-read Planet|null $capital
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read Planet|null $current
+ * @property-read \Illuminate\Database\Eloquent\Collection|BattleLog[] $defenseBattleLogs
+ * @property-read int $capital_change_remaining
+ * @property-read int $level
+ * @property-read int $level_experience
+ * @property-read int $next_level
+ * @property-read int $next_level_experience
+ * @property-read \Illuminate\Database\Eloquent\Collection|MissionLog[] $missionLogs
+ * @property-read \Illuminate\Database\Eloquent\Collection|Movement[] $movements
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|Planet[] $planets
+ * @property-read \Illuminate\Database\Eloquent\Collection|Research[] $researches
+ * @property-read \Illuminate\Database\Eloquent\Collection|resource[] $resources
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection|Unit[] $units
  *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
@@ -55,7 +77,8 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, HasManyPlanet;
+    use HasApiTokens, Notifiable, BelongsToManyResource, BelongsToManyUnit,
+        HasManyBookmark, HasManyPlanet, HasManyMovement, HasManyResearch, HasManyMissionLog;
 
     /**
      * The user role.
@@ -77,6 +100,20 @@ class User extends Authenticatable
      * @var int
      */
     const ROLE_SUPER_ADMIN = 2;
+
+    /**
+     * The experience offset.
+     *
+     * @var float
+     */
+    const EXPERIENCE_OFFSET = 0.04;
+
+    /**
+     * The hyperdrive cooldown.
+     *
+     * @var int
+     */
+    const CAPITAL_CHANGE_COOLDOWN = 86400;
 
     /**
      * {@inheritdoc}
@@ -130,6 +167,46 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the capital.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function capital()
+    {
+        return $this->belongsTo(Planet::class, 'capital_id');
+    }
+
+    /**
+     * Get the current.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function current()
+    {
+        return $this->belongsTo(Planet::class, 'current_id');
+    }
+
+    /**
+     * Get the attack battle logs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attackBattleLogs()
+    {
+        return $this->hasMany(BattleLog::class, 'attacker_id');
+    }
+
+    /**
+     * Get the defense battle logs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function defenseBattleLogs()
+    {
+        return $this->hasMany(BattleLog::class, 'defender_id');
+    }
+
+    /**
      * Set the password attribute.
      *
      * @param string $value
@@ -171,5 +248,150 @@ class User extends Authenticatable
     public function canGiveRole($role)
     {
         return $this->role >= $role;
+    }
+
+    /**
+     * Has energy?
+     *
+     * @param int $energy
+     *
+     * @return bool
+     */
+    public function hasEnergy($energy)
+    {
+        return $this->energy >= $energy;
+    }
+
+    /**
+     * Increment the energy.
+     *
+     * @param int $amount
+     */
+    public function incrementEnergy($amount)
+    {
+        if ($amount) {
+            $this->fill([
+                'energy' => $this->energy + $amount,
+            ]);
+
+            $this->save();
+        }
+    }
+
+    /**
+     * Decrement the energy.
+     *
+     * @param int $amount
+     */
+    public function decrementEnergy($amount)
+    {
+        if ($amount) {
+            $this->fill([
+                'energy' => max(0, $this->energy - $amount),
+            ]);
+
+            $this->save();
+        }
+    }
+
+    /**
+     * Synchronize the production.
+     */
+    public function syncProduction()
+    {
+        $this->fill([
+            'energy' => $this->energy,
+            'production_rate' => $this->planets->sum('production_rate'),
+        ]);
+
+        $this->save();
+    }
+
+    /**
+     * Is capital changeable?
+     *
+     * @return bool
+     */
+    public function isCapitalChangeable()
+    {
+        $dt = $this->last_capital_changed;
+
+        return !$dt || $dt->copy()->addSeconds(static::CAPITAL_CHANGE_COOLDOWN)->lte(Carbon::now());
+    }
+
+    /**
+     * Get the energy attribute.
+     *
+     * @return int
+     */
+    public function getEnergyAttribute()
+    {
+        $energy = 0;
+
+        if (!empty($this->attributes['energy'])) {
+            $energy = $this->attributes['energy'];
+        }
+
+        $produced = round(
+            $this->production_rate / 3600 * Carbon::now()->diffInSeconds($this->last_production_changed)
+        );
+
+        return $energy + $produced;
+    }
+
+    /**
+     * Get the level attribute.
+     *
+     * @return int
+     */
+    public function getLevelAttribute()
+    {
+        return (int) (static::EXPERIENCE_OFFSET * sqrt($this->experience)) + 1;
+    }
+
+    /**
+     * Get the level expereience attribute.
+     *
+     * @return int
+     */
+    public function getLevelExperienceAttribute()
+    {
+        return (int) pow(($this->level - 1) / static::EXPERIENCE_OFFSET, 2);
+    }
+
+    /**
+     * Get the next level attribute.
+     *
+     * @return int
+     */
+    public function getNextLevelAttribute()
+    {
+        return $this->level + 1;
+    }
+
+    /**
+     * Get the next level expereience attribute.
+     *
+     * @return int
+     */
+    public function getNextLevelExperienceAttribute()
+    {
+        return (int) pow($this->level / static::EXPERIENCE_OFFSET, 2);
+    }
+
+    /**
+     * Get the capital change remaining attribute.
+     *
+     * @return int
+     */
+    public function getCapitalChangeRemainingAttribute()
+    {
+        if (!$this->isCapitalChangeable()) {
+            $dt = $this->last_capital_changed;
+
+            return Carbon::now()->diffInSeconds($dt->copy()->addSeconds(static::CAPITAL_CHANGE_COOLDOWN));
+        }
+
+        return 0;
     }
 }

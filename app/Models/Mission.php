@@ -2,10 +2,11 @@
 
 namespace Koodilab\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
+use Koodilab\Events\PlanetUpdated;
 use Koodilab\Models\Behaviors\Timeable;
 use Koodilab\Models\Relations\BelongsToPlanet;
 
@@ -22,8 +23,6 @@ use Koodilab\Models\Relations\BelongsToPlanet;
  * @property-read Planet $planet
  * @property-read \Illuminate\Database\Eloquent\Collection|resource[] $resources
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Mission expired()
- * @method static \Illuminate\Database\Eloquent\Builder|Mission notExpired()
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEndedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereExperience($value)
@@ -32,7 +31,7 @@ use Koodilab\Models\Relations\BelongsToPlanet;
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Mission extends Model
+class Mission extends Model implements TimeableContract
 {
     use Timeable, BelongsToPlanet;
 
@@ -119,26 +118,51 @@ class Mission extends Model
     }
 
     /**
-     * Expired scope.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
+     * {@inheritdoc}
      */
-    public function scopeExpired(Builder $query)
+    public function finish()
     {
-        return $query->where('ended_at', '<', Carbon::now());
+        $this->planet->user->experience += $this->experience;
+        $this->planet->user->save();
+
+        /** @var \Illuminate\Database\Eloquent\Collection|Stock[] $stocks */
+        $stocks = $this->planet->stocks()
+            ->whereIn('resource_id', $this->resources->modelKeys())
+            ->get()
+            ->keyBy('resource_id');
+
+        foreach ($this->resources as $resource) {
+            if (!$stocks->has($resource->id)) {
+                return false;
+            }
+
+            /** @var Stock $stock */
+            $stock = $stocks
+                ->get($resource->id)
+                ->setRelation('planet', $this->planet);
+
+            if (!$stock->hasQuantity($resource->pivot->quantity)) {
+                return false;
+            }
+        }
+
+        foreach ($this->resources as $resource) {
+            $stocks->get($resource->id)->decrementQuantity($resource->pivot->quantity);
+        }
+
+        MissionLog::createFromMission($this);
+        $this->delete();
+
+        event(new PlanetUpdated($this->planet_id));
+
+        return true;
     }
 
     /**
-     * Expired scope.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
+     * {@inheritdoc}
      */
-    public function scopeNotExpired(Builder $query)
+    public function cancel()
     {
-        return $query->where('ended_at', '>=', Carbon::now());
+        $this->delete();
     }
 }
