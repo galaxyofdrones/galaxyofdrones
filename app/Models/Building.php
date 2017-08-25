@@ -191,11 +191,7 @@ class Building extends Model implements TranslatableContract
             return $this->modifiers['level'];
         }
 
-        if (!empty($this->attributes['level'])) {
-            return $this->attributes['level'];
-        }
-
-        return $this->end_level;
+        return 1;
     }
 
     /**

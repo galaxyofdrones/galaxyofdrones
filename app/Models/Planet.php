@@ -312,16 +312,16 @@ class Planet extends Model implements PositionableContract
      */
     public function hasRequiredBuildings($except = null)
     {
-        $constructedBuildingIds = $this->grids()
+        $constructedIds = $this->grids()
             ->whereNotNull('building_id')
             ->pluck('building_id');
 
         if ($except) {
-            $constructedBuildingIds->forget($except);
+            $constructedIds->forget($except);
         }
 
-        foreach (Building::whereIsRoot()->pluck('id') as $buildingId) {
-            if (!$constructedBuildingIds->contains($buildingId)) {
+        foreach (Building::whereIsRoot()->pluck('id') as $id) {
+            if (!$constructedIds->contains($id)) {
                 return false;
             }
         }

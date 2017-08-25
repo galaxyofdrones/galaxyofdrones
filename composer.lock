@@ -750,12 +750,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "60860f3fdb277154606a1f3584104ed97d24d16a"
+                "reference": "df9e97990393100f42b142a9ff5fb459f87e5fd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/60860f3fdb277154606a1f3584104ed97d24d16a",
-                "reference": "60860f3fdb277154606a1f3584104ed97d24d16a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/df9e97990393100f42b142a9ff5fb459f87e5fd6",
+                "reference": "df9e97990393100f42b142a9ff5fb459f87e5fd6",
                 "shasum": ""
             },
             "require": {
@@ -874,7 +874,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-23T13:02:52+00:00"
+            "time": "2017-08-25T15:30:43+00:00"
         },
         {
             "name": "laravel/passport",
@@ -3367,16 +3367,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "53d9518ffeb019c51d542ff60cb578f076d3ff16"
+                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/53d9518ffeb019c51d542ff60cb578f076d3ff16",
-                "reference": "53d9518ffeb019c51d542ff60cb578f076d3ff16",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/b3217d58609e9c8e661cd41357a54d926c4a2a1a",
+                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a",
                 "shasum": ""
             },
             "require": {
@@ -3437,7 +3437,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-07-22T13:00:15+00:00"
+            "time": "2017-08-25T07:02:50+00:00"
         },
         {
             "name": "doctrine/collections",
