@@ -282,7 +282,7 @@ class Movement extends Model implements TimeableContract
         if ($units->sum('pivot.quantity') > $units->sum('pivot.losses')) {
             $travelTime = $this->ended_at->diffInSeconds($this->created_at);
 
-            $returnMovement = new self([
+            $returnMovement = new static([
                 'type' => static::TYPE_SUPPORT,
                 'ended_at' => Carbon::now()->addSeconds($travelTime),
             ]);

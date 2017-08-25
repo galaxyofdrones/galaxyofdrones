@@ -48,7 +48,7 @@ class MissionLog extends Model
      */
     public static function createFromMission(Mission $mission)
     {
-        $missionLog = new self([
+        $missionLog = new static([
             'experience' => $mission->experience,
         ]);
 

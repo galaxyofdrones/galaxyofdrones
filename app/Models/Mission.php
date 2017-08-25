@@ -77,7 +77,7 @@ class Mission extends Model implements TimeableContract
      */
     public static function createRand(Planet $planet, Building $building, Collection $resources)
     {
-        $mission = new self([
+        $mission = new static([
             'ended_at' => Carbon::now()->addSeconds($building->mission_time),
         ]);
 

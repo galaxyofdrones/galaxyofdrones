@@ -113,7 +113,7 @@ class BattleLog extends Model
      */
     public static function createFromMovement(Movement $movement, $winner = null)
     {
-        $battleLog = new self([
+        $battleLog = new static([
             'start_name' => $movement->start->display_name,
             'end_name' => $movement->end->display_name,
             'type' => static::TYPE_ATTACK,
