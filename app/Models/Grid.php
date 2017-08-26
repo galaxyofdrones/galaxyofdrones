@@ -169,8 +169,10 @@ class Grid extends Model
      *
      * @param int $amount
      */
-    public function decrementLevel($amount)
+    public function decrementLevel($amount = null)
     {
+        $amount = $amount ?: $this->level;
+
         if (!$amount || !$this->building_id) {
             return;
         }
