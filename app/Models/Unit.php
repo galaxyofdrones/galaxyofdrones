@@ -105,6 +105,7 @@ class Unit extends Model
      */
     protected $attributes = [
         'name' => '{}',
+        'is_unlocked' => false,
         'description' => '{}',
     ];
 

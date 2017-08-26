@@ -56,6 +56,7 @@ class Resource extends Model implements TranslatableContract
      */
     protected $attributes = [
         'name' => '{}',
+        'is_unlocked' => false,
         'description' => '{}',
     ];
 
