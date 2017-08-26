@@ -9,6 +9,7 @@ use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
 use Koodilab\Models\Behaviors\Timeable;
 use Koodilab\Models\Relations\BelongsToPlanet;
+use Koodilab\Support\Util;
 
 /**
  * Mission.
@@ -90,7 +91,7 @@ class Mission extends Model implements TimeableContract
             ? new Collection([$resources->random($amount)])
             : $resources->random($amount);
 
-        $randQuantity = static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * ((float) mt_rand() / (float) mt_getrandmax());
+        $randQuantity = static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * Util::randFloat();
         $totalQuantity = $planet->capacity * $randQuantity;
 
         $totalFrequency = $resources->sum('frequency');

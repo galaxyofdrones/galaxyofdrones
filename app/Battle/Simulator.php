@@ -83,7 +83,7 @@ class Simulator implements SimulatorContract
     {
         $this->setup($movement);
 
-        if ($this->getAttackerDetection() < $this->getDefenderDetection()) {
+        if ($this->attackerDetection() < $this->defenderDetection()) {
             $this->battle();
         } else {
             $this->report();
@@ -119,7 +119,7 @@ class Simulator implements SimulatorContract
      *
      * @return int
      */
-    protected function getAttackerDetection()
+    protected function attackerDetection()
     {
         return $this->movement->units->reduce(function ($carry, Unit $unit) {
             return $carry + $unit->detection * $unit->pivot->quantity;
@@ -131,7 +131,7 @@ class Simulator implements SimulatorContract
      *
      * @return int
      */
-    protected function getDefenderDetection()
+    protected function defenderDetection()
     {
         $detection = $this->movement->end->populations->reduce(function ($carry, Population $population) {
             return $carry + $population->unit->detection * $population->quantity;
@@ -147,7 +147,7 @@ class Simulator implements SimulatorContract
      *
      * @return int
      */
-    protected function getAttackerAttack()
+    protected function attackerAttack()
     {
         return $this->movement->units->reduce(function ($carry, Unit $unit) {
             return $carry + $unit->attack * $unit->pivot->quantity;
@@ -159,7 +159,7 @@ class Simulator implements SimulatorContract
      *
      * @return int
      */
-    protected function getDefenderDefense()
+    protected function defenderDefense()
     {
         $defense = $this->movement->end->populations->reduce(function ($carry, Population $population) {
             return $carry + $population->unit->defense * $population->quantity;
@@ -193,7 +193,9 @@ class Simulator implements SimulatorContract
             ->get()
             ->map(function (Population $population) {
                 $population->setRelation('planet', $this->movement->end);
-                $population->unit->applyModifiers($this->movement->end->defense_bonus);
+                $population->unit->applyModifiers([
+                    'defense_bonus' => $this->movement->end->defense_bonus,
+                ]);
 
                 return $population;
             });
@@ -205,7 +207,10 @@ class Simulator implements SimulatorContract
             ->sortByDesc('building.type')
             ->map(function (Grid $grid) {
                 $grid->setRelation('planet', $this->movement->end);
-                $grid->building->applyModifiers($grid->level, $this->movement->end->defense_bonus);
+                $grid->building->applyModifiers([
+                    'level' => $grid->level,
+                    'defense_bonus' => $this->movement->end->defense_bonus,
+                ]);
 
                 return $grid;
             });
@@ -216,13 +221,13 @@ class Simulator implements SimulatorContract
      */
     protected function battle()
     {
-        $defense = $this->getDefenderDefense();
+        $defense = $this->defenderDefense();
 
         if (!$defense) {
             $this->attackerLossRate = 0;
             $this->defenderLossRate = 1;
         } else {
-            $result = $this->getAttackerAttack() / $defense;
+            $result = $this->attackerAttack() / $defense;
 
             if ($result < 1) {
                 $this->attackerLossRate = 1;
@@ -359,15 +364,5 @@ class Simulator implements SimulatorContract
 
             $damage -= $losses;
         }
-    }
-
-    /**
-     * Get a random float.
-     *
-     * @return float
-     */
-    protected function getRandFloat()
-    {
-        return (float) mt_rand() / (float) mt_getrandmax();
     }
 }
