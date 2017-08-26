@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Tests\Unit;
+namespace Koodilab\Tests\Unit\Support;
 
 use Koodilab\Models\Setting;
 use Koodilab\Support\SettingManager;

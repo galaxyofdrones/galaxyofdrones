@@ -39,6 +39,6 @@ class PlanetUpdated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('planet.'.$this->planetId);
+        return new PrivateChannel("planet.{$this->planetId}");
     }
 }

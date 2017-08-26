@@ -60,7 +60,7 @@ class SettingManager
         $settings = $this->all();
 
         if (!$settings->has($key)) {
-            throw new InvalidArgumentException(sprintf('There is no key %s in the settings table!', $key));
+            throw new InvalidArgumentException("There is no key {$key} in the settings table!");
         }
 
         return $settings->get($key)

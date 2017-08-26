@@ -27,7 +27,7 @@ class CreatePlanetsTable extends Migration
                 ->onDelete('set null');
 
             $table->string('name');
-            $table->string('custom_name');
+            $table->string('custom_name')->nullable();
             $table->integer('x')->unsigned();
             $table->integer('y')->unsigned();
             $table->integer('size')->unsigned();

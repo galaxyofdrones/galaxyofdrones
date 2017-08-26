@@ -20,6 +20,7 @@ use Koodilab\Models\Relations\HasOneUpgrade;
  * @property int $y
  * @property int|null $level
  * @property int $type
+ * @property bool $is_enabled
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read Building|null $building
@@ -31,6 +32,7 @@ use Koodilab\Models\Relations\HasOneUpgrade;
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereBuildingId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Grid whereIsEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereLevel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid wherePlanetId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereType($value)
@@ -74,6 +76,13 @@ class Grid extends Model
      */
     protected $guarded = [
         'id', 'created_at', 'updated_at',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $casts = [
+        'is_enabled' => 'bool',
     ];
 
     /**
@@ -167,6 +176,7 @@ class Grid extends Model
 
         if (!$this->level) {
             $this->level = null;
+            $this->is_enabled = true;
             $this->building()->associate(null);
         }
 

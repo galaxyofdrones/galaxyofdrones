@@ -30,6 +30,7 @@ class CreateGridsTable extends Migration
             $table->integer('y');
             $table->integer('level')->unsigned()->nullable();
             $table->integer('type')->unsigned();
+            $table->boolean('is_enabled');
             $table->timestamps();
 
             $table->unique(['planet_id', 'x', 'y']);

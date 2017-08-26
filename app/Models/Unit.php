@@ -28,7 +28,7 @@ use Koodilab\Models\Relations\HasManyTraining;
  * @property int|null $capacity
  * @property int|null $research_experience
  * @property int|null $research_cost
- * @property int $research_time
+ * @property int|null $research_time
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|Population[] $populations
