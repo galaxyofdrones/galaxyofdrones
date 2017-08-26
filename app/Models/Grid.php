@@ -144,6 +144,7 @@ class Grid extends Model
             })
             ->map(function (Building $building) {
                 return $building->applyModifiers([
+                    'level' => 1,
                     'defense_bonus' => $this->planet->defense_bonus,
                     'construction_time_bonus' => $this->planet->construction_time_bonus,
                 ]);
