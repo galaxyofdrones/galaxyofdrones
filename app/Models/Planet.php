@@ -147,26 +147,6 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Is occupiable?
-     *
-     * @param User $user
-     *
-     * @return bool
-     */
-    public function isOccupiable(User $user)
-    {
-        if (User::where('capital_id', $this->id)->exists()) {
-            return false;
-        }
-
-        if (!$user->resources()->where('resources.id', $this->resource_id)->exists()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Get the incoming movements.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -298,6 +278,26 @@ class Planet extends Model implements PositionableContract
             ->reduce(function ($carry, Training $training) {
                 return $carry + $training->quantity * $training->unit->supply;
             }, 0);
+    }
+
+    /**
+     * Is occupiable?
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function isOccupiable(User $user)
+    {
+        if (User::where('capital_id', $this->id)->exists()) {
+            return false;
+        }
+
+        if (!$user->resources()->where('resources.id', $this->resource_id)->exists()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

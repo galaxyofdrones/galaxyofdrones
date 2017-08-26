@@ -159,28 +159,6 @@ class Building extends Model implements TranslatableContract
     ];
 
     /**
-     * Has the level?
-     *
-     * @param int $level
-     *
-     * @return bool
-     */
-    public function hasLevel($level)
-    {
-        return $level > 0 && $level <= $this->end_level;
-    }
-
-    /**
-     * Has lower level?
-     *
-     * @return bool
-     */
-    public function hasLowerLevel()
-    {
-        return $this->hasLowerLevel();
-    }
-
-    /**
      * Get the level attribute.
      *
      * @return int
@@ -444,6 +422,28 @@ class Building extends Model implements TranslatableContract
         }
 
         return $trainTimeBonus;
+    }
+
+    /**
+     * Has the level?
+     *
+     * @param int $level
+     *
+     * @return bool
+     */
+    public function hasLevel($level)
+    {
+        return $level > 0 && $level <= $this->end_level;
+    }
+
+    /**
+     * Has lower level?
+     *
+     * @return bool
+     */
+    public function hasLowerLevel()
+    {
+        return $this->hasLowerLevel();
     }
 
     /**

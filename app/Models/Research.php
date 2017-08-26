@@ -4,6 +4,7 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
+use Koodilab\Events\UserUpdated;
 use Koodilab\Models\Behaviors\Timeable;
 use Koodilab\Models\Relations\BelongsToUser;
 
@@ -82,7 +83,7 @@ class Research extends Model implements TimeableContract
 
         $this->delete();
 
-        //event(new MothershipUpdated($this->user->id));
+        event(new UserUpdated($this->user->id));
 
         return true;
     }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Battle\Simulator;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
+use Koodilab\Jobs\Move;
 use Koodilab\Models\Behaviors\Timeable;
 use Koodilab\Models\Relations\BelongsToUser;
 
@@ -176,12 +177,6 @@ class Movement extends Model implements TimeableContract
         $battleLog = app(Simulator::class)->scout($this);
 
         $this->returnMovement($battleLog->attackerUnits);
-
-        //event(new LogUpdated($battleLog->attacker_id));
-
-        if ($battleLog->winner == BattleLog::WINNER_DEFENDER) {
-            //event(new LogUpdated($battleLog->defender_id));
-        }
     }
 
     /**
@@ -192,9 +187,6 @@ class Movement extends Model implements TimeableContract
         $battleLog = app(Simulator::class)->attack($this);
 
         $this->returnMovement($battleLog->attackerUnits, $battleLog->resources);
-
-        //event(new LogUpdated($battleLog->attacker_id));
-        //event(new LogUpdated($battleLog->defender_id));
     }
 
     /**
@@ -211,9 +203,6 @@ class Movement extends Model implements TimeableContract
                 $this->returnMovement($battleLog->attackerUnits);
             }
         }
-
-        //event(new LogUpdated($battleLog->attacker_id));
-        //event(new LogUpdated($battleLog->defender_id));
     }
 
     /**
@@ -245,8 +234,7 @@ class Movement extends Model implements TimeableContract
                 'unit_id' => $unit->id,
             ]);
 
-            $population
-                ->setRelation('planet', $this->end)
+            $population->setRelation('planet', $this->end)
                 ->setRelation('unit', $unit)
                 ->incrementQuantity($unit->pivot->quantity);
         }
@@ -263,8 +251,7 @@ class Movement extends Model implements TimeableContract
                 'resource_id' => $resource->id,
             ]);
 
-            $stock
-                ->setRelation('planet', $this->end)
+            $stock->setRelation('planet', $this->end)
                 ->incrementQuantity($resource->pivot->quantity);
         }
     }
@@ -282,16 +269,13 @@ class Movement extends Model implements TimeableContract
         if ($units->sum('pivot.quantity') > $units->sum('pivot.losses')) {
             $travelTime = $this->ended_at->diffInSeconds($this->created_at);
 
-            $returnMovement = new static([
+            $returnMovement = self::create([
+                'start_id' => $this->end_id,
+                'end_id' => $this->start_id,
+                'user_id' => $this->user_id,
                 'type' => static::TYPE_SUPPORT,
                 'ended_at' => Carbon::now()->addSeconds($travelTime),
             ]);
-
-            $returnMovement->start()->associate($this->end_id);
-            $returnMovement->end()->associate($this->start_id);
-            $returnMovement->user()->associate($this->user_id);
-
-            $returnMovement->save();
 
             foreach ($units as $unit) {
                 $quantity = $unit->pivot->quantity - $unit->pivot->losses;
@@ -315,7 +299,7 @@ class Movement extends Model implements TimeableContract
                 }
             }
 
-            //dispatch((new Move($returnMovement))->delay($returnMovement->remaining));
+            dispatch((new Move($returnMovement->id))->delay($returnMovement->remaining));
         }
     }
 

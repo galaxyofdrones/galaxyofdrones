@@ -4,6 +4,7 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Models\Relations\BelongsToUser;
+use Koodilab\Notifications\MissionLogCreated;
 
 /**
  * Mission log.
@@ -60,6 +61,8 @@ class MissionLog extends Model
                 'quantity' => $resource->pivot->quantity,
             ]);
         }
+
+        $missionLog->user->notify(new MissionLogCreated($missionLog));
 
         return $missionLog;
     }

@@ -34,8 +34,7 @@ trait Positionable
      */
     public function scopeInBounds(Builder $query, Bounds $bounds)
     {
-        $query
-            ->where('x', '>=', $bounds->minX())
+        $query->where('x', '>=', $bounds->minX())
             ->where('x', '<=', $bounds->maxX())
             ->where('y', '>=', $bounds->minY())
             ->where('y', '<=', $bounds->maxY());

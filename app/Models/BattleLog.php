@@ -3,6 +3,7 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Koodilab\Notifications\BattleLogCreated;
 
 /**
  * Battle log.
@@ -114,6 +115,10 @@ class BattleLog extends Model
     public static function createFromMovement(Movement $movement, $winner = null)
     {
         $battleLog = new static([
+            'attacker_id' => $movement->start->user_id,
+            'defender_id' => $movement->end->user_id,
+            'start_id' => $movement->start_id,
+            'end_id' => $movement->end_id,
             'start_name' => $movement->start->display_name,
             'end_name' => $movement->end->display_name,
             'type' => static::TYPE_ATTACK,
@@ -129,13 +134,18 @@ class BattleLog extends Model
                 break;
         }
 
-        $battleLog->attacker()->associate($movement->start->user_id);
-        $battleLog->defender()->associate($movement->end->user_id);
-
-        $battleLog->start()->associate($movement->start_id);
-        $battleLog->end()->associate($movement->end_id);
-
         $battleLog->save();
+
+        if ($battleLog->type == static::TYPE_SCOUT) {
+            $battleLog->attacker->notify(new BattleLogCreated($battleLog));
+
+            if ($battleLog->winner == static::WINNER_DEFENDER) {
+                $battleLog->defender->notify(new BattleLogCreated($battleLog));
+            }
+        } else {
+            $battleLog->attacker->notify(new BattleLogCreated($battleLog));
+            $battleLog->defender->notify(new BattleLogCreated($battleLog));
+        }
 
         return $battleLog;
     }
