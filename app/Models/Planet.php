@@ -307,27 +307,24 @@ class Planet extends Model implements PositionableContract
     public function occupy(User $user)
     {
         if ($this->user_id && $this->user->current_id == $this->id) {
-            $this->user->current()->associate($this->user->capital_id);
-            $this->user->save();
+            $this->user->update([
+                'current_id' => $this->user->capital_id,
+            ]);
         }
 
-        $this->user()->associate($user);
-        $this->save();
-
-        $building = Building::where('type', Building::TYPE_CENTRAL)
-            ->first(['id', 'start_level']);
+        $this->update([
+            'user_id' => $user->id,
+        ]);
 
         /** @var Grid $grid */
         $grid = $this->grids()
             ->where('type', Grid::TYPE_CENTRAL)
             ->first();
 
-        $grid->fill([
-            'level' => $building->start_level,
+        $grid->update([
+            'building_id' => Building::where('type', Building::TYPE_CENTRAL)->value('id'),
+            'level' => 1,
         ]);
-
-        $grid->building()->associate($building);
-        $grid->save();
     }
 
     /**
