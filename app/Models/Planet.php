@@ -137,6 +137,7 @@ class Planet extends Model implements PositionableContract
                 $planet->constructions->each->delete();
                 $planet->upgrades->each->delete();
                 $planet->trainings->each->delete();
+                $planet->missions->each->delete();
             }
 
             if ($planet->user_id) {
