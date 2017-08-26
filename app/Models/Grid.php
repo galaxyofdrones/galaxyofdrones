@@ -86,6 +86,18 @@ class Grid extends Model
     ];
 
     /**
+     * {@inheritdoc}
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updated(function (self $grid) {
+            $grid->planet->syncBuildings();
+        });
+    }
+
+    /**
      * Get the constructable buildings.
      *
      * @return Collection

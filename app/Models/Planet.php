@@ -119,6 +119,33 @@ class Planet extends Model implements PositionableContract
     ];
 
     /**
+     * {@inheritdoc}
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function (self $planet) {
+            if ($planet->isDirty('user_id')) {
+                $planet->custom_name = null;
+
+                $originalUserId = $planet->getOriginal('user_id');
+
+                $planet->incomingMovements()->where('user_id', $originalUserId)->get()->each->delete();
+                $planet->outgoingMovements()->where('user_id', $originalUserId)->get()->each->delete();
+
+                $planet->constructions->each->delete();
+                $planet->upgrades->each->delete();
+                $planet->trainings->each->delete();
+            }
+
+            if ($planet->user_id) {
+                $planet->user->syncProduction();
+            }
+        });
+    }
+
+    /**
      * Is occupiable?
      *
      * @param User $user

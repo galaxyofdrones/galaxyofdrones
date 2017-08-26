@@ -5,6 +5,7 @@ namespace Koodilab\Models;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Koodilab\Events\UserUpdated;
 use Koodilab\Models\Relations\BelongsToManyResource;
 use Koodilab\Models\Relations\BelongsToManyUnit;
 use Koodilab\Models\Relations\HasManyBookmark;
@@ -161,8 +162,30 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::deleting(function ($model) {
-            return auth()->id() != $model->getKey();
+        static::saving(function (self $user) {
+            if ($user->isDirty('capital_id')) {
+                $user->last_capital_changed = Carbon::now();
+            }
+
+            if ($user->isDirty(['energy', 'production_rate'])) {
+                $user->last_production_changed = Carbon::now();
+            }
+        });
+
+        static::deleting(function (self $user) {
+            if (auth()->id() != $user->getKey()) {
+                $user->planets->each->update([
+                    'user_id' => null,
+                ]);
+
+                return true;
+            }
+
+            return false;
+        });
+
+        static::updated(function (self $user) {
+            event(new UserUpdated($user->id));
         });
     }
 
@@ -269,13 +292,9 @@ class User extends Authenticatable
      */
     public function incrementEnergy($amount)
     {
-        if ($amount) {
-            $this->fill([
-                'energy' => $this->energy + $amount,
-            ]);
-
-            $this->save();
-        }
+        $this->update([
+            'energy' => $this->energy + $amount,
+        ]);
     }
 
     /**
@@ -285,13 +304,9 @@ class User extends Authenticatable
      */
     public function decrementEnergy($amount)
     {
-        if ($amount) {
-            $this->fill([
-                'energy' => max(0, $this->energy - $amount),
-            ]);
-
-            $this->save();
-        }
+        $this->update([
+            'energy' => max(0, $this->energy - $amount),
+        ]);
     }
 
     /**
@@ -299,12 +314,10 @@ class User extends Authenticatable
      */
     public function syncProduction()
     {
-        $this->fill([
+        $this->update([
             'energy' => $this->energy,
             'production_rate' => $this->planets->sum('production_rate'),
         ]);
-
-        $this->save();
     }
 
     /**

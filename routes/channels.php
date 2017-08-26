@@ -14,6 +14,10 @@ use Koodilab\Models\User;
 |
 */
 
+Broadcast::channel('user.{id}', function (User $user, $id) {
+    return $user->id == $id;
+});
+
 Broadcast::channel('planet.{planet}', function (User $user, Planet $planet) {
     return $user->id == $planet->user_id;
 });
