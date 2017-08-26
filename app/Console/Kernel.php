@@ -10,13 +10,25 @@ class Kernel extends ConsoleKernel
     /**
      * {@inheritdoc}
      */
-    protected $commands = [];
+    protected $commands = [
+        Commands\BuildingDemolish::class,
+        Commands\ConstructionFinish::class,
+        Commands\MissionClearCommand::class,
+        Commands\MissionGenerateCommand::class,
+        Commands\MovementFinish::class,
+        Commands\PlanetOccupyCommand::class,
+        Commands\ResearchFinish::class,
+        Commands\StarmapGenerateCommand::class,
+        Commands\TrainingFinish::class,
+        Commands\UpgradeFinish::class,
+    ];
 
     /**
      * {@inheritdoc}
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('mission:generate')->cron('0 */6 * * * *');
     }
 
     /**

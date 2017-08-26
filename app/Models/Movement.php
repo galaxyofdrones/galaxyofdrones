@@ -197,7 +197,7 @@ class Movement extends Model implements TimeableContract
         $battleLog = app(Simulator::class)->occupy($this);
 
         if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
-            if ($battleLog->end->isOccupyable($battleLog->attacker)) {
+            if ($battleLog->end->isOccupiable($battleLog->attacker)) {
                 $battleLog->end->occupy($battleLog->attacker);
             } else {
                 $this->returnMovement($battleLog->attackerUnits);

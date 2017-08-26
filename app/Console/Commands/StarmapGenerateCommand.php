@@ -1,0 +1,73 @@
+<?php
+
+namespace Koodilab\Console\Commands;
+
+use Illuminate\Console\Command;
+use Koodilab\Console\Behaviors\PrependTimestamp;
+use Koodilab\Contracts\Starmap\Generator;
+use Koodilab\Contracts\Starmap\Renderer;
+
+class StarmapGenerateCommand extends Command
+{
+    use PrependTimestamp;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $signature = 'starmap:generate';
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $description = 'Generate a starmap';
+
+    /**
+     * The generator instance.
+     *
+     * @var Generator
+     */
+    protected $generator;
+
+    /**
+     * The renderer instance.
+     *
+     * @var Renderer
+     */
+    protected $renderer;
+
+    /**
+     * Constructor.
+     *
+     * @param Generator $generator
+     * @param Renderer  $renderer
+     */
+    public function __construct(Generator $generator, Renderer $renderer)
+    {
+        parent::__construct();
+
+        $this->generator = $generator;
+        $this->renderer = $renderer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handle()
+    {
+        $this->info(
+            $this->prependTimestamp('Generating starmap...')
+        );
+
+        $this->generator->generate();
+
+        $this->info(
+            $this->prependTimestamp('Generation complete! Rendering starmap...')
+        );
+
+        $this->renderer->render();
+
+        $this->info(
+            $this->prependTimestamp('Rendering complete! Have fun!')
+        );
+    }
+}

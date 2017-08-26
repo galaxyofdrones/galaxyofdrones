@@ -107,6 +107,16 @@ class Mission extends Model implements TimeableContract
     }
 
     /**
+     * Delete the expired missions.
+     *
+     * @return bool|null
+     */
+    public static function deleteExpired()
+    {
+        return static::where('ended_at', '<', Carbon::now())->delete();
+    }
+
+    /**
      * Get the resources.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
