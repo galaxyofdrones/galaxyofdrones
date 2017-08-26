@@ -78,12 +78,10 @@ class Mission extends Model implements TimeableContract
      */
     public static function createRand(Planet $planet, Building $building, Collection $resources)
     {
-        $mission = new static([
+        $mission = static::create([
+            'planet_id' => $planet->id,
             'ended_at' => Carbon::now()->addSeconds($building->mission_time),
         ]);
-
-        $mission->planet()->associate($planet->id);
-        $mission->save();
 
         $amount = mt_rand(1, $resources->count());
 
@@ -130,19 +128,11 @@ class Mission extends Model implements TimeableContract
         $stocks = $this->planet->stocks()
             ->whereIn('resource_id', $this->resources->modelKeys())
             ->get()
-            ->keyBy('resource_id');
+            ->keyBy('resource_id')
+            ->each->setRelation('planet', $this->planet);
 
         foreach ($this->resources as $resource) {
-            if (!$stocks->has($resource->id)) {
-                return false;
-            }
-
-            /** @var Stock $stock */
-            $stock = $stocks
-                ->get($resource->id)
-                ->setRelation('planet', $this->planet);
-
-            if (!$stock->hasQuantity($resource->pivot->quantity)) {
+            if (!$stocks->has($resource->id) || !$stocks->get($resource->id)->hasQuantity($resource->pivot->quantity)) {
                 return false;
             }
         }
@@ -151,7 +141,7 @@ class Mission extends Model implements TimeableContract
             $stocks->get($resource->id)->decrementQuantity($resource->pivot->quantity);
         }
 
-        MissionLog::createFromMission($this);
+        MissionLog::createFrom($this);
         $this->delete();
 
         event(new PlanetUpdated($this->planet_id));

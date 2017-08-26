@@ -238,7 +238,7 @@ class Simulator implements SimulatorContract
             }
         }
 
-        $this->battleLog = BattleLog::createFromMovement(
+        $this->battleLog = BattleLog::createFrom(
             $this->movement, $this->attackerLossRate > $this->defenderLossRate
                 ? BattleLog::WINNER_DEFENDER
                 : BattleLog::WINNER_ATTACKER
@@ -255,7 +255,7 @@ class Simulator implements SimulatorContract
         $this->attackerLossRate = 0;
         $this->defenderLossRate = 0;
 
-        $this->battleLog = BattleLog::createFromMovement($this->movement);
+        $this->battleLog = BattleLog::createFrom($this->movement);
 
         $this->calculate();
     }

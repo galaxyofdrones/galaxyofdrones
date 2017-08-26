@@ -112,29 +112,18 @@ class BattleLog extends Model
      *
      * @return BattleLog
      */
-    public static function createFromMovement(Movement $movement, $winner = null)
+    public static function createFrom(Movement $movement, $winner = null)
     {
-        $battleLog = new static([
+        $battleLog = static::create([
             'attacker_id' => $movement->start->user_id,
             'defender_id' => $movement->end->user_id,
             'start_id' => $movement->start_id,
             'end_id' => $movement->end_id,
             'start_name' => $movement->start->display_name,
             'end_name' => $movement->end->display_name,
-            'type' => static::TYPE_ATTACK,
+            'type' => $movement->type,
             'winner' => $winner ?: static::WINNER_ATTACKER,
         ]);
-
-        switch ($movement->type) {
-            case Movement::TYPE_SCOUT:
-                $battleLog->type = static::TYPE_SCOUT;
-                break;
-            case Movement::TYPE_OCCUPY:
-                $battleLog->type = static::TYPE_OCCUPY;
-                break;
-        }
-
-        $battleLog->save();
 
         if ($battleLog->type == static::TYPE_SCOUT) {
             $battleLog->attacker->notify(new BattleLogCreated($battleLog));

@@ -47,14 +47,12 @@ class MissionLog extends Model
      *
      * @return MissionLog
      */
-    public static function createFromMission(Mission $mission)
+    public static function createFrom(Mission $mission)
     {
-        $missionLog = new static([
+        $missionLog = static::create([
+            'user_id' => $mission->planet->user_id,
             'experience' => $mission->experience,
         ]);
-
-        $missionLog->user()->associate($mission->planet->user_id);
-        $missionLog->save();
 
         foreach ($mission->resources as $resource) {
             $missionLog->resources()->attach($resource->id, [
