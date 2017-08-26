@@ -65,8 +65,7 @@ class Training extends Model implements TimeableContract
             'unit_id' => $this->unit_id,
         ]);
 
-        $population
-            ->setRelation('planet', $this->grid->planet)
+        $population->setRelation('planet', $this->grid->planet)
             ->setRelation('unit', $this->unit)
             ->incrementQuantity($this->quantity);
 

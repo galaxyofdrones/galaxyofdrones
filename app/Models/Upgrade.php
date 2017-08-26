@@ -64,7 +64,7 @@ class Upgrade extends Model implements TimeableContract
             'level' => $this->grid->building->level,
         ]);
 
-        $this->grid->planet->user->experience += $this->grid->building->experience;
+        $this->grid->planet->user->experience += $this->grid->building->construction_experience;
         $this->grid->planet->user->save();
 
         $this->delete();
