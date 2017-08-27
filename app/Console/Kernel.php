@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\PlanetOccupyCommand::class,
         Commands\ResearchFinish::class,
         Commands\StarmapGenerateCommand::class,
+        Commands\StarmapRenderCommand::class,
         Commands\TrainingFinish::class,
         Commands\UpgradeFinish::class,
     ];

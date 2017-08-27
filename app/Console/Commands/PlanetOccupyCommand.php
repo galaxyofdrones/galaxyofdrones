@@ -42,7 +42,7 @@ class PlanetOccupyCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Execute the console command.
      */
     public function handle()
     {

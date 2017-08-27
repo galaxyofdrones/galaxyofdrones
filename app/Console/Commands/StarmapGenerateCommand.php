@@ -19,7 +19,7 @@ class StarmapGenerateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Generate a starmap';
+    protected $description = 'Generate the starmap';
 
     /**
      * The generator instance.
@@ -50,7 +50,7 @@ class StarmapGenerateCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Execute the console command.
      */
     public function handle()
     {
@@ -64,10 +64,6 @@ class StarmapGenerateCommand extends Command
             $this->prependTimestamp('Generation complete! Rendering starmap...')
         );
 
-        $this->renderer->render();
-
-        $this->info(
-            $this->prependTimestamp('Rendering complete! Have fun!')
-        );
+        $this->call('starmap:render');
     }
 }
