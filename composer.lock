@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ffc4726a7bd5f8d60532602ab1c0c6a9",
+    "content-hash": "a93877dc4dba5d114b524f48073dd059",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -750,12 +750,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "df9e97990393100f42b142a9ff5fb459f87e5fd6"
+                "reference": "73de18e32a7d04ed61c1a37b724732a23aad259c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/df9e97990393100f42b142a9ff5fb459f87e5fd6",
-                "reference": "df9e97990393100f42b142a9ff5fb459f87e5fd6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/73de18e32a7d04ed61c1a37b724732a23aad259c",
+                "reference": "73de18e32a7d04ed61c1a37b724732a23aad259c",
                 "shasum": ""
             },
             "require": {
@@ -874,7 +874,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-25T15:30:43+00:00"
+            "time": "2017-08-27T02:42:16+00:00"
         },
         {
             "name": "laravel/passport",
@@ -5432,7 +5432,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "ext-imagick": "*"
     },
     "platform-dev": []
 }
