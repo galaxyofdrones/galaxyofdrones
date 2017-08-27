@@ -10,7 +10,11 @@ class EventServiceProvider extends ServiceProvider
     /**
      * {@inheritdoc}
      */
-    protected $listen = [];
+    protected $listen = [
+        \Illuminate\Auth\Events\Login::class => [
+            \Koodilab\Listeners\UserLoginListener::class,
+        ],
+    ];
 
     /**
      * {@inheritdoc}
