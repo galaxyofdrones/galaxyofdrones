@@ -4,7 +4,7 @@
 {% block title %}{{ subtitle ~ ' - ' ~ parent() }}{% endblock %}
 
 {% block body %}
-    <section class="container-login">
+    <section id="site" class="container-login">
         <a class="logo" href="{{ route('home') }}">
             <img class="img-responsive" src="{{ asset('images/logo.png') }}" alt="{{ title }}">
         </a>
@@ -55,6 +55,19 @@
                     <button class="btn btn-info btn-block" type="submit">
                         {{ subtitle }}
                     </button>
+                </div>
+                <div class="panel-footer text-center">
+                    <p>
+                        <a href="#">
+                            {{ trans('messages.auth.forgot') }}
+                        </a>
+                    </p>
+                    <p>
+                        {{ trans('messages.auth.dont_have') }}
+                        <a href="#">
+                            {{ trans('messages.auth.sign_up') }}
+                        </a>
+                    </p>
                 </div>
             </form>
         </div>

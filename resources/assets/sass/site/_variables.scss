@@ -39,7 +39,7 @@ $body-bg:               #0b0e14;
 $text-color:            #b6bfca;
 
 //** Global textual link color.
-// $link-color:            $brand-primary
+$link-color:            $brand-success;
 //** Link hover color set via `darken()` function.
 // $link-hover-color:      darken($link-color, 15%)
 //** Link hover decoration.
@@ -725,7 +725,7 @@ $panel-inner-border:          #19222f;
 $panel-footer-bg:             none;
 
 $panel-default-text:          #fff;
-$panel-default-border:        #19222f;
+$panel-default-border:        $brand-info;
 $panel-default-heading-bg:    none;
 
 // $panel-primary-text:          #fff

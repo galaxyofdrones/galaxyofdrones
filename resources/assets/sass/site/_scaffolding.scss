@@ -11,6 +11,24 @@
     content: ' *';
 }
 
+.panel {
+    .panel-heading {
+        border-color: #19222f;
+
+        i {
+            margin-right: $grid-gutter-width / 3;
+        }
+    }
+    .panel-footer {
+        p:last-child {
+            margin-bottom: 0;
+        }
+        a {
+            transition: ease .2s;
+        }
+    }
+}
+
 .container-login {
     @extend .container-fluid;
     background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
