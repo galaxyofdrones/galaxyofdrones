@@ -3,6 +3,7 @@
 namespace Koodilab\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Koodilab\Events\UserUpdated;
@@ -56,6 +57,7 @@ use Laravel\Passport\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read \Illuminate\Database\Eloquent\Collection|Unit[] $units
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|User dashboard()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentId($value)
@@ -190,6 +192,30 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the dashboard roles.
+     *
+     * @return array
+     */
+    public static function dashboardRoles()
+    {
+        return [
+            static::ROLE_ADMIN, static::ROLE_SUPER_ADMIN,
+        ];
+    }
+
+    /**
+     * Dashboard scope.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeDashboard(Builder $query)
+    {
+        return $query->whereIn('role', static::dashboardRoles());
+    }
+
+    /**
      * Get the capital.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -271,6 +297,16 @@ class User extends Authenticatable
     public function canGiveRole($role)
     {
         return $this->role >= $role;
+    }
+
+    /**
+     * Can use dashboard?
+     *
+     * @return bool
+     */
+    public function canUseDashboard()
+    {
+        return in_array($this->role, static::dashboardRoles());
     }
 
     /**

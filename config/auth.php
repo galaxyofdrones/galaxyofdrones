@@ -66,7 +66,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'koodilab',
             'model' => Koodilab\Models\User::class,
         ],
 
