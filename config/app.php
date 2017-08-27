@@ -185,7 +185,7 @@ return [
          */
         Koodilab\Providers\AppServiceProvider::class,
         Koodilab\Providers\AuthServiceProvider::class,
-        // Koodilab\Providers\BroadcastServiceProvider::class,
+        Koodilab\Providers\BroadcastServiceProvider::class,
         Koodilab\Providers\EventServiceProvider::class,
         Koodilab\Providers\RouteServiceProvider::class,
 
