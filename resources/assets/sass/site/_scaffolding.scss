@@ -1,0 +1,29 @@
+[v-cloak] {
+    display: none;
+}
+
+.btn {
+    transition: ease .2s;
+}
+
+.control-label.required:after {
+    color: $brand-info;
+    content: ' *';
+}
+
+.container-login {
+    @extend .container-fluid;
+    background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
+    height: 100vh;
+
+    .logo {
+        display: block;
+        height: 100px;
+        margin: $grid-gutter-width auto;
+        width: 240px;
+    }
+    .panel {
+        margin: 0 auto;
+        max-width: 360px;
+    }
+}

@@ -2,6 +2,21 @@
 
 use Koodilab\Support\Util;
 
+if (!function_exists('flash')) {
+    /**
+     * Set a flash message.
+     *
+     * @param string $message
+     * @param string $title
+     *
+     * @return \Koodilab\Support\FlashManager|null
+     */
+    function flash($message = null, $title = null)
+    {
+        return Util::flash($message, $title);
+    }
+}
+
 if (!function_exists('setting')) {
     /**
      * Get the setting.

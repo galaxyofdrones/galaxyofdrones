@@ -5,6 +5,25 @@ namespace Koodilab\Support;
 class Util
 {
     /**
+     * Set a flash message.
+     *
+     * @param string $message
+     * @param string $title
+     *
+     * @return FlashManager|null
+     */
+    public static function flash($message = null, $title = null)
+    {
+        $flash = app(FlashManager::class);
+
+        if (!$message) {
+            return $flash;
+        }
+
+        return $flash->info($message, $title);
+    }
+
+    /**
      * Get a random float.
      *
      * @return float
