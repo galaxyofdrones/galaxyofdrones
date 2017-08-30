@@ -6,7 +6,7 @@
             type: '{{ session('_flash_manager.type') }}',
             showConfirmButton: false,
             timer: 1500
-        }).done();
+        }).catch(swal.noop);
     </script>
 {% elseif errors is not empty %}
     <script type="text/javascript">
@@ -16,6 +16,6 @@
             type: 'error',
             showConfirmButton: false,
             timer: 1500
-        }).done();
+        }).catch(swal.noop);
     </script>
 {% endif %}

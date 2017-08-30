@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/css?family=Exo+2:400,500,700&subset=latin,latin-ext);
+
 [v-cloak] {
     display: none;
 }
@@ -13,7 +15,7 @@
 
 .panel {
     .panel-heading {
-        border-color: #19222f;
+        border-color: $brand-primary;
 
         i {
             margin-right: $grid-gutter-width / 3;
@@ -43,5 +45,14 @@
     .panel {
         margin: 0 auto;
         max-width: 360px;
+    }
+}
+
+.container-starmap {
+    background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
+
+    .starmap {
+        background: rgba(0, 0, 0, 0);
+        height: 100vh;
     }
 }

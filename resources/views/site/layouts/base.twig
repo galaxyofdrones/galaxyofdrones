@@ -21,7 +21,7 @@
         <meta property="og:type" content="website">
     {% endblock %}
     {% block og_url %}
-        <meta property="og:url" content="{{ route('home', config('app.locale')) }}">
+        <meta property="og:url" content="{{ route('home') }}">
     {% endblock %}
     {% block og_image %}
         <meta property="og:image" content="{{ asset('images/og-website.png') }}">

@@ -17,6 +17,6 @@ $router->group([
     $router->get('logout', 'LoginController@logout')
         ->name('logout');
 
-    $router->get('/', 'HomeController@index')
+    $router->get('/', 'StarmapController@index')
         ->name('home');
 });
