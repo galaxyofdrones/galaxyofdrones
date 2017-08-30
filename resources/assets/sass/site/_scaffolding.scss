@@ -31,35 +31,74 @@
     }
 }
 
-.container-login {
-    @extend .container-fluid;
+.container-site {
     background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
     height: 100vh;
     margin: 0 auto;
     max-height: 1080px;
     max-width: 1920px;
+    overflow: hidden;
+    position: relative;
 
-    .logo {
-        display: block;
-        height: 100px;
-        margin: $grid-gutter-width auto;
-        width: 240px;
-    }
-    .panel {
-        margin: 0 auto;
-        max-width: 360px;
+    &-login {
+        @extend .container-fluid;
+
+        .logo {
+            display: block;
+            height: 100px;
+            margin: $grid-gutter-width auto;
+            width: 240px;
+        }
+        .panel {
+            margin: 0 auto;
+            max-width: 360px;
+        }
     }
 }
 
-.container-starmap {
-    background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
-    height: 100vh;
-    margin: 0 auto;
-    max-height: 1080px;
-    max-width: 1920px;
+.sidebar {
+    background: $panel-bg;
+    border-right: 1px solid $brand-info;
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    transform: translateX(-260px);
+    transition: ease .2s;
+    width: 320px;
+    z-index: 9999;
+    @include clearfix;
 
-    .starmap {
-        background: rgba(0, 0, 0, 0);
-        height: 100%;
+    &.active {
+        transform: translateX(0);
     }
+    &-content {
+        float: left;
+        width: 260px;
+    }
+    &-nav {
+        border-left: 1px solid $panel-inner-border;
+        float: right;
+        height: 100%;
+        padding: 4px;
+        width: 59px;
+
+        .nav > li {
+            margin: 0;
+
+            > a {
+                color: $brand-info;
+                font-size: 32px;
+                height: 52px;
+                line-height: 52px;
+                padding: 0;
+                text-align: center;
+                transition: ease .2s;
+            }
+        }
+    }
+}
+
+.starmap {
+    background: rgba(0, 0, 0, 0);
+    height: 100%;
 }

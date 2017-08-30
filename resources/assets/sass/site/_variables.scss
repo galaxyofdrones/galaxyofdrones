@@ -432,10 +432,10 @@ $input-color-placeholder:        $text-color-light;
 
 //=== Shared nav styles
 // $nav-link-padding:                          10px 15px
-// $nav-link-hover-bg:                         $gray-lighter
+$nav-link-hover-bg:                         #19222f;
 
-// $nav-disabled-link-color:                   $gray-light
-// $nav-disabled-link-hover-color:             $gray-light
+$nav-disabled-link-color:                   $text-color-disabled;
+$nav-disabled-link-hover-color:             $text-color-disabled;
 
 //== Tabs
 // $nav-tabs-border-color:                     #ddd
@@ -714,7 +714,7 @@ $state-danger-text:              $brand-danger;
 //
 //##
 
-$panel-bg:                    rgba(#0e141c, .75);
+$panel-bg:                    rgba(#0e141c, .95);
 $panel-body-padding:          25px;
 $panel-heading-padding:       20px 25px;
 // $panel-footer-padding:        $panel-heading-padding

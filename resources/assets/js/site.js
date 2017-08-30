@@ -13,12 +13,13 @@ require('./site/bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Sidebar from './site/Sidebar';
 import Starmap from './site/Starmap';
 
 const app = new Vue({
     el: '#site',
 
     components: {
-        Starmap
+        Sidebar, Starmap
     }
 });

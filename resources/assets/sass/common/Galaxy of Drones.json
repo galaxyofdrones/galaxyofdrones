@@ -8,12 +8,20 @@
     {
       "selection": [
         {
+          "order": 47,
+          "id": 39,
+          "name": "close",
+          "prevSize": 32,
+          "code": 59677,
+          "tempChar": ""
+        },
+        {
           "order": 39,
           "id": 38,
           "name": "chevron-left",
           "prevSize": 32,
           "code": 59649,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 40,
@@ -21,7 +29,7 @@
           "name": "chevron-right",
           "prevSize": 32,
           "code": 59652,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 41,
@@ -29,7 +37,7 @@
           "name": "create",
           "prevSize": 32,
           "code": 59653,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 42,
@@ -37,7 +45,7 @@
           "name": "delete",
           "prevSize": 32,
           "code": 59657,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 43,
@@ -45,7 +53,7 @@
           "name": "edit",
           "prevSize": 32,
           "code": 59659,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 44,
@@ -53,7 +61,7 @@
           "name": "nav",
           "prevSize": 32,
           "code": 59661,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 45,
@@ -61,7 +69,7 @@
           "name": "search",
           "prevSize": 32,
           "code": 59667,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 46,
@@ -69,7 +77,7 @@
           "name": "sort-order",
           "prevSize": 32,
           "code": 59675,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 38,
@@ -77,7 +85,7 @@
           "name": "login",
           "prevSize": 32,
           "code": 59676,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 37,
@@ -85,7 +93,7 @@
           "prevSize": 32,
           "code": 59674,
           "name": "trophy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 35,
@@ -93,7 +101,7 @@
           "prevSize": 32,
           "code": 59673,
           "name": "more",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 29,
@@ -101,7 +109,7 @@
           "prevSize": 32,
           "code": 59654,
           "name": "envelope",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 28,
@@ -109,7 +117,7 @@
           "prevSize": 32,
           "code": 59666,
           "name": "surface",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 1,
@@ -117,7 +125,7 @@
           "prevSize": 32,
           "code": 59671,
           "name": "arrow-left",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 25,
@@ -125,7 +133,7 @@
           "prevSize": 32,
           "code": 59672,
           "name": "arrow-right",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 2,
@@ -133,7 +141,7 @@
           "prevSize": 32,
           "code": 59670,
           "name": "supply",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 3,
@@ -141,7 +149,7 @@
           "prevSize": 32,
           "code": 59669,
           "name": "xp",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 4,
@@ -149,7 +157,7 @@
           "prevSize": 32,
           "code": 59651,
           "name": "energy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 5,
@@ -157,7 +165,7 @@
           "prevSize": 32,
           "code": 59648,
           "name": "time",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 7,
@@ -165,7 +173,7 @@
           "prevSize": 32,
           "code": 59650,
           "name": "cog",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 11,
@@ -173,7 +181,7 @@
           "prevSize": 32,
           "code": 59655,
           "name": "eye",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 12,
@@ -181,7 +189,7 @@
           "prevSize": 32,
           "code": 59656,
           "name": "globe",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 14,
@@ -189,7 +197,7 @@
           "prevSize": 32,
           "code": 59658,
           "name": "home",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 16,
@@ -197,7 +205,7 @@
           "prevSize": 32,
           "code": 59660,
           "name": "mothership",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 18,
@@ -205,7 +213,7 @@
           "prevSize": 32,
           "code": 59662,
           "name": "power-off",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 19,
@@ -213,7 +221,7 @@
           "prevSize": 32,
           "code": 59663,
           "name": "question-circle",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 20,
@@ -221,7 +229,7 @@
           "prevSize": 32,
           "code": 59664,
           "name": "star",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 21,
@@ -229,7 +237,7 @@
           "prevSize": 32,
           "code": 59665,
           "name": "starmap",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 24,
@@ -237,20 +245,35 @@
           "prevSize": 32,
           "code": 59668,
           "name": "user",
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 0,
       "metadata": {
         "name": "icomoon",
         "importSize": {
-          "width": 640,
-          "height": 640
+          "width": 357,
+          "height": 357
         }
       },
       "height": 1024,
       "prevSize": 32,
       "icons": [
+        {
+          "id": 39,
+          "paths": [
+            "M1024 102.4l-102.4-102.4-409.6 409.6-409.6-409.6-102.4 102.4 409.6 409.6-409.6 409.6 102.4 102.4 409.6-409.6 409.6 409.6 102.4-102.4-409.6-409.6z"
+          ],
+          "attrs": [
+            {}
+          ],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 20,
+          "tags": [
+            "close"
+          ]
+        },
         {
           "id": 38,
           "paths": [

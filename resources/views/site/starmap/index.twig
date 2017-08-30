@@ -1,13 +1,11 @@
-{% extends 'site.layouts.base' %}
+{% extends 'site.layouts.main' %}
 
-{% block body %}
-    <div id="site" class="container-starmap">
-        <starmap size="{{ constant('Koodilab\\Starmap\\Generator::SIZE') }}"
-                 max-zoom="{{ constant('Koodilab\\Starmap\\Renderer::MAX_ZOOM_LEVEL') }}"
-                 geo-json-url="{{ route('api_starmap_geo_json', ['__zoom__', '__bounds__']) }}"
-                 tile-url="{{ asset('starmap/{z}/{x}/{y}.png') }}"
-                 image-path="{{ asset('images') }}" inline-template>
-            <div class="starmap"></div>
-        </starmap>
-    </div>
+{% block content %}
+    <starmap size="{{ constant('Koodilab\\Starmap\\Generator::SIZE') }}"
+             max-zoom="{{ constant('Koodilab\\Starmap\\Renderer::MAX_ZOOM_LEVEL') }}"
+             geo-json-url="{{ route('api_starmap_geo_json', ['__zoom__', '__bounds__']) }}"
+             tile-url="{{ asset('starmap/{z}/{x}/{y}.png') }}"
+             image-path="{{ asset('images') }}" inline-template>
+        <div class="starmap"></div>
+    </starmap>
 {% endblock %}
