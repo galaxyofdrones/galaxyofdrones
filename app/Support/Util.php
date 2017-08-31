@@ -24,6 +24,31 @@ class Util
     }
 
     /**
+     * Get the gravatar.
+     *
+     * @param string $email
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    public static function gravatar($email = null, array $parameters = [])
+    {
+        $hash = '';
+
+        if (!empty($email)) {
+            $hash = md5(mb_strtolower($email));
+        }
+
+        $query = '';
+
+        if (!empty($parameters)) {
+            $query = '?'.http_build_query($parameters);
+        }
+
+        return "//gravatar.com/avatar/{$hash}{$query}";
+    }
+
+    /**
      * Get a random float.
      *
      * @return float

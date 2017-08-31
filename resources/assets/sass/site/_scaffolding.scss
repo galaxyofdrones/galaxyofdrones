@@ -4,6 +4,11 @@
     display: none;
 }
 
+body {
+    min-height: 320px;
+    min-width: 320px;
+}
+
 .btn {
     transition: ease .2s;
 }
@@ -93,7 +98,96 @@
                 padding: 0;
                 text-align: center;
                 transition: ease .2s;
+
+                &:focus,
+                &:hover {
+                    color: #fff;
+                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+                }
             }
+        }
+    }
+}
+
+.player {
+    &-info,
+    &-energy {
+        background: $panel-bg;
+        border: 1px solid $brand-info;
+        position: absolute;
+        right: $grid-gutter-width / 2;
+        width: 202px;
+        z-index: 999;
+    }
+    &-info {
+        height: 82px;
+        top: $grid-gutter-width / 2;
+        @include clearfix;
+    }
+    &-energy {
+        border-color: $brand-warning;
+        color: #fff;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+        top: 92px + $grid-gutter-width / 2;
+    }
+    &-left {
+        float: left;
+        height: 100%;
+        width: 50px;
+    }
+    &-right {
+        float: right;
+        height: 100%;
+        width: 150px;
+    }
+    &-avatar {
+        height: 50px;
+        width: 50px;
+    }
+    &-level {
+        color: #fff;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+    }
+    &-nav {
+        border-bottom: 1px solid $panel-inner-border;
+        padding: 4px;
+
+        .nav > li {
+            display: table-cell;
+            margin: 0;
+            width: 1%;
+
+            > a {
+                color: $brand-info;
+                font-size: 20px;
+                height: 41px;
+                line-height: 41px;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                transition: ease .2s;
+
+                &:focus,
+                &:hover {
+                    color: #fff;
+                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+                }
+            }
+        }
+    }
+    &-progress {
+        height: 30px;
+        padding: 12px 0;
+
+        .progress {
+            height: 5px;
+            margin: 0 8px;
         }
     }
 }

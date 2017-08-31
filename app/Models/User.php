@@ -14,6 +14,7 @@ use Koodilab\Models\Relations\HasManyMissionLog;
 use Koodilab\Models\Relations\HasManyMovement;
 use Koodilab\Models\Relations\HasManyPlanet;
 use Koodilab\Models\Relations\HasManyResearch;
+use Koodilab\Support\Util;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -452,5 +453,17 @@ class User extends Authenticatable
     public function receivesBroadcastNotificationsOn()
     {
         return "user.{$this->id}";
+    }
+
+    /**
+     * Get the gravatar.
+     *
+     * @param array $parameters
+     *
+     * @return string
+     */
+    public function gravatar(array $parameters = [])
+    {
+        return Util::gravatar($this->email, $parameters);
     }
 }
