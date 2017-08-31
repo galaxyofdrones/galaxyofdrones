@@ -12,7 +12,7 @@
         "laravel/passport": "^3.0",
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
-        "rcrowe/twigbridge": "0.10.x-dev"
+        "rcrowe/twigbridge": "^0.9"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",
@@ -41,8 +41,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
@@ -61,7 +60,5 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
