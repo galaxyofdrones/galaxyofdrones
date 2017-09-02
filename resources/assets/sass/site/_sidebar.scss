@@ -1,0 +1,47 @@
+.sidebar {
+    background: $panel-bg;
+    border-right: 1px solid $brand-info;
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    transform: translateX(-260px);
+    transition: ease .2s;
+    width: 320px;
+    z-index: 9999;
+    @include clearfix;
+
+    &.active {
+        transform: translateX(0);
+    }
+    &-content {
+        float: left;
+        width: 260px;
+    }
+    &-nav {
+        border-left: 1px solid $panel-inner-border;
+        float: right;
+        height: 100%;
+        padding: 4px;
+        width: 59px;
+
+        .nav > li {
+            margin: 0;
+
+            > a {
+                color: $brand-info;
+                font-size: 32px;
+                height: 52px;
+                line-height: 52px;
+                padding: 0;
+                text-align: center;
+                transition: ease .2s;
+
+                &:focus,
+                &:hover {
+                    color: #fff;
+                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+                }
+            }
+        }
+    }
+}
