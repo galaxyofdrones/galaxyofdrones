@@ -115,13 +115,13 @@ body {
         background: $panel-bg;
         border: 1px solid $brand-info;
         position: absolute;
-        right: $grid-gutter-width / 2;
+        right: $grid-gutter-width / 3;
         width: 202px;
         z-index: 999;
     }
     &-info {
         height: 82px;
-        top: $grid-gutter-width / 2;
+        top: $grid-gutter-width / 3;
         @include clearfix;
     }
     &-energy {
@@ -131,7 +131,7 @@ body {
         line-height: 32px;
         text-align: center;
         text-shadow: 0 0 15px rgba(255, 255, 255, .6);
-        top: 92px + $grid-gutter-width / 2;
+        top: 92px + $grid-gutter-width / 3;
     }
     &-left {
         float: left;
@@ -241,6 +241,47 @@ body {
             left: 50%;
             position: absolute;
             transform: translateX(-50%);
+        }
+    }
+    .leaflet-left .leaflet-bar {
+        margin-left: 60px + $grid-gutter-width / 3;
+    }
+    .leaflet-bar {
+        border: 1px solid $brand-info;
+        border-radius: 0;
+        box-shadow: none;
+
+        a {
+            border-bottom: 1px solid $panel-inner-border;
+            background: $panel-bg;
+            color: $brand-info;
+            height: 30px;
+            line-height: 30px;
+            transition: ease .2s;
+            width: 30px;
+
+            &:hover {
+                color: #fff;
+                text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+            }
+            &:first-child {
+                border-radius: 0;
+            }
+            &:last-child {
+                border-bottom: none;
+                border-radius: 0;
+            }
+        }
+    }
+    .leaflet-control-zoom a {
+        height: 40px;
+        line-height: 40px;
+    }
+    .leaflet-control-bookmark {
+        font-size: 14px;
+
+        i {
+            vertical-align: middle;
         }
     }
 }

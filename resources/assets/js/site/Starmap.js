@@ -1,5 +1,7 @@
 export default {
-    props: ['size', 'maxZoom', 'geoJsonUrl', 'tileUrl', 'imagePath'],
+    props: [
+        'size', 'maxZoom', 'geoJsonUrl', 'tileUrl', 'imagePath', 'zoomInTitle', 'zoomOutTitle', 'bookmarkTitle'
+    ],
 
     data() {
         return {
@@ -77,6 +79,9 @@ export default {
 
             this.map.on('zoomstart', () => geoJsonLayer.clearLayers());
             this.map.on('moveend', () => geoJsonLayer.refresh(this.geoJson()));
+
+            this.zoomControl().addTo(this.map);
+            this.bookmarkControl().addTo(this.map);
         },
 
         geoJson() {
@@ -113,6 +118,42 @@ export default {
 
         multiplier() {
             return Math.pow(2, this.maxZoom - this.map.getZoom());
+        },
+
+        zoomControl() {
+            return L.control.zoom({
+                zoomInTitle: this.zoomInTitle,
+                zoomOutTitle: this.zoomOutTitle
+            });
+        },
+
+        bookmarkControl() {
+            const BookmarkControl = L.Control.extend({
+                options: {
+                    position: 'topleft',
+                    bookmarkTitle: this.bookmarkTitle,
+                    bookmarkIconClass: 'icon-star',
+                    onClick() {}
+                },
+
+                onAdd() {
+                    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-bookmark');
+                    const link = L.DomUtil.create('a', 'leaflet-control-bookmark', container);
+
+                    link.href = '#';
+                    link.title = this.options.bookmarkTitle;
+                    link.onclick = e => {
+                        e.preventDefault();
+                        this.options.onClick();
+                    };
+
+                    L.DomUtil.create('i', this.options.bookmarkIconClass, link);
+
+                    return container;
+                }
+            });
+
+            return new BookmarkControl();
         }
     }
 };

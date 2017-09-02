@@ -5,7 +5,10 @@
              max-zoom="{{ constant('Koodilab\\Starmap\\Renderer::MAX_ZOOM_LEVEL') }}"
              geo-json-url="{{ route('api_starmap_geo_json', ['__zoom__', '__bounds__']) }}"
              tile-url="{{ asset('starmap/{z}/{x}/{y}.png') }}"
-             image-path="{{ asset('images') }}" inline-template>
+             image-path="{{ asset('images') }}"
+             zoom-in-title="{{ trans('messages.zoom_in') }}"
+             zoom-out-title="{{ trans('messages.zoom_out') }}"
+             bookmark-title="{{ trans('messages.bookmark.plural') }}" inline-template>
         <div class="starmap"></div>
     </starmap>
 {% endblock %}
