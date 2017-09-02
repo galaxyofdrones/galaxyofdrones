@@ -21,6 +21,7 @@ class CreateResourcesTable extends Migration
             $table->integer('research_experience')->unsigned()->nullable();
             $table->integer('research_cost')->unsigned()->nullable();
             $table->integer('research_time')->unsigned()->nullable();
+            $table->integer('sort_order')->unsigned()->index();
             $table->timestamps();
         });
     }

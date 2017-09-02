@@ -5,6 +5,7 @@ namespace Koodilab\Models;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 use Koodilab\Models\Behaviors\Researchable;
+use Koodilab\Models\Behaviors\Sortable;
 use Koodilab\Models\Behaviors\Translatable;
 use Koodilab\Models\Relations\BelongsToManyUser;
 use Koodilab\Models\Relations\HasManyPlanet;
@@ -21,7 +22,8 @@ use Koodilab\Models\Relations\HasManyStock;
  * @property array $description
  * @property int|null $research_experience
  * @property int|null $research_cost
- * @property int|null $research_time
+ * @property int $research_time
+ * @property int $sort_order
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|Planet[] $planets
@@ -39,12 +41,13 @@ use Koodilab\Models\Relations\HasManyStock;
  * @method static \Illuminate\Database\Eloquent\Builder|Resource whereResearchCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Resource whereResearchExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Resource whereResearchTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Resource whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Resource whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Resource extends Model implements TranslatableContract
 {
-    use Researchable, Translatable, BelongsToManyUser, HasManyPlanet, HasManyStock;
+    use Researchable, Sortable, Translatable, BelongsToManyUser, HasManyPlanet, HasManyStock;
 
     /**
      * {@inheritdoc}

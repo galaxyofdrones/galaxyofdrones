@@ -5,6 +5,7 @@ namespace Koodilab\Models;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Models\Behaviors\Modifiable;
 use Koodilab\Models\Behaviors\Researchable;
+use Koodilab\Models\Behaviors\Sortable;
 use Koodilab\Models\Behaviors\Translatable;
 use Koodilab\Models\Relations\BelongsToManyUser;
 use Koodilab\Models\Relations\HasManyPopulation;
@@ -28,7 +29,8 @@ use Koodilab\Models\Relations\HasManyTraining;
  * @property int|null $capacity
  * @property int|null $research_experience
  * @property int|null $research_cost
- * @property int|null $research_time
+ * @property int $research_time
+ * @property int $sort_order
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|Population[] $populations
@@ -48,6 +50,7 @@ use Koodilab\Models\Relations\HasManyTraining;
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereResearchCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereResearchExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereResearchTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Unit whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereSpeed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereSupply($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereTrainCost($value)
@@ -58,7 +61,7 @@ use Koodilab\Models\Relations\HasManyTraining;
  */
 class Unit extends Model
 {
-    use Modifiable, Researchable, Translatable, BelongsToManyUser, HasManyPopulation, HasManyTraining;
+    use Modifiable, Sortable, Researchable, Translatable, BelongsToManyUser, HasManyPopulation, HasManyTraining;
 
     /**
      * The transporter type.
