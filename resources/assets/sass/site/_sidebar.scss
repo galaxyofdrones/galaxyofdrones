@@ -44,4 +44,12 @@
             }
         }
     }
+    &-block {
+        border-bottom: 1px solid $panel-inner-border;
+        padding: 10px;
+
+        &:last-child {
+            border: none;
+        }
+    }
 }
