@@ -70,11 +70,7 @@ export default {
                 }
             });
 
-            geoJsonLayer.ajaxParams.headers = {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
-            };
-
+            geoJsonLayer.ajaxParams.headers = axios.defaults.headers.common;
             geoJsonLayer.addTo(this.map);
 
             this.map.on('zoomstart', () => geoJsonLayer.clearLayers());
