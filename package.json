@@ -18,7 +18,7 @@
     "leaflet": "^1.2.0",
     "leaflet-ajax": "^2.1.0",
     "lodash": "^4.17.4",
-    "sweetalert2": "^6.6.9",
+    "sweetalert2": "^6.6.10",
     "vue": "^2.1.10"
   }
 }
