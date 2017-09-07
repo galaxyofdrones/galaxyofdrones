@@ -60,13 +60,13 @@ class PlanetOccupyCommand extends Command
             $this->error(
                 $this->prependTimestamp("The user [{$user->id}] not found.")
             );
-        } elseif (!$planet->isOccupiable($user)) {
+        } elseif (!$user->canOccupy($planet)) {
             $this->error(
-                $this->prependTimestamp("The planet [{$planet->id}] is not occupiable.")
+                $this->prependTimestamp("The user [{$user->id}] can not occupy the planet [{$planet->id}].")
             );
         } else {
             $this->database->transaction(function () use ($planet, $user) {
-                $planet->occupy($user);
+                $user->occupy($planet);
 
                 $this->info(
                     $this->prependTimestamp("The user [{$user->id}] has been occupied the planet [{$planet->id}]!")

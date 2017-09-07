@@ -174,6 +174,7 @@ class Movement extends Model implements TimeableContract
      */
     protected function finishScout()
     {
+        /** @var BattleLog $battleLog */
         $battleLog = app(Simulator::class)->scout($this);
 
         $this->returnMovement($battleLog->attackerUnits);
@@ -184,6 +185,7 @@ class Movement extends Model implements TimeableContract
      */
     protected function finishAttack()
     {
+        /** @var BattleLog $battleLog */
         $battleLog = app(Simulator::class)->attack($this);
 
         $this->returnMovement($battleLog->attackerUnits, $battleLog->resources);
@@ -194,12 +196,11 @@ class Movement extends Model implements TimeableContract
      */
     protected function finishOccupy()
     {
+        /** @var BattleLog $battleLog */
         $battleLog = app(Simulator::class)->occupy($this);
 
         if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
-            if ($battleLog->end->isOccupiable($battleLog->attacker)) {
-                $battleLog->end->occupy($battleLog->attacker);
-            } else {
+            if (!$battleLog->attacker->occupy($battleLog->end)) {
                 $this->returnMovement($battleLog->attackerUnits);
             }
         }

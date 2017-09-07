@@ -47,6 +47,8 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Koodilab\Http\Middleware\RedirectIfAuthenticated::class,
+        'player' => \Koodilab\Http\Middleware\RedirectIfNotStarted::class,
+        'recruit' => \Koodilab\Http\Middleware\RedirectIfStarted::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 

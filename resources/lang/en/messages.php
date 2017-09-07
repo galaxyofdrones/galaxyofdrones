@@ -3,6 +3,7 @@
 return [
 
     'info' => 'Info',
+    'start' => 'Start',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 

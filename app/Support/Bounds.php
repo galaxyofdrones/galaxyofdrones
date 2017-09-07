@@ -37,7 +37,7 @@ class Bounds
      *
      * @param string $bounds
      *
-     * @return Bounds
+     * @return static
      */
     public static function fromString($bounds)
     {
@@ -54,26 +54,12 @@ class Bounds
      * @param int $maxX
      * @param int $maxY
      */
-    public function __construct($minX, $minY, $maxX, $maxY)
+    public function __construct($minX = 0, $minY = 0, $maxX = 0, $maxY = 0)
     {
         $this->minX = $minX;
         $this->minY = $minY;
         $this->maxX = $maxX;
         $this->maxY = $maxY;
-    }
-
-    /**
-     * Set the minimum x coordinate.
-     *
-     * @param int $minX
-     *
-     * @return Bounds
-     */
-    public function setMinX($minX)
-    {
-        $this->minX = $minX;
-
-        return $this;
     }
 
     /**
@@ -87,15 +73,15 @@ class Bounds
     }
 
     /**
-     * Set the minimum y coordinate.
+     * Set the minimum x coordinate.
      *
-     * @param int $minY
+     * @param int $minX
      *
-     * @return Bounds
+     * @return static
      */
-    public function setMinY($minY)
+    public function setMinX($minX)
     {
-        $this->minY = $minY;
+        $this->minX = $minX;
 
         return $this;
     }
@@ -111,15 +97,29 @@ class Bounds
     }
 
     /**
-     * Set the maximum x coordinate.
+     * Set the minimum y coordinate.
      *
-     * @param int $maxX
+     * @param int $minY
      *
-     * @return Bounds
+     * @return static
      */
-    public function setMaxX($maxX)
+    public function setMinY($minY)
     {
-        $this->maxX = $maxX;
+        $this->minY = $minY;
+
+        return $this;
+    }
+
+    /**
+     * Set the minimum x and y coordinate.
+     *
+     * @param int $minXY
+     *
+     * @return static
+     */
+    public function setMinXY($minXY)
+    {
+        $this->minX = $this->minY = $minXY;
 
         return $this;
     }
@@ -135,15 +135,15 @@ class Bounds
     }
 
     /**
-     * Set the maximum y coordinate.
+     * Set the maximum x coordinate.
      *
-     * @param int $maxY
+     * @param int $maxX
      *
-     * @return Bounds
+     * @return static
      */
-    public function setMaxY($maxY)
+    public function setMaxX($maxX)
     {
-        $this->maxY = $maxY;
+        $this->maxX = $maxX;
 
         return $this;
     }
@@ -156,6 +156,34 @@ class Bounds
     public function maxY()
     {
         return $this->maxY;
+    }
+
+    /**
+     * Set the maximum y coordinate.
+     *
+     * @param int $maxY
+     *
+     * @return static
+     */
+    public function setMaxY($maxY)
+    {
+        $this->maxY = $maxY;
+
+        return $this;
+    }
+
+    /**
+     * Set the maximum x and y coordinate.
+     *
+     * @param int $maxXY
+     *
+     * @return static
+     */
+    public function setMaxXY($maxXY)
+    {
+        $this->maxX = $this->maxY = $maxXY;
+
+        return $this;
     }
 
     /**
@@ -179,7 +207,7 @@ class Bounds
      *
      * @param float $value
      *
-     * @return Bounds
+     * @return static
      */
     public function scale($value)
     {

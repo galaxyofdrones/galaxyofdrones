@@ -14,6 +14,16 @@ $router->group([
             ->name('login');
     });
 
+    $router->group([
+        'prefix' => 'start',
+    ], function () use ($router) {
+        $router->post('/', 'StartController@store')
+            ->name('start_store');
+
+        $router->get('/', 'StartController@index')
+            ->name('start');
+    });
+
     $router->get('logout', 'LoginController@logout')
         ->name('logout');
 

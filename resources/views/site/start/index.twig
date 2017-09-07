@@ -1,0 +1,10 @@
+{% extends 'site.layouts.base' %}
+
+{% set subtitle = trans('messages.start') %}
+{% block title %}{{ subtitle ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block body %}
+    <section id="site" class="container-site">
+
+    </section>
+{% endblock %}

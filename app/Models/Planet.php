@@ -2,15 +2,11 @@
 
 namespace Koodilab\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
-use Koodilab\Models\Behaviors\Positionable;
-use Koodilab\Models\Relations\BelongsToResource;
-use Koodilab\Models\Relations\BelongsToUser;
-use Koodilab\Models\Relations\HasManyGrid;
-use Koodilab\Models\Relations\HasManyMission;
-use Koodilab\Models\Relations\HasManyPopulation;
-use Koodilab\Models\Relations\HasManyStock;
+use Koodilab\Starmap\Generator;
+use Koodilab\Support\Bounds;
 
 /**
  * Planet.
@@ -19,7 +15,7 @@ use Koodilab\Models\Relations\HasManyStock;
  * @property int $resource_id
  * @property int|null $user_id
  * @property string $name
- * @property string $custom_name
+ * @property string|null $custom_name
  * @property int $x
  * @property int $y
  * @property int $size
@@ -49,6 +45,7 @@ use Koodilab\Models\Relations\HasManyStock;
  * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Planet inBounds(\Koodilab\Support\Bounds $bounds)
+ * @method static \Illuminate\Database\Eloquent\Builder|Planet starter()
  * @method static \Illuminate\Database\Eloquent\Builder|Planet whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Planet whereConstructionTimeBonus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Planet whereCreatedAt($value)
@@ -69,7 +66,15 @@ use Koodilab\Models\Relations\HasManyStock;
  */
 class Planet extends Model implements PositionableContract
 {
-    use Positionable, BelongsToResource, BelongsToUser, HasManyStock, HasManyPopulation, HasManyGrid, HasManyMission;
+    use Behaviors\Positionable,
+        Concerns\HasCustomName,
+        Concerns\HasStorage,
+        Relations\BelongsToResource,
+        Relations\BelongsToUser,
+        Relations\HasManyStock,
+        Relations\HasManyPopulation,
+        Relations\HasManyGrid,
+        Relations\HasManyMission;
 
     /**
      * The small size.
@@ -107,6 +112,13 @@ class Planet extends Model implements PositionableContract
     const SETTLER_COUNT = 1;
 
     /**
+     * The capital step.
+     *
+     * @var int
+     */
+    const CAPITAL_STEP = 1024;
+
+    /**
      * {@inheritdoc}
      */
     protected $perPage = 30;
@@ -127,23 +139,47 @@ class Planet extends Model implements PositionableContract
 
         static::updating(function (self $planet) {
             if ($planet->isDirty('user_id')) {
-                $planet->custom_name = null;
+                $userId = $planet->getOriginal('user_id');
 
-                $originalUserId = $planet->getOriginal('user_id');
-
-                $planet->incomingMovements()->where('user_id', $originalUserId)->get()->each->delete();
-                $planet->outgoingMovements()->where('user_id', $originalUserId)->get()->each->delete();
-
-                $planet->constructions->each->delete();
-                $planet->upgrades->each->delete();
-                $planet->trainings->each->delete();
-                $planet->missions->each->delete();
+                if ($userId) {
+                    $planet->custom_name = null;
+                    $planet->incomingMovements()->where('user_id', $userId)->get()->each->delete();
+                    $planet->outgoingMovements()->where('user_id', $userId)->get()->each->delete();
+                    $planet->constructions->each->delete();
+                    $planet->upgrades->each->delete();
+                    $planet->trainings->each->delete();
+                    $planet->missions->each->delete();
+                }
             }
 
             if ($planet->user_id) {
                 $planet->user->syncProduction();
             }
         });
+    }
+
+    /**
+     * Find a free capital.
+     *
+     * @return static
+     */
+    public static function findFreeCapital()
+    {
+        $center = Generator::SIZE / 2;
+        $query = static::starter();
+        $bounds = new Bounds();
+
+        for ($i = static::CAPITAL_STEP; $i < $center; $i += static::CAPITAL_STEP) {
+            $capital = $query->inBounds(
+                $bounds->setMinXY($center - $i)->setMaxXY($center + $i)
+            )->first();
+
+            if ($capital) {
+                return $capital;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -197,28 +233,6 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Get the display name attribute.
-     *
-     * @return string
-     */
-    public function getDisplayNameAttribute()
-    {
-        return $this->custom_name ?: $this->name;
-    }
-
-    /**
-     * Set the custom name attribute.
-     *
-     * @param string $value
-     */
-    public function setCustomNameAttribute($value)
-    {
-        $this->attributes['custom_name'] = $this->name != $value
-            ? $value
-            : null;
-    }
-
-    /**
      * Get the resource quantity attribute.
      *
      * @return int
@@ -229,103 +243,22 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Get the used capacity attribute.
+     * Starter scope.
      *
-     * @return int
+     * @param Builder $query
+     *
+     * @return Builder
      */
-    public function getUsedCapacityAttribute()
+    public function scopeStarter(Builder $query)
     {
-        return $this->stocks()
-            ->get(['resource_id', 'quantity', 'updated_at'])
-            ->reduce(function ($carry, Stock $stock) {
-                return $carry + $stock->setRelation('planet', $this)->quantity;
-            }, 0);
-    }
+        $resourceId = Resource::where('is_unlocked', true)
+            ->orderBy('sort_order')
+            ->value('id');
 
-    /**
-     * Get the used supply attribute.
-     *
-     * @return int
-     */
-    public function getUsedSupplyAttribute()
-    {
-        return $this->populations()
-            ->with([
-                'unit' => function ($query) {
-                    $query->select('id', 'supply');
-                },
-            ])
-            ->get(['unit_id', 'quantity'])
-            ->reduce(function ($carry, Population $population) {
-                return $carry + $population->quantity * $population->unit->supply;
-            }, 0);
-    }
-
-    /**
-     * Get the used training supply attribute.
-     *
-     * @return int
-     */
-    public function getUsedTrainingSupplyAttribute()
-    {
-        return $this->trainings()
-            ->with([
-                'unit' => function ($query) {
-                    $query->select('id', 'supply');
-                },
-            ])
-            ->get(['unit_id', 'quantity'])
-            ->reduce(function ($carry, Training $training) {
-                return $carry + $training->quantity * $training->unit->supply;
-            }, 0);
-    }
-
-    /**
-     * Is occupiable?
-     *
-     * @param User $user
-     *
-     * @return bool
-     */
-    public function isOccupiable(User $user)
-    {
-        if (User::where('capital_id', $this->id)->exists()) {
-            return false;
-        }
-
-        if (!$user->resources()->where('resources.id', $this->resource_id)->exists()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Occupy.
-     *
-     * @param User $user
-     */
-    public function occupy(User $user)
-    {
-        if ($this->user_id && $this->user->current_id == $this->id) {
-            $this->user->update([
-                'current_id' => $this->user->capital_id,
-            ]);
-        }
-
-        $this->update([
-            'user_id' => $user->id,
-        ]);
-
-        /** @var Grid $grid */
-        $grid = $this->grids()
-            ->where('type', Grid::TYPE_CENTRAL)
-            ->first();
-
-        $grid->update([
-            'building_id' => Building::where('type', Building::TYPE_CENTRAL)->value('id'),
-            'level' => 1,
-        ]);
+        return $query
+            ->whereNull('user_id')
+            ->where('resource_id', $resourceId)
+            ->where('size', static::SIZE_SMALL);
     }
 
     /**
