@@ -24,9 +24,18 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
+    'planet' => [
+        'free' => 'Only one planet is free.|Only :count planets are free.',
+        'first' => 'Get my first planet',
+    ],
+
     'success' => [
         'logout' => 'Logout successful.',
         'singular' => 'Success',
+    ],
+
+    'warning' => [
+        'server' => 'Sorry, the server is full :(',
     ],
 
 ];

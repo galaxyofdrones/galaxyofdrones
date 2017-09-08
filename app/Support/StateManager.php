@@ -18,7 +18,7 @@ class StateManager
     {
         $planet->createOrUpdateStock();
 
-        $attributes = (new Collection($planet->getAttributes()))->only([
+        $attributes = (new Collection($planet->attributesToArray()))->only([
             'capacity', 'supply', 'mining_rate', 'production_rate', 'defense_bonus', 'construction_time_bonus',
         ])->transform(function () {
             return 0;

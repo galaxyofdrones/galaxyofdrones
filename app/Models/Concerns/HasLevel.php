@@ -37,7 +37,7 @@ trait HasLevel
      */
     public function hasLowerLevel()
     {
-        return $this->hasLowerLevel();
+        return $this->level < $this->end_level;
     }
 
     /**

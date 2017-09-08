@@ -2,6 +2,7 @@
 
 namespace Koodilab\Http\Controllers\Site;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
@@ -40,19 +41,21 @@ class StartController extends Controller
     {
         $capital = Planet::findFreeCapital();
 
-        if (!$capital) {
-            return back();
-        }
-
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
+
+        if (!$capital || !$user->canOccupy($capital)) {
+            return back();
+        }
 
         DB::transaction(function () use ($capital, $user) {
             $user->occupy($capital);
 
-            $user->capital()->associate($capital);
-            $user->current()->associate($capital);
-            $user->save();
+            $user->update([
+                'capital_id' => $capital->id,
+                'current_id' => $capital->id,
+                'started_at' => Carbon::now(),
+            ]);
 
             $user->resources()->sync(
                 Resource::where('is_unlocked', true)->pluck('id')

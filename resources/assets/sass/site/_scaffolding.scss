@@ -24,6 +24,18 @@ select.form-control {
     background-size: 12px;
 }
 
+.highlight-success {
+    color: $brand-success;
+}
+
+.highlight-danger {
+    color: $brand-danger;
+}
+
+.highlight-warning {
+    color: $brand-warning;
+}
+
 .panel {
     .panel-heading {
         border-color: $brand-primary;
@@ -51,7 +63,7 @@ select.form-control {
     overflow: hidden;
     position: relative;
 
-    &-login {
+    &-standalone {
         @extend .container-fluid;
 
         .logo {
