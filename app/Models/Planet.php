@@ -280,6 +280,30 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
+     * Get the incoming attack movement count.
+     *
+     * @return int
+     */
+    public function incomingAttackMovementCount()
+    {
+        return $this->incomingMovements()->whereIn('type', [
+            Movement::TYPE_ATTACK, Movement::TYPE_OCCUPY,
+        ])->count();
+    }
+
+    /**
+     * Get the outgoing attack movement count.
+     *
+     * @return int
+     */
+    public function outgoingAttackMovementCount()
+    {
+        return $this->outgoingMovements()->whereIn('type', [
+            Movement::TYPE_SCOUT, Movement::TYPE_ATTACK, Movement::TYPE_OCCUPY,
+        ])->count();
+    }
+
+    /**
      * Starter scope.
      *
      * @param Builder $query
