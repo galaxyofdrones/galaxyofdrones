@@ -4,8 +4,6 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
-use Koodilab\Models\Behaviors\Positionable;
-use Koodilab\Models\Relations\HasManyBookmark;
 
 /**
  * Star.
@@ -29,7 +27,8 @@ use Koodilab\Models\Relations\HasManyBookmark;
  */
 class Star extends Model implements PositionableContract
 {
-    use Positionable, HasManyBookmark;
+    use Behaviors\Positionable,
+        Relations\HasManyBookmark;
 
     /**
      * {@inheritdoc}

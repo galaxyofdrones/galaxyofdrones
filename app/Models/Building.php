@@ -5,11 +5,6 @@ namespace Koodilab\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NestedSet;
 use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
-use Koodilab\Models\Behaviors\Categorizable;
-use Koodilab\Models\Behaviors\Modifiable;
-use Koodilab\Models\Behaviors\Translatable;
-use Koodilab\Models\Relations\HasManyConstruction;
-use Koodilab\Models\Relations\HasManyGrid;
 
 /**
  * Building.
@@ -72,7 +67,12 @@ use Koodilab\Models\Relations\HasManyGrid;
  */
 class Building extends Model implements TranslatableContract
 {
-    use Categorizable, Modifiable, Translatable, HasManyConstruction, HasManyGrid;
+    use Behaviors\Categorizable,
+        Behaviors\Modifiable,
+        Behaviors\Translatable,
+        Concerns\HasLevel,
+        Relations\HasManyConstruction,
+        Relations\HasManyGrid;
 
     /**
      * The central type.
@@ -157,20 +157,6 @@ class Building extends Model implements TranslatableContract
         'name' => 'json',
         'description' => 'json',
     ];
-
-    /**
-     * Get the level attribute.
-     *
-     * @return int
-     */
-    public function getLevelAttribute()
-    {
-        if (!empty($this->modifiers['level'])) {
-            return $this->modifiers['level'];
-        }
-
-        return $this->end_level;
-    }
 
     /**
      * Get the construction experience attribute.
@@ -425,28 +411,6 @@ class Building extends Model implements TranslatableContract
     }
 
     /**
-     * Has the level?
-     *
-     * @param int $level
-     *
-     * @return bool
-     */
-    public function hasLevel($level)
-    {
-        return $level > 0 && $level <= $this->end_level;
-    }
-
-    /**
-     * Has lower level?
-     *
-     * @return bool
-     */
-    public function hasLowerLevel()
-    {
-        return $this->hasLowerLevel();
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function validateModifiers(array $modifiers)
@@ -456,30 +420,5 @@ class Building extends Model implements TranslatableContract
         }
 
         return true;
-    }
-
-    /**
-     * Apply the linear formula.
-     *
-     * @param mixed $value
-     *
-     * @return float
-     */
-    protected function applyLinearForumla($value)
-    {
-        return $value * ($this->level / $this->end_level);
-    }
-
-    /**
-     * Apply the exp forumla.
-     *
-     * @param mixed $value
-     * @param int   $exp
-     *
-     * @return float
-     */
-    protected function applyExpFormula($value, $exp = 2)
-    {
-        return $value * pow($this->level / $this->end_level, $exp);
     }
 }

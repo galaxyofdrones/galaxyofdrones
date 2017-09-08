@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('production_rate')->unsigned();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('last_capital_changed')->nullable();
-            $table->timestamp('last_production_changed')->nullable();
+            $table->timestamp('last_energy_changed')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamps();
         });

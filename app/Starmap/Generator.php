@@ -241,7 +241,7 @@ class Generator implements GeneratorContract
         $center = (int) floor($max / 2);
         unset($grids[$center]);
 
-        $resources = array_rand($grids, $planet->resource_quantity);
+        $resources = array_rand($grids, $planet->resource_count);
         $i = 0;
 
         for ($x = 0; $x < static::GRID_COUNT; ++$x) {

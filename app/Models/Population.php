@@ -3,8 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Relations\BelongsToPlanet;
-use Koodilab\Models\Relations\BelongsToUnit;
 
 /**
  * Population.
@@ -28,7 +26,9 @@ use Koodilab\Models\Relations\BelongsToUnit;
  */
 class Population extends Model
 {
-    use BelongsToPlanet, BelongsToUnit;
+    use Concerns\HasUnitQuantity,
+        Relations\BelongsToPlanet,
+        Relations\BelongsToUnit;
 
     /**
      * {@inheritdoc}
@@ -41,55 +41,4 @@ class Population extends Model
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];
-
-    /**
-     * Has quantity?
-     *
-     * @param int $quantity
-     *
-     * @return bool
-     */
-    public function hasQuantity($quantity)
-    {
-        return $this->quantity >= $quantity;
-    }
-
-    /**
-     * Increment the quantity.
-     *
-     * @param int $amount
-     */
-    public function incrementQuantity($amount)
-    {
-        if ($amount) {
-            $free = $this->planet->supply - $this->planet->used_supply;
-            $supply = $amount * $this->unit->supply;
-
-            if ($free < $supply) {
-                $amount = floor($free / $this->unit->supply);
-            }
-
-            $this->fill([
-                'quantity' => max(0, $this->quantity + $amount),
-            ]);
-
-            $this->save();
-        }
-    }
-
-    /**
-     * Decrement the quantity.
-     *
-     * @param int $amount
-     */
-    public function decrementQuantity($amount)
-    {
-        if ($amount) {
-            $this->fill([
-                'quantity' => max(0, $this->quantity - $amount),
-            ]);
-
-            $this->save();
-        }
-    }
 }

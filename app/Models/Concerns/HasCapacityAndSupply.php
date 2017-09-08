@@ -6,7 +6,7 @@ use Koodilab\Models\Population;
 use Koodilab\Models\Stock;
 use Koodilab\Models\Training;
 
-trait HasStorage
+trait HasCapacityAndSupply
 {
     /**
      * Get the used capacity attribute.

@@ -3,8 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Relations\BelongsToStar;
-use Koodilab\Models\Relations\BelongsToUser;
 
 /**
  * Bookmark.
@@ -28,7 +26,8 @@ use Koodilab\Models\Relations\BelongsToUser;
  */
 class Bookmark extends Model
 {
-    use BelongsToStar, BelongsToUser;
+    use Relations\BelongsToStar,
+        Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}

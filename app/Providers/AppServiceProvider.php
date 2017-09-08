@@ -13,6 +13,7 @@ use Koodilab\Starmap\NameGenerator;
 use Koodilab\Starmap\Renderer;
 use Koodilab\Support\FlashManager;
 use Koodilab\Support\SettingManager;
+use Koodilab\Support\StateManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(RendererContract::class, Renderer::class);
         $this->app->singleton(FlashManager::class);
         $this->app->singleton(SettingManager::class);
+        $this->app->singleton(StateManager::class);
     }
 }

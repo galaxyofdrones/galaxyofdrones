@@ -27,7 +27,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int $production_rate
  * @property \Carbon\Carbon|null $last_login
  * @property \Carbon\Carbon|null $last_capital_changed
- * @property \Carbon\Carbon|null $last_production_changed
+ * @property \Carbon\Carbon|null $last_energy_changed
  * @property \Carbon\Carbon|null $started_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -61,8 +61,8 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastCapitalChanged($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastEnergyChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastProductionChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProductionRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
@@ -138,7 +138,7 @@ class User extends Authenticatable
      * {@inheritdoc}
      */
     protected $dates = [
-        'last_login', 'last_capital_changed', 'last_production_changed', 'started_at',
+        'last_login', 'last_capital_changed', 'last_energy_changed', 'started_at',
     ];
 
     /**
@@ -158,10 +158,6 @@ class User extends Authenticatable
         static::saving(function (self $user) {
             if ($user->isDirty('capital_id')) {
                 $user->last_capital_changed = Carbon::now();
-            }
-
-            if ($user->isDirty(['energy', 'production_rate'])) {
-                $user->last_production_changed = Carbon::now();
             }
         });
 
@@ -308,17 +304,6 @@ class User extends Authenticatable
     public function canUseDashboard()
     {
         return in_array($this->role, static::dashboardRoles());
-    }
-
-    /**
-     * Synchronize the production.
-     */
-    public function syncProduction()
-    {
-        $this->update([
-            'energy' => $this->energy,
-            'production_rate' => $this->planets->sum('production_rate'),
-        ]);
     }
 
     /**

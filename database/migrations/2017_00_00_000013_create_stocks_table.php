@@ -27,6 +27,7 @@ class CreateStocksTable extends Migration
                 ->onDelete('cascade');
 
             $table->integer('quantity')->unsigned();
+            $table->timestamp('last_quantity_changed')->nullable();
             $table->timestamps();
 
             $table->unique(['planet_id', 'resource_id']);

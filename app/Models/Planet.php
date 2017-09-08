@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Koodilab\Starmap\Generator;
 use Koodilab\Support\Bounds;
+use Koodilab\Support\StateManager;
 
 /**
  * Planet.
@@ -29,7 +30,7 @@ use Koodilab\Support\Bounds;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
  * @property-read string $display_name
- * @property-read int $resource_quantity
+ * @property-read int $resource_count
  * @property-read int $used_capacity
  * @property-read int $used_supply
  * @property-read int $used_training_supply
@@ -67,8 +68,8 @@ use Koodilab\Support\Bounds;
 class Planet extends Model implements PositionableContract
 {
     use Behaviors\Positionable,
+        Concerns\HasCapacityAndSupply,
         Concerns\HasCustomName,
-        Concerns\HasStorage,
         Relations\BelongsToResource,
         Relations\BelongsToUser,
         Relations\HasManyStock,
@@ -153,7 +154,7 @@ class Planet extends Model implements PositionableContract
             }
 
             if ($planet->user_id) {
-                $planet->user->syncProduction();
+                app(StateManager::class)->syncUser($planet->user);
             }
         });
     }
@@ -233,13 +234,49 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Get the resource quantity attribute.
+     * Get the resource count attribute.
      *
      * @return int
      */
-    public function getResourceQuantityAttribute()
+    public function getResourceCountAttribute()
     {
         return static::RESOURCE_COUNT + $this->size;
+    }
+
+    /**
+     * Create or update stock.
+     */
+    public function createOrUpdateStock()
+    {
+        /** @var Stock $stock */
+        $stock = $this->stocks()->firstOrNew([
+            'resource_id' => $this->resource_id,
+        ]);
+
+        $stock->setRelation('planet', $this)->fill([
+            'quantity' => $stock->quantity,
+        ])->save();
+    }
+
+    /**
+     * Find all enabled buildings.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Building[]
+     */
+    public function findAllEnabledBuildings()
+    {
+        return $this->grids()
+            ->with('building')
+            ->whereNotNull('building_id')
+            ->where('is_enabled', true)
+            ->get([
+                'building_id', 'level',
+            ])
+            ->transform(function (Grid $grid) {
+                return $grid->building->applyModifiers([
+                    'level' => $grid->level,
+                ]);
+            });
     }
 
     /**
@@ -285,54 +322,6 @@ class Planet extends Model implements PositionableContract
         }
 
         return true;
-    }
-
-    /**
-     * Synchronize the buildings.
-     */
-    public function syncBuildings()
-    {
-        /** @var Stock $stock */
-        $stock = $this->stocks()->firstOrNew([
-            'resource_id' => $this->resource_id,
-        ]);
-
-        $stock->setRelation('planet', $this)->syncQuantity();
-
-        /** @var \Illuminate\Database\Eloquent\Collection|Grid[] $grids */
-        $grids = $this->grids()
-            ->whereNotNull('building_id')
-            ->where('enabled', true)
-            ->get(['building_id', 'level']);
-
-        $attributes = collect($this->attributes)->only([
-            'capacity', 'supply', 'mining_rate', 'production_rate', 'defense_bonus', 'construction_time_bonus',
-        ])->transform(function () {
-            return 0;
-        });
-
-        foreach ($grids as $grid) {
-            $grid->building->applyModifiers([
-                'level' => $grid->level,
-            ]);
-
-            $attributes->transform(function ($value, $key) use ($grid) {
-                return $value + $grid->building->{$key};
-            });
-        }
-
-        $this->fill($attributes->filter()->toArray());
-
-        if (!empty($this->attributes['mining_rate']) && !empty($this->attributes['production_rate'])) {
-            if ($this->attributes['mining_rate'] > $this->attributes['production_rate']) {
-                $this->attributes['mining_rate'] -= $this->attributes['production_rate'];
-            } else {
-                $this->attributes['production_rate'] = $this->attributes['mining_rate'];
-                $this->attributes['mining_rate'] = null;
-            }
-        }
-
-        $this->save();
     }
 
     /**

@@ -4,11 +4,7 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Relations\BelongsToBuilding;
-use Koodilab\Models\Relations\BelongsToPlanet;
-use Koodilab\Models\Relations\HasOneConstruction;
-use Koodilab\Models\Relations\HasOneTraining;
-use Koodilab\Models\Relations\HasOneUpgrade;
+use Koodilab\Support\StateManager;
 
 /**
  * Grid.
@@ -43,7 +39,11 @@ use Koodilab\Models\Relations\HasOneUpgrade;
  */
 class Grid extends Model
 {
-    use BelongsToBuilding, BelongsToPlanet, HasOneConstruction, HasOneUpgrade, HasOneTraining;
+    use Relations\BelongsToBuilding,
+        Relations\BelongsToPlanet,
+        Relations\HasOneConstruction,
+        Relations\HasOneUpgrade,
+        Relations\HasOneTraining;
 
     /**
      * The plain type.
@@ -93,7 +93,7 @@ class Grid extends Model
         parent::boot();
 
         static::updated(function (self $grid) {
-            $grid->planet->syncBuildings();
+            app(StateManager::class)->syncPlanet($grid->planet);
         });
     }
 
@@ -167,13 +167,13 @@ class Grid extends Model
     /**
      * Decrement the level.
      *
-     * @param int $amount
+     * @param int $level
      */
-    public function decrementLevel($amount = null)
+    public function demolishBuilding($level = null)
     {
-        $amount = $amount ?: $this->level;
+        $level = $level ?: $this->level;
 
-        if (!$amount || !$this->building_id) {
+        if (empty($level) || !$this->building_id) {
             return;
         }
 
@@ -186,7 +186,7 @@ class Grid extends Model
         }
 
         $this->level = max(
-            (int) !$this->planet->hasRequiredBuildings($this->id), $this->level - $amount
+            (int) !$this->planet->hasRequiredBuildings($this->id), $this->level - $level
         );
 
         if (!$this->level) {

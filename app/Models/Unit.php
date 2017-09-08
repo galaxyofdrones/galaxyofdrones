@@ -3,13 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Behaviors\Modifiable;
-use Koodilab\Models\Behaviors\Researchable;
-use Koodilab\Models\Behaviors\Sortable;
-use Koodilab\Models\Behaviors\Translatable;
-use Koodilab\Models\Relations\BelongsToManyUser;
-use Koodilab\Models\Relations\HasManyPopulation;
-use Koodilab\Models\Relations\HasManyTraining;
 
 /**
  * Unit.
@@ -61,7 +54,13 @@ use Koodilab\Models\Relations\HasManyTraining;
  */
 class Unit extends Model
 {
-    use Modifiable, Sortable, Researchable, Translatable, BelongsToManyUser, HasManyPopulation, HasManyTraining;
+    use Behaviors\Modifiable,
+        Behaviors\Sortable,
+        Behaviors\Researchable,
+        Behaviors\Translatable,
+        Relations\BelongsToManyUser,
+        Relations\HasManyPopulation,
+        Relations\HasManyTraining;
 
     /**
      * The transporter type.

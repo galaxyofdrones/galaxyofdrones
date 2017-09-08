@@ -5,8 +5,6 @@ namespace Koodilab\Models;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\UserUpdated;
-use Koodilab\Models\Behaviors\Timeable;
-use Koodilab\Models\Relations\BelongsToUser;
 
 /**
  * Research.
@@ -33,7 +31,8 @@ use Koodilab\Models\Relations\BelongsToUser;
  */
 class Research extends Model implements TimeableContract
 {
-    use Timeable, BelongsToUser;
+    use Behaviors\Timeable,
+        Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}

@@ -5,7 +5,7 @@ namespace Koodilab\Models\Behaviors;
 trait Sortable
 {
     /**
-     * Boot the sortable.
+     * The "booting" method of the trait.
      */
     public static function bootSortable()
     {

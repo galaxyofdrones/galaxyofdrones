@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
-use Koodilab\Models\Behaviors\Timeable;
-use Koodilab\Models\Relations\BelongsToPlanet;
 use Koodilab\Support\Util;
 
 /**
@@ -34,7 +32,8 @@ use Koodilab\Support\Util;
  */
 class Mission extends Model implements TimeableContract
 {
-    use Timeable, BelongsToPlanet;
+    use Behaviors\Timeable,
+        Relations\BelongsToPlanet;
 
     /**
      * The minimum capacity.

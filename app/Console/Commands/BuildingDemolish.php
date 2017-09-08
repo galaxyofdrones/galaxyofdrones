@@ -54,7 +54,7 @@ class BuildingDemolish extends Command
             );
         } else {
             $this->database->transaction(function () use ($grid) {
-                $grid->decrementLevel();
+                $grid->demolishBuilding();
 
                 $this->info(
                     $this->prependTimestamp("The building [{$grid->id}] has been demolished!")

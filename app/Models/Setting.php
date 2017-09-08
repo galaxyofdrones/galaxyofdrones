@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Behaviors\Translatable;
 use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 use Koodilab\Support\SettingManager;
 
@@ -25,7 +24,7 @@ use Koodilab\Support\SettingManager;
  */
 class Setting extends Model implements TranslatableContract
 {
-    use Translatable;
+    use Behaviors\Translatable;
 
     /**
      * {@inheritdoc}

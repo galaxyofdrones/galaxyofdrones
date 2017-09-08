@@ -4,12 +4,6 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
-use Koodilab\Models\Behaviors\Researchable;
-use Koodilab\Models\Behaviors\Sortable;
-use Koodilab\Models\Behaviors\Translatable;
-use Koodilab\Models\Relations\BelongsToManyUser;
-use Koodilab\Models\Relations\HasManyPlanet;
-use Koodilab\Models\Relations\HasManyStock;
 
 /**
  * Resource.
@@ -47,7 +41,12 @@ use Koodilab\Models\Relations\HasManyStock;
  */
 class Resource extends Model implements TranslatableContract
 {
-    use Researchable, Sortable, Translatable, BelongsToManyUser, HasManyPlanet, HasManyStock;
+    use Behaviors\Researchable,
+        Behaviors\Sortable,
+        Behaviors\Translatable,
+        Relations\BelongsToManyUser,
+        Relations\HasManyPlanet,
+        Relations\HasManyStock;
 
     /**
      * {@inheritdoc}

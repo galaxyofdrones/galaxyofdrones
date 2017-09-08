@@ -5,9 +5,6 @@ namespace Koodilab\Models;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
-use Koodilab\Models\Behaviors\Timeable;
-use Koodilab\Models\Relations\BelongsToBuilding;
-use Koodilab\Models\Relations\BelongsToGrid;
 
 /**
  * Construction.
@@ -34,7 +31,9 @@ use Koodilab\Models\Relations\BelongsToGrid;
  */
 class Construction extends Model implements TimeableContract
 {
-    use Timeable, BelongsToBuilding, BelongsToGrid;
+    use Behaviors\Timeable,
+        Relations\BelongsToBuilding,
+        Relations\BelongsToGrid;
 
     /**
      * {@inheritdoc}

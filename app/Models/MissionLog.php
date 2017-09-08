@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Relations\BelongsToUser;
 use Koodilab\Notifications\MissionLogCreated;
 
 /**
@@ -26,7 +25,7 @@ use Koodilab\Notifications\MissionLogCreated;
  */
 class MissionLog extends Model
 {
-    use BelongsToUser;
+    use Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}

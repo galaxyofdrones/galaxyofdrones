@@ -2,10 +2,7 @@
 
 namespace Koodilab\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Relations\BelongsToPlanet;
-use Koodilab\Models\Relations\BelongsToResource;
 
 /**
  * Stock.
@@ -14,6 +11,7 @@ use Koodilab\Models\Relations\BelongsToResource;
  * @property int $planet_id
  * @property int $resource_id
  * @property int $quantity
+ * @property \Carbon\Carbon|null $last_quantity_changed
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read Planet $planet
@@ -21,6 +19,7 @@ use Koodilab\Models\Relations\BelongsToResource;
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereLastQuantityChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock wherePlanetId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereResourceId($value)
@@ -29,7 +28,9 @@ use Koodilab\Models\Relations\BelongsToResource;
  */
 class Stock extends Model
 {
-    use BelongsToPlanet, BelongsToResource;
+    use Concerns\HasResourceQuantity,
+        Relations\BelongsToPlanet,
+        Relations\BelongsToResource;
 
     /**
      * {@inheritdoc}
@@ -44,86 +45,9 @@ class Stock extends Model
     ];
 
     /**
-     * Get the quantity attribute.
-     *
-     * @return int
+     * {@inheritdoc}
      */
-    public function getQuantityAttribute()
-    {
-        $quantity = 0;
-
-        if (!empty($this->attributes['quantity'])) {
-            $quantity = $this->attributes['quantity'];
-        }
-
-        if ($this->resource_id != $this->planet->resource_id) {
-            return $quantity;
-        }
-
-        $free = $this->planet->capacity - $this->planet->stocks()->sum('quantity');
-
-        $mined = round(
-            $this->planet->mining_rate / 3600 * Carbon::now()->diffInSeconds($this->updated_at)
-        );
-
-        return $quantity + min($free, $mined);
-    }
-
-    /**
-     * Has quantity?
-     *
-     * @param int $quantity
-     *
-     * @return bool
-     */
-    public function hasQuantity($quantity)
-    {
-        return $this->quantity >= $quantity;
-    }
-
-    /**
-     * Increment the quantity.
-     *
-     * @param int $amount
-     */
-    public function incrementQuantity($amount)
-    {
-        if ($amount) {
-            $free = $this->planet->capacity - $this->planet->used_capacity;
-
-            $this->fill([
-                'quantity' => max(0, $this->quantity + min($free, $amount)),
-            ]);
-
-            $this->touch();
-        }
-    }
-
-    /**
-     * Decrement the quantity.
-     *
-     * @param int $amount
-     */
-    public function decrementQuantity($amount)
-    {
-        if ($amount) {
-            $this->fill([
-                'quantity' => max(0, $this->quantity - $amount),
-            ]);
-
-            $this->touch();
-        }
-    }
-
-    /**
-     * Synchronize the quantity.
-     */
-    public function syncQuantity()
-    {
-        $this->fill([
-            'quantity' => $this->quantity,
-        ]);
-
-        $this->touch();
-    }
+    protected $dates = [
+        'last_quantity_changed',
+    ];
 }

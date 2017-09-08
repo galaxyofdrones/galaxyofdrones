@@ -9,8 +9,6 @@ use Koodilab\Contracts\Battle\Simulator;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
 use Koodilab\Jobs\Move;
-use Koodilab\Models\Behaviors\Timeable;
-use Koodilab\Models\Relations\BelongsToUser;
 
 /**
  * Movement.
@@ -42,7 +40,8 @@ use Koodilab\Models\Relations\BelongsToUser;
  */
 class Movement extends Model implements TimeableContract
 {
-    use Timeable, BelongsToUser;
+    use Behaviors\Timeable,
+        Relations\BelongsToUser;
 
     /**
      * The scout type.
