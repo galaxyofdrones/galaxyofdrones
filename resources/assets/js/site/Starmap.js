@@ -1,3 +1,5 @@
+import { EventBus } from '../common/event-bus';
+
 export default {
     props: [
         'size', 'maxZoom', 'geoJsonUrl', 'tileUrl', 'imagePath', 'zoomInTitle', 'zoomOutTitle', 'bookmarkTitle'
@@ -6,6 +8,8 @@ export default {
     data() {
         return {
             map: undefined,
+            x: 0,
+            y: 0,
             zoom: 0
         };
     },
@@ -15,7 +19,16 @@ export default {
     },
 
     mounted() {
-        this.initLeaflet();
+        EventBus.$on('planet-changed', planet => {
+            this.x = planet.x;
+            this.y = planet.y;
+
+            if (!this.map) {
+                this.initLeaflet();
+            } else {
+                this.map.setView(this.center(), this.maxZoom);
+            }
+        });
     },
 
     methods: {
@@ -96,7 +109,7 @@ export default {
 
         center() {
             return this.map.unproject([
-                this.size / 2, this.size / 2
+                this.x, this.y
             ], this.zoom);
         },
 

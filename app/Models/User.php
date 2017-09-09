@@ -255,6 +255,20 @@ class User extends Authenticatable
     }
 
     /**
+     * Find all planets order by name.
+     *
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Planet[]
+     */
+    public function findAllPlanetsOrderByName($columns = ['*'])
+    {
+        return $this->planets()
+            ->orderByRaw('CONCAT(custom_name, name)')
+            ->get($columns);
+    }
+
+    /**
      * Is started?
      *
      * @return bool

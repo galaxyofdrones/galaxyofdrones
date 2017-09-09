@@ -9,12 +9,12 @@
 
         &:after {
             background: radial-gradient(
-                            ellipse at center,
-                            rgba(0, 0, 0, 0) 0%,
-                            rgba(0, 0, 0, 0) 40%,
-                            rgba(255, 255, 255, 0.6) 45%,
-                            rgba(0, 0, 0, 0) 65%,
-                            rgba(0, 0, 0, 0) 100%
+                ellipse at center,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0) 40%,
+                rgba(255, 255, 255, 0.6) 45%,
+                rgba(0, 0, 0, 0) 65%,
+                rgba(0, 0, 0, 0) 100%
             );
             border-radius: 50%;
             bottom: 0;
@@ -42,11 +42,13 @@
             border: 2px dotted rgba($brand-danger, 0.7);
         }
         span {
-            bottom: -($grid-gutter-width / 3 * 2);
+            bottom: 0;
             color: #fff;
             left: 50%;
             position: absolute;
-            transform: translateX(-50%);
+            text-align: center;
+            transform: translateX(-50%) translateY(100%);
+            width: 128px;
         }
     }
     .leaflet-left .leaflet-bar {

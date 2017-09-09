@@ -6,6 +6,7 @@ use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
 use Koodilab\Models\Transformers\Transformer;
 use Koodilab\Models\Unit;
+use Koodilab\Models\User;
 
 class CurrentPlanetTransformer extends Transformer
 {
@@ -18,7 +19,8 @@ class CurrentPlanetTransformer extends Transformer
     {
         return [
             'id' => $item->id,
-            'name' => $item->display_name,
+            'name' => $item->name,
+            'display_name' => $item->display_name,
             'x' => $item->x,
             'y' => $item->y,
             'capacity' => $item->capacity,
@@ -34,9 +36,28 @@ class CurrentPlanetTransformer extends Transformer
             'used_capacity' => $item->used_capacity,
             'used_supply' => $item->used_supply,
             'used_training_supply' => $item->used_training_supply,
+            'planets' => $this->planets($item->user),
             'resources' => $this->resources($item),
             'units' => $this->units($item),
         ];
+    }
+
+    /**
+     * Get the planets.
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    protected function planets(User $user)
+    {
+        return $user->findAllPlanetsOrderByName()
+            ->transform(function (Planet $planet) {
+                return [
+                    'id' => $planet->id,
+                    'name' => $planet->display_name,
+                ];
+            });
     }
 
     /**

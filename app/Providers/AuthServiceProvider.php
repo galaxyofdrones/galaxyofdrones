@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Koodilab\Auth\KoodilabUserProvider;
+use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
@@ -34,6 +35,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('dashboard', function (User $user) {
             return $user->canUseDashboard();
+        });
+
+        Gate::define('friendly', function (User $user, Planet $planet) {
+            return $user->id == $planet->user_id;
+        });
+
+        Gate::define('hostile', function (User $user, Planet $planet) {
+            return $user->id != $planet->user_id;
         });
     }
 

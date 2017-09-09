@@ -1,15 +1,29 @@
 {% extends 'site.layouts.base' %}
 
+{% import 'site.partials.helpers' as helpers %}
+
 {% block body %}
     <section id="site" class="container-site">
-        <sidebar inline-template>
+        <sidebar planet-url="{{ route('api_planet_current') }}"
+                 user-url="{{ route('api_user_current', '__planet__') }}"
+                 name-url="{{ route('api_planet_name') }}" inline-template>
             <div class="sidebar" :class="{active: isActive}">
                 <div class="sidebar-content">
                     <div class="sidebar-block">
-                        <div class="input-group">
-                            <select class="form-control"></select>
+                        <input v-if="isEditActive" class="form-control"
+                               v-model="name"
+                               ref="name"
+                               :placeholder="data.name"
+                               @blur="renamePlanet()"
+                               @keyup.13="renamePlanet()">
+                        <div v-else class="input-group">
+                            <select class="form-control" v-model="selected">
+                                <option :value="planet.id" v-for="planet in data.planets">
+                                    {{ helpers.vue('planet.name') }}
+                                </option>
+                            </select>
                             <div class="input-group-btn">
-                                <a class="btn btn-success" href="#">
+                                <a class="btn btn-success" href="#" @click.prevent="toggleEdit()">
                                     <i class="icon-edit"></i>
                                 </a>
                             </div>

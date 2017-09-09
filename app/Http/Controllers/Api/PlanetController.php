@@ -2,6 +2,7 @@
 
 namespace Koodilab\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Transformers\Site\CurrentPlanetTransformer;
 
@@ -21,12 +22,30 @@ class PlanetController extends Controller
      *
      * @param CurrentPlanetTransformer $transformer
      *
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse|array
      */
     public function current(CurrentPlanetTransformer $transformer)
     {
         return $transformer->transform(
             auth()->user()->current
         );
+    }
+
+    /**
+     * Update the current name.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function name(Request $request)
+    {
+        if (!$request->has('name')) {
+            return response('Bad Request.', 400);
+        }
+
+        auth()->user()->current->update([
+            'custom_name' => $request->get('name'),
+        ]);
     }
 }
