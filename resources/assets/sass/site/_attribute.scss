@@ -1,0 +1,15 @@
+.attribute {
+    background: $attribute-bg;
+    margin: 0 0 $grid-gutter-width / 3 0;
+    overflow: hidden;
+    text-align: center;
+
+    &-row {
+        @include make-row(10px);
+
+        [class*="col-"] {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+}

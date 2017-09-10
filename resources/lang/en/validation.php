@@ -117,8 +117,15 @@ return [
     */
 
     'attributes' => [
+        'construction' => 'Construction',
+        'incoming' => 'Incoming',
+        'mining_rate' => 'Mining rate',
+        'outgoing' => 'Outgoing',
         'password' => 'Password',
+        'production_rate' => 'Production rate',
         'remember' => 'Remember me',
+        'training' => 'Training',
+        'upgrade' => 'Upgrade',
         'username_or_email' => 'Username / E-mail',
     ],
 

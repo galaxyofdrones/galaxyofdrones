@@ -7,6 +7,14 @@
     text-align: center;
     width: 100%;
 
+    &-row {
+        @include make-row(20px);
+
+        [class*="col-"] {
+            padding: 0;
+            text-align: center;
+        }
+    }
     &:before {
         background: url('../../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
         content: '';
@@ -240,5 +248,9 @@
     .item {
         min-width: 240px;
         width: auto;
+
+        &-sm {
+            min-width: 48px;
+        }
     }
 }

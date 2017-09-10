@@ -62,6 +62,14 @@ export default {
             if (this.isEditActive) {
                 this.$nextTick(() => this.$refs.name.focus());
             }
+        },
+
+        resourceClass(resource) {
+            return `resource-${resource.id}`;
+        },
+
+        unitClass(unit) {
+            return `unit-${unit.id}`;
         }
     }
 };

@@ -32,6 +32,7 @@ class CurrentPlanetTransformer extends Transformer
             'outgoing_movement' => $item->outgoingMovements()->count(),
             'outgoing_attack_movement' => $item->outgoingAttackMovementCount(),
             'construction' => $item->constructions()->count(),
+            'upgrade' => $item->upgrades()->count(),
             'training' => $item->trainings()->count(),
             'used_capacity' => $item->used_capacity,
             'used_supply' => $item->used_supply,

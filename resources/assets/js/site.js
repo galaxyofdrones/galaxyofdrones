@@ -16,6 +16,9 @@ require('./site/bootstrap');
 import Player from './site/Player';
 import Sidebar from './site/Sidebar';
 import Starmap from './site/Starmap';
+import Popover from './common/Popover';
+
+Vue.directive('popover', Popover);
 
 const app = new Vue({
     el: '#site',

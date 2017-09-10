@@ -165,7 +165,7 @@ class Grid extends Model
     }
 
     /**
-     * Decrement the level.
+     * Demolish the building.
      *
      * @param int $level
      */
