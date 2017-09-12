@@ -4,7 +4,6 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Events\PlanetUpdated;
 
 /**
  * Construction.
@@ -70,12 +69,11 @@ class Construction extends Model implements TimeableContract
         $this->grid->building()->associate($this->building->id);
         $this->grid->save();
 
-        $this->grid->planet->user->experience += $this->building->construction_experience;
-        $this->grid->planet->user->save();
+        $this->grid->planet->user->incrementExperience(
+            $this->building->construction_experience
+        );
 
         $this->delete();
-
-        event(new PlanetUpdated($this->grid->planet_id));
 
         return true;
     }

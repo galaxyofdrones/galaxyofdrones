@@ -130,8 +130,7 @@ class Mission extends Model implements TimeableContract
      */
     public function finish()
     {
-        $this->planet->user->experience += $this->experience;
-        $this->planet->user->save();
+        $this->planet->user->incrementExperience($this->experience);
 
         /** @var \Illuminate\Database\Eloquent\Collection|Stock[] $stocks */
         $stocks = $this->planet->stocks()

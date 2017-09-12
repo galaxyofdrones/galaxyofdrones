@@ -45,6 +45,18 @@ trait HasExperience
     }
 
     /**
+     * Increment the experience.
+     *
+     * @param int $amount
+     */
+    public function incrementExperience($amount)
+    {
+        $this->update([
+            'experience' => $this->experience + $amount,
+        ]);
+    }
+
+    /**
      * Get the experience offset.
      *
      * @return float

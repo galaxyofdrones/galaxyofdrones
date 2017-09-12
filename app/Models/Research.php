@@ -4,7 +4,6 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Events\UserUpdated;
 
 /**
  * Research.
@@ -77,12 +76,11 @@ class Research extends Model implements TimeableContract
                 break;
         }
 
-        $this->user->experience += $this->researchable->research_experience;
-        $this->user->save();
+        $this->user->incrementExperience(
+            $this->researchable->research_experience
+        );
 
         $this->delete();
-
-        event(new UserUpdated($this->user->id));
 
         return true;
     }
