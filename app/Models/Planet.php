@@ -5,6 +5,7 @@ namespace Koodilab\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
+use Koodilab\Events\PlanetUpdated;
 use Koodilab\Starmap\Generator;
 use Koodilab\Support\Bounds;
 use Koodilab\Support\StateManager;
@@ -156,6 +157,8 @@ class Planet extends Model implements PositionableContract
             if ($planet->user_id) {
                 app(StateManager::class)->syncUser($planet->user);
             }
+
+            event(new PlanetUpdated($planet->id));
         });
     }
 

@@ -7,9 +7,12 @@ export default {
         return {
             isActive: false,
             isEditActive: false,
+            isSubscribed: false,
             selected: undefined,
             name: '',
             data: {
+                id: undefined,
+                user_id: undefined,
                 display_name: '',
                 planets: [],
                 resources: [],
@@ -30,26 +33,64 @@ export default {
 
     methods: {
         fetchData() {
+            this.unsubscribe();
+
             axios.get(this.planetUrl).then(response => {
                 this.data = response.data;
-                this.isEditActive = false;
                 this.selected = this.data.id;
-                this.name = this.data.display_name;
+
+                this.initName();
+                this.subscribe();
 
                 EventBus.$emit('planet-changed', this.data);
             });
         },
 
         changePlanet() {
-            if (this.selected !== this.data.id) {
-                axios.put(this.userUrl.replace('__planet__', this.selected)).then(() => this.fetchData());
+            if (this.selected === this.data.id) {
+                return;
             }
+
+            axios.put(this.userUrl.replace('__planet__', this.selected));
         },
 
         renamePlanet() {
-            axios.put(this.nameUrl, {
-                name: this.name
-            }).then(() => this.fetchData());
+            if (this.name === this.data.display_name) {
+                this.isEditActive = false;
+            } else if (!this.name && this.data.name === this.data.display_name) {
+                this.initName();
+            } else {
+                axios.put(this.nameUrl, {
+                    name: this.name
+                });
+            }
+        },
+
+        initName() {
+            this.isEditActive = false;
+            this.name = this.data.display_name;
+        },
+
+        subscribe() {
+            if (this.isSubscribed) {
+                return;
+            }
+
+            Echo.private(`user.${this.data.user_id}`).listen('.updated', this.fetchData);
+            Echo.private(`planet.${this.data.id}`).listen('.updated', this.fetchData);
+
+            this.isSubscribed = true;
+        },
+
+        unsubscribe() {
+            if (!this.isSubscribed) {
+                return;
+            }
+
+            Echo.leave(`user.${this.data.user_id}`);
+            Echo.leave(`planet.${this.data.id}`);
+
+            this.isSubscribed = false;
         },
 
         toggle() {

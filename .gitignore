@@ -9,6 +9,7 @@
 /.vagrant
 Homestead.json
 Homestead.yaml
+laravel-echo-server.json
 npm-debug.log
 yarn-error.log
 _ide_helper.php

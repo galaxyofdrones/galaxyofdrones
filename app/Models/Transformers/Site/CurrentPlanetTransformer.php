@@ -19,6 +19,7 @@ class CurrentPlanetTransformer extends Transformer
     {
         return [
             'id' => $item->id,
+            'user_id' => $item->user_id,
             'name' => $item->name,
             'display_name' => $item->display_name,
             'x' => $item->x,
