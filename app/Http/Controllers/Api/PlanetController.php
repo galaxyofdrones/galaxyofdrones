@@ -4,7 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\Site\CurrentPlanetTransformer;
+use Koodilab\Models\Transformers\Site\PlanetTransformer;
 
 class PlanetController extends Controller
 {
@@ -20,11 +20,11 @@ class PlanetController extends Controller
     /**
      * Show the current planet in json format.
      *
-     * @param CurrentPlanetTransformer $transformer
+     * @param PlanetTransformer $transformer
      *
      * @return \Illuminate\Http\JsonResponse|array
      */
-    public function current(CurrentPlanetTransformer $transformer)
+    public function index(PlanetTransformer $transformer)
     {
         return $transformer->transform(
             auth()->user()->current

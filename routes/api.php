@@ -8,11 +8,11 @@ $router->group([
     $router->group([
         'prefix' => 'planet',
     ], function () use ($router) {
-        $router->get('current', 'PlanetController@current')
-            ->name('planet_current');
-
         $router->put('name', 'PlanetController@name')
             ->name('planet_name');
+
+        $router->get('/', 'PlanetController@index')
+            ->name('planet');
     });
 
     $router->group([
@@ -30,5 +30,8 @@ $router->group([
         $router->put('current/{planet}', 'UserController@current')
             ->name('user_current')
             ->where('planet', '\d+');
+
+        $router->get('/', 'UserController@index')
+            ->name('user');
     });
 });

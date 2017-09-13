@@ -8,7 +8,7 @@ use Koodilab\Models\Transformers\Transformer;
 use Koodilab\Models\Unit;
 use Koodilab\Models\User;
 
-class CurrentPlanetTransformer extends Transformer
+class PlanetTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
@@ -19,6 +19,7 @@ class CurrentPlanetTransformer extends Transformer
     {
         return [
             'id' => $item->id,
+            'resource_id' => $item->resource_id,
             'user_id' => $item->user_id,
             'name' => $item->name,
             'display_name' => $item->display_name,

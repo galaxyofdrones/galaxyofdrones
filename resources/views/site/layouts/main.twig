@@ -4,9 +4,10 @@
 
 {% block body %}
     <section id="site" class="container-site">
-        <sidebar planet-url="{{ route('api_planet_current') }}"
-                 user-url="{{ route('api_user_current', '__planet__') }}"
-                 name-url="{{ route('api_planet_name') }}" inline-template>
+        <sidebar planet-url="{{ route('api_planet') }}"
+                 planet-name-url="{{ route('api_planet_name') }}"
+                 user-current-url="{{ route('api_user_current', '__planet__') }}"
+                 inline-template>
             <div class="sidebar" :class="{active: isActive}">
                 <div class="sidebar-content">
                     <div class="sidebar-block" v-cloak>
@@ -120,7 +121,9 @@
                              title="{{ trans('messages.resource.plural') }}"
                              :data-content="resourceLabel"
                              v-popover="{trigger: 'hover'}">
-                            <div class="progress-bar progress-bar-success" :style="{width: resourceProgress}"></div>
+                            <div class="progress-bar"
+                                 :class="{'progress-bar-success': !isResourceFull, 'progress-bar-danger': isResourceFull}"
+                                 :style="{width: resourceProgress}"></div>
                         </div>
                         <div class="item-row">
                             <div class="col-xs-3" v-for="resource in data.resources">
@@ -128,7 +131,7 @@
                                       :title="resource.name"
                                       :data-content="resource.description"
                                       v-popover="{trigger: 'hover'}">
-                                    {{ helpers.vue('resource.quantity') }}
+                                    {{ helpers.vue('resourceValue(resource)') }}
                                 </span>
                             </div>
                         </div>
@@ -138,8 +141,11 @@
                              title="{{ trans('messages.unit.plural') }}"
                              :data-content="unitLabel"
                              v-popover="{trigger: 'hover'}">
-                            <div class="progress-bar progress-bar-success" :style="{width: unitProgress}"></div>
-                            <div class="progress-bar progress-bar-warning" :style="{width: unitTrainingProgress}"></div>
+                            <div class="progress-bar progress-bar-success"
+                                 :class="{'progress-bar-success': !isUnitFull, 'progress-bar-danger': isUnitFull}"
+                                 :style="{width: unitProgress}"></div>
+                            <div class="progress-bar progress-bar-warning"
+                                 :style="{width: unitTrainingProgress}"></div>
                         </div>
                         <div class="item-row">
                             <div class="col-xs-3" v-for="unit in data.units">
@@ -184,22 +190,23 @@
                 </div>
             </div>
         </sidebar>
-        <player inline-template>
+        <player url="{{ route('api_user') }}" inline-template>
             <div class="player">
-                <div class="player-info">
+                <div class="player-info" v-cloak>
                     <div class="player-left">
-                        <img class="player-avatar" src="{{ auth_user().gravatar({'s': 100}) }}" alt="{{ auth_user().username }}">
+                        <img class="player-avatar" :src="data.gravatar" :alt="data.username">
                         <div class="player-level">
                             <i class="icon-star"></i>
-                            {{ auth_user().level }}
+                            {{ helpers.vue('data.level') }}
                         </div>
                     </div>
                     <div class="player-right">
                         <div class="player-nav">
                             <ul class="nav nav-pills nav-justified">
-                                <li>
+                                <li :class="{unread: hasUnread}">
                                     <a href="#">
                                         <i class="icon-envelope"></i>
+                                        <span class="notification"></span>
                                     </a>
                                 </li>
                                 <li>
@@ -217,15 +224,16 @@
                         <div class="player-progress">
                             <div class="progress"
                                  title="{{ trans('validation.attributes.experience') }}"
+                                 :data-content="experienceLabel"
                                  v-popover="{placement: 'left', trigger: 'hover'}">
-                                <div class="progress-bar progress-bar-info" style="width: 60%;"></div>
+                                <div class="progress-bar progress-bar-info" :style="{width: experienceProgress}"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="player-energy">
+                <div class="player-energy" v-cloak>
                     <i class="icon-energy"></i>
-                    36
+                    {{ helpers.vue('energyValue') }}
                 </div>
             </div>
         </player>

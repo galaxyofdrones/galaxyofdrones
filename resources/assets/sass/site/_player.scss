@@ -18,9 +18,16 @@
         color: #fff;
         height: 32px;
         line-height: 32px;
-        text-align: center;
+        padding: 0 $grid-gutter-width / 2;
+        text-align: right;
         text-shadow: 0 0 15px rgba(255, 255, 255, .6);
         top: 92px + $grid-gutter-width / 3;
+        @include clearfix;
+
+        i {
+            float: left;
+            margin-top: $grid-gutter-width / 3;
+        }
     }
     &-left {
         float: left;
@@ -67,6 +74,21 @@
                     color: #fff;
                     text-shadow: 0 0 15px rgba(255, 255, 255, .6);
                 }
+            }
+            &.unread .notification {
+                display: block;
+            }
+            .notification {
+                background: $brand-danger;
+                color: #fff;
+                display: none;
+                font-size: 10px;
+                font-weight: 500;
+                line-height: 1;
+                padding: 0 4px 2px;
+                position: absolute;
+                right: 6px;
+                top: 6px;
             }
         }
     }
