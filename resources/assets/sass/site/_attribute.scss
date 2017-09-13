@@ -7,6 +7,9 @@
     &-row {
         @include make-row(10px);
 
+        &:last-child .attribute {
+            margin-bottom: 0;
+        }
         [class*="col-"] {
             padding-left: 5px;
             padding-right: 5px;

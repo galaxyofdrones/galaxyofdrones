@@ -29,9 +29,17 @@ return [
         'first' => 'Get my first planet',
     ],
 
+    'resource' => [
+        'plural' => 'Resources',
+    ],
+
     'success' => [
         'logout' => 'Logout successful.',
         'singular' => 'Success',
+    ],
+
+    'unit' => [
+        'plural' => 'Units',
     ],
 
     'warning' => [

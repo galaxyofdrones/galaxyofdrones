@@ -116,6 +116,12 @@
                         </div>
                     </div>
                     <div class="sidebar-block" v-cloak>
+                        <div class="progress"
+                             title="{{ trans('messages.resource.plural') }}"
+                             :data-content="resourceLabel"
+                             v-popover="{trigger: 'hover'}">
+                            <div class="progress-bar progress-bar-success" :style="{width: resourceProgress}"></div>
+                        </div>
                         <div class="item-row">
                             <div class="col-xs-3" v-for="resource in data.resources">
                                 <span class="item item-sm" :class="resourceClass(resource)"
@@ -128,6 +134,13 @@
                         </div>
                     </div>
                     <div class="sidebar-block" v-cloak>
+                        <div class="progress progress-unit"
+                             title="{{ trans('messages.unit.plural') }}"
+                             :data-content="unitLabel"
+                             v-popover="{trigger: 'hover'}">
+                            <div class="progress-bar progress-bar-success" :style="{width: unitProgress}"></div>
+                            <div class="progress-bar progress-bar-warning" :style="{width: unitTrainingProgress}"></div>
+                        </div>
                         <div class="item-row">
                             <div class="col-xs-3" v-for="unit in data.units">
                                 <span class="item item-sm" :class="unitClass(unit)"
@@ -202,7 +215,9 @@
                             </ul>
                         </div>
                         <div class="player-progress">
-                            <div class="progress">
+                            <div class="progress"
+                                 title="{{ trans('validation.attributes.experience') }}"
+                                 v-popover="{placement: 'left', trigger: 'hover'}">
                                 <div class="progress-bar progress-bar-info" style="width: 60%;"></div>
                             </div>
                         </div>

@@ -118,6 +118,7 @@ return [
 
     'attributes' => [
         'construction' => 'Construction',
+        'experience' => 'Experience',
         'incoming' => 'Incoming',
         'mining_rate' => 'Mining rate',
         'outgoing' => 'Outgoing',

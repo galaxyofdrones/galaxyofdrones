@@ -10,9 +10,15 @@ export default {
             isSubscribed: false,
             selected: undefined,
             name: '',
+            usedCapacity: 0,
             data: {
                 id: undefined,
                 user_id: undefined,
+                capacity: 0,
+                supply: 0,
+                used_capacity: 0,
+                used_supply: 0,
+                used_training_supply: 0,
                 display_name: '',
                 planets: [],
                 resources: [],
@@ -29,6 +35,28 @@ export default {
         selected() {
             this.changePlanet();
         }
+    },
+
+    computed: {
+        resourceLabel() {
+            return `${Math.round(this.usedCapacity)}/${this.data.capacity}`;
+        },
+
+        resourceProgress() {
+            return `${Math.min(100, this.data.usedCapacity / this.data.capacity * 100)}%`;
+        },
+
+        unitLabel() {
+            return `${this.data.used_supply + this.data.used_training_supply}/${this.data.supply}`;
+        },
+
+        unitProgress() {
+            return `${this.data.used_supply / this.data.supply * 100}%`;
+        },
+
+        unitTrainingProgress() {
+            return `${this.data.used_training_supply / this.data.supply * 100}%`;
+        },
     },
 
     methods: {
@@ -69,6 +97,10 @@ export default {
         initName() {
             this.isEditActive = false;
             this.name = this.data.display_name;
+        },
+
+        initUsedCapacity() {
+            this.usedCapacity = this.data.used_capacity;
         },
 
         subscribe() {
