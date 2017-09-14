@@ -101,7 +101,8 @@ trait Sortable
     protected function setSortOrder()
     {
         $this->setAttribute(
-            $this->sortOrderKey(), $this->sortOrderQuery()->max($this->sortOrderKey()) + 1
+            $this->sortOrderKey(),
+            $this->sortOrderQuery()->max($this->sortOrderKey()) + 1
         );
     }
 

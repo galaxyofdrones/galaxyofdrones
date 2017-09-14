@@ -14,7 +14,8 @@ trait Timeable
     public function getRemainingAttribute()
     {
         return max(0, Carbon::now()->diffInSeconds(
-            $this->getAttribute($this->endedAtKey()), false
+            $this->getAttribute($this->endedAtKey()),
+            false
         ));
     }
 

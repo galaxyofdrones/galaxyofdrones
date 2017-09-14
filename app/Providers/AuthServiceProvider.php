@@ -56,7 +56,8 @@ class AuthServiceProvider extends ServiceProvider
     protected function userProvider(array $config)
     {
         return new KoodilabUserProvider(
-            $this->app->make('hash'), $config['model']
+            $this->app->make('hash'),
+            $config['model']
         );
     }
 }

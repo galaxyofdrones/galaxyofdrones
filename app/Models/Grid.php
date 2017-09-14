@@ -186,7 +186,8 @@ class Grid extends Model
         }
 
         $this->level = max(
-            (int) !$this->planet->hasRequiredBuildings($this->id), $this->level - $level
+            (int) !$this->planet->hasRequiredBuildings($this->id),
+            $this->level - $level
         );
 
         if (!$this->level) {

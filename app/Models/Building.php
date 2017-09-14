@@ -367,7 +367,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_DEFENSIVE && $defenseBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($defenseBonus), 2
+                $this->applyLinearForumla($defenseBonus),
+                2
             );
         }
 
@@ -385,7 +386,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_CENTRAL && $constructionTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($constructionTimeBonus), 2
+                $this->applyExpFormula($constructionTimeBonus),
+                2
             );
         }
 
@@ -403,7 +405,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_TRAINER && $trainTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($trainTimeBonus), 2
+                $this->applyExpFormula($trainTimeBonus),
+                2
             );
         }
 
