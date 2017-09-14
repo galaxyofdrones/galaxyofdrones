@@ -13,12 +13,16 @@ require('./site/bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Filters from './site/Filters';
 import Player from './site/Player';
+import Popover from './common/Popover';
 import Sidebar from './site/Sidebar';
 import Starmap from './site/Starmap';
-import Popover from './common/Popover';
 
 Vue.directive('popover', Popover);
+Vue.filter('sign', Filters.sign);
+Vue.filter('number', Filters.number);
+Vue.filter('timer', Filters.timer);
 
 const app = new Vue({
     el: '#site',

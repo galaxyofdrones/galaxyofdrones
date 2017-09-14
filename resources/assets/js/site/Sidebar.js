@@ -199,7 +199,7 @@ export default {
 
         resourceValue(resource) {
             if (resource.id === this.data.resource_id) {
-                return Math.round(this.resourceQuantity);
+                return this.resourceQuantity;
             }
 
             return resource.quantity;
