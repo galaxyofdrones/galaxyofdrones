@@ -35,6 +35,10 @@ export default {
         this.fetchData();
     },
 
+    mounted() {
+        this.initPerfectScrollbar();
+    },
+
     watch: {
         selected() {
             this.changePlanet();
@@ -143,6 +147,14 @@ export default {
             }
         },
 
+        initPerfectScrollbar() {
+            $('.perfect-scrollbar', this.$el).perfectScrollbar();
+        },
+
+        updatePerfectScrollbar() {
+            $('.perfect-scrollbar', this.$el).perfectScrollbar('update');
+        },
+
         subscribe() {
             if (this.isSubscribed) {
                 return;
@@ -167,6 +179,10 @@ export default {
 
         toggle() {
             this.isActive = !this.isActive;
+
+            if (this.isActive) {
+                this.updatePerfectScrollbar();
+            }
         },
 
         toggleEdit() {

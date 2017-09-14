@@ -5,6 +5,33 @@ $cache-buster: 'f02ywdcfvk';
 $text-color-light: darken(#b6bfca, 20%);
 $text-color-disabled: darken(#b6bfca, 40%);
 
+// Perfect scrollbar
+
+// Colors
+$ps-border-radius: 0;
+
+//$ps-rail-default-opacity: 0 !default;
+//$ps-rail-container-hover-opacity: 0.6 !default;
+//$ps-rail-hover-opacity: 0.9 !default;
+
+//$ps-bar-bg: transparent !default;
+$ps-bar-container-hover-bg: rgba(#4183d7, .75);
+$ps-bar-hover-bg: #4183d7;
+$ps-rail-hover-bg: #243141;
+
+// Sizes
+//$ps-scrollbar-x-rail-bottom: 0px !default;
+$ps-scrollbar-x-rail-height: 5px;
+//$ps-scrollbar-x-bottom: 2px !default;
+$ps-scrollbar-x-height: 5px;
+$ps-scrollbar-x-hover-height: 6px;
+
+//$ps-scrollbar-y-rail-right: 0 !default;
+$ps-scrollbar-y-rail-width: 5px;
+//$ps-scrollbar-y-right: 2px !default;
+$ps-scrollbar-y-width: 5px;
+$ps-scrollbar-y-hover-width: 6px;
+
 // Bootstrap
 
 //

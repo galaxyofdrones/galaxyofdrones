@@ -9,7 +9,7 @@
                  user-current-url="{{ route('api_user_current', '__planet__') }}"
                  inline-template>
             <div class="sidebar" :class="{active: isActive}">
-                <div class="sidebar-content">
+                <div class="sidebar-content perfect-scrollbar">
                     <div class="sidebar-block" v-cloak>
                         <input v-if="isEditActive" class="form-control"
                                v-model="name"
