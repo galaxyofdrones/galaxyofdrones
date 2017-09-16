@@ -4,7 +4,7 @@
     <starmap size="{{ constant('Koodilab\\Starmap\\Generator::SIZE') }}"
              max-zoom="{{ constant('Koodilab\\Starmap\\Renderer::MAX_ZOOM_LEVEL') }}"
              geo-json-url="{{ route('api_starmap_geo_json', ['__zoom__', '__bounds__']) }}"
-             tile-url="{{ asset('starmap/{z}/{x}/{y}.png') }}"
+             tile-url="{{ asset('tile/{z}/{x}/{y}.png') }}"
              image-path="{{ asset('images') }}"
              zoom-in-title="{{ trans('messages.zoom_in') }}"
              zoom-out-title="{{ trans('messages.zoom_out') }}"

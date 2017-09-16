@@ -15,9 +15,9 @@ use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read int $remaining
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $researchable
- * @property-read User $user
+ * @property int $remaining
+ * @property \Illuminate\Database\Eloquent\Model|\Eloquent $researchable
+ * @property User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereEndedAt($value)

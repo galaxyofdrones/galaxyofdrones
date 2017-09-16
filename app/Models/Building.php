@@ -33,11 +33,11 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
  * @property float $train_time_bonus
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Kalnoy\Nestedset\Collection|Building[] $children
- * @property-read \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
- * @property-read int $level
- * @property-read \Illuminate\Database\Eloquent\Collection|Grid[] $grids
- * @property-read Building|null $parent
+ * @property \Kalnoy\Nestedset\Collection|Building[] $children
+ * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
+ * @property int $level
+ * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
+ * @property Building|null $parent
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereConstructionCost($value)

@@ -19,14 +19,14 @@ use Koodilab\Notifications\BattleLogCreated;
  * @property int $winner
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read User $attacker
- * @property-read \Illuminate\Database\Eloquent\Collection|Unit[] $attackerUnits
- * @property-read \Illuminate\Database\Eloquent\Collection|Building[] $buildings
- * @property-read User|null $defender
- * @property-read \Illuminate\Database\Eloquent\Collection|Unit[] $defenderUnits
- * @property-read Planet $end
- * @property-read \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property-read Planet $start
+ * @property User $attacker
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[] $attackerUnits
+ * @property \Illuminate\Database\Eloquent\Collection|Building[] $buildings
+ * @property User|null $defender
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[] $defenderUnits
+ * @property Planet $end
+ * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
+ * @property Planet $start
  *
  * @method static \Illuminate\Database\Eloquent\Builder|BattleLog whereAttackerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BattleLog whereCreatedAt($value)

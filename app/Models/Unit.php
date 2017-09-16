@@ -26,10 +26,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $sort_order
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Population[] $populations
- * @property-read \Illuminate\Database\Eloquent\Collection|Research[] $researches
- * @property-read \Illuminate\Database\Eloquent\Collection|Training[] $trainings
- * @property-read \Illuminate\Database\Eloquent\Collection|User[] $users
+ * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
+ * @property \Illuminate\Database\Eloquent\Collection|Research[] $researches
+ * @property \Illuminate\Database\Eloquent\Collection|Training[] $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|User[] $users
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereAttack($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereCapacity($value)

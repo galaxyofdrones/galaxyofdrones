@@ -18,6 +18,7 @@ import Player from './site/Player';
 import Popover from './common/Popover';
 import Sidebar from './site/Sidebar';
 import Starmap from './site/Starmap';
+import Surface from './site/Surface';
 
 Vue.directive('popover', Popover);
 Vue.filter('sign', Filters.sign);
@@ -28,6 +29,6 @@ const app = new Vue({
     el: '#site',
 
     components: {
-        Player, Sidebar, Starmap
+        Player, Sidebar, Starmap, Surface
     }
 });

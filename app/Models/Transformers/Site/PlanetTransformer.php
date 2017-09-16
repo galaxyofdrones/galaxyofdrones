@@ -2,6 +2,7 @@
 
 namespace Koodilab\Models\Transformers\Site;
 
+use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
 use Koodilab\Models\Transformers\Transformer;
@@ -42,6 +43,7 @@ class PlanetTransformer extends Transformer
             'planets' => $this->planets($item->user),
             'resources' => $this->resources($item),
             'units' => $this->units($item),
+            'grids' => $this->grids($item),
         ];
     }
 
@@ -109,6 +111,41 @@ class PlanetTransformer extends Transformer
                     'quantity' => $populations->has($unit->id)
                         ? $populations->get($unit->id)->quantity
                         : 0,
+                ];
+            });
+    }
+
+    /**
+     * Get the grids.
+     *
+     * @param Planet $planet
+     *
+     * @return array
+     */
+    protected function grids(Planet $planet)
+    {
+        return $planet->findGridsWithConstructionAndUpgrade()
+            ->map(function (Grid $grid) {
+                return [
+                    'id' => $grid->id,
+                    'building_id' => $grid->building_id,
+                    'x' => $grid->x,
+                    'y' => $grid->y,
+                    'level' => $grid->level,
+                    'type' => $grid->type,
+                    'construction' => $grid->construction
+                        ? [
+                            'building_id' => $grid->construction->building_id,
+                            'level' => $grid->construction->level,
+                            'remaining' => $grid->construction->remaining,
+                        ]
+                        : null,
+                    'upgrade' => $grid->upgrade
+                        ? [
+                            'level' => $grid->upgrade->level,
+                            'remaining' => $grid->upgrade->remaining,
+                        ]
+                        : null,
                 ];
             });
     }

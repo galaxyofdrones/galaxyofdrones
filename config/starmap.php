@@ -40,21 +40,21 @@ return [
     | Absolute Directory
     |--------------------------------------------------------------------------
     |
-    | The starmap absolute directory.
+    | The tile absolute directory.
     |
     */
 
-    'absolute_dir' => public_path('starmap'),
+    'absolute_dir' => public_path('tile'),
 
     /*
     |--------------------------------------------------------------------------
     | Texture Directory
     |--------------------------------------------------------------------------
     |
-    | The starmap texture directory.
+    | The tile texture directory.
     |
     */
 
-    'texture_dir' => base_path('resources/starmap'),
+    'texture_dir' => base_path('resources/tile'),
 
 ];

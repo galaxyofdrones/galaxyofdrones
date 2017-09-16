@@ -29,22 +29,22 @@ use Koodilab\Support\StateManager;
  * @property float|null $construction_time_bonus
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
- * @property-read string $display_name
- * @property-read int $resource_count
- * @property-read int $used_capacity
- * @property-read int $used_supply
- * @property-read int $used_training_supply
- * @property-read \Illuminate\Database\Eloquent\Collection|Grid[] $grids
- * @property-read \Illuminate\Database\Eloquent\Collection|Movement[] $incomingMovements
- * @property-read \Illuminate\Database\Eloquent\Collection|Mission[] $missions
- * @property-read \Illuminate\Database\Eloquent\Collection|Movement[] $outgoingMovements
- * @property-read \Illuminate\Database\Eloquent\Collection|Population[] $populations
- * @property-read resource $resource
- * @property-read \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
- * @property-read \Illuminate\Database\Eloquent\Collection|Training[] $trainings
- * @property-read \Illuminate\Database\Eloquent\Collection|Upgrade[] $upgrades
- * @property-read User|null $user
+ * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
+ * @property string $display_name
+ * @property int $resource_count
+ * @property int $used_capacity
+ * @property int $used_supply
+ * @property int $used_training_supply
+ * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[] $incomingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|Mission[] $missions
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[] $outgoingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
+ * @property resource $resource
+ * @property \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
+ * @property \Illuminate\Database\Eloquent\Collection|Training[] $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|Upgrade[] $upgrades
+ * @property User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Planet inBounds(\Koodilab\Support\Bounds $bounds)
  * @method static \Illuminate\Database\Eloquent\Builder|Planet starter()
@@ -262,11 +262,11 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Find all enabled buildings.
+     * Find enabled buildings.
      *
      * @return \Illuminate\Database\Eloquent\Collection|Building[]
      */
-    public function findAllEnabledBuildings()
+    public function findEnabledBuildings()
     {
         return $this->grids()
             ->with('building')
@@ -280,6 +280,18 @@ class Planet extends Model implements PositionableContract
                     'level' => $grid->level,
                 ]);
             });
+    }
+
+    /**
+     * Find grids with construction and upgrade.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Grid[]
+     */
+    public function findGridsWithConstructionAndUpgrade()
+    {
+        return $this->grids()
+            ->with('construction', 'upgrade')
+            ->get();
     }
 
     /**

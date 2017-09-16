@@ -20,10 +20,10 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
  * @property int $sort_order
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Planet[] $planets
- * @property-read \Illuminate\Database\Eloquent\Collection|Research[] $researches
- * @property-read \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
- * @property-read \Illuminate\Database\Eloquent\Collection|User[] $users
+ * @property \Illuminate\Database\Eloquent\Collection|Planet[] $planets
+ * @property \Illuminate\Database\Eloquent\Collection|Research[] $researches
+ * @property \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
+ * @property \Illuminate\Database\Eloquent\Collection|User[] $users
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Resource whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Resource whereDescription($value)

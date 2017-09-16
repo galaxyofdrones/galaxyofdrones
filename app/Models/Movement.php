@@ -21,12 +21,12 @@ use Koodilab\Jobs\Move;
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read Planet $end
- * @property-read int $remaining
- * @property-read \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property-read Planet $start
- * @property-read \Illuminate\Database\Eloquent\Collection|Unit[] $units
- * @property-read User $user
+ * @property Planet $end
+ * @property int $remaining
+ * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
+ * @property Planet $start
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
+ * @property User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereEndId($value)

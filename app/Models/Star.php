@@ -14,7 +14,7 @@ use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
  * @property int $y
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Bookmark[] $bookmarks
+ * @property \Illuminate\Database\Eloquent\Collection|Bookmark[] $bookmarks
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Star inBounds(\Koodilab\Support\Bounds $bounds)
  * @method static \Illuminate\Database\Eloquent\Builder|Star whereCreatedAt($value)

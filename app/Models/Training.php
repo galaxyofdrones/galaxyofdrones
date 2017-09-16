@@ -16,9 +16,9 @@ use Koodilab\Events\PlanetUpdated;
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read int $remaining
- * @property-read Grid $grid
- * @property-read Unit $unit
+ * @property int $remaining
+ * @property Grid $grid
+ * @property Unit $unit
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Training whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Training whereEndedAt($value)

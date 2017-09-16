@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read Star $star
- * @property-read User $user
+ * @property Star $star
+ * @property User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Bookmark whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bookmark whereId($value)

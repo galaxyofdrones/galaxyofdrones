@@ -18,9 +18,9 @@ use Koodilab\Support\Util;
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read int $remaining
- * @property-read Planet $planet
- * @property-read \Illuminate\Database\Eloquent\Collection|resource[] $resources
+ * @property int $remaining
+ * @property Planet $planet
+ * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEndedAt($value)

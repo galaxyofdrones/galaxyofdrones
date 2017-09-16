@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $last_quantity_changed
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read Planet $planet
- * @property-read resource $resource
+ * @property Planet $planet
+ * @property resource $resource
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereId($value)

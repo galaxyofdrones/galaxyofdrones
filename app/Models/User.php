@@ -31,25 +31,25 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon|null $started_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|BattleLog[] $attackBattleLogs
- * @property-read \Illuminate\Database\Eloquent\Collection|Bookmark[] $bookmarks
- * @property-read Planet|null $capital
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
- * @property-read Planet|null $current
- * @property-read \Illuminate\Database\Eloquent\Collection|BattleLog[] $defenseBattleLogs
- * @property-read int $capital_change_remaining
- * @property-read int $level
- * @property-read int $level_experience
- * @property-read int $next_level
- * @property-read int $next_level_experience
- * @property-read \Illuminate\Database\Eloquent\Collection|MissionLog[] $missionLogs
- * @property-read \Illuminate\Database\Eloquent\Collection|Movement[] $movements
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Database\Eloquent\Collection|Planet[] $planets
- * @property-read \Illuminate\Database\Eloquent\Collection|Research[] $researches
- * @property-read \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
- * @property-read \Illuminate\Database\Eloquent\Collection|Unit[] $units
+ * @property \Illuminate\Database\Eloquent\Collection|BattleLog[] $attackBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Bookmark[] $bookmarks
+ * @property Planet|null $capital
+ * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property Planet|null $current
+ * @property \Illuminate\Database\Eloquent\Collection|BattleLog[] $defenseBattleLogs
+ * @property int $capital_change_remaining
+ * @property int $level
+ * @property int $level_experience
+ * @property int $next_level
+ * @property int $next_level_experience
+ * @property \Illuminate\Database\Eloquent\Collection|MissionLog[] $missionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[] $movements
+ * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property \Illuminate\Database\Eloquent\Collection|Planet[] $planets
+ * @property \Illuminate\Database\Eloquent\Collection|Research[] $researches
+ * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
+ * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
  *
  * @method static \Illuminate\Database\Eloquent\Builder|User dashboard()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)

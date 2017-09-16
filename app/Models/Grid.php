@@ -19,11 +19,11 @@ use Koodilab\Support\StateManager;
  * @property bool $is_enabled
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read Building|null $building
- * @property-read Construction $construction
- * @property-read Planet $planet
- * @property-read Training $training
- * @property-read Upgrade $upgrade
+ * @property Building|null $building
+ * @property Construction $construction
+ * @property Planet $planet
+ * @property Training $training
+ * @property Upgrade $upgrade
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereBuildingId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereCreatedAt($value)

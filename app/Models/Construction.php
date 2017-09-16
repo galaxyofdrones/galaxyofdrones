@@ -15,9 +15,9 @@ use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read Building $building
- * @property-read int $remaining
- * @property-read Grid $grid
+ * @property Building $building
+ * @property int $remaining
+ * @property Grid $grid
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Construction whereBuildingId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Construction whereCreatedAt($value)

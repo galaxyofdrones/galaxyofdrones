@@ -24,7 +24,7 @@ class StateManager
             return 0;
         });
 
-        $planet->findAllEnabledBuildings()->each(function (Building $building) use ($attributes) {
+        $planet->findEnabledBuildings()->each(function (Building $building) use ($attributes) {
             $attributes->transform(function ($value, $key) use ($building) {
                 return $value + $building->{$key};
             });

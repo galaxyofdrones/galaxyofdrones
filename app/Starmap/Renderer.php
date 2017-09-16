@@ -189,7 +189,7 @@ class Renderer implements RendererContract
             $planets = Planet::inBounds($this->bounds)->get();
 
             $this->compositeObjects($planets, function ($textureDir, Planet $planet) {
-                return "{$textureDir}/planets/{$planet->resource_id}/{$this->z}/{$planet->size}.png";
+                return "{$textureDir}/planet/{$planet->resource_id}/{$this->z}/{$planet->size}.png";
             });
         }
 

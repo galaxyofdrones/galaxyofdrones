@@ -20,6 +20,7 @@
     "leaflet-ajax": "^2.1.0",
     "lodash": "^4.17.4",
     "perfect-scrollbar": "^0.8.1",
+    "pixi.js": "^4.5.5",
     "socket.io-client": "^2.0.3",
     "sweetalert2": "^6.6.10",
     "vue": "^2.1.10"

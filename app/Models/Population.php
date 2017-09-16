@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $quantity
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read Planet $planet
- * @property-read Unit $unit
+ * @property Planet $planet
+ * @property Unit $unit
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Population whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Population whereId($value)

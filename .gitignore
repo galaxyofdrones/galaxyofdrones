@@ -1,6 +1,6 @@
 /node_modules
 /public/hot
-/public/starmap
+/public/tile
 /public/storage
 /storage/clockwork
 /storage/*.key
