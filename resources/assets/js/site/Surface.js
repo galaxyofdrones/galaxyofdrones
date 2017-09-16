@@ -8,6 +8,7 @@ export default {
 
     data() {
         return {
+            $parent: undefined,
             clickTreshold: 5,
             isDragging: false,
             hasModal: false,
@@ -39,6 +40,8 @@ export default {
     },
 
     mounted() {
+        this.$parent = $(this.$el).parent();
+
         EventBus.$on('modal-opened', this.hasModal = true);
         EventBus.$on('modal-closed', this.hasModal = false);
         EventBus.$on('planet-changed', planet => {
@@ -182,11 +185,11 @@ export default {
         },
 
         rendererWidth() {
-            return window.innerWidth;
+            return this.$parent.width();
         },
 
         rendererHeight() {
-            return window.innerHeight;
+            return this.$parent.height();
         },
 
         centerX() {

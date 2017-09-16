@@ -5,6 +5,7 @@ export default {
 
     data() {
         return {
+            $perfectScrollbar: undefined,
             isActive: false,
             isEditActive: false,
             isSubscribed: false,
@@ -148,11 +149,11 @@ export default {
         },
 
         initPerfectScrollbar() {
-            $('.perfect-scrollbar', this.$el).perfectScrollbar();
+            this.$perfectScrollbar = $('.perfect-scrollbar', this.$el).perfectScrollbar();
         },
 
         updatePerfectScrollbar() {
-            $('.perfect-scrollbar', this.$el).perfectScrollbar('update');
+            this.$perfectScrollbar.perfectScrollbar('update');
         },
 
         subscribe() {

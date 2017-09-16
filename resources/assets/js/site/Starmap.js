@@ -8,9 +8,11 @@ export default {
     data() {
         return {
             map: undefined,
-            x: 0,
-            y: 0,
-            zoom: 0
+            zoom: 0,
+            planet: {
+                x: 0,
+                y: 0
+            }
         };
     },
 
@@ -20,8 +22,7 @@ export default {
 
     mounted() {
         EventBus.$on('planet-changed', planet => {
-            this.x = planet.x;
-            this.y = planet.y;
+            this.planet = planet;
 
             if (!this.map) {
                 this.initLeaflet();
@@ -109,7 +110,7 @@ export default {
 
         center() {
             return this.map.unproject([
-                this.x, this.y
+                this.planet.x, this.planet.y
             ], this.zoom);
         },
 
