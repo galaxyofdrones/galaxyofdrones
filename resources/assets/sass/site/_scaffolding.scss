@@ -13,6 +13,11 @@ body {
     transition: ease .2s;
 }
 
+.close {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: ease .2s;
+}
+
 .control-label.required:after {
     color: $brand-info;
     content: ' *';

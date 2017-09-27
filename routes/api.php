@@ -6,6 +6,14 @@ $router->group([
     'namespace' => 'Api',
 ], function () use ($router) {
     $router->group([
+        'prefix' => 'construction',
+    ], function () use ($router) {
+        $router->get('{grid}', 'ConstructionController@index')
+            ->name('construction')
+            ->where('grid', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'planet',
     ], function () use ($router) {
         $router->put('name', 'PlanetController@name')

@@ -100,27 +100,36 @@ class Grid extends Model
     /**
      * Get the constructable buildings.
      *
-     * @return Collection
+     * @return Collection|Building[]
      */
     public function constructableBuildings()
     {
-        if ($this->building_id || $this->construction) {
+        if ($this->building_id) {
             return new Collection();
         }
 
-        /** @var \Illuminate\Database\Eloquent\Collection $constructedIds */
-        $constructedIds = $this->planet->grids()
-            ->whereNotNull('building_id')
-            ->get(['id', 'building_id'])
-            ->groupBy('building_id');
+        $modifiers = [
+            'level' => 1,
+            'defense_bonus' => $this->planet->defense_bonus,
+            'construction_time_bonus' => $this->planet->construction_time_bonus,
+        ];
 
-        /** @var \Illuminate\Database\Eloquent\Collection $constructingIds */
-        $constructingIds = $this->planet->constructions()
-            ->get(['id', 'building_id'])
-            ->groupBy('building_id');
+        if ($this->construction) {
+            return new Collection([
+                $this->construction->building->applyModifiers($modifiers),
+            ]);
+        }
 
-        /** @var \Illuminate\Database\Eloquent\Builder $buildings */
-        $buildings = Building::whereIn('parent_id', $constructedIds->keys())->defaultOrder();
+        $buildings = Building::defaultOrder();
+        $requiredBuildings = $this->planet->findRequiredBuildings();
+
+        if ($requiredBuildings->isNotEmpty()) {
+            $buildings->whereIn('id', $requiredBuildings->pluck('id'));
+        } else {
+            $buildings->whereIn('parent_id', $this->grids()
+                ->whereNotNull('building_id')
+                ->pluck('building_id'));
+        }
 
         if ($this->type == static::TYPE_RESOURCE) {
             $buildings->where('type', Building::TYPE_MINER);
@@ -130,38 +139,25 @@ class Grid extends Model
             ]);
         }
 
-        $requiredCount = Building::whereIsRoot()->count();
-
         return $buildings->get()
-            ->filter(function (Building $building) use ($requiredCount, $constructedIds, $constructingIds) {
-                if ($constructedIds->count() < $requiredCount) {
-                    return !$constructedIds->has($building->id) && !$constructingIds->has($building->id);
-                }
-
+            ->filter(function (Building $building) {
                 if ($building->limit) {
-                    $count = 0;
+                    $count = $this->planet->grids()
+                        ->where('building_id', $building->id)
+                        ->count();
 
-                    if ($constructedIds->has($building->id)) {
-                        $count += $constructedIds->get($building->id)->count();
-                    }
-
-                    if ($constructingIds->has($building->id)) {
-                        $count += $constructingIds->get($building->id)->count();
-                    }
+                    $count += $this->planet->constructions()
+                        ->where('constructions.building_id', $building->id)
+                        ->count();
 
                     return $building->limit > $count;
                 }
 
                 return true;
             })
-            ->map(function (Building $building) {
-                return $building->applyModifiers([
-                    'level' => 1,
-                    'defense_bonus' => $this->planet->defense_bonus,
-                    'construction_time_bonus' => $this->planet->construction_time_bonus,
-                ]);
-            })
-            ->values();
+            ->transform(function (Building $building) use ($modifiers) {
+                return $building->applyModifiers($modifiers);
+            });
     }
 
     /**
@@ -186,7 +182,7 @@ class Grid extends Model
         }
 
         $this->level = max(
-            (int) !$this->planet->hasRequiredBuildings($this->id),
+            (int) $this->planet->findRequiredBuildings($this->id)->isNotEmpty(),
             $this->level - $level
         );
 

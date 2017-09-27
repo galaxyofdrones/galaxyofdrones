@@ -19,6 +19,10 @@ return [
         'plural' => 'Bookmarks',
     ],
 
+    'construction' => [
+        'singular' => 'Construction',
+    ],
+
     'error' => [
         'whoops' => 'Whoops',
         'wrong' => 'Something went wrong.',

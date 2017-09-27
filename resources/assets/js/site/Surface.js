@@ -11,7 +11,6 @@ export default {
             $parent: undefined,
             clickTreshold: 5,
             isDragging: false,
-            hasModal: false,
             dragStartX: 0,
             dragStartY: 0,
             dragged: 0,
@@ -42,8 +41,6 @@ export default {
     mounted() {
         this.$parent = $(this.$el).parent();
 
-        EventBus.$on('modal-opened', this.hasModal = true);
-        EventBus.$on('modal-closed', this.hasModal = false);
         EventBus.$on('planet-changed', planet => {
             this.planet = planet;
 
@@ -219,8 +216,8 @@ export default {
 
             sprite.on('mouseover', () => this.gridOver(sprite));
             sprite.on('mouseout', () => this.gridOut(sprite));
-            sprite.on('click', this.gridClick);
-            sprite.on('tap', this.gridClick);
+            sprite.on('click', () => this.gridClick(grid));
+            sprite.on('tap', () => this.gridClick(grid));
 
             this.gridLevel(grid, sprite);
             this.gridRemaining(grid, sprite);
@@ -253,10 +250,6 @@ export default {
         },
 
         gridOver(sprite) {
-            if (this.hasModal) {
-                return;
-            }
-
             sprite.alpha = 0.6;
         },
 
@@ -264,12 +257,12 @@ export default {
             sprite.alpha = 1;
         },
 
-        gridClick() {
+        gridClick(grid) {
             if (this.dragged > this.clickTreshold) {
                 return;
             }
 
-            // TODO: Implement the click
+            EventBus.$emit('grid-click', grid);
         },
 
         gridLevel(grid, sprite) {

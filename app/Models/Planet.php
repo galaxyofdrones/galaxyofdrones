@@ -71,6 +71,7 @@ class Planet extends Model implements PositionableContract
     use Behaviors\Positionable,
         Concerns\HasCapacityAndSupply,
         Concerns\HasCustomName,
+        Concerns\HasBuilding,
         Relations\BelongsToResource,
         Relations\BelongsToUser,
         Relations\HasManyStock,
@@ -262,27 +263,6 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Find enabled buildings.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Building[]
-     */
-    public function findEnabledBuildings()
-    {
-        return $this->grids()
-            ->with('building')
-            ->whereNotNull('building_id')
-            ->where('is_enabled', true)
-            ->get([
-                'building_id', 'level',
-            ])
-            ->transform(function (Grid $grid) {
-                return $grid->building->applyModifiers([
-                    'level' => $grid->level,
-                ]);
-            });
-    }
-
-    /**
      * Find grids with construction and upgrade.
      *
      * @return \Illuminate\Database\Eloquent\Collection|Grid[]
@@ -335,32 +315,6 @@ class Planet extends Model implements PositionableContract
             ->whereNull('user_id')
             ->where('resource_id', $resourceId)
             ->where('size', static::SIZE_SMALL);
-    }
-
-    /**
-     * Has required buildings.
-     *
-     * @param int $except
-     *
-     * @return bool
-     */
-    public function hasRequiredBuildings($except = null)
-    {
-        $constructedIds = $this->grids()
-            ->whereNotNull('building_id')
-            ->pluck('building_id');
-
-        if ($except) {
-            $constructedIds->forget($except);
-        }
-
-        foreach (Building::whereIsRoot()->pluck('id') as $id) {
-            if (!$constructedIds->contains($id)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**

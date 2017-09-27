@@ -13,9 +13,10 @@ require('./site/bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Construction from './site/Construction';
 import Filters from './site/Filters';
 import Player from './site/Player';
-import Popover from './common/Popover';
+import Popover from './site/Popover';
 import Sidebar from './site/Sidebar';
 import Starmap from './site/Starmap';
 import Surface from './site/Surface';
@@ -29,6 +30,6 @@ const app = new Vue({
     el: '#site',
 
     components: {
-        Player, Sidebar, Starmap, Surface
+        Construction, Player, Sidebar, Starmap, Surface
     }
 });
