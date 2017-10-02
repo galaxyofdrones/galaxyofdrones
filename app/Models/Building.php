@@ -325,7 +325,7 @@ class Building extends Model implements TranslatableContract
     {
         $productionRate = $this->attributes['production_rate'];
 
-        if ($this->type == static::TYPE_PRODUCER && $productionRate) {
+        if (in_array($this->type, [static::TYPE_CENTRAL, static::TYPE_PRODUCER]) && $productionRate) {
             if ($this->hasLowerLevel()) {
                 return round(
                     $this->applyLinearForumla($productionRate) * config('app.speed')

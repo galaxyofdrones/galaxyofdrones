@@ -79,4 +79,16 @@ class Util
 
         return $manager->value($key, $locale, $fallbackToDefault);
     }
+
+    /**
+     * Show the vue value.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public static function vue($value)
+    {
+        return "{{ {$value} }}";
+    }
 }

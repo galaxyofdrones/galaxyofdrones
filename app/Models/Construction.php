@@ -2,8 +2,11 @@
 
 namespace Koodilab\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
+use Koodilab\Events\PlanetUpdated;
+use Koodilab\Jobs\Construction as ConstructionJob;
 
 /**
  * Construction.
@@ -54,6 +57,36 @@ class Construction extends Model implements TimeableContract
     ];
 
     /**
+     * Create from.
+     *
+     * @param Grid     $grid
+     * @param Building $building
+     *
+     * @return static
+     */
+    public static function createFrom(Grid $grid, Building $building)
+    {
+        auth()->user()->decrementEnergy($building->construction_cost);
+
+        $construction = static::create([
+            'building_id' => $building->id,
+            'grid_id' => $grid->id,
+            'level' => $building->level,
+            'ended_at' => Carbon::now()->addSeconds($building->construction_time),
+        ]);
+
+        dispatch(
+            (new ConstructionJob($construction->id))->delay($construction->remaining)
+        );
+
+        event(
+            new PlanetUpdated($grid->planet_id)
+        );
+
+        return $construction;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function finish()
@@ -62,12 +95,10 @@ class Construction extends Model implements TimeableContract
             'level' => $this->level,
         ]);
 
-        $this->grid->fill([
+        $this->grid->update([
+            'building_id' => $this->building->id,
             'level' => $this->building->level,
         ]);
-
-        $this->grid->building()->associate($this->building->id);
-        $this->grid->save();
 
         $this->grid->planet->user->incrementExperience(
             $this->building->construction_experience
@@ -83,5 +114,18 @@ class Construction extends Model implements TimeableContract
      */
     public function cancel()
     {
+        $this->building->applyModifiers([
+            'level' => $this->level,
+        ]);
+
+        $this->grid->planet->user->incrementEnergy(round(
+            $this->remaining / $this->building->construction_time * $this->building->construction_cost
+        ));
+
+        $this->delete();
+
+        event(
+            new PlanetUpdated($this->grid->planet_id)
+        );
     }
 }

@@ -142,8 +142,6 @@ export default {
                     if (this.data.capacity === this.usedCapacity) {
                         clearInterval(this.resourceInterval);
                     }
-
-                    console.log('tick');
                 }, 1000);
             }
         },

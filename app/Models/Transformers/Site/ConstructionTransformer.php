@@ -2,11 +2,29 @@
 
 namespace Koodilab\Models\Transformers\Site;
 
+use Illuminate\Contracts\Translation\Translator;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\Transformer;
 
 class ConstructionTransformer extends Transformer
 {
+    /**
+     * The translator.
+     *
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * Constructor.
+     *
+     * @param Translator $translator
+     */
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -15,7 +33,9 @@ class ConstructionTransformer extends Transformer
     public function transform($item)
     {
         return [
-            'in_progress' => !empty($item->construction),
+            'remaining' => $item->construction
+                ? $item->construction->remaining
+                : null,
             'buildings' => $this->buildings($item),
         ];
     }
@@ -31,10 +51,14 @@ class ConstructionTransformer extends Transformer
     {
         $buildings = [];
 
-        foreach ($grid->constructableBuildings() as $building) {
+        foreach ($grid->constructionBuildings() as $building) {
             $buildings[] = [
                 'id' => $building->id,
                 'name' => $building->translation('name'),
+                'name_with_level' => $this->translator->trans('messages.building.name_with_level', [
+                    'name' => $building->translation('name'),
+                    'level' => $building->level,
+                ]),
                 'type' => $building->type,
                 'construction_experience' => $building->construction_experience,
                 'construction_cost' => $building->construction_cost,

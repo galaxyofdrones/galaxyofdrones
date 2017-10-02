@@ -211,9 +211,9 @@ $border-radius-small:       0;
 // $btn-link-disabled-color:        $gray-light
 
 // Allows for customizing button radius independently from global border radius
-// $btn-border-radius-base:         $border-radius-base
-// $btn-border-radius-large:        $border-radius-large
-// $btn-border-radius-small:        $border-radius-small
+$btn-border-radius-base:         2px;
+$btn-border-radius-large:        2px;
+$btn-border-radius-small:        2px;
 
 
 //== Forms
@@ -628,10 +628,10 @@ $popover-border-color:                $brand-info;
 //##
 
 //** Padding applied to the modal body
-// $modal-inner-padding:         15px
+$modal-inner-padding:         25px;
 
 //** Padding applied to the modal title
-// $modal-title-padding:         15px
+$modal-title-padding:         20px 25px;
 //** Modal title line-height
 // $modal-title-line-height:     $line-height-base
 
@@ -645,7 +645,7 @@ $modal-content-border-color:                   $brand-info;
 //** Modal backdrop background color
 // $modal-backdrop-bg:           #000
 //** Modal backdrop opacity
-$modal-backdrop-opacity:      .75;
+$modal-backdrop-opacity:      .7;
 //** Modal header border color
 $modal-header-border-color:   $brand-primary;
 //** Modal footer border color

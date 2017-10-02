@@ -2,6 +2,7 @@
 
 return [
 
+    'energy' => 'Energy',
     'info' => 'Info',
     'start' => 'Start',
     'zoom_in' => 'Zoom in',
@@ -19,7 +20,13 @@ return [
         'plural' => 'Bookmarks',
     ],
 
+    'building' => [
+        'name_with_level' => ':name (Level :level)',
+    ],
+
     'construction' => [
+        'cancel' => 'Cancel construction',
+        'construct' => 'Construct',
         'singular' => 'Construction',
     ],
 

@@ -1,6 +1,8 @@
-<construction url="{{ route('api_construction', '__grid__') }}" inline-template>
+<construction url="{{ route('api_construction', '__grid__') }}"
+              store-url="{{ route('api_construction_store', ['__grid__', '__building__']) }}"
+              destroy-url="{{ route('api_construction_destroy', '__grid__') }}" inline-template>
     <div class="construction modal fade" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
@@ -10,7 +12,173 @@
                         {{ trans('messages.construction.singular') }}
                     </h4>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body">
+                    <div class="tab-content" v-if="data.buildings.length">
+                        <div v-for="building in data.buildings" class="tab-pane" :class="{active: isSelected(building)}">
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <span class="item" :class="buildingClass(building)"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>
+                                        {{ vue('building.name_with_level') }}
+                                    </h4>
+                                    <p>
+                                        {{ vue('building.description') }}
+                                    </p>
+                                    <div class="attribute-row">
+                                        <div class="col-md-6 col-lg-4" v-if="building.defense !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.defense') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.defense') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.detection !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.detection') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.detection') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.capacity !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.capacity') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.capacity') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.supply !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.supply') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.supply') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.mining_rate !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.mining_rate') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.mining_rate') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.production_rate !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.production_rate') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.production_rate') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.mission_time !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.mission_time') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.mission_time | timer') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.defense_bonus !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.defense_bonus') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.defense_bonus | percent') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.construction_time_bonus !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.construction_time_bonus') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.construction_time_bonus | percent') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4" v-if="building.train_time_bonus !== null">
+                                            <div class="attribute">
+                                                <h6>
+                                                    {{ trans('validation.attributes.train_time_bonus') }}
+                                                </h6>
+                                                <h4>
+                                                    {{ vue('building.train_time_bonus | percent') }}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="list-inline">
+                                        <li title="{{ trans('validation.attributes.construction_experience') }}">
+                                            <i class="icon-xp"></i>
+                                            {{ vue('building.construction_experience | number') }}
+                                        </li>
+                                        <li class="highlight-warning" title="{{ trans('validation.attributes.construction_cost') }}">
+                                            <i class="icon-energy"></i>
+                                            {{ vue('building.construction_cost | number') }}
+                                        </li>
+                                        <li title="{{ trans('validation.attributes.construction_time') }}">
+                                            <i class="icon-time"></i>
+                                            {{ vue('building.construction_time | timer') }}
+                                        </li>
+                                    </ul>
+                                    <div class="row" v-if="remaining">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <button class="btn btn-warning btn-block" @click="destroy()">
+                                                    {{ trans('messages.construction.cancel') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <h4>{{ vue('remaining | timer') }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row" v-else>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <button class="btn btn-success btn-block" @click="store()">
+                                                    {{ trans('messages.construction.construct') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body separator">
+                    <ul class="nav nav-pills">
+                        <li v-for="building in data.buildings" :class="{active: isSelected(building)}">
+                            <a href="#" @click.prevent="select(building)">
+                                <span class="item item-sm" :class="buildingClass(building)">
+                                    {{ vue('building.name') }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

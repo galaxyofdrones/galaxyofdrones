@@ -22,8 +22,9 @@ import Starmap from './site/Starmap';
 import Surface from './site/Surface';
 
 Vue.directive('popover', Popover);
-Vue.filter('sign', Filters.sign);
 Vue.filter('number', Filters.number);
+Vue.filter('percent', Filters.percent);
+Vue.filter('sign', Filters.sign);
 Vue.filter('timer', Filters.timer);
 
 const app = new Vue({

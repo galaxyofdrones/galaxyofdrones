@@ -10,4 +10,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * Create a bad request json response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function createBadRequestJsonResponse()
+    {
+        return response()->json(['message' => 'Bad Request.'], 400);
+    }
 }

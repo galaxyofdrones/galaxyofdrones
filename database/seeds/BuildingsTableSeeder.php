@@ -25,10 +25,12 @@ class BuildingsTableSeeder extends Seeder
             'limit' => 1,
             'capacity' => 1000,
             'supply' => 1000,
+            'production_rate' => 200,
             'construction_time_bonus' => 0.76,
         ]);
 
         Building::create([
+            'parent_id' => 1,
             'name' => [
                 'en' => 'Mine',
             ],
@@ -44,6 +46,7 @@ class BuildingsTableSeeder extends Seeder
         ]);
 
         Building::create([
+            'parent_id' => 1,
             'name' => [
                 'en' => 'Power Plant',
             ],
@@ -53,14 +56,14 @@ class BuildingsTableSeeder extends Seeder
             'construction_time' => 112578,
             'end_level' => 10,
             'description' => [
-                'en' => 'Produces the energy from the minerals.',
+                'en' => 'Produces the energy and transmutes the minerals.',
             ],
-            'limit' => 3,
-            'production_rate' => 600,
+            'limit' => 1,
+            'production_rate' => 400,
         ]);
 
         Building::create([
-            'parent_id' => 1,
+            'parent_id' => 3,
             'name' => [
                 'en' => 'Drone Bay',
             ],

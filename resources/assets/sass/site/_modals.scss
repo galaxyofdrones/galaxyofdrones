@@ -2,4 +2,7 @@
     &-dialog {
         margin-top: 100px;
     }
+    &-body.separator {
+        border-top: 1px solid $modal-header-border-color;
+    }
 }

@@ -1,16 +1,4 @@
 export default {
-    sign(value, number) {
-        if (!number) {
-            return value;
-        }
-
-        if (number < 0) {
-            return `-${value}`;
-        }
-
-        return `+${value}`;
-    },
-
     number(value, decimals = 2) {
         const abs = Math.abs(value);
 
@@ -25,6 +13,22 @@ export default {
         }
 
         return Math.round(value);
+    },
+
+    percent(value) {
+        return `${value * 100}%`;
+    },
+
+    sign(value, number) {
+        if (!number) {
+            return value;
+        }
+
+        if (number < 0) {
+            return `-${value}`;
+        }
+
+        return `+${value}`;
     },
 
     timer(value) {

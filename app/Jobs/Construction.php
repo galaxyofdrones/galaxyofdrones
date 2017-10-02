@@ -7,7 +7,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Koodilab\Models\Construction as ConstructionModel;
 
-class Construct implements ShouldQueue
+class Construction implements ShouldQueue
 {
     use Queueable;
 

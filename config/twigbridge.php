@@ -64,6 +64,7 @@ return [
             'last',
             'mix',
             'setting',
+            'vue',
         ],
 
         /*

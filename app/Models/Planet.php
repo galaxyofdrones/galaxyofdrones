@@ -71,7 +71,6 @@ class Planet extends Model implements PositionableContract
     use Behaviors\Positionable,
         Concerns\HasCapacityAndSupply,
         Concerns\HasCustomName,
-        Concerns\HasBuilding,
         Relations\BelongsToResource,
         Relations\BelongsToUser,
         Relations\HasManyStock,
@@ -272,6 +271,38 @@ class Planet extends Model implements PositionableContract
         return $this->grids()
             ->with('construction', 'upgrade')
             ->get();
+    }
+
+    /**
+     * Find the not empty grids.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Grid[]
+     */
+    public function findNotEmptyGrids()
+    {
+        return $this->grids()
+            ->whereNotNull('building_id')
+            ->get();
+    }
+
+    /**
+     * Find the buildings.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Building[]
+     */
+    public function findBuildings()
+    {
+        return $this->grids()
+            ->with('building')
+            ->whereNotNull('building_id')
+            ->get([
+                'building_id', 'level',
+            ])
+            ->transform(function (Grid $grid) {
+                return $grid->building->applyModifiers([
+                    'level' => $grid->level,
+                ]);
+            });
     }
 
     /**

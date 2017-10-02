@@ -16,7 +16,7 @@ trait HasCapacityAndSupply
     public function getUsedCapacityAttribute()
     {
         return $this->stocks()
-            ->get(['resource_id', 'quantity', 'updated_at'])
+            ->get(['resource_id', 'quantity', 'last_quantity_changed'])
             ->reduce(function ($carry, Stock $stock) {
                 return $carry + $stock->setRelation('planet', $this)->quantity;
             }, 0);

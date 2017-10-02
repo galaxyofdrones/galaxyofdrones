@@ -11,16 +11,25 @@ $router->group([
         $router->get('{grid}', 'ConstructionController@index')
             ->name('construction')
             ->where('grid', '\d+');
+
+        $router->post('{grid}/{building}', 'ConstructionController@store')
+            ->name('construction_store')
+            ->where('grid', '\d+')
+            ->where('building', '\d+');
+
+        $router->delete('{grid}', 'ConstructionController@destroy')
+            ->name('construction_destroy')
+            ->where('grid', '\d+');
     });
 
     $router->group([
         'prefix' => 'planet',
     ], function () use ($router) {
-        $router->put('name', 'PlanetController@name')
-            ->name('planet_name');
-
         $router->get('/', 'PlanetController@index')
             ->name('planet');
+
+        $router->put('name', 'PlanetController@name')
+            ->name('planet_name');
     });
 
     $router->group([
@@ -35,11 +44,11 @@ $router->group([
     $router->group([
         'prefix' => 'user',
     ], function () use ($router) {
+        $router->get('/', 'UserController@index')
+            ->name('user');
+
         $router->put('current/{planet}', 'UserController@current')
             ->name('user_current')
             ->where('planet', '\d+');
-
-        $router->get('/', 'UserController@index')
-            ->name('user');
     });
 });

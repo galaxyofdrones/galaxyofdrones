@@ -16,7 +16,6 @@ use Koodilab\Support\StateManager;
  * @property int $y
  * @property int|null $level
  * @property int $type
- * @property bool $is_enabled
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property Building|null $building
@@ -98,11 +97,11 @@ class Grid extends Model
     }
 
     /**
-     * Get the constructable buildings.
+     * Get the construction buildings.
      *
      * @return Collection|Building[]
      */
-    public function constructableBuildings()
+    public function constructionBuildings()
     {
         if ($this->building_id) {
             return new Collection();
@@ -120,16 +119,9 @@ class Grid extends Model
             ]);
         }
 
-        $buildings = Building::defaultOrder();
-        $requiredBuildings = $this->planet->findRequiredBuildings();
-
-        if ($requiredBuildings->isNotEmpty()) {
-            $buildings->whereIn('id', $requiredBuildings->pluck('id'));
-        } else {
-            $buildings->whereIn('parent_id', $this->grids()
-                ->whereNotNull('building_id')
-                ->pluck('building_id'));
-        }
+        $buildings = Building::defaultOrder()->whereIn(
+            'parent_id', $this->planet->findNotEmptyGrids()->pluck('building_id')
+        );
 
         if ($this->type == static::TYPE_RESOURCE) {
             $buildings->where('type', Building::TYPE_MINER);
@@ -182,13 +174,11 @@ class Grid extends Model
         }
 
         $this->level = max(
-            (int) $this->planet->findRequiredBuildings($this->id)->isNotEmpty(),
-            $this->level - $level
+            0, $this->level - $level
         );
 
         if (!$this->level) {
             $this->level = null;
-            $this->is_enabled = true;
             $this->building()->associate(null);
         }
 

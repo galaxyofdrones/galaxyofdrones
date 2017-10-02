@@ -1,7 +1,5 @@
 {% extends 'site.layouts.base' %}
 
-{% import 'site.partials.helpers' as helpers %}
-
 {% block body %}
     <section id="site" class="container-site">
         <sidebar planet-url="{{ route('api_planet') }}"
@@ -20,7 +18,7 @@
                         <div v-else class="input-group">
                             <select class="form-control" v-model="selected">
                                 <option :value="planet.id" v-for="planet in data.planets">
-                                    {{ helpers.vue('planet.name') }}
+                                    {{ vue('planet.name') }}
                                 </option>
                             </select>
                             <div class="input-group-btn">
@@ -38,7 +36,7 @@
                                         {{ trans('validation.attributes.mining_rate') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.mining_rate') }}
+                                        {{ vue('data.mining_rate') }}
                                     </h4>
                                 </div>
                             </div>
@@ -48,7 +46,7 @@
                                         {{ trans('validation.attributes.production_rate') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.production_rate') }}
+                                        {{ vue('data.production_rate') }}
                                     </h4>
                                 </div>
                             </div>
@@ -60,10 +58,10 @@
                                         {{ trans('validation.attributes.incoming') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.incoming_movement') }}
+                                        {{ vue('data.incoming_movement') }}
                                     </h4>
                                     <h4 class="highlight-danger">
-                                        {{ helpers.vue('data.incoming_attack_movement') }}
+                                        {{ vue('data.incoming_attack_movement') }}
                                     </h4>
                                 </div>
                             </div>
@@ -73,10 +71,10 @@
                                         {{ trans('validation.attributes.outgoing') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.outgoing_movement') }}
+                                        {{ vue('data.outgoing_movement') }}
                                     </h4>
                                     <h4 class="highlight-warning">
-                                        {{ helpers.vue('data.outgoing_attack_movement') }}
+                                        {{ vue('data.outgoing_attack_movement') }}
                                     </h4>
                                 </div>
                             </div>
@@ -88,7 +86,7 @@
                                         {{ trans('validation.attributes.construction') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.construction') }}
+                                        {{ vue('data.construction') }}
                                     </h4>
                                 </div>
                             </div>
@@ -98,7 +96,7 @@
                                         {{ trans('validation.attributes.upgrade') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.upgrade') }}
+                                        {{ vue('data.upgrade') }}
                                     </h4>
                                 </div>
                             </div>
@@ -110,7 +108,7 @@
                                         {{ trans('validation.attributes.training') }}
                                     </h6>
                                     <h4>
-                                        {{ helpers.vue('data.training') }}
+                                        {{ vue('data.training') }}
                                     </h4>
                                 </div>
                             </div>
@@ -131,7 +129,7 @@
                                       :title="resource.name"
                                       :data-content="resource.description"
                                       v-popover="{trigger: 'hover'}">
-                                    {{ helpers.vue('resourceValue(resource) | number') }}
+                                    {{ vue('resourceValue(resource) | number') }}
                                 </span>
                             </div>
                         </div>
@@ -153,7 +151,7 @@
                                       :title="unit.name"
                                       :data-content="unit.description"
                                       v-popover="{trigger: 'hover'}">
-                                    {{ helpers.vue('unit.quantity | number') }}
+                                    {{ vue('unit.quantity | number') }}
                                 </span>
                             </div>
                         </div>
@@ -197,7 +195,7 @@
                         <img class="player-avatar" :src="data.gravatar" :alt="data.username">
                         <div class="player-level">
                             <i class="icon-star"></i>
-                            {{ helpers.vue('data.level') }}
+                            {{ vue('data.level') }}
                         </div>
                     </div>
                     <div class="player-right">
@@ -233,7 +231,7 @@
                 </div>
                 <div class="player-energy" v-cloak>
                     <i class="icon-energy"></i>
-                    {{ helpers.vue('energy | number') }}
+                    {{ vue('energy | number') }}
                 </div>
             </div>
         </player>
