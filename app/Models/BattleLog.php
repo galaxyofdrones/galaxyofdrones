@@ -105,7 +105,7 @@ class BattleLog extends Model
     ];
 
     /**
-     * Create from a movement.
+     * Create from.
      *
      * @param Movement $movement
      * @param bool     $winner

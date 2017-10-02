@@ -40,7 +40,7 @@ class MissionLog extends Model
     ];
 
     /**
-     * Create from a mission.
+     * Create from.
      *
      * @param Mission $mission
      *
