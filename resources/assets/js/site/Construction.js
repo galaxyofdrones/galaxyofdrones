@@ -68,7 +68,7 @@ export default {
                     this.remaining--;
 
                     if (!this.remaining) {
-                        this.clearRemaining();
+                        this.$modal.modal('hide');
                     }
                 }, 1000);
             }
