@@ -192,7 +192,11 @@
             <div class="player">
                 <div class="player-info" v-cloak>
                     <div class="player-left">
-                        <img class="player-avatar" :src="data.gravatar" :alt="data.username">
+                        <img class="player-avatar"
+                             :src="data.gravatar"
+                             :alt="data.username"
+                             :data-content="data.username"
+                             v-popover="{placement: 'left', trigger: 'hover'}">
                         <div class="player-level"
                              data-content="{{ trans('validation.attributes.level') }}"
                              v-popover="{placement: 'left', trigger: 'hover'}">
