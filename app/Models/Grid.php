@@ -2,7 +2,6 @@
 
 namespace Koodilab\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Support\StateManager;
 
@@ -42,7 +41,8 @@ class Grid extends Model
         Relations\BelongsToPlanet,
         Relations\HasOneConstruction,
         Relations\HasOneUpgrade,
-        Relations\HasOneTraining;
+        Relations\HasOneTraining,
+        Concerns\HasBuilding;
 
     /**
      * The plain type.
@@ -94,94 +94,5 @@ class Grid extends Model
         static::updated(function (self $grid) {
             app(StateManager::class)->syncPlanet($grid->planet);
         });
-    }
-
-    /**
-     * Get the construction buildings.
-     *
-     * @return Collection|Building[]
-     */
-    public function constructionBuildings()
-    {
-        if ($this->building_id) {
-            return new Collection();
-        }
-
-        $modifiers = [
-            'level' => 1,
-            'defense_bonus' => $this->planet->defense_bonus,
-            'construction_time_bonus' => $this->planet->construction_time_bonus,
-        ];
-
-        if ($this->construction) {
-            return new Collection([
-                $this->construction->building->applyModifiers($modifiers),
-            ]);
-        }
-
-        $buildings = Building::defaultOrder()->whereIn(
-            'parent_id', $this->planet->findNotEmptyGrids()->pluck('building_id')
-        );
-
-        if ($this->type == static::TYPE_RESOURCE) {
-            $buildings->where('type', Building::TYPE_MINER);
-        } else {
-            $buildings->whereNotIn('type', [
-                Building::TYPE_CENTRAL, Building::TYPE_MINER,
-            ]);
-        }
-
-        return $buildings->get()
-            ->filter(function (Building $building) {
-                if ($building->limit) {
-                    $count = $this->planet->grids()
-                        ->where('building_id', $building->id)
-                        ->count();
-
-                    $count += $this->planet->constructions()
-                        ->where('constructions.building_id', $building->id)
-                        ->count();
-
-                    return $building->limit > $count;
-                }
-
-                return true;
-            })
-            ->transform(function (Building $building) use ($modifiers) {
-                return $building->applyModifiers($modifiers);
-            });
-    }
-
-    /**
-     * Demolish the building.
-     *
-     * @param int $level
-     */
-    public function demolishBuilding($level = null)
-    {
-        $level = $level ?: $this->level;
-
-        if (empty($level) || !$this->building_id) {
-            return;
-        }
-
-        if ($this->upgrade) {
-            $this->upgrade->delete();
-        }
-
-        if ($this->training) {
-            $this->training->delete();
-        }
-
-        $this->level = max(
-            0, $this->level - $level
-        );
-
-        if (!$this->level) {
-            $this->level = null;
-            $this->building()->associate(null);
-        }
-
-        $this->save();
     }
 }

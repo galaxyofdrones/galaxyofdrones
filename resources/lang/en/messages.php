@@ -2,6 +2,7 @@
 
 return [
 
+    'cancel' => 'Cancel',
     'energy' => 'Energy',
     'info' => 'Info',
     'start' => 'Start',
@@ -25,7 +26,6 @@ return [
     ],
 
     'construction' => [
-        'cancel' => 'Cancel construction',
         'construct' => 'Construct',
         'singular' => 'Construction',
     ],
@@ -51,6 +51,10 @@ return [
 
     'unit' => [
         'plural' => 'Units',
+    ],
+
+    'upgrade' => [
+        'singular' => 'Upgrade',
     ],
 
     'warning' => [

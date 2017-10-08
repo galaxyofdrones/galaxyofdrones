@@ -68,7 +68,7 @@ class Construction extends Model implements TimeableContract
     {
         auth()->user()->decrementEnergy($building->construction_cost);
 
-        $construction = static::create([
+        $model = static::create([
             'building_id' => $building->id,
             'grid_id' => $grid->id,
             'level' => $building->level,
@@ -76,14 +76,14 @@ class Construction extends Model implements TimeableContract
         ]);
 
         dispatch(
-            (new ConstructionJob($construction->id))->delay($construction->remaining)
+            (new ConstructionJob($model->id))->delay($model->remaining)
         );
 
         event(
             new PlanetUpdated($grid->planet_id)
         );
 
-        return $construction;
+        return $model;
     }
 
     /**

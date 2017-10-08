@@ -20,8 +20,10 @@ import Popover from './site/Popover';
 import Sidebar from './site/Sidebar';
 import Starmap from './site/Starmap';
 import Surface from './site/Surface';
+import Upgrade from './site/Upgrade';
 
 Vue.directive('popover', Popover);
+Vue.filter('item', Filters.item);
 Vue.filter('number', Filters.number);
 Vue.filter('percent', Filters.percent);
 Vue.filter('sign', Filters.sign);
@@ -31,6 +33,6 @@ const app = new Vue({
     el: '#site',
 
     components: {
-        Construction, Player, Sidebar, Starmap, Surface
+        Construction, Player, Sidebar, Starmap, Surface, Upgrade
     }
 });

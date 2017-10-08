@@ -2,8 +2,11 @@
 
 namespace Koodilab\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
+use Koodilab\Events\PlanetUpdated;
+use Koodilab\Jobs\Upgrade as UpgradeJob;
 
 /**
  * Upgrade.
@@ -50,20 +53,48 @@ class Upgrade extends Model implements TimeableContract
     ];
 
     /**
+     * Create from.
+     *
+     * @param Grid $grid
+     *
+     * @return static
+     */
+    public static function createFrom(Grid $grid)
+    {
+        $building = $grid->upgradeBuilding();
+
+        auth()->user()->decrementEnergy($building->construction_cost);
+
+        $model = static::create([
+            'grid_id' => $grid->id,
+            'level' => $building->level,
+            'ended_at' => Carbon::now()->addSeconds($building->construction_time),
+        ]);
+
+        dispatch(
+            (new UpgradeJob($model->id))->delay($model->remaining)
+        );
+
+        event(
+            new PlanetUpdated($grid->planet_id)
+        );
+
+        return $model;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function finish()
     {
-        $this->grid->building->applyModifiers([
-            'level' => $this->level,
-        ]);
+        $building = $this->grid->upgradeBuilding();
 
         $this->grid->update([
-            'level' => $this->grid->building->level,
+            'level' => $building->level,
         ]);
 
         $this->grid->planet->user->incrementExperience(
-            $this->grid->building->construction_experience
+            $building->construction_experience
         );
 
         $this->delete();
@@ -76,5 +107,16 @@ class Upgrade extends Model implements TimeableContract
      */
     public function cancel()
     {
+        $building = $this->grid->upgradeBuilding();
+
+        $this->grid->planet->user->incrementEnergy(round(
+            $this->remaining / $building->construction_time * $building->construction_cost
+        ));
+
+        $this->delete();
+
+        event(
+            new PlanetUpdated($this->grid->planet_id)
+        );
     }
 }

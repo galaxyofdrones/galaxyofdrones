@@ -1,4 +1,8 @@
 export default {
+    item(value, type = 'resource') {
+        return `${type}-${value.id}`;
+    },
+
     number(value, decimals = 2) {
         const abs = Math.abs(value);
 
@@ -16,12 +20,12 @@ export default {
     },
 
     percent(value) {
-        return `${value * 100}%`;
+        return `${(value * 100).toFixed(0)}%`;
     },
 
     sign(value, number) {
         if (!number) {
-            return value;
+            number = value;
         }
 
         if (number < 0) {

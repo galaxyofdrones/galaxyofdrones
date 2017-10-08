@@ -42,6 +42,22 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'upgrade',
+    ], function () use ($router) {
+        $router->get('{grid}', 'UpgradeController@index')
+            ->name('upgrade')
+            ->where('grid', '\d+');
+
+        $router->post('{grid}', 'UpgradeController@store')
+            ->name('upgrade_store')
+            ->where('grid', '\d+');
+
+        $router->delete('{grid}', 'UpgradeController@destroy')
+            ->name('upgrade_destroy')
+            ->where('grid', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'user',
     ], function () use ($router) {
         $router->get('/', 'UserController@index')

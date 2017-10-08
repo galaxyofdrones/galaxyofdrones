@@ -5,7 +5,7 @@ namespace Koodilab\Models\Transformers\Site;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\Transformer;
 
-class ConstructionTransformer extends Transformer
+class UpgradeTransformer extends Transformer
 {
     /**
      * @var BuildingTransformer
@@ -29,29 +29,19 @@ class ConstructionTransformer extends Transformer
      */
     public function transform($item)
     {
+        $building = $item->currentBuilding();
+        $upgrade = $item->upgradeBuilding();
+
         return [
-            'remaining' => $item->construction
-                ? $item->construction->remaining
+            'remaining' => $item->upgrade
+                ? $item->upgrade->remaining
                 : null,
-            'buildings' => $this->buildings($item),
+            'building' => $building
+                ? $this->buildingTransformer->transform($building)
+                : null,
+            'upgrade' => $upgrade
+                ? $this->buildingTransformer->transform($upgrade)
+                : null,
         ];
-    }
-
-    /**
-     * Get the buildings.
-     *
-     * @param Grid $grid
-     *
-     * @return array
-     */
-    protected function buildings(Grid $grid)
-    {
-        $buildings = [];
-
-        foreach ($grid->constructionBuildings() as $building) {
-            $buildings[] = $this->buildingTransformer->transform($building);
-        }
-
-        return $buildings;
     }
 }

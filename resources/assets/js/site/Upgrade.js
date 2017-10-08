@@ -8,15 +8,13 @@ export default {
             $modal: undefined,
             remaining: 0,
             remainingInterval: undefined,
-            selected: {
-                id: undefined
-            },
             grid: {
                 id: undefined,
                 building_id: undefined
             },
             data: {
-                buildings: []
+                building: {},
+                upgrade: {}
             }
         };
     },
@@ -27,9 +25,15 @@ export default {
         EventBus.$on('grid-click', this.open);
     },
 
+    computed: {
+        building() {
+            return this.data.building;
+        }
+    },
+
     methods: {
         open(grid) {
-            if (grid.building_id) {
+            if (!grid.building_id) {
                 return;
             }
 
@@ -42,14 +46,13 @@ export default {
 
             axios.get(url).then(response => {
                 this.data = response.data;
-                this.selected = _.first(this.data.buildings);
                 this.$modal.modal();
                 this.initRemaining();
             });
         },
 
         store() {
-            const url = this.storeUrl.replace('__grid__', this.grid.id).replace('__building__', this.selected.id);
+            const url = this.storeUrl.replace('__grid__', this.grid.id);
 
             axios.post(url).then(() => this.$modal.modal('hide'));
         },
@@ -81,14 +84,6 @@ export default {
             }
 
             clearInterval(this.remainingInterval);
-        },
-
-        isSelected(building) {
-            return this.selected.id === building.id;
-        },
-
-        select(building) {
-            this.selected = building;
         }
     }
 };

@@ -4,12 +4,11 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Building;
-use Koodilab\Models\Construction;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Transformers\Site\ConstructionTransformer;
+use Koodilab\Models\Transformers\Site\UpgradeTransformer;
+use Koodilab\Models\Upgrade;
 
-class ConstructionController extends Controller
+class UpgradeController extends Controller
 {
     /**
      * Constructor.
@@ -21,14 +20,14 @@ class ConstructionController extends Controller
     }
 
     /**
-     * Show the construction in json format.
+     * Show the upgrade in json format.
      *
-     * @param Grid                    $grid
-     * @param ConstructionTransformer $transformer
+     * @param Grid               $grid
+     * @param UpgradeTransformer $transformer
      *
      * @return \Illuminate\Http\JsonResponse|array
      */
-    public function index(Grid $grid, ConstructionTransformer $transformer)
+    public function index(Grid $grid, UpgradeTransformer $transformer)
     {
         $this->authorize('friendly', $grid->planet);
 
@@ -36,24 +35,21 @@ class ConstructionController extends Controller
     }
 
     /**
-     * Store a newly created construction in storage.
+     * Store a newly created upgrade in storage.
      *
-     * @param Grid     $grid
-     * @param Building $building
+     * @param Grid $grid
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Grid $grid, Building $building)
+    public function store(Grid $grid)
     {
         $this->authorize('friendly', $grid->planet);
 
-        if ($grid->construction) {
+        if ($grid->upgrade) {
             return $this->createBadRequestJsonResponse();
         }
 
-        $building = $grid->constructionBuildings()
-            ->keyBy('id')
-            ->get($building->id);
+        $building = $grid->upgradeBuilding();
 
         if (!$building) {
             return $this->createBadRequestJsonResponse();
@@ -63,13 +59,13 @@ class ConstructionController extends Controller
             return $this->createBadRequestJsonResponse();
         }
 
-        DB::transaction(function () use ($grid, $building) {
-            Construction::createFrom($grid, $building);
+        DB::transaction(function () use ($grid) {
+            Upgrade::createFrom($grid);
         });
     }
 
     /**
-     * Remove the construction from storage.
+     * Remove the upgrade from storage.
      *
      * @param Grid $grid
      *
@@ -79,12 +75,12 @@ class ConstructionController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->construction) {
+        if (!$grid->upgrade) {
             return $this->createBadRequestJsonResponse();
         }
 
         DB::transaction(function () use ($grid) {
-            $grid->construction->cancel();
+            $grid->upgrade->cancel();
         });
     }
 }

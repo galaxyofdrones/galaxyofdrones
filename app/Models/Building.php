@@ -169,7 +169,7 @@ class Building extends Model implements TranslatableContract
 
         if ($this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($constructionExperience)
+                $this->applyLinearForumla($constructionExperience)
             );
         }
 
