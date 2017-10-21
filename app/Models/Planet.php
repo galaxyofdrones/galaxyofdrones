@@ -31,6 +31,7 @@ use Koodilab\Support\StateManager;
  * @property \Carbon\Carbon|null $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
  * @property string $display_name
+ * @property int $free_capacity
  * @property int $free_supply
  * @property int $resource_count
  * @property int $used_capacity

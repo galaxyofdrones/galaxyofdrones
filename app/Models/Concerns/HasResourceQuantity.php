@@ -55,10 +55,8 @@ trait HasResourceQuantity
             return;
         }
 
-        $free = $this->planet->capacity - $this->planet->used_capacity;
-
         $this->fill([
-            'quantity' => max(0, $this->quantity + min($free, $amount)),
+            'quantity' => max(0, $this->quantity + min($this->planet->free_capacity, $amount)),
         ])->save();
     }
 }

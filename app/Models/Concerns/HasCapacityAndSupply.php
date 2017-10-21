@@ -9,6 +9,16 @@ use Koodilab\Models\Training;
 trait HasCapacityAndSupply
 {
     /**
+     * Get the free capacity attribute.
+     *
+     * @return int
+     */
+    public function getFreeCapacityAttribute()
+    {
+        return $this->capacity - $this->used_capacity;
+    }
+
+    /**
      * Get the used capacity attribute.
      *
      * @return int
