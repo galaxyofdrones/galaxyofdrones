@@ -7,7 +7,7 @@
     &-row {
         @include make-row(10px);
 
-        &:last-child .attribute {
+        .sidebar &:last-child .attribute {
             margin-bottom: 0;
         }
         [class*="col-"] {

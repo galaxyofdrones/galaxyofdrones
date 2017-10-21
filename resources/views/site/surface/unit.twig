@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-md-6 text-center">
+        <span class="item" :class="unit | item('unit')"></span>
+    </div>
+    <div class="col-md-6">
+        <h4>
+            {{ vue('unit.name') }}
+        </h4>
+        <p>
+            {{ vue('unit.description') }}
+        </p>
+        <div class="attribute-row">
+            <div class="col-md-6">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.speed') }}
+                    </h6>
+                    <h4>
+                        {{ vue('unit.speed') }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.attack') }}
+                    </h6>
+                    <h4>
+                        {{ vue('unit.attack') }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.defense') }}
+                    </h6>
+                    <h4>
+                        {{ vue('unit.defense') }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-6" v-if="unit.detection !== null">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.detection') }}
+                    </h6>
+                    <h4>
+                        {{ vue('unit.detection') }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-6" v-if="unit.capacity !== null">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.capacity') }}
+                    </h6>
+                    <h4>
+                        {{ vue('unit.capacity') }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <ul class="list-inline">
+            <li data-content="{{ trans('validation.attributes.supply') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-supply"></i>
+                {{ vue('unit.supply | number') }}
+            </li>
+            <li class="highlight-warning" data-content="{{ trans('validation.attributes.train_cost') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-energy"></i>
+                {{ vue('unit.train_cost | number') }}
+            </li>
+            <li data-content="{{ trans('validation.attributes.train_time') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-time"></i>
+                {{ vue('unit.train_time | timer') }}
+            </li>
+        </ul>
+        <div class="row" v-if="remaining">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <button class="btn btn-warning btn-block" @click="destroy()">
+                        {{ trans('messages.cancel') }}
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4>{{ vue('remaining | timer') }}</h4>
+            </div>
+        </div>
+        <div class="row" v-else>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control"
+                               type="number"
+                               min="1"
+                               :max="trainableQuantity"
+                               :placeholder="quantityPlaceholder"
+                               v-model.number="quantity">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success btn-block" @click="store()" :disabled="!isTrainable">
+                                {{ trans('messages.training.train') }}
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4>{{ vue('trainTime | timer') }}</h4>
+            </div>
+        </div>
+    </div>
+</div>

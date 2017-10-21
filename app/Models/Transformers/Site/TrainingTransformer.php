@@ -35,7 +35,6 @@ class TrainingTransformer extends Transformer
             'remaining' => $item->training
                 ? $item->training->remaining
                 : null,
-            'supply' => $item->planet->free_supply,
             'units' => $item->trainingUnits()->transform([
                 $this->unitTransformer, 'transform',
             ]),

@@ -7,9 +7,10 @@
                  user-current-url="{{ route('api_user_current', '__planet__') }}"
                  inline-template>
             <div class="sidebar" :class="{active: isActive}">
-                <div class="sidebar-content perfect-scrollbar">
+                <div class="sidebar-content" ref="scrollbar">
                     <div class="sidebar-block" v-cloak>
-                        <input v-if="isEditActive" class="form-control"
+                        <input v-if="isEditActive"
+                               class="form-control"
                                v-model="name"
                                ref="name"
                                :placeholder="data.name"
@@ -125,7 +126,8 @@
                         </div>
                         <div class="item-row">
                             <div class="col-xs-3" v-for="resource in data.resources">
-                                <span class="item item-sm" :class="resourceClass(resource)"
+                                <span class="item item-sm"
+                                      :class="resource | item('resource')"
                                       :title="resource.name"
                                       :data-content="resource.description"
                                       v-popover="{trigger: 'hover'}">
@@ -147,7 +149,8 @@
                         </div>
                         <div class="item-row">
                             <div class="col-xs-3" v-for="unit in data.units">
-                                <span class="item item-sm" :class="unitClass(unit)"
+                                <span class="item item-sm"
+                                      :class="unit | item('unit')"
                                       :title="unit.name"
                                       :data-content="unit.description"
                                       v-popover="{trigger: 'hover'}">

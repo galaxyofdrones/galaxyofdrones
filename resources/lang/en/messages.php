@@ -49,6 +49,10 @@ return [
         'singular' => 'Success',
     ],
 
+    'training' => [
+        'train' => 'Train',
+    ],
+
     'unit' => [
         'plural' => 'Units',
     ],

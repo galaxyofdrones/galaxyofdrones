@@ -41,7 +41,7 @@ export default {
     mounted() {
         this.$parent = $(this.$el).parent();
 
-        EventBus.$on('planet-changed', planet => {
+        EventBus.$on('planet-updated', planet => {
             this.planet = planet;
 
             if (!this.stage) {

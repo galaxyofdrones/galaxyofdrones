@@ -61,7 +61,6 @@ class Kernel extends HttpKernel
 
         if ($this->app->environment() != 'production') {
             $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
-            $this->prependMiddleware(\Clockwork\Support\Laravel\ClockworkMiddleware::class);
         }
     }
 }

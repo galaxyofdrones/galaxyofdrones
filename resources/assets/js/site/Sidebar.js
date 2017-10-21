@@ -78,6 +78,8 @@ export default {
 
     methods: {
         fetchData() {
+            EventBus.$emit('planet-update');
+
             this.unsubscribe();
 
             axios.get(this.planetUrl).then(response => {
@@ -88,7 +90,7 @@ export default {
                 this.initResource();
                 this.subscribe();
 
-                EventBus.$emit('planet-changed', this.data);
+                EventBus.$emit('planet-updated', this.data);
             });
         },
 
@@ -109,7 +111,9 @@ export default {
                 return;
             }
 
-            axios.put(this.userCurrentUrl.replace('__planet__', this.selected));
+            axios.put(
+                this.userCurrentUrl.replace('__planet__', this.selected)
+            );
         },
 
         initName() {
@@ -147,7 +151,7 @@ export default {
         },
 
         initPerfectScrollbar() {
-            this.$perfectScrollbar = $('.perfect-scrollbar', this.$el).perfectScrollbar();
+            this.$perfectScrollbar = $(this.$refs.scrollbar).perfectScrollbar();
         },
 
         updatePerfectScrollbar() {
@@ -159,8 +163,8 @@ export default {
                 return;
             }
 
-            Echo.private(`user.${this.data.user_id}`).listen('.updated', this.fetchData);
             Echo.private(`planet.${this.data.id}`).listen('.updated', this.fetchData);
+            EventBus.$on('user-update', this.fetchData);
 
             this.isSubscribed = true;
         },
@@ -170,8 +174,8 @@ export default {
                 return;
             }
 
-            Echo.leave(`user.${this.data.user_id}`);
             Echo.leave(`planet.${this.data.id}`);
+            EventBus.$off('user-update', this.fetchData);
 
             this.isSubscribed = false;
         },
@@ -192,20 +196,12 @@ export default {
             }
         },
 
-        resourceClass(resource) {
-            return `resource-${resource.id}`;
-        },
-
         resourceValue(resource) {
             if (resource.id === this.data.resource_id) {
                 return this.resourceQuantity;
             }
 
             return resource.quantity;
-        },
-
-        unitClass(unit) {
-            return `unit-${unit.id}`;
         }
     }
 };

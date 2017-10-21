@@ -39,7 +39,7 @@ trait HasCapacityAndSupply
      */
     public function getFreeSupplyAttribute()
     {
-        return $this->supply - ($this->used_supply + $this->used_training_supply);
+        return $this->supply - $this->used_supply - $this->used_training_supply;
     }
 
     /**

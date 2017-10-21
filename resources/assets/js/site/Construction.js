@@ -1,13 +1,12 @@
 import { EventBus } from '../common/event-bus';
+import Modal from './Modal';
 
-export default {
+export default Modal.extend({
     props: ['url', 'storeUrl', 'destroyUrl'],
 
     data() {
         return {
-            $modal: undefined,
-            remaining: 0,
-            remainingInterval: undefined,
+            isSubscribed: false,
             selected: {
                 id: undefined
             },
@@ -16,15 +15,15 @@ export default {
                 building_id: undefined
             },
             data: {
+                remaining: 0,
                 buildings: []
             }
         };
     },
 
-    mounted() {
-        this.$modal = $(this.$el).on('hide.bs.modal', this.clearRemaining);
-
+    created() {
         EventBus.$on('grid-click', this.open);
+        EventBus.$on('planet-update', this.fetchData);
     },
 
     methods: {
@@ -34,53 +33,45 @@ export default {
             }
 
             this.grid = grid;
-            this.fetchData();
+            this.fetchData(true);
         },
 
-        fetchData() {
-            const url = this.url.replace('__grid__', this.grid.id);
+        fetchData(showModal = false) {
+            if (!showModal && !this.isEnabled) {
+                return;
+            }
 
-            axios.get(url).then(response => {
+            axios.get(
+                this.url.replace('__grid__', this.grid.id)
+            ).then(response => {
                 this.data = response.data;
-                this.selected = _.first(this.data.buildings);
-                this.$modal.modal();
-                this.initRemaining();
+
+                if (!showModal && !this.data.buildings.length) {
+                    this.$modal.modal('hide');
+                } else {
+                    this.initRemaining(this.data.remaining);
+
+                    this.select(
+                        _.first(this.data.buildings)
+                    );
+
+                    if (showModal) {
+                        this.$nextTick(() => this.$modal.modal());
+                    }
+                }
             });
         },
 
         store() {
-            const url = this.storeUrl.replace('__grid__', this.grid.id).replace('__building__', this.selected.id);
-
-            axios.post(url).then(() => this.$modal.modal('hide'));
+            axios.post(
+                this.storeUrl.replace('__grid__', this.grid.id).replace('__building__', this.selected.id)
+            );
         },
 
         destroy() {
-            const url = this.destroyUrl.replace('__grid__', this.grid.id);
-
-            axios.delete(url).then(() => this.$modal.modal('hide'));
-        },
-
-        initRemaining() {
-            this.clearRemaining();
-            this.remaining = this.data.remaining;
-
-            if (this.remaining) {
-                this.remainingInterval = setInterval(() => {
-                    this.remaining--;
-
-                    if (!this.remaining) {
-                        this.$modal.modal('hide');
-                    }
-                }, 1000);
-            }
-        },
-
-        clearRemaining() {
-            if (!this.remainingInterval) {
-                return;
-            }
-
-            clearInterval(this.remainingInterval);
+            axios.delete(
+                this.destroyUrl.replace('__grid__', this.grid.id)
+            );
         },
 
         isSelected(building) {
@@ -91,4 +82,4 @@ export default {
             this.selected = building;
         }
     }
-};
+});

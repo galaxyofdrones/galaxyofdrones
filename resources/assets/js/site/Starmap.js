@@ -21,7 +21,7 @@ export default {
     },
 
     mounted() {
-        EventBus.$on('planet-changed', planet => {
+        EventBus.$on('planet-updated', planet => {
             this.planet = planet;
 
             if (!this.map) {

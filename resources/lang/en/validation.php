@@ -117,9 +117,10 @@ return [
     */
 
     'attributes' => [
+        'attack' => 'Attack',
         'capacity' => 'Capacity',
         'construction' => 'Construction',
-        'construction_cost' => 'Cost',
+        'construction_cost' => 'Construction cost',
         'construction_experience' => 'Experience',
         'construction_time' => 'Construction time',
         'construction_time_bonus' => 'Construction time bonus',
@@ -136,8 +137,11 @@ return [
         'password' => 'Password',
         'production_rate' => 'Production rate',
         'remember' => 'Remember me',
+        'speed' => 'Speed',
         'supply' => 'Supply',
         'training' => 'Training',
+        'train_cost' => 'Train cost',
+        'train_time' => 'Train time',
         'train_time_bonus' => 'Train time bonus',
         'upgrade' => 'Upgrade',
         'username_or_email' => 'Username / E-mail',

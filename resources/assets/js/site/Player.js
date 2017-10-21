@@ -1,3 +1,5 @@
+import { EventBus } from '../common/event-bus';
+
 export default {
     props: ['url'],
 
@@ -34,14 +36,24 @@ export default {
         }
     },
 
+    watch: {
+        energy() {
+            EventBus.$emit('energy-updated', this.energy);
+        }
+    },
+
     methods: {
         fetchData() {
+            EventBus.$emit('user-update');
+
             this.unsubscribe();
 
             axios.get(this.url).then(response => {
                 this.data = response.data;
                 this.initEnergy();
                 this.subscribe();
+
+                EventBus.$emit('user-updated', this.dat);
             });
         },
 

@@ -19,7 +19,7 @@
         "doctrine/dbal": "^2.6",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "itsgoingd/clockwork": "^1.14",
+        "itsgoingd/clockwork": "^2.0",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0"
     },
@@ -41,7 +41,10 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-ide-helper",
+                "itsgoingd/clockwork"
+            ]
         }
     },
     "scripts": {
