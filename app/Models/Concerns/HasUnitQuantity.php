@@ -17,15 +17,15 @@ trait HasUnitQuantity
             return;
         }
 
-        $free = $this->planet->supply - $this->planet->used_supply;
+        $free = $this->planet->free_supply;
         $supply = $amount * $this->unit->supply;
 
         if ($free < $supply) {
             $amount = floor($free / $this->unit->supply);
         }
 
-        $this->update([
+        $this->fill([
             'quantity' => max(0, $this->quantity + $amount),
-        ]);
+        ])->save();
     }
 }

@@ -80,7 +80,7 @@ trait HasBuilding
             })
             ->transform(function (Building $building) use ($modifiers) {
                 return $building->applyModifiers($modifiers);
-            });
+            })->values();
     }
 
     /**

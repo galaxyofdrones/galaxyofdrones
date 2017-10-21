@@ -9,7 +9,7 @@ use Koodilab\Models\Transformers\Transformer;
 class BuildingTransformer extends Transformer
 {
     /**
-     * The translator.
+     * The translator instance.
      *
      * @var Translator
      */

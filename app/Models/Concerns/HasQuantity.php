@@ -27,8 +27,8 @@ trait HasQuantity
             return;
         }
 
-        $this->update([
+        $this->fill([
             'quantity' => max(0, $this->quantity - $amount),
-        ]);
+        ])->save();
     }
 }

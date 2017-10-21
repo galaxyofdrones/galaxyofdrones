@@ -8,6 +8,8 @@ use Koodilab\Models\Transformers\Transformer;
 class ConstructionTransformer extends Transformer
 {
     /**
+     * The building transformer instance.
+     *
      * @var BuildingTransformer
      */
     protected $buildingTransformer;
@@ -33,25 +35,9 @@ class ConstructionTransformer extends Transformer
             'remaining' => $item->construction
                 ? $item->construction->remaining
                 : null,
-            'buildings' => $this->buildings($item),
+            'buildings' => $item->constructionBuildings()->transform([
+                $this->buildingTransformer, 'transform',
+            ]),
         ];
-    }
-
-    /**
-     * Get the buildings.
-     *
-     * @param Grid $grid
-     *
-     * @return array
-     */
-    protected function buildings(Grid $grid)
-    {
-        $buildings = [];
-
-        foreach ($grid->constructionBuildings() as $building) {
-            $buildings[] = $this->buildingTransformer->transform($building);
-        }
-
-        return $buildings;
     }
 }

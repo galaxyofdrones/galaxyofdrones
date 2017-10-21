@@ -42,7 +42,8 @@ class Grid extends Model
         Relations\HasOneConstruction,
         Relations\HasOneUpgrade,
         Relations\HasOneTraining,
-        Concerns\HasBuilding;
+        Concerns\HasBuilding,
+        Concerns\HasUnit;
 
     /**
      * The plain type.

@@ -58,6 +58,23 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'training',
+    ], function () use ($router) {
+        $router->get('{grid}', 'TrainingController@index')
+            ->name('training')
+            ->where('grid', '\d+');
+
+        $router->post('{grid}/{unit}', 'TrainingController@store')
+            ->name('training_store')
+            ->where('grid', '\d+')
+            ->where('unit', '\d+');
+
+        $router->delete('{grid}', 'TrainingController@destroy')
+            ->name('training_destroy')
+            ->where('grid', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'user',
     ], function () use ($router) {
         $router->get('/', 'UserController@index')

@@ -16,7 +16,7 @@ trait Researchable
     public function getResearchTimeAttribute()
     {
         return round(
-            $this->getAttribute($this->researchTimeKey()) / config('app.speed')
+            $this->getAttributeFromArray($this->researchTimeKey()) / config('app.speed')
         );
     }
 

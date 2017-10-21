@@ -2,9 +2,11 @@
 
 namespace Koodilab\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
+use Koodilab\Jobs\Train as TrainJob;
 
 /**
  * Training.
@@ -55,6 +57,37 @@ class Training extends Model implements TimeableContract
     ];
 
     /**
+     * Create from.
+     *
+     * @param Grid $grid
+     * @param Unit $unit
+     * @param int  $quantity
+     *
+     * @return static
+     */
+    public static function createFrom(Grid $grid, Unit $unit, $quantity)
+    {
+        auth()->user()->decrementEnergy($quantity * $unit->train_cost);
+
+        $model = static::create([
+            'grid_id' => $grid->id,
+            'unit_id' => $unit->id,
+            'quantity' => $quantity,
+            'ended_at' => Carbon::now()->addSeconds($quantity * $unit->train_time),
+        ]);
+
+        dispatch(
+            (new TrainJob($model->id))->delay($model->remaining)
+        );
+
+        event(
+            new PlanetUpdated($grid->planet_id)
+        );
+
+        return $model;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function finish()
@@ -64,13 +97,16 @@ class Training extends Model implements TimeableContract
             'unit_id' => $this->unit_id,
         ]);
 
-        $population->setRelation('planet', $this->grid->planet)
-            ->setRelation('unit', $this->unit)
-            ->incrementQuantity($this->quantity);
+        $population->setRelations([
+            'planet' => $this->grid->planet,
+            'unit' => $this->unit,
+        ])->incrementQuantity($this->quantity);
 
         $this->delete();
 
-        event(new PlanetUpdated($this->grid->planet_id));
+        event(
+            new PlanetUpdated($this->grid->planet_id)
+        );
 
         return true;
     }
@@ -80,5 +116,17 @@ class Training extends Model implements TimeableContract
      */
     public function cancel()
     {
+        $totalTime = $this->grid->training->quantity * $this->grid->training->unit->train_time;
+        $totalCost = $this->grid->training->quantity * $this->grid->training->unit->train_cost;
+
+        $this->grid->planet->user->incrementEnergy(round(
+            $this->remaining / $totalTime * $totalCost
+        ));
+
+        $this->delete();
+
+        event(
+            new PlanetUpdated($this->grid->planet_id)
+        );
     }
 }

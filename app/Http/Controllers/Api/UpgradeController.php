@@ -45,6 +45,10 @@ class UpgradeController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
+        if (!$grid->building_id) {
+            return $this->createBadRequestJsonResponse();
+        }
+
         if ($grid->upgrade) {
             return $this->createBadRequestJsonResponse();
         }

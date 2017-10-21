@@ -23,6 +23,16 @@ trait HasCapacityAndSupply
     }
 
     /**
+     * Get the free supply attribute.
+     *
+     * @return int
+     */
+    public function getFreeSupplyAttribute()
+    {
+        return $this->supply - ($this->used_supply + $this->used_training_supply);
+    }
+
+    /**
      * Get the used supply attribute.
      *
      * @return int

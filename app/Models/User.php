@@ -80,6 +80,7 @@ class User extends Authenticatable
         Concerns\CanOccupy,
         Concerns\HasEnergy,
         Concerns\HasExperience,
+        Concerns\HasResearchable,
         Relations\BelongsToManyResource,
         Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,
@@ -265,6 +266,20 @@ class User extends Authenticatable
     {
         return $this->planets()
             ->orderByRaw('CONCAT(custom_name, name)')
+            ->get($columns);
+    }
+
+    /**
+     * Find all units order by sort order.
+     *
+     * @param array $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Unit[]
+     */
+    public function findAllUnitsOrderBySortOrder($columns = ['*'])
+    {
+        return $this->units()
+            ->orderBy('sort_order')
             ->get($columns);
     }
 
