@@ -5,7 +5,6 @@ namespace Koodilab\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Events\PlanetUpdated;
 use Koodilab\Jobs\Construction as ConstructionJob;
 
 /**
@@ -79,10 +78,6 @@ class Construction extends Model implements TimeableContract
             (new ConstructionJob($model->id))->delay($model->remaining)
         );
 
-        event(
-            new PlanetUpdated($grid->planet_id)
-        );
-
         return $model;
     }
 
@@ -123,9 +118,5 @@ class Construction extends Model implements TimeableContract
         ));
 
         $this->delete();
-
-        event(
-            new PlanetUpdated($this->grid->planet_id)
-        );
     }
 }

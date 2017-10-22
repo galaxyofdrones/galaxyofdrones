@@ -285,6 +285,25 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
+     * Create or update population.
+     *
+     * @param Unit $unit
+     * @param int  $quantity
+     */
+    public function createOrUpdatePopulation(Unit $unit, $quantity)
+    {
+        /** @var Population $population */
+        $population = $this->populations()->firstOrNew([
+            'unit_id' => $unit->id,
+        ]);
+
+        $population->setRelations([
+            'planet' => $this,
+            'unit' => $unit,
+        ])->incrementQuantity($quantity);
+    }
+
+    /**
      * Find grids with construction and upgrade.
      *
      * @return \Illuminate\Database\Eloquent\Collection|Grid[]

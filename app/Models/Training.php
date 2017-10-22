@@ -80,10 +80,6 @@ class Training extends Model implements TimeableContract
             (new TrainJob($model->id))->delay($model->remaining)
         );
 
-        event(
-            new PlanetUpdated($grid->planet_id)
-        );
-
         return $model;
     }
 
@@ -92,15 +88,9 @@ class Training extends Model implements TimeableContract
      */
     public function finish()
     {
-        /** @var Population $population */
-        $population = $this->grid->planet->populations()->firstOrNew([
-            'unit_id' => $this->unit_id,
-        ]);
-
-        $population->setRelations([
-            'planet' => $this->grid->planet,
-            'unit' => $this->unit,
-        ])->incrementQuantity($this->quantity);
+        $this->grid->planet->createOrUpdatePopulation(
+            $this->unit, $this->quantity
+        );
 
         $this->delete();
 
@@ -124,9 +114,5 @@ class Training extends Model implements TimeableContract
         ));
 
         $this->delete();
-
-        event(
-            new PlanetUpdated($this->grid->planet_id)
-        );
     }
 }

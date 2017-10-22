@@ -5,7 +5,6 @@ namespace Koodilab\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Events\PlanetUpdated;
 use Koodilab\Jobs\Upgrade as UpgradeJob;
 
 /**
@@ -75,10 +74,6 @@ class Upgrade extends Model implements TimeableContract
             (new UpgradeJob($model->id))->delay($model->remaining)
         );
 
-        event(
-            new PlanetUpdated($grid->planet_id)
-        );
-
         return $model;
     }
 
@@ -114,9 +109,5 @@ class Upgrade extends Model implements TimeableContract
         ));
 
         $this->delete();
-
-        event(
-            new PlanetUpdated($this->grid->planet_id)
-        );
     }
 }
