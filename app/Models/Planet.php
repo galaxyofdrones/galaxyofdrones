@@ -71,8 +71,9 @@ use Koodilab\Support\StateManager;
 class Planet extends Model implements PositionableContract
 {
     use Behaviors\Positionable,
-        Concerns\HasCapacityAndSupply,
+        Concerns\HasCapacity,
         Concerns\HasCustomName,
+        Concerns\HasSupply,
         Relations\BelongsToResource,
         Relations\BelongsToUser,
         Relations\HasManyStock,
