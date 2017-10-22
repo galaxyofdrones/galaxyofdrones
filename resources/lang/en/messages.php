@@ -5,7 +5,9 @@ return [
     'cancel' => 'Cancel',
     'energy' => 'Energy',
     'info' => 'Info',
+    'instant' => 'Instant',
     'start' => 'Start',
+    'transmute' => 'Transmute',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 

@@ -16,7 +16,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'is_unlocked' => true,
             'frequency' => 1.0,
-            'efficiency' => 0.05,
+            'efficiency' => 1.05,
             'description' => [
                 'en' => 'Finds on marsh planets.',
             ],
@@ -27,7 +27,7 @@ class ResourcesTableSeeder extends Seeder
                 'en' => 'Cobalt',
             ],
             'frequency' => 0.9,
-            'efficiency' => 0.1,
+            'efficiency' => 1.1,
             'description' => [
                 'en' => 'Finds on sea planets.',
             ],
@@ -41,7 +41,7 @@ class ResourcesTableSeeder extends Seeder
                 'en' => 'Chronoton',
             ],
             'frequency' => 0.8,
-            'efficiency' => 0.2,
+            'efficiency' => 1.2,
             'description' => [
                 'en' => 'Finds on desert planets.',
             ],
@@ -55,7 +55,7 @@ class ResourcesTableSeeder extends Seeder
                 'en' => 'Titanium',
             ],
             'frequency' => 0.5,
-            'efficiency' => 0.5,
+            'efficiency' => 1.5,
             'description' => [
                 'en' => 'Finds on asteroids.',
             ],
@@ -69,7 +69,7 @@ class ResourcesTableSeeder extends Seeder
                 'en' => 'Selenium',
             ],
             'frequency' => 0.4,
-            'efficiency' => 0.6,
+            'efficiency' => 1.6,
             'description' => [
                 'en' => 'Finds on volcanic planets.',
             ],
@@ -83,7 +83,7 @@ class ResourcesTableSeeder extends Seeder
                 'en' => 'Thorium',
             ],
             'frequency' => 0.2,
-            'efficiency' => 0.8,
+            'efficiency' => 1.8,
             'description' => [
                 'en' => 'Finds on ice planets.',
             ],
@@ -97,7 +97,7 @@ class ResourcesTableSeeder extends Seeder
                 'en' => 'Adamantine',
             ],
             'frequency' => 0.05,
-            'efficiency' => 0.95,
+            'efficiency' => 1.95,
             'description' => [
                 'en' => 'Finds on extreme planets.',
             ],

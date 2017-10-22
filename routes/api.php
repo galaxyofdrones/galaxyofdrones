@@ -75,6 +75,19 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'transmute',
+    ], function () use ($router) {
+        $router->get('{grid}', 'TransmuteController@index')
+            ->name('transmute')
+            ->where('grid', '\d+');
+
+        $router->post('{grid}/{resource}', 'TransmuteController@store')
+            ->name('transmute_store')
+            ->where('grid', '\d+')
+            ->where('resource', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'user',
     ], function () use ($router) {
         $router->get('/', 'UserController@index')

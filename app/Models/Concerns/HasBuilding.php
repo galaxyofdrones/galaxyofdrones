@@ -51,7 +51,8 @@ trait HasBuilding
         }
 
         $buildings = Building::defaultOrder()->whereIn(
-            'parent_id', $this->planet->findNotEmptyGrids()->pluck('building_id')
+            'parent_id',
+            $this->planet->findNotEmptyGrids()->pluck('building_id')
         );
 
         if ($this->type == static::TYPE_RESOURCE) {
@@ -123,7 +124,8 @@ trait HasBuilding
         }
 
         $this->level = max(
-            0, $this->level - $level
+            0,
+            $this->level - $level
         );
 
         if (!$this->level) {

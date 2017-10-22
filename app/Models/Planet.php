@@ -264,6 +264,27 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
+     * Find stock.
+     *
+     * @param resource $resource
+     *
+     * @return Stock
+     */
+    public function findStock(Resource $resource)
+    {
+        /** @var Stock $stock */
+        $stock = $this->stocks()
+            ->where('resource_id', $resource->id)
+            ->first();
+
+        if ($stock) {
+            $stock->setRelation('planet', $this);
+        }
+
+        return $stock;
+    }
+
+    /**
      * Find grids with construction and upgrade.
      *
      * @return \Illuminate\Database\Eloquent\Collection|Grid[]

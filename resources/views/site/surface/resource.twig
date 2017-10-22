@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-6 text-center">
+        <span class="item" :class="resource | item('resource')"></span>
+    </div>
+    <div class="col-md-6">
+        <h4>
+            {{ vue('resource.name') }}
+        </h4>
+        <p>
+            {{ vue('resource.description') }}
+        </p>
+        <div class="attribute-row">
+            <div class="col-md-6">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.frequency') }}
+                    </h6>
+                    <h4>
+                        {{ vue('resource.frequency | percent') }}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.efficiency') }}
+                    </h6>
+                    <h4>
+                        {{ vue('resource.efficiency | percent') }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <ul class="list-inline">
+            <li data-content="{{ trans('validation.attributes.transmute_time') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-time"></i>
+                {{ trans('messages.instant') }}
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control"
+                               type="number"
+                               min="1"
+                               :max="transmutableQuantity"
+                               :placeholder="quantityPlaceholder"
+                               v-model.number="quantity">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success btn-block" @click="store()" :disabled="!isTransmutable">
+                                {{ trans('messages.transmute') }}
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4 class="highlight-warning">
+                    <i class="icon-energy"></i>
+                    {{ vue('transmutableEnergy | number') }}
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>

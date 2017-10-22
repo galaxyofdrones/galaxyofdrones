@@ -43,6 +43,10 @@ export default {
     watch: {
         selected() {
             this.changePlanet();
+        },
+
+        resourceQuantity() {
+            EventBus.$emit('resource-updated', this.resourceQuantity);
         }
     },
 

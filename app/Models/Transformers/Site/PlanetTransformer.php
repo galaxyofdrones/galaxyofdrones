@@ -56,7 +56,7 @@ class PlanetTransformer extends Transformer
      */
     protected function planets(User $user)
     {
-        return $user->findAllPlanetsOrderByName()
+        return $user->findPlanetsOrderByName()
             ->transform(function (Planet $planet) {
                 return [
                     'id' => $planet->id,

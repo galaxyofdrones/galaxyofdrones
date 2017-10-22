@@ -53,7 +53,7 @@ export default {
                 this.initEnergy();
                 this.subscribe();
 
-                EventBus.$emit('user-updated', this.dat);
+                EventBus.$emit('user-updated', this.data);
             });
         },
 

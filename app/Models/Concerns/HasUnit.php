@@ -26,6 +26,6 @@ trait HasUnit
             );
         }
 
-        return $this->planet->user->findAllUnitsOrderBySortOrder();
+        return $this->planet->user->findUnitsOrderBySortOrder();
     }
 }
