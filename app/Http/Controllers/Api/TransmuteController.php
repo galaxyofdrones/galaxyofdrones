@@ -77,10 +77,11 @@ class TransmuteController extends Controller
         }
 
         DB::transaction(function () use ($resource, $user, $stock, $quantity) {
-            $stock->decrementQuantity($quantity);
             $user->incrementEnergy(
                 round($quantity * $resource->efficiency)
             );
+
+            $stock->decrementQuantity($quantity);
         });
     }
 }

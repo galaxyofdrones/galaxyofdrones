@@ -162,8 +162,13 @@ class Movement extends Model implements TimeableContract
 
         $this->delete();
 
-        event(new PlanetUpdated($this->start_id));
-        event(new PlanetUpdated($this->end_id));
+        event(
+            new PlanetUpdated($this->start_id)
+        );
+
+        event(
+            new PlanetUpdated($this->end_id)
+        );
 
         return true;
     }

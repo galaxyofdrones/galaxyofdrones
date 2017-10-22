@@ -2,6 +2,8 @@
 
 namespace Koodilab\Models\Concerns;
 
+use Koodilab\Models\Stock;
+
 trait HasCapacity
 {
     /**

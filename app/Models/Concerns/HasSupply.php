@@ -2,6 +2,9 @@
 
 namespace Koodilab\Models\Concerns;
 
+use Koodilab\Models\Population;
+use Koodilab\Models\Training;
+
 trait HasSupply
 {
     /**

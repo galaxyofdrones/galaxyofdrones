@@ -161,7 +161,9 @@ class Planet extends Model implements PositionableContract
                 app(StateManager::class)->syncUser($planet->user);
             }
 
-            event(new PlanetUpdated($planet->id));
+            event(
+                new PlanetUpdated($planet->id)
+            );
         });
     }
 

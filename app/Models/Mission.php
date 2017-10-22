@@ -152,7 +152,9 @@ class Mission extends Model implements TimeableContract
         MissionLog::createFrom($this);
         $this->delete();
 
-        event(new PlanetUpdated($this->planet_id));
+        event(
+            new PlanetUpdated($this->planet_id)
+        );
 
         return true;
     }

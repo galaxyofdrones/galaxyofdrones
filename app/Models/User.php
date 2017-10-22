@@ -175,7 +175,9 @@ class User extends Authenticatable
         });
 
         static::updated(function (self $user) {
-            event(new UserUpdated($user->id));
+            event(
+                new UserUpdated($user->id)
+            );
         });
     }
 
