@@ -3,14 +3,13 @@
 namespace Koodilab\Models\Transformers\Site;
 
 use Koodilab\Models\Transformers\Transformer;
-use Koodilab\Models\User;
 
 class UserTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param User $item
+     * @param \Koodilab\Models\User $item
      */
     public function transform($item)
     {

@@ -87,6 +87,10 @@ $router->group([
             ->where('resource', '\d+');
     });
 
+    $router->get('scout/{grid}', 'ScoutController@index')
+        ->name('scout')
+        ->where('grid', '\d+');
+
     $router->group([
         'prefix' => 'user',
     ], function () use ($router) {

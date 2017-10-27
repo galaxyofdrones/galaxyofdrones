@@ -2,7 +2,6 @@
 
 namespace Koodilab\Models\Transformers\Site;
 
-use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\Transformer;
 
 class TrainingTransformer extends Transformer
@@ -27,7 +26,7 @@ class TrainingTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param Grid $item
+     * @param \Koodilab\Models\Grid $item
      */
     public function transform($item)
     {
@@ -35,9 +34,9 @@ class TrainingTransformer extends Transformer
             'remaining' => $item->training
                 ? $item->training->remaining
                 : null,
-            'units' => $item->trainingUnits()->transform([
-                $this->unitTransformer, 'transform',
-            ]),
+            'units' => $this->unitTransformer->transformCollection(
+                $item->trainingUnits()
+            ),
         ];
     }
 }

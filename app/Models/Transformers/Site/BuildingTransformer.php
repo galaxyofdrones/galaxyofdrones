@@ -3,7 +3,6 @@
 namespace Koodilab\Models\Transformers\Site;
 
 use Illuminate\Contracts\Translation\Translator;
-use Koodilab\Models\Building;
 use Koodilab\Models\Transformers\Transformer;
 
 class BuildingTransformer extends Transformer
@@ -28,7 +27,7 @@ class BuildingTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param Building $item
+     * @param \Koodilab\Models\Building $item
      */
     public function transform($item)
     {

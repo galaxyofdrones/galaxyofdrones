@@ -2,7 +2,6 @@
 
 namespace Koodilab\Models\Transformers\Site;
 
-use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\Transformer;
 
 class UpgradeTransformer extends Transformer
@@ -25,7 +24,7 @@ class UpgradeTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param Grid $item
+     * @param \Koodilab\Models\Grid $item
      */
     public function transform($item)
     {

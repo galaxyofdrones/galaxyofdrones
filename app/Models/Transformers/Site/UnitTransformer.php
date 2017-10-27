@@ -3,14 +3,13 @@
 namespace Koodilab\Models\Transformers\Site;
 
 use Koodilab\Models\Transformers\Transformer;
-use Koodilab\Models\Unit;
 
 class UnitTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param Unit $item
+     * @param \Koodilab\Models\Unit $item
      */
     public function transform($item)
     {

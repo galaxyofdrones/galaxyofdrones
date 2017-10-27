@@ -31,7 +31,7 @@ class TransmuteController extends Controller
      */
     public function index(Grid $grid, TransmuteTransformer $transformer)
     {
-        $this->authorize('friendly', $grid->planet);
+        $this->authorizeProducer($grid);
 
         return $transformer->transform($grid);
     }
@@ -47,15 +47,7 @@ class TransmuteController extends Controller
      */
     public function store(Request $request, Grid $grid, Resource $resource)
     {
-        $this->authorize('friendly', $grid->planet);
-
-        if (!$grid->building_id) {
-            return $this->createBadRequestJsonResponse();
-        }
-
-        if ($grid->building->type != Building::TYPE_PRODUCER) {
-            return $this->createBadRequestJsonResponse();
-        }
+        $this->authorizeProducer($grid);
 
         $quantity = (int) $request->get('quantity', 0);
 
@@ -83,5 +75,25 @@ class TransmuteController extends Controller
 
             $stock->decrementQuantity($quantity);
         });
+    }
+
+    /**
+     * Authorize the producer.
+     *
+     * @param Grid $grid
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function authorizeProducer(Grid $grid)
+    {
+        $this->authorize('friendly', $grid->planet);
+
+        if (!$grid->building_id) {
+            return $this->createBadRequestJsonResponse();
+        }
+
+        if ($grid->building->type != Building::TYPE_PRODUCER) {
+            return $this->createBadRequestJsonResponse();
+        }
     }
 }

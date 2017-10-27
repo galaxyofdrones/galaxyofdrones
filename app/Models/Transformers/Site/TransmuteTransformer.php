@@ -2,7 +2,6 @@
 
 namespace Koodilab\Models\Transformers\Site;
 
-use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\Transformer;
 
 class TransmuteTransformer extends Transformer
@@ -25,14 +24,14 @@ class TransmuteTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param Grid $item
+     * @param \Koodilab\Models\Grid $item
      */
     public function transform($item)
     {
         return [
-            'resources' => $item->planet->user->findResourcesOrderBySortOrder()->transform([
-                $this->resourceTransfomer, 'transform',
-            ]),
+            'resources' => $this->resourceTransfomer->transformCollection(
+                $item->planet->user->findResourcesOrderBySortOrder()
+            ),
         ];
     }
 }

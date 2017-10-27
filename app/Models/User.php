@@ -81,6 +81,9 @@ class User extends Authenticatable
         Concerns\HasEnergy,
         Concerns\HasExperience,
         Concerns\HasResearchable,
+        Queries\FindPlanetsOrderByName,
+        Queries\FindResourcesOrderBySortOrder,
+        Queries\FindUnitsOrderBySortOrder,
         Relations\BelongsToManyResource,
         Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,
@@ -255,48 +258,6 @@ class User extends Authenticatable
         if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
-    }
-
-    /**
-     * Find planets order by name.
-     *
-     * @param array $columns
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Planet[]
-     */
-    public function findPlanetsOrderByName($columns = ['*'])
-    {
-        return $this->planets()
-            ->orderByRaw('CONCAT(custom_name, name)')
-            ->get($columns);
-    }
-
-    /**
-     * Find resources order by sort order.
-     *
-     * @param array $columns
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Unit[]
-     */
-    public function findResourcesOrderBySortOrder($columns = ['*'])
-    {
-        return $this->resources()
-            ->orderBy('sort_order')
-            ->get($columns);
-    }
-
-    /**
-     * Find units order by sort order.
-     *
-     * @param array $columns
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Unit[]
-     */
-    public function findUnitsOrderBySortOrder($columns = ['*'])
-    {
-        return $this->units()
-            ->orderBy('sort_order')
-            ->get($columns);
     }
 
     /**

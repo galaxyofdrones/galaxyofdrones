@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Koodilab\Events\PlanetUpdated;
-use Koodilab\Starmap\Generator;
-use Koodilab\Support\Bounds;
 use Koodilab\Support\StateManager;
 
 /**
@@ -74,6 +72,16 @@ class Planet extends Model implements PositionableContract
         Concerns\HasCapacity,
         Concerns\HasCustomName,
         Concerns\HasSupply,
+        Queries\FindBuildings,
+        Queries\FindFreeCapital,
+        Queries\FindGrids,
+        Queries\FindIncomingMovements,
+        Queries\FindNotEmptyGrids,
+        Queries\FindOutgoingMovements,
+        Queries\FindStock,
+        Queries\IncomingMovementCount,
+        Queries\IncomingAttackMovementCount,
+        Queries\OutgoingAttackMovementCount,
         Relations\BelongsToResource,
         Relations\BelongsToUser,
         Relations\HasManyStock,
@@ -168,30 +176,6 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Find a free capital.
-     *
-     * @return static
-     */
-    public static function findFreeCapital()
-    {
-        $center = Generator::SIZE / 2;
-        $query = static::starter();
-        $bounds = new Bounds();
-
-        for ($i = static::CAPITAL_STEP; $i < $center; $i += static::CAPITAL_STEP) {
-            $capital = $query->inBounds(
-                $bounds->setMinXY($center - $i)->setMaxXY($center + $i)
-            )->first();
-
-            if ($capital) {
-                return $capital;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Get the incoming movements.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -267,27 +251,6 @@ class Planet extends Model implements PositionableContract
     }
 
     /**
-     * Find stock.
-     *
-     * @param resource $resource
-     *
-     * @return Stock
-     */
-    public function findStock(Resource $resource)
-    {
-        /** @var Stock $stock */
-        $stock = $this->stocks()
-            ->where('resource_id', $resource->id)
-            ->first();
-
-        if ($stock) {
-            $stock->setRelation('planet', $this);
-        }
-
-        return $stock;
-    }
-
-    /**
      * Create or update population.
      *
      * @param Unit $unit
@@ -304,74 +267,6 @@ class Planet extends Model implements PositionableContract
             'planet' => $this,
             'unit' => $unit,
         ])->incrementQuantity($quantity);
-    }
-
-    /**
-     * Find grids with construction and upgrade.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Grid[]
-     */
-    public function findGridsWithConstructionAndUpgrade()
-    {
-        return $this->grids()
-            ->with('construction', 'upgrade')
-            ->get();
-    }
-
-    /**
-     * Find the not empty grids.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Grid[]
-     */
-    public function findNotEmptyGrids()
-    {
-        return $this->grids()
-            ->whereNotNull('building_id')
-            ->get();
-    }
-
-    /**
-     * Find the buildings.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|Building[]
-     */
-    public function findBuildings()
-    {
-        return $this->grids()
-            ->with('building')
-            ->whereNotNull('building_id')
-            ->get([
-                'building_id', 'level',
-            ])
-            ->transform(function (Grid $grid) {
-                return $grid->building->applyModifiers([
-                    'level' => $grid->level,
-                ]);
-            });
-    }
-
-    /**
-     * Get the incoming attack movement count.
-     *
-     * @return int
-     */
-    public function incomingAttackMovementCount()
-    {
-        return $this->incomingMovements()->whereIn('type', [
-            Movement::TYPE_ATTACK, Movement::TYPE_OCCUPY,
-        ])->count();
-    }
-
-    /**
-     * Get the outgoing attack movement count.
-     *
-     * @return int
-     */
-    public function outgoingAttackMovementCount()
-    {
-        return $this->outgoingMovements()->whereIn('type', [
-            Movement::TYPE_SCOUT, Movement::TYPE_ATTACK, Movement::TYPE_OCCUPY,
-        ])->count();
     }
 
     /**

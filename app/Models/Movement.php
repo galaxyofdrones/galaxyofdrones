@@ -41,6 +41,7 @@ use Koodilab\Jobs\Move;
 class Movement extends Model implements TimeableContract
 {
     use Behaviors\Timeable,
+        Queries\FindUnitsOrderBySortOrder,
         Relations\BelongsToUser;
 
     /**
@@ -304,7 +305,9 @@ class Movement extends Model implements TimeableContract
                 }
             }
 
-            dispatch((new Move($returnMovement->id))->delay($returnMovement->remaining));
+            dispatch(
+                (new Move($returnMovement->id))->delay($returnMovement->remaining)
+            );
         }
     }
 
@@ -313,5 +316,6 @@ class Movement extends Model implements TimeableContract
      */
     public function cancel()
     {
+        $this->delete();
     }
 }

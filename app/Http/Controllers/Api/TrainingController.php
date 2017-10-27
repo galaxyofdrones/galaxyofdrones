@@ -32,7 +32,7 @@ class TrainingController extends Controller
      */
     public function index(Grid $grid, TrainingTransformer $transformer)
     {
-        $this->authorize('friendly', $grid->planet);
+        $this->authorizeTrainer($grid);
 
         return $transformer->transform($grid);
     }
@@ -48,15 +48,7 @@ class TrainingController extends Controller
      */
     public function store(Request $request, Grid $grid, Unit $unit)
     {
-        $this->authorize('friendly', $grid->planet);
-
-        if (!$grid->building_id) {
-            return $this->createBadRequestJsonResponse();
-        }
-
-        if ($grid->building->type != Building::TYPE_TRAINER) {
-            return $this->createBadRequestJsonResponse();
-        }
+        $this->authorizeTrainer($grid);
 
         if ($grid->training) {
             return $this->createBadRequestJsonResponse();
@@ -114,5 +106,25 @@ class TrainingController extends Controller
         DB::transaction(function () use ($grid) {
             $grid->training->cancel();
         });
+    }
+
+    /**
+     * Authorize the trainer.
+     *
+     * @param Grid $grid
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function authorizeTrainer(Grid $grid)
+    {
+        $this->authorize('friendly', $grid->planet);
+
+        if (!$grid->building_id) {
+            return $this->createBadRequestJsonResponse();
+        }
+
+        if ($grid->building->type != Building::TYPE_TRAINER) {
+            return $this->createBadRequestJsonResponse();
+        }
     }
 }

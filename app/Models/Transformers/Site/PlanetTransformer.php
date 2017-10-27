@@ -30,7 +30,7 @@ class PlanetTransformer extends Transformer
             'supply' => $item->supply,
             'mining_rate' => (int) $item->mining_rate,
             'production_rate' => (int) $item->production_rate,
-            'incoming_movement' => $item->incomingMovements()->count(),
+            'incoming_movement' => $item->incomingMovementCount(),
             'incoming_attack_movement' => $item->incomingAttackMovementCount(),
             'outgoing_movement' => $item->outgoingMovements()->count(),
             'outgoing_attack_movement' => $item->outgoingAttackMovementCount(),
@@ -124,7 +124,7 @@ class PlanetTransformer extends Transformer
      */
     protected function grids(Planet $planet)
     {
-        return $planet->findGridsWithConstructionAndUpgrade()
+        return $planet->findGrids()
             ->map(function (Grid $grid) {
                 return [
                     'id' => $grid->id,
