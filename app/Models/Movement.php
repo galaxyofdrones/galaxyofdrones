@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Battle\Simulator;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
-use Koodilab\Jobs\Move;
+use Koodilab\Jobs\Move as MoveJob;
 
 /**
  * Movement.
@@ -306,7 +306,7 @@ class Movement extends Model implements TimeableContract
             }
 
             dispatch(
-                (new Move($returnMovement->id))->delay($returnMovement->remaining)
+                (new MoveJob($returnMovement->id))->delay($returnMovement->remaining)
             );
         }
     }
