@@ -18,6 +18,8 @@ class MovementTransformer extends Transformer
     {
         return [
             'id' => $item->id,
+            'type' => $item->type,
+            'remaining' => $item->remaining,
             'start' => $this->planet($item->start),
             'end' => $this->planet($item->end),
             'units' => $this->units($item),
@@ -55,7 +57,7 @@ class MovementTransformer extends Transformer
                     'id' => $unit->id,
                     'name' => $unit->translation('name'),
                     'description' => $unit->translation('description'),
-                    'quantity' => $unit->quantity,
+                    'quantity' => $unit->pivot->quantity,
                 ];
             });
     }

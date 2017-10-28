@@ -1,6 +1,8 @@
 export default {
     item(value, type = 'resource') {
-        return `${type}-${value.id}`;
+        return `${type}-${value.hasOwnProperty('id')
+            ? value.id
+            : value}`;
     },
 
     number(value, decimals = 2) {

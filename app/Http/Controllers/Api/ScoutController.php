@@ -10,6 +10,15 @@ use Koodilab\Models\Transformers\Site\ScoutTransformer;
 class ScoutController extends Controller
 {
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        $this->middleware('player');
+    }
+
+    /**
      * Show the scout in json format.
      *
      * @param ScoutTransformer $transformer

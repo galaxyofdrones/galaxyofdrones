@@ -37,6 +37,10 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
+    'movement' => [
+        'empty' => 'No movemenets.',
+    ],
+
     'planet' => [
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
