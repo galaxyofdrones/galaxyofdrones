@@ -42,6 +42,7 @@ class Grid extends Model
         Relations\HasOneConstruction,
         Relations\HasOneUpgrade,
         Relations\HasOneTraining,
+        Queries\FindAllByBuilding,
         Concerns\HasBuilding,
         Concerns\HasUnit;
 

@@ -71,6 +71,7 @@ class Building extends Model implements TranslatableContract
         Behaviors\Modifiable,
         Behaviors\Translatable,
         Concerns\HasLevel,
+        Queries\FindByType,
         Relations\HasManyConstruction,
         Relations\HasManyGrid;
 

@@ -52,6 +52,20 @@ class Mission extends Model implements TimeableContract
     const MAX_CAPACITY = 0.6;
 
     /**
+     * The energy bonus.
+     *
+     * @var float
+     */
+    const ENERGY_BONUS = 6.0;
+
+    /**
+     * The experience bonus.
+     *
+     * @var float
+     */
+    const EXPERIENCE_BONUS = 3.0;
+
+    /**
      * {@inheritdoc}
      */
     protected $perPage = 30;
@@ -81,30 +95,42 @@ class Mission extends Model implements TimeableContract
     {
         $mission = static::create([
             'planet_id' => $planet->id,
-            'ended_at' => Carbon::now()->addSeconds($building->mission_time),
+            'energy' => 0,
+            'experience' => 0,
         ]);
 
-        $amount = mt_rand(1, $resources->count());
+        $resources = $resources->random(
+            mt_rand(1, $resources->count())
+        );
 
-        $resources = $amount == 1
-            ? new Collection([$resources->random($amount)])
-            : $resources->random($amount);
-
-        $randQuantity = static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * Util::randFloat();
-        $totalQuantity = $planet->capacity * $randQuantity;
-
+        $totalQuantity = $planet->capacity * static::randMultiplier();
         $totalFrequency = $resources->sum('frequency');
 
         foreach ($resources as $resource) {
-            $quantity = round($resource->frequency / $totalFrequency * $totalQuantity);
-            $mission->experience += $quantity + round($quantity * $resource->efficiency);
+            $quantity = round(
+                $resource->frequency / $totalFrequency * $totalQuantity
+            );
+
+            $energy = round(
+                $quantity * $resource->efficiency
+            );
+
+            $mission->energy += round(
+                $energy * static::ENERGY_BONUS
+            );
+
+            $mission->experience += round(
+                $energy * static::EXPERIENCE_BONUS
+            );
 
             $mission->resources()->attach($resource->id, [
                 'quantity' => $quantity,
             ]);
         }
 
-        $mission->save();
+        $mission->fill([
+            'ended_at' => Carbon::now()->addSeconds($building->mission_time),
+        ])->save();
     }
 
     /**
@@ -115,6 +141,16 @@ class Mission extends Model implements TimeableContract
     public static function deleteExpired()
     {
         return static::where('ended_at', '<', Carbon::now())->delete();
+    }
+
+    /**
+     * Get a random multiplier.
+     *
+     * @return float
+     */
+    protected static function randMultiplier()
+    {
+        return static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * Util::randFloat();
     }
 
     /**

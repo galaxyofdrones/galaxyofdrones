@@ -55,29 +55,19 @@ class MissionGenerateCommand extends Command
 
         $this->database->transaction(function () {
             /** @var Building $building */
-            $building = Building::where('type', Building::TYPE_TRADER)
-                ->first(['id', 'type', 'end_level', 'mission_time']);
+            $building = Building::findByType(Building::TYPE_TRADER);
 
             if ($building) {
-                $grids = Grid::where('building_id', $building->id)->get(['id', 'planet_id', 'level']);
+                $grids = Grid::findAllByBuilding($building);
 
                 foreach ($grids as $grid) {
                     $building->applyModifiers([
                         'level' => $grid->level,
                     ]);
 
-                    /** @var \Koodilab\Models\Planet $planet */
-                    $planet = $grid->planet()->first(['id', 'user_id', 'capacity']);
-
-                    /* @var \Koodilab\Models\User $user */
-                    $user = $planet->user()->first(['id']);
-
-                    /** @var \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources */
-                    $resources = $user->resources()
-                        ->orderBy('efficiency')
-                        ->get(['resources.id', 'frequency', 'efficiency']);
-
-                    Mission::createRand($planet, $building, $resources);
+                    Mission::createRand(
+                        $grid->planet, $building, $grid->planet->user->findResourcesOrderBySortOrder()
+                    );
                 }
             }
         });
