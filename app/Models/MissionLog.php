@@ -10,6 +10,7 @@ use Koodilab\Notifications\MissionLogCreated;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $energy
  * @property int $experience
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -17,6 +18,7 @@ use Koodilab\Notifications\MissionLogCreated;
  * @property User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereEnergy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereUpdatedAt($value)

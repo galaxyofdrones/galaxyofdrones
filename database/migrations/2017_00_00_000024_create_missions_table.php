@@ -20,6 +20,7 @@ class CreateMissionsTable extends Migration
                 ->on('planets')
                 ->onDelete('cascade');
 
+            $table->integer('energy')->unsigned();
             $table->integer('experience')->unsigned();
             $table->timestamp('ended_at');
             $table->timestamps();

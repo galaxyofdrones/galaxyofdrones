@@ -14,6 +14,7 @@ use Koodilab\Support\Util;
  *
  * @property int $id
  * @property int $planet_id
+ * @property int $energy
  * @property int $experience
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
@@ -24,6 +25,7 @@ use Koodilab\Support\Util;
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEnergy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission wherePlanetId($value)

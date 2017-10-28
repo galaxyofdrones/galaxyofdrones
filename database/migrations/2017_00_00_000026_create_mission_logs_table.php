@@ -20,6 +20,7 @@ class CreateMissionLogsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->integer('energy')->unsigned();
             $table->integer('experience')->unsigned();
             $table->timestamps();
         });
