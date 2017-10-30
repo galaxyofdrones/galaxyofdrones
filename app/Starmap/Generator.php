@@ -250,7 +250,6 @@ class Generator implements GeneratorContract
                     'x' => $x,
                     'y' => $y,
                     'type' => Grid::TYPE_PLAIN,
-                    'is_enabled' => true,
                 ]);
 
                 if ($i == $center) {
