@@ -1,15 +1,15 @@
 import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
+import Producer from './Producer';
 import Scout from './Scout';
 import Trader from './Trader';
-import Training from './Training';
-import Transmute from './Transmute';
+import Trainer from './Trainer';
 
 export default Modal.extend({
     props: ['url', 'storeUrl', 'destroyUrl'],
 
     components: {
-        Scout, Trader, Training, Transmute
+        Producer, Scout, Trader, Trainer
     },
 
     data() {

@@ -1,10 +1,10 @@
-<training :type="{{ constant('Koodilab\\Models\\Building::TYPE_TRAINER') }}"
+<trainer :type="{{ constant('Koodilab\\Models\\Building::TYPE_TRAINER') }}"
           :building="building"
           :grid="grid"
-          url="{{ route('api_training', '__grid__') }}"
-          store-url="{{ route('api_training_store', ['__grid__', '__unit__']) }}"
-          destroy-url="{{ route('api_training_destroy', '__grid__') }}" inline-template>
-    <div v-if="isEnabled" class="training">
+          url="{{ route('api_trainer', '__grid__') }}"
+          store-url="{{ route('api_trainer_store', ['__grid__', '__unit__']) }}"
+          destroy-url="{{ route('api_trainer_destroy', '__grid__') }}" inline-template>
+    <div v-if="isEnabled" class="trainer">
         <div class="modal-body separator">
             <div class="tab-content" v-if="data.units.length">
                 <div v-for="unit in data.units" class="tab-pane" :class="{active: isSelected(unit)}">
@@ -24,4 +24,4 @@
             </ul>
         </div>
     </div>
-</training>
+</trainer>

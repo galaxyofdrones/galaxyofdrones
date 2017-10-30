@@ -4,7 +4,7 @@ namespace Koodilab\Models\Transformers\Site;
 
 use Koodilab\Models\Transformers\Transformer;
 
-class TrainingTransformer extends Transformer
+class TrainerTransformer extends Transformer
 {
     /**
      * The unit transformer instance.

@@ -4,7 +4,7 @@ namespace Koodilab\Models\Transformers\Site;
 
 use Koodilab\Models\Transformers\Transformer;
 
-class TransmuteTransformer extends Transformer
+class ProducerTransformer extends Transformer
 {
     /**
      * @var ResourceTransformer

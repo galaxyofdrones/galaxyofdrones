@@ -8,9 +8,9 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Transformers\Site\TransmuteTransformer;
+use Koodilab\Models\Transformers\Site\ProducerTransformer;
 
-class TransmuteController extends Controller
+class ProducerController extends Controller
 {
     /**
      * Constructor.
@@ -22,14 +22,14 @@ class TransmuteController extends Controller
     }
 
     /**
-     * Show the transmute in json format.
+     * Show the producer in json format.
      *
-     * @param Grid                 $grid
-     * @param TransmuteTransformer $transformer
+     * @param Grid                $grid
+     * @param ProducerTransformer $transformer
      *
      * @return \Illuminate\Http\JsonResponse|array
      */
-    public function index(Grid $grid, TransmuteTransformer $transformer)
+    public function index(Grid $grid, ProducerTransformer $transformer)
     {
         $this->authorizeProducer($grid);
 

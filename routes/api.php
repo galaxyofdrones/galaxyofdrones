@@ -57,6 +57,19 @@ $router->group([
             ->where('grid', '\d+');
     });
 
+    $router->group([
+        'prefix' => 'producer',
+    ], function () use ($router) {
+        $router->get('{grid}', 'ProducerController@index')
+            ->name('producer')
+            ->where('grid', '\d+');
+
+        $router->post('{grid}/{resource}', 'ProducerController@store')
+            ->name('producer_store')
+            ->where('grid', '\d+')
+            ->where('resource', '\d+');
+    });
+
     $router->get('scout/{grid}', 'ScoutController@index')
         ->name('scout')
         ->where('grid', '\d+');
@@ -75,33 +88,20 @@ $router->group([
     });
 
     $router->group([
-        'prefix' => 'training',
+        'prefix' => 'trainer',
     ], function () use ($router) {
-        $router->get('{grid}', 'TrainingController@index')
-            ->name('training')
+        $router->get('{grid}', 'TrainerController@index')
+            ->name('trainer')
             ->where('grid', '\d+');
 
-        $router->post('{grid}/{unit}', 'TrainingController@store')
-            ->name('training_store')
+        $router->post('{grid}/{unit}', 'TrainerController@store')
+            ->name('trainer_store')
             ->where('grid', '\d+')
             ->where('unit', '\d+');
 
-        $router->delete('{grid}', 'TrainingController@destroy')
-            ->name('training_destroy')
+        $router->delete('{grid}', 'TrainerController@destroy')
+            ->name('trainer_destroy')
             ->where('grid', '\d+');
-    });
-
-    $router->group([
-        'prefix' => 'transmute',
-    ], function () use ($router) {
-        $router->get('{grid}', 'TransmuteController@index')
-            ->name('transmute')
-            ->where('grid', '\d+');
-
-        $router->post('{grid}/{resource}', 'TransmuteController@store')
-            ->name('transmute_store')
-            ->where('grid', '\d+')
-            ->where('resource', '\d+');
     });
 
     $router->group([

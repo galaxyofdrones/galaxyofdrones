@@ -2,6 +2,8 @@
 
 namespace Koodilab\Models\Queries;
 
+use Koodilab\Models\Resource;
+
 trait FindStock
 {
     /**

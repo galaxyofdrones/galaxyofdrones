@@ -8,10 +8,10 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Training;
-use Koodilab\Models\Transformers\Site\TrainingTransformer;
+use Koodilab\Models\Transformers\Site\TrainerTransformer;
 use Koodilab\Models\Unit;
 
-class TrainingController extends Controller
+class TrainerController extends Controller
 {
     /**
      * Constructor.
@@ -23,14 +23,14 @@ class TrainingController extends Controller
     }
 
     /**
-     * Show the training in json format.
+     * Show the trainer in json format.
      *
-     * @param Grid                $grid
-     * @param TrainingTransformer $transformer
+     * @param Grid               $grid
+     * @param TrainerTransformer $transformer
      *
      * @return \Illuminate\Http\JsonResponse|array
      */
-    public function index(Grid $grid, TrainingTransformer $transformer)
+    public function index(Grid $grid, TrainerTransformer $transformer)
     {
         $this->authorizeTrainer($grid);
 

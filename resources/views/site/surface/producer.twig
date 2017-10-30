@@ -1,9 +1,9 @@
-<transmute :type="{{ constant('Koodilab\\Models\\Building::TYPE_PRODUCER') }}"
+<producer :type="{{ constant('Koodilab\\Models\\Building::TYPE_PRODUCER') }}"
            :building="building"
            :grid="grid"
-           url="{{ route('api_transmute', '__grid__') }}"
-           store-url="{{ route('api_transmute_store', ['__grid__', '__resource__']) }}" inline-template>
-    <div v-if="isEnabled" class="transmute">
+           url="{{ route('api_producer', '__grid__') }}"
+           store-url="{{ route('api_producer_store', ['__grid__', '__resource__']) }}" inline-template>
+    <div v-if="isEnabled" class="producer">
         <div class="modal-body separator">
             <div class="tab-content" v-if="data.resources.length">
                 <div v-for="resource in data.resources" class="tab-pane" :class="{active: isSelected(resource)}">
@@ -23,4 +23,4 @@
             </ul>
         </div>
     </div>
-</transmute>
+</producer>
