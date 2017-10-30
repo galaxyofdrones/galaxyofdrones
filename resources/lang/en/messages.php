@@ -37,6 +37,11 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
+    'mission' => [
+        'complete' => 'Complete',
+        'empty' => 'No missions.',
+    ],
+
     'movement' => [
         'empty' => 'No movemenets.',
     ],

@@ -100,8 +100,6 @@ class Construction extends Model implements TimeableContract
         );
 
         $this->delete();
-
-        return true;
     }
 
     /**

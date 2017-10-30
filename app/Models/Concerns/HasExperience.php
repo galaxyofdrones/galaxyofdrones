@@ -57,6 +57,20 @@ trait HasExperience
     }
 
     /**
+     * Increment the energy and experience.
+     *
+     * @param int $energyAmount
+     * @param int $experienceAmount
+     */
+    public function incrementEnergyAndExperience($energyAmount, $experienceAmount)
+    {
+        $this->update([
+            'energy' => $this->energy + $energyAmount,
+            'experience' => $this->experience + $experienceAmount,
+        ]);
+    }
+
+    /**
      * Get the experience offset.
      *
      * @return float

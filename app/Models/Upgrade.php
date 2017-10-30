@@ -93,8 +93,6 @@ class Upgrade extends Model implements TimeableContract
         );
 
         $this->delete();
-
-        return true;
     }
 
     /**

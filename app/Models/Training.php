@@ -97,8 +97,6 @@ class Training extends Model implements TimeableContract
         event(
             new PlanetUpdated($this->grid->planet_id)
         );
-
-        return true;
     }
 
     /**

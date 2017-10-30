@@ -81,8 +81,6 @@ class Research extends Model implements TimeableContract
         );
 
         $this->delete();
-
-        return true;
     }
 
     /**

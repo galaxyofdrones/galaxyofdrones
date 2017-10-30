@@ -13,8 +13,6 @@ interface Timeable
 
     /**
      * Finish.
-     *
-     * @return bool
      */
     public function finish();
 

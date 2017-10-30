@@ -170,8 +170,6 @@ class Movement extends Model implements TimeableContract
         event(
             new PlanetUpdated($this->end_id)
         );
-
-        return true;
     }
 
     /**

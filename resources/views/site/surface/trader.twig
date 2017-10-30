@@ -1,0 +1,65 @@
+<trader :type="{{ constant('Koodilab\\Models\\Building::TYPE_TRADER') }}"
+        :building="building"
+        :grid="grid"
+        url="{{ route('api_trader', '__grid__') }}"
+        store-url="{{ route('api_trader_store', ['__grid__', '__mission__']) }}" inline-template>
+    <div v-if="isEnabled" class="trader">
+        <div v-if="isEmpty" class="modal-body separator">
+            <p class="text-center">
+                {{ trans('messages.mission.empty') }}
+            </p>
+        </div>
+        <template v-else>
+            <trader-item v-for="mission in data.missions"
+                         :key="mission.id"
+                         :mission="mission"
+                         :is-completable="isCompletable"
+                         :store="store" inline-template>
+                <div class="modal-body separator">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <span v-for="resource in mission.resources"
+                              class="item item-sm"
+                              :class="resource | item('resource')"
+                              :title="resource.name"
+                              :data-content="resource.description"
+                              v-popover="{placement: 'top', trigger: 'hover'}">
+                            {{ vue('resource.quantity | number') }}
+                        </span>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h4>
+                                <i class="icon-time"></i>
+                            </h4>
+                            <h4>
+                                {{ vue('remaining | timer') }}
+                            </h4>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <ul class="list-inline">
+                                <li data-content="{{ trans('validation.attributes.experience') }}"
+                                    v-popover="{placement: 'top', trigger: 'hover'}">
+                                    <i class="icon-xp"></i>
+                                    {{ vue('mission.experience | number | sign(mission.experience)') }}
+                                </li>
+                                <li class="highlight-warning"
+                                    data-content="{{ trans('validation.attributes.energy') }}"
+                                    v-popover="{placement: 'top', trigger: 'hover'}">
+                                    <i class="icon-energy"></i>
+                                    {{ vue('mission.energy | number| sign(mission.energy)') }}
+                                </li>
+                            </ul>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-block"
+                                        :disabled="!isCompletable(mission)"
+                                        @click="store(mission)">
+                                    {{ trans('messages.mission.complete') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </trader-item>
+        </template>
+    </div>
+</trader>

@@ -57,6 +57,23 @@ $router->group([
             ->where('grid', '\d+');
     });
 
+    $router->get('scout/{grid}', 'ScoutController@index')
+        ->name('scout')
+        ->where('grid', '\d+');
+
+    $router->group([
+        'prefix' => 'trader',
+    ], function () use ($router) {
+        $router->get('{grid}', 'TraderController@index')
+            ->name('trader')
+            ->where('grid', '\d+');
+
+        $router->post('{grid}/{mission}', 'TraderController@store')
+            ->name('trader_store')
+            ->where('grid', '\d+')
+            ->where('mission', '\d+');
+    });
+
     $router->group([
         'prefix' => 'training',
     ], function () use ($router) {
@@ -86,10 +103,6 @@ $router->group([
             ->where('grid', '\d+')
             ->where('resource', '\d+');
     });
-
-    $router->get('scout/{grid}', 'ScoutController@index')
-        ->name('scout')
-        ->where('grid', '\d+');
 
     $router->group([
         'prefix' => 'user',

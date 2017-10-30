@@ -1,6 +1,7 @@
 import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
 import Scout from './Scout';
+import Trader from './Trader';
 import Training from './Training';
 import Transmute from './Transmute';
 
@@ -8,7 +9,7 @@ export default Modal.extend({
     props: ['url', 'storeUrl', 'destroyUrl'],
 
     components: {
-        Scout, Training, Transmute
+        Scout, Trader, Training, Transmute
     },
 
     data() {

@@ -52,6 +52,7 @@ class MissionLog extends Model
     {
         $missionLog = static::create([
             'user_id' => $mission->planet->user_id,
+            'energy' => $mission->energy,
             'experience' => $mission->experience,
         ]);
 
@@ -61,7 +62,9 @@ class MissionLog extends Model
             ]);
         }
 
-        $missionLog->user->notify(new MissionLogCreated($missionLog));
+        $missionLog->user->notify(
+            new MissionLogCreated($missionLog)
+        );
 
         return $missionLog;
     }

@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Events\PlanetUpdated;
 use Koodilab\Support\Util;
 
 /**
@@ -35,6 +34,7 @@ use Koodilab\Support\Util;
 class Mission extends Model implements TimeableContract
 {
     use Behaviors\Timeable,
+        Queries\FindResourcesOrderBySortOrder,
         Relations\BelongsToPlanet;
 
     /**
@@ -164,16 +164,14 @@ class Mission extends Model implements TimeableContract
     }
 
     /**
-     * {@inheritdoc}
+     * Is completable?
+     *
+     * @return bool
      */
-    public function finish()
+    public function isCompletable()
     {
-        $this->planet->user->incrementExperience($this->experience);
-
         /** @var \Illuminate\Database\Eloquent\Collection|Stock[] $stocks */
-        $stocks = $this->planet->stocks()
-            ->whereIn('resource_id', $this->resources->modelKeys())
-            ->get()
+        $stocks = $this->planet->findStocksByResourceIds($this->resources->modelKeys())
             ->keyBy('resource_id')
             ->each->setRelation('planet', $this->planet);
 
@@ -183,18 +181,30 @@ class Mission extends Model implements TimeableContract
             }
         }
 
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function finish()
+    {
+        $this->planet->user->incrementEnergyAndExperience(
+            $this->energy, $this->experience
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Collection|Stock[] $stocks */
+        $stocks = $this->planet->findStocksByResourceIds($this->resources->modelKeys())
+            ->keyBy('resource_id')
+            ->each->setRelation('planet', $this->planet);
+
         foreach ($this->resources as $resource) {
             $stocks->get($resource->id)->decrementQuantity($resource->pivot->quantity);
         }
 
         MissionLog::createFrom($this);
+
         $this->delete();
-
-        event(
-            new PlanetUpdated($this->planet_id)
-        );
-
-        return true;
     }
 
     /**

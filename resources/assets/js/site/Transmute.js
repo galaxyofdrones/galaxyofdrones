@@ -6,7 +6,7 @@ export default ModalBody.extend({
 
     data() {
         return {
-            total: 0,
+            mined: 0,
             quantity: '',
             planet: {
                 resource_id: undefined,
@@ -23,7 +23,7 @@ export default ModalBody.extend({
     },
 
     created() {
-        EventBus.$on('resource-updated', resource => this.total = resource);
+        EventBus.$on('resource-updated', resource => this.mined = resource);
         EventBus.$on('planet-update', this.fetchData);
         EventBus.$on('planet-updated', planet => this.planet = planet);
     },
@@ -35,7 +35,7 @@ export default ModalBody.extend({
 
         transmutableQuantity() {
             if (this.planet.resource_id === this.selected.id) {
-                return Math.floor(this.total);
+                return Math.floor(this.mined);
             }
 
             return _.find(this.planet.resources, {
