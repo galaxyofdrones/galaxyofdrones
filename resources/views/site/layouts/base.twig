@@ -1,7 +1,7 @@
 {% extends 'layouts.base' %}
 
 {% set title = setting('title') %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{% if subtitle is defined %}{{ subtitle ~ ' - ' }}{% endif %}{{ title }}{% endblock %}
 
 {% block head %}
     {% set description = setting('description') %}
