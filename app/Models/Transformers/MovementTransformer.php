@@ -1,10 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Transformers\Site;
+namespace Koodilab\Models\Transformers;
 
 use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Transformers\Transformer;
 use Koodilab\Models\Unit;
 
 class MovementTransformer extends Transformer

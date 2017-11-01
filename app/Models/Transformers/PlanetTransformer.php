@@ -1,11 +1,10 @@
 <?php
 
-namespace Koodilab\Models\Transformers\Site;
+namespace Koodilab\Models\Transformers;
 
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Transformers\Transformer;
 use Koodilab\Models\Unit;
 use Koodilab\Models\User;
 

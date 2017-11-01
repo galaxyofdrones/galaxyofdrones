@@ -5,7 +5,7 @@ namespace Koodilab\Http\Controllers\Api;
 use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Transformers\Site\UpgradeTransformer;
+use Koodilab\Models\Transformers\UpgradeTransformer;
 use Koodilab\Models\Upgrade;
 
 class UpgradeController extends Controller

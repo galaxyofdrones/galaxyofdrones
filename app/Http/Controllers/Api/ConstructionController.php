@@ -7,7 +7,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Construction;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Transformers\Site\ConstructionTransformer;
+use Koodilab\Models\Transformers\ConstructionTransformer;
 
 class ConstructionController extends Controller
 {

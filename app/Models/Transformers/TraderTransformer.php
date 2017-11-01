@@ -1,8 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Transformers\Site;
-
-use Koodilab\Models\Transformers\Transformer;
+namespace Koodilab\Models\Transformers;
 
 class TraderTransformer extends Transformer
 {

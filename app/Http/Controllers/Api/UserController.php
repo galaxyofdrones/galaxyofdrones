@@ -4,7 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Transformers\Site\UserTransformer;
+use Koodilab\Models\Transformers\UserTransformer;
 
 class UserController extends Controller
 {

@@ -7,7 +7,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Mission;
-use Koodilab\Models\Transformers\Site\TraderTransformer;
+use Koodilab\Models\Transformers\TraderTransformer;
 
 class TraderController extends Controller
 {

@@ -2,14 +2,12 @@
 
 namespace Koodilab\Models\Transformers;
 
-abstract class Transformer
+use Koodilab\Contracts\Models\Transformers\Transformer as TransformerContract;
+
+abstract class Transformer implements TransformerContract
 {
     /**
-     * Transform the collection.
-     *
-     * @param mixed $items
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function transformCollection($items)
     {
@@ -21,11 +19,7 @@ abstract class Transformer
     }
 
     /**
-     * Transform the item.
-     *
-     * @param mixed $item
-     *
-     * @return array
+     * {@inheritdoc}
      */
     abstract public function transform($item);
 }

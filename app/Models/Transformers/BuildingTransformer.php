@@ -1,9 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Transformers\Site;
+namespace Koodilab\Models\Transformers;
 
 use Illuminate\Contracts\Translation\Translator;
-use Koodilab\Models\Transformers\Transformer;
 
 class BuildingTransformer extends Transformer
 {

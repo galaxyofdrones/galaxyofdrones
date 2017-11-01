@@ -4,7 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\Site\PlanetTransformer;
+use Koodilab\Models\Transformers\PlanetTransformer;
 
 class PlanetController extends Controller
 {

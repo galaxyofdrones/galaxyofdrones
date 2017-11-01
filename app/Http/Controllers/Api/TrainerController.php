@@ -8,7 +8,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Training;
-use Koodilab\Models\Transformers\Site\TrainerTransformer;
+use Koodilab\Models\Transformers\TrainerTransformer;
 use Koodilab\Models\Unit;
 
 class TrainerController extends Controller
