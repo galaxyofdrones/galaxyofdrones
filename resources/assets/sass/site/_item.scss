@@ -9,10 +9,12 @@
 
     &-row {
         @include make-row(20px);
+        text-align: center;
 
         [class*="col-"] {
+            display: inline-block;
+            float: none;
             padding: 0;
-            text-align: center;
         }
     }
     &:before {
