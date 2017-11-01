@@ -44,6 +44,15 @@
                     text-shadow: 0 0 15px rgba(255, 255, 255, .6);
                 }
             }
+            &.active > a {
+                &,
+                &:hover,
+                &:focus {
+                    background: none;
+                    color: #fff;
+                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+                }
+            }
         }
     }
     &-block {

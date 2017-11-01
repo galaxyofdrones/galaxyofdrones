@@ -14,7 +14,9 @@ export default Modal.extend({
                     coordinates: []
                 }
             },
-            planet: {}
+            planet: {
+                id: undefined
+            }
         };
     },
 
@@ -24,6 +26,10 @@ export default Modal.extend({
     },
 
     computed: {
+        isCurrent() {
+            return this.properties.id === this.planet.id;
+        },
+
         properties() {
             return this.geoJsonPoint.properties;
         },
@@ -37,6 +43,11 @@ export default Modal.extend({
         open(geoJsonPoint) {
             this.geoJsonPoint = geoJsonPoint;
             this.$nextTick(() => this.$modal.modal());
+        },
+
+        openUser() {
+            this.$modal.modal('hide');
+            EventBus.$emit('profile-click', this.properties.username);
         }
     }
 });

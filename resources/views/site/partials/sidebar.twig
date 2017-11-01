@@ -1,0 +1,191 @@
+<sidebar planet-url="{{ route('api_planet') }}"
+         planet-name-url="{{ route('api_planet_name') }}"
+         user-current-url="{{ route('api_user_current', '__planet__') }}"
+         inline-template>
+    <div class="sidebar" :class="{active: isActive}">
+        <div class="sidebar-content" ref="scrollbar">
+            <div class="sidebar-block" v-cloak>
+                <input v-if="isEditActive"
+                       class="form-control"
+                       v-model="name"
+                       ref="name"
+                       :placeholder="data.name"
+                       @blur="renamePlanet()"
+                       @keyup.13="renamePlanet()">
+                <div v-else class="input-group">
+                    <select class="form-control" v-model="selected">
+                        <option :value="planet.id" v-for="planet in data.planets">
+                            {{ vue('planet.name') }}
+                        </option>
+                    </select>
+                    <div class="input-group-btn">
+                        <a class="btn btn-success" href="#" @click.prevent="toggleEdit()">
+                            <i class="icon-edit"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-block" v-cloak>
+                <div class="attribute-row">
+                    <div class="col-xs-6">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.mining_rate') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.mining_rate') }}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.production_rate') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.production_rate') }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="attribute-row">
+                    <div class="col-xs-6">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.incoming') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.incoming_movement') }}
+                            </h4>
+                            <h4 class="highlight-danger">
+                                {{ vue('data.incoming_attack_movement') }}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.outgoing') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.outgoing_movement') }}
+                            </h4>
+                            <h4 class="highlight-warning">
+                                {{ vue('data.outgoing_attack_movement') }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="attribute-row">
+                    <div class="col-xs-6">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.construction') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.construction') }}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.upgrade') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.upgrade') }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="attribute-row">
+                    <div class="col-xs-12">
+                        <div class="attribute">
+                            <h6>
+                                {{ trans('validation.attributes.training') }}
+                            </h6>
+                            <h4>
+                                {{ vue('data.training') }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-block" v-cloak>
+                <div class="progress"
+                     title="{{ trans('messages.resource.plural') }}"
+                     :data-content="resourceLabel"
+                     v-popover="{trigger: 'hover'}">
+                    <div class="progress-bar"
+                         :class="{'progress-bar-success': !isResourceFull, 'progress-bar-danger': isResourceFull}"
+                         :style="{width: resourceProgress}"></div>
+                </div>
+                <div class="item-row">
+                    <div class="col-xs-3" v-for="resource in data.resources">
+                        <span class="item item-sm"
+                              :class="resource | item('resource')"
+                              :title="resource.name"
+                              :data-content="resource.description"
+                              v-popover="{trigger: 'hover'}">
+                            {{ vue('resourceValue(resource) | number') }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-block" v-cloak>
+                <div class="progress progress-unit"
+                     title="{{ trans('messages.unit.plural') }}"
+                     :data-content="unitLabel"
+                     v-popover="{trigger: 'hover'}">
+                    <div class="progress-bar progress-bar-success"
+                         :class="{'progress-bar-success': !isUnitFull, 'progress-bar-danger': isUnitFull}"
+                         :style="{width: unitProgress}"></div>
+                    <div class="progress-bar progress-bar-warning"
+                         :style="{width: unitTrainingProgress}"></div>
+                </div>
+                <div class="item-row">
+                    <div class="col-xs-3" v-for="unit in data.units">
+                        <span class="item item-sm"
+                              :class="unit | item('unit')"
+                              :title="unit.name"
+                              :data-content="unit.description"
+                              v-popover="{trigger: 'hover'}">
+                            {{ vue('unit.quantity | number') }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            {% set route_name = app.request.route.getName %}
+
+            <ul class="nav nav-pills nav-stacked">
+                <li>
+                    <a href="#" @click.prevent="toggle()">
+                        <i :class="{'icon-nav': !isActive, 'icon-close': isActive}"></i>
+                    </a>
+                </li>
+                <li class="{{ route_name == 'home' ? 'active' }}">
+                    <a href="{{ route('home') }}">
+                        <i class="icon-surface"></i>
+                    </a>
+                </li>
+                <li class="{{ route_name == 'starmap' ? 'active' }}">
+                    <a href="{{ route('starmap') }}">
+                        <i class="icon-starmap"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" @click.prevent="openMothership()">
+                        <i class="icon-mothership"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" @click.prevent="openTrophy()">
+                        <i class="icon-trophy"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</sidebar>

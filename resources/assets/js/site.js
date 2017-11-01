@@ -13,15 +13,22 @@ require('./site/bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Bookmark from './site/Bookmark';
 import Construction from './site/Construction';
 import Filters from './site/Filters';
+import Mailbox from './site/Mailbox';
+import Mothership from './site/Mothership';
+import Move from './site/Move';
 import Planet from './site/Planet';
 import Player from './site/Player';
 import Popover from './site/Popover';
+import Profile from './site/Profile';
+import Setting from './site/Setting';
 import Sidebar from './site/Sidebar';
 import Star from './site/Star';
 import Starmap from './site/Starmap';
 import Surface from './site/Surface';
+import Trophy from './site/Trophy';
 import Upgrade from './site/Upgrade';
 
 Vue.filter('item', Filters.item);
@@ -36,6 +43,20 @@ const app = new Vue({
     el: '#site',
 
     components: {
-        Construction, Planet, Player, Sidebar, Star, Starmap, Surface, Upgrade
+        Bookmark,
+        Construction,
+        Mailbox,
+        Move,
+        Mothership,
+        Planet,
+        Player,
+        Profile,
+        Setting,
+        Sidebar,
+        Star,
+        Starmap,
+        Surface,
+        Trophy,
+        Upgrade
     }
 });

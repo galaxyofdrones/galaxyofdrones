@@ -142,8 +142,7 @@ export default {
                 options: {
                     position: 'topleft',
                     bookmarkTitle: this.bookmarkTitle,
-                    bookmarkIconClass: 'icon-star',
-                    onClick() {}
+                    bookmarkIconClass: 'icon-star'
                 },
 
                 onAdd() {
@@ -154,7 +153,7 @@ export default {
                     link.title = this.options.bookmarkTitle;
                     link.onclick = e => {
                         e.preventDefault();
-                        this.options.onClick();
+                        EventBus.$emit('bookmark-click');
                     };
 
                     L.DomUtil.create('i', this.options.bookmarkIconClass, link);

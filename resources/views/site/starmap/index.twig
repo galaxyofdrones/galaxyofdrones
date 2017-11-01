@@ -1,5 +1,7 @@
 {% extends 'site.layouts.main' %}
 
+{% set subtitle = trans('messages.starmap') %}
+
 {% block content %}
     <starmap size="{{ constant('Koodilab\\Starmap\\Generator::SIZE') }}"
              max-zoom="{{ constant('Koodilab\\Starmap\\Renderer::MAX_ZOOM_LEVEL') }}"
@@ -12,6 +14,7 @@
         <div class="starmap"></div>
     </starmap>
 
+    {% include 'site.starmap.bookmark' %}
     {% include 'site.starmap.planet' %}
     {% include 'site.starmap.star' %}
 {% endblock %}

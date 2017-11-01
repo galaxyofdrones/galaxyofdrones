@@ -7,9 +7,13 @@ return [
     'free' => 'Free',
     'info' => 'Info',
     'instant' => 'Instant',
+    'mailbox' => 'Mailbox',
+    'mothership' => 'Mothership',
     'owner' => 'Owner',
+    'starmap' => 'Starmap',
     'start' => 'Start',
     'transmute' => 'Transmute',
+    'trophy' => 'Trophy',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 
@@ -56,11 +60,16 @@ return [
     'planet' => [
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
+        'jump' => 'Jump to surface',
     ],
 
     'resource' => [
         'count' => 'Resource count',
         'plural' => 'Resources',
+    ],
+
+    'setting' => [
+        'plural' => 'Settings',
     ],
 
     'success' => [

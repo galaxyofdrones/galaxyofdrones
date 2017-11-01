@@ -322,7 +322,6 @@ class Planet extends Model implements PositionableContract
                 'id' => $this->id,
                 'resource_id' => $this->resource_id,
                 'resource_count' => $this->resource_count,
-                'user_id' => $this->user_id,
                 'username' => $username,
                 'name' => $this->display_name,
                 'type' => 'planet',

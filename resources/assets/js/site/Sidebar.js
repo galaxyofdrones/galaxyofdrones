@@ -206,6 +206,14 @@ export default {
             }
 
             return resource.quantity;
+        },
+
+        openMothership() {
+            EventBus.$emit('mothership-click');
+        },
+
+        openTrophy() {
+            EventBus.$emit('trophy-click');
         }
     }
 };

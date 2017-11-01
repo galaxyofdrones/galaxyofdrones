@@ -52,14 +52,23 @@
                                         <h6>
                                             {{ trans('messages.owner') }}
                                         </h6>
-                                        <h4 v-if="properties.user_id">
-                                            <a href="#">
+                                        <h4 v-if="properties.username">
+                                            <a href="#" @click.prevent="openUser()">
                                                 {{ vue('properties.username') }}
                                             </a>
                                         </h4>
                                         <h4 v-else>
                                             {{ vue('free') }}
                                         </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="isCurrent" class="attribute-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <a class="btn btn-info btn-block" href="{{ route('home') }}">
+                                            {{ trans('messages.planet.jump') }}
+                                        </a>
                                     </div>
                                 </div>
                             </div>

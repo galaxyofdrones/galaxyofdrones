@@ -10,6 +10,7 @@ export default {
             energyInterval: undefined,
             data: {
                 id: undefined,
+                username: '',
                 production_rate: 0,
                 experience: 0,
                 level_experience: 0,
@@ -88,5 +89,17 @@ export default {
 
             this.isSubscribed = false;
         },
+
+        openUser() {
+            EventBus.$emit('profile-click', this.data.username);
+        },
+
+        openMailbox() {
+            EventBus.$emit('mailbox-click');
+        },
+
+        openSetting() {
+            EventBus.$emit('setting-click');
+        }
     }
 };
