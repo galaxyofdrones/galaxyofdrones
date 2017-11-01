@@ -1,7 +1,7 @@
 import { EventBus } from '../common/event-bus';
-import ModalBody from './ModalBody';
+import Building from './Building';
 
-export default ModalBody.extend({
+export default Building.extend({
     props: ['grid', 'url', 'storeUrl', 'destroyUrl'],
 
     data() {

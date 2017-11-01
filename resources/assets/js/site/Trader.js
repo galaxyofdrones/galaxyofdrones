@@ -1,12 +1,12 @@
 import { EventBus } from '../common/event-bus';
-import ModalBody from './ModalBody';
-import TraderItem from './TraderItem';
+import Building from './Building';
+import Mission from './Mission';
 
-export default ModalBody.extend({
+export default Building.extend({
     props: ['grid', 'url', 'storeUrl'],
 
     components: {
-        TraderItem
+        Mission
     },
 
     data() {

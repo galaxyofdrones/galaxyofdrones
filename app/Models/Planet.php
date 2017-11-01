@@ -296,11 +296,14 @@ class Planet extends Model implements PositionableContract
     public function toFeature()
     {
         $status = 'free';
+        $username = null;
 
         if ($this->user_id) {
             /** @var User $user */
             $user = auth()->user();
+
             $status = 'hostile';
+            $username = $user->username;
 
             if ($user) {
                 if ($user->current_id == $this->id) {
@@ -317,6 +320,10 @@ class Planet extends Model implements PositionableContract
             'type' => 'Feature',
             'properties' => [
                 'id' => $this->id,
+                'resource_id' => $this->resource_id,
+                'resource_count' => $this->resource_count,
+                'user_id' => $this->user_id,
+                'username' => $username,
                 'name' => $this->display_name,
                 'type' => 'planet',
                 'size' => 32 + ($this->size * 16),

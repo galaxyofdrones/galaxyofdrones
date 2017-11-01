@@ -28,10 +28,6 @@ export default Modal.extend({
 
     methods: {
         open(grid) {
-            if (grid.building_id) {
-                return;
-            }
-
             this.grid = grid;
             this.fetchData(true);
         },

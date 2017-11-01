@@ -1,0 +1,47 @@
+<star inline-template>
+    <div class="star modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        {{ vue('properties.name') }}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <span class="item star"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="attribute-row">
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('messages.coordinate.x') }}
+                                        </h6>
+                                        <h4>
+                                            {{ vue('geometry.coordinates[0]') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('messages.coordinate.y') }}
+                                        </h6>
+                                        <h4>
+                                            {{ vue('geometry.coordinates[1]') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</star>

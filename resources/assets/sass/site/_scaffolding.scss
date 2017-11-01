@@ -30,15 +30,15 @@ select.form-control {
 }
 
 .highlight-success {
-    color: $brand-success;
+    color: $brand-success !important;
 }
 
 .highlight-danger {
-    color: $brand-danger;
+    color: $brand-danger !important;
 }
 
 .highlight-warning {
-    color: $brand-warning;
+    color: $brand-warning !important;
 }
 
 .panel {

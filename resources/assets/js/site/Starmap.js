@@ -78,7 +78,7 @@ export default {
                         icon: L.divIcon(options)
                     });
 
-                    marker.on('click', () => {});
+                    marker.on('click', () => EventBus.$emit(`${geoJsonPoint.properties.type}-click`, geoJsonPoint));
 
                     return marker;
                 }

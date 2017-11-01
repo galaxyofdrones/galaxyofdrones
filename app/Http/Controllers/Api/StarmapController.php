@@ -51,7 +51,7 @@ class StarmapController extends Controller
             /** @var Star[] $stars */
             $stars = Star::inBounds($bounds)
                 ->limit($limit)
-                ->get(['id', 'x', 'y', 'name']);
+                ->get();
 
             foreach ($stars as $star) {
                 $features[] = $star->toFeature();
@@ -60,7 +60,7 @@ class StarmapController extends Controller
             /** @var Planet[] $planets */
             $planets = Planet::inBounds($bounds)
                 ->limit(static::GEO_JSON_LIMIT - $limit)
-                ->get(['id', 'user_id', 'x', 'y', 'name', 'custom_name', 'size']);
+                ->get();
 
             foreach ($planets as $planet) {
                 $features[] = $planet->toFeature();

@@ -4,8 +4,10 @@ return [
 
     'cancel' => 'Cancel',
     'energy' => 'Energy',
+    'free' => 'Free',
     'info' => 'Info',
     'instant' => 'Instant',
+    'owner' => 'Owner',
     'start' => 'Start',
     'transmute' => 'Transmute',
     'zoom_in' => 'Zoom in',
@@ -25,6 +27,11 @@ return [
 
     'building' => [
         'name_with_level' => ':name (Level :level)',
+    ],
+
+    'coordinate' => [
+        'x' => 'X - Coordinate',
+        'y' => 'Y - Coordinate',
     ],
 
     'construction' => [
@@ -52,6 +59,7 @@ return [
     ],
 
     'resource' => [
+        'count' => 'Resource count',
         'plural' => 'Resources',
     ],
 

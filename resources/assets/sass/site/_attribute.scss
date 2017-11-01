@@ -4,6 +4,13 @@
     overflow: hidden;
     text-align: center;
 
+    h4 {
+        color: #fff;
+    }
+    a {
+        text-decoration: none;
+        transition: ease .2s;
+    }
     &-row {
         @include make-row(10px);
 

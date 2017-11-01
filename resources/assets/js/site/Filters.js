@@ -1,6 +1,6 @@
 export default {
     item(value, type = 'resource') {
-        return `${type}-${value.hasOwnProperty('id')
+        return `${type}-${value && value.hasOwnProperty('id')
             ? value.id
             : value}`;
     },

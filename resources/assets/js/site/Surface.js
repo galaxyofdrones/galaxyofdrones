@@ -262,7 +262,9 @@ export default {
                 return;
             }
 
-            EventBus.$emit('grid-click', grid);
+            EventBus.$emit(grid.building_id
+                ? 'building-click'
+                : 'grid-click', grid);
         },
 
         gridLevel(grid, sprite) {

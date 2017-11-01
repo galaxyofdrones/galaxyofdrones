@@ -27,7 +27,7 @@ export default Modal.extend({
     },
 
     created() {
-        EventBus.$on('grid-click', this.open);
+        EventBus.$on('building-click', this.open);
         EventBus.$on('planet-update', this.fetchData);
     },
 
@@ -39,10 +39,6 @@ export default Modal.extend({
 
     methods: {
         open(grid) {
-            if (!grid.building_id) {
-                return;
-            }
-
             this.grid = grid;
             this.fetchData(true);
         },

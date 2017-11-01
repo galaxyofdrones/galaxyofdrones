@@ -1,12 +1,12 @@
 import { EventBus } from '../common/event-bus';
-import ModalBody from './ModalBody';
-import ScoutItem from './ScoutItem';
+import Building from './Building';
+import Movement from './Movement';
 
-export default ModalBody.extend({
+export default Building.extend({
     props: ['grid', 'url'],
 
     components: {
-        ScoutItem
+        Movement
     },
 
     data() {

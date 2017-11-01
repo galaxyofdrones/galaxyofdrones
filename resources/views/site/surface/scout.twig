@@ -9,9 +9,9 @@
             </p>
         </div>
         <template v-else>
-            <scout-item v-for="movement in data.incoming_movements"
-                        :key="movement.id"
-                        :movement="movement" inline-template>
+            <movement v-for="movement in data.incoming_movements"
+                      :key="movement.id"
+                      :movement="movement" inline-template>
                 <div class="modal-body separator">
                     <div class="row">
                         <div class="col-md-6">
@@ -39,10 +39,10 @@
                         </div>
                     </div>
                 </div>
-            </scout-item>
-            <scout-item v-for="movement in data.outgoing_movements"
-                        :key="movement.id"
-                        :movement="movement" inline-template>
+            </movement>
+            <movement v-for="movement in data.outgoing_movements"
+                      :key="movement.id"
+                      :movement="movement" inline-template>
                 <div class="modal-body separator">
                     <div class="row">
                         <div class="col-md-6">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-            </scout-item>
+            </movement>
         </template>
     </div>
 </scout>
