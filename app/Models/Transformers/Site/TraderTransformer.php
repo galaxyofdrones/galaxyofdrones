@@ -32,7 +32,7 @@ class TraderTransformer extends Transformer
     {
         return [
             'missions' => $this->missionTransformer->transformCollection(
-                $item->planet->findMissionsOrderByEndedAt()
+                $item->planet->findNotExpiredMissions()
             ),
         ];
     }

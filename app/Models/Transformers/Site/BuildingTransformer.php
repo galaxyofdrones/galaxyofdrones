@@ -53,6 +53,7 @@ class BuildingTransformer extends Transformer
             'defense_bonus' => $item->defense_bonus,
             'construction_time_bonus' => $item->construction_time_bonus,
             'train_time_bonus' => $item->train_time_bonus,
+            'has_lower_level' => $item->hasLowerLevel(),
         ];
     }
 }

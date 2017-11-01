@@ -2,18 +2,21 @@
 
 namespace Koodilab\Models\Queries;
 
-trait FindMissionsOrderByEndedAt
+use Carbon\Carbon;
+
+trait FindNotExpiredMissions
 {
     /**
-     * Find missions order by ended at.
+     * Find not expired missions.
      *
      * @param array $columns
      *
      * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Mission[]
      */
-    public function findMissionsOrderByEndedAt($columns = ['*'])
+    public function findNotExpiredMissions($columns = ['*'])
     {
         return $this->missions()
+            ->where('ended_at', '>=', Carbon::now())
             ->orderBy('ended_at')
             ->get($columns);
     }

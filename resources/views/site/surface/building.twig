@@ -141,7 +141,7 @@
                 </div>
             </div>
         </div>
-        <ul class="list-inline">
+        <ul v-if="!grid.building_id || building.has_lower_level" class="list-inline">
             <li data-content="{{ trans('validation.attributes.construction_experience') }}"
                 v-popover="{placement: 'top', trigger: 'hover'}">
                 <i class="icon-xp"></i>
@@ -159,7 +159,7 @@
                 {{ vue('(data.upgrade ? data.upgrade.construction_time : building.construction_time) | timer') }}
             </li>
         </ul>
-        <div class="row" v-if="remaining">
+        <div v-if="remaining" class="row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-warning btn-block" @click="destroy()">
@@ -171,7 +171,7 @@
                 <h4>{{ vue('remaining | timer') }}</h4>
             </div>
         </div>
-        <div class="row" v-else-if="grid.building_id">
+        <div v-else-if="grid.building_id && building.has_lower_level" class="row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-success btn-block" @click="store()">
@@ -180,7 +180,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" v-else>
+        <div v-else-if="!grid.building_id" class="row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-success btn-block" @click="store()">
