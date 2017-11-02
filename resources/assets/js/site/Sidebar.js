@@ -12,7 +12,7 @@ export default {
             selected: undefined,
             name: '',
             usedCapacity: 0,
-            resourceQuantity: 0,
+            resource: 0,
             resourceInterval: undefined,
             data: {
                 id: undefined,
@@ -45,8 +45,8 @@ export default {
             this.changePlanet();
         },
 
-        resourceQuantity() {
-            EventBus.$emit('resource-updated', this.resourceQuantity);
+        resource() {
+            EventBus.$emit('resource-updated', this.resource);
         }
     },
 
@@ -55,16 +55,16 @@ export default {
             return this.data.capacity === this.usedCapacity;
         },
 
+        isUnitFull() {
+            return this.data.supply === this.data.used_supply;
+        },
+
         resourceLabel() {
             return `${Math.round(this.usedCapacity)}/${this.data.capacity}`;
         },
 
         resourceProgress() {
             return `${Math.min(100, this.usedCapacity / this.data.capacity * 100)}%`;
-        },
-
-        isUnitFull() {
-            return this.data.supply === this.data.used_supply;
         },
 
         unitLabel() {
@@ -77,7 +77,7 @@ export default {
 
         unitTrainingProgress() {
             return `${this.data.used_training_supply / this.data.supply * 100}%`;
-        },
+        }
     },
 
     methods: {
@@ -126,32 +126,35 @@ export default {
         },
 
         initResource() {
-            if (this.resourceInterval) {
-                clearInterval(this.resourceInterval);
-            }
-
+            this.clearResource();
             this.usedCapacity = this.data.used_capacity;
 
-            const resource = _.find(this.data.resources, {
+            this.resource = _.find(this.data.resources, {
                 id: this.data.resource_id
-            });
-
-            this.resourceQuantity = resource
-                ? resource.quantity
-                : 0;
+            }).quantity;
 
             if (this.data.mining_rate && this.data.capacity !== this.usedCapacity) {
                 this.resourceInterval = setInterval(() => {
-                    const quantity = Math.min(this.data.capacity - this.usedCapacity, this.data.mining_rate / 3600);
+                    const quantity = Math.min(
+                        this.data.capacity - this.usedCapacity, this.data.mining_rate / 3600
+                    );
 
-                    this.resourceQuantity += quantity;
+                    this.resource += quantity;
                     this.usedCapacity += quantity;
 
                     if (this.data.capacity === this.usedCapacity) {
-                        clearInterval(this.resourceInterval);
+                        this.clearResource();
                     }
                 }, 1000);
             }
+        },
+
+        clearResource() {
+            if (!this.resourceInterval) {
+                return;
+            }
+
+            this.resourceInterval = clearInterval(this.resourceInterval);
         },
 
         initPerfectScrollbar() {
@@ -200,9 +203,9 @@ export default {
             }
         },
 
-        resourceValue(resource) {
+        resourceQuantity(resource) {
             if (resource.id === this.data.resource_id) {
-                return this.resourceQuantity;
+                return this.resource;
             }
 
             return resource.quantity;

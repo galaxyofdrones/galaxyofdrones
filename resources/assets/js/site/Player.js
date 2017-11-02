@@ -59,15 +59,20 @@ export default {
         },
 
         initEnergy() {
-            if (this.energyInterval) {
-                clearInterval(this.energyInterval);
-            }
-
+            this.clearEnergy();
             this.energy = this.data.energy;
 
             if (this.data.production_rate) {
                 this.energyInterval = setInterval(() => this.energy += this.data.production_rate / 3600, 1000);
             }
+        },
+
+        clearEnergy() {
+            if (!this.energyInterval) {
+                return;
+            }
+
+            this.energyInterval = clearInterval(this.energyInterval);
         },
 
         subscribe() {
