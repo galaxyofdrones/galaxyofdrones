@@ -4,6 +4,8 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Koodilab\Http\Controllers\Controller;
+use Koodilab\Models\Planet;
+use Koodilab\Models\Transformers\PlanetShowTransformer;
 use Koodilab\Models\Transformers\PlanetTransformer;
 
 class PlanetController extends Controller
@@ -47,5 +49,20 @@ class PlanetController extends Controller
         auth()->user()->current->update([
             'custom_name' => $request->get('name'),
         ]);
+    }
+
+    /**
+     * Show the planet in json format.
+     *
+     * @param Planet                $planet
+     * @param PlanetShowTransformer $transformer
+     *
+     * @return \Illuminate\Http\JsonResponse|array
+     */
+    public function show(Planet $planet, PlanetShowTransformer $transformer)
+    {
+        $this->authorize('friendly', $planet);
+
+        return $transformer->transform($planet);
     }
 }

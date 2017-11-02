@@ -54,7 +54,12 @@ return [
     ],
 
     'movement' => [
+        'attack' => 'Attack',
         'empty' => 'No movemenets.',
+        'occupy' => 'Occupy',
+        'scout' => 'Scout',
+        'support' => 'Support',
+        'transport' => 'Transport',
     ],
 
     'planet' => [

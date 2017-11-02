@@ -41,26 +41,4 @@ class Star extends Model implements PositionableContract
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toFeature()
-    {
-        return [
-            'type' => 'Feature',
-            'properties' => [
-                'id' => $this->id,
-                'name' => $this->name,
-                'type' => 'star',
-                'size' => 96,
-            ],
-            'geometry' => [
-                'type' => 'Point',
-                'coordinates' => [
-                    $this->x, $this->y,
-                ],
-            ],
-        ];
-    }
 }

@@ -2,13 +2,13 @@ import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['free'],
+    props: ['url', 'scout', 'attack', 'occupy', 'support', 'transport'],
 
     data() {
         return {
             geoJsonPoint: {
                 properties: {
-                    resource_id: undefined
+                    status: ''
                 },
                 geometry: {
                     coordinates: []
@@ -16,6 +16,9 @@ export default Modal.extend({
             },
             planet: {
                 id: undefined
+            },
+            data: {
+                username: ''
             }
         };
     },
@@ -30,6 +33,10 @@ export default Modal.extend({
             return this.properties.id === this.planet.id;
         },
 
+        isFriendly() {
+            return this.properties.status === 'friendly';
+        },
+
         properties() {
             return this.geoJsonPoint.properties;
         },
@@ -42,12 +49,53 @@ export default Modal.extend({
     methods: {
         open(geoJsonPoint) {
             this.geoJsonPoint = geoJsonPoint;
-            this.$nextTick(() => this.$modal.modal());
+            this.fetchData(true);
+        },
+
+        fetchData(showModal = false) {
+            if (!showModal && !this.isEnabled) {
+                return;
+            }
+
+            axios.get(
+                this.url.replace('__planet__', this.properties.id)
+            ).then(response => {
+                this.data = response.data;
+
+                if (showModal) {
+                    this.$nextTick(() => this.$modal.modal());
+                }
+            });
         },
 
         openUser() {
             this.$modal.modal('hide');
-            EventBus.$emit('profile-click', this.properties.username);
+            EventBus.$emit('profile-click', this.data.username);
+        },
+
+        openScoutMove() {
+            this.$modal.modal('hide');
+            EventBus.$emit('move-click', this.scout);
+        },
+
+        openAttackMove() {
+            this.$modal.modal('hide');
+            EventBus.$emit('move-click', this.attack);
+        },
+
+        openOccupyMove() {
+            this.$modal.modal('hide');
+            EventBus.$emit('move-click', this.occupy);
+        },
+
+        openSupportMove() {
+            this.$modal.modal('hide');
+            EventBus.$emit('move-click', this.support);
+        },
+
+        openTransportMove() {
+            this.$modal.modal('hide');
+            EventBus.$emit('move-click', this.transport);
         }
     }
 });

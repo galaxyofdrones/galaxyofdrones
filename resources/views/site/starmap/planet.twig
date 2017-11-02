@@ -1,4 +1,9 @@
-<planet free="{{ trans('messages.free') }}" inline-template>
+<planet url="{{ route('api_planet_show', '__planet__') }}"
+        :scout="{{ constant('Koodilab\\Models\\Movement::TYPE_SCOUT') }}"
+        :attack="{{ constant('Koodilab\\Models\\Movement::TYPE_ATTACK') }}"
+        :occupy="{{ constant('Koodilab\\Models\\Movement::TYPE_OCCUPY') }}"
+        :support="{{ constant('Koodilab\\Models\\Movement::TYPE_SUPPORT') }}"
+        :transport="{{ constant('Koodilab\\Models\\Movement::TYPE_TRANSPORT') }}" inline-template>
     <div class="planet modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -13,7 +18,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6 text-center">
-                            <span class="item" :class="properties.resource_id | item('planet')"></span>
+                            <span class="item" :class="data.resource_id | item('planet')"></span>
                         </div>
                         <div class="col-md-6">
                             <div class="attribute-row">
@@ -43,7 +48,7 @@
                                             {{ trans('messages.resource.count') }}
                                         </h6>
                                         <h4>
-                                            {{ vue('properties.resource_count') }}
+                                            {{ vue('data.resource_count') }}
                                         </h4>
                                     </div>
                                 </div>
@@ -52,13 +57,13 @@
                                         <h6>
                                             {{ trans('messages.owner') }}
                                         </h6>
-                                        <h4 v-if="properties.username">
+                                        <h4 v-if="data.user_id">
                                             <a href="#" @click.prevent="openUser()">
-                                                {{ vue('properties.username') }}
+                                                {{ vue('data.username') }}
                                             </a>
                                         </h4>
                                         <h4 v-else>
-                                            {{ vue('free') }}
+                                            {{ vue('data.username') }}
                                         </h4>
                                     </div>
                                 </div>
@@ -69,6 +74,45 @@
                                         <a class="btn btn-info btn-block" href="{{ route('home') }}">
                                             {{ trans('messages.planet.jump') }}
                                         </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else-if="isFriendly" class="attribute-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block" @click="openSupportMove()">
+                                            {{ trans('messages.movement.support') }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block" @click="openTransportMove()">
+                                            {{ trans('messages.movement.transport') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else class="attribute-row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <button class="btn btn-info btn-block" @click="openScoutMove()">
+                                            {{ trans('messages.movement.scout') }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <button class="btn btn-danger btn-block" @click="openAttackMove()">
+                                            {{ trans('messages.movement.attack') }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block" :disabled="!data.canOccupy" @click="openOccupyMove()">
+                                            {{ trans('messages.movement.occupy') }}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

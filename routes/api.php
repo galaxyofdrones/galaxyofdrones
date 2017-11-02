@@ -30,6 +30,10 @@ $router->group([
 
         $router->put('name', 'PlanetController@name')
             ->name('planet_name');
+
+        $router->get('{planet}', 'PlanetController@show')
+            ->name('planet_show')
+            ->where('planet', '\d+');
     });
 
     $router->group([

@@ -17,6 +17,10 @@ trait CanOccupy
      */
     public function canOccupy(Planet $planet)
     {
+        if ($this->id == $planet->user_id) {
+            return false;
+        }
+
         if ($this->where('capital_id', $planet->id)->exists()) {
             return false;
         }

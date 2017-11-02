@@ -40,11 +40,4 @@ interface Positionable
      * @return Builder
      */
     public function scopeInBounds(Builder $query, Bounds $bounds);
-
-    /**
-     * To feature.
-     *
-     * @return array
-     */
-    public function toFeature();
 }

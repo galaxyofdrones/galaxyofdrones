@@ -5,6 +5,8 @@ namespace Koodilab\Http\Controllers\Api;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Star;
+use Koodilab\Models\Transformers\PlanetFeatureTransformer;
+use Koodilab\Models\Transformers\StarFeatureTransformer;
 use Koodilab\Support\Bounds;
 
 class StarmapController extends Controller
@@ -35,36 +37,32 @@ class StarmapController extends Controller
     /**
      * Get the geo json data.
      *
-     * @param int    $zoom
-     * @param string $bounds
+     * @param int                      $zoom
+     * @param string                   $bounds
+     * @param StarFeatureTransformer   $starTransformer
+     * @param PlanetFeatureTransformer $planetTransformer
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function geoJson($zoom, $bounds)
+    public function geoJson($zoom, $bounds, StarFeatureTransformer $starTransformer, PlanetFeatureTransformer $planetTransformer)
     {
-        $features = [];
+        $features = collect();
 
         if ($zoom >= static::GEO_JSON_ZOOM_LEVEL) {
             $bounds = Bounds::fromString($bounds)->scale(1.5);
             $limit = (int) (static::GEO_JSON_LIMIT * config('starmap.ratio'));
 
-            /** @var Star[] $stars */
-            $stars = Star::inBounds($bounds)
-                ->limit($limit)
-                ->get();
+            $features = $features->merge(
+                $starTransformer->transformCollection(Star::inBounds($bounds)
+                    ->limit($limit)
+                    ->get())
+            );
 
-            foreach ($stars as $star) {
-                $features[] = $star->toFeature();
-            }
-
-            /** @var Planet[] $planets */
-            $planets = Planet::inBounds($bounds)
-                ->limit(static::GEO_JSON_LIMIT - $limit)
-                ->get();
-
-            foreach ($planets as $planet) {
-                $features[] = $planet->toFeature();
-            }
+            $features = $features->merge(
+                $planetTransformer->transformCollection(Planet::inBounds($bounds)
+                    ->limit(static::GEO_JSON_LIMIT - $limit)
+                    ->get())
+            );
         }
 
         return response()->json([
