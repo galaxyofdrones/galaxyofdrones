@@ -14,13 +14,12 @@
         @include clearfix;
     }
     &-energy {
-        border-color: $brand-warning;
-        color: #fff;
+        border-color: $brand-info;
+        color: $brand-warning;
         height: 32px;
         line-height: 32px;
         padding: 0 $grid-gutter-width / 2;
         text-align: right;
-        text-shadow: 0 0 15px rgba(255, 255, 255, .6);
         top: 92px + $grid-gutter-width / 3;
         @include clearfix;
 
@@ -48,7 +47,6 @@
         height: 30px;
         line-height: 30px;
         text-align: center;
-        text-shadow: 0 0 15px rgba(255, 255, 255, .6);
     }
     &-nav {
         border-bottom: 1px solid $panel-inner-border;
