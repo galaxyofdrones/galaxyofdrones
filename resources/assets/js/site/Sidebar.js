@@ -129,9 +129,9 @@ export default {
             this.clearResource();
             this.usedCapacity = this.data.used_capacity;
 
-            this.resource = _.find(this.data.resources, {
+            this.resource = _.get(_.find(this.data.resources, {
                 id: this.data.resource_id
-            }).quantity;
+            }), 'quantity', 0);
 
             if (this.data.mining_rate && this.data.capacity !== this.usedCapacity) {
                 this.resourceInterval = setInterval(() => {

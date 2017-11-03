@@ -10,6 +10,7 @@ return [
     'mailbox' => 'Mailbox',
     'mothership' => 'Mothership',
     'owner' => 'Owner',
+    'required_quantity' => 'Required quantity',
     'starmap' => 'Starmap',
     'start' => 'Start',
     'transmute' => 'Transmute',
@@ -27,6 +28,7 @@ return [
 
     'bookmark' => [
         'plural' => 'Bookmarks',
+        'star' => 'Bookmark this star',
     ],
 
     'building' => [

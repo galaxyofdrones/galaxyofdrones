@@ -49,7 +49,8 @@ class PlanetShowTransformer extends Transformer
             'username' => $item->user_id
                 ? $item->user->username
                 : $this->translator->trans('messages.free'),
-            'canOccupy' => $this->canOccupy($item),
+            'can_occupy' => $this->canOccupy($item),
+            'travel_time' => $this->travelTime($item),
         ];
     }
 
@@ -62,13 +63,40 @@ class PlanetShowTransformer extends Transformer
      */
     protected function canOccupy(Planet $planet)
     {
-        /** @var \Koodilab\Models\User $user */
-        $user = $this->auth->guard()->user();
+        $user = $this->user();
 
         if ($user) {
             return $user->canOccupy($planet);
         }
 
         return false;
+    }
+
+    /**
+     * Get the travel from current planet.
+     *
+     * @param Planet $planet
+     *
+     * @return int
+     */
+    protected function travelTime(Planet $planet)
+    {
+        $user = $this->user();
+
+        if ($user) {
+            return $user->current->travelTimeTo($planet);
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get the authenticated user.
+     *
+     * @return \Koodilab\Models\User
+     */
+    protected function user()
+    {
+        return $this->auth->guard()->user();
     }
 }

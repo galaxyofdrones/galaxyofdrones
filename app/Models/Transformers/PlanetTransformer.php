@@ -106,7 +106,10 @@ class PlanetTransformer extends Transformer
                 return [
                     'id' => $unit->id,
                     'name' => $unit->translation('name'),
+                    'type' => $unit->type,
+                    'speed' => $unit->speed,
                     'description' => $unit->translation('description'),
+                    'capacity' => $unit->capacity,
                     'quantity' => $populations->has($unit->id)
                         ? $populations->get($unit->id)->quantity
                         : 0,

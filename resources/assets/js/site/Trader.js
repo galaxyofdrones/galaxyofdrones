@@ -67,9 +67,9 @@ export default Building.extend({
                 return Math.floor(this.mined);
             }
 
-            return _.find(this.planet.resources, {
+            return _.get(_.find(this.planet.resources, {
                 id: resource.id
-            }).quantity;
+            }), 'quantity', 0);
         },
 
         store(mission) {

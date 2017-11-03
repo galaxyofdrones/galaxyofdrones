@@ -39,10 +39,6 @@ export default Building.extend({
             );
         },
 
-        quantityPlaceholder() {
-            return `(${this.trainableQuantity})`;
-        },
-
         trainTime() {
             return this.isTrainable
                 ? this.quantity * this.selected.train_time

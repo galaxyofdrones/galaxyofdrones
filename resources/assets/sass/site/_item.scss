@@ -17,6 +17,15 @@
             padding: 0;
         }
     }
+    &-input-row {
+        @include make-row;
+        text-align: center;
+
+        [class*="col-"] {
+            display: inline-block;
+            float: none;
+        }
+    }
     &:before {
         background: url('../../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
         content: '';

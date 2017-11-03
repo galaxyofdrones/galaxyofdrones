@@ -1,4 +1,8 @@
 export default {
+    bracket(value) {
+        return `(${value})`;
+    },
+
     item(value, type = 'resource') {
         return `${type}-${value && value.hasOwnProperty('id')
             ? value.id

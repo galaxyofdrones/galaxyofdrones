@@ -14,7 +14,7 @@
     &-row {
         @include make-row(10px);
 
-        .planet &:first-child {
+        &.separator {
             margin-bottom: $grid-gutter-width;
         }
         .sidebar &:last-child .attribute {

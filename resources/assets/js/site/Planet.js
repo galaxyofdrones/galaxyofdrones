@@ -2,7 +2,7 @@ import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url', 'scout', 'attack', 'occupy', 'support', 'transport'],
+    props: ['url'],
 
     data() {
         return {
@@ -73,29 +73,9 @@ export default Modal.extend({
             EventBus.$emit('profile-click', this.data.username);
         },
 
-        openScoutMove() {
+        openMove(type) {
             this.$modal.modal('hide');
-            EventBus.$emit('move-click', this.scout);
-        },
-
-        openAttackMove() {
-            this.$modal.modal('hide');
-            EventBus.$emit('move-click', this.attack);
-        },
-
-        openOccupyMove() {
-            this.$modal.modal('hide');
-            EventBus.$emit('move-click', this.occupy);
-        },
-
-        openSupportMove() {
-            this.$modal.modal('hide');
-            EventBus.$emit('move-click', this.support);
-        },
-
-        openTransportMove() {
-            this.$modal.modal('hide');
-            EventBus.$emit('move-click', this.transport);
+            EventBus.$emit('move-click', type, _.assignIn({}, this.properties, this.data));
         }
     }
 });

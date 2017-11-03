@@ -1,9 +1,4 @@
-<planet url="{{ route('api_planet_show', '__planet__') }}"
-        :scout="{{ constant('Koodilab\\Models\\Movement::TYPE_SCOUT') }}"
-        :attack="{{ constant('Koodilab\\Models\\Movement::TYPE_ATTACK') }}"
-        :occupy="{{ constant('Koodilab\\Models\\Movement::TYPE_OCCUPY') }}"
-        :support="{{ constant('Koodilab\\Models\\Movement::TYPE_SUPPORT') }}"
-        :transport="{{ constant('Koodilab\\Models\\Movement::TYPE_TRANSPORT') }}" inline-template>
+<planet url="{{ route('api_planet_show', '__planet__') }}" inline-template>
     <div class="planet modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -21,7 +16,7 @@
                             <span class="item" :class="data.resource_id | item('planet')"></span>
                         </div>
                         <div class="col-md-6">
-                            <div class="attribute-row">
+                            <div class="attribute-row separator">
                                 <div class="col-md-6">
                                     <div class="attribute">
                                         <h6>
@@ -80,14 +75,16 @@
                             <div v-else-if="isFriendly" class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <button class="btn btn-success btn-block" @click="openSupportMove()">
+                                        <button class="btn btn-success btn-block"
+                                                @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_SUPPORT') }})">
                                             {{ trans('messages.movement.support') }}
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <button class="btn btn-success btn-block" @click="openTransportMove()">
+                                        <button class="btn btn-success btn-block"
+                                                @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_TRANSPORT') }})">
                                             {{ trans('messages.movement.transport') }}
                                         </button>
                                     </div>
@@ -96,21 +93,24 @@
                             <div v-else class="attribute-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <button class="btn btn-info btn-block" @click="openScoutMove()">
+                                        <button class="btn btn-info btn-block"
+                                                @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_SCOUT') }})">
                                             {{ trans('messages.movement.scout') }}
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <button class="btn btn-danger btn-block" @click="openAttackMove()">
+                                        <button class="btn btn-danger btn-block"
+                                                @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_ATTACK') }})">
                                             {{ trans('messages.movement.attack') }}
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <button class="btn btn-success btn-block" :disabled="!data.canOccupy" @click="openOccupyMove()">
+                                        <button class="btn btn-success btn-block" :disabled="!data.can_occupy"
+                                                @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_OCCUPY') }})">
                                             {{ trans('messages.movement.occupy') }}
                                         </button>
                                     </div>

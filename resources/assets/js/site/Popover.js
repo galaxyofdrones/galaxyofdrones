@@ -9,5 +9,9 @@ export default {
         }
 
         $(el).popover(options);
+    },
+
+    unbind(el) {
+        $(el).popover('destroy');
     }
 };

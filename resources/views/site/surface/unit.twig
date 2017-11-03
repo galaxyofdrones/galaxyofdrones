@@ -62,15 +62,18 @@
             </div>
         </div>
         <ul class="list-inline">
-            <li data-content="{{ trans('validation.attributes.supply') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+            <li data-content="{{ trans('validation.attributes.supply') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
                 <i class="icon-supply"></i>
                 {{ vue('unit.supply | number') }}
             </li>
-            <li class="highlight-warning" data-content="{{ trans('validation.attributes.train_cost') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+            <li class="highlight-warning" data-content="{{ trans('validation.attributes.train_cost') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
                 <i class="icon-energy"></i>
                 {{ vue('unit.train_cost | number') }}
             </li>
-            <li data-content="{{ trans('validation.attributes.train_time') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+            <li data-content="{{ trans('validation.attributes.train_time') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
                 <i class="icon-time"></i>
                 {{ vue('unit.train_time | timer') }}
             </li>
@@ -95,7 +98,7 @@
                                type="number"
                                min="1"
                                :max="trainableQuantity"
-                               :placeholder="quantityPlaceholder"
+                               :placeholder="trainableQuantity | bracket"
                                v-model.number="quantity">
                         <span class="input-group-btn">
                             <button class="btn btn-success btn-block" @click="store()" :disabled="!isTrainable">

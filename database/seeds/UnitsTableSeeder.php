@@ -23,7 +23,7 @@ class UnitsTableSeeder extends Seeder
             'train_cost' => 340,
             'train_time' => 1800,
             'description' => [
-                'en' => 'Trasports the minerals.',
+                'en' => 'Transports the minerals.',
             ],
             'capacity' => 100,
         ]);

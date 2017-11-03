@@ -38,13 +38,9 @@ export default Building.extend({
                 return Math.floor(this.mined);
             }
 
-            return _.find(this.planet.resources, {
+            return _.get(_.find(this.planet.resources, {
                 id: this.selected.id
-            }).quantity;
-        },
-
-        quantityPlaceholder() {
-            return `(${this.transmutableQuantity})`;
+            }), 'quantity', 0);
         },
 
         transmutableEnergy() {

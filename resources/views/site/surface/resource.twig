@@ -32,7 +32,8 @@
             </div>
         </div>
         <ul class="list-inline">
-            <li data-content="{{ trans('validation.attributes.transmute_time') }}" v-popover="{placement: 'top', trigger: 'hover'}">
+            <li data-content="{{ trans('validation.attributes.transmute_time') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
                 <i class="icon-time"></i>
                 {{ trans('messages.instant') }}
             </li>
@@ -45,7 +46,7 @@
                                type="number"
                                min="1"
                                :max="transmutableQuantity"
-                               :placeholder="quantityPlaceholder"
+                               :placeholder="transmutableQuantity | bracket"
                                v-model.number="quantity">
                         <span class="input-group-btn">
                             <button class="btn btn-success btn-block" @click="store()" :disabled="!isTransmutable">

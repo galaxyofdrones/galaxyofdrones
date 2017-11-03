@@ -31,6 +31,7 @@ import Surface from './site/Surface';
 import Trophy from './site/Trophy';
 import Upgrade from './site/Upgrade';
 
+Vue.filter('bracket', Filters.bracket);
 Vue.filter('item', Filters.item);
 Vue.filter('number', Filters.number);
 Vue.filter('percent', Filters.percent);
