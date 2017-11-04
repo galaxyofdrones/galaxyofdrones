@@ -69,13 +69,15 @@ export default Modal.extend({
         },
 
         openUser() {
-            this.$modal.modal('hide');
-            EventBus.$emit('profile-click', this.data.username);
+            this.openAfterHidden(
+                () => EventBus.$emit('profile-click', this.data.username)
+            );
         },
 
         openMove(type) {
-            this.$modal.modal('hide');
-            EventBus.$emit('move-click', type, _.assignIn({}, this.properties, this.data));
+            this.openAfterHidden(
+                () => EventBus.$emit('move-click', type, _.assignIn({}, this.properties, this.data))
+            );
         }
     }
 });

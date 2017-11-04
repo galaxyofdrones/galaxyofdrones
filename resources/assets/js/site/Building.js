@@ -10,7 +10,7 @@ export default Remaining.extend({
         };
     },
 
-    mounted() {
+    created() {
         EventBus.$on('modal-show', () => this.isEnabled = this.type === this.building.type);
         EventBus.$on('modal-hidden', () => this.isEnabled = false);
     }
