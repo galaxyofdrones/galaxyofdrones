@@ -9,15 +9,16 @@ export default Remaining.extend({
         };
     },
 
-    created() {
-        EventBus.$on('modal-show', () => this.isEnabled = true);
-        EventBus.$on('modal-hidden', () => this.isEnabled = false);
-    },
-
     mounted() {
         this.$modal = $(this.$el)
-            .on('show.bs.modal', () => EventBus.$emit('modal-show'))
-            .on('hidden.bs.modal', () => EventBus.$emit('modal-hidden'));
+            .on('show.bs.modal', () => {
+                EventBus.$emit('modal-show');
+                this.isEnabled = true;
+            })
+            .on('hidden.bs.modal', () => {
+                EventBus.$emit('modal-hidden');
+                this.isEnabled = false;
+            });
     },
 
     methods: {
