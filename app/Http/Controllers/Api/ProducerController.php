@@ -31,7 +31,9 @@ class ProducerController extends Controller
      */
     public function index(Grid $grid, ProducerTransformer $transformer)
     {
-        $this->authorizeProducer($grid);
+        $this->authorize('friendly', $grid->planet);
+
+        $this->authorize('building', [$grid->building, Building::TYPE_PRODUCER]);
 
         return $transformer->transform($grid);
     }
@@ -47,7 +49,9 @@ class ProducerController extends Controller
      */
     public function store(Request $request, Grid $grid, Resource $resource)
     {
-        $this->authorizeProducer($grid);
+        $this->authorize('friendly', $grid->planet);
+
+        $this->authorize('building', [$grid->building, Building::TYPE_PRODUCER]);
 
         $quantity = (int) $request->get('quantity', 0);
 
@@ -75,25 +79,5 @@ class ProducerController extends Controller
 
             $stock->decrementQuantity($quantity);
         });
-    }
-
-    /**
-     * Authorize the producer.
-     *
-     * @param Grid $grid
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function authorizeProducer(Grid $grid)
-    {
-        $this->authorize('friendly', $grid->planet);
-
-        if (!$grid->building_id) {
-            return $this->createBadRequestJsonResponse();
-        }
-
-        if ($grid->building->type != Building::TYPE_PRODUCER) {
-            return $this->createBadRequestJsonResponse();
-        }
     }
 }

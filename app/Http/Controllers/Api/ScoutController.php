@@ -30,13 +30,7 @@ class ScoutController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->building_id) {
-            return $this->createBadRequestJsonResponse();
-        }
-
-        if ($grid->building->type != Building::TYPE_SCOUT) {
-            return $this->createBadRequestJsonResponse();
-        }
+        $this->authorize('building', [$grid->building, Building::TYPE_SCOUT]);
 
         return $transformer->transform($grid);
     }

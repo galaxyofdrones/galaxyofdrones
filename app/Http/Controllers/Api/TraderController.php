@@ -30,7 +30,9 @@ class TraderController extends Controller
      */
     public function index(Grid $grid, TraderTransformer $transformer)
     {
-        $this->authorizeTrader($grid);
+        $this->authorize('friendly', $grid->planet);
+
+        $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
 
         return $transformer->transform($grid);
     }
@@ -45,7 +47,9 @@ class TraderController extends Controller
      */
     public function store(Grid $grid, Mission $mission)
     {
-        $this->authorizeTrader($grid);
+        $this->authorize('friendly', $grid->planet);
+
+        $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
 
         if ($grid->planet_id != $mission->planet_id) {
             return $this->createBadRequestJsonResponse();
@@ -58,25 +62,5 @@ class TraderController extends Controller
         DB::transaction(function () use ($mission) {
             $mission->finish();
         });
-    }
-
-    /**
-     * Authorize the trader.
-     *
-     * @param Grid $grid
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function authorizeTrader(Grid $grid)
-    {
-        $this->authorize('friendly', $grid->planet);
-
-        if (!$grid->building_id) {
-            return $this->createBadRequestJsonResponse();
-        }
-
-        if ($grid->building->type != Building::TYPE_TRADER) {
-            return $this->createBadRequestJsonResponse();
-        }
     }
 }
