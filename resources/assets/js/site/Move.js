@@ -211,6 +211,22 @@ export default Modal.extend({
             );
         },
 
+        support() {
+            axios.post(this.urls.support.replace('__planet__', this.selected.id), {
+                quantity: this.quantity
+            }).then(
+                () => this.$modal.modal('hide')
+            );
+        },
+
+        transport() {
+            axios.post(this.urls.transport.replace('__planet__', this.selected.id), {
+                quantity: this.quantity
+            }).then(
+                () => this.$modal.modal('hide')
+            );
+        },
+
         resourceQuantity(resource) {
             if (this.planet.resource_id === resource.id) {
                 return Math.floor(this.mined);

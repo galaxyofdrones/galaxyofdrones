@@ -145,6 +145,8 @@ class Movement extends Model implements TimeableContract
      * @param Planet     $planet
      * @param Population $population
      * @param int        $quantity
+     *
+     * @return static
      */
     public static function createScoutFrom(Planet $planet, Population $population, $quantity)
     {
@@ -180,14 +182,18 @@ class Movement extends Model implements TimeableContract
         event(
             new PlanetUpdated($movement->end_id)
         );
+
+        return $movement;
     }
 
     /**
      * Create attack from.
      *
-     * @param Planet         $planet
-     * @param Collection     $populations
-     * @param BaseCollection $quantities
+     * @param Planet                  $planet
+     * @param Collection|Population[] $populations
+     * @param BaseCollection          $quantities
+     *
+     * @return static
      */
     public static function createAttackFrom(Planet $planet, Collection $populations, BaseCollection $quantities)
     {
@@ -227,6 +233,8 @@ class Movement extends Model implements TimeableContract
         event(
             new PlanetUpdated($movement->end_id)
         );
+
+        return $movement;
     }
 
     /**
@@ -234,6 +242,8 @@ class Movement extends Model implements TimeableContract
      *
      * @param Planet     $planet
      * @param Population $population
+     *
+     * @return static
      */
     public static function createOccupyFrom(Planet $planet, Population $population)
     {
@@ -269,6 +279,118 @@ class Movement extends Model implements TimeableContract
         event(
             new PlanetUpdated($movement->end_id)
         );
+
+        return $movement;
+    }
+
+    /**
+     * Create support from.
+     *
+     * @param Planet                  $planet
+     * @param Collection|Population[] $populations
+     * @param BaseCollection          $quantities
+     *
+     * @return static
+     */
+    public static function createSupportFrom(Planet $planet, Collection $populations, BaseCollection $quantities)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $travelTime = round(
+            $planet->travelTimeTo($user->current) / $populations->min('unit.speed')
+        );
+
+        $movement = static::create([
+            'start_id' => $user->current_id,
+            'end_id' => $planet->id,
+            'user_id' => $user->id,
+            'type' => self::TYPE_SUPPORT,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        foreach ($populations as $population) {
+            $population->decrementQuantity(
+                $quantities->get($population->unit_id)
+            );
+
+            $movement->units()->attach($population->unit_id, [
+                'quantity' => $quantities->get($population->unit_id),
+            ]);
+        }
+
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+
+        return $movement;
+    }
+
+    /**
+     * Create transport from.
+     *
+     * @param Planet             $planet
+     * @param Population         $population
+     * @param Collection|Stock[] $stocks
+     * @param int                $quantity
+     * @param BaseCollection     $quantities
+     *
+     * @return static
+     */
+    public static function createTransportFrom(Planet $planet, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $travelTime = round(
+            $planet->travelTimeTo($user->current) / $population->unit->speed
+        );
+
+        $movement = static::create([
+            'start_id' => $user->current_id,
+            'end_id' => $planet->id,
+            'user_id' => $user->id,
+            'type' => self::TYPE_TRANSPORT,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        $population->decrementQuantity($quantity);
+
+        $movement->units()->attach($population->unit->id, [
+            'quantity' => $quantity,
+        ]);
+
+        foreach ($stocks as $stock) {
+            $stock->decrementQuantity(
+                $quantities->get($stock->resource_id)
+            );
+
+            $movement->resources()->attach($stock->resource_id, [
+                'quantity' => $quantities->get($stock->resource_id),
+            ]);
+        }
+
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+
+        return $movement;
     }
 
     /**

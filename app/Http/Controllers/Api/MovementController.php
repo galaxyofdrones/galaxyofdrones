@@ -7,6 +7,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
+use Koodilab\Models\Stock;
 use Koodilab\Models\Unit;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -100,7 +101,6 @@ class MovementController extends Controller
             throw new BadRequestHttpException();
         }
 
-        /** @var \Koodilab\Models\Population $population */
         $population = $user->current->findPopulationByUnit(
             Unit::findByType(Unit::TYPE_SETTLER)
         );
@@ -116,17 +116,72 @@ class MovementController extends Controller
         });
     }
 
+    /**
+     * Store a newly created movement in storage.
+     *
+     * @param Planet $planet
+     *
+     * @return mixed|\Illuminate\Http\Response
+     */
     public function storeSupport(Planet $planet)
     {
         $this->authorize('friendly', $planet);
 
         $quantities = $this->quantities();
+
+        $populations = auth()->user()->current->findPopulationsByUnitIds($quantities->keys())
+            ->each(function (Population $population) use ($quantities) {
+                if (!$population->hasQuantity($quantities->get($population->unit_id))) {
+                    throw new BadRequestHttpException();
+                }
+            });
+
+        DB::transaction(function () use ($planet, $populations, $quantities) {
+            Movement::createSupportFrom(
+                $planet, $populations, $quantities
+            );
+        });
     }
 
+    /**
+     * Store a newly created movement in storage.
+     *
+     * @param Planet $planet
+     *
+     * @return mixed|\Illuminate\Http\Response
+     */
     public function storeTransport(Planet $planet)
     {
         $this->authorize('friendly', $planet);
 
         $quantities = $this->quantities();
+
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        $population = $user->current->findPopulationByUnit(
+            Unit::findByType(Unit::TYPE_TRANSPORTER)
+        );
+
+        $quantity = ceil(
+            $quantities->sum() / $population->unit->capacity
+        );
+
+        if (!$population || !$population->hasQuantity($quantity)) {
+            throw new BadRequestHttpException();
+        }
+
+        $stocks = $user->current->findStocksByResourceIds($quantities->keys())
+            ->each(function (Stock $stock) use ($quantities, $user) {
+                if (!$stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
+                    throw new BadRequestHttpException();
+                }
+            });
+
+        DB::transaction(function () use ($planet, $population, $stocks, $quantity, $quantities) {
+            Movement::createTransportFrom(
+                $planet, $population, $stocks, $quantity, $quantities
+            );
+        });
     }
 }

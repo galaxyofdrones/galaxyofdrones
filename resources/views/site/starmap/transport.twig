@@ -35,7 +35,7 @@
                 <div class="attribute-row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <button class="btn btn-success btn-block" :disabled="!canTransport">
+                            <button class="btn btn-success btn-block" :disabled="!canTransport" @click="transport()">
                                 {{ trans('messages.movement.transport') }}
                             </button>
                         </div>
