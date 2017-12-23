@@ -18,7 +18,9 @@
                         <li :class="{unread: hasUnread}">
                             <a href="#" @click.prevent="openMailbox()">
                                 <i class="icon-envelope"></i>
-                                <span class="notification"></span>
+                                <span class="notification">
+                                    {{ vue('data.notification_count') }}
+                                </span>
                             </a>
                         </li>
                         <li>

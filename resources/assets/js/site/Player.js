@@ -14,7 +14,8 @@ export default {
                 production_rate: 0,
                 experience: 0,
                 level_experience: 0,
-                next_level_experience: 0
+                next_level_experience: 0,
+                notification_count: 0
             }
         };
     },
@@ -25,7 +26,7 @@ export default {
 
     computed: {
         hasUnread() {
-            return false;
+            return this.data.notification_count > 0;
         },
 
         experienceLabel() {
