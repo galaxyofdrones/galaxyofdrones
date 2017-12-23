@@ -83,7 +83,9 @@ class TrainerController extends Controller
         ]);
 
         DB::transaction(function () use ($grid, $unit, $quantity) {
-            Training::createFrom($grid, $unit, $quantity);
+            Training::createFrom(
+                $grid, $unit, $quantity
+            );
         });
     }
 

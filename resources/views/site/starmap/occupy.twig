@@ -35,7 +35,7 @@
                 <div class="attribute-row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <button class="btn btn-success btn-block" :disabled="!canOccupy">
+                            <button class="btn btn-success btn-block" :disabled="!canOccupy" @click="occupy()">
                                 {{ trans('messages.movement.occupy') }}
                             </button>
                         </div>

@@ -65,7 +65,9 @@ class UpgradeController extends Controller
         }
 
         DB::transaction(function () use ($grid) {
-            Upgrade::createFrom($grid);
+            Upgrade::createFrom(
+                $grid
+            );
         });
     }
 

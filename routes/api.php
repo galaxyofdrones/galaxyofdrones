@@ -51,6 +51,14 @@ $router->group([
         $router->post('scout/{planet}', 'MovementController@storeScout')
             ->name('movement_scout')
             ->where('planet', '\d+');
+
+        $router->post('attack/{planet}', 'MovementController@storeAttack')
+            ->name('movement_attack')
+            ->where('planet', '\d+');
+
+        $router->post('occupy/{planet}', 'MovementController@storeOccupy')
+            ->name('movement_occupy')
+            ->where('planet', '\d+');
     });
 
     $router->group([

@@ -5,6 +5,7 @@ namespace Koodilab\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection as BaseCollection;
 use Koodilab\Contracts\Battle\Simulator;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
@@ -166,6 +167,95 @@ class Movement extends Model implements TimeableContract
 
         $movement->units()->attach($population->unit->id, [
             'quantity' => $quantity,
+        ]);
+
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+    }
+
+    /**
+     * Create attack from.
+     *
+     * @param Planet         $planet
+     * @param Collection     $populations
+     * @param BaseCollection $quantities
+     */
+    public static function createAttackFrom(Planet $planet, Collection $populations, BaseCollection $quantities)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $travelTime = round(
+            $planet->travelTimeTo($user->current) / $populations->min('unit.speed')
+        );
+
+        $movement = static::create([
+            'start_id' => $user->current_id,
+            'end_id' => $planet->id,
+            'user_id' => $user->id,
+            'type' => self::TYPE_ATTACK,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        foreach ($populations as $population) {
+            $population->decrementQuantity(
+                $quantities->get($population->unit_id)
+            );
+
+            $movement->units()->attach($population->unit_id, [
+                'quantity' => $quantities->get($population->unit_id),
+            ]);
+        }
+
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+    }
+
+    /**
+     * Create occupy from.
+     *
+     * @param Planet     $planet
+     * @param Population $population
+     */
+    public static function createOccupyFrom(Planet $planet, Population $population)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $travelTime = round(
+            $planet->travelTimeTo($user->current) / $population->unit->speed
+        );
+
+        $movement = static::create([
+            'start_id' => $user->current_id,
+            'end_id' => $planet->id,
+            'user_id' => $user->id,
+            'type' => self::TYPE_OCCUPY,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        $population->decrementQuantity(Planet::SETTLER_COUNT);
+
+        $movement->units()->attach($population->unit->id, [
+            'quantity' => Planet::SETTLER_COUNT,
         ]);
 
         dispatch(

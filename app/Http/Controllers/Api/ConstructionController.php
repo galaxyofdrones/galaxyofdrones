@@ -65,7 +65,9 @@ class ConstructionController extends Controller
         }
 
         DB::transaction(function () use ($grid, $building) {
-            Construction::createFrom($grid, $building);
+            Construction::createFrom(
+                $grid, $building
+            );
         });
     }
 

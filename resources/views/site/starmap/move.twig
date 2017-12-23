@@ -14,8 +14,8 @@
       }|json_encode }}"
       :urls="{{ {
           'scout': route('api_movement_scout', '__planet__'),
-          'attack': route('home'),
-          'occupy': route('home'),
+          'attack': route('api_movement_attack', '__planet__'),
+          'occupy': route('api_movement_occupy', '__planet__'),
           'support': route('home'),
           'transport': route('home')
       }|json_encode }}" inline-template>

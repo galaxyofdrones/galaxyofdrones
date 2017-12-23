@@ -195,6 +195,22 @@ export default Modal.extend({
             );
         },
 
+        attack() {
+            axios.post(this.urls.attack.replace('__planet__', this.selected.id), {
+                quantity: this.quantity
+            }).then(
+                () => this.$modal.modal('hide')
+            );
+        },
+
+        occupy() {
+            axios.post(
+                this.urls.occupy.replace('__planet__', this.selected.id)
+            ).then(
+                () => this.$modal.modal('hide')
+            );
+        },
+
         resourceQuantity(resource) {
             if (this.planet.resource_id === resource.id) {
                 return Math.floor(this.mined);
