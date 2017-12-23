@@ -58,6 +58,7 @@ class Unit extends Model
         Behaviors\Sortable,
         Behaviors\Researchable,
         Behaviors\Translatable,
+        Queries\FindByType,
         Relations\BelongsToManyUser,
         Relations\HasManyPopulation,
         Relations\HasManyTraining;

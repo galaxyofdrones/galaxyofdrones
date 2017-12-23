@@ -31,7 +31,7 @@
                                        :placeholder="scoutUnit.quantity | bracket"
                                        v-model.number="quantity[scoutUnit.id]">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-info btn-block" :disabled="!canScout">
+                                    <button class="btn btn-info btn-block" :disabled="!canScout" @click="scout()">
                                         {{ trans('messages.movement.scout') }}
                                     </button>
                                 </span>

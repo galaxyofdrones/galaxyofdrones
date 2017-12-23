@@ -46,6 +46,14 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'movement',
+    ], function () use ($router) {
+        $router->post('scout/{planet}', 'MovementController@storeScout')
+            ->name('movement_scout')
+            ->where('planet', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'upgrade',
     ], function () use ($router) {
         $router->get('{grid}', 'UpgradeController@index')

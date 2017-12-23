@@ -79,6 +79,7 @@ class Planet extends Model implements PositionableContract
         Queries\FindNotExpiredMissions,
         Queries\FindNotEmptyGrids,
         Queries\FindOutgoingMovements,
+        Queries\FindPopulationByUnit,
         Queries\FindStock,
         Queries\FindStocksByResourceIds,
         Queries\IncomingMovementCount,

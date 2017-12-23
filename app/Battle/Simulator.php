@@ -285,6 +285,7 @@ class Simulator implements SimulatorContract
             $losses = round($unit->pivot->quantity * $this->attackerLossRate);
 
             $this->battleLog->attackerUnits()->attach($unit->id, [
+                'owner' => BattleLog::OWNER_ATTACKER,
                 'quantity' => $unit->pivot->quantity,
                 'losses' => $losses,
             ]);
@@ -308,6 +309,7 @@ class Simulator implements SimulatorContract
                 $population->decrementQuantity(round($quantity * $this->defenderLossRate));
 
                 $this->battleLog->defenderUnits()->attach($population->unit_id, [
+                    'owner' => BattleLog::OWNER_DEFENDER,
                     'quantity' => $quantity,
                     'losses' => $quantity - $population->quantity,
                 ]);

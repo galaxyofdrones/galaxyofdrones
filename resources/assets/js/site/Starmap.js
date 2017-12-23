@@ -10,6 +10,7 @@ export default {
             map: undefined,
             zoom: 0,
             planet: {
+                id: undefined,
                 x: 0,
                 y: 0
             }
@@ -22,11 +23,13 @@ export default {
 
     mounted() {
         EventBus.$on('planet-updated', planet => {
+            const isSamePlanet = planet.id === this.planet.id;
+
             this.planet = planet;
 
             if (!this.map) {
                 this.initLeaflet();
-            } else {
+            } else if (!isSamePlanet) {
                 this.map.setView(this.center(), this.maxZoom);
             }
         });

@@ -36,7 +36,7 @@ class UserController extends Controller
      *
      * @param Planet $planet
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed|\Illuminate\Http\Response
      */
     public function current(Planet $planet)
     {

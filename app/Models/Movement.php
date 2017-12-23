@@ -139,6 +139,49 @@ class Movement extends Model implements TimeableContract
     }
 
     /**
+     * Create scout from.
+     *
+     * @param Planet     $planet
+     * @param Population $population
+     * @param int        $quantity
+     */
+    public static function createScoutFrom(Planet $planet, Population $population, $quantity)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $travelTime = round(
+            $planet->travelTimeTo($user->current) / $population->unit->speed
+        );
+
+        $movement = static::create([
+            'start_id' => $user->current_id,
+            'end_id' => $planet->id,
+            'user_id' => $user->id,
+            'type' => self::TYPE_SCOUT,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        $population->decrementQuantity($quantity);
+
+        $movement->units()->attach($population->unit->id, [
+            'quantity' => $quantity,
+        ]);
+
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function finish()

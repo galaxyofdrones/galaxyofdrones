@@ -10,6 +10,7 @@ use Koodilab\Models\Grid;
 use Koodilab\Models\Training;
 use Koodilab\Models\Transformers\TrainerTransformer;
 use Koodilab\Models\Unit;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TrainerController extends Controller
 {
@@ -33,7 +34,6 @@ class TrainerController extends Controller
     public function index(Grid $grid, TrainerTransformer $transformer)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_TRAINER]);
 
         return $transformer->transform($grid);
@@ -46,37 +46,32 @@ class TrainerController extends Controller
      * @param Grid    $grid
      * @param Unit    $unit
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed|\Illuminate\Http\Response
      */
     public function store(Request $request, Grid $grid, Unit $unit)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_TRAINER]);
 
         if ($grid->training) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
-        $quantity = (int) $request->get('quantity', 0);
-
-        if ($quantity <= 0) {
-            return $this->createBadRequestJsonResponse();
-        }
+        $quantity = $this->quantity();
 
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
         if (!$user->hasUnit($unit)) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         if (!$user->hasEnergy($quantity * $unit->train_cost)) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         if ($grid->planet->free_supply < $quantity * $unit->supply) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         $grid->building->applyModifiers([
@@ -97,14 +92,14 @@ class TrainerController extends Controller
      *
      * @param Grid $grid
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed|\Illuminate\Http\Response
      */
     public function destroy(Grid $grid)
     {
         $this->authorize('friendly', $grid->planet);
 
         if (!$grid->training) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($grid) {

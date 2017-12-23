@@ -7,6 +7,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\UpgradeTransformer;
 use Koodilab\Models\Upgrade;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpgradeController extends Controller
 {
@@ -39,28 +40,28 @@ class UpgradeController extends Controller
      *
      * @param Grid $grid
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed|\Illuminate\Http\Response
      */
     public function store(Grid $grid)
     {
         $this->authorize('friendly', $grid->planet);
 
         if (!$grid->building_id) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         if ($grid->upgrade) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         $building = $grid->upgradeBuilding();
 
         if (!$building) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         if (!auth()->user()->hasEnergy($building->construction_cost)) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($grid) {
@@ -73,14 +74,14 @@ class UpgradeController extends Controller
      *
      * @param Grid $grid
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed|\Illuminate\Http\Response
      */
     public function destroy(Grid $grid)
     {
         $this->authorize('friendly', $grid->planet);
 
         if (!$grid->upgrade) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($grid) {

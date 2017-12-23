@@ -2,13 +2,13 @@
 
 namespace Koodilab\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Resource;
 use Koodilab\Models\Transformers\ProducerTransformer;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProducerController extends Controller
 {
@@ -32,7 +32,6 @@ class ProducerController extends Controller
     public function index(Grid $grid, ProducerTransformer $transformer)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_PRODUCER]);
 
         return $transformer->transform($grid);
@@ -41,35 +40,29 @@ class ProducerController extends Controller
     /**
      * Store a newly created transmute in storage.
      *
-     * @param Request  $request
      * @param Grid     $grid
      * @param resource $resource
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed|\Illuminate\Http\Response
      */
-    public function store(Request $request, Grid $grid, Resource $resource)
+    public function store(Grid $grid, Resource $resource)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_PRODUCER]);
 
-        $quantity = (int) $request->get('quantity', 0);
-
-        if ($quantity <= 0) {
-            return $this->createBadRequestJsonResponse();
-        }
+        $quantity = $this->quantity();
 
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
         if (!$user->hasResource($resource)) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         $stock = $grid->planet->findStock($resource);
 
         if (!$stock->hasQuantity($quantity)) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($resource, $user, $stock, $quantity) {

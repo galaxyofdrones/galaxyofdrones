@@ -29,7 +29,6 @@ class ScoutController extends Controller
     public function index(Grid $grid, ScoutTransformer $transformer)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_SCOUT]);
 
         return $transformer->transform($grid);

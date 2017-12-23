@@ -11,6 +11,13 @@
           'fighter': constant('Koodilab\\Models\\Unit::TYPE_FIGHTER'),
           'heavyFighter': constant('Koodilab\\Models\\Unit::TYPE_HEAVY_FIGHTER'),
           'settler': constant('Koodilab\\Models\\Unit::TYPE_SETTLER')
+      }|json_encode }}"
+      :urls="{{ {
+          'scout': route('api_movement_scout', '__planet__'),
+          'attack': route('home'),
+          'occupy': route('home'),
+          'support': route('home'),
+          'transport': route('home')
       }|json_encode }}" inline-template>
     <div class="move modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">

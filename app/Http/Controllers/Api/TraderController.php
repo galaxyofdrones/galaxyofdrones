@@ -8,6 +8,7 @@ use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Mission;
 use Koodilab\Models\Transformers\TraderTransformer;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TraderController extends Controller
 {
@@ -31,7 +32,6 @@ class TraderController extends Controller
     public function index(Grid $grid, TraderTransformer $transformer)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
 
         return $transformer->transform($grid);
@@ -43,20 +43,19 @@ class TraderController extends Controller
      * @param Grid    $grid
      * @param Mission $mission
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed|\Illuminate\Http\Response
      */
     public function store(Grid $grid, Mission $mission)
     {
         $this->authorize('friendly', $grid->planet);
-
         $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
 
         if ($grid->planet_id != $mission->planet_id) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         if (!$mission->isCompletable()) {
-            return $this->createBadRequestJsonResponse();
+            throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($mission) {

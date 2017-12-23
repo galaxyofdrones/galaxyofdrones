@@ -2,7 +2,7 @@ import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['types', 'unitTypes'],
+    props: ['types', 'unitTypes', 'urls'],
 
     data() {
         return {
@@ -185,6 +185,14 @@ export default Modal.extend({
             this.selected = selected;
             this.quantity = {};
             this.$nextTick(() => this.$modal.modal());
+        },
+
+        scout() {
+            axios.post(this.urls.scout.replace('__planet__', this.selected.id), {
+                quantity: this.quantity[this.scoutUnit.id]
+            }).then(
+                () => this.$modal.modal('hide')
+            );
         },
 
         resourceQuantity(resource) {
