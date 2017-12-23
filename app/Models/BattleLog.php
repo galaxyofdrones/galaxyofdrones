@@ -126,16 +126,24 @@ class BattleLog extends Model
         ]);
 
         if ($battleLog->type == static::TYPE_SCOUT) {
-            $battleLog->attacker->notify(new BattleLogCreated($battleLog));
+            $battleLog->attacker->notify(
+                new BattleLogCreated($battleLog)
+            );
 
             if ($battleLog->defender_id && $battleLog->winner == static::WINNER_DEFENDER) {
-                $battleLog->defender->notify(new BattleLogCreated($battleLog));
+                $battleLog->defender->notify(
+                    new BattleLogCreated($battleLog)
+                );
             }
         } else {
-            $battleLog->attacker->notify(new BattleLogCreated($battleLog));
+            $battleLog->attacker->notify(
+                new BattleLogCreated($battleLog)
+            );
 
             if ($battleLog->defender_id) {
-                $battleLog->defender->notify(new BattleLogCreated($battleLog));
+                $battleLog->defender->notify(
+                    new BattleLogCreated($battleLog)
+                );
             }
         }
 

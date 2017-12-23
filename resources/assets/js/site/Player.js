@@ -81,7 +81,9 @@ export default {
                 return;
             }
 
-            Echo.private(`user.${this.data.id}`).listen('.updated', this.fetchData);
+            Echo.private(`user.${this.data.id}`)
+                .listen('.updated', this.fetchData)
+                .notification(this.fetchData);
 
             this.isSubscribed = true;
         },
