@@ -142,4 +142,7 @@ $router->group([
             ->name('user_current')
             ->where('planet', '\d+');
     });
+
+    $router->put('profile', 'ProfileController@update')
+        ->name('profile_update');
 });

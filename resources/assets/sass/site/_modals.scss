@@ -3,3 +3,11 @@
         border-top: 1px solid $modal-header-border-color;
     }
 }
+
+@media (min-width: $screen-sm-min) {
+    .modal {
+        &.setting .modal-dialog {
+            max-width: 360px;
+        }
+    }
+}

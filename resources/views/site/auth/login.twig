@@ -22,8 +22,11 @@
                         <label class="control-label required" for="username_or_email">
                             {{ trans('validation.attributes.username_or_email') }}
                         </label>
-                        <input id="username_or_email" class="form-control input-lg" type="text"
-                               name="username_or_email" value="{{ old('username_or_email') }}"
+                        <input id="username_or_email"
+                               class="form-control input-lg"
+                               type="text"
+                               name="username_or_email"
+                               value="{{ old('username_or_email') }}"
                                placeholder="{{ trans('validation.attributes.username_or_email') }}" required>
                         {% if errors.has('username_or_email') %}
                             <span class="help-block">
@@ -35,7 +38,10 @@
                         <label class="control-label required" for="password">
                             {{ trans('validation.attributes.password') }}
                         </label>
-                        <input id="password" class="form-control input-lg" type="password" name="password"
+                        <input id="password"
+                               class="form-control input-lg"
+                               type="password"
+                               name="password"
                                placeholder="{{ trans('validation.attributes.password') }}" required>
                         {% if errors.has('password') %}
                             <span class="help-block">

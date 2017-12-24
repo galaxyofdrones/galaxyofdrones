@@ -14,6 +14,7 @@ class UserTransformer extends Transformer
         return [
             'id' => $item->id,
             'username' => $item->username,
+            'email' => $item->email,
             'energy' => $item->energy,
             'production_rate' => $item->production_rate,
             'level' => $item->level,

@@ -11,6 +11,7 @@ return [
     'mothership' => 'Mothership',
     'owner' => 'Owner',
     'required_quantity' => 'Required quantity',
+    'save' => 'Save',
     'starmap' => 'Starmap',
     'start' => 'Start',
     'transmute' => 'Transmute',
