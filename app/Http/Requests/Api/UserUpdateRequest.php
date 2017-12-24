@@ -4,7 +4,7 @@ namespace Koodilab\Http\Requests\Api;
 
 use Koodilab\Http\Requests\Request;
 
-class ProfileUpdateRequest extends Request
+class UserUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

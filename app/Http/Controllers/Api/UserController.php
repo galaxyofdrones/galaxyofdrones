@@ -2,9 +2,13 @@
 
 namespace Koodilab\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
+use Koodilab\Http\Requests\Api\UserUpdateRequest;
 use Koodilab\Models\Planet;
+use Koodilab\Models\Transformers\UserShowTransformer;
 use Koodilab\Models\Transformers\UserTransformer;
+use Koodilab\Models\User;
 
 class UserController extends Controller
 {
@@ -22,13 +26,40 @@ class UserController extends Controller
      *
      * @param UserTransformer $transformer
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(UserTransformer $transformer)
     {
         return $transformer->transform(
             auth()->user()
         );
+    }
+
+    /**
+     * Show the user in json format.
+     *
+     * @param User                $user
+     * @param UserShowTransformer $transformer
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function show(User $user, UserShowTransformer $transformer)
+    {
+        return $transformer->transform($user);
+    }
+
+    /**
+     * Update the user in storage.
+     *
+     * @param UserUpdateRequest $request
+     *
+     * @return mixed|\Illuminate\Http\Response
+     */
+    public function update(UserUpdateRequest $request)
+    {
+        DB::transaction(function () use ($request) {
+            $request->persist();
+        });
     }
 
     /**

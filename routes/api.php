@@ -28,12 +28,12 @@ $router->group([
         $router->get('/', 'PlanetController@index')
             ->name('planet');
 
-        $router->put('name', 'PlanetController@name')
-            ->name('planet_name');
-
         $router->get('{planet}', 'PlanetController@show')
             ->name('planet_show')
             ->where('planet', '\d+');
+
+        $router->put('name', 'PlanetController@name')
+            ->name('planet_name');
     });
 
     $router->group([
@@ -138,11 +138,14 @@ $router->group([
         $router->get('/', 'UserController@index')
             ->name('user');
 
+        $router->get('{user}', 'UserController@show')
+            ->name('user_show');
+
+        $router->put('/', 'UserController@update')
+            ->name('user_update');
+
         $router->put('current/{planet}', 'UserController@current')
             ->name('user_current')
             ->where('planet', '\d+');
     });
-
-    $router->put('profile', 'ProfileController@update')
-        ->name('profile_update');
 });

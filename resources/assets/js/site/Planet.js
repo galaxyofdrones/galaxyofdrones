@@ -49,22 +49,15 @@ export default Modal.extend({
     methods: {
         open(geoJsonPoint) {
             this.geoJsonPoint = geoJsonPoint;
-            this.fetchData(true);
+            this.fetchData();
         },
 
-        fetchData(showModal = false) {
-            if (!showModal && !this.isEnabled) {
-                return;
-            }
-
+        fetchData() {
             axios.get(
                 this.url.replace('__planet__', this.properties.id)
             ).then(response => {
                 this.data = response.data;
-
-                if (showModal) {
-                    this.$nextTick(() => this.$modal.modal());
-                }
+                this.$nextTick(() => this.$modal.modal());
             });
         },
 

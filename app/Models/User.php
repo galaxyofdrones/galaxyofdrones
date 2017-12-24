@@ -81,6 +81,7 @@ class User extends Authenticatable
         Concerns\HasEnergy,
         Concerns\HasExperience,
         Concerns\HasResearchable,
+        Queries\FindByIdOrUsername,
         Queries\FindPlanetsOrderByName,
         Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,

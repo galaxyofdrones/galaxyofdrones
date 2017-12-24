@@ -2,9 +2,12 @@ import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
+    props: ['url'],
+
     data() {
         return {
-            username: ''
+            username: '',
+            data: {}
         };
     },
 
@@ -15,7 +18,16 @@ export default Modal.extend({
     methods: {
         open(username) {
             this.username = username;
-            this.$nextTick(() => this.$modal.modal());
+            this.fetchData();
+        },
+
+        fetchData() {
+            axios.get(
+                this.url.replace('__user__', this.username)
+            ).then(response => {
+                this.data = response.data;
+                this.$nextTick(() => this.$modal.modal());
+            });
         }
     }
 });

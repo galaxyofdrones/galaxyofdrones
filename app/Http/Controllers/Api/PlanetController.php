@@ -34,6 +34,21 @@ class PlanetController extends Controller
     }
 
     /**
+     * Show the planet in json format.
+     *
+     * @param Planet                $planet
+     * @param PlanetShowTransformer $transformer
+     *
+     * @return \Illuminate\Http\JsonResponse|array
+     */
+    public function show(Planet $planet, PlanetShowTransformer $transformer)
+    {
+        $this->authorize('friendly', $planet);
+
+        return $transformer->transform($planet);
+    }
+
+    /**
      * Update the current name.
      *
      * @param Request $request
@@ -49,20 +64,5 @@ class PlanetController extends Controller
         auth()->user()->current->update([
             'custom_name' => $request->get('name'),
         ]);
-    }
-
-    /**
-     * Show the planet in json format.
-     *
-     * @param Planet                $planet
-     * @param PlanetShowTransformer $transformer
-     *
-     * @return \Illuminate\Http\JsonResponse|array
-     */
-    public function show(Planet $planet, PlanetShowTransformer $transformer)
-    {
-        $this->authorize('friendly', $planet);
-
-        return $transformer->transform($planet);
     }
 }
