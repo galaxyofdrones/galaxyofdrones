@@ -1,6 +1,18 @@
+import Moment from 'moment';
+
 export default {
     bracket(value) {
         return `(${value})`;
+    },
+
+    fromNow(value) {
+        const datetime = Moment(value, 'YYYY-MM-DD HH:mm:ss');
+
+        if (!datetime.isValid()) {
+            return value;
+        }
+
+        return datetime.fromNow();
     },
 
     item(value, type = 'resource') {

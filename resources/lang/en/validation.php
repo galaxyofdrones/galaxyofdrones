@@ -134,7 +134,9 @@ return [
         'frequency' => 'Frequency',
         'incoming' => 'Incoming',
         'level' => 'Level',
+        'losing_battles' => 'Losing battles',
         'mining_rate' => 'Mining rate',
+        'missions' => 'Missions',
         'mission_time' => 'Mission time',
         'outgoing' => 'Outgoing',
         'password' => 'Password',
@@ -150,6 +152,7 @@ return [
         'transmute_time' => 'Transmute time',
         'upgrade' => 'Upgrade',
         'username_or_email' => 'Username / E-mail',
+        'winning_battles' => 'Winning battles',
     ],
 
 ];

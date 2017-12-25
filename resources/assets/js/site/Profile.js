@@ -1,18 +1,27 @@
 import { EventBus } from '../common/event-bus';
+import Filters from './Filters';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url'],
+    props: ['url', 'translations'],
 
     data() {
         return {
             username: '',
-            data: {}
+            data: {
+                created_at: ''
+            }
         };
     },
 
     created() {
         EventBus.$on('profile-click', this.open);
+    },
+
+    computed: {
+        joined() {
+            return this.translations.joined.replace('__datetime__', Filters.fromNow(this.data.created_at));
+        }
     },
 
     methods: {

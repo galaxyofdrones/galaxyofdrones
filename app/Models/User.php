@@ -85,6 +85,8 @@ class User extends Authenticatable
         Queries\FindPlanetsOrderByName,
         Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,
+        Queries\LosingBattleLogCount,
+        Queries\WinningBattleLogCount,
         Relations\BelongsToManyResource,
         Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,

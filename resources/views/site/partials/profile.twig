@@ -1,4 +1,9 @@
-<profile url="{{ route('api_user_show', '__user__') }}" inline-template>
+<profile url="{{ route('api_user_show', '__user__') }}"
+         :translations="{{ {
+             'joined': trans('messages.user.joined', {
+                 'datetime': '__datetime__'
+             })
+         }|json_encode }}" inline-template>
     <div class="profile modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -14,6 +19,56 @@
                     <div class="row">
                         <div class="col-md-6 text-center">
                             <span class="item mothership"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>
+                                {{ vue('data.username_with_level') }}
+                            </h4>
+                            <p>
+                                {{ vue('joined') }}
+                            </p>
+                            <div class="attribute-row">
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('validation.attributes.experience') }}
+                                        </h6>
+                                        <h4>
+                                            {{ vue('data.experience | number') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('validation.attributes.missions') }}
+                                        </h6>
+                                        <h4>
+                                            {{ vue('data.mission_count | number') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('validation.attributes.winning_battles') }}
+                                        </h6>
+                                        <h4 class="highlight-success">
+                                            {{ vue('data.winning_battle_count | number') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('validation.attributes.losing_battles') }}
+                                        </h6>
+                                        <h4 class="highlight-danger">
+                                            {{ vue('data.losing_battle_count | number') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -97,6 +97,11 @@ return [
         'singular' => 'Upgrade',
     ],
 
+    'user' => [
+        'joined' => 'Joined the battle :datetime.',
+        'username_with_level' => ':username (Level :level)',
+    ],
+
     'warning' => [
         'server' => 'Sorry, the server is full :(',
     ],
