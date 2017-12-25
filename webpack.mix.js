@@ -1,4 +1,5 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+const webpack = require('webpack');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,11 +16,9 @@ mix.options({
     processCssUrls: false
 })
     .webpackConfig({
-        resolve: {
-            alias: {
-                jquery: path.join(__dirname, 'node_modules/jquery/dist/jquery')
-            }
-        }
+        plugins: [
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+        ]
     })
     .js('resources/assets/js/admin.js', 'public/js')
     .js('resources/assets/js/site.js', 'public/js')

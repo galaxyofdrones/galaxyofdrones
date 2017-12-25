@@ -41,7 +41,7 @@ class UserShowTransformer extends Transformer
             'mission_count' => $item->missionLogs()->count(),
             'winning_battle_count' => $item->winningBattleLogCount(),
             'losing_battle_count' => $item->losingBattleLogCount(),
-            'created_at' => $item->created_at->toDateString(),
+            'created_at' => $item->created_at->toDateTimeString(),
         ];
     }
 }

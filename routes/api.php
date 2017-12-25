@@ -6,6 +6,21 @@ $router->group([
     'namespace' => 'Api',
 ], function () use ($router) {
     $router->group([
+        'prefix' => 'bookmark',
+    ], function () use ($router) {
+        $router->get('/', 'BookmarkController@index')
+            ->name('bookmark');
+
+        $router->post('{star}', 'BookmarkController@store')
+            ->name('bookmark_store')
+            ->where('star', '\d+');
+
+        $router->delete('{bookmark}', 'BookmarkController@destroy')
+            ->name('bookmark_destroy')
+            ->where('bookmark', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'construction',
     ], function () use ($router) {
         $router->get('{grid}', 'ConstructionController@index')
@@ -34,6 +49,14 @@ $router->group([
 
         $router->put('name', 'PlanetController@name')
             ->name('planet_name');
+    });
+
+    $router->group([
+        'prefix' => 'star',
+    ], function () use ($router) {
+        $router->get('{star}', 'StarController@show')
+            ->name('star_show')
+            ->where('star', '\d+');
     });
 
     $router->group([

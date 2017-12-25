@@ -26,7 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Bookmark extends Model
 {
-    use Relations\BelongsToStar,
+    use Queries\FindByStarAndUser,
+        Relations\BelongsToStar,
         Relations\BelongsToUser;
 
     /**

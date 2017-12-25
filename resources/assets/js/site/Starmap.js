@@ -33,6 +33,10 @@ export default {
                 this.map.setView(this.center(), this.maxZoom);
             }
         });
+
+        EventBus.$on('starmap-move', (x, y) => this.map.setView(
+            this.unproject(x, y), this.maxZoom
+        ));
     },
 
     methods: {
@@ -112,20 +116,26 @@ export default {
         },
 
         center() {
-            return this.map.unproject([
+            return this.unproject(
                 this.planet.x, this.planet.y
-            ], this.zoom);
+            );
         },
 
         southWest() {
-            return this.map.unproject([
+            return this.unproject(
                 0, 0
-            ], this.zoom);
+            );
         },
 
         northEast() {
-            return this.map.unproject([
+            return this.unproject(
                 this.size, this.size
+            );
+        },
+
+        unproject(x, y) {
+            return this.map.unproject([
+                x, y
             ], this.zoom);
         },
 

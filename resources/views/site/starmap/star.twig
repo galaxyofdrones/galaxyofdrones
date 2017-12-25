@@ -1,4 +1,5 @@
-<star inline-template>
+<star url="{{ route('api_star_show', '__star__') }}"
+      bookmark-store-url="{{ route('api_bookmark_store', '__star__') }}" inline-template>
     <div class="star modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -41,7 +42,7 @@
                             <div class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <button class="btn btn-info btn-block">
+                                        <button class="btn btn-info btn-block" :disabled="data.isBookmarked" @click="bookmark()">
                                             {{ trans('messages.bookmark.star') }}
                                         </button>
                                     </div>

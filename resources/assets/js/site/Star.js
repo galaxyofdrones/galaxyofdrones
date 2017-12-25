@@ -2,6 +2,8 @@ import { EventBus } from '../common/event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
+    props: ['url', 'bookmarkStoreUrl'],
+
     data() {
         return {
             geoJsonPoint: {
@@ -9,6 +11,9 @@ export default Modal.extend({
                 geometry: {
                     coordinates: []
                 }
+            },
+            data: {
+                isBookmarked: false
             }
         };
     },
@@ -30,7 +35,24 @@ export default Modal.extend({
     methods: {
         open(geoJsonPoint) {
             this.geoJsonPoint = geoJsonPoint;
-            this.$nextTick(() => this.$modal.modal());
+            this.fetchData();
+        },
+
+        fetchData() {
+            axios.get(
+                this.url.replace('__star__', this.properties.id)
+            ).then(response => {
+                this.data = response.data;
+                this.$nextTick(() => this.$modal.modal());
+            });
+        },
+
+        bookmark() {
+            this.data.isBookmarked = true;
+
+            axios.post(
+                this.bookmarkStoreUrl.replace('__star__', this.properties.id)
+            );
         }
     }
 });

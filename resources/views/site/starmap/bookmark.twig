@@ -1,4 +1,5 @@
-<bookmark inline-template>
+<bookmark url="{{ route('api_bookmark') }}"
+          destroy-url="{{ route('api_bookmark_destroy', '__bookmark__') }}" inline-template>
     <div class="bookmark modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -10,8 +11,40 @@
                         {{ trans('messages.bookmark.plural') }}
                     </h4>
                 </div>
-                <div class="modal-body">
-
+                <div v-if="isEmpty" class="modal-body">
+                    <p class="text-center">
+                        {{ trans('messages.bookmark.empty') }}
+                    </p>
+                </div>
+                <div v-else
+                     v-for="(bookmark, index) in data.bookmarks"
+                     class="modal-body"
+                     :class="{separator: index > 0}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="item item-sm star">
+                                {{ vue('bookmark.name') }}
+                            </span>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h4>
+                                <i class="icon-time"></i>
+                            </h4>
+                            <h4>
+                                {{ vue('bookmark.created_at | fromNow') }}
+                            </h4>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="form-group">
+                                <button class="btn btn-info btn-block" @click="move(bookmark)">
+                                    {{ trans('messages.move') }}
+                                </button>
+                                <button class="btn btn-danger btn-block" @click="destroy(bookmark)">
+                                    {{ trans('messages.delete') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

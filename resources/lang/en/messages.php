@@ -3,12 +3,14 @@
 return [
 
     'cancel' => 'Cancel',
+    'delete' => 'Delete',
     'energy' => 'Energy',
     'free' => 'Free',
     'info' => 'Info',
     'instant' => 'Instant',
     'mailbox' => 'Mailbox',
     'mothership' => 'Mothership',
+    'move' => 'Move',
     'owner' => 'Owner',
     'required_quantity' => 'Required quantity',
     'save' => 'Save',
@@ -28,6 +30,7 @@ return [
     ],
 
     'bookmark' => [
+        'empty' => 'No bookmarks.',
         'plural' => 'Bookmarks',
         'star' => 'Bookmark this star',
     ],
