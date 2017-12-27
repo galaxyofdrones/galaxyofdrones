@@ -26,7 +26,7 @@ class UpgradeController extends Controller
      * @param Grid               $grid
      * @param UpgradeTransformer $transformer
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, UpgradeTransformer $transformer)
     {

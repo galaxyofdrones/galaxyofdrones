@@ -27,7 +27,7 @@ class TraderController extends Controller
      * @param TraderTransformer $transformer
      * @param Grid              $grid
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, TraderTransformer $transformer)
     {

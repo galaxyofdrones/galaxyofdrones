@@ -24,7 +24,7 @@ class PlanetController extends Controller
      *
      * @param PlanetTransformer $transformer
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(PlanetTransformer $transformer)
     {
@@ -39,7 +39,7 @@ class PlanetController extends Controller
      * @param Planet                $planet
      * @param PlanetShowTransformer $transformer
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function show(Planet $planet, PlanetShowTransformer $transformer)
     {

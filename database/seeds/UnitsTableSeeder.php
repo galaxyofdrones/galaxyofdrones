@@ -138,9 +138,9 @@ class UnitsTableSeeder extends Seeder
             'description' => [
                 'en' => 'Destroys the buildings.',
             ],
-            'research_experience' => 122500,
-            'research_cost' => 245000,
-            'research_time' => 490000,
+            'research_experience' => 61250,
+            'research_cost' => 122500,
+            'research_time' => 245000,
         ]);
 
         Unit::create([

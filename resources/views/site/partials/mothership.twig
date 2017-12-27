@@ -7,7 +7,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title">
-                        {{ trans('messages.mothership') }}
+                        {{ trans('messages.mothership.singular') }}
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -15,8 +15,18 @@
                         <div class="col-md-6 text-center">
                             <span class="item mothership"></span>
                         </div>
+                        <div class="col-md-6">
+                            <h4>
+                                {{ trans('messages.mothership.singular') }}
+                            </h4>
+                            <p>
+                                {{ trans('messages.mothership.description') }}
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                {% include 'site.partials.laboratory' %}
             </div>
         </div>
     </div>

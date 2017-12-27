@@ -24,7 +24,7 @@ class ScoutController extends Controller
      * @param ScoutTransformer $transformer
      * @param Grid             $grid
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, ScoutTransformer $transformer)
     {

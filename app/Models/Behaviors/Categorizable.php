@@ -9,18 +9,6 @@ trait Categorizable
     use NodeTrait;
 
     /**
-     * Get a scoped model.
-     *
-     * @param array $attributes
-     *
-     * @return static
-     */
-    public static function scopedModel(array $attributes = [])
-    {
-        return new static($attributes);
-    }
-
-    /**
      * Find all roots.
      *
      * @param array $columns

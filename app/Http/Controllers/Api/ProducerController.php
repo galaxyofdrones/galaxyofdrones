@@ -27,7 +27,7 @@ class ProducerController extends Controller
      * @param Grid                $grid
      * @param ProducerTransformer $transformer
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, ProducerTransformer $transformer)
     {

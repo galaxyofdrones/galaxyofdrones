@@ -52,6 +52,13 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'research',
+    ], function () use ($router) {
+        $router->get('/', 'ResearchController@index')
+            ->name('research');
+    });
+
+    $router->group([
         'prefix' => 'star',
     ], function () use ($router) {
         $router->get('{star}', 'StarController@show')

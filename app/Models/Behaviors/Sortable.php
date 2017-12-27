@@ -17,18 +17,6 @@ trait Sortable
     }
 
     /**
-     * Get a scoped model.
-     *
-     * @param array $attributes
-     *
-     * @return static
-     */
-    public static function scopedModel(array $attributes = [])
-    {
-        return new static($attributes);
-    }
-
-    /**
      * Find all order by sort order.
      *
      * @param array $columns

@@ -6,6 +6,7 @@ export default Building.extend({
 
     data() {
         return {
+            isResearch: false,
             mined: 0,
             quantity: '',
             planet: {

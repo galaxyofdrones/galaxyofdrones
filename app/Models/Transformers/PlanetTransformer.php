@@ -75,7 +75,7 @@ class PlanetTransformer extends Transformer
     {
         $stocks = $planet->stocks->keyBy('resource_id');
 
-        return Resource::scopedModel()
+        return Resource::newModelInstance()
             ->findAllOrderBySortOrder()
             ->transform(function (Resource $resource) use ($stocks) {
                 return [
@@ -100,7 +100,7 @@ class PlanetTransformer extends Transformer
     {
         $populations = $planet->populations->keyBy('unit_id');
 
-        return Unit::scopedModel()
+        return Unit::newModelInstance()
             ->findAllOrderBySortOrder()
             ->transform(function (Unit $unit) use ($populations) {
                 return [

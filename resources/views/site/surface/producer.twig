@@ -7,7 +7,7 @@
         <div class="modal-body separator">
             <div class="tab-content" v-if="data.resources.length">
                 <div v-for="resource in data.resources" class="tab-pane" :class="{active: isSelected(resource)}">
-                    {% include 'site.surface.resource' %}
+                    {% include 'site.partials.resource' %}
                 </div>
             </div>
         </div>

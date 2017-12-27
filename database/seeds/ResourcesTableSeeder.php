@@ -33,7 +33,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'research_experience' => 10875,
             'research_cost' => 21750,
-            'research_time' => 43500,
+            'research_time' => 14500,
         ]);
 
         Resource::create([
@@ -47,7 +47,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'research_experience' => 21000,
             'research_cost' => 42000,
-            'research_time' => 84000,
+            'research_time' => 28000,
         ]);
 
         Resource::create([
@@ -61,7 +61,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'research_experience' => 41375,
             'research_cost' => 82750,
-            'research_time' => 165500,
+            'research_time' => 55166,
         ]);
 
         Resource::create([
@@ -75,7 +75,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'research_experience' => 72500,
             'research_cost' => 145000,
-            'research_time' => 290000,
+            'research_time' => 96666,
         ]);
 
         Resource::create([
@@ -89,7 +89,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'research_experience' => 119250,
             'research_cost' => 238500,
-            'research_time' => 477000,
+            'research_time' => 159000,
         ]);
 
         Resource::create([
@@ -103,7 +103,7 @@ class ResourcesTableSeeder extends Seeder
             ],
             'research_experience' => 183687,
             'research_cost' => 367375,
-            'research_time' => 734750,
+            'research_time' => 244916,
         ]);
     }
 }

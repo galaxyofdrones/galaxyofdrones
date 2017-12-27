@@ -8,7 +8,7 @@
         <div class="modal-body separator">
             <div class="tab-content" v-if="data.units.length">
                 <div v-for="unit in data.units" class="tab-pane" :class="{active: isSelected(unit)}">
-                    {% include 'site.surface.unit' %}
+                    {% include 'site.partials.unit' %}
                 </div>
             </div>
         </div>

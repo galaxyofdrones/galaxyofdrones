@@ -61,7 +61,25 @@
                 </div>
             </div>
         </div>
-        <ul class="list-inline">
+        <ul v-if="isResearch" class="list-inline">
+            <li data-content="{{ trans('validation.attributes.research_experience') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-xp"></i>
+                {{ vue('unit.research_experience | number') }}
+            </li>
+            <li class="highlight-warning"
+                data-content="{{ trans('validation.attributes.research_cost') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-energy"></i>
+                {{ vue('unit.research_cost | number') }}
+            </li>
+            <li data-content="{{ trans('validation.attributes.research_time') }}"
+                v-popover="{placement: 'top', trigger: 'hover'}">
+                <i class="icon-time"></i>
+                {{ vue('unit.research_time | timer') }}
+            </li>
+        </ul>
+        <ul v-else class="list-inline">
             <li data-content="{{ trans('validation.attributes.supply') }}"
                 v-popover="{placement: 'top', trigger: 'hover'}">
                 <i class="icon-supply"></i>
@@ -78,7 +96,7 @@
                 {{ vue('unit.train_time | timer') }}
             </li>
         </ul>
-        <div class="attribute-row" v-if="remaining">
+        <div v-if="remaining" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-warning btn-block" @click="destroy()">
@@ -90,7 +108,16 @@
                 <h4>{{ vue('remaining | timer') }}</h4>
             </div>
         </div>
-        <div class="attribute-row" v-else>
+        <div v-else-if="isResearch" class="attribute-row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <button class="btn btn-success btn-block" @click="store(unit)">
+                        {{ trans('messages.research.singular') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div v-else class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <div class="input-group">

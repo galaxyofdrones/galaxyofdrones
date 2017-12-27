@@ -27,7 +27,7 @@ class ConstructionController extends Controller
      * @param Grid                    $grid
      * @param ConstructionTransformer $transformer
      *
-     * @return \Illuminate\Http\JsonResponse|array
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, ConstructionTransformer $transformer)
     {

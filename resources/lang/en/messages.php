@@ -9,7 +9,6 @@ return [
     'info' => 'Info',
     'instant' => 'Instant',
     'mailbox' => 'Mailbox',
-    'mothership' => 'Mothership',
     'move' => 'Move',
     'owner' => 'Owner',
     'required_quantity' => 'Required quantity',
@@ -59,6 +58,11 @@ return [
         'empty' => 'No missions.',
     ],
 
+    'mothership' => [
+        'singular' => 'Mothership',
+        'description' => 'The mothership is circling around the capital planet and protects it from occupation.',
+    ],
+
     'movement' => [
         'attack' => 'Attack',
         'empty' => 'No movemenets.',
@@ -72,6 +76,11 @@ return [
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
         'jump' => 'Jump to surface',
+    ],
+
+    'research' => [
+        'empty' => 'No researches.',
+        'singular' => 'Research',
     ],
 
     'resource' => [

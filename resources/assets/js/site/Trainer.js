@@ -6,6 +6,7 @@ export default Building.extend({
 
     data() {
         return {
+            isResearch: false,
             energy: 0,
             supply: 0,
             quantity: '',
