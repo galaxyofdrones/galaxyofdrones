@@ -1,7 +1,10 @@
 import Research from './Research';
+import { EventBus } from '../common/event-bus';
 
 export default {
-    props: ['isEnabled', 'url'],
+    props: [
+        'isEnabled', 'url', 'storeResourceUrl', 'storeUnitUrl', 'destroyResourceUrl', 'destroyUnitUrl'
+    ],
 
     components: {
         Research
@@ -9,11 +12,17 @@ export default {
 
     data() {
         return {
+            energy: 0,
             data: {
-                resource: {},
+                resource: undefined,
                 units: []
             }
         };
+    },
+
+    created() {
+        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('user-updated', () => this.fetchData());
     },
 
     computed: {
@@ -39,20 +48,28 @@ export default {
             );
         },
 
-        storeResource(resource) {
-
+        isResearchable(research) {
+            return this.energy >= research.research_cost;
         },
 
-        destroyResource(resource) {
+        storeResource() {
+            axios.post(this.storeResourceUrl);
+        },
 
+        destroyResource() {
+            axios.delete(this.destroyResourceUrl);
         },
 
         storeUnit(unit) {
-
+            axios.post(
+                this.storeUnitUrl.replace('__unit__', unit.id)
+            );
         },
 
         destroyUnit(unit) {
-
+            axios.delete(
+                this.destroyUnitUrl.replace('__unit__', unit.id)
+            );
         }
     }
 };

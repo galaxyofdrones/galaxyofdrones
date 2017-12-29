@@ -55,7 +55,7 @@ class PlanetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function name(Request $request)
+    public function updateName(Request $request)
     {
         if (!$request->has('name')) {
             return response('Bad Request.', 400);

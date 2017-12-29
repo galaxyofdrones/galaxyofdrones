@@ -1,7 +1,6 @@
 <sidebar planet-url="{{ route('api_planet') }}"
-         planet-name-url="{{ route('api_planet_name') }}"
-         user-current-url="{{ route('api_user_current', '__planet__') }}"
-         inline-template>
+         planet-name-url="{{ route('api_planet_name_update') }}"
+         user-current-url="{{ route('api_user_current_update', '__planet__') }}" inline-template>
     <div class="sidebar" :class="{active: isActive}">
         <div class="sidebar-content" ref="scrollbar">
             <div class="sidebar-block" v-cloak>

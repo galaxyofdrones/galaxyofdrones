@@ -1,12 +1,18 @@
 import Remaining from './Remaining';
 
 export default Remaining.extend({
-    props: ['research', 'store', 'destroy'],
+    props: ['research', 'isResearchable', 'store', 'destroy'],
 
     data() {
         return {
             isResearch: true
         };
+    },
+
+    created() {
+        this.initRemaining(
+            this.research.remaining
+        );
     },
 
     computed: {
@@ -19,9 +25,11 @@ export default Remaining.extend({
         }
     },
 
-    created() {
-        this.initRemaining(
-            this.research.remaining
-        );
+    watch: {
+        research() {
+            this.initRemaining(
+                this.research.remaining
+            );
+        }
     }
 });

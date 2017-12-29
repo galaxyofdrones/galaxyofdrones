@@ -47,8 +47,8 @@ $router->group([
             ->name('planet_show')
             ->where('planet', '\d+');
 
-        $router->put('name', 'PlanetController@name')
-            ->name('planet_name');
+        $router->put('name', 'PlanetController@updateName')
+            ->name('planet_name_update');
     });
 
     $router->group([
@@ -56,6 +56,20 @@ $router->group([
     ], function () use ($router) {
         $router->get('/', 'ResearchController@index')
             ->name('research');
+
+        $router->post('/resource', 'ResearchController@storeResource')
+            ->name('research_resource_store');
+
+        $router->post('{unit}', 'ResearchController@storeUnit')
+            ->name('research_unit_store')
+            ->where('unit', '\d+');
+
+        $router->delete('/resource', 'ResearchController@destroyResource')
+            ->name('research_resource_destroy');
+
+        $router->delete('{unit}', 'ResearchController@destroyUnit')
+            ->name('research_unit_destroy')
+            ->where('unit', '\d+');
     });
 
     $router->group([
@@ -79,23 +93,23 @@ $router->group([
         'prefix' => 'movement',
     ], function () use ($router) {
         $router->post('scout/{planet}', 'MovementController@storeScout')
-            ->name('movement_scout')
+            ->name('movement_scout_store')
             ->where('planet', '\d+');
 
         $router->post('attack/{planet}', 'MovementController@storeAttack')
-            ->name('movement_attack')
+            ->name('movement_attack_store')
             ->where('planet', '\d+');
 
         $router->post('occupy/{planet}', 'MovementController@storeOccupy')
-            ->name('movement_occupy')
+            ->name('movement_occupy_store')
             ->where('planet', '\d+');
 
         $router->post('support/{planet}', 'MovementController@storeSupport')
-            ->name('movement_support')
+            ->name('movement_support_store')
             ->where('planet', '\d+');
 
         $router->post('transport/{planet}', 'MovementController@storeTransport')
-            ->name('movement_transport')
+            ->name('movement_transport_store')
             ->where('planet', '\d+');
     });
 
@@ -168,14 +182,21 @@ $router->group([
         $router->get('/', 'UserController@index')
             ->name('user');
 
+        $router->get('capital', 'UserController@capital')
+            ->name('user_capital');
+
         $router->get('{user}', 'UserController@show')
             ->name('user_show');
 
         $router->put('/', 'UserController@update')
             ->name('user_update');
 
-        $router->put('current/{planet}', 'UserController@current')
-            ->name('user_current')
+        $router->put('capital/{planet}', 'UserController@updateCapital')
+            ->name('user_capital_update')
+            ->where('planet', '\d+');
+
+        $router->put('current/{planet}', 'UserController@updateCurrent')
+            ->name('user_current_update')
             ->where('planet', '\d+');
     });
 });

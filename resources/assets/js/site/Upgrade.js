@@ -14,6 +14,7 @@ export default Modal.extend({
 
     data() {
         return {
+            energy: 0,
             grid: {
                 id: undefined,
                 building_id: undefined
@@ -28,7 +29,8 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('building-click', this.open);
-        EventBus.$on('planet-update', this.fetchData);
+        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('planet-update', () => this.fetchData());
     },
 
     computed: {
@@ -58,6 +60,10 @@ export default Modal.extend({
                     this.$nextTick(() => this.$modal.modal());
                 }
             });
+        },
+
+        canConstruct() {
+            return this.energy >= this.data.building.construction_cost;
         },
 
         store() {

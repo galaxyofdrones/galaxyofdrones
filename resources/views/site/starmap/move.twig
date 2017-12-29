@@ -13,11 +13,11 @@
           'settler': constant('Koodilab\\Models\\Unit::TYPE_SETTLER')
       }|json_encode }}"
       :urls="{{ {
-          'scout': route('api_movement_scout', '__planet__'),
-          'attack': route('api_movement_attack', '__planet__'),
-          'occupy': route('api_movement_occupy', '__planet__'),
-          'support': route('api_movement_support', '__planet__'),
-          'transport': route('api_movement_transport', '__planet__'),
+          'scout': route('api_movement_scout_store', '__planet__'),
+          'attack': route('api_movement_attack_store', '__planet__'),
+          'occupy': route('api_movement_occupy_store', '__planet__'),
+          'support': route('api_movement_support_store', '__planet__'),
+          'transport': route('api_movement_transport_store', '__planet__'),
       }|json_encode }}" inline-template>
     <div class="move modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">

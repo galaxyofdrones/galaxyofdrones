@@ -25,7 +25,7 @@ export default Building.extend({
 
     created() {
         EventBus.$on('resource-updated', resource => this.mined = resource);
-        EventBus.$on('planet-update', this.fetchData);
+        EventBus.$on('planet-update', () => this.fetchData());
         EventBus.$on('planet-updated', planet => this.planet = planet);
     },
 

@@ -2,8 +2,10 @@
 
 namespace Koodilab\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
+use Koodilab\Jobs\Research as ResearchJob;
 
 /**
  * Research.
@@ -53,6 +55,35 @@ class Research extends Model implements TimeableContract
     ];
 
     /**
+     * Create from.
+     *
+     * @param Model $researchable
+     *
+     * @return static
+     */
+    public static function createFrom(Model $researchable)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $user->decrementEnergy($researchable->research_cost);
+
+        $model = new static([
+            'user_id' => $user->id,
+            'ended_at' => Carbon::now()->addSeconds($researchable->research_time),
+        ]);
+
+        $model->researchable()->associate($researchable);
+        $model->save();
+
+        dispatch(
+            (new ResearchJob($model->id))->delay($model->remaining)
+        );
+
+        return $model;
+    }
+
+    /**
      * Get the researchable.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
@@ -88,5 +119,13 @@ class Research extends Model implements TimeableContract
      */
     public function cancel()
     {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $user->incrementEnergy(round(
+            $this->remaining / $this->researchable->research_time * $this->researchable->research_cost
+        ));
+
+        $this->delete();
     }
 }

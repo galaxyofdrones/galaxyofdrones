@@ -100,46 +100,6 @@ class Movement extends Model implements TimeableContract
     ];
 
     /**
-     * Get the start.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function start()
-    {
-        return $this->belongsTo(Planet::class, 'start_id');
-    }
-
-    /**
-     * Get the end.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function end()
-    {
-        return $this->belongsTo(Planet::class, 'end_id');
-    }
-
-    /**
-     * Get the resources.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function resources()
-    {
-        return $this->belongsToMany(Resource::class)->withPivot('quantity');
-    }
-
-    /**
-     * Get the units.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function units()
-    {
-        return $this->belongsToMany(Unit::class)->withPivot('quantity');
-    }
-
-    /**
      * Create scout from.
      *
      * @param Planet     $planet
@@ -391,6 +351,46 @@ class Movement extends Model implements TimeableContract
         );
 
         return $movement;
+    }
+
+    /**
+     * Get the start.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function start()
+    {
+        return $this->belongsTo(Planet::class, 'start_id');
+    }
+
+    /**
+     * Get the end.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function end()
+    {
+        return $this->belongsTo(Planet::class, 'end_id');
+    }
+
+    /**
+     * Get the resources.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class)->withPivot('quantity');
+    }
+
+    /**
+     * Get the units.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class)->withPivot('quantity');
     }
 
     /**

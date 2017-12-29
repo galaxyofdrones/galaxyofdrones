@@ -59,6 +59,7 @@ return [
     ],
 
     'mothership' => [
+        'hyperjump' => 'Hyperjump',
         'singular' => 'Mothership',
         'description' => 'The mothership is circling around the capital planet and protects it from occupation.',
     ],

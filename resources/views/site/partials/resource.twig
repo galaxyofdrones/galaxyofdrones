@@ -71,7 +71,7 @@
         <div v-else-if="isResearch" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store(resource)">
+                    <button class="btn btn-success btn-block" @click="store()" :disabled="!isResearchable(resource)">
                         {{ trans('messages.research.singular') }}
                     </button>
                 </div>

@@ -30,7 +30,7 @@ trait CanChangeCapital
     public function getCapitalChangeRemainingAttribute()
     {
         if ($this->isCapitalChangeable()) {
-            return 0;
+            return null;
         }
 
         return Carbon::now()->diffInSeconds(

@@ -19,7 +19,7 @@ export default Building.extend({
     },
 
     created() {
-        EventBus.$on('planet-update', this.fetchData);
+        EventBus.$on('planet-update', () => this.fetchData());
     },
 
     computed: {

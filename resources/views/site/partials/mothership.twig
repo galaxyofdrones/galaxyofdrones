@@ -1,4 +1,5 @@
-<mothership inline-template>
+<mothership url="{{ route('api_user_capital') }}"
+            store-url="{{ route('api_user_capital_update', '__planet__') }}" inline-template>
     <div class="mothership modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -22,6 +23,25 @@
                             <p>
                                 {{ trans('messages.mothership.description') }}
                             </p>
+                            <div class="attribute-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" v-model="selected" :disabled="remaining">
+                                            <option :value="planet.id" v-for="planet in data.planets">
+                                                {{ vue('planet.name') }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4 v-if="remaining">
+                                            {{ vue('remaining | timer') }}
+                                        </h4>
+                                        <button v-else class="btn btn-info btn-block" :disabled="!canHyperjump" @click="store()">
+                                            {{ trans('messages.mothership.hyperjump') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

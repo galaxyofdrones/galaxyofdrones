@@ -7,6 +7,7 @@ export default Modal.extend({
     data() {
         return {
             isSubscribed: false,
+            energy: 0,
             selected: {
                 id: undefined
             },
@@ -23,7 +24,8 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('grid-click', this.open);
-        EventBus.$on('planet-update', this.fetchData);
+        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('planet-update', () => this.fetchData());
     },
 
     methods: {
@@ -56,6 +58,10 @@ export default Modal.extend({
                     }
                 }
             });
+        },
+
+        canConstruct() {
+            return this.energy >= this.selected.construction_cost;
         },
 
         store() {
