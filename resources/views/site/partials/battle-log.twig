@@ -1,0 +1,19 @@
+<battle-log :is-enabled="isEnabled && isBattleLogSelected"
+            url="{{ route('api_battle_log') }}" inline-template>
+    <div v-if="isEnabled" class="battle-log">
+        <div v-if="hasPrev || hasNext" class="modal-footer">
+            <ul class="pager">
+                <li class="previous" :class="{disabled: !hasPrev}">
+                    <a href="#" @click.prevent="prevPage()">
+                        <i class="icon-arrow-left"></i>
+                    </a>
+                </li>
+                <li class="next" :class="{disabled: !hasNext}">
+                    <a href="#" @click.prevent="nextPage()">
+                        <i class="icon-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</battle-log>

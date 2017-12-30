@@ -1,6 +1,41 @@
 .modal {
+    .nav-tabs > li {
+        > a {
+            color: $brand-info;
+            transition: ease .2s;
+
+            &:focus,
+            &:hover {
+                color: $nav-tabs-active-link-hover-color;
+            }
+        }
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                color: $nav-tabs-active-link-hover-color;
+            }
+        }
+    }
     &-body.separator {
         border-top: 1px solid $modal-header-border-color;
+    }
+    &-footer .pager {
+        margin: 0;
+
+        a {
+            color: #fff;
+            transition: ease .2s;
+        }
+        .disabled {
+            > a,
+            > a:hover,
+            > a:focus,
+            > span {
+                color: $pager-disabled-color;
+                background-color: $brand-primary;
+            }
+        }
     }
 }
 

@@ -11,8 +11,22 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-
+                    <ul class="nav nav-tabs nav-justified">
+                        <li :class="{active: isMissionLogSelected}">
+                            <a href="#" @click.prevent="selectMissionLog()">
+                                {{ trans('messages.mission_log.plural') }}
+                            </a>
+                        </li>
+                        <li :class="{active: isBattleLogSelected}">
+                            <a href="#" @click.prevent="selectBattleLog()">
+                                {{ trans('messages.battle_log.plural') }}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+
+                {% include 'site.partials.mission-log' %}
+                {% include 'site.partials.battle-log' %}
             </div>
         </div>
     </div>

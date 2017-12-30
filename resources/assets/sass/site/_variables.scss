@@ -466,16 +466,16 @@ $nav-disabled-link-color:                   $text-color-disabled;
 $nav-disabled-link-hover-color:             $text-color-disabled;
 
 //== Tabs
-// $nav-tabs-border-color:                     #ddd
+$nav-tabs-border-color:                     $brand-info;
 
-// $nav-tabs-link-hover-border-color:          $gray-lighter
+$nav-tabs-link-hover-border-color:          rgba(0, 0, 0, 0);
 
-// $nav-tabs-active-link-hover-bg:             $body-bg
-// $nav-tabs-active-link-hover-color:          $gray
+$nav-tabs-active-link-hover-bg:             rgba(0, 0, 0, 0);
+$nav-tabs-active-link-hover-color:          #fff;
 // $nav-tabs-active-link-hover-border-color:   #ddd
 
-// $nav-tabs-justified-link-border-color:            #ddd
-// $nav-tabs-justified-active-link-border-color:     $body-bg
+$nav-tabs-justified-link-border-color:            $brand-info;
+$nav-tabs-justified-active-link-border-color:     rgba(0, 0, 0, 0);
 
 //== Pills
 // $nav-pills-border-radius:                   $border-radius-base
@@ -508,16 +508,16 @@ $nav-disabled-link-hover-color:             $text-color-disabled;
 //
 //##
 
-// $pager-bg:                             $pagination-bg
-// $pager-border:                         $pagination-border
-// $pager-border-radius:                  15px
+$pager-bg:                             $brand-info;
+$pager-border:                         rgba(0, 0, 0, 0);
+$pager-border-radius:                  2px;
 
-// $pager-hover-bg:                       $pagination-hover-bg
+$pager-hover-bg:                       darken($pager-bg, 10%);
 
 // $pager-active-bg:                      $pagination-active-bg
 // $pager-active-color:                   $pagination-active-color
 
-// $pager-disabled-color:                 $pagination-disabled-color
+$pager-disabled-color:                 #fff;
 
 
 //== Jumbotron

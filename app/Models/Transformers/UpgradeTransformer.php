@@ -5,6 +5,8 @@ namespace Koodilab\Models\Transformers;
 class UpgradeTransformer extends Transformer
 {
     /**
+     * The building transformer instance.
+     *
      * @var BuildingTransformer
      */
     protected $buildingTransformer;

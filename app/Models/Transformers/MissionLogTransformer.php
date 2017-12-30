@@ -2,15 +2,15 @@
 
 namespace Koodilab\Models\Transformers;
 
-use Koodilab\Models\Mission;
+use Koodilab\Models\MissionLog;
 use Koodilab\Models\Resource;
 
-class MissionTransformer extends Transformer
+class MissionLogTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param Mission $item
+     * @param MissionLog $item
      */
     public function transform($item)
     {
@@ -18,7 +18,7 @@ class MissionTransformer extends Transformer
             'id' => $item->id,
             'energy' => $item->energy,
             'experience' => $item->experience,
-            'remaining' => $item->remaining,
+            'created_at' => $item->created_at->toDateTimeString(),
             'resources' => $this->resources($item),
         ];
     }
@@ -26,13 +26,13 @@ class MissionTransformer extends Transformer
     /**
      * Get the resources.
      *
-     * @param Mission $mission
+     * @param MissionLog $missionLog
      *
      * @return array
      */
-    protected function resources(Mission $mission)
+    protected function resources(MissionLog $missionLog)
     {
-        return $mission->findResourcesOrderBySortOrder()
+        return $missionLog->findResourcesOrderBySortOrder()
             ->transform(function (Resource $resource) {
                 return [
                     'id' => $resource->id,

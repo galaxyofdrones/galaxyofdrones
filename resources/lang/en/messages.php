@@ -28,6 +28,10 @@ return [
         'sign_up' => 'Sign up',
     ],
 
+    'battle_log' => [
+        'plural' => 'Battle logs',
+    ],
+
     'bookmark' => [
         'empty' => 'No bookmarks.',
         'plural' => 'Bookmarks',
@@ -56,6 +60,10 @@ return [
     'mission' => [
         'complete' => 'Complete',
         'empty' => 'No missions.',
+    ],
+
+    'mission_log' => [
+        'plural' => 'Mission logs',
     ],
 
     'mothership' => [

@@ -6,6 +6,13 @@ $router->group([
     'namespace' => 'Api',
 ], function () use ($router) {
     $router->group([
+        'prefix' => 'battle-log',
+    ], function () use ($router) {
+        $router->get('/', 'BattleLogController@index')
+            ->name('battle_log');
+    });
+
+    $router->group([
         'prefix' => 'bookmark',
     ], function () use ($router) {
         $router->get('/', 'BookmarkController@index')
@@ -87,6 +94,13 @@ $router->group([
             ->name('starmap_geo_json')
             ->where('zoom', '\d')
             ->where('bounds', '[-0-9\.,]+');
+    });
+
+    $router->group([
+        'prefix' => 'mission-log',
+    ], function () use ($router) {
+        $router->get('/', 'MissionLogController@index')
+            ->name('mission_log');
     });
 
     $router->group([

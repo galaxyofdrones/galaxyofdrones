@@ -89,6 +89,8 @@ class User extends Authenticatable
         Queries\FindUnitsOrderBySortOrder,
         Queries\LosingBattleLogCount,
         Queries\WinningBattleLogCount,
+        Queries\PaginateBattleLogs,
+        Queries\PaginateMissionLogs,
         Relations\BelongsToManyResource,
         Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,

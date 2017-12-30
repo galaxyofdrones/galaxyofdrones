@@ -5,6 +5,8 @@ namespace Koodilab\Models\Transformers;
 class ProducerTransformer extends Transformer
 {
     /**
+     * The resource transformer instance.
+     *
      * @var ResourceTransformer
      */
     protected $resourceTransfomer;

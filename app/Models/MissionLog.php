@@ -27,7 +27,8 @@ use Koodilab\Notifications\MissionLogCreated;
  */
 class MissionLog extends Model
 {
-    use Relations\BelongsToUser;
+    use Queries\FindResourcesOrderBySortOrder,
+        Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}
