@@ -27,13 +27,12 @@ use Koodilab\Notifications\MissionLogCreated;
  */
 class MissionLog extends Model
 {
-    use Queries\FindResourcesOrderBySortOrder,
-        Relations\BelongsToUser;
+    use Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
+    protected $perPage = 5;
 
     /**
      * {@inheritdoc}

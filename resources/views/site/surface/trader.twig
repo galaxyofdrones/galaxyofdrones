@@ -17,14 +17,14 @@
             <div class="modal-body separator">
                 <div class="row">
                     <div class="col-md-6">
-                    <span v-for="resource in mission.resources"
-                          class="item item-sm"
-                          :class="resource | item('resource')"
-                          :title="resource.name"
-                          :data-content="resource.description"
-                          v-popover="{placement: 'top', trigger: 'hover'}">
-                        {{ vue('resource.quantity | number') }}
-                    </span>
+                        <span v-for="resource in mission.resources"
+                              class="item item-sm"
+                              :class="resource | item('resource')"
+                              :title="resource.name"
+                              :data-content="resource.description"
+                              v-popover="{placement: 'top', trigger: 'hover'}">
+                            {{ vue('resource.quantity | number') }}
+                        </span>
                     </div>
                     <div class="col-md-3 text-center">
                         <h4>

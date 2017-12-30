@@ -12,7 +12,8 @@ trait PaginateMissionLogs
     public function paginateMissionLogs()
     {
         return $this->missionLogs()
+            ->with('resources')
             ->orderBy('created_at', 'desc')
-            ->paginate(1);
+            ->paginate();
     }
 }

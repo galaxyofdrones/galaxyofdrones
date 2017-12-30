@@ -32,14 +32,13 @@ class MissionLogTransformer extends Transformer
      */
     protected function resources(MissionLog $missionLog)
     {
-        return $missionLog->findResourcesOrderBySortOrder()
-            ->transform(function (Resource $resource) {
-                return [
-                    'id' => $resource->id,
-                    'name' => $resource->translation('name'),
-                    'description' => $resource->translation('description'),
-                    'quantity' => $resource->pivot->quantity,
-                ];
-            });
+        return $missionLog->resources->transform(function (Resource $resource) {
+            return [
+                'id' => $resource->id,
+                'name' => $resource->translation('name'),
+                'description' => $resource->translation('description'),
+                'quantity' => $resource->pivot->quantity,
+            ];
+        });
     }
 }

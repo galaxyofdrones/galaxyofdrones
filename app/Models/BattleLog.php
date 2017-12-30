@@ -95,7 +95,7 @@ class BattleLog extends Model
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
+    protected $perPage = 5;
 
     /**
      * {@inheritdoc}
@@ -151,26 +151,6 @@ class BattleLog extends Model
     }
 
     /**
-     * Get the attacker.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function attacker()
-    {
-        return $this->belongsTo(User::class, 'attacker_id');
-    }
-
-    /**
-     * Get the defender.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function defender()
-    {
-        return $this->belongsTo(User::class, 'defender_id');
-    }
-
-    /**
      * Get the start.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -188,6 +168,26 @@ class BattleLog extends Model
     public function end()
     {
         return $this->belongsTo(Planet::class, 'end_id');
+    }
+
+    /**
+     * Get the attacker.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function attacker()
+    {
+        return $this->belongsTo(User::class, 'attacker_id');
+    }
+
+    /**
+     * Get the defender.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function defender()
+    {
+        return $this->belongsTo(User::class, 'defender_id');
     }
 
     /**

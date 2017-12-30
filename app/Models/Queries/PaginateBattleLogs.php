@@ -13,9 +13,10 @@ trait PaginateBattleLogs
      */
     public function paginateBattleLogs()
     {
-        return BattleLog::where('attacker_id', $this->id)
+        return BattleLog::with('start', 'end', 'attacker', 'defender', 'resources', 'buildings', 'attackerUnits', 'defenderUnits')
+            ->where('attacker_id', $this->id)
             ->orWhere('defender_id', $this->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(1);
+            ->paginate();
     }
 }

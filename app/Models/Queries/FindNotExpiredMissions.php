@@ -16,6 +16,7 @@ trait FindNotExpiredMissions
     public function findNotExpiredMissions($columns = ['*'])
     {
         return $this->missions()
+            ->with('resources')
             ->where('ended_at', '>=', Carbon::now())
             ->orderBy('ended_at')
             ->get($columns);

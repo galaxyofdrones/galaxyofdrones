@@ -118,12 +118,16 @@ return [
 
     'attributes' => [
         'attack' => 'Attack',
+        'attacker_units' => 'Attacker units',
         'capacity' => 'Capacity',
         'construction' => 'Construction',
         'construction_cost' => 'Construction cost',
         'construction_experience' => 'Experience',
         'construction_time' => 'Construction time',
         'construction_time_bonus' => 'Construction time bonus',
+        'defender_buildings' => 'Defender buildings',
+        'defender_resources' => 'Defender resources',
+        'defender_units' => 'Defender units',
         'defense' => 'Defense',
         'defense_bonus' => 'Defense bonus',
         'detection' => 'Detection',

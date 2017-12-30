@@ -1,19 +1,205 @@
 <battle-log :is-enabled="isEnabled && isBattleLogSelected"
+            :open-after-hidden="openAfterHidden"
             url="{{ route('api_battle_log') }}" inline-template>
     <div v-if="isEnabled" class="battle-log">
-        <div v-if="hasPrev || hasNext" class="modal-footer">
-            <ul class="pager">
-                <li class="previous" :class="{disabled: !hasPrev}">
-                    <a href="#" @click.prevent="prevPage()">
-                        <i class="icon-arrow-left"></i>
-                    </a>
-                </li>
-                <li class="next" :class="{disabled: !hasNext}">
-                    <a href="#" @click.prevent="nextPage()">
-                        <i class="icon-arrow-right"></i>
-                    </a>
-                </li>
-            </ul>
+        <div v-if="isEmpty" class="modal-body separator">
+            <p class="text-center">
+                {{ trans('messages.battle_log.empty') }}
+            </p>
         </div>
+        <template v-else>
+            <template v-for="battle_log in data.data">
+                <div class="modal-body separator">
+                    <div class="row">
+                        <template v-if="battle_log.is_attack">
+                            <div class="col-md-2 text-center">
+                                <span class="item item-sm"
+                                      :class="battle_log.start.resource_id | item('planet')">
+                                    {{ vue('battle_log.start.name') }}
+                                </span>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h4 class="highlight-warning">
+                                    <i class="icon-arrow-right"></i>
+                                </h4>
+                                <h4>
+                                    {{ vue('battle_log.created_at | fromNow') }}
+                                </h4>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <span class="item item-sm"
+                                      :class="battle_log.end.resource_id | item('planet')">
+                                    {{ vue('battle_log.end.name') }}
+                                </span>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <h4>
+                                    <i class="icon-user"></i>
+                                </h4>
+                                <h4 v-if="battle_log.defender.id">
+                                    <a href="#" @click.prevent="openUser(battle_log.defender.username)">
+                                        {{ vue('battle_log.defender.username') }}
+                                    </a>
+                                </h4>
+                                <h4 v-else>
+                                    {{ vue('battle_log.defender.username') }}
+                                </h4>
+                            </div>
+                        </template>
+                        <template v-if="battle_log.is_defense">
+                            <div class="col-md-2 text-center">
+                                <span class="item item-sm"
+                                      :class="battle_log.end.resource_id | item('planet')">
+                                    {{ vue('battle_log.end.name') }}
+                                </span>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h4 class="highlight-danger">
+                                    <i class="icon-arrow-left"></i>
+                                </h4>
+                                <h4>
+                                    {{ vue('battle_log.created_at | fromNow') }}
+                                </h4>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <span class="item item-sm"
+                                      :class="battle_log.start.resource_id | item('planet')">
+                                    {{ vue('battle_log.start.name') }}
+                                </span>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <h4>
+                                    <i class="icon-user"></i>
+                                </h4>
+                                <h4>
+                                    <a href="#" @click.prevent="openUser(battle_log.attacker.username)">
+                                        {{ vue('battle_log.attacker.username') }}
+                                    </a>
+                                </h4>
+                            </div>
+                        </template>
+                        <div class="col-md-2">
+                            <a class="btn btn-info btn-block" href="#" @click.prevent="collapse(battle_log)">
+                                <i class="icon-more"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body separator collapse" :class="{in: isCollapsed(battle_log)}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                {{ trans('validation.attributes.attacker_units') }}
+                            </h4>
+                            <div class="attribute-row">
+                                <div v-for="unit in battle_log.attacker_units" class="col-md-3">
+                                    <div class="attribute">
+                                        <h6>
+                                            <span class="item item-sm"
+                                                  :class="unit | item('unit')"
+                                                  :title="unit.name"
+                                                  :data-content="unit.description"
+                                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                            </span>
+                                        </h6>
+                                        <h4>
+                                            {{ vue('unit.quantity | number') }}
+                                        </h4>
+                                        <h5 class="highlight-danger">
+                                            {{ vue('unit.losses | number') }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 v-if="battle_log.resources.length">
+                                {{ trans('validation.attributes.defender_units') }}
+                            </h4>
+                            <div v-if="battle_log.resources.length" class="attribute-row">
+                                <div v-for="resource in battle_log.resources" class="col-md-3">
+                                    <div class="attribute">
+                                        <h6>
+                                            <span class="item item-sm"
+                                                  :class="resource | item('resource')"
+                                                  :title="resource.name"
+                                                  :data-content="resource.description"
+                                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                            </span>
+                                        </h6>
+                                        <h4>
+                                            {{ vue('resource.quantity | number') }}
+                                        </h4>
+                                        <h5 class="highlight-danger">
+                                            {{ vue('resource.losses | number') }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 v-if="battle_log.defender_units.length">
+                                {{ trans('validation.attributes.defender_units') }}
+                            </h4>
+                            <div v-if="battle_log.defender_units.length" class="attribute-row">
+                                <div v-for="unit in battle_log.defender_units" class="col-md-3">
+                                    <div class="attribute">
+                                        <h6>
+                                            <span class="item item-sm"
+                                                  :class="unit | item('unit')"
+                                                  :title="unit.name"
+                                                  :data-content="unit.description"
+                                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                            </span>
+                                        </h6>
+                                        <h4>
+                                            {{ vue('unit.quantity | number') }}
+                                        </h4>
+                                        <h5 class="highlight-danger">
+                                            {{ vue('unit.losses | number') }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 v-if="battle_log.buildings.length">
+                                {{ trans('validation.attributes.defender_buildings') }}
+                            </h4>
+                            <div v-if="battle_log.buildings.length" class="attribute-row">
+                                <div v-for="building in battle_log.buildings" class="col-md-3">
+                                    <div class="attribute">
+                                        <h6>
+                                            <span class="item item-sm"
+                                                  :class="building | item('building')"
+                                                  :title="building.name"
+                                                  :data-content="building.description"
+                                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                            </span>
+                                        </h6>
+                                        <h4>
+                                            {{ vue('building.level | number') }}
+                                        </h4>
+                                        <h5 class="highlight-danger">
+                                            {{ vue('building.losses | number') }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div v-if="hasPrev || hasNext" class="modal-footer">
+                <ul class="pager">
+                    <li class="previous" :class="{disabled: !hasPrev}">
+                        <a href="#" @click.prevent="prevPage()">
+                            <i class="icon-arrow-left"></i>
+                        </a>
+                    </li>
+                    <li class="next" :class="{disabled: !hasNext}">
+                        <a href="#" @click.prevent="nextPage()">
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </template>
     </div>
 </battle-log>

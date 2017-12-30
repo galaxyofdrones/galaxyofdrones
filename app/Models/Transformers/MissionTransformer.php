@@ -32,14 +32,13 @@ class MissionTransformer extends Transformer
      */
     protected function resources(Mission $mission)
     {
-        return $mission->findResourcesOrderBySortOrder()
-            ->transform(function (Resource $resource) {
-                return [
-                    'id' => $resource->id,
-                    'name' => $resource->translation('name'),
-                    'description' => $resource->translation('description'),
-                    'quantity' => $resource->pivot->quantity,
-                ];
-            });
+        return $mission->resources->transform(function (Resource $resource) {
+            return [
+                'id' => $resource->id,
+                'name' => $resource->translation('name'),
+                'description' => $resource->translation('description'),
+                'quantity' => $resource->pivot->quantity,
+            ];
+        });
     }
 }

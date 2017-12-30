@@ -34,7 +34,6 @@ use Koodilab\Support\Util;
 class Mission extends Model implements TimeableContract
 {
     use Behaviors\Timeable,
-        Queries\FindResourcesOrderBySortOrder,
         Relations\BelongsToPlanet;
 
     /**

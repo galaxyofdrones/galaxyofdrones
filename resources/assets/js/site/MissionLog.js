@@ -6,12 +6,17 @@ export default {
             page: 1,
             data: {
                 current_page: 1,
-                last_page: 1
+                last_page: 1,
+                total: 0
             }
         };
     },
 
     computed: {
+        isEmpty() {
+            return this.data.total === 0;
+        },
+
         hasPrev() {
             return this.data.current_page > 1;
         },

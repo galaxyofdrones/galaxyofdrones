@@ -29,6 +29,7 @@ return [
     ],
 
     'battle_log' => [
+        'empty' => 'No battle logs.',
         'plural' => 'Battle logs',
     ],
 
@@ -63,6 +64,7 @@ return [
     ],
 
     'mission_log' => [
+        'empty' => 'No mission logs.',
         'plural' => 'Mission logs',
     ],
 
