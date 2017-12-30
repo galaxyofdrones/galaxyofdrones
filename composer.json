@@ -1,6 +1,6 @@
 {
     "name": "koodilab/galaxyofdrones-online",
-    "description": "A multiplayer space strategy game based on Laravel.",
+    "description": "An open source multiplayer space strategy game.",
     "license": "MIT",
     "type": "project",
     "require": {
