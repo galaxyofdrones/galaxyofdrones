@@ -4,6 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Transformers\MissionLogTransformer;
+use Koodilab\Notifications\MissionLogCreated;
 
 class MissionLogController extends Controller
 {
@@ -25,8 +26,13 @@ class MissionLogController extends Controller
      */
     public function index(MissionLogTransformer $transformer)
     {
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        $user->deleteNotificationsByType(MissionLogCreated::class);
+
         return $transformer->transformCollection(
-            auth()->user()->paginateMissionLogs()
+            $user->paginateMissionLogs()
         );
     }
 }

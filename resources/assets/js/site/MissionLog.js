@@ -1,3 +1,5 @@
+import { EventBus } from '../common/event-bus';
+
 export default {
     props: ['isEnabled', 'url'],
 
@@ -10,6 +12,10 @@ export default {
                 total: 0
             }
         };
+    },
+
+    created() {
+        EventBus.$on('user-updated', () => this.fetchData());
     },
 
     computed: {

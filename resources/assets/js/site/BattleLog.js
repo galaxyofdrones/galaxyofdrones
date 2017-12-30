@@ -15,6 +15,10 @@ export default {
         };
     },
 
+    created() {
+        EventBus.$on('user-updated', () => this.fetchData());
+    },
+
     computed: {
         isEmpty() {
             return this.data.total === 0;

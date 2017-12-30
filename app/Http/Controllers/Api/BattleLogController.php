@@ -4,6 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Transformers\BattleLogTransformer;
+use Koodilab\Notifications\BattleLogCreated;
 
 class BattleLogController extends Controller
 {
@@ -25,8 +26,13 @@ class BattleLogController extends Controller
      */
     public function index(BattleLogTransformer $transformer)
     {
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        $user->deleteNotificationsByType(BattleLogCreated::class);
+
         return $transformer->transformCollection(
-            auth()->user()->paginateBattleLogs()
+            $user->paginateBattleLogs()
         );
     }
 }

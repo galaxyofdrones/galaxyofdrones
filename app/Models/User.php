@@ -340,4 +340,26 @@ class User extends Authenticatable
     {
         return "user.{$this->id}";
     }
+
+    /**
+     * Delete the notifications by type.
+     *
+     * @param string $type
+     */
+    public function deleteNotificationsByType($type)
+    {
+        $count = $this->notifications()
+            ->where('type', $type)
+            ->count();
+
+        if ($count) {
+            $this->notifications()
+                ->where('type', $type)
+                ->delete();
+
+            event(
+                new UserUpdated($this->id)
+            );
+        }
+    }
 }
