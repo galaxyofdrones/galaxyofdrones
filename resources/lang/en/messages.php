@@ -121,6 +121,7 @@ return [
     ],
 
     'user' => [
+        'empty' => 'No users.',
         'joined' => 'Joined the battle :datetime.',
         'username_with_level' => ':username (Level :level)',
     ],

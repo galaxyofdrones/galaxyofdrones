@@ -158,6 +158,7 @@ return [
         'train_time_bonus' => 'Train time bonus',
         'transmute_time' => 'Transmute time',
         'upgrade' => 'Upgrade',
+        'username' => 'Username',
         'username_or_email' => 'Username / E-mail',
         'winning_battles' => 'Winning battles',
     ],

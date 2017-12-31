@@ -52,6 +52,20 @@ class UserController extends Controller
     }
 
     /**
+     * Show the trophy in json format.
+     *
+     * @param UserShowTransformer $transformer
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function trophy(UserShowTransformer $transformer)
+    {
+        return $transformer->transformCollection(
+            User::paginateAllStartedOrderByExperience()
+        );
+    }
+
+    /**
      * Show the user in json format.
      *
      * @param User                $user
@@ -61,6 +75,10 @@ class UserController extends Controller
      */
     public function show(User $user, UserShowTransformer $transformer)
     {
+        if (!$user->isStarted()) {
+            throw new BadRequestHttpException();
+        }
+
         return $transformer->transform($user);
     }
 

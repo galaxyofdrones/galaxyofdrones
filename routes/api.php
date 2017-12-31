@@ -199,6 +199,9 @@ $router->group([
         $router->get('capital', 'UserController@capital')
             ->name('user_capital');
 
+        $router->get('trophy', 'UserController@trophy')
+            ->name('user_trophy');
+
         $router->get('{user}', 'UserController@show')
             ->name('user_show');
 

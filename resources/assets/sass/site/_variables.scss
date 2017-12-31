@@ -162,7 +162,7 @@ $border-radius-small:       0;
 //## Customizes the `.table` component with basic values, each used across all table variations.
 
 //** Padding for `<th>`s and `<td>`s.
-// $table-cell-padding:            8px
+$table-cell-padding:            20px 25px;
 //** Padding for cells in `.table-condensed`.
 // $table-condensed-cell-padding:  5px
 
@@ -175,7 +175,7 @@ $border-radius-small:       0;
 // $table-bg-active:               $table-bg-hover
 
 //** Border color for table and cell borders.
-// $table-border-color:            #ddd
+$table-border-color:            $brand-primary;
 
 
 //== Buttons

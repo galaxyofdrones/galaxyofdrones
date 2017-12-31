@@ -46,6 +46,17 @@
             }
         }
     }
+    .table-responsive {
+        margin-bottom: 0;
+    }
+    .table {
+        margin-bottom: 0;
+
+        a {
+            text-decoration: none;
+            transition: ease .2s;
+        }
+    }
 }
 
 @media (min-width: $screen-sm-min) {
