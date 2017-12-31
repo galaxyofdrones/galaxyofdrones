@@ -32,6 +32,22 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'password',
+    ], function () use ($router) {
+        $router->get('reset', 'ForgotPasswordController@showLinkRequestForm')
+            ->name('password.request');
+
+        $router->post('email', 'ForgotPasswordController@sendResetLinkEmail')
+            ->name('password.email');
+
+        $router->get('password/reset/{token}', 'ResetPasswordController@showResetForm')
+            ->name('password.reset');
+
+        $router->post('reset', 'ResetPasswordController@reset')
+            ->name('password.update');
+    });
+
+    $router->group([
         'prefix' => 'login',
     ], function () use ($router) {
         $router->get('/', 'LoginController@showLoginForm')

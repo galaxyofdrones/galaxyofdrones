@@ -8,6 +8,16 @@
             timer: 1500
         }).catch(swal.noop);
     </script>
+{% elseif session_has('status') %}
+    <script type="text/javascript">
+        swal({
+            title: '{{ trans('messages.success.singular') }}',
+            text: '{{ session('status') }}',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        }).catch(swal.noop);
+    </script>
 {% elseif errors is not empty %}
     <script type="text/javascript">
         swal({

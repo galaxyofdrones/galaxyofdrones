@@ -23,10 +23,12 @@ return [
     'auth' => [
         'already_have' => 'Already have an account?',
         'dont_have' => "Don't have an account?",
+        'email' => 'Send Password Reset Link',
         'forgot' => 'Forgot your password?',
         'login' => 'Login',
         'logout' => 'Logout',
         'register' => 'Register',
+        'reset' => 'Reset Password',
     ],
 
     'battle_log' => [

@@ -1,6 +1,6 @@
 {% extends 'site.layouts.base' %}
 
-{% set subtitle = trans('messages.auth.login') %}
+{% set subtitle = trans('messages.auth.reset') %}
 
 {% block body %}
     <section id="site" class="container-site container-site-standalone">
@@ -14,23 +14,24 @@
                     {{ subtitle }}
                 </h3>
             </div>
-            <form action="{{ route('login') }}" method="post">
+            <form action="{{ route('password.update') }}" method="post">
                 {{ csrf_field() }}
+                <input type="hidden" name="token" value="{{ token }}">
 
                 <div class="panel-body">
-                    <div class="form-group {{ errors.has('username_or_email') ? 'has-error' }}">
-                        <label class="control-label required" for="username_or_email">
-                            {{ trans('validation.attributes.username_or_email') }}
+                    <div class="form-group {{ errors.has('email') ? 'has-error' }}">
+                        <label class="control-label required" for="email">
+                            {{ trans('validation.attributes.email') }}
                         </label>
-                        <input id="username_or_email"
+                        <input id="email"
                                class="form-control input-lg"
-                               type="text"
-                               name="username_or_email"
-                               value="{{ old('username_or_email') }}"
-                               placeholder="{{ trans('validation.attributes.username_or_email') }}" required>
-                        {% if errors.has('username_or_email') %}
+                               type="email"
+                               name="email"
+                               value="{{ old('email', email) }}"
+                               placeholder="{{ trans('validation.attributes.email') }}" required>
+                        {% if errors.has('email') %}
                             <span class="help-block">
-                                <strong>{{ errors.first('username_or_email') }}</strong>
+                                <strong>{{ errors.first('email') }}</strong>
                             </span>
                         {% endif %}
                     </div>
@@ -49,11 +50,20 @@
                             </span>
                         {% endif %}
                     </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="remember"  {{ old('remember', true) ? 'checked' }}>
-                            {{ trans('validation.attributes.remember') }}
+                    <div class="form-group {{ errors.has('password_confirmation') ? 'has-error' }}">
+                        <label class="control-label required" for="password_confirmation">
+                            {{ trans('validation.attributes.password_confirmation') }}
                         </label>
+                        <input id="password_confirmation"
+                               class="form-control input-lg"
+                               type="password"
+                               name="password_confirmation"
+                               placeholder="{{ trans('validation.attributes.password_confirmation') }}" required>
+                        {% if errors.has('password_confirmation') %}
+                            <span class="help-block">
+                                <strong>{{ errors.first('password') }}</strong>
+                            </span>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -63,8 +73,9 @@
                 </div>
                 <div class="panel-footer text-center">
                     <p>
-                        <a href="{{ route('password.request') }}">
-                            {{ trans('messages.auth.forgot') }}
+                        {{ trans('messages.auth.already_have') }}
+                        <a href="{{ route('login') }}">
+                            {{ trans('messages.auth.login') }}
                         </a>
                     </p>
                     <p>
