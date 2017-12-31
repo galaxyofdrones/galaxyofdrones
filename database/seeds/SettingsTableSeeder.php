@@ -20,7 +20,7 @@ class SettingsTableSeeder extends Seeder
         Setting::create([
             'key' => 'description',
             'value' => [
-                'en' => 'A multiplayer space strategy game based on Laravel.',
+                'en' => 'An open source multiplayer space strategy game.',
             ],
         ]);
 
