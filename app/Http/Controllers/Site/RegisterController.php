@@ -28,6 +28,14 @@ class RegisterController extends Controller
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function redirectPath()
+    {
+        return route('home');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param array $data
@@ -36,7 +44,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, []);
+        return Validator::make($data, [
+            'username' => 'required|min:3|max:20|regex:/^[a-zA-Z0-9\.\-_]+$/u|unique:users',
+            'email' => 'required|max:255|email|unique:users,email,:id',
+            'password' => 'required|min:6|max:255|confirmed',
+        ]);
     }
 
     /**
@@ -48,6 +60,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([]);
+        return User::create([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ]);
     }
 }

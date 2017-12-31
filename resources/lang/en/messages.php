@@ -21,11 +21,12 @@ return [
     'zoom_out' => 'Zoom out',
 
     'auth' => [
+        'already_have' => 'Already have an account?',
         'dont_have' => "Don't have an account?",
         'forgot' => 'Forgot your password?',
         'login' => 'Login',
         'logout' => 'Logout',
-        'sign_up' => 'Sign up',
+        'register' => 'Register',
     ],
 
     'battle_log' => [
