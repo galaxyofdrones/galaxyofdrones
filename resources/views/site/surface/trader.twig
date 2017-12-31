@@ -48,13 +48,11 @@
                                 {{ vue('mission.energy | number| sign(mission.energy)') }}
                             </li>
                         </ul>
-                        <div class="form-group">
-                            <button class="btn btn-success btn-block"
-                                    :disabled="!isCompletable(mission)"
-                                    @click="store(mission)">
-                                {{ trans('messages.mission.complete') }}
-                            </button>
-                        </div>
+                        <button class="btn btn-success btn-block"
+                                :disabled="!isCompletable(mission)"
+                                @click="store(mission)">
+                            {{ trans('messages.mission.complete') }}
+                        </button>
                     </div>
                 </div>
             </div>

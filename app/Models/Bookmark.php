@@ -33,7 +33,7 @@ class Bookmark extends Model
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
+    protected $perPage = 5;
 
     /**
      * {@inheritdoc}

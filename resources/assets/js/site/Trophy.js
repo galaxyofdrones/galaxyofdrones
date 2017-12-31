@@ -35,6 +35,7 @@ export default Modal.extend({
 
     methods: {
         open() {
+            this.page = 1;
             this.fetchData(true);
         },
 

@@ -28,13 +28,11 @@ class BookmarkController extends Controller
      */
     public function index(BookmarkTransformer $transformer)
     {
-        return [
-            'bookmarks' => $transformer->transformCollection(
-                Bookmark::with('star')
-                    ->latest()
-                    ->get()
-            ),
-        ];
+        return $transformer->transformCollection(
+            Bookmark::with('star')
+                ->latest()
+                ->paginate()
+        );
     }
 
     /**

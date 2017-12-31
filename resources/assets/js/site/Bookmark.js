@@ -6,8 +6,13 @@ export default Modal.extend({
 
     data() {
         return {
+            page: 1,
             data: {
-                bookmarks: []
+                current_page: 1,
+                from: 0,
+                last_page: 1,
+                to: 0,
+                total: 0
             }
         };
     },
@@ -18,19 +23,39 @@ export default Modal.extend({
 
     computed: {
         isEmpty() {
-            return !this.data.bookmarks.length;
+            return this.data.total === 0;
+        },
+
+        hasPrev() {
+            return this.data.current_page > 1;
+        },
+
+        hasNext() {
+            return this.data.current_page < this.data.last_page;
         }
     },
 
     methods: {
         open() {
-            this.fetchData();
+            this.page = 1;
+            this.fetchData(true);
         },
 
-        fetchData() {
-            axios.get(this.url).then(response => {
+        fetchData(showModal = false) {
+            if (!showModal && !this.isEnabled) {
+                return;
+            }
+
+            axios.get(this.url, {
+                params: {
+                    page: this.page
+                }
+            }).then(response => {
                 this.data = response.data;
-                this.$nextTick(() => this.$modal.modal());
+
+                if (showModal) {
+                    this.$nextTick(() => this.$modal.modal());
+                }
             });
         },
 
@@ -43,15 +68,36 @@ export default Modal.extend({
         },
 
         destroy(bookmark) {
-            this.data = {
-                bookmarks: _.filter(
-                    this.data.bookmarks, current => current.id !== bookmark.id
-                )
-            };
-
             axios.delete(
                 this.destroyUrl.replace('__bookmark__', bookmark.id)
-            );
+            ).then(() => {
+                if (this.page > 1 && (this.data.to - this.data.from) === 0) {
+                    this.prevPage();
+                } else {
+                    this.fetchData();
+                }
+            });
+        },
+
+        prevPage() {
+            this.changePage(this.page - 1);
+        },
+
+        nextPage() {
+            this.changePage(this.page + 1);
+        },
+
+        changePage(page) {
+            if (this.page === page) {
+                return;
+            }
+
+            if (page < 1 || page > this.data.last_page) {
+                return;
+            }
+
+            this.page = page;
+            this.fetchData();
         }
     }
 });
