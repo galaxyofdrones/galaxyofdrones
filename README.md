@@ -2,6 +2,8 @@
 
 An open source multiplayer space strategy game.
 
+![Screenshot](public/images/screenshot.png)
+
 ## About the game
 
 The game story takes place in a virtual galaxy where randomly generated planets produce various raw materials which can be used by the Players to develop their infrastructure and fleet. In addition, players may trade with the Earth or engage in battles, so beyond various military arrangements, economic decisions should be taken as well.
@@ -52,19 +54,19 @@ php artisan passport:keys
 php artisan starmap:generate
 ```
 
-### Step 7: Run the Laravel Queue
+### Step 8: Run the Laravel Queue
 
 ```
 php artisan queue:work --sleep=1 --tries=3
 ```
 
-### Step 8: Run the Laravel Scheduler
+### Step 9: Run the Laravel Scheduler
 
 ```
 * * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1
 ```
 
-### Step 9: Install and setup Laravel Echo Server
+### Step 10: Install and setup Laravel Echo Server
 
 (use the `/ws` as socket.io path)
 
@@ -76,7 +78,7 @@ php artisan queue:work --sleep=1 --tries=3
 ...
 ```
 
-### Step 10: Setup the websocket in webserver config
+### Step 11: Setup the websocket in webserver config
 
 (example nginx configuration)
 
