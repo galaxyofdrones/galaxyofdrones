@@ -22,6 +22,16 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'register',
+    ], function () use ($router) {
+        $router->get('/', 'RegisterController@showRegistrationForm')
+            ->name('register');
+
+        $router->post('/', 'RegisterController@register')
+            ->name('register');
+    });
+
+    $router->group([
         'prefix' => 'login',
     ], function () use ($router) {
         $router->get('/', 'LoginController@showLoginForm')
