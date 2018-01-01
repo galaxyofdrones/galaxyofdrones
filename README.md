@@ -85,6 +85,7 @@ php artisan queue:work --sleep=1 --tries=3
 (example nginx configuration)
 
 ```
+...
 location /ws {
     proxy_pass http://127.0.0.1:6001;
     proxy_http_version 1.1;
@@ -93,6 +94,14 @@ location /ws {
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
 }
+...
+```
+
+### Step 12: Have fun
+
+```
+username: koodilab
+password: havefun
 ```
 
 ## Security
