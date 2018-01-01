@@ -13,6 +13,57 @@ require('./admin/bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Filters from './admin/Filters';
+import Overview from './admin/Overview';
+import PerfectScrollbar from 'perfect-scrollbar';
+import Random from './admin/Random';
+import TableView from './admin/TableView';
+import Tooltip from './admin/Tooltip';
+
+Vue.filter('date', Filters.date);
+Vue.filter('datetime', Filters.datetime);
+Vue.filter('fromNow', Filters.fromNow);
+
+Vue.directive('tooltip', Tooltip);
+
 const app = new Vue({
-    el: '#admin'
+    el: '#admin',
+
+    components: {
+        Overview, Random, TableView
+    },
+
+    data() {
+        return {
+            isSidebarActive: true,
+            perfectScrollbar: undefined
+        };
+    },
+
+    created() {
+        $('.main-body', this.$el).removeClass('active');
+    },
+
+    mounted() {
+        this.initSidebar();
+    },
+
+    methods: {
+        initSidebar() {
+            if (!this.$refs.sidebar) {
+                return;
+            }
+
+            this.perfectScrollbar = new PerfectScrollbar(this.$refs.sidebar);
+
+            $(this.$refs.sidebar)
+                .on('shown.bs.collapse', this.perfectScrollbar.update)
+                .on('hidden.bs.collapse', this.perfectScrollbar.update);
+        },
+
+        toggleSidebar() {
+            this.isSidebarActive = !this.isSidebarActive;
+            this.perfectScrollbar.update();
+        }
+    }
 });

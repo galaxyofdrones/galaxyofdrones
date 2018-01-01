@@ -1,11 +1,12 @@
 import { EventBus } from '../common/event-bus';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {
     props: ['planetUrl', 'planetNameUrl', 'userCurrentUrl'],
 
     data() {
         return {
-            $perfectScrollbar: undefined,
+            perfectScrollbar: undefined,
             isActive: false,
             isEditActive: false,
             isSubscribed: false,
@@ -158,11 +159,11 @@ export default {
         },
 
         initPerfectScrollbar() {
-            this.$perfectScrollbar = $(this.$refs.scrollbar).perfectScrollbar();
+            this.perfectScrollbar = new PerfectScrollbar(this.$refs.scrollbar);
         },
 
         updatePerfectScrollbar() {
-            this.$perfectScrollbar.perfectScrollbar('update');
+            this.perfectScrollbar.update();
         },
 
         subscribe() {

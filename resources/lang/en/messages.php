@@ -2,21 +2,34 @@
 
 return [
 
+    'admin' => 'Admin',
     'cancel' => 'Cancel',
+    'create' => 'Create',
     'delete' => 'Delete',
+    'edit' => 'Edit',
     'energy' => 'Energy',
+    'failed_job' => 'Failed job',
     'free' => 'Free',
+    'generate' => 'Generate',
+    'home' => 'Home',
     'info' => 'Info',
     'instant' => 'Instant',
     'mailbox' => 'Mailbox',
     'move' => 'Move',
+    'no' => 'No',
+    'no_items' => 'No items.',
     'owner' => 'Owner',
+    'overview' => 'Overview',
+    'refresh' => 'Refresh',
     'required_quantity' => 'Required quantity',
     'save' => 'Save',
+    'search' => 'Search',
     'starmap' => 'Starmap',
     'start' => 'Start',
+    'super_admin' => 'Super admin',
     'transmute' => 'Transmute',
     'trophy' => 'Trophy',
+    'yes' => 'Yes',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 
@@ -61,6 +74,10 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
+    'help' => [
+        'username' => 'English alphabet, numbers, dot, dash and underscore.',
+    ],
+
     'mission' => [
         'complete' => 'Complete',
         'empty' => 'No missions.',
@@ -82,6 +99,7 @@ return [
         'empty' => 'No movemenets.',
         'occupy' => 'Occupy',
         'scout' => 'Scout',
+        'singular' => 'Movement',
         'support' => 'Support',
         'transport' => 'Transport',
     ],
@@ -90,6 +108,12 @@ return [
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
         'jump' => 'Jump to surface',
+        'singular' => 'Planet',
+    ],
+
+    'profile' => [
+        'edit' => 'Edit profile',
+        'singular' => 'Profile',
     ],
 
     'research' => [
@@ -102,16 +126,29 @@ return [
         'plural' => 'Resources',
     ],
 
+    'result' => [
+        'show' => 'Results:',
+        'total' => 'Total:',
+    ],
+
     'setting' => [
+        'edit' => 'Edit settings',
         'plural' => 'Settings',
     ],
 
+    'star' => [
+        'singular' => 'Star',
+    ],
+
     'success' => [
+        'create' => 'Created successfully.',
         'logout' => 'Logout successful.',
         'singular' => 'Success',
+        'update' => 'Updated successfully.',
     ],
 
     'training' => [
+        'singular' => 'Training',
         'train' => 'Train',
     ],
 
@@ -124,12 +161,17 @@ return [
     ],
 
     'user' => [
+        'create' => 'New user',
+        'edit' => 'Edit user',
         'empty' => 'No users.',
         'joined' => 'Joined the battle :datetime.',
+        'plural' => 'Users',
+        'singular' => 'User',
         'username_with_level' => ':username (Level :level)',
     ],
 
     'warning' => [
+        'delete_selected' => 'Are you sure you want to delete the selected items?',
         'server' => 'Sorry, the server is full :(',
     ],
 

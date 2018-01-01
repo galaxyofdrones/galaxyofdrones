@@ -193,6 +193,20 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the role options.
+     *
+     * @return array
+     */
+    public static function roleOptions()
+    {
+        return [
+            static::ROLE_USER => 'messages.user.singular',
+            static::ROLE_ADMIN => 'messages.admin',
+            static::ROLE_SUPER_ADMIN => 'messages.super_admin',
+        ];
+    }
+
+    /**
      * Get the dashboard roles.
      *
      * @return array

@@ -15,7 +15,9 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * {@inheritdoc}
      */
-    protected $policies = [];
+    protected $policies = [
+        User::class => \Koodilab\Policies\UserPolicy::class,
+    ];
 
     /**
      * Register any authentication / authorization services.

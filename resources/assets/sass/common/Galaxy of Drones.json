@@ -2,18 +2,26 @@
   "metadata": {
     "name": "Galaxy of Drones",
     "lastOpened": 0,
-    "created": 1503839296478
+    "created": 1514811873647
   },
   "iconSets": [
     {
       "selection": [
+        {
+          "order": 48,
+          "id": 40,
+          "name": "refresh",
+          "prevSize": 32,
+          "code": 59678,
+          "tempChar": ""
+        },
         {
           "order": 47,
           "id": 39,
           "name": "close",
           "prevSize": 32,
           "code": 59677,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 39,
@@ -21,7 +29,7 @@
           "name": "chevron-left",
           "prevSize": 32,
           "code": 59649,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 40,
@@ -29,7 +37,7 @@
           "name": "chevron-right",
           "prevSize": 32,
           "code": 59652,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 41,
@@ -37,7 +45,7 @@
           "name": "create",
           "prevSize": 32,
           "code": 59653,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 42,
@@ -45,7 +53,7 @@
           "name": "delete",
           "prevSize": 32,
           "code": 59657,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 43,
@@ -53,7 +61,7 @@
           "name": "edit",
           "prevSize": 32,
           "code": 59659,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 44,
@@ -61,7 +69,7 @@
           "name": "nav",
           "prevSize": 32,
           "code": 59661,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 45,
@@ -69,7 +77,7 @@
           "name": "search",
           "prevSize": 32,
           "code": 59667,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 46,
@@ -77,7 +85,7 @@
           "name": "sort-order",
           "prevSize": 32,
           "code": 59675,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 38,
@@ -85,7 +93,7 @@
           "name": "login",
           "prevSize": 32,
           "code": 59676,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 37,
@@ -93,7 +101,7 @@
           "prevSize": 32,
           "code": 59674,
           "name": "trophy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 35,
@@ -101,7 +109,7 @@
           "prevSize": 32,
           "code": 59673,
           "name": "more",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 29,
@@ -109,7 +117,7 @@
           "prevSize": 32,
           "code": 59654,
           "name": "envelope",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 28,
@@ -117,7 +125,7 @@
           "prevSize": 32,
           "code": 59666,
           "name": "surface",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 1,
@@ -125,7 +133,7 @@
           "prevSize": 32,
           "code": 59671,
           "name": "arrow-left",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 25,
@@ -133,7 +141,7 @@
           "prevSize": 32,
           "code": 59672,
           "name": "arrow-right",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 2,
@@ -141,7 +149,7 @@
           "prevSize": 32,
           "code": 59670,
           "name": "supply",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 3,
@@ -149,7 +157,7 @@
           "prevSize": 32,
           "code": 59669,
           "name": "xp",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 4,
@@ -157,7 +165,7 @@
           "prevSize": 32,
           "code": 59651,
           "name": "energy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 5,
@@ -165,7 +173,7 @@
           "prevSize": 32,
           "code": 59648,
           "name": "time",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 7,
@@ -173,7 +181,7 @@
           "prevSize": 32,
           "code": 59650,
           "name": "cog",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 11,
@@ -181,7 +189,7 @@
           "prevSize": 32,
           "code": 59655,
           "name": "eye",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 12,
@@ -189,7 +197,7 @@
           "prevSize": 32,
           "code": 59656,
           "name": "globe",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 14,
@@ -197,7 +205,7 @@
           "prevSize": 32,
           "code": 59658,
           "name": "home",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 16,
@@ -205,7 +213,7 @@
           "prevSize": 32,
           "code": 59660,
           "name": "mothership",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 18,
@@ -213,7 +221,7 @@
           "prevSize": 32,
           "code": 59662,
           "name": "power-off",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 19,
@@ -221,7 +229,7 @@
           "prevSize": 32,
           "code": 59663,
           "name": "question-circle",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 20,
@@ -229,7 +237,7 @@
           "prevSize": 32,
           "code": 59664,
           "name": "star",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 21,
@@ -237,7 +245,7 @@
           "prevSize": 32,
           "code": 59665,
           "name": "starmap",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 24,
@@ -245,20 +253,35 @@
           "prevSize": 32,
           "code": 59668,
           "name": "user",
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 0,
       "metadata": {
         "name": "icomoon",
         "importSize": {
-          "width": 357,
-          "height": 357
+          "width": 640,
+          "height": 640
         }
       },
       "height": 1024,
       "prevSize": 32,
       "icons": [
+        {
+          "id": 40,
+          "paths": [
+            "M870.4 153.6c-89.6-96-217.6-153.6-358.4-153.6-281.6 0-512 230.4-512 512s230.4 512 512 512c236.8 0 435.2-166.4 492.8-384h-134.4c-51.2 147.2-192 256-358.4 256-211.2 0-384-172.8-384-384s172.8-384 384-384c108.8 0 198.4 44.8 268.8 115.2l-204.8 204.8h448v-448l-153.6 153.6z"
+          ],
+          "attrs": [
+            {}
+          ],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 20,
+          "tags": [
+            "refresh"
+          ]
+        },
         {
           "id": 39,
           "paths": [

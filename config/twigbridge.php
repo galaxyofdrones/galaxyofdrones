@@ -65,6 +65,10 @@ return [
             'mix',
             'setting',
             'vue',
+
+            'user_role_options' => [
+                'callback' => 'Koodilab\Models\User::roleOptions',
+            ],
         ],
 
         /*

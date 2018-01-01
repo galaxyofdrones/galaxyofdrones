@@ -1,0 +1,4 @@
+.control-label.required:after {
+    color: $brand-info;
+    content: ' *';
+}
