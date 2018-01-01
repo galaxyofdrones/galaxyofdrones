@@ -4,13 +4,7 @@ An open source multiplayer space strategy game.
 
 ![Screenshot](public/images/screenshot.png)
 
-## Server
-
-https://galaxyofdrones.com/
-
-## Website
-
-https://koodilab.com/en/game/galaxy-of-drones-online
+**More screenshots:** https://koodilab.com/en/game/galaxy-of-drones-online
 
 ## About the game
 
