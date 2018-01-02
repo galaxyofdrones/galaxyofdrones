@@ -14,7 +14,7 @@ trait PaginateAllStartedOrderByExperience
     public static function paginateAllStartedOrderByExperience()
     {
         return static::whereNotNull('started_at')
-            ->orderBy('experience')
+            ->orderBy('experience', 'desc')
             ->paginate();
     }
 }
