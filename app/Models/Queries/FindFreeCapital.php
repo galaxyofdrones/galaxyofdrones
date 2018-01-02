@@ -16,11 +16,10 @@ trait FindFreeCapital
     public static function findFreeCapital()
     {
         $center = Generator::SIZE / 2;
-        $query = Planet::starter();
         $bounds = new Bounds();
 
         for ($i = Planet::CAPITAL_STEP; $i < $center; $i += Planet::CAPITAL_STEP) {
-            $capital = $query->inBounds(
+            $capital = Planet::starter()->inBounds(
                 $bounds->setMinXY($center - $i)->setMaxXY($center + $i)
             )->first();
 
