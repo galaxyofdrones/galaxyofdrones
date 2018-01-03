@@ -7,9 +7,6 @@ use Koodilab\Tests\TestCase;
 
 class BoundsTest extends TestCase
 {
-    /**
-     * fromString() test.
-     */
     public function testFromString()
     {
         $bounds = Bounds::fromString('0.5,1.0,1.5,2.0');
@@ -20,9 +17,6 @@ class BoundsTest extends TestCase
         $this->assertEquals(2.0, $bounds->maxY());
     }
 
-    /**
-     * has() test.
-     */
     public function testHas()
     {
         $bounds = new Bounds(1.0, 1.0, 3.0, 3.0);
@@ -31,9 +25,6 @@ class BoundsTest extends TestCase
         $this->assertFalse($bounds->has(3.0, 3.5));
     }
 
-    /**
-     * scale() test.
-     */
     public function testScale()
     {
         $bounds = (new Bounds(1.0, 1.0, 3.0, 3.0))->scale(1.5);

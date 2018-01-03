@@ -8,15 +8,10 @@ use Koodilab\Tests\TestCase;
 class NameGeneratorTest extends TestCase
 {
     /**
-     * The name generator instance.
-     *
      * @var NameGenerator
      */
     protected $nameGenerator;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         parent::setUp();
@@ -24,9 +19,6 @@ class NameGeneratorTest extends TestCase
         $this->nameGenerator = new NameGenerator();
     }
 
-    /**
-     * generate() test.
-     */
     public function testGenerate()
     {
         $this->assertInternalType('string', $this->nameGenerator->generate());

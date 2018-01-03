@@ -15,22 +15,15 @@ class GeneratorTest extends TestCase
     use DatabaseMigrations;
 
     /**
-     * The config instance.
-     *
      * @var Config
      */
     protected $config;
 
     /**
-     * The generator instane.
-     *
      * @var Generator
      */
     protected $generator;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         parent::setUp();
@@ -40,9 +33,6 @@ class GeneratorTest extends TestCase
         $this->generator = $this->app->make(Generator::class);
     }
 
-    /**
-     * generate() test.
-     */
     public function testGenerate()
     {
         factory(Resource::class)->create();
