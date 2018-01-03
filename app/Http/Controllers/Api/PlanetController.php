@@ -43,8 +43,6 @@ class PlanetController extends Controller
      */
     public function show(Planet $planet, PlanetShowTransformer $transformer)
     {
-        $this->authorize('friendly', $planet);
-
         return $transformer->transform($planet);
     }
 
