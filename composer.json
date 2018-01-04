@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "ext-imagick": "*",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
