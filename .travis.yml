@@ -8,7 +8,7 @@ before_script:
   - pecl channel-update pecl.php.net
   - yes | pecl install imagick
   - cp .env.example .env
-  - composer install --no-interaction
+  - travis_retry composer install --no-interaction --no-suggest
   - php artisan key:generate
   - php artisan passport:keys
 
