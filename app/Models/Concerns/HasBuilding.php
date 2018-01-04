@@ -4,6 +4,7 @@ namespace Koodilab\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Collection;
 use Koodilab\Models\Building;
+use Koodilab\Models\User;
 
 trait HasBuilding
 {
@@ -123,8 +124,12 @@ trait HasBuilding
             $this->training->delete();
         }
 
+        $minLevel = $this->building->type == Building::TYPE_CENTRAL && User::findByCapitalId($this->planet_id)
+            ? 1
+            : 0;
+
         $this->level = max(
-            0,
+            $minLevel,
             $this->level - $level
         );
 
