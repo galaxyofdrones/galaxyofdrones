@@ -306,7 +306,9 @@ class Simulator implements SimulatorContract
     {
         foreach ($this->populations as $population) {
             if ($quantity = $population->quantity) {
-                $population->decrementQuantity(round($quantity * $this->defenderLossRate));
+                $population->decrementQuantity(
+                    round($quantity * $this->defenderLossRate)
+                );
 
                 $this->battleLog->defenderUnits()->attach($population->unit_id, [
                     'owner' => BattleLog::OWNER_DEFENDER,
