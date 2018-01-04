@@ -2,6 +2,8 @@
 
 An open source multiplayer space strategy game.
 
+[![Build Status](https://travis-ci.org/koodilab/galaxyofdrones-online.svg?branch=master)](https://travis-ci.org/koodilab/galaxyofdrones-online)
+
 ![Screenshot](public/images/screenshot.png)
 
 **More screenshots:** https://koodilab.com/en/game/galaxy-of-drones-online
