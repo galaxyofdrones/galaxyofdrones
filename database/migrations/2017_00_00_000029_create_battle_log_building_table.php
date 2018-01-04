@@ -12,6 +12,8 @@ class CreateBattleLogBuildingTable extends Migration
     public function up()
     {
         Schema::create('battle_log_building', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
             $table->bigInteger('battle_log_id')->unsigned();
             $table->foreign('battle_log_id')
                 ->references('id')
@@ -26,8 +28,6 @@ class CreateBattleLogBuildingTable extends Migration
 
             $table->integer('level')->unsigned();
             $table->integer('losses')->unsigned();
-
-            $table->primary(['battle_log_id', 'building_id']);
         });
     }
 
