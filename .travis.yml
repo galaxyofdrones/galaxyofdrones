@@ -5,6 +5,9 @@ php:
   - 7.1
 
 before_script:
+  - pear config-set preferred_state beta
+  - pecl channel-update pecl.php.net
+  - yes | pecl install imagick
   - cp .env.example .env
   - composer install --no-interaction
   - php artisan key:generate
