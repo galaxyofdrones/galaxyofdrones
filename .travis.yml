@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+
+before_script:
+  - cp .env.example .env
+  - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan migrate --seed
+  - php artisan passport:keys
+
+script:
+  - vendor/bin/phpunit
