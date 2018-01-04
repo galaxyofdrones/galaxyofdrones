@@ -3,7 +3,10 @@
 namespace Koodilab\Tests\Feature\Api;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Event;
+use Koodilab\Events\UserUpdated;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 use Koodilab\Tests\TestCase;
@@ -24,11 +27,21 @@ class PlanetTest extends TestCase
             'name' => 'Earth',
         ]);
 
+        $initialDispatcher = Event::getFacadeRoot();
+
+        Event::fake();
+
+        Model::setEventDispatcher($initialDispatcher);
+
         $user->update([
             'capital_id' => $planet->id,
             'current_id' => $planet->id,
             'started_at' => Carbon::now(),
         ]);
+
+        Event::assertDispatched(UserUpdated::class, function ($event) use ($user) {
+            return $event->userId === $user->id;
+        });
 
         $user->resources()->sync($planet->resource_id);
 
