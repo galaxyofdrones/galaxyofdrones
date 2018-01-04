@@ -34,6 +34,10 @@ export default Modal.extend({
     },
 
     computed: {
+        canConstruct() {
+            return this.energy >= this.data.upgrade.construction_cost;
+        },
+
         building() {
             return this.data.building;
         }
@@ -60,10 +64,6 @@ export default Modal.extend({
                     this.$nextTick(() => this.$modal.modal());
                 }
             });
-        },
-
-        canConstruct() {
-            return this.energy >= this.data.building.construction_cost;
         },
 
         store() {

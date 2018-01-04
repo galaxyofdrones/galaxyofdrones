@@ -28,6 +28,12 @@ export default Modal.extend({
         EventBus.$on('planet-update', () => this.fetchData());
     },
 
+    computed: {
+        canConstruct() {
+            return this.energy >= this.selected.construction_cost;
+        }
+    },
+
     methods: {
         open(grid) {
             this.grid = grid;
@@ -58,10 +64,6 @@ export default Modal.extend({
                     }
                 }
             });
-        },
-
-        canConstruct() {
-            return this.energy >= this.selected.construction_cost;
         },
 
         store() {
