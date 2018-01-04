@@ -356,13 +356,15 @@ class Simulator implements SimulatorContract
             $level = $grid->level;
             $losses = min($damage, $level);
 
-            if ($losses || $grid->building->type == Building::TYPE_DEFENSIVE || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
-                $grid->demolishBuilding($losses);
-
+            if (!empty($losses) || $grid->building->type == Building::TYPE_DEFENSIVE || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
                 $this->battleLog->buildings()->attach($grid->building_id, [
                     'level' => $level,
                     'losses' => $losses,
                 ]);
+
+                if (!empty($losses)) {
+                    $grid->demolishBuilding($losses);
+                }
             }
 
             $damage -= $losses;
