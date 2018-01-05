@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Koodilab\Auth\KoodilabUserProvider;
+use Koodilab\Models\Bookmark;
 use Koodilab\Models\Building;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
@@ -16,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * {@inheritdoc}
      */
     protected $policies = [
+        Bookmark::class => \Koodilab\Policies\BookmarkPolicy::class,
         User::class => \Koodilab\Policies\UserPolicy::class,
     ];
 

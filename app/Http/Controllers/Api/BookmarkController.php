@@ -67,6 +67,8 @@ class BookmarkController extends Controller
      */
     public function destroy(Bookmark $bookmark)
     {
+        $this->authorize('destroy', $bookmark);
+
         DB::transaction(function () use ($bookmark) {
             $bookmark->delete();
         });
