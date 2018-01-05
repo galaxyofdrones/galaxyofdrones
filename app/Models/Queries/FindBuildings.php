@@ -20,9 +20,10 @@ trait FindBuildings
                 'building_id', 'level',
             ])
             ->transform(function (Grid $grid) {
-                return $grid->building->applyModifiers([
-                    'level' => $grid->level,
-                ]);
+                return $grid->building->replicate()
+                    ->applyModifiers([
+                        'level' => $grid->level,
+                    ]);
             });
     }
 }
