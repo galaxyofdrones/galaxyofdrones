@@ -4,13 +4,14 @@ namespace Koodilab\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Collection;
 use Koodilab\Models\Building;
+use Koodilab\Models\Unit;
 
 trait HasUnit
 {
     /**
      * Get the training units.
      *
-     * @return Collection|\Koodilab\Models\Unit[]
+     * @return Collection|Unit[]
      */
     public function trainingUnits()
     {
@@ -26,6 +27,15 @@ trait HasUnit
             );
         }
 
-        return $this->planet->user->findUnitsOrderBySortOrder();
+        $this->building->applyModifiers([
+            'level' => $this->level,
+        ]);
+
+        return $this->planet->user->findUnitsOrderBySortOrder()
+            ->transform(function (Unit $unit) {
+                return $unit->applyModifiers([
+                    'train_time_bonus' => $this->building->train_time_bonus,
+                ]);
+            });
     }
 }
