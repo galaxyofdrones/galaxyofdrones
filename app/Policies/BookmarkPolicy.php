@@ -11,7 +11,7 @@ class BookmarkPolicy
     use HandlesAuthorization;
 
     /**
-     * Check the manage ability.
+     * Check the destroy ability.
      *
      * @param User     $user
      * @param Bookmark $bookmark
