@@ -28,8 +28,12 @@ class BookmarkController extends Controller
      */
     public function index(BookmarkTransformer $transformer)
     {
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
         return $transformer->transformCollection(
-            Bookmark::with('star')
+            $user->bookmarks()
+                ->with('star')
                 ->latest()
                 ->paginate()
         );
