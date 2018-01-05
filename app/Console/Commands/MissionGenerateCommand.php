@@ -66,7 +66,7 @@ class MissionGenerateCommand extends Command
                     ]);
 
                     Mission::createRand(
-                        $grid->planet, $building, $grid->planet->user->findResourcesOrderBySortOrder()
+                        $grid->planet, $building, $grid->planet->user->findMissionResources()
                     );
                 }
             }

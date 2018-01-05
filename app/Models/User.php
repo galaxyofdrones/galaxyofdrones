@@ -85,6 +85,7 @@ class User extends Authenticatable
         Queries\FindAvailableUnits,
         Queries\FindByCapitalId,
         Queries\FindByIdOrUsername,
+        Queries\FindMissionResources,
         Queries\FindPlanetsOrderByName,
         Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,
