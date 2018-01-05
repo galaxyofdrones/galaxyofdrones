@@ -305,16 +305,20 @@ class Simulator implements SimulatorContract
     protected function calculateDefenderUnits()
     {
         foreach ($this->populations as $population) {
-            if ($quantity = $population->quantity) {
-                $population->decrementQuantity(
-                    round($quantity * $this->defenderLossRate)
-                );
+            $quantity = $population->quantity;
+
+            if ($quantity) {
+                $losses = round($quantity * $this->defenderLossRate);
 
                 $this->battleLog->defenderUnits()->attach($population->unit_id, [
                     'owner' => BattleLog::OWNER_DEFENDER,
                     'quantity' => $quantity,
-                    'losses' => $quantity - $population->quantity,
+                    'losses' => $losses,
                 ]);
+
+                if (!empty($losses)) {
+                    $population->decrementQuantity($losses);
+                }
             }
         }
     }
@@ -332,15 +336,20 @@ class Simulator implements SimulatorContract
             $capacity = round($this->capacity * $this->defenderLossRate);
 
             foreach ($this->stocks as $stock) {
-                if ($quantity = $stock->quantity) {
-                    $stock->decrementQuantity(round($capacity * ($quantity / $total)));
-                    $losses = $quantity - $stock->quantity;
+                $quantity = $stock->quantity;
 
-                    if ($losses || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
+                if ($quantity) {
+                    $losses = round($capacity * ($quantity / $total));
+
+                    if (!empty($losses) || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
                         $this->battleLog->resources()->attach($stock->resource_id, [
                             'quantity' => $quantity,
                             'losses' => $losses,
                         ]);
+
+                        if (!empty($losses)) {
+                            $stock->decrementQuantity($losses);
+                        }
                     }
                 }
             }
