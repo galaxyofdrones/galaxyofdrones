@@ -96,7 +96,7 @@ return [
 
     'movement' => [
         'attack' => 'Attack',
-        'empty' => 'No movemenets.',
+        'empty' => 'No movements.',
         'occupy' => 'Occupy',
         'scout' => 'Scout',
         'singular' => 'Movement',
