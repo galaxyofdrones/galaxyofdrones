@@ -7,11 +7,11 @@ use Koodilab\Models\Resource;
 trait FindMissionResources
 {
     /**
-     * Find mission resources.
+     * Find the mission resources.
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|resource[]
+     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[]
      */
     public function findMissionResources($columns = ['*'])
     {
