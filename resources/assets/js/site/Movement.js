@@ -7,5 +7,13 @@ export default Remaining.extend({
         this.initRemaining(
             this.movement.remaining
         );
+    },
+
+    watch: {
+        movement() {
+            this.initRemaining(
+                this.mission.remaining
+            );
+        }
     }
 });

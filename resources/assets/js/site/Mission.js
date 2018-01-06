@@ -7,5 +7,13 @@ export default Remaining.extend({
         this.initRemaining(
             this.mission.remaining
         );
+    },
+
+    watch: {
+        mission() {
+            this.initRemaining(
+                this.mission.remaining
+            );
+        }
     }
 });
