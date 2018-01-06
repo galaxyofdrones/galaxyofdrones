@@ -21,15 +21,17 @@ trait HasUnit
             return $units;
         }
 
-        if ($this->training) {
-            return $units->add(
-                $this->training->unit
-            );
-        }
-
         $this->building->applyModifiers([
             'level' => $this->level,
         ]);
+
+        if ($this->training) {
+            return $units->add(
+                $this->training->unit->applyModifiers([
+                    'train_time_bonus' => $this->building->train_time_bonus,
+                ])
+            );
+        }
 
         return $this->planet->user->findUnitsOrderBySortOrder()
             ->transform(function (Unit $unit) {
