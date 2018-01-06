@@ -12,7 +12,7 @@ export default Remaining.extend({
     watch: {
         movement() {
             this.initRemaining(
-                this.mission.remaining
+                this.movement.remaining
             );
         }
     }
