@@ -4,27 +4,26 @@ namespace Koodilab\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Koodilab\Models\BattleLog;
 
 class BattleLogCreated extends Notification
 {
     use Queueable;
 
     /**
-     * The battle log instance.
+     * The battle log id.
      *
-     * @var BattleLog
+     * @var int
      */
-    protected $battleLog;
+    protected $battleLogId;
 
     /**
      * Constructor.
      *
-     * @param BattleLog $battleLog
+     * @param int $battleLogId
      */
-    public function __construct(BattleLog $battleLog)
+    public function __construct($battleLogId)
     {
-        $this->battleLog = $battleLog;
+        $this->battleLogId = $battleLogId;
     }
 
     /**
@@ -49,7 +48,7 @@ class BattleLogCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'battle_log_id' => $this->battleLog->id,
+            'battle_log_id' => $this->battleLogId,
         ];
     }
 }

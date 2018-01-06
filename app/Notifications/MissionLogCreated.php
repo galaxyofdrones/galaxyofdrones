@@ -4,27 +4,26 @@ namespace Koodilab\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Koodilab\Models\MissionLog;
 
 class MissionLogCreated extends Notification
 {
     use Queueable;
 
     /**
-     * The mission log instance.
+     * The mission log id.
      *
-     * @var MissionLog
+     * @var int
      */
-    protected $missionLog;
+    protected $missionLogId;
 
     /**
      * Constructor.
      *
-     * @param MissionLog $missionLog
+     * @param int $missionLogId
      */
-    public function __construct(MissionLog $missionLog)
+    public function __construct(int $missionLogId)
     {
-        $this->missionLog = $missionLog;
+        $this->missionLogId = $missionLogId;
     }
 
     /**
@@ -49,7 +48,7 @@ class MissionLogCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'mission_log' => $this->missionLog->id,
+            'mission_log_id' => $this->missionLogId,
         ];
     }
 }

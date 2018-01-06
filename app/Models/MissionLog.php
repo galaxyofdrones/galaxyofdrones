@@ -63,7 +63,7 @@ class MissionLog extends Model
         }
 
         $missionLog->user->notify(
-            new MissionLogCreated($missionLog)
+            new MissionLogCreated($missionLog->id)
         );
 
         return $missionLog;
