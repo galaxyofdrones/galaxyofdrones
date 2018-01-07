@@ -126,6 +126,11 @@ class User extends Authenticatable
     /**
      * {@inheritdoc}
      */
+    protected $perPage = 30;
+
+    /**
+     * {@inheritdoc}
+     */
     protected $attributes = [
         'is_enabled' => true,
         'role' => self::ROLE_USER,

@@ -21,6 +21,9 @@
                             <thead>
                                 <tr>
                                     <th>
+                                        #
+                                    </th>
+                                    <th>
                                         {{ trans('validation.attributes.username') }}
                                     </th>
                                     <th class="text-center">
@@ -38,7 +41,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="user in data.data">
+                                <tr v-for="(user, index) in data.data">
+                                    <td>
+                                        {{ vue('rank + index') }}
+                                    </td>
                                     <td>
                                         <a href="#" @click.prevent="openUser(user.username)">
                                             {{ vue('user.username') }}

@@ -32,7 +32,7 @@ class MissionLog extends Model
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 5;
+    protected $perPage = 30;
 
     /**
      * {@inheritdoc}

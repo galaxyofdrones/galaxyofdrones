@@ -7,8 +7,10 @@ export default Modal.extend({
     data() {
         return {
             page: 1,
+            rank: 0,
             data: {
                 current_page: 1,
+                from: 0,
                 last_page: 1,
                 total: 0
             }
@@ -50,6 +52,7 @@ export default Modal.extend({
                 }
             }).then(response => {
                 this.data = response.data;
+                this.rank = this.data.from;
 
                 if (showModal) {
                     this.$nextTick(() => this.$modal.modal());
