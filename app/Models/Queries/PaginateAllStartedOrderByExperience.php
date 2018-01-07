@@ -13,7 +13,7 @@ trait PaginateAllStartedOrderByExperience
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|User[]
      */
-    public static function paginateAllStartedOrderByExperience($perPage = 1)
+    public static function paginateAllStartedOrderByExperience($perPage = 10)
     {
         return static::whereNotNull('started_at')
             ->orderBy('experience', 'desc')
