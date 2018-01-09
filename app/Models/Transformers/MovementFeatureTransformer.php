@@ -65,7 +65,7 @@ class MovementFeatureTransformer extends Transformer
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        if ($user && $user->current_id == $movement->start_id) {
+        if ($user && $user->current_id == $movement->end_id) {
             return 'incoming';
         }
 
