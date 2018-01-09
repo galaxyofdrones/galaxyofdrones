@@ -92,4 +92,23 @@
             vertical-align: middle;
         }
     }
+    .leaflet-movement {
+        stroke-dasharray: 1, 5;
+        stroke-width: 2;
+
+        &.incoming {
+            stroke: $brand-success;
+
+            &-attack {
+                stroke: $brand-danger;
+            }
+        }
+        &.outgoing {
+            stroke: $brand-success;
+
+            &-attack {
+                stroke: $brand-warning;
+            }
+        }
+    }
 }

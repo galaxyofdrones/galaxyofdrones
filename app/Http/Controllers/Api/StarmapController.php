@@ -5,6 +5,7 @@ namespace Koodilab\Http\Controllers\Api;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Star;
+use Koodilab\Models\Transformers\MovementFeatureTransformer;
 use Koodilab\Models\Transformers\PlanetFeatureTransformer;
 use Koodilab\Models\Transformers\StarFeatureTransformer;
 use Koodilab\Support\Bounds;
@@ -37,14 +38,15 @@ class StarmapController extends Controller
     /**
      * Get the geo json data.
      *
-     * @param int                      $zoom
-     * @param string                   $bounds
-     * @param StarFeatureTransformer   $starTransformer
-     * @param PlanetFeatureTransformer $planetTransformer
+     * @param int                        $zoom
+     * @param string                     $bounds
+     * @param StarFeatureTransformer     $starTransformer
+     * @param PlanetFeatureTransformer   $planetTransformer
+     * @param MovementFeatureTransformer $movementTransformer
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function geoJson($zoom, $bounds, StarFeatureTransformer $starTransformer, PlanetFeatureTransformer $planetTransformer)
+    public function geoJson($zoom, $bounds, StarFeatureTransformer $starTransformer, PlanetFeatureTransformer $planetTransformer, MovementFeatureTransformer $movementTransformer)
     {
         $features = collect();
 
@@ -62,6 +64,21 @@ class StarmapController extends Controller
                 $planetTransformer->transformCollection(Planet::inBounds($bounds)
                     ->limit(static::GEO_JSON_LIMIT - $limit)
                     ->get())
+            );
+
+            /** @var \Koodilab\Models\User $user */
+            $user = auth()->user();
+
+            $features = $features->merge(
+                $movementTransformer->transformCollection(
+                    $user->current->findIncomingMovements()
+                )
+            );
+
+            $features = $features->merge(
+                $movementTransformer->transformCollection(
+                    $user->current->findOutgoingMovements()
+                )
             );
         }
 

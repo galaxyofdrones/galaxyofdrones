@@ -190,41 +190,36 @@ export default Modal.extend({
         scout() {
             axios.post(this.urls.scout.replace('__planet__', this.selected.id), {
                 quantity: this.quantity[this.scoutUnit.id]
-            }).then(
-                () => this.$modal.modal('hide')
-            );
+            }).then(this.handleSuccess);
         },
 
         attack() {
             axios.post(this.urls.attack.replace('__planet__', this.selected.id), {
                 quantity: this.quantity
-            }).then(
-                () => this.$modal.modal('hide')
-            );
+            }).then(this.handleSuccess);
         },
 
         occupy() {
             axios.post(
                 this.urls.occupy.replace('__planet__', this.selected.id)
-            ).then(
-                () => this.$modal.modal('hide')
-            );
+            ).then(this.handleSuccess);
         },
 
         support() {
             axios.post(this.urls.support.replace('__planet__', this.selected.id), {
                 quantity: this.quantity
-            }).then(
-                () => this.$modal.modal('hide')
-            );
+            }).then(this.handleSuccess);
         },
 
         transport() {
             axios.post(this.urls.transport.replace('__planet__', this.selected.id), {
                 quantity: this.quantity
-            }).then(
-                () => this.$modal.modal('hide')
-            );
+            }).then(this.handleSuccess);
+        },
+
+        handleSuccess() {
+            this.$modal.modal('hide');
+            EventBus.$emit('starmap-refresh');
         },
 
         resourceQuantity(resource) {

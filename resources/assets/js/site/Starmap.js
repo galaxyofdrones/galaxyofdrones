@@ -60,11 +60,11 @@ export default {
             }).addTo(this.map);
 
             const geoJsonLayer = L.geoJson.ajax(this.geoJson(), {
-                pointToLayer: (geoJsonPoint, latlng) => {
-                    const point = this.map.unproject([
-                        latlng.lng, latlng.lat
-                    ], this.maxZoom);
+                coordsToLatLng: coords => this.map.unproject([
+                    coords[0], coords[1]
+                ], this.maxZoom),
 
+                pointToLayer: (geoJsonPoint, latlng) => {
                     const size = (geoJsonPoint.properties.size + 16) / this.multiplier();
 
                     const options = {
@@ -80,7 +80,7 @@ export default {
                         options.html = `<span>${geoJsonPoint.properties.name}</span>`;
                     }
 
-                    const marker = L.marker(point, {
+                    const marker = L.marker(latlng, {
                         title: geoJsonPoint.properties.name,
                         icon: L.divIcon(options)
                     });
@@ -88,6 +88,16 @@ export default {
                     marker.on('click', () => EventBus.$emit(`${geoJsonPoint.properties.type}-click`, geoJsonPoint));
 
                     return marker;
+                },
+
+                style: feature => {
+                    if (feature.geometry.type === 'LineString') {
+                        return {
+                            className: feature.properties.type < 3
+                                ? `leaflet-movement ${feature.properties.status}-attack`
+                                : `leaflet-movement ${feature.properties.status}`
+                        };
+                    }
                 }
             });
 
@@ -96,6 +106,8 @@ export default {
 
             this.map.on('zoomstart', () => geoJsonLayer.clearLayers());
             this.map.on('moveend', () => geoJsonLayer.refresh(this.geoJson()));
+
+            EventBus.$on('starmap-refresh', () => geoJsonLayer.refresh());
 
             this.zoomControl().addTo(this.map);
             this.bookmarkControl().addTo(this.map);
