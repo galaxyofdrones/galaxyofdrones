@@ -3,6 +3,8 @@
 namespace Koodilab\Models\Transformers;
 
 use Illuminate\Contracts\Translation\Translator;
+use Koodilab\Models\Planet;
+use Koodilab\Models\User;
 
 class UserShowTransformer extends Transformer
 {
@@ -42,6 +44,28 @@ class UserShowTransformer extends Transformer
             'winning_battle_count' => $item->winningBattleLogCount(),
             'losing_battle_count' => $item->losingBattleLogCount(),
             'created_at' => $item->created_at->toDateTimeString(),
+            'planets' => $this->planets($item),
         ];
+    }
+
+    /**
+     * Get the planets.
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function planets(User $user)
+    {
+        return $user->findPlanetsOrderByName()
+            ->transform(function (Planet $planet) {
+                return [
+                    'id' => $planet->id,
+                    'resource_id' => $planet->resource_id,
+                    'name' => $planet->display_name,
+                    'x' => $planet->x,
+                    'y' => $planet->y,
+                ];
+            });
     }
 }

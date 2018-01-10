@@ -8,6 +8,9 @@
             margin-top: $grid-gutter-width / 3 * 2;
         }
     }
+    &.profile .btn {
+        margin-top: $grid-gutter-width / 3 * 2;
+    }
     &-body.separator {
         border-top: 1px solid $modal-header-border-color;
     }

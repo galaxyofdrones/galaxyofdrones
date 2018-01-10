@@ -3,7 +3,7 @@ import Filters from './Filters';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url', 'translations'],
+    props: ['url', 'canMove', 'translations'],
 
     data() {
         return {
@@ -37,6 +37,14 @@ export default Modal.extend({
                 this.data = response.data;
                 this.$nextTick(() => this.$modal.modal());
             });
+        },
+
+        move(planet) {
+            EventBus.$emit(
+                'starmap-move', planet.x, planet.y
+            );
+
+            this.$modal.modal('hide');
         }
     }
 });
