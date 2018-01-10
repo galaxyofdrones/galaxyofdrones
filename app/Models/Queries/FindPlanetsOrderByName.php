@@ -14,7 +14,7 @@ trait FindPlanetsOrderByName
     public function findPlanetsOrderByName($columns = ['*'])
     {
         return $this->planets()
-            ->orderBy('name')
+            ->orderByRaw('IFNULL(custom_name, name)')
             ->get($columns);
     }
 }
