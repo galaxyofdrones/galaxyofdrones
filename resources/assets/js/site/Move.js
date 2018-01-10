@@ -219,7 +219,6 @@ export default Modal.extend({
 
         handleSuccess() {
             this.$modal.modal('hide');
-            EventBus.$emit('starmap-refresh');
         },
 
         resourceQuantity(resource) {

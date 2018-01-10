@@ -7,6 +7,7 @@ export default {
 
     data() {
         return {
+            geoJsonLayer: undefined,
             map: undefined,
             zoom: 0,
             planet: {
@@ -29,7 +30,9 @@ export default {
 
             if (!this.map) {
                 this.initLeaflet();
-            } else if (!isSamePlanet) {
+            } else if (isSamePlanet) {
+                this.geoJsonLayer.refresh();
+            } else {
                 this.map.setView(this.center(), this.maxZoom);
             }
         });
@@ -59,7 +62,7 @@ export default {
                 bounds: L.latLngBounds(this.southWest(), this.northEast()),
             }).addTo(this.map);
 
-            const geoJsonLayer = L.geoJson.ajax(this.geoJson(), {
+            this.geoJsonLayer = L.geoJson.ajax(this.geoJson(), {
                 coordsToLatLng: coords => this.map.unproject([
                     coords[0], coords[1]
                 ], this.maxZoom),
@@ -101,13 +104,11 @@ export default {
                 }
             });
 
-            geoJsonLayer.ajaxParams.headers = axios.defaults.headers.common;
-            geoJsonLayer.addTo(this.map);
+            this.geoJsonLayer.ajaxParams.headers = axios.defaults.headers.common;
+            this.geoJsonLayer.addTo(this.map);
 
-            this.map.on('zoomstart', () => geoJsonLayer.clearLayers());
-            this.map.on('moveend', () => geoJsonLayer.refresh(this.geoJson()));
-
-            EventBus.$on('starmap-refresh', () => geoJsonLayer.refresh());
+            this.map.on('zoomstart', () => this.geoJsonLayer.clearLayers());
+            this.map.on('moveend', () => this.geoJsonLayer.refresh(this.geoJson()));
 
             this.zoomControl().addTo(this.map);
             this.bookmarkControl().addTo(this.map);

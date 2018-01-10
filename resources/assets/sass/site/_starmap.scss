@@ -92,8 +92,15 @@
             vertical-align: middle;
         }
     }
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
     .leaflet-movement {
+        animation: dash 1s linear infinite;
         stroke-dasharray: 1, 5;
+        stroke-dashoffset: 6;
         stroke-width: 2;
 
         &.incoming {
