@@ -333,7 +333,9 @@ class Simulator implements SimulatorContract
         }, 0);
 
         if ($total) {
-            $capacity = round($this->capacity * $this->defenderLossRate);
+            $capacity = min(
+                $total, round($this->capacity * $this->defenderLossRate)
+            );
 
             foreach ($this->stocks as $stock) {
                 $quantity = $stock->quantity;
