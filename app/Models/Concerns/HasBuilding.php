@@ -100,6 +100,8 @@ trait HasBuilding
 
         return $building->replicate()->applyModifiers([
             'level' => $this->level + 1,
+            'defense_bonus' => $this->planet->defense_bonus,
+            'construction_time_bonus' => $this->planet->construction_time_bonus,
         ]);
     }
 

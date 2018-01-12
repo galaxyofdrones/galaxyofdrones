@@ -46,6 +46,8 @@ export default {
             number = value;
         }
 
+        value = Math.abs(value);
+
         if (number < 0) {
             return `-${value}`;
         }
