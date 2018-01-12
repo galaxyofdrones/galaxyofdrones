@@ -46,7 +46,9 @@ export default {
             number = value;
         }
 
-        value = Math.abs(value);
+        value = !isNaN(value)
+            ? Math.abs(value)
+            : value;
 
         if (number < 0) {
             return `-${value}`;
