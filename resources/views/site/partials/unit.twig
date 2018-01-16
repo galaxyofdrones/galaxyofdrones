@@ -3,7 +3,10 @@
         <span class="item" :class="unit | item('unit')"></span>
     </div>
     <div class="col-md-6">
-        <h4>
+        <h4 v-if="!isResearch && remaining">
+            {{ vue('trainName') }}
+        </h4>
+        <h4 v-else>
             {{ vue('unit.name') }}
         </h4>
         <p>

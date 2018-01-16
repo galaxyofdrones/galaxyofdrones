@@ -148,6 +148,11 @@ class PlanetTransformer extends Transformer
                             'remaining' => $grid->upgrade->remaining,
                         ]
                         : null,
+                    'training' => $grid->training
+                        ? [
+                            'remaining' => $grid->training->remaining,
+                        ]
+                        : null,
                 ];
             });
     }

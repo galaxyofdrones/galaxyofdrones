@@ -40,6 +40,10 @@ export default Building.extend({
             );
         },
 
+        trainName() {
+            return `${this.data.quantity} x ${this.selected.name}`;
+        },
+
         trainTime() {
             return this.isTrainable
                 ? this.quantity * this.selected.train_time

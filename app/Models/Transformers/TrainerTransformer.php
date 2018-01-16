@@ -28,9 +28,14 @@ class TrainerTransformer extends Transformer
      */
     public function transform($item)
     {
+        $training = $item->training;
+
         return [
-            'remaining' => $item->training
-                ? $item->training->remaining
+            'remaining' => $training
+                ? $training->remaining
+                : null,
+            'quantity' => $training
+                ? $training->quantity
                 : null,
             'units' => $this->unitTransformer->transformCollection(
                 $item->trainingUnits()

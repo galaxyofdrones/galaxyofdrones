@@ -282,18 +282,26 @@ export default {
 
         gridRemaining(grid, sprite) {
             let remaining;
+            let textStyle;
 
             if (grid.construction) {
                 remaining = grid.construction.remaining;
+                textStyle = this.textStyle;
+            } else if (grid.training) {
+                remaining = grid.training.remaining;
+                textStyle = _.assignIn({}, this.textStyle, {
+                    fill: '#ebb237'
+                });
             } else if (grid.upgrade) {
                 remaining = grid.upgrade.remaining;
+                textStyle = this.textStyle;
             }
 
             if (!remaining) {
                 return;
             }
 
-            const text = new Text(Filters.timer(remaining), this.textStyle);
+            const text = new Text(Filters.timer(remaining), textStyle);
 
             text.position.x = (sprite.width - text.width) / 2;
             text.position.y = (sprite.height - text.height) / 2;
