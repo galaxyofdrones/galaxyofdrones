@@ -159,20 +159,43 @@ class Planet extends Model implements PositionableContract
                 $userId = $planet->getOriginal('user_id');
 
                 if ($userId) {
+                    $user = User::find($userId);
+
                     $planet->custom_name = null;
-                    $planet->incomingMovements()->where('user_id', $userId)->get()->each->delete();
-                    $planet->outgoingMovements()->where('user_id', $userId)->get()->each->delete();
-                    $planet->constructions->each->delete();
-                    $planet->upgrades->each->delete();
-                    $planet->trainings->each->delete();
-                    $planet->missions->each->delete();
+                    $planet->capacity = null;
+                    $planet->supply = null;
+                    $planet->mining_rate = null;
+                    $planet->production_rate = null;
+                    $planet->defense_bonus = null;
+                    $planet->construction_time_bonus = null;
+                    $planet->incomingMovements()->where('user_id', $user->id)->delete();
+                    $planet->outgoingMovements()->where('user_id', $user->id)->delete();
+                    $planet->constructions()->delete();
+                    $planet->upgrades()->delete();
+                    $planet->trainings()->delete();
+                    $planet->missions()->delete();
+
+                    $planet->grids()->update([
+                        'level' => null,
+                        'building_id' => null,
+                    ]);
+
+                    if ($planet->id == $user->current_id) {
+                        $user->update([
+                            'current_id' => $user->capital_id,
+                        ]);
+                    }
+
+                    app(StateManager::class)->syncUser($user);
                 }
             }
 
             if ($planet->user_id) {
                 app(StateManager::class)->syncUser($planet->user);
             }
+        });
 
+        static::updated(function (self $planet) {
             event(
                 new PlanetUpdated($planet->id)
             );
@@ -227,6 +250,16 @@ class Planet extends Model implements PositionableContract
     public function trainings()
     {
         return $this->hasManyThrough(Training::class, Grid::class);
+    }
+
+    /**
+     * Is capital?
+     *
+     * @return bool
+     */
+    public function isCapital()
+    {
+        return $this->user_id && $this->id == $this->user->capital_id;
     }
 
     /**

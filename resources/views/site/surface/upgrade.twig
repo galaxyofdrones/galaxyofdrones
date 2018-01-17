@@ -1,4 +1,5 @@
-<upgrade url="{{ route('api_upgrade', '__grid__') }}"
+<upgrade :central-type="{{ constant('Koodilab\\Models\\Building::TYPE_CENTRAL') }}"
+         url="{{ route('api_upgrade', '__grid__') }}"
          store-url="{{ route('api_upgrade_store', '__grid__') }}"
          destroy-url="{{ route('api_upgrade_destroy', '__grid__') }}" inline-template>
     <div class="upgrade modal fade" tabindex="-1">

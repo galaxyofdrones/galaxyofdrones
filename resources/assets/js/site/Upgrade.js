@@ -6,7 +6,7 @@ import Trader from './Trader';
 import Trainer from './Trainer';
 
 export default Modal.extend({
-    props: ['url', 'storeUrl', 'destroyUrl'],
+    props: ['centralType', 'url', 'storeUrl', 'destroyUrl'],
 
     components: {
         Producer, Scout, Trader, Trainer
@@ -14,6 +14,7 @@ export default Modal.extend({
 
     data() {
         return {
+            isCapitalPlanet: false,
             energy: 0,
             grid: {
                 id: undefined,
@@ -31,11 +32,16 @@ export default Modal.extend({
         EventBus.$on('building-click', this.open);
         EventBus.$on('energy-updated', energy => this.energy = energy);
         EventBus.$on('planet-update', () => this.fetchData());
+        EventBus.$on('planet-updated', planet => this.isCapitalPlanet = planet.is_capital);
     },
 
     computed: {
         canConstruct() {
             return this.energy >= this.data.upgrade.construction_cost;
+        },
+
+        canDemolish() {
+            return !this.remaining && (!this.isCapitalPlanet || this.data.building.type !== this.centralType);
         },
 
         building() {
@@ -47,6 +53,12 @@ export default Modal.extend({
         open(grid) {
             this.grid = grid;
             this.fetchData(true);
+        },
+
+        openDemolish() {
+            this.openAfterHidden(
+                () => EventBus.$emit('demolish-open', this.grid)
+            );
         },
 
         fetchData(showModal = false) {

@@ -56,6 +56,10 @@ $router->group([
 
         $router->put('name', 'PlanetController@updateName')
             ->name('planet_name_update');
+
+        $router->delete('demolish/{grid}', 'PlanetController@demolish')
+            ->name('planet_demolish')
+            ->where('grid', '\d+');
     });
 
     $router->group([

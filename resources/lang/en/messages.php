@@ -6,6 +6,7 @@ return [
     'cancel' => 'Cancel',
     'create' => 'Create',
     'delete' => 'Delete',
+    'demolish' => 'Demolish',
     'edit' => 'Edit',
     'energy' => 'Energy',
     'failed_job' => 'Failed job',
@@ -172,6 +173,8 @@ return [
 
     'warning' => [
         'delete_selected' => 'Are you sure you want to delete the selected items?',
+        'demolish_building' => 'Are you sure you want to demolish the selected building?',
+        'lose_planet' => 'If it is the Command Center, you will lose the planet.',
         'server' => 'Sorry, the server is full :(',
     ],
 

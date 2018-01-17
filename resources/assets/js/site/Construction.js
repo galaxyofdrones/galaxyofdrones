@@ -7,6 +7,7 @@ export default Modal.extend({
     data() {
         return {
             isSubscribed: false,
+            canDemolish: false,
             energy: 0,
             selected: {
                 id: undefined

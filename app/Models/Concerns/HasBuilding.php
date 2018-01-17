@@ -4,7 +4,6 @@ namespace Koodilab\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Collection;
 use Koodilab\Models\Building;
-use Koodilab\Models\User;
 
 trait HasBuilding
 {
@@ -126,20 +125,25 @@ trait HasBuilding
             $this->training->delete();
         }
 
-        $minLevel = $this->building->type == Building::TYPE_CENTRAL && User::findByCapitalId($this->planet_id)
+        $minLevel = $this->planet->isCapital() && $this->building->type == Building::TYPE_CENTRAL
             ? 1
             : 0;
 
         $this->level = max(
-            $minLevel,
-            $this->level - $level
+            $minLevel, $this->level - $level
         );
 
-        if (!$this->level) {
-            $this->level = null;
-            $this->building()->associate(null);
-        }
+        if (!$this->level && $this->building->type == Building::TYPE_CENTRAL) {
+            $this->planet->update([
+                'user_id' => null,
+            ]);
+        } else {
+            if (!$this->level) {
+                $this->level = null;
+                $this->building_id = null;
+            }
 
-        $this->save();
+            $this->save();
+        }
     }
 }

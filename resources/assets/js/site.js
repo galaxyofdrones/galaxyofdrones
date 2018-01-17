@@ -15,6 +15,7 @@ require('./site/bootstrap');
 
 import Bookmark from './site/Bookmark';
 import Construction from './site/Construction';
+import Demolish from './site/Demolish';
 import Filters from './site/Filters';
 import Mailbox from './site/Mailbox';
 import Mothership from './site/Mothership';
@@ -47,6 +48,7 @@ const app = new Vue({
     components: {
         Bookmark,
         Construction,
+        Demolish,
         Mailbox,
         Move,
         Mothership,

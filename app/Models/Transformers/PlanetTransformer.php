@@ -39,6 +39,7 @@ class PlanetTransformer extends Transformer
             'used_capacity' => $item->used_capacity,
             'used_supply' => $item->used_supply,
             'used_training_supply' => $item->used_training_supply,
+            'is_capital' => $item->isCapital(),
             'planets' => $this->planets($item->user),
             'resources' => $this->resources($item),
             'units' => $this->units($item),

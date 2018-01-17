@@ -189,5 +189,14 @@
                 </div>
             </div>
         </div>
+        <div v-if="grid.building_id" class="attribute-row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <button class="btn btn-danger btn-block" @click="openDemolish()" :disabled="!canDemolish">
+                        {{ trans('messages.demolish') }}
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

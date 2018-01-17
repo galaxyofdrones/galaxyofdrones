@@ -83,7 +83,6 @@ class User extends Authenticatable
         Concerns\HasResearchable,
         Queries\FindAvailableResource,
         Queries\FindAvailableUnits,
-        Queries\FindByCapitalId,
         Queries\FindByIdOrUsername,
         Queries\FindMissionResources,
         Queries\FindPlanetsOrderByName,

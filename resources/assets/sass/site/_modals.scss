@@ -14,20 +14,25 @@
     &-body.separator {
         border-top: 1px solid $modal-header-border-color;
     }
-    &-footer .pager {
-        margin: 0;
-
-        a {
-            color: #fff;
-            transition: ease .2s;
+    &-footer {
+        &-btn-group {
+            padding-bottom: $grid-gutter-width / 3;
         }
-        .disabled {
-            > a,
-            > a:hover,
-            > a:focus,
-            > span {
-                color: $pager-disabled-color;
-                background-color: $brand-primary;
+        .pager {
+            margin: 0;
+
+            a {
+                color: #fff;
+                transition: ease .2s;
+            }
+            .disabled {
+                > a,
+                > a:hover,
+                > a:focus,
+                > span {
+                    color: $pager-disabled-color;
+                    background-color: $brand-primary;
+                }
             }
         }
     }
