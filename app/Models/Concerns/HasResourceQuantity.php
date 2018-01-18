@@ -57,6 +57,6 @@ trait HasResourceQuantity
 
         $this->fill([
             'quantity' => max(0, $this->quantity + min($this->planet->free_capacity, $amount)),
-        ])->save();
+        ])->touch();
     }
 }

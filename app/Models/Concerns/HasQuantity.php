@@ -29,6 +29,6 @@ trait HasQuantity
 
         $this->fill([
             'quantity' => max(0, $this->quantity - $amount),
-        ])->save();
+        ])->touch();
     }
 }

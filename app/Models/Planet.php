@@ -284,7 +284,7 @@ class Planet extends Model implements PositionableContract
 
         $stock->setRelation('planet', $this)->fill([
             'quantity' => $stock->quantity,
-        ])->save();
+        ])->touch();
     }
 
     /**
