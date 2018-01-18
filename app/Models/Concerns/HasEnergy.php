@@ -7,18 +7,6 @@ use Carbon\Carbon;
 trait HasEnergy
 {
     /**
-     * The "booting" method of the trait.
-     */
-    public static function bootHasEnergy()
-    {
-        static::saving(function ($model) {
-            if ($model->isDirty(['energy', 'production_rate'])) {
-                $model->last_energy_changed = Carbon::now();
-            }
-        });
-    }
-
-    /**
      * Get the energy attribute.
      *
      * @return int
@@ -59,6 +47,7 @@ trait HasEnergy
     {
         $this->update([
             'energy' => $this->energy + $amount,
+            'last_energy_changed' => Carbon::now(),
         ]);
     }
 
@@ -71,6 +60,7 @@ trait HasEnergy
     {
         $this->update([
             'energy' => max(0, $this->energy - $amount),
+            'last_energy_changed' => Carbon::now(),
         ]);
     }
 }

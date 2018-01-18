@@ -2,6 +2,7 @@
 
 namespace Koodilab\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
@@ -284,7 +285,8 @@ class Planet extends Model implements PositionableContract
 
         $stock->setRelation('planet', $this)->fill([
             'quantity' => $stock->quantity,
-        ])->touch();
+            'last_quantity_changed' => Carbon::now(),
+        ])->save();
     }
 
     /**

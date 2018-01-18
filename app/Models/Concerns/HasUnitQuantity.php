@@ -4,7 +4,17 @@ namespace Koodilab\Models\Concerns;
 
 trait HasUnitQuantity
 {
-    use HasQuantity;
+    /**
+     * Has quantity?
+     *
+     * @param int $quantity
+     *
+     * @return bool
+     */
+    public function hasQuantity($quantity)
+    {
+        return $this->quantity >= $quantity;
+    }
 
     /**
      * Increment the quantity.
@@ -26,6 +36,22 @@ trait HasUnitQuantity
 
         $this->fill([
             'quantity' => max(0, $this->quantity + $amount),
-        ])->touch();
+        ])->save();
+    }
+
+    /**
+     * Decrement the quantity.
+     *
+     * @param int $amount
+     */
+    public function decrementQuantity($amount)
+    {
+        if (empty($amount)) {
+            return;
+        }
+
+        $this->fill([
+            'quantity' => max(0, $this->quantity - $amount),
+        ])->save();
     }
 }

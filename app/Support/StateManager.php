@@ -2,6 +2,7 @@
 
 namespace Koodilab\Support;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Koodilab\Models\Building;
 use Koodilab\Models\Planet;
@@ -45,6 +46,7 @@ class StateManager
         $user->update([
             'energy' => $user->energy,
             'production_rate' => $user->planets->sum('production_rate'),
+            'last_energy_changed' => Carbon::now(),
         ]);
     }
 }

@@ -6,18 +6,16 @@ use Carbon\Carbon;
 
 trait HasResourceQuantity
 {
-    use HasQuantity;
-
     /**
-     * The "booting" method of the trait.
+     * Has quantity?
+     *
+     * @param int $quantity
+     *
+     * @return bool
      */
-    public static function bootHasResourceQuantity()
+    public function hasQuantity($quantity)
     {
-        static::saving(function ($model) {
-            if ($model->isDirty('quantity')) {
-                $model->last_quantity_changed = Carbon::now();
-            }
-        });
+        return $this->quantity >= $quantity;
     }
 
     /**
@@ -57,6 +55,24 @@ trait HasResourceQuantity
 
         $this->fill([
             'quantity' => max(0, $this->quantity + min($this->planet->free_capacity, $amount)),
-        ])->touch();
+            'last_quantity_changed' => Carbon::now(),
+        ])->save();
+    }
+
+    /**
+     * Decrement the quantity.
+     *
+     * @param int $amount
+     */
+    public function decrementQuantity($amount)
+    {
+        if (empty($amount)) {
+            return;
+        }
+
+        $this->fill([
+            'quantity' => max(0, $this->quantity - $amount),
+            'last_quantity_changed' => Carbon::now(),
+        ])->save();
     }
 }
