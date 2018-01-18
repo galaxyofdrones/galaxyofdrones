@@ -2,6 +2,8 @@
 
 namespace Koodilab\Models\Concerns;
 
+use Carbon\Carbon;
+
 trait HasExperience
 {
     /**
@@ -67,6 +69,7 @@ trait HasExperience
         $this->update([
             'energy' => $this->energy + $energyAmount,
             'experience' => $this->experience + $experienceAmount,
+            'last_energy_changed' => Carbon::now(),
         ]);
     }
 
