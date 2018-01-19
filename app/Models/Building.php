@@ -27,9 +27,9 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
  * @property int $supply
  * @property int $mining_rate
  * @property int $production_rate
- * @property int $mission_time
  * @property float $defense_bonus
  * @property float $construction_time_bonus
+ * @property float $trade_time_bonus
  * @property float $train_time_bonus
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -54,12 +54,12 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereLft($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereLimit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereMiningRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Building whereMissionTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereProductionRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereRgt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Building whereTradeTimeBonus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereTrainTimeBonus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereUpdatedAt($value)
@@ -340,24 +340,6 @@ class Building extends Model implements TranslatableContract
     }
 
     /**
-     * Get the mission time attribute.
-     *
-     * @return int
-     */
-    public function getMissionTimeAttribute()
-    {
-        $missionTime = $this->attributes['mission_time'];
-
-        if ($this->type == static::TYPE_TRADER && $missionTime && $this->hasLowerLevel()) {
-            return round(
-                $this->applyLinearForumla($missionTime)
-            );
-        }
-
-        return $missionTime;
-    }
-
-    /**
      * Get the defense bonus attribute.
      *
      * @return float
@@ -368,8 +350,7 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_DEFENSIVE && $defenseBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($defenseBonus),
-                2
+                $this->applyLinearForumla($defenseBonus), 2
             );
         }
 
@@ -387,8 +368,7 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_CENTRAL && $constructionTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($constructionTimeBonus),
-                2
+                $this->applyExpFormula($constructionTimeBonus), 2
             );
         }
 
@@ -406,12 +386,29 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_TRAINER && $trainTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($trainTimeBonus),
-                2
+                $this->applyExpFormula($trainTimeBonus), 2
             );
         }
 
         return $trainTimeBonus;
+    }
+
+    /**
+     * Get the trade time bonus attribute.
+     *
+     * @return float
+     */
+    public function getTradeTimeBonusAttribute()
+    {
+        $tradeTimeBonus = $this->attributes['train_time_bonus'];
+
+        if ($this->type == static::TYPE_TRADER && $tradeTimeBonus && $this->hasLowerLevel()) {
+            return round(
+                $this->applyExpFormula($tradeTimeBonus), 2
+            );
+        }
+
+        return $tradeTimeBonus;
     }
 
     /**

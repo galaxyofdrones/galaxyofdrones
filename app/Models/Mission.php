@@ -65,6 +65,13 @@ class Mission extends Model implements TimeableContract
     const EXPERIENCE_BONUS = 3.0;
 
     /**
+     * The mission time.
+     *
+     * @var int
+     */
+    const MISSION_TIME = 259200;
+
+    /**
      * {@inheritdoc}
      */
     protected $perPage = 30;
@@ -128,7 +135,7 @@ class Mission extends Model implements TimeableContract
         }
 
         $mission->fill([
-            'ended_at' => Carbon::now()->addSeconds($building->mission_time),
+            'ended_at' => Carbon::now()->addSeconds(static::MISSION_TIME),
         ])->save();
     }
 
