@@ -43,7 +43,9 @@ class PlanetTest extends TestCase
             return $event->userId === $user->id;
         });
 
-        $user->resources()->sync($planet->resource_id);
+        $user->resources()->attach($planet->resource_id, [
+            'quantity' => 0,
+        ]);
 
         $response = $this->getJson('/api/planet');
 
