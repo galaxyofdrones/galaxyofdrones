@@ -45,7 +45,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li :class="{active: isMissionControlSelected}">
+                            <a href="#" @click.prevent="selectMissionControl()">
+                                {{ trans('messages.mission_control') }}
+                            </a>
+                        </li>
+                        <li :class="{active: isLaboratorySelected}">
+                            <a href="#" @click.prevent="selectLaboratory()">
+                                {{ trans('messages.laboratory') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
+                {% include 'site.partials.mission-control' %}
                 {% include 'site.partials.laboratory' %}
             </div>
         </div>

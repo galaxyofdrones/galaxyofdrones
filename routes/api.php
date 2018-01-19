@@ -101,6 +101,17 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'mission',
+    ], function () use ($router) {
+        $router->get('/', 'MissionController@index')
+            ->name('mission');
+
+        $router->post('{mission}', 'MissionController@store')
+            ->name('mission_store')
+            ->where('mission', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'mission-log',
     ], function () use ($router) {
         $router->get('/', 'MissionLogController@index')

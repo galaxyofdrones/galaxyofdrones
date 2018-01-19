@@ -43,6 +43,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int $next_level
  * @property int $next_level_experience
  * @property \Illuminate\Database\Eloquent\Collection|MissionLog[] $missionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Mission[] $missions
  * @property \Illuminate\Database\Eloquent\Collection|Movement[] $movements
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property \Illuminate\Database\Eloquent\Collection|Planet[] $planets
@@ -85,6 +86,7 @@ class User extends Authenticatable
         Queries\FindAvailableUnits,
         Queries\FindByIdOrUsername,
         Queries\FindMissionResources,
+        Queries\FindNotExpiredMissions,
         Queries\FindPlanetsOrderByName,
         Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,
@@ -98,6 +100,7 @@ class User extends Authenticatable
         Relations\HasManyPlanet,
         Relations\HasManyMovement,
         Relations\HasManyResearch,
+        Relations\HasManyMission,
         Relations\HasManyMissionLog;
 
     /**
