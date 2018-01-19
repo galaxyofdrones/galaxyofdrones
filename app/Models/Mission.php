@@ -103,12 +103,13 @@ class Mission extends Model implements TimeableContract
         ]);
 
         $resources = $user->findMissionResources();
+
         $resources = $resources->random(
             mt_rand(1, $resources->count())
         );
 
-        $totalQuantity = $user->planets->sum('capacity') * static::randMultiplier();
         $totalFrequency = $resources->sum('frequency');
+        $totalQuantity = $user->planets->sum('capacity') * static::randMultiplier();
 
         foreach ($resources as $resource) {
             $quantity = round(
