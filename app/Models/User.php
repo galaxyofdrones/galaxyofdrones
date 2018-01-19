@@ -93,7 +93,6 @@ class User extends Authenticatable
         Queries\PaginateAllStartedOrderByExperience,
         Queries\PaginateBattleLogs,
         Queries\PaginateMissionLogs,
-        Relations\BelongsToManyResource,
         Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
@@ -274,6 +273,16 @@ class User extends Authenticatable
     public function defenseBattleLogs()
     {
         return $this->hasMany(BattleLog::class, 'defender_id');
+    }
+
+    /**
+     * Get the resources.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class)->withPivot('quantity');
     }
 
     /**
