@@ -15,7 +15,7 @@ trait FindAvailableResource
      */
     public function findAvailableResource($columns = ['*'])
     {
-        $except = $this->resources()->pluck('resources.id');
+        $except = $this->resources()->pluck('resource_id');
 
         return Resource::whereNotIn('id', $except)
             ->orderBy('sort_order')

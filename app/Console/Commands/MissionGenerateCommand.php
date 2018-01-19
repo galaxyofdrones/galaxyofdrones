@@ -5,9 +5,8 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
 use Koodilab\Models\Mission;
+use Koodilab\Models\User;
 
 class MissionGenerateCommand extends Command
 {
@@ -54,21 +53,10 @@ class MissionGenerateCommand extends Command
         );
 
         $this->database->transaction(function () {
-            /** @var Building $building */
-            $building = Building::findByType(Building::TYPE_TRADER);
+            $users = User::whereNotNull('started_at')->get();
 
-            if ($building) {
-                $grids = Grid::findAllByBuilding($building);
-
-                foreach ($grids as $grid) {
-                    $building->applyModifiers([
-                        'level' => $grid->level,
-                    ]);
-
-                    Mission::createRand(
-                        $grid->planet, $building, $grid->planet->user->findMissionResources()
-                    );
-                }
+            foreach ($users as $user) {
+                Mission::createRand($user);
             }
         });
 

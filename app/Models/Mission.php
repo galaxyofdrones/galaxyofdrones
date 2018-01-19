@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Support\Util;
@@ -12,36 +11,36 @@ use Koodilab\Support\Util;
  * Mission.
  *
  * @property int $id
- * @property int $planet_id
+ * @property int $user_id
  * @property int $energy
  * @property int $experience
  * @property \Carbon\Carbon $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property int $remaining
- * @property Planet $planet
  * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
+ * @property User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEndedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEnergy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission wherePlanetId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mission whereUserId($value)
  * @mixin \Eloquent
  */
 class Mission extends Model implements TimeableContract
 {
     use Behaviors\Timeable,
-        Relations\BelongsToPlanet;
+        Relations\BelongsToUser;
 
     /**
      * The minimum capacity.
      *
      * @var float
      */
-    const MIN_CAPACITY = 0.4;
+    const MIN_CAPACITY = 0.2;
 
     /**
      * The maximum capacity.
@@ -93,23 +92,22 @@ class Mission extends Model implements TimeableContract
     /**
      * Create a random mission.
      *
-     * @param Planet     $planet
-     * @param Building   $building
-     * @param Collection $resources
+     * @param User $user
      */
-    public static function createRand(Planet $planet, Building $building, Collection $resources)
+    public static function createRand(User $user)
     {
         $mission = static::create([
-            'planet_id' => $planet->id,
+            'user_id' => $user->id,
             'energy' => 0,
             'experience' => 0,
         ]);
 
+        $resources = $user->findMissionResources();
         $resources = $resources->random(
             mt_rand(1, $resources->count())
         );
 
-        $totalQuantity = $planet->capacity * static::randMultiplier();
+        $totalQuantity = $user->planets->sum('capacity') * static::randMultiplier();
         $totalFrequency = $resources->sum('frequency');
 
         foreach ($resources as $resource) {
@@ -176,13 +174,14 @@ class Mission extends Model implements TimeableContract
      */
     public function isCompletable()
     {
-        /** @var \Illuminate\Database\Eloquent\Collection|Stock[] $stocks */
-        $stocks = $this->planet->findStocksByResourceIds($this->resources->modelKeys())
-            ->keyBy('resource_id')
-            ->each->setRelation('planet', $this->planet);
+        $userResources = $this->user->resources()
+            ->whereIn('resource_id', $this->resources->modelKeys())
+            ->get();
 
         foreach ($this->resources as $resource) {
-            if (!$stocks->has($resource->id) || !$stocks->get($resource->id)->hasQuantity($resource->pivot->quantity)) {
+            $userResource = $userResources->firstWhere('id', $resource->id);
+
+            if ($userResource->pivot->quantity < $resource->pivot->quantity) {
                 return false;
             }
         }
@@ -195,17 +194,20 @@ class Mission extends Model implements TimeableContract
      */
     public function finish()
     {
-        $this->planet->user->incrementEnergyAndExperience(
+        $this->user->incrementEnergyAndExperience(
             $this->energy, $this->experience
         );
 
-        /** @var \Illuminate\Database\Eloquent\Collection|Stock[] $stocks */
-        $stocks = $this->planet->findStocksByResourceIds($this->resources->modelKeys())
-            ->keyBy('resource_id')
-            ->each->setRelation('planet', $this->planet);
+        $userResources = $this->user->resources()
+            ->whereIn('resource_id', $this->resources->modelKeys())
+            ->get();
 
         foreach ($this->resources as $resource) {
-            $stocks->get($resource->id)->decrementQuantity($resource->pivot->quantity);
+            $userResource = $userResources->firstWhere('id', $resource->id);
+
+            $userResource->pivot->update([
+                'quantity' => max(0, $userResource->pivot->quantity - $resource->pivot->quantity),
+            ]);
         }
 
         MissionLog::createFrom($this);
