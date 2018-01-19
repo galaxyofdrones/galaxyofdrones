@@ -100,7 +100,9 @@ class Research extends Model implements TimeableContract
     {
         switch ($this->researchable_type) {
             case Resource::class:
-                $this->user->resources()->attach($this->researchable_id);
+                $this->user->resources()->attach($this->researchable_id, [
+                    'quantity' => 0,
+                ]);
                 break;
             case Unit::class:
                 $this->user->units()->attach($this->researchable_id);

@@ -282,7 +282,9 @@ class User extends Authenticatable
      */
     public function resources()
     {
-        return $this->belongsToMany(Resource::class)->withPivot('quantity');
+        return $this->belongsToMany(Resource::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 
     /**

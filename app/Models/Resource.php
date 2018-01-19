@@ -85,6 +85,8 @@ class Resource extends Model implements TranslatableContract
      */
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('quantity');
+        return $this->belongsToMany(User::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 }
