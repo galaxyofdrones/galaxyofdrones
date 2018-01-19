@@ -14,10 +14,10 @@ class CreateMissionsTable extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('planet_id')->unsigned();
-            $table->foreign('planet_id')
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('planets')
+                ->on('users')
                 ->onDelete('cascade');
 
             $table->integer('energy')->unsigned();
