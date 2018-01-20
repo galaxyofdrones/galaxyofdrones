@@ -376,6 +376,24 @@ class Building extends Model implements TranslatableContract
     }
 
     /**
+     * Get the trade time bonus attribute.
+     *
+     * @return float
+     */
+    public function getTradeTimeBonusAttribute()
+    {
+        $tradeTimeBonus = $this->attributes['trade_time_bonus'];
+
+        if ($this->type == static::TYPE_TRADER && $tradeTimeBonus && $this->hasLowerLevel()) {
+            return round(
+                $this->applyExpFormula($tradeTimeBonus), 2
+            );
+        }
+
+        return $tradeTimeBonus;
+    }
+
+    /**
      * Get the train time bonus attribute.
      *
      * @return float
@@ -391,24 +409,6 @@ class Building extends Model implements TranslatableContract
         }
 
         return $trainTimeBonus;
-    }
-
-    /**
-     * Get the trade time bonus attribute.
-     *
-     * @return float
-     */
-    public function getTradeTimeBonusAttribute()
-    {
-        $tradeTimeBonus = $this->attributes['train_time_bonus'];
-
-        if ($this->type == static::TYPE_TRADER && $tradeTimeBonus && $this->hasLowerLevel()) {
-            return round(
-                $this->applyExpFormula($tradeTimeBonus), 2
-            );
-        }
-
-        return $tradeTimeBonus;
     }
 
     /**

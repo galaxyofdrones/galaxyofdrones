@@ -88,19 +88,6 @@
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.mission_time !== null">
-                <div class="attribute">
-                    <h6>
-                        {{ trans('validation.attributes.mission_time') }}
-                    </h6>
-                    <h4>
-                        {{ vue('building.mission_time | timer') }}
-                    </h4>
-                    <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.mission_time !== null">
-                        {{ vue('data.upgrade.mission_time - building.mission_time | timer | sign(data.upgrade.mission_time - building.mission_time)') }}
-                    </h5>
-                </div>
-            </div>
             <div class="col-md-6" v-if="building.defense_bonus !== null">
                 <div class="attribute">
                     <h6>
@@ -124,6 +111,19 @@
                     </h4>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.construction_time_bonus !== null">
                         {{ vue('data.upgrade.construction_time_bonus - building.construction_time_bonus | percent | sign(data.upgrade.construction_time_bonus - building.construction_time_bonus)') }}
+                    </h5>
+                </div>
+            </div>
+            <div class="col-md-6" v-if="building.trade_time_bonus !== null">
+                <div class="attribute">
+                    <h6>
+                        {{ trans('validation.attributes.trade_time_bonus') }}
+                    </h6>
+                    <h4>
+                        {{ vue('building.trade_time_bonus | percent') }}
+                    </h4>
+                    <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.trade_time_bonus !== null">
+                        {{ vue('data.upgrade.trade_time_bonus - building.trade_time_bonus | percent | sign(data.upgrade.trade_time_bonus - building.trade_time_bonus)') }}
                     </h5>
                 </div>
             </div>

@@ -52,7 +52,7 @@ export default Modal.extend({
                 this.data = response.data;
 
                 if (!showModal && !this.data.buildings.length) {
-                    this.$modal.modal('hide');
+                    this.close();
                 } else {
                     this.initRemaining(this.data.remaining);
 

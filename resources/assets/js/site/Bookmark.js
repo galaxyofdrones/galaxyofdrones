@@ -64,7 +64,7 @@ export default Modal.extend({
                 'starmap-move', bookmark.x, bookmark.y
             );
 
-            this.$modal.modal('hide');
+            this.close();
         },
 
         destroy(bookmark) {

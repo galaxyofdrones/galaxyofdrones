@@ -44,7 +44,7 @@ export default Modal.extend({
                 'starmap-move', planet.x, planet.y
             );
 
-            this.$modal.modal('hide');
+            this.close();
         }
     }
 });

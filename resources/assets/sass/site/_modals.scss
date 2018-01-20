@@ -11,6 +11,9 @@
     &.profile .btn {
         margin-top: $grid-gutter-width / 3 * 2;
     }
+    &.mothership .mission-control .item {
+        margin: 0 $grid-gutter-width;
+    }
     &-body.separator {
         border-top: 1px solid $modal-header-border-color;
     }
