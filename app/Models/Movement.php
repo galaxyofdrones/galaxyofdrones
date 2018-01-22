@@ -554,16 +554,19 @@ class Movement extends Model implements TimeableContract
      */
     protected function transferMissionResources()
     {
-        $userResources = $this->user->resources()
-            ->whereIn('resource_id', $this->resources->modelKeys())
-            ->get();
+        foreach ($this->resources as $resource) {
+            $userResource = $this->user->resources->firstWhere('id', $resource->id);
 
-        foreach ($userResources as $userResource) {
-            $resource = $this->resources->firstWhere('id', $userResource->id);
-
-            $userResource->pivot->update([
-                'quantity' => $userResource->pivot->quantity + $resource->pivot->quantity,
-            ]);
+            if (!$userResource) {
+                $this->user->resources()->attach($resource->id, [
+                    'is_researched' => false,
+                    'quantity' => $resource->pivot->quantity,
+                ]);
+            } else {
+                $userResource->pivot->update([
+                    'quantity' => $userResource->pivot->quantity + $resource->pivot->quantity,
+                ]);
+            }
         }
     }
 

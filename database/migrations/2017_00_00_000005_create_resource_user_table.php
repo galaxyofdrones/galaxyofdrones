@@ -26,6 +26,7 @@ class CreateResourceUserTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->boolean('is_researched');
             $table->integer('quantity')->unsigned();
             $table->timestamps();
 

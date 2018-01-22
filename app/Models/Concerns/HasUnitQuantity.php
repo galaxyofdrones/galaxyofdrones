@@ -27,7 +27,7 @@ trait HasUnitQuantity
             return;
         }
 
-        $free = $this->planet->free_supply;
+        $free = $this->planet->supply - $this->planet->used_supply;
         $supply = $amount * $this->unit->supply;
 
         if ($free < $supply) {

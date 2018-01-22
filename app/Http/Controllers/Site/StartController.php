@@ -58,6 +58,7 @@ class StartController extends Controller
             ]);
 
             $user->resources()->attach(Resource::where('is_unlocked', true)->pluck('id'), [
+                'is_researched' => true,
                 'quantity' => 0,
             ]);
 
