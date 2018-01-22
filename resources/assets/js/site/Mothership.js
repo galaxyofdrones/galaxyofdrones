@@ -17,6 +17,7 @@ export default Modal.extend({
             data: {
                 capital_id: undefined,
                 capital_change_remaining: 0,
+                incoming_trade_movement: 0,
                 planets: []
             }
         };
@@ -37,7 +38,7 @@ export default Modal.extend({
         },
 
         canHyperjump() {
-            return this.selected !== this.data.capital_id;
+            return !this.data.incoming_trade_movement && this.selected !== this.data.capital_id;
         }
     },
 

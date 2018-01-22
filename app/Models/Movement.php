@@ -9,6 +9,7 @@ use Illuminate\Support\Collection as BaseCollection;
 use Koodilab\Contracts\Battle\Simulator;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
+use Koodilab\Events\UserUpdated;
 use Koodilab\Jobs\Move as MoveJob;
 
 /**
@@ -514,6 +515,10 @@ class Movement extends Model implements TimeableContract
     {
         $this->transferMissionResources();
         $this->returnMovement();
+
+        event(
+            new UserUpdated($this->user_id)
+        );
     }
 
     /**

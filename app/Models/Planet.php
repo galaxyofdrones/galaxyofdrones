@@ -83,6 +83,7 @@ class Planet extends Model implements PositionableContract
         Queries\FindStock,
         Queries\FindStocksByResourceIds,
         Queries\IncomingMovementCount,
+        Queries\IncomingTradeMovementCount,
         Queries\IncomingAttackMovementCount,
         Queries\OutgoingAttackMovementCount,
         Relations\BelongsToResource,
@@ -171,7 +172,6 @@ class Planet extends Model implements PositionableContract
                     $planet->constructions()->delete();
                     $planet->upgrades()->delete();
                     $planet->trainings()->delete();
-                    $planet->missions()->delete();
 
                     $planet->grids()->update([
                         'level' => null,

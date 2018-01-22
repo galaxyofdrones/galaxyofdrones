@@ -25,12 +25,7 @@ trait CanOccupy
             return false;
         }
 
-        $isResearched = $this->resources()
-            ->where('resource_id', $planet->resource_id)
-            ->where('is_researched', true)
-            ->exists();
-
-        if ($this->isStarted() && !$isResearched) {
+        if ($this->isStarted() && !$this->hasResource($planet->resource)) {
             return false;
         }
 

@@ -16,7 +16,10 @@ trait HasResearchable
      */
     public function hasResource(Resource $resource)
     {
-        return $this->resources()->where('resource_id', $resource->id)->exists();
+        return $this->resources()
+            ->where('is_researched', true)
+            ->where('resource_id', $resource->id)
+            ->exists();
     }
 
     /**
@@ -28,6 +31,8 @@ trait HasResearchable
      */
     public function hasUnit(Unit $unit)
     {
-        return $this->units()->where('unit_id', $unit->id)->exists();
+        return $this->units()
+            ->where('unit_id', $unit->id)
+            ->exists();
     }
 }
