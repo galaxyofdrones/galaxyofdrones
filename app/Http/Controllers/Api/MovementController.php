@@ -4,6 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
+use Koodilab\Models\Building;
 use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
@@ -181,6 +182,53 @@ class MovementController extends Controller
         DB::transaction(function () use ($planet, $population, $stocks, $quantity, $quantities) {
             Movement::createTransportFrom(
                 $planet, $population, $stocks, $quantity, $quantities
+            );
+        });
+    }
+
+    /**
+     * Store a newly created movement in storage.
+     *
+     * @return mixed|\Illuminate\Http\Response
+     */
+    public function storeTrade()
+    {
+        $quantities = $this->quantities();
+
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        /** @var Building $building */
+        $building = $user->current->findBuildings()
+            ->firstWhere('type', Building::TYPE_TRADER);
+
+        if (!$building) {
+            throw new BadRequestHttpException();
+        }
+
+        $population = $user->current->findPopulationByUnit(
+            Unit::findByType(Unit::TYPE_TRANSPORTER)
+        );
+
+        $quantity = ceil(
+            $quantities->sum() / $population->unit->capacity
+        );
+
+        if (!$population || !$population->hasQuantity($quantity)) {
+            throw new BadRequestHttpException();
+        }
+
+        /** @var Stock[] $stocks */
+        $stocks = $user->current->findStocksByResourceIds($quantities->keys())
+            ->each(function (Stock $stock) use ($quantities, $user) {
+                if (!$stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
+                    throw new BadRequestHttpException();
+                }
+            });
+
+        DB::transaction(function () use ($building, $population, $stocks, $quantity, $quantities) {
+            Movement::createTradeFrom(
+                $building, $population, $stocks, $quantity, $quantities
             );
         });
     }

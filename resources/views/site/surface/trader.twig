@@ -3,7 +3,7 @@
         :grid="grid"
         :close="close"
         url="{{ route('api_planet_capital') }}"
-        store-url="{{ route('api_planet_capital') }}"
+        store-url="{{ route('api_movement_trade_store', '__planet__') }}"
         :unit-types="{{ {
             'transporter': constant('Koodilab\\Models\\Unit::TYPE_TRANSPORTER')
         }|json_encode }}" inline-template>

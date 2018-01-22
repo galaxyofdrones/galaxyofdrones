@@ -143,6 +143,9 @@ $router->group([
         $router->post('transport/{planet}', 'MovementController@storeTransport')
             ->name('movement_transport_store')
             ->where('planet', '\d+');
+
+        $router->post('trade', 'MovementController@storeTrade')
+            ->name('movement_trade_store');
     });
 
     $router->group([
