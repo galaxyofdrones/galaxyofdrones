@@ -43,6 +43,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int $next_level
  * @property int $next_level_experience
  * @property \Illuminate\Database\Eloquent\Collection|MissionLog[] $missionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Mission[] $missions
  * @property \Illuminate\Database\Eloquent\Collection|Movement[] $movements
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property \Illuminate\Database\Eloquent\Collection|Planet[] $planets
@@ -85,6 +86,7 @@ class User extends Authenticatable
         Queries\FindAvailableUnits,
         Queries\FindByIdOrUsername,
         Queries\FindMissionResources,
+        Queries\FindNotExpiredMissions,
         Queries\FindPlanetsOrderByName,
         Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,
@@ -93,12 +95,12 @@ class User extends Authenticatable
         Queries\PaginateAllStartedOrderByExperience,
         Queries\PaginateBattleLogs,
         Queries\PaginateMissionLogs,
-        Relations\BelongsToManyResource,
         Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
         Relations\HasManyMovement,
         Relations\HasManyResearch,
+        Relations\HasManyMission,
         Relations\HasManyMissionLog;
 
     /**
@@ -274,6 +276,18 @@ class User extends Authenticatable
     public function defenseBattleLogs()
     {
         return $this->hasMany(BattleLog::class, 'defender_id');
+    }
+
+    /**
+     * Get the resources.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class)
+            ->withPivot('is_researched', 'quantity')
+            ->withTimestamps();
     }
 
     /**

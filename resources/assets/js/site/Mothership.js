@@ -1,20 +1,23 @@
 import { EventBus } from '../common/event-bus';
 import Laboratory from './Laboratory';
+import MissionControl from './MissionControl';
 import Modal from './Modal';
 
 export default Modal.extend({
     props: ['url', 'storeUrl'],
 
     components: {
-        Laboratory
+        Laboratory, MissionControl
     },
 
     data() {
         return {
             selected: undefined,
+            selectedTab: 'mission-control',
             data: {
                 capital_id: undefined,
                 capital_change_remaining: 0,
+                incoming_trade_movement: 0,
                 planets: []
             }
         };
@@ -26,14 +29,30 @@ export default Modal.extend({
     },
 
     computed: {
+        isMissionControlSelected() {
+            return this.selectedTab === 'mission-control';
+        },
+
+        isLaboratorySelected() {
+            return this.selectedTab === 'laboratory';
+        },
+
         canHyperjump() {
-            return this.selected !== this.data.capital_id;
+            return !this.data.incoming_trade_movement && this.selected !== this.data.capital_id;
         }
     },
 
     methods: {
         open() {
             this.fetchData(true);
+        },
+
+        selectMissionControl() {
+            this.selectedTab = 'mission-control';
+        },
+
+        selectLaboratory() {
+            this.selectedTab = 'laboratory';
         },
 
         fetchData(showModal = false) {

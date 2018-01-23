@@ -100,7 +100,7 @@ class Research extends Model implements TimeableContract
     {
         switch ($this->researchable_type) {
             case Resource::class:
-                $this->user->resources()->attach($this->researchable_id);
+                $this->finishResource();
                 break;
             case Unit::class:
                 $this->user->units()->attach($this->researchable_id);
@@ -112,6 +112,27 @@ class Research extends Model implements TimeableContract
         );
 
         $this->delete();
+    }
+
+    /**
+     * Finish resource.
+     */
+    protected function finishResource()
+    {
+        $userResource = $this->user->resources()
+            ->where('resource_id', $this->researchable_id)
+            ->first();
+
+        if (!$userResource) {
+            $this->user->resources()->attach($this->researchable_id, [
+                'is_researched' => true,
+                'quantity' => 0,
+            ]);
+        } else {
+            $userResource->pivot->update([
+                'is_researched' => true,
+            ]);
+        }
     }
 
     /**

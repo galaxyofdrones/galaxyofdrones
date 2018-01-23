@@ -57,9 +57,10 @@ class StartController extends Controller
                 'started_at' => Carbon::now(),
             ]);
 
-            $user->resources()->sync(
-                Resource::where('is_unlocked', true)->pluck('id')
-            );
+            $user->resources()->attach(Resource::where('is_unlocked', true)->pluck('id'), [
+                'is_researched' => true,
+                'quantity' => 0,
+            ]);
 
             $user->units()->sync(
                 Unit::where('is_unlocked', true)->pluck('id')

@@ -120,12 +120,12 @@ class BuildingsTableSeeder extends Seeder
             'construction_experience' => 1473,
             'construction_cost' => 8421,
             'construction_time' => 147368,
-            'end_level' => 6,
+            'end_level' => 10,
             'description' => [
-                'en' => 'Lists the trading missions from the Earth.',
+                'en' => 'Trades between the planet and mothership.',
             ],
             'limit' => 1,
-            'mission_time' => 259200,
+            'trade_time_bonus' => 0.65,
         ]);
 
         Building::create([

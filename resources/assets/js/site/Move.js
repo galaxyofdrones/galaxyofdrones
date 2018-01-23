@@ -1,29 +1,26 @@
 import { EventBus } from '../common/event-bus';
+import Cargo from './Cargo';
 import Modal from './Modal';
 
 export default Modal.extend({
     props: ['types', 'unitTypes', 'urls'],
 
+    mixins: [
+        Cargo
+    ],
+
     data() {
         return {
             type: undefined,
-            mined: 0,
-            quantity: {},
             selected: {
                 id: undefined,
                 travel_time: 0
-            },
-            planet: {
-                id: undefined,
-                units: []
             }
         };
     },
 
     created() {
         EventBus.$on('move-click', this.open);
-        EventBus.$on('resource-updated', resource => this.mined = resource);
-        EventBus.$on('planet-updated', planet => this.planet = planet);
     },
 
     computed: {
@@ -47,12 +44,6 @@ export default Modal.extend({
             return this.type === this.types.transport;
         },
 
-        canTransport() {
-            return this.hasResources
-                && this.transporterUnit.quantity > 0
-                && this.transporterQuantity <= this.transporterUnit.quantity;
-        },
-
         canScout() {
             return this.quantity.hasOwnProperty(this.scoutUnit.id)
                 && this.quantity[this.scoutUnit.id] > 0
@@ -61,19 +52,6 @@ export default Modal.extend({
 
         canOccupy() {
             return this.settlerUnit.quantity > 0;
-        },
-
-        hasResources() {
-            const quantity = _.pickBy(this.quantity);
-            let hasResources = false;
-
-            _.forEach(this.planet.resources, resource => {
-                if (quantity.hasOwnProperty(resource.id)) {
-                    return hasResources = quantity[resource.id] > 0 && quantity[resource.id] <= this.resourceQuantity(resource);
-                }
-            });
-
-            return hasResources;
         },
 
         hasUnits() {
@@ -100,26 +78,6 @@ export default Modal.extend({
             });
 
             return hasFighterUnits;
-        },
-
-        transporterUnit() {
-            return _.find(
-                this.planet.units, unit => unit.type === this.unitTypes.transporter
-            );
-        },
-
-        transporterQuantity() {
-            if (!this.hasResources) {
-                return 0;
-            }
-
-            const totalResource = _.reduce(
-                _.pickBy(this.quantity), (sum, quantity) => sum + quantity, 0
-            );
-
-            return Math.ceil(
-                totalResource / this.transporterUnit.capacity
-            );
         },
 
         scoutUnit() {
@@ -190,45 +148,31 @@ export default Modal.extend({
         scout() {
             axios.post(this.urls.scout.replace('__planet__', this.selected.id), {
                 quantity: this.quantity[this.scoutUnit.id]
-            }).then(this.handleSuccess);
+            }).then(this.close);
         },
 
         attack() {
             axios.post(this.urls.attack.replace('__planet__', this.selected.id), {
                 quantity: this.quantity
-            }).then(this.handleSuccess);
+            }).then(this.close);
         },
 
         occupy() {
             axios.post(
                 this.urls.occupy.replace('__planet__', this.selected.id)
-            ).then(this.handleSuccess);
+            ).then(this.close);
         },
 
         support() {
             axios.post(this.urls.support.replace('__planet__', this.selected.id), {
                 quantity: this.quantity
-            }).then(this.handleSuccess);
+            }).then(this.close);
         },
 
         transport() {
             axios.post(this.urls.transport.replace('__planet__', this.selected.id), {
                 quantity: this.quantity
-            }).then(this.handleSuccess);
-        },
-
-        handleSuccess() {
-            this.$modal.modal('hide');
-        },
-
-        resourceQuantity(resource) {
-            if (this.planet.resource_id === resource.id) {
-                return Math.floor(this.mined);
-            }
-
-            return _.get(_.find(this.planet.resources, {
-                id: resource.id
-            }), 'quantity', 0);
+            }).then(this.close);
         }
     }
 });

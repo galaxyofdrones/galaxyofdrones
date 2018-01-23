@@ -51,7 +51,7 @@ class MissionLog extends Model
     public static function createFrom(Mission $mission)
     {
         $missionLog = static::create([
-            'user_id' => $mission->planet->user_id,
+            'user_id' => $mission->user_id,
             'energy' => $mission->energy,
             'experience' => $mission->experience,
         ]);

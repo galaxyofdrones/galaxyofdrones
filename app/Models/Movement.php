@@ -9,6 +9,7 @@ use Illuminate\Support\Collection as BaseCollection;
 use Koodilab\Contracts\Battle\Simulator;
 use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
+use Koodilab\Events\UserUpdated;
 use Koodilab\Jobs\Move as MoveJob;
 
 /**
@@ -81,6 +82,13 @@ class Movement extends Model implements TimeableContract
     const TYPE_TRANSPORT = 4;
 
     /**
+     * The transport type.
+     *
+     * @var int
+     */
+    const TYPE_TRADE = 5;
+
+    /**
      * {@inheritdoc}
      */
     protected $perPage = 30;
@@ -121,7 +129,7 @@ class Movement extends Model implements TimeableContract
             'start_id' => $user->current_id,
             'end_id' => $planet->id,
             'user_id' => $user->id,
-            'type' => self::TYPE_SCOUT,
+            'type' => static::TYPE_SCOUT,
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
@@ -131,19 +139,7 @@ class Movement extends Model implements TimeableContract
             'quantity' => $quantity,
         ]);
 
-        dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining)
-        );
-
-        event(
-            new PlanetUpdated($movement->start_id)
-        );
-
-        event(
-            new PlanetUpdated($movement->end_id)
-        );
-
-        return $movement;
+        return static::createFrom($movement);
     }
 
     /**
@@ -168,7 +164,7 @@ class Movement extends Model implements TimeableContract
             'start_id' => $user->current_id,
             'end_id' => $planet->id,
             'user_id' => $user->id,
-            'type' => self::TYPE_ATTACK,
+            'type' => static::TYPE_ATTACK,
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
@@ -182,19 +178,7 @@ class Movement extends Model implements TimeableContract
             ]);
         }
 
-        dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining)
-        );
-
-        event(
-            new PlanetUpdated($movement->start_id)
-        );
-
-        event(
-            new PlanetUpdated($movement->end_id)
-        );
-
-        return $movement;
+        return static::createFrom($movement);
     }
 
     /**
@@ -218,7 +202,7 @@ class Movement extends Model implements TimeableContract
             'start_id' => $user->current_id,
             'end_id' => $planet->id,
             'user_id' => $user->id,
-            'type' => self::TYPE_OCCUPY,
+            'type' => static::TYPE_OCCUPY,
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
@@ -228,19 +212,7 @@ class Movement extends Model implements TimeableContract
             'quantity' => Planet::SETTLER_COUNT,
         ]);
 
-        dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining)
-        );
-
-        event(
-            new PlanetUpdated($movement->start_id)
-        );
-
-        event(
-            new PlanetUpdated($movement->end_id)
-        );
-
-        return $movement;
+        return static::createFrom($movement);
     }
 
     /**
@@ -265,7 +237,7 @@ class Movement extends Model implements TimeableContract
             'start_id' => $user->current_id,
             'end_id' => $planet->id,
             'user_id' => $user->id,
-            'type' => self::TYPE_SUPPORT,
+            'type' => static::TYPE_SUPPORT,
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
@@ -279,19 +251,7 @@ class Movement extends Model implements TimeableContract
             ]);
         }
 
-        dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining)
-        );
-
-        event(
-            new PlanetUpdated($movement->start_id)
-        );
-
-        event(
-            new PlanetUpdated($movement->end_id)
-        );
-
-        return $movement;
+        return static::createFrom($movement);
     }
 
     /**
@@ -318,10 +278,61 @@ class Movement extends Model implements TimeableContract
             'start_id' => $user->current_id,
             'end_id' => $planet->id,
             'user_id' => $user->id,
-            'type' => self::TYPE_TRANSPORT,
+            'type' => static::TYPE_TRANSPORT,
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
+        return static::createTransportOrTradeFrom(
+            $movement, $population, $stocks, $quantity, $quantities
+        );
+    }
+
+    /**
+     * Create trade from.
+     *
+     * @param Building           $building
+     * @param Population         $population
+     * @param Collection|Stock[] $stocks
+     * @param int                $quantity
+     * @param BaseCollection     $quantities
+     *
+     * @return static
+     */
+    public static function createTradeFrom(Building $building, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $travelTime = round(
+            $user->capital->travelTimeTo($user->current) / $population->unit->speed * (1 - $building->trade_time_bonus)
+        );
+
+        $movement = static::create([
+            'start_id' => $user->current_id,
+            'end_id' => $user->capital_id,
+            'user_id' => $user->id,
+            'type' => static::TYPE_TRADE,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        return static::createTransportOrTradeFrom(
+            $movement, $population, $stocks, $quantity, $quantities
+        );
+    }
+
+    /**
+     * Create transport or trade from.
+     *
+     * @param Movement           $movement
+     * @param Population         $population
+     * @param Collection|Stock[] $stocks
+     * @param int                $quantity
+     * @param BaseCollection     $quantities
+     *
+     * @return static
+     */
+    protected static function createTransportOrTradeFrom(self $movement, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    {
         $population->decrementQuantity($quantity);
 
         $movement->units()->attach($population->unit->id, [
@@ -338,6 +349,18 @@ class Movement extends Model implements TimeableContract
             ]);
         }
 
+        return static::createFrom($movement);
+    }
+
+    /**
+     * Create from.
+     *
+     * @param Movement $movement
+     *
+     * @return static
+     */
+    protected static function createFrom(self $movement)
+    {
         dispatch(
             (new MoveJob($movement->id))->delay($movement->remaining)
         );
@@ -414,6 +437,9 @@ class Movement extends Model implements TimeableContract
             case static::TYPE_TRANSPORT:
                 $this->finishTransport();
                 break;
+            case static::TYPE_TRADE:
+                $this->finishTrade();
+                break;
         }
 
         $this->delete();
@@ -474,12 +500,25 @@ class Movement extends Model implements TimeableContract
     }
 
     /**
-     * Handle the resource movement.
+     * Handle the transport movement.
      */
     protected function finishTransport()
     {
         $this->transferResources();
         $this->returnMovement();
+    }
+
+    /**
+     * Handle the trade movement.
+     */
+    protected function finishTrade()
+    {
+        $this->transferMissionResources();
+        $this->returnMovement();
+
+        event(
+            new UserUpdated($this->user_id)
+        );
     }
 
     /**
@@ -516,6 +555,27 @@ class Movement extends Model implements TimeableContract
     }
 
     /**
+     * Transfer the mission resources.
+     */
+    protected function transferMissionResources()
+    {
+        foreach ($this->resources as $resource) {
+            $userResource = $this->user->resources->firstWhere('id', $resource->id);
+
+            if (!$userResource) {
+                $this->user->resources()->attach($resource->id, [
+                    'is_researched' => false,
+                    'quantity' => $resource->pivot->quantity,
+                ]);
+            } else {
+                $userResource->pivot->update([
+                    'quantity' => $userResource->pivot->quantity + $resource->pivot->quantity,
+                ]);
+            }
+        }
+    }
+
+    /**
      * Start a return movement.
      *
      * @param Collection|Unit[]     $units
@@ -528,7 +588,7 @@ class Movement extends Model implements TimeableContract
         if ($units->sum('pivot.quantity') > $units->sum('pivot.losses')) {
             $travelTime = $this->ended_at->diffInSeconds($this->created_at);
 
-            $returnMovement = self::create([
+            $returnMovement = static::create([
                 'start_id' => $this->end_id,
                 'end_id' => $this->start_id,
                 'user_id' => $this->user_id,

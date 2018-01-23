@@ -23,11 +23,7 @@ export default Modal.extend({
         demolish() {
             axios.delete(
                 this.url.replace('__grid__', this.grid.id)
-            ).then(() => this.$modal.modal('hide'));
-        },
-
-        cancel() {
-            this.$modal.modal('hide');
+            ).then(this.close);
         }
     }
 });

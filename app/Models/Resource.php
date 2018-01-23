@@ -45,7 +45,6 @@ class Resource extends Model implements TranslatableContract
         Behaviors\Sortable,
         Behaviors\Translatable,
         Queries\FindResearchByUser,
-        Relations\BelongsToManyUser,
         Relations\HasManyPlanet,
         Relations\HasManyStock;
 
@@ -78,4 +77,16 @@ class Resource extends Model implements TranslatableContract
         'is_unlocked' => 'bool',
         'description' => 'json',
     ];
+
+    /**
+     * Get the users.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+            ->withPivot('is_researched', 'quantity')
+            ->withTimestamps();
+    }
 }

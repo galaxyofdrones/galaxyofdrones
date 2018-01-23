@@ -41,7 +41,7 @@ export default Modal.extend({
 
         submit() {
             axios.put(this.url, this.parameters)
-                .then(() => this.$modal.modal('hide'))
+                .then(this.close)
                 .catch(error => this.errors = error.response.data.errors);
         }
     }

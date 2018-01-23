@@ -14,6 +14,7 @@ trait FindResourcesOrderBySortOrder
     public function findResourcesOrderBySortOrder($columns = ['*'])
     {
         return $this->resources()
+            ->where('is_researched', true)
             ->orderBy('sort_order')
             ->get($columns);
     }

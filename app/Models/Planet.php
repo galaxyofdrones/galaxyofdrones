@@ -38,7 +38,6 @@ use Koodilab\Support\StateManager;
  * @property int $used_training_supply
  * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
  * @property \Illuminate\Database\Eloquent\Collection|Movement[] $incomingMovements
- * @property \Illuminate\Database\Eloquent\Collection|Mission[] $missions
  * @property \Illuminate\Database\Eloquent\Collection|Movement[] $outgoingMovements
  * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
  * @property resource $resource
@@ -77,7 +76,6 @@ class Planet extends Model implements PositionableContract
         Queries\FindFreeCapital,
         Queries\FindGrids,
         Queries\FindIncomingMovements,
-        Queries\FindNotExpiredMissions,
         Queries\FindNotEmptyGrids,
         Queries\FindOutgoingMovements,
         Queries\FindPopulationByUnit,
@@ -85,14 +83,14 @@ class Planet extends Model implements PositionableContract
         Queries\FindStock,
         Queries\FindStocksByResourceIds,
         Queries\IncomingMovementCount,
+        Queries\IncomingTradeMovementCount,
         Queries\IncomingAttackMovementCount,
         Queries\OutgoingAttackMovementCount,
         Relations\BelongsToResource,
         Relations\BelongsToUser,
         Relations\HasManyStock,
         Relations\HasManyPopulation,
-        Relations\HasManyGrid,
-        Relations\HasManyMission;
+        Relations\HasManyGrid;
 
     /**
      * The small size.
@@ -174,7 +172,6 @@ class Planet extends Model implements PositionableContract
                     $planet->constructions()->delete();
                     $planet->upgrades()->delete();
                     $planet->trainings()->delete();
-                    $planet->missions()->delete();
 
                     $planet->grids()->update([
                         'level' => null,

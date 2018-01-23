@@ -48,9 +48,9 @@ class BuildingTransformer extends Transformer
             'supply' => $item->supply,
             'mining_rate' => $item->mining_rate,
             'production_rate' => $item->production_rate,
-            'mission_time' => $item->mission_time,
             'defense_bonus' => $item->defense_bonus,
             'construction_time_bonus' => $item->construction_time_bonus,
+            'trade_time_bonus' => $item->trade_time_bonus,
             'train_time_bonus' => $item->train_time_bonus,
             'has_lower_level' => $item->hasLowerLevel(),
         ];

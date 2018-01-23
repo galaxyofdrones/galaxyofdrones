@@ -114,6 +114,10 @@ class UserController extends Controller
             throw new BadRequestHttpException();
         }
 
+        if ($user->capital->incomingTradeMovementCount()) {
+            throw new BadRequestHttpException();
+        }
+
         $user->update([
             'capital_id' => $planet->id,
         ]);

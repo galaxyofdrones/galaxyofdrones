@@ -7,62 +7,7 @@
             {{ trans('messages.movement.transport') }}
         </h4>
     </div>
+
     {% include 'site.starmap.time' %}
-    <div class="modal-body separator">
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <span class="item" :class="transporterUnit | item('unit')"></span>
-            </div>
-            <div class="col-md-6">
-                <h4>
-                    {{ vue('transporterUnit.name') }}
-                </h4>
-                <p>
-                    {{ vue('transporterUnit.description') }}
-                </p>
-                <div class="attribute-row">
-                    <div class="col-md-6">
-                        <div class="attribute">
-                            <h6>
-                                {{ trans('messages.required_quantity') }}
-                            </h6>
-                            <h4>
-                                {{ vue('transporterQuantity') }} / {{ vue('transporterUnit.quantity') }}
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="attribute-row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <button class="btn btn-success btn-block" :disabled="!canTransport" @click="transport()">
-                                {{ trans('messages.movement.transport') }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-body separator">
-        <div class="item-input-row">
-            <div class="col-xs-12 col-sm-4 col-md-3" v-for="resource in planet.resources">
-                <span class="item item-sm"
-                      :class="resource | item('resource')"
-                      :title="resource.name"
-                      :data-content="resource.description"
-                      v-popover="{placement: 'top', trigger: 'hover'}">
-                    {{ vue('resource.name') }}
-                </span>
-                <div class="form-group">
-                    <input class="form-control"
-                           type="number"
-                           min="1"
-                           :max="resourceQuantity(resource)"
-                           :placeholder="resourceQuantity(resource) | bracket"
-                           v-model.number="quantity[resource.id]">
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'site.partials.cargo' %}
 </div>

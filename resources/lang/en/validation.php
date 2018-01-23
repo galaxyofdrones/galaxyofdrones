@@ -160,6 +160,8 @@ return [
         'speed' => 'Speed',
         'supply' => 'Supply',
         'title' => 'Title',
+        'trade_time' => 'Trade time',
+        'trade_time_bonus' => 'Trade time bonus',
         'training' => 'Training',
         'train_cost' => 'Train cost',
         'train_time' => 'Train time',

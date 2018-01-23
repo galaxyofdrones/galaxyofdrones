@@ -50,6 +50,9 @@ $router->group([
         $router->get('/', 'PlanetController@index')
             ->name('planet');
 
+        $router->get('capital', 'PlanetController@capital')
+            ->name('planet_capital');
+
         $router->get('{planet}', 'PlanetController@show')
             ->name('planet_show')
             ->where('planet', '\d+');
@@ -101,6 +104,17 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'mission',
+    ], function () use ($router) {
+        $router->get('/', 'MissionController@index')
+            ->name('mission');
+
+        $router->post('{mission}', 'MissionController@store')
+            ->name('mission_store')
+            ->where('mission', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'mission-log',
     ], function () use ($router) {
         $router->get('/', 'MissionLogController@index')
@@ -129,6 +143,9 @@ $router->group([
         $router->post('transport/{planet}', 'MovementController@storeTransport')
             ->name('movement_transport_store')
             ->where('planet', '\d+');
+
+        $router->post('trade', 'MovementController@storeTrade')
+            ->name('movement_trade_store');
     });
 
     $router->group([
@@ -163,19 +180,6 @@ $router->group([
     $router->get('scout/{grid}', 'ScoutController@index')
         ->name('scout')
         ->where('grid', '\d+');
-
-    $router->group([
-        'prefix' => 'trader',
-    ], function () use ($router) {
-        $router->get('{grid}', 'TraderController@index')
-            ->name('trader')
-            ->where('grid', '\d+');
-
-        $router->post('{grid}/{mission}', 'TraderController@store')
-            ->name('trader_store')
-            ->where('grid', '\d+')
-            ->where('mission', '\d+');
-    });
 
     $router->group([
         'prefix' => 'trainer',

@@ -30,6 +30,10 @@ export default Remaining.extend({
 
             EventBus.$on('modal-hidden', handler);
 
+            this.close();
+        },
+
+        close() {
             this.$modal.modal('hide');
         }
     }

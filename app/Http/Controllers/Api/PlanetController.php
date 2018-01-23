@@ -39,6 +39,20 @@ class PlanetController extends Controller
     }
 
     /**
+     * Show the capital planet in json format.
+     *
+     * @param PlanetShowTransformer $transformer
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function capital(PlanetShowTransformer $transformer)
+    {
+        return $transformer->transform(
+            auth()->user()->capital
+        );
+    }
+
+    /**
      * Show the planet in json format.
      *
      * @param Planet                $planet
