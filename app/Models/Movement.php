@@ -362,7 +362,7 @@ class Movement extends Model implements TimeableContract
     protected static function createFrom(self $movement)
     {
         dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining)
+            (new MoveJob($movement->id))->delay($movement->remaining ?: null)
         );
 
         event(
@@ -619,7 +619,7 @@ class Movement extends Model implements TimeableContract
             }
 
             dispatch(
-                (new MoveJob($returnMovement->id))->delay($returnMovement->remaining)
+                (new MoveJob($returnMovement->id))->delay($returnMovement->remaining ?: null)
             );
         }
     }
