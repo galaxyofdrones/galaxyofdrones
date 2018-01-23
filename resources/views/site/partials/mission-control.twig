@@ -2,7 +2,7 @@
                  url="{{ route('api_mission') }}"
                  store-url="{{ route('api_mission_store', '__mission__') }}" inline-template>
     <div v-if="isEnabled" class="mission-control">
-        <div class="modal-body separator text-center">
+        <div class="mission-control-storage modal-body separator text-center">
             <span v-for="resource in data.resources"
                   class="item item-sm"
                   :class="resource | item('resource')"
