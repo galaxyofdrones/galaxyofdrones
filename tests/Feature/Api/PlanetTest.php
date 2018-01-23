@@ -44,6 +44,7 @@ class PlanetTest extends TestCase
         });
 
         $user->resources()->attach($planet->resource_id, [
+            'is_researched' => true,
             'quantity' => 0,
         ]);
 
