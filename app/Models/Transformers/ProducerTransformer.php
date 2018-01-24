@@ -30,7 +30,7 @@ class ProducerTransformer extends Transformer
     {
         return [
             'resources' => $this->resourceTransfomer->transformCollection(
-                $item->planet->user->findResourcesOrderBySortOrder()
+                $item->planet->user->findResearchedResources()
             ),
         ];
     }

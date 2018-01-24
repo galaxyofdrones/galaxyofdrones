@@ -88,7 +88,7 @@ class User extends Authenticatable
         Queries\FindMissionResources,
         Queries\FindNotExpiredMissions,
         Queries\FindPlanetsOrderByName,
-        Queries\FindResourcesOrderBySortOrder,
+        Queries\FindResearchedResources,
         Queries\FindUnitsOrderBySortOrder,
         Queries\LosingBattleLogCount,
         Queries\WinningBattleLogCount,

@@ -43,6 +43,7 @@ use Koodilab\Jobs\Move as MoveJob;
 class Movement extends Model implements TimeableContract
 {
     use Behaviors\Timeable,
+        Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,
         Relations\BelongsToUser;
 
