@@ -35,6 +35,8 @@ export default {
 
     created() {
         this.fetchData();
+
+        EventBus.$on('change-planet', planet => this.selected = planet);
     },
 
     mounted() {

@@ -67,6 +67,10 @@ export default Modal.extend({
             );
         },
 
+        changePlanet() {
+            EventBus.$emit('change-planet', this.properties.id);
+        },
+
         openMove(type) {
             this.openAfterHidden(
                 () => EventBus.$emit('move-click', type, _.assignIn({}, this.properties, this.data))

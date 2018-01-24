@@ -108,6 +108,7 @@ return [
     ],
 
     'planet' => [
+        'change' => 'Change planet',
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
         'jump' => 'Jump to surface',
