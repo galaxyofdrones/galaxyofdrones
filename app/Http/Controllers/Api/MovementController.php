@@ -3,6 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
+use Koodilab\Events\PlanetUpdated;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Movement;
@@ -226,10 +227,35 @@ class MovementController extends Controller
                 }
             });
 
-        DB::transaction(function () use ($building, $population, $stocks, $quantity, $quantities) {
-            Movement::createTradeFrom(
-                $building, $population, $stocks, $quantity, $quantities
-            );
+        DB::transaction(function () use ($user, $building, $population, $stocks, $quantity, $quantities) {
+            if ($user->capital_id == $user->current_id) {
+                foreach ($stocks as $stock) {
+                    $stock->decrementQuantity(
+                        $quantities->get($stock->resource_id)
+                    );
+
+                    $userResource = $user->resources->firstWhere('id', $stock->resource_id);
+
+                    if (!$userResource) {
+                        $user->resources()->attach($stock->resource_id, [
+                            'is_researched' => false,
+                            'quantity' => $quantities->get($stock->resource_id),
+                        ]);
+                    } else {
+                        $userResource->pivot->update([
+                            'quantity' => $userResource->pivot->quantity + $quantities->get($stock->resource_id),
+                        ]);
+                    }
+                }
+
+                event(
+                    new PlanetUpdated($user->capital_id)
+                );
+            } else {
+                Movement::createTradeFrom(
+                    $building, $population, $stocks, $quantity, $quantities
+                );
+            }
         });
     }
 }
