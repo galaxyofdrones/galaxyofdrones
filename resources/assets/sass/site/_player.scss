@@ -9,9 +9,9 @@
         z-index: 999;
     }
     &-info {
+        display: flex;
         height: 82px;
         top: $grid-gutter-width / 3;
-        @include clearfix;
     }
     &-energy {
         border-color: $brand-info;
@@ -29,12 +29,10 @@
         }
     }
     &-left {
-        float: left;
         height: 100%;
         width: 50px;
     }
     &-right {
-        float: right;
         height: 100%;
         width: 150px;
     }

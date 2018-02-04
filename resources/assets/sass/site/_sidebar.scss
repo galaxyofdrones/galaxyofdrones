@@ -2,26 +2,24 @@
     background: $panel-bg;
     border-right: 1px solid $brand-info;
     bottom: 0;
+    display: flex;
     position: absolute;
     top: 0;
     transform: translateX(-260px);
     transition: ease .2s;
     width: 320px;
     z-index: 9999;
-    @include clearfix;
 
     &.active {
         transform: translateX(0);
     }
     &-content {
-        float: left;
         height: 100%;
         position: relative;
         width: 260px;
     }
     &-nav {
         border-left: 1px solid $panel-inner-border;
-        float: right;
         height: 100%;
         padding: 4px;
         width: 59px;
