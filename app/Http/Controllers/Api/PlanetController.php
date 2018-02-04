@@ -70,12 +70,12 @@ class PlanetController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed|\Illuminate\Http\Response
      */
     public function updateName(Request $request)
     {
         if (!$request->has('name')) {
-            return response('Bad Request.', 400);
+            throw new BadRequestHttpException();
         }
 
         auth()->user()->current->update([

@@ -6,7 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
+use Koodilab\Events\PlanetUpdated;
 use Koodilab\Events\UserUpdated;
+use Koodilab\Models\Building;
+use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 use Koodilab\Tests\TestCase;
@@ -16,8 +19,10 @@ class PlanetTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function testCurrent()
+    protected function setUp()
     {
+        parent::setUp();
+
         $user = factory(User::class)->create();
 
         Passport::actingAs($user);
@@ -47,10 +52,12 @@ class PlanetTest extends TestCase
             'is_researched' => true,
             'quantity' => 0,
         ]);
+    }
 
-        $response = $this->getJson('/api/planet');
-
-        $response->assertStatus(200)
+    public function testIndex()
+    {
+        $this->getJson('/api/planet')
+            ->assertStatus(200)
             ->assertJsonStructure([
                 'id',
                 'resource_id',
@@ -81,5 +88,114 @@ class PlanetTest extends TestCase
                 'name' => 'Earth',
                 'display_name' => 'Earth',
             ]);
+    }
+
+    public function testCapital()
+    {
+        $capitalId = auth()->user()->capital_id;
+
+        $this->getJson('/api/planet/capital')
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'id',
+                'resource_id',
+                'user_id',
+                'resource_count',
+                'username',
+                'can_occupy',
+                'travel_time',
+            ])->assertJson([
+                'id' => $capitalId,
+                'resource_id' => $capitalId,
+            ]);
+    }
+
+    public function testShow()
+    {
+        $this->get('/api/planet/10')
+            ->assertStatus(404);
+
+        $this->get('/api/planet/not-id')
+            ->assertStatus(404);
+
+        $currentId = auth()->user()->current_id;
+
+        $this->getJson("/api/planet/{$currentId}")
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'id',
+                'resource_id',
+                'user_id',
+                'resource_count',
+                'username',
+                'can_occupy',
+                'travel_time',
+            ])->assertJson([
+                'id' => $currentId,
+                'resource_id' => $currentId,
+            ]);
+    }
+
+    public function testUpdateName()
+    {
+        $this->put('/api/planet/name')
+            ->assertStatus(400);
+
+        $this->put('/api/planet/name', [
+            'name' => 'Helios',
+        ])->assertStatus(200);
+
+        $current = auth()->user()->current;
+
+        Event::assertDispatched(PlanetUpdated::class, function ($event) use ($current) {
+            return $event->planetId === $current->id;
+        });
+
+        $this->getJson('/api/planet')
+            ->assertStatus(200)
+            ->assertJson([
+                'name' => $current->name,
+                'display_name' => 'Helios',
+            ]);
+    }
+
+    public function testDemolish()
+    {
+        $this->delete('/api/planet/demolish/not-id')
+            ->assertStatus(404);
+
+        $grid = factory(Grid::class)->create([
+            'building_id' => null,
+            'level' => null,
+        ]);
+
+        $this->delete("/api/planet/demolish/{$grid->id}")
+            ->assertStatus(403);
+
+        $grid->update([
+            'planet_id' => auth()->user()->current_id,
+        ]);
+
+        $this->delete("/api/planet/demolish/{$grid->id}")
+            ->assertStatus(400);
+
+        $building = factory(Building::class)->create([
+            'type' => Building::TYPE_CENTRAL,
+        ]);
+
+        $grid->update([
+            'building_id' => $building->id,
+            'level' => 1,
+        ]);
+
+        $this->delete("/api/planet/demolish/{$grid->id}")
+            ->assertStatus(400);
+
+        $building->update([
+            'type' => Building::TYPE_MINER,
+        ]);
+
+        $this->delete("/api/planet/demolish/{$grid->id}")
+            ->assertStatus(200);
     }
 }
