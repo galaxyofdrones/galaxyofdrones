@@ -3,6 +3,10 @@ language: php
 php:
   - 7.1
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 before_script:
   - pear config-set preferred_state beta
   - pecl channel-update pecl.php.net
