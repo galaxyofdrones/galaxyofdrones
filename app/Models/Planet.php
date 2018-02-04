@@ -281,7 +281,7 @@ class Planet extends Model implements PositionableContract
         ]);
 
         $stock->setRelation('planet', $this)->fill([
-            'quantity' => $stock->quantity,
+            'quantity' => max(0, $stock->quantity),
             'last_quantity_changed' => Carbon::now(),
         ])->save();
     }
