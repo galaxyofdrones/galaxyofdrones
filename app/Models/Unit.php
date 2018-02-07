@@ -7,29 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Unit.
  *
- * @property int $id
- * @property array $name
- * @property int $type
- * @property bool $is_unlocked
- * @property int $speed
- * @property int $attack
- * @property int $defense
- * @property int $supply
- * @property int $train_cost
- * @property int $train_time
- * @property array $description
- * @property int|null $detection
- * @property int|null $capacity
- * @property int|null $research_experience
- * @property int|null $research_cost
- * @property int $research_time
- * @property int $sort_order
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property int                                                   $id
+ * @property array                                                 $name
+ * @property int                                                   $type
+ * @property bool                                                  $is_unlocked
+ * @property int                                                   $speed
+ * @property int                                                   $attack
+ * @property int                                                   $defense
+ * @property int                                                   $supply
+ * @property int                                                   $train_cost
+ * @property int                                                   $train_time
+ * @property array                                                 $description
+ * @property int|null                                              $detection
+ * @property int|null                                              $capacity
+ * @property int|null                                              $research_experience
+ * @property int|null                                              $research_cost
+ * @property int                                                   $research_time
+ * @property int                                                   $sort_order
+ * @property \Carbon\Carbon|null                                   $created_at
+ * @property \Carbon\Carbon|null                                   $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
- * @property \Illuminate\Database\Eloquent\Collection|Research[] $researches
- * @property \Illuminate\Database\Eloquent\Collection|Training[] $trainings
- * @property \Illuminate\Database\Eloquent\Collection|User[] $users
+ * @property \Illuminate\Database\Eloquent\Collection|Research[]   $researches
+ * @property \Illuminate\Database\Eloquent\Collection|Training[]   $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|User[]       $users
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereAttack($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereCapacity($value)

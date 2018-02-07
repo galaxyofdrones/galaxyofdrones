@@ -11,16 +11,16 @@ use Koodilab\Jobs\Train as TrainJob;
 /**
  * Training.
  *
- * @property int $id
- * @property int $grid_id
- * @property int $unit_id
- * @property int $quantity
- * @property \Carbon\Carbon $ended_at
+ * @property int                 $id
+ * @property int                 $grid_id
+ * @property int                 $unit_id
+ * @property int                 $quantity
+ * @property \Carbon\Carbon      $ended_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property int $remaining
- * @property Grid $grid
- * @property Unit $unit
+ * @property int                 $remaining
+ * @property Grid                $grid
+ * @property Unit                $unit
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Training whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Training whereEndedAt($value)

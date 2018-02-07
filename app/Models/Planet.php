@@ -12,39 +12,39 @@ use Koodilab\Support\StateManager;
 /**
  * Planet.
  *
- * @property int $id
- * @property int $resource_id
- * @property int|null $user_id
- * @property string $name
- * @property string|null $custom_name
- * @property int $x
- * @property int $y
- * @property int $size
- * @property int|null $capacity
- * @property int|null $supply
- * @property int|null $mining_rate
- * @property int|null $production_rate
- * @property float|null $defense_bonus
- * @property float|null $construction_time_bonus
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property int                                                     $id
+ * @property int                                                     $resource_id
+ * @property int|null                                                $user_id
+ * @property string                                                  $name
+ * @property string|null                                             $custom_name
+ * @property int                                                     $x
+ * @property int                                                     $y
+ * @property int                                                     $size
+ * @property int|null                                                $capacity
+ * @property int|null                                                $supply
+ * @property int|null                                                $mining_rate
+ * @property int|null                                                $production_rate
+ * @property float|null                                              $defense_bonus
+ * @property float|null                                              $construction_time_bonus
+ * @property \Carbon\Carbon|null                                     $created_at
+ * @property \Carbon\Carbon|null                                     $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
- * @property string $display_name
- * @property int $free_capacity
- * @property int $free_supply
- * @property int $resource_count
- * @property int $used_capacity
- * @property int $used_supply
- * @property int $used_training_supply
- * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
- * @property \Illuminate\Database\Eloquent\Collection|Movement[] $incomingMovements
- * @property \Illuminate\Database\Eloquent\Collection|Movement[] $outgoingMovements
- * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
- * @property resource $resource
- * @property \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
- * @property \Illuminate\Database\Eloquent\Collection|Training[] $trainings
- * @property \Illuminate\Database\Eloquent\Collection|Upgrade[] $upgrades
- * @property User|null $user
+ * @property string                                                  $display_name
+ * @property int                                                     $free_capacity
+ * @property int                                                     $free_supply
+ * @property int                                                     $resource_count
+ * @property int                                                     $used_capacity
+ * @property int                                                     $used_supply
+ * @property int                                                     $used_training_supply
+ * @property \Illuminate\Database\Eloquent\Collection|Grid[]         $grids
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[]     $incomingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[]     $outgoingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|Population[]   $populations
+ * @property resource                                                $resource
+ * @property \Illuminate\Database\Eloquent\Collection|Stock[]        $stocks
+ * @property \Illuminate\Database\Eloquent\Collection|Training[]     $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|Upgrade[]      $upgrades
+ * @property User|null                                               $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Planet inBounds(\Koodilab\Support\Bounds $bounds)
  * @method static \Illuminate\Database\Eloquent\Builder|Planet starter()

@@ -15,20 +15,20 @@ use Koodilab\Jobs\Move as MoveJob;
 /**
  * Movement.
  *
- * @property int $id
- * @property int $start_id
- * @property int $end_id
- * @property int $user_id
- * @property int $type
- * @property \Carbon\Carbon $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property Planet $end
- * @property int $remaining
+ * @property int                                                 $id
+ * @property int                                                 $start_id
+ * @property int                                                 $end_id
+ * @property int                                                 $user_id
+ * @property int                                                 $type
+ * @property \Carbon\Carbon                                      $ended_at
+ * @property \Carbon\Carbon|null                                 $created_at
+ * @property \Carbon\Carbon|null                                 $updated_at
+ * @property Planet                                              $end
+ * @property int                                                 $remaining
  * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property Planet $start
- * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
- * @property User $user
+ * @property Planet                                              $start
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[]     $units
+ * @property User                                                $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereEndId($value)

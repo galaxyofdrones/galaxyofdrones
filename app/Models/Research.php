@@ -10,16 +10,16 @@ use Koodilab\Jobs\Research as ResearchJob;
 /**
  * Research.
  *
- * @property int $id
- * @property int $user_id
- * @property int $researchable_id
- * @property string $researchable_type
- * @property \Carbon\Carbon $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property int $remaining
+ * @property int                                           $id
+ * @property int                                           $user_id
+ * @property int                                           $researchable_id
+ * @property string                                        $researchable_type
+ * @property \Carbon\Carbon                                $ended_at
+ * @property \Carbon\Carbon|null                           $created_at
+ * @property \Carbon\Carbon|null                           $updated_at
+ * @property int                                           $remaining
  * @property \Illuminate\Database\Eloquent\Model|\Eloquent $researchable
- * @property User $user
+ * @property User                                          $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereEndedAt($value)

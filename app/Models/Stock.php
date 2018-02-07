@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Stock.
  *
- * @property int $id
- * @property int $planet_id
- * @property int $resource_id
- * @property int $quantity
+ * @property int                 $id
+ * @property int                 $planet_id
+ * @property int                 $resource_id
+ * @property int                 $quantity
  * @property \Carbon\Carbon|null $last_quantity_changed
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property Planet $planet
- * @property resource $resource
+ * @property Planet              $planet
+ * @property resource            $resource
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereId($value)

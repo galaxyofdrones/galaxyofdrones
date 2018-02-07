@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Bookmark.
  *
- * @property int $id
- * @property int $star_id
- * @property int $user_id
- * @property string $name
+ * @property int                 $id
+ * @property int                 $star_id
+ * @property int                 $user_id
+ * @property string              $name
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property Star $star
- * @property User $user
+ * @property Star                $star
+ * @property User                $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Bookmark whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bookmark whereId($value)

@@ -9,35 +9,35 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 /**
  * Building.
  *
- * @property int $id
- * @property int $_lft
- * @property int $_rgt
- * @property int|null $parent_id
- * @property array $name
- * @property int $type
- * @property int $end_level
- * @property int $construction_experience
- * @property int $construction_cost
- * @property int $construction_time
- * @property array $description
- * @property int|null $limit
- * @property int $defense
- * @property int $detection
- * @property int $capacity
- * @property int $supply
- * @property int $mining_rate
- * @property int $production_rate
- * @property float $defense_bonus
- * @property float $construction_time_bonus
- * @property float $trade_time_bonus
- * @property float $train_time_bonus
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property \Kalnoy\Nestedset\Collection|Building[] $children
+ * @property int                                                     $id
+ * @property int                                                     $_lft
+ * @property int                                                     $_rgt
+ * @property int|null                                                $parent_id
+ * @property array                                                   $name
+ * @property int                                                     $type
+ * @property int                                                     $end_level
+ * @property int                                                     $construction_experience
+ * @property int                                                     $construction_cost
+ * @property int                                                     $construction_time
+ * @property array                                                   $description
+ * @property int|null                                                $limit
+ * @property int                                                     $defense
+ * @property int                                                     $detection
+ * @property int                                                     $capacity
+ * @property int                                                     $supply
+ * @property int                                                     $mining_rate
+ * @property int                                                     $production_rate
+ * @property float                                                   $defense_bonus
+ * @property float                                                   $construction_time_bonus
+ * @property float                                                   $trade_time_bonus
+ * @property float                                                   $train_time_bonus
+ * @property \Carbon\Carbon|null                                     $created_at
+ * @property \Carbon\Carbon|null                                     $updated_at
+ * @property \Kalnoy\Nestedset\Collection|Building[]                 $children
  * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
- * @property int $level
- * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
- * @property Building|null $parent
+ * @property int                                                     $level
+ * @property \Illuminate\Database\Eloquent\Collection|Grid[]         $grids
+ * @property Building|null                                           $parent
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereConstructionCost($value)

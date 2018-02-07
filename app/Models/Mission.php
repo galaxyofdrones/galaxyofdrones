@@ -10,16 +10,16 @@ use Koodilab\Support\Util;
 /**
  * Mission.
  *
- * @property int $id
- * @property int $user_id
- * @property int $energy
- * @property int $experience
- * @property \Carbon\Carbon $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property int $remaining
+ * @property int                                                 $id
+ * @property int                                                 $user_id
+ * @property int                                                 $energy
+ * @property int                                                 $experience
+ * @property \Carbon\Carbon                                      $ended_at
+ * @property \Carbon\Carbon|null                                 $created_at
+ * @property \Carbon\Carbon|null                                 $updated_at
+ * @property int                                                 $remaining
  * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property User $user
+ * @property User                                                $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEndedAt($value)

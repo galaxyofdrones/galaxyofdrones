@@ -8,20 +8,20 @@ use Koodilab\Support\StateManager;
 /**
  * Grid.
  *
- * @property int $id
- * @property int $planet_id
- * @property int|null $building_id
- * @property int $x
- * @property int $y
- * @property int|null $level
- * @property int $type
+ * @property int                 $id
+ * @property int                 $planet_id
+ * @property int|null            $building_id
+ * @property int                 $x
+ * @property int                 $y
+ * @property int|null            $level
+ * @property int                 $type
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property Building|null $building
- * @property Construction $construction
- * @property Planet $planet
- * @property Training $training
- * @property Upgrade $upgrade
+ * @property Building|null       $building
+ * @property Construction        $construction
+ * @property Planet              $planet
+ * @property Training            $training
+ * @property Upgrade             $upgrade
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereBuildingId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grid whereCreatedAt($value)
