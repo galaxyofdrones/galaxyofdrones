@@ -16,7 +16,7 @@ before_install:
   - cp .env.example .env
 
 install:
-  - yarn global add jscs
+  - travis_retry yarn global add jscs
   - travis_retry composer install --no-interaction --no-suggest
   - travis_retry composer global require friendsofphp/php-cs-fixer
 
@@ -26,5 +26,5 @@ before_script:
 
 script:
   - jscs ./resources/assets/js
-  - vendor/bin/php-cs-fixer fix --dry-run
+  - php-cs-fixer fix --dry-run
   - vendor/bin/phpunit
