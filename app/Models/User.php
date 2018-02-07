@@ -4,8 +4,8 @@ namespace Koodilab\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Koodilab\Events\UserUpdated;
 use Koodilab\Support\Util;
 use Laravel\Passport\HasApiTokens;
@@ -167,38 +167,6 @@ class User extends Authenticatable
     protected $casts = [
         'is_enabled' => 'bool',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function (self $user) {
-            if ($user->isDirty('capital_id')) {
-                $user->last_capital_changed = Carbon::now();
-            }
-        });
-
-        static::deleting(function (self $user) {
-            if (auth()->id() != $user->getKey()) {
-                $user->planets->each->update([
-                    'user_id' => null,
-                ]);
-
-                return true;
-            }
-
-            return false;
-        });
-
-        static::updated(function (self $user) {
-            event(
-                new UserUpdated($user->id)
-            );
-        });
-    }
 
     /**
      * Get the role options.
@@ -396,5 +364,37 @@ class User extends Authenticatable
                 new UserUpdated($this->id)
             );
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (self $user) {
+            if ($user->isDirty('capital_id')) {
+                $user->last_capital_changed = Carbon::now();
+            }
+        });
+
+        static::deleting(function (self $user) {
+            if (auth()->id() != $user->getKey()) {
+                $user->planets->each->update([
+                    'user_id' => null,
+                ]);
+
+                return true;
+            }
+
+            return false;
+        });
+
+        static::updated(function (self $user) {
+            event(
+                new UserUpdated($user->id)
+            );
+        });
     }
 }

@@ -115,6 +115,21 @@ class Research extends Model implements TimeableContract
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function cancel()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $user->incrementEnergy(round(
+            $this->remaining / $this->researchable->research_time * $this->researchable->research_cost
+        ));
+
+        $this->delete();
+    }
+
+    /**
      * Finish resource.
      */
     protected function finishResource()
@@ -133,20 +148,5 @@ class Research extends Model implements TimeableContract
                 'is_researched' => true,
             ]);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        /** @var User $user */
-        $user = auth()->user();
-
-        $user->incrementEnergy(round(
-            $this->remaining / $this->researchable->research_time * $this->researchable->research_cost
-        ));
-
-        $this->delete();
     }
 }

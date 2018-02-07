@@ -3,8 +3,8 @@
 namespace Koodilab\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\DatabaseManager;
 use Koodilab\Models\Construction as ConstructionModel;
 
 class Construction implements ShouldQueue

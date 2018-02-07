@@ -33,20 +33,6 @@ class Bounds
     protected $maxY;
 
     /**
-     * From string.
-     *
-     * @param string $bounds
-     *
-     * @return static
-     */
-    public static function fromString($bounds)
-    {
-        list($minX, $minY, $maxX, $maxY) = explode(',', $bounds, 4);
-
-        return new self($minX, $minY, $maxX, $maxY);
-    }
-
-    /**
      * Constructor.
      *
      * @param int $minX
@@ -60,6 +46,20 @@ class Bounds
         $this->minY = $minY;
         $this->maxX = $maxX;
         $this->maxY = $maxY;
+    }
+
+    /**
+     * From string.
+     *
+     * @param string $bounds
+     *
+     * @return static
+     */
+    public static function fromString($bounds)
+    {
+        list($minX, $minY, $maxX, $maxY) = explode(',', $bounds, 4);
+
+        return new self($minX, $minY, $maxX, $maxY);
     }
 
     /**

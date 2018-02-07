@@ -77,6 +77,52 @@ class Simulator implements SimulatorContract
     protected $heavyFighterCount;
 
     /**
+     * Setup.
+     *
+     * @param Movement $movement
+     */
+    protected function setup(Movement $movement)
+    {
+        $this->movement = $movement;
+
+        $this->movement->start->load('user');
+        $this->movement->end->load('user');
+
+        $this->stocks = $this->movement->end->stocks()
+            ->get()
+            ->map(function (Stock $stock) {
+                return $stock->setRelation('planet', $this->movement->end);
+            });
+
+        $this->populations = $this->movement->end->populations()
+            ->with('unit')
+            ->get()
+            ->map(function (Population $population) {
+                $population->setRelation('planet', $this->movement->end);
+                $population->unit->applyModifiers([
+                    'defense_bonus' => $this->movement->end->defense_bonus,
+                ]);
+
+                return $population;
+            });
+
+        $this->grids = $this->movement->end->grids()
+            ->with('building')
+            ->whereNotNull('building_id')
+            ->get()
+            ->sortByDesc('building.type')
+            ->map(function (Grid $grid) {
+                $grid->setRelation('planet', $this->movement->end);
+                $grid->building->applyModifiers([
+                    'level' => $grid->level,
+                    'defense_bonus' => $this->movement->end->defense_bonus,
+                ]);
+
+                return $grid;
+            });
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function scout(Movement $movement)
@@ -168,52 +214,6 @@ class Simulator implements SimulatorContract
         return $this->grids->reduce(function ($carry, Grid $grid) {
             return $carry + $grid->building->defense;
         }, $defense);
-    }
-
-    /**
-     * Setup.
-     *
-     * @param Movement $movement
-     */
-    protected function setup(Movement $movement)
-    {
-        $this->movement = $movement;
-
-        $this->movement->start->load('user');
-        $this->movement->end->load('user');
-
-        $this->stocks = $this->movement->end->stocks()
-            ->get()
-            ->map(function (Stock $stock) {
-                return $stock->setRelation('planet', $this->movement->end);
-            });
-
-        $this->populations = $this->movement->end->populations()
-            ->with('unit')
-            ->get()
-            ->map(function (Population $population) {
-                $population->setRelation('planet', $this->movement->end);
-                $population->unit->applyModifiers([
-                    'defense_bonus' => $this->movement->end->defense_bonus,
-                ]);
-
-                return $population;
-            });
-
-        $this->grids = $this->movement->end->grids()
-            ->with('building')
-            ->whereNotNull('building_id')
-            ->get()
-            ->sortByDesc('building.type')
-            ->map(function (Grid $grid) {
-                $grid->setRelation('planet', $this->movement->end);
-                $grid->building->applyModifiers([
-                    'level' => $grid->level,
-                    'defense_bonus' => $this->movement->end->defense_bonus,
-                ]);
-
-                return $grid;
-            });
     }
 
     /**

@@ -322,62 +322,6 @@ class Movement extends Model implements TimeableContract
     }
 
     /**
-     * Create transport or trade from.
-     *
-     * @param Movement           $movement
-     * @param Population         $population
-     * @param Collection|Stock[] $stocks
-     * @param int                $quantity
-     * @param BaseCollection     $quantities
-     *
-     * @return static
-     */
-    protected static function createTransportOrTradeFrom(self $movement, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
-    {
-        $population->decrementQuantity($quantity);
-
-        $movement->units()->attach($population->unit->id, [
-            'quantity' => $quantity,
-        ]);
-
-        foreach ($stocks as $stock) {
-            $stock->decrementQuantity(
-                $quantities->get($stock->resource_id)
-            );
-
-            $movement->resources()->attach($stock->resource_id, [
-                'quantity' => $quantities->get($stock->resource_id),
-            ]);
-        }
-
-        return static::createFrom($movement);
-    }
-
-    /**
-     * Create from.
-     *
-     * @param Movement $movement
-     *
-     * @return static
-     */
-    protected static function createFrom(self $movement)
-    {
-        dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining ?: null)
-        );
-
-        event(
-            new PlanetUpdated($movement->start_id)
-        );
-
-        event(
-            new PlanetUpdated($movement->end_id)
-        );
-
-        return $movement;
-    }
-
-    /**
      * Get the start.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -452,6 +396,70 @@ class Movement extends Model implements TimeableContract
         event(
             new PlanetUpdated($this->end_id)
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cancel()
+    {
+        $this->delete();
+    }
+
+    /**
+     * Create transport or trade from.
+     *
+     * @param Movement           $movement
+     * @param Population         $population
+     * @param Collection|Stock[] $stocks
+     * @param int                $quantity
+     * @param BaseCollection     $quantities
+     *
+     * @return static
+     */
+    protected static function createTransportOrTradeFrom(self $movement, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    {
+        $population->decrementQuantity($quantity);
+
+        $movement->units()->attach($population->unit->id, [
+            'quantity' => $quantity,
+        ]);
+
+        foreach ($stocks as $stock) {
+            $stock->decrementQuantity(
+                $quantities->get($stock->resource_id)
+            );
+
+            $movement->resources()->attach($stock->resource_id, [
+                'quantity' => $quantities->get($stock->resource_id),
+            ]);
+        }
+
+        return static::createFrom($movement);
+    }
+
+    /**
+     * Create from.
+     *
+     * @param Movement $movement
+     *
+     * @return static
+     */
+    protected static function createFrom(self $movement)
+    {
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining ?: null)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+
+        return $movement;
     }
 
     /**
@@ -623,13 +631,5 @@ class Movement extends Model implements TimeableContract
                 (new MoveJob($returnMovement->id))->delay($returnMovement->remaining ?: null)
             );
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        $this->delete();
     }
 }

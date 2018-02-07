@@ -27,6 +27,18 @@ class Kernel extends ConsoleKernel
     /**
      * {@inheritdoc}
      */
+    public function bootstrap()
+    {
+        parent::bootstrap();
+
+        if ($this->app->environment() != 'production') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('mission:generate')->cron('0 */6 * * * *');
@@ -40,17 +52,5 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function bootstrap()
-    {
-        parent::bootstrap();
-
-        if ($this->app->environment() != 'production') {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        }
     }
 }

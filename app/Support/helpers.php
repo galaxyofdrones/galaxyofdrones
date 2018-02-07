@@ -25,9 +25,9 @@ if (!function_exists('setting')) {
      * @param string $locale
      * @param bool   $fallbackToDefault
      *
-     * @return \Koodilab\Support\SettingManager|mixed
-     *
      * @throws InvalidArgumentException
+     *
+     * @return \Koodilab\Support\SettingManager|mixed
      */
     function setting($key = null, $locale = null, $fallbackToDefault = true)
     {

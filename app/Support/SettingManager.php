@@ -51,9 +51,9 @@ class SettingManager
      * @param string $locale
      * @param bool   $fallbackToDefault
      *
-     * @return mixed
-     *
      * @throws InvalidArgumentException
+     *
+     * @return mixed
      */
     public function value($key, $locale = null, $fallbackToDefault = true)
     {

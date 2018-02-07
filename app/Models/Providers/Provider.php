@@ -2,8 +2,8 @@
 
 namespace Koodilab\Models\Providers;
 
-use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Http\Request;
@@ -181,7 +181,7 @@ abstract class Provider extends Transformer
      */
     public function viewData()
     {
-        return array(
+        return [
             'attributes' => $this->attributes(),
             'keyword' => $this->keyword(),
             'default_sort' => $this->defaultSort(),
@@ -189,7 +189,7 @@ abstract class Provider extends Transformer
             'default_direction' => $this->defaultDirection(),
             'direction' => $this->direction(),
             'page' => $this->page(),
-        );
+        ];
     }
 
     /**

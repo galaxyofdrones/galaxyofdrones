@@ -149,16 +149,6 @@ class Mission extends Model implements TimeableContract
     }
 
     /**
-     * Get a random multiplier.
-     *
-     * @return float
-     */
-    protected static function randMultiplier()
-    {
-        return static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * Util::randFloat();
-    }
-
-    /**
      * Get the resources.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -222,5 +212,15 @@ class Mission extends Model implements TimeableContract
     public function cancel()
     {
         $this->delete();
+    }
+
+    /**
+     * Get a random multiplier.
+     *
+     * @return float
+     */
+    protected static function randMultiplier()
+    {
+        return static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * Util::randFloat();
     }
 }

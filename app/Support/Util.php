@@ -65,9 +65,9 @@ class Util
      * @param string $locale
      * @param bool   $fallbackToDefault
      *
-     * @return SettingManager|mixed
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return SettingManager|mixed
      */
     public static function setting($key = null, $locale = null, $fallbackToDefault = true)
     {

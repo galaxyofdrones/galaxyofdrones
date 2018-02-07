@@ -2,9 +2,9 @@
 
 namespace Koodilab\Http\Controllers\Site;
 
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Koodilab\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {
