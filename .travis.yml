@@ -26,5 +26,5 @@ before_script:
 
 script:
   - jscs ./resources/assets/js
-  - php-cs-fixer fix --dry-run
+  - $HOME/.composer/vendor/bin/php-cs-fixer fix --dry-run
   - vendor/bin/phpunit
