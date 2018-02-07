@@ -17,7 +17,7 @@ trait HasUnit
     {
         $units = new Collection();
 
-        if (!$this->building_id || $this->building->type != Building::TYPE_TRAINER) {
+        if (! $this->building_id || $this->building->type != Building::TYPE_TRAINER) {
             return $units;
         }
 

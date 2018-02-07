@@ -2,7 +2,7 @@
 
 use Koodilab\Support\Util;
 
-if (!function_exists('flash')) {
+if (! function_exists('flash')) {
     /**
      * Set a flash message.
      *
@@ -17,7 +17,7 @@ if (!function_exists('flash')) {
     }
 }
 
-if (!function_exists('setting')) {
+if (! function_exists('setting')) {
     /**
      * Get the setting.
      *
@@ -25,9 +25,9 @@ if (!function_exists('setting')) {
      * @param string $locale
      * @param bool   $fallbackToDefault
      *
-     * @return \Koodilab\Support\SettingManager|mixed
-     *
      * @throws InvalidArgumentException
+     *
+     * @return \Koodilab\Support\SettingManager|mixed
      */
     function setting($key = null, $locale = null, $fallbackToDefault = true)
     {
@@ -35,7 +35,7 @@ if (!function_exists('setting')) {
     }
 }
 
-if (!function_exists('vue')) {
+if (! function_exists('vue')) {
     /**
      * Show the vue value.
      *

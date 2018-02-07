@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Population.
  *
- * @property int $id
- * @property int $planet_id
- * @property int $unit_id
- * @property int $quantity
+ * @property int                 $id
+ * @property int                 $planet_id
+ * @property int                 $unit_id
+ * @property int                 $quantity
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property Planet $planet
- * @property Unit $unit
+ * @property Planet              $planet
+ * @property Unit                $unit
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Population whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Population whereId($value)

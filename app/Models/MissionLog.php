@@ -8,14 +8,14 @@ use Koodilab\Notifications\MissionLogCreated;
 /**
  * Mission log.
  *
- * @property int $id
- * @property int $user_id
- * @property int $energy
- * @property int $experience
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property int                                                 $id
+ * @property int                                                 $user_id
+ * @property int                                                 $energy
+ * @property int                                                 $experience
+ * @property \Carbon\Carbon|null                                 $created_at
+ * @property \Carbon\Carbon|null                                 $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property User $user
+ * @property User                                                $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereEnergy($value)

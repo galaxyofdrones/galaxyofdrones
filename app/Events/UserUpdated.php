@@ -2,8 +2,8 @@
 
 namespace Koodilab\Events;
 
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 class UserUpdated implements ShouldBroadcastNow
 {

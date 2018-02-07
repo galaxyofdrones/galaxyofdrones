@@ -25,7 +25,7 @@ trait CanOccupy
             return false;
         }
 
-        if ($this->isStarted() && !$this->hasResource($planet->resource)) {
+        if ($this->isStarted() && ! $this->hasResource($planet->resource)) {
             return false;
         }
 
@@ -41,7 +41,7 @@ trait CanOccupy
      */
     public function occupy(Planet $planet)
     {
-        if (!$this->canOccupy($planet)) {
+        if (! $this->canOccupy($planet)) {
             return false;
         }
 

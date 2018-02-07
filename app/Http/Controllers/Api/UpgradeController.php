@@ -46,7 +46,7 @@ class UpgradeController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->building_id) {
+        if (! $grid->building_id) {
             throw new BadRequestHttpException();
         }
 
@@ -56,11 +56,11 @@ class UpgradeController extends Controller
 
         $building = $grid->upgradeBuilding();
 
-        if (!$building) {
+        if (! $building) {
             throw new BadRequestHttpException();
         }
 
-        if (!auth()->user()->hasEnergy($building->construction_cost)) {
+        if (! auth()->user()->hasEnergy($building->construction_cost)) {
             throw new BadRequestHttpException();
         }
 
@@ -82,7 +82,7 @@ class UpgradeController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->upgrade) {
+        if (! $grid->upgrade) {
             throw new BadRequestHttpException();
         }
 

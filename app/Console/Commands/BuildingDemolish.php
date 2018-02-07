@@ -48,7 +48,7 @@ class BuildingDemolish extends Command
         /** @var Grid $grid */
         $grid = Grid::find($this->argument('grid'));
 
-        if (!$grid) {
+        if (! $grid) {
             $this->error(
                 $this->prependTimestamp("The grid [{$grid->id}] not found.")
             );

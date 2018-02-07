@@ -2,8 +2,8 @@
 
 namespace Koodilab\Http\Controllers\Site;
 
-use Koodilab\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Koodilab\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {

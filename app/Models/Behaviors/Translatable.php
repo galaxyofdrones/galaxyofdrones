@@ -25,14 +25,14 @@ trait Translatable
         $locale = $locale ?: $this->locale();
         $translations = $this->{$key};
 
-        if (!empty($translations[$locale])) {
+        if (! empty($translations[$locale])) {
             return $translations[$locale];
         }
 
         if ($fallbackToDefault) {
             $locale = $this->fallbackLocale();
 
-            if (!empty($translations[$locale])) {
+            if (! empty($translations[$locale])) {
                 return $translations[$locale];
             }
         }
@@ -52,7 +52,7 @@ trait Translatable
         $locale = $locale ?: $this->locale();
         $translations = $this->{$key};
 
-        if (!array_key_exists($locale, $translations) || $translations[$locale] != $value) {
+        if (! array_key_exists($locale, $translations) || $translations[$locale] != $value) {
             $this->{$key} = array_merge($translations, [
                 $locale => $value,
             ]);

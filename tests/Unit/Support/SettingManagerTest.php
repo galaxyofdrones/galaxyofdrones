@@ -2,10 +2,10 @@
 
 namespace Koodilab\Tests\Unit\Support;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Koodilab\Models\Setting;
 use Koodilab\Support\SettingManager;
 use Koodilab\Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class SettingManagerTest extends TestCase
 {

@@ -9,35 +9,35 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 /**
  * Building.
  *
- * @property int $id
- * @property int $_lft
- * @property int $_rgt
- * @property int|null $parent_id
- * @property array $name
- * @property int $type
- * @property int $end_level
- * @property int $construction_experience
- * @property int $construction_cost
- * @property int $construction_time
- * @property array $description
- * @property int|null $limit
- * @property int $defense
- * @property int $detection
- * @property int $capacity
- * @property int $supply
- * @property int $mining_rate
- * @property int $production_rate
- * @property float $defense_bonus
- * @property float $construction_time_bonus
- * @property float $trade_time_bonus
- * @property float $train_time_bonus
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property \Kalnoy\Nestedset\Collection|Building[] $children
+ * @property int                                                     $id
+ * @property int                                                     $_lft
+ * @property int                                                     $_rgt
+ * @property int|null                                                $parent_id
+ * @property array                                                   $name
+ * @property int                                                     $type
+ * @property int                                                     $end_level
+ * @property int                                                     $construction_experience
+ * @property int                                                     $construction_cost
+ * @property int                                                     $construction_time
+ * @property array                                                   $description
+ * @property int|null                                                $limit
+ * @property int                                                     $defense
+ * @property int                                                     $detection
+ * @property int                                                     $capacity
+ * @property int                                                     $supply
+ * @property int                                                     $mining_rate
+ * @property int                                                     $production_rate
+ * @property float                                                   $defense_bonus
+ * @property float                                                   $construction_time_bonus
+ * @property float                                                   $trade_time_bonus
+ * @property float                                                   $train_time_bonus
+ * @property \Carbon\Carbon|null                                     $created_at
+ * @property \Carbon\Carbon|null                                     $updated_at
+ * @property \Kalnoy\Nestedset\Collection|Building[]                 $children
  * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
- * @property int $level
- * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
- * @property Building|null $parent
+ * @property int                                                     $level
+ * @property \Illuminate\Database\Eloquent\Collection|Grid[]         $grids
+ * @property Building|null                                           $parent
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Building whereConstructionCost($value)
@@ -208,7 +208,7 @@ class Building extends Model implements TranslatableContract
             $constructionTime = $this->applyExpFormula($constructionTime, 3);
         }
 
-        if (!empty($this->modifiers['construction_time_bonus'])) {
+        if (! empty($this->modifiers['construction_time_bonus'])) {
             $constructionTime *= max(0, 1 - $this->modifiers['construction_time_bonus']);
         }
 
@@ -231,7 +231,7 @@ class Building extends Model implements TranslatableContract
                 $defense = $this->applyLinearForumla($defense);
             }
 
-            if (!empty($this->modifiers['defense_bonus'])) {
+            if (! empty($this->modifiers['defense_bonus'])) {
                 $defense *= 1 + $this->modifiers['defense_bonus'];
             }
 
@@ -350,7 +350,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_DEFENSIVE && $defenseBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($defenseBonus), 2
+                $this->applyLinearForumla($defenseBonus),
+                2
             );
         }
 
@@ -368,7 +369,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_CENTRAL && $constructionTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($constructionTimeBonus), 2
+                $this->applyExpFormula($constructionTimeBonus),
+                2
             );
         }
 
@@ -386,7 +388,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_TRADER && $tradeTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($tradeTimeBonus), 2
+                $this->applyExpFormula($tradeTimeBonus),
+                2
             );
         }
 
@@ -404,7 +407,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_TRAINER && $trainTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($trainTimeBonus), 2
+                $this->applyExpFormula($trainTimeBonus),
+                2
             );
         }
 
@@ -416,7 +420,7 @@ class Building extends Model implements TranslatableContract
      */
     protected function validateModifiers(array $modifiers)
     {
-        if (!empty($modifiers['level'])) {
+        if (! empty($modifiers['level'])) {
             return $this->hasLevel($modifiers['level']);
         }
 

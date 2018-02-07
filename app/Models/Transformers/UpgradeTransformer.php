@@ -32,7 +32,7 @@ class UpgradeTransformer extends Transformer
         $upgrade = $item->upgradeBuilding();
 
         return [
-            'hasTraining' => !empty($item->training),
+            'hasTraining' => ! empty($item->training),
             'remaining' => $item->upgrade
                 ? $item->upgrade->remaining
                 : null,

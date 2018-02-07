@@ -28,7 +28,8 @@ class SettingController extends Controller
     public function edit($translation)
     {
         return view(
-            'admin.setting.edit', compact('translation')
+            'admin.setting.edit',
+            compact('translation')
         );
     }
 

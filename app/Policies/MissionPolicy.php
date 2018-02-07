@@ -2,9 +2,9 @@
 
 namespace Koodilab\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Koodilab\Models\Mission;
 use Koodilab\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MissionPolicy
 {

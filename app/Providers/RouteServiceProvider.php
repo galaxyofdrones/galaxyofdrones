@@ -2,8 +2,8 @@
 
 namespace Koodilab\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 use Koodilab\Models\User;
 
 class RouteServiceProvider extends ServiceProvider

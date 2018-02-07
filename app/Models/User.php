@@ -4,8 +4,8 @@ namespace Koodilab\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Koodilab\Events\UserUpdated;
 use Koodilab\Support\Util;
 use Laravel\Passport\HasApiTokens;
@@ -13,44 +13,44 @@ use Laravel\Passport\HasApiTokens;
 /**
  * User.
  *
- * @property int $id
- * @property int|null $capital_id
- * @property int|null $current_id
- * @property string $username
- * @property string $email
- * @property string $password
- * @property string|null $remember_token
- * @property bool $is_enabled
- * @property int $role
- * @property int $energy
- * @property int $experience
- * @property int $production_rate
- * @property \Carbon\Carbon|null $last_login
- * @property \Carbon\Carbon|null $last_capital_changed
- * @property \Carbon\Carbon|null $last_energy_changed
- * @property \Carbon\Carbon|null $started_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|BattleLog[] $attackBattleLogs
- * @property \Illuminate\Database\Eloquent\Collection|Bookmark[] $bookmarks
- * @property Planet|null $capital
- * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
- * @property Planet|null $current
- * @property \Illuminate\Database\Eloquent\Collection|BattleLog[] $defenseBattleLogs
- * @property int $capital_change_remaining
- * @property int $level
- * @property int $level_experience
- * @property int $next_level
- * @property int $next_level_experience
- * @property \Illuminate\Database\Eloquent\Collection|MissionLog[] $missionLogs
- * @property \Illuminate\Database\Eloquent\Collection|Mission[] $missions
- * @property \Illuminate\Database\Eloquent\Collection|Movement[] $movements
+ * @property int                                                                                                       $id
+ * @property int|null                                                                                                  $capital_id
+ * @property int|null                                                                                                  $current_id
+ * @property string                                                                                                    $username
+ * @property string                                                                                                    $email
+ * @property string                                                                                                    $password
+ * @property string|null                                                                                               $remember_token
+ * @property bool                                                                                                      $is_enabled
+ * @property int                                                                                                       $role
+ * @property int                                                                                                       $energy
+ * @property int                                                                                                       $experience
+ * @property int                                                                                                       $production_rate
+ * @property \Carbon\Carbon|null                                                                                       $last_login
+ * @property \Carbon\Carbon|null                                                                                       $last_capital_changed
+ * @property \Carbon\Carbon|null                                                                                       $last_energy_changed
+ * @property \Carbon\Carbon|null                                                                                       $started_at
+ * @property \Carbon\Carbon|null                                                                                       $created_at
+ * @property \Carbon\Carbon|null                                                                                       $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|BattleLog[]                                                      $attackBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Bookmark[]                                                       $bookmarks
+ * @property Planet|null                                                                                               $capital
+ * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
+ * @property Planet|null                                                                                               $current
+ * @property \Illuminate\Database\Eloquent\Collection|BattleLog[]                                                      $defenseBattleLogs
+ * @property int                                                                                                       $capital_change_remaining
+ * @property int                                                                                                       $level
+ * @property int                                                                                                       $level_experience
+ * @property int                                                                                                       $next_level
+ * @property int                                                                                                       $next_level_experience
+ * @property \Illuminate\Database\Eloquent\Collection|MissionLog[]                                                     $missionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Mission[]                                                        $missions
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[]                                                       $movements
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property \Illuminate\Database\Eloquent\Collection|Planet[] $planets
- * @property \Illuminate\Database\Eloquent\Collection|Research[] $researches
- * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
- * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
+ * @property \Illuminate\Database\Eloquent\Collection|Planet[]                                                         $planets
+ * @property \Illuminate\Database\Eloquent\Collection|Research[]                                                       $researches
+ * @property \Illuminate\Database\Eloquent\Collection|resource[]                                                       $resources
+ * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[]                                                           $units
  *
  * @method static \Illuminate\Database\Eloquent\Builder|User dashboard()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
@@ -169,38 +169,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * {@inheritdoc}
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function (self $user) {
-            if ($user->isDirty('capital_id')) {
-                $user->last_capital_changed = Carbon::now();
-            }
-        });
-
-        static::deleting(function (self $user) {
-            if (auth()->id() != $user->getKey()) {
-                $user->planets->each->update([
-                    'user_id' => null,
-                ]);
-
-                return true;
-            }
-
-            return false;
-        });
-
-        static::updated(function (self $user) {
-            event(
-                new UserUpdated($user->id)
-            );
-        });
-    }
-
-    /**
      * Get the role options.
      *
      * @return array
@@ -297,7 +265,7 @@ class User extends Authenticatable
      */
     public function setPasswordAttribute($value)
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -309,7 +277,7 @@ class User extends Authenticatable
      */
     public function isStarted()
     {
-        return !empty($this->started_at);
+        return ! empty($this->started_at);
     }
 
     /**
@@ -396,5 +364,37 @@ class User extends Authenticatable
                 new UserUpdated($this->id)
             );
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (self $user) {
+            if ($user->isDirty('capital_id')) {
+                $user->last_capital_changed = Carbon::now();
+            }
+        });
+
+        static::deleting(function (self $user) {
+            if (auth()->id() != $user->getKey()) {
+                $user->planets->each->update([
+                    'user_id' => null,
+                ]);
+
+                return true;
+            }
+
+            return false;
+        });
+
+        static::updated(function (self $user) {
+            event(
+                new UserUpdated($user->id)
+            );
+        });
     }
 }

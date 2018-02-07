@@ -2,10 +2,10 @@
 
 namespace Koodilab\Http\Controllers\Site;
 
-use Koodilab\Models\User;
-use Koodilab\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
+use Koodilab\Http\Controllers\Controller;
+use Koodilab\Models\User;
 
 class RegisterController extends Controller
 {

@@ -15,20 +15,20 @@ use Koodilab\Jobs\Move as MoveJob;
 /**
  * Movement.
  *
- * @property int $id
- * @property int $start_id
- * @property int $end_id
- * @property int $user_id
- * @property int $type
- * @property \Carbon\Carbon $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property Planet $end
- * @property int $remaining
+ * @property int                                                 $id
+ * @property int                                                 $start_id
+ * @property int                                                 $end_id
+ * @property int                                                 $user_id
+ * @property int                                                 $type
+ * @property \Carbon\Carbon                                      $ended_at
+ * @property \Carbon\Carbon|null                                 $created_at
+ * @property \Carbon\Carbon|null                                 $updated_at
+ * @property Planet                                              $end
+ * @property int                                                 $remaining
  * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property Planet $start
- * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
- * @property User $user
+ * @property Planet                                              $start
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[]     $units
+ * @property User                                                $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereEndId($value)
@@ -284,7 +284,11 @@ class Movement extends Model implements TimeableContract
         ]);
 
         return static::createTransportOrTradeFrom(
-            $movement, $population, $stocks, $quantity, $quantities
+            $movement,
+            $population,
+            $stocks,
+            $quantity,
+            $quantities
         );
     }
 
@@ -317,64 +321,12 @@ class Movement extends Model implements TimeableContract
         ]);
 
         return static::createTransportOrTradeFrom(
-            $movement, $population, $stocks, $quantity, $quantities
+            $movement,
+            $population,
+            $stocks,
+            $quantity,
+            $quantities
         );
-    }
-
-    /**
-     * Create transport or trade from.
-     *
-     * @param Movement           $movement
-     * @param Population         $population
-     * @param Collection|Stock[] $stocks
-     * @param int                $quantity
-     * @param BaseCollection     $quantities
-     *
-     * @return static
-     */
-    protected static function createTransportOrTradeFrom(self $movement, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
-    {
-        $population->decrementQuantity($quantity);
-
-        $movement->units()->attach($population->unit->id, [
-            'quantity' => $quantity,
-        ]);
-
-        foreach ($stocks as $stock) {
-            $stock->decrementQuantity(
-                $quantities->get($stock->resource_id)
-            );
-
-            $movement->resources()->attach($stock->resource_id, [
-                'quantity' => $quantities->get($stock->resource_id),
-            ]);
-        }
-
-        return static::createFrom($movement);
-    }
-
-    /**
-     * Create from.
-     *
-     * @param Movement $movement
-     *
-     * @return static
-     */
-    protected static function createFrom(self $movement)
-    {
-        dispatch(
-            (new MoveJob($movement->id))->delay($movement->remaining ?: null)
-        );
-
-        event(
-            new PlanetUpdated($movement->start_id)
-        );
-
-        event(
-            new PlanetUpdated($movement->end_id)
-        );
-
-        return $movement;
     }
 
     /**
@@ -455,6 +407,70 @@ class Movement extends Model implements TimeableContract
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function cancel()
+    {
+        $this->delete();
+    }
+
+    /**
+     * Create transport or trade from.
+     *
+     * @param Movement           $movement
+     * @param Population         $population
+     * @param Collection|Stock[] $stocks
+     * @param int                $quantity
+     * @param BaseCollection     $quantities
+     *
+     * @return static
+     */
+    protected static function createTransportOrTradeFrom(self $movement, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    {
+        $population->decrementQuantity($quantity);
+
+        $movement->units()->attach($population->unit->id, [
+            'quantity' => $quantity,
+        ]);
+
+        foreach ($stocks as $stock) {
+            $stock->decrementQuantity(
+                $quantities->get($stock->resource_id)
+            );
+
+            $movement->resources()->attach($stock->resource_id, [
+                'quantity' => $quantities->get($stock->resource_id),
+            ]);
+        }
+
+        return static::createFrom($movement);
+    }
+
+    /**
+     * Create from.
+     *
+     * @param Movement $movement
+     *
+     * @return static
+     */
+    protected static function createFrom(self $movement)
+    {
+        dispatch(
+            (new MoveJob($movement->id))->delay($movement->remaining ?: null)
+        );
+
+        event(
+            new PlanetUpdated($movement->start_id)
+        );
+
+        event(
+            new PlanetUpdated($movement->end_id)
+        );
+
+        return $movement;
+    }
+
+    /**
      * Finish the scout.
      */
     protected function finishScout()
@@ -485,7 +501,7 @@ class Movement extends Model implements TimeableContract
         $battleLog = app(Simulator::class)->occupy($this);
 
         if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
-            if (!$battleLog->attacker->occupy($battleLog->end)) {
+            if (! $battleLog->attacker->occupy($battleLog->end)) {
                 $this->returnMovement($battleLog->attackerUnits);
             }
         }
@@ -563,7 +579,7 @@ class Movement extends Model implements TimeableContract
         foreach ($this->resources as $resource) {
             $userResource = $this->user->resources->firstWhere('id', $resource->id);
 
-            if (!$userResource) {
+            if (! $userResource) {
                 $this->user->resources()->attach($resource->id, [
                     'is_researched' => false,
                     'quantity' => $resource->pivot->quantity,
@@ -623,13 +639,5 @@ class Movement extends Model implements TimeableContract
                 (new MoveJob($returnMovement->id))->delay($returnMovement->remaining ?: null)
             );
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        $this->delete();
     }
 }

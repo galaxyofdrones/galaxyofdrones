@@ -12,39 +12,39 @@ use Koodilab\Support\StateManager;
 /**
  * Planet.
  *
- * @property int $id
- * @property int $resource_id
- * @property int|null $user_id
- * @property string $name
- * @property string|null $custom_name
- * @property int $x
- * @property int $y
- * @property int $size
- * @property int|null $capacity
- * @property int|null $supply
- * @property int|null $mining_rate
- * @property int|null $production_rate
- * @property float|null $defense_bonus
- * @property float|null $construction_time_bonus
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property int                                                     $id
+ * @property int                                                     $resource_id
+ * @property int|null                                                $user_id
+ * @property string                                                  $name
+ * @property string|null                                             $custom_name
+ * @property int                                                     $x
+ * @property int                                                     $y
+ * @property int                                                     $size
+ * @property int|null                                                $capacity
+ * @property int|null                                                $supply
+ * @property int|null                                                $mining_rate
+ * @property int|null                                                $production_rate
+ * @property float|null                                              $defense_bonus
+ * @property float|null                                              $construction_time_bonus
+ * @property \Carbon\Carbon|null                                     $created_at
+ * @property \Carbon\Carbon|null                                     $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|Construction[] $constructions
- * @property string $display_name
- * @property int $free_capacity
- * @property int $free_supply
- * @property int $resource_count
- * @property int $used_capacity
- * @property int $used_supply
- * @property int $used_training_supply
- * @property \Illuminate\Database\Eloquent\Collection|Grid[] $grids
- * @property \Illuminate\Database\Eloquent\Collection|Movement[] $incomingMovements
- * @property \Illuminate\Database\Eloquent\Collection|Movement[] $outgoingMovements
- * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
- * @property resource $resource
- * @property \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
- * @property \Illuminate\Database\Eloquent\Collection|Training[] $trainings
- * @property \Illuminate\Database\Eloquent\Collection|Upgrade[] $upgrades
- * @property User|null $user
+ * @property string                                                  $display_name
+ * @property int                                                     $free_capacity
+ * @property int                                                     $free_supply
+ * @property int                                                     $resource_count
+ * @property int                                                     $used_capacity
+ * @property int                                                     $used_supply
+ * @property int                                                     $used_training_supply
+ * @property \Illuminate\Database\Eloquent\Collection|Grid[]         $grids
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[]     $incomingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|Movement[]     $outgoingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|Population[]   $populations
+ * @property resource                                                $resource
+ * @property \Illuminate\Database\Eloquent\Collection|Stock[]        $stocks
+ * @property \Illuminate\Database\Eloquent\Collection|Training[]     $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|Upgrade[]      $upgrades
+ * @property User|null                                               $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Planet inBounds(\Koodilab\Support\Bounds $bounds)
  * @method static \Illuminate\Database\Eloquent\Builder|Planet starter()
@@ -145,60 +145,6 @@ class Planet extends Model implements PositionableContract
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::updating(function (self $planet) {
-            if ($planet->isDirty('user_id')) {
-                $userId = $planet->getOriginal('user_id');
-
-                if ($userId) {
-                    $user = User::find($userId);
-
-                    $planet->custom_name = null;
-                    $planet->capacity = null;
-                    $planet->supply = null;
-                    $planet->mining_rate = null;
-                    $planet->production_rate = null;
-                    $planet->defense_bonus = null;
-                    $planet->construction_time_bonus = null;
-                    $planet->incomingMovements()->where('user_id', $user->id)->delete();
-                    $planet->outgoingMovements()->where('user_id', $user->id)->delete();
-                    $planet->constructions()->delete();
-                    $planet->upgrades()->delete();
-                    $planet->trainings()->delete();
-
-                    $planet->grids()->update([
-                        'level' => null,
-                        'building_id' => null,
-                    ]);
-
-                    if ($planet->id == $user->current_id) {
-                        $user->update([
-                            'current_id' => $user->capital_id,
-                        ]);
-                    }
-
-                    app(StateManager::class)->syncUser($user);
-                }
-            }
-
-            if ($planet->user_id) {
-                app(StateManager::class)->syncUser($planet->user);
-            }
-        });
-
-        static::updated(function (self $planet) {
-            event(
-                new PlanetUpdated($planet->id)
-            );
-        });
-    }
 
     /**
      * Get the incoming movements.
@@ -322,5 +268,59 @@ class Planet extends Model implements PositionableContract
             ->whereNull('user_id')
             ->where('resource_id', $resourceId)
             ->where('size', static::SIZE_SMALL);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function (self $planet) {
+            if ($planet->isDirty('user_id')) {
+                $userId = $planet->getOriginal('user_id');
+
+                if ($userId) {
+                    $user = User::find($userId);
+
+                    $planet->custom_name = null;
+                    $planet->capacity = null;
+                    $planet->supply = null;
+                    $planet->mining_rate = null;
+                    $planet->production_rate = null;
+                    $planet->defense_bonus = null;
+                    $planet->construction_time_bonus = null;
+                    $planet->incomingMovements()->where('user_id', $user->id)->delete();
+                    $planet->outgoingMovements()->where('user_id', $user->id)->delete();
+                    $planet->constructions()->delete();
+                    $planet->upgrades()->delete();
+                    $planet->trainings()->delete();
+
+                    $planet->grids()->update([
+                        'level' => null,
+                        'building_id' => null,
+                    ]);
+
+                    if ($planet->id == $user->current_id) {
+                        $user->update([
+                            'current_id' => $user->capital_id,
+                        ]);
+                    }
+
+                    app(StateManager::class)->syncUser($user);
+                }
+            }
+
+            if ($planet->user_id) {
+                app(StateManager::class)->syncUser($planet->user);
+            }
+        });
+
+        static::updated(function (self $planet) {
+            event(
+                new PlanetUpdated($planet->id)
+            );
+        });
     }
 }

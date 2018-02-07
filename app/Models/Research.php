@@ -10,16 +10,16 @@ use Koodilab\Jobs\Research as ResearchJob;
 /**
  * Research.
  *
- * @property int $id
- * @property int $user_id
- * @property int $researchable_id
- * @property string $researchable_type
- * @property \Carbon\Carbon $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property int $remaining
+ * @property int                                           $id
+ * @property int                                           $user_id
+ * @property int                                           $researchable_id
+ * @property string                                        $researchable_type
+ * @property \Carbon\Carbon                                $ended_at
+ * @property \Carbon\Carbon|null                           $created_at
+ * @property \Carbon\Carbon|null                           $updated_at
+ * @property int                                           $remaining
  * @property \Illuminate\Database\Eloquent\Model|\Eloquent $researchable
- * @property User $user
+ * @property User                                          $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereEndedAt($value)
@@ -115,27 +115,6 @@ class Research extends Model implements TimeableContract
     }
 
     /**
-     * Finish resource.
-     */
-    protected function finishResource()
-    {
-        $userResource = $this->user->resources()
-            ->where('resource_id', $this->researchable_id)
-            ->first();
-
-        if (!$userResource) {
-            $this->user->resources()->attach($this->researchable_id, [
-                'is_researched' => true,
-                'quantity' => 0,
-            ]);
-        } else {
-            $userResource->pivot->update([
-                'is_researched' => true,
-            ]);
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function cancel()
@@ -148,5 +127,26 @@ class Research extends Model implements TimeableContract
         ));
 
         $this->delete();
+    }
+
+    /**
+     * Finish resource.
+     */
+    protected function finishResource()
+    {
+        $userResource = $this->user->resources()
+            ->where('resource_id', $this->researchable_id)
+            ->first();
+
+        if (! $userResource) {
+            $this->user->resources()->attach($this->researchable_id, [
+                'is_researched' => true,
+                'quantity' => 0,
+            ]);
+        } else {
+            $userResource->pivot->update([
+                'is_researched' => true,
+            ]);
+        }
     }
 }

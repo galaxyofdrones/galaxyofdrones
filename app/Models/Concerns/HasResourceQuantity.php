@@ -25,7 +25,7 @@ trait HasResourceQuantity
      */
     public function getQuantityAttribute()
     {
-        $quantity = !empty($this->attributes['quantity'])
+        $quantity = ! empty($this->attributes['quantity'])
             ? $this->attributes['quantity']
             : 0;
 

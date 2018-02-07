@@ -8,25 +8,25 @@ use Koodilab\Notifications\BattleLogCreated;
 /**
  * Battle log.
  *
- * @property int $id
- * @property int $start_id
- * @property int $end_id
- * @property int $attacker_id
- * @property int|null $defender_id
- * @property string $start_name
- * @property string $end_name
- * @property int $type
- * @property int $winner
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property User $attacker
- * @property \Illuminate\Database\Eloquent\Collection|Unit[] $attackerUnits
+ * @property int                                                 $id
+ * @property int                                                 $start_id
+ * @property int                                                 $end_id
+ * @property int                                                 $attacker_id
+ * @property int|null                                            $defender_id
+ * @property string                                              $start_name
+ * @property string                                              $end_name
+ * @property int                                                 $type
+ * @property int                                                 $winner
+ * @property \Carbon\Carbon|null                                 $created_at
+ * @property \Carbon\Carbon|null                                 $updated_at
+ * @property User                                                $attacker
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[]     $attackerUnits
  * @property \Illuminate\Database\Eloquent\Collection|Building[] $buildings
- * @property User|null $defender
- * @property \Illuminate\Database\Eloquent\Collection|Unit[] $defenderUnits
- * @property Planet $end
+ * @property User|null                                           $defender
+ * @property \Illuminate\Database\Eloquent\Collection|Unit[]     $defenderUnits
+ * @property Planet                                              $end
  * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property Planet $start
+ * @property Planet                                              $start
  *
  * @method static \Illuminate\Database\Eloquent\Builder|BattleLog whereAttackerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BattleLog whereCreatedAt($value)

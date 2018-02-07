@@ -77,6 +77,52 @@ class Simulator implements SimulatorContract
     protected $heavyFighterCount;
 
     /**
+     * Setup.
+     *
+     * @param Movement $movement
+     */
+    protected function setup(Movement $movement)
+    {
+        $this->movement = $movement;
+
+        $this->movement->start->load('user');
+        $this->movement->end->load('user');
+
+        $this->stocks = $this->movement->end->stocks()
+            ->get()
+            ->map(function (Stock $stock) {
+                return $stock->setRelation('planet', $this->movement->end);
+            });
+
+        $this->populations = $this->movement->end->populations()
+            ->with('unit')
+            ->get()
+            ->map(function (Population $population) {
+                $population->setRelation('planet', $this->movement->end);
+                $population->unit->applyModifiers([
+                    'defense_bonus' => $this->movement->end->defense_bonus,
+                ]);
+
+                return $population;
+            });
+
+        $this->grids = $this->movement->end->grids()
+            ->with('building')
+            ->whereNotNull('building_id')
+            ->get()
+            ->sortByDesc('building.type')
+            ->map(function (Grid $grid) {
+                $grid->setRelation('planet', $this->movement->end);
+                $grid->building->applyModifiers([
+                    'level' => $grid->level,
+                    'defense_bonus' => $this->movement->end->defense_bonus,
+                ]);
+
+                return $grid;
+            });
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function scout(Movement $movement)
@@ -171,59 +217,13 @@ class Simulator implements SimulatorContract
     }
 
     /**
-     * Setup.
-     *
-     * @param Movement $movement
-     */
-    protected function setup(Movement $movement)
-    {
-        $this->movement = $movement;
-
-        $this->movement->start->load('user');
-        $this->movement->end->load('user');
-
-        $this->stocks = $this->movement->end->stocks()
-            ->get()
-            ->map(function (Stock $stock) {
-                return $stock->setRelation('planet', $this->movement->end);
-            });
-
-        $this->populations = $this->movement->end->populations()
-            ->with('unit')
-            ->get()
-            ->map(function (Population $population) {
-                $population->setRelation('planet', $this->movement->end);
-                $population->unit->applyModifiers([
-                    'defense_bonus' => $this->movement->end->defense_bonus,
-                ]);
-
-                return $population;
-            });
-
-        $this->grids = $this->movement->end->grids()
-            ->with('building')
-            ->whereNotNull('building_id')
-            ->get()
-            ->sortByDesc('building.type')
-            ->map(function (Grid $grid) {
-                $grid->setRelation('planet', $this->movement->end);
-                $grid->building->applyModifiers([
-                    'level' => $grid->level,
-                    'defense_bonus' => $this->movement->end->defense_bonus,
-                ]);
-
-                return $grid;
-            });
-    }
-
-    /**
      * Battle.
      */
     protected function battle()
     {
         $defense = $this->defenderDefense();
 
-        if (!$defense) {
+        if (! $defense) {
             $this->attackerLossRate = 0;
             $this->defenderLossRate = 1;
         } else {
@@ -316,7 +316,7 @@ class Simulator implements SimulatorContract
                     'losses' => $losses,
                 ]);
 
-                if (!empty($losses)) {
+                if (! empty($losses)) {
                     $population->decrementQuantity($losses);
                 }
             }
@@ -334,7 +334,8 @@ class Simulator implements SimulatorContract
 
         if ($total) {
             $capacity = min(
-                $total, round($this->capacity * $this->defenderLossRate)
+                $total,
+                round($this->capacity * $this->defenderLossRate)
             );
 
             foreach ($this->stocks as $stock) {
@@ -343,13 +344,13 @@ class Simulator implements SimulatorContract
                 if ($quantity) {
                     $losses = round($capacity * ($quantity / $total));
 
-                    if (!empty($losses) || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
+                    if (! empty($losses) || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
                         $this->battleLog->resources()->attach($stock->resource_id, [
                             'quantity' => $quantity,
                             'losses' => $losses,
                         ]);
 
-                        if (!empty($losses)) {
+                        if (! empty($losses)) {
                             $stock->decrementQuantity($losses);
                         }
                     }
@@ -369,13 +370,13 @@ class Simulator implements SimulatorContract
             $level = $grid->level;
             $losses = min($damage, $level);
 
-            if (!empty($losses) || $grid->building->type == Building::TYPE_DEFENSIVE || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
+            if (! empty($losses) || $grid->building->type == Building::TYPE_DEFENSIVE || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
                 $this->battleLog->buildings()->attach($grid->building_id, [
                     'level' => $level,
                     'losses' => $losses,
                 ]);
 
-                if (!empty($losses)) {
+                if (! empty($losses)) {
                     $grid->demolishBuilding($losses);
                 }
             }

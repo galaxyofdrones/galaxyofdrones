@@ -13,7 +13,7 @@ trait CanChangeCapital
      */
     public function isCapitalChangeable()
     {
-        if (!$this->last_capital_changed) {
+        if (! $this->last_capital_changed) {
             return false;
         }
 

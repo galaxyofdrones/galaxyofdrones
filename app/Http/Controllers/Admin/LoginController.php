@@ -35,18 +35,6 @@ class LoginController extends Controller
     /**
      * {@inheritdoc}
      */
-    protected function credentials(Request $request)
-    {
-        $credentials = $request->only($this->username(), 'password');
-
-        $credentials['ability'] = 'dashboard';
-
-        return $credentials;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function username()
     {
         return 'username_or_email';
@@ -74,5 +62,17 @@ class LoginController extends Controller
         );
 
         return redirect()->route('admin_login');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+
+        $credentials['ability'] = 'dashboard';
+
+        return $credentials;
     }
 }

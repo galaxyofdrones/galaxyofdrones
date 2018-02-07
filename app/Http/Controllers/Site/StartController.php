@@ -44,7 +44,7 @@ class StartController extends Controller
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
-        if (!$capital || !$user->canOccupy($capital)) {
+        if (! $capital || ! $user->canOccupy($capital)) {
             return back();
         }
 

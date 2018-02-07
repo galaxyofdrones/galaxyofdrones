@@ -52,15 +52,15 @@ class PlanetOccupyCommand extends Command
         /* @var User $user */
         $user = User::find($this->argument('user'));
 
-        if (!$planet) {
+        if (! $planet) {
             $this->error(
                 $this->prependTimestamp("The planet [{$planet->id}] not found.")
             );
-        } elseif (!$user) {
+        } elseif (! $user) {
             $this->error(
                 $this->prependTimestamp("The user [{$user->id}] not found.")
             );
-        } elseif (!$user->canOccupy($planet)) {
+        } elseif (! $user->canOccupy($planet)) {
             $this->error(
                 $this->prependTimestamp("The user [{$user->id}] can not occupy the planet [{$planet->id}].")
             );

@@ -53,7 +53,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('building', function (User $user, Building $building, $type) {
-            return !empty($building) && $building->type == $type;
+            return ! empty($building) && $building->type == $type;
         });
     }
 
