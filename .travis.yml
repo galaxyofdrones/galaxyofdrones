@@ -4,17 +4,27 @@ php:
   - 7.1
 
 cache:
+  yarn: true
   directories:
     - $HOME/.composer/cache/files
+    - $HOME/.php-cs-fixer
 
-before_script:
+before_install:
   - pear config-set preferred_state beta
   - pecl channel-update pecl.php.net
   - yes | pecl install imagick
   - cp .env.example .env
+
+install:
+  - yarn global add jscs
   - travis_retry composer install --no-interaction --no-suggest
+  - travis_retry composer global require friendsofphp/php-cs-fixer
+
+before_script:
   - php artisan key:generate
   - php artisan passport:keys
 
 script:
+  - jscs ./resources/assets/js
+  - vendor/bin/php-cs-fixer fix --dry-run
   - vendor/bin/phpunit
