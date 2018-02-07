@@ -16,7 +16,7 @@ class Util
     {
         $flash = app(FlashManager::class);
 
-        if (!$message) {
+        if (! $message) {
             return $flash;
         }
 
@@ -35,13 +35,13 @@ class Util
     {
         $hash = '';
 
-        if (!empty($email)) {
+        if (! empty($email)) {
             $hash = md5(mb_strtolower($email));
         }
 
         $query = '';
 
-        if (!empty($parameters)) {
+        if (! empty($parameters)) {
             $query = '?'.http_build_query($parameters);
         }
 
@@ -73,7 +73,7 @@ class Util
     {
         $manager = app(SettingManager::class);
 
-        if (!$key) {
+        if (! $key) {
             return $manager;
         }
 

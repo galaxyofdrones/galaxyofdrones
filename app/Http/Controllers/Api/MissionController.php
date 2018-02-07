@@ -52,7 +52,7 @@ class MissionController extends Controller
     {
         $this->authorize('complete', $mission);
 
-        if (!$mission->isCompletable()) {
+        if (! $mission->isCompletable()) {
             throw new BadRequestHttpException();
         }
 

@@ -186,7 +186,8 @@ class Mission extends Model implements TimeableContract
     public function finish()
     {
         $this->user->incrementEnergyAndExperience(
-            $this->energy, $this->experience
+            $this->energy,
+            $this->experience
         );
 
         $userResources = $this->user->resources()

@@ -49,7 +49,7 @@ class KoodilabUserProvider extends EloquentUserProvider
 
         $query = $this->createModel()->newQuery();
 
-        if (!empty($credentials['username_or_email'])) {
+        if (! empty($credentials['username_or_email'])) {
             $query->where(function (Builder $query) use ($credentials) {
                 $query->where('username', $credentials['username_or_email'])
                     ->orWhere('email', $credentials['username_or_email']);
@@ -59,7 +59,7 @@ class KoodilabUserProvider extends EloquentUserProvider
         $query->where('is_enabled', true);
 
         foreach ($credentials as $key => $value) {
-            if (!Str::contains($key, ['username_or_email', 'is_enabled', 'password', 'ability'])) {
+            if (! Str::contains($key, ['username_or_email', 'is_enabled', 'password', 'ability'])) {
                 $query->where($key, $value);
             }
         }
@@ -76,11 +76,11 @@ class KoodilabUserProvider extends EloquentUserProvider
     {
         $plain = $credentials['password'];
 
-        if (!$this->hasher->check($plain, $user->getAuthPassword())) {
+        if (! $this->hasher->check($plain, $user->getAuthPassword())) {
             return false;
         }
 
-        if (!empty($credentials['ability']) && $user->cannot($credentials['ability'])) {
+        if (! empty($credentials['ability']) && $user->cannot($credentials['ability'])) {
             return false;
         }
 

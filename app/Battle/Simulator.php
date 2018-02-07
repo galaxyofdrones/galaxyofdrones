@@ -223,7 +223,7 @@ class Simulator implements SimulatorContract
     {
         $defense = $this->defenderDefense();
 
-        if (!$defense) {
+        if (! $defense) {
             $this->attackerLossRate = 0;
             $this->defenderLossRate = 1;
         } else {
@@ -316,7 +316,7 @@ class Simulator implements SimulatorContract
                     'losses' => $losses,
                 ]);
 
-                if (!empty($losses)) {
+                if (! empty($losses)) {
                     $population->decrementQuantity($losses);
                 }
             }
@@ -334,7 +334,8 @@ class Simulator implements SimulatorContract
 
         if ($total) {
             $capacity = min(
-                $total, round($this->capacity * $this->defenderLossRate)
+                $total,
+                round($this->capacity * $this->defenderLossRate)
             );
 
             foreach ($this->stocks as $stock) {
@@ -343,13 +344,13 @@ class Simulator implements SimulatorContract
                 if ($quantity) {
                     $losses = round($capacity * ($quantity / $total));
 
-                    if (!empty($losses) || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
+                    if (! empty($losses) || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
                         $this->battleLog->resources()->attach($stock->resource_id, [
                             'quantity' => $quantity,
                             'losses' => $losses,
                         ]);
 
-                        if (!empty($losses)) {
+                        if (! empty($losses)) {
                             $stock->decrementQuantity($losses);
                         }
                     }
@@ -369,13 +370,13 @@ class Simulator implements SimulatorContract
             $level = $grid->level;
             $losses = min($damage, $level);
 
-            if (!empty($losses) || $grid->building->type == Building::TYPE_DEFENSIVE || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
+            if (! empty($losses) || $grid->building->type == Building::TYPE_DEFENSIVE || $this->battleLog->type == BattleLog::TYPE_SCOUT) {
                 $this->battleLog->buildings()->attach($grid->building_id, [
                     'level' => $level,
                     'losses' => $losses,
                 ]);
 
-                if (!empty($losses)) {
+                if (! empty($losses)) {
                     $grid->demolishBuilding($losses);
                 }
             }

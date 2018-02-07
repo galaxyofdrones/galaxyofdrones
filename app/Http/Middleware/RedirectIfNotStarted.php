@@ -21,7 +21,7 @@ class RedirectIfNotStarted
         /** @var \Koodilab\Models\User $user */
         $user = Auth::guard($guard)->user();
 
-        if ($user && !$user->isStarted()) {
+        if ($user && ! $user->isStarted()) {
             return $request->expectsJson()
                 ? response()->json(['message' => 'Bad Request.'], 400)
                 : redirect()->route('start');

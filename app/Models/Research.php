@@ -138,7 +138,7 @@ class Research extends Model implements TimeableContract
             ->where('resource_id', $this->researchable_id)
             ->first();
 
-        if (!$userResource) {
+        if (! $userResource) {
             $this->user->resources()->attach($this->researchable_id, [
                 'is_researched' => true,
                 'quantity' => 0,

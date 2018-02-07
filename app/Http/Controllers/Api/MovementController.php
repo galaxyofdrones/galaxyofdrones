@@ -42,13 +42,15 @@ class MovementController extends Controller
             Unit::findByType(Unit::TYPE_SCOUT)
         );
 
-        if (!$population || !$population->hasQuantity($quantity)) {
+        if (! $population || ! $population->hasQuantity($quantity)) {
             throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($planet, $population, $quantity) {
             Movement::createScoutFrom(
-                $planet, $population, $quantity
+                $planet,
+                $population,
+                $quantity
             );
         });
     }
@@ -73,14 +75,16 @@ class MovementController extends Controller
                 ]);
             })
             ->each(function (Population $population) use ($quantities) {
-                if (!$population->hasQuantity($quantities->get($population->unit_id))) {
+                if (! $population->hasQuantity($quantities->get($population->unit_id))) {
                     throw new BadRequestHttpException();
                 }
             });
 
         DB::transaction(function () use ($planet, $populations, $quantities) {
             Movement::createAttackFrom(
-                $planet, $populations, $quantities
+                $planet,
+                $populations,
+                $quantities
             );
         });
     }
@@ -99,7 +103,7 @@ class MovementController extends Controller
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
-        if (!$user->canOccupy($planet)) {
+        if (! $user->canOccupy($planet)) {
             throw new BadRequestHttpException();
         }
 
@@ -107,13 +111,14 @@ class MovementController extends Controller
             Unit::findByType(Unit::TYPE_SETTLER)
         );
 
-        if (!$population || !$population->hasQuantity(Planet::SETTLER_COUNT)) {
+        if (! $population || ! $population->hasQuantity(Planet::SETTLER_COUNT)) {
             throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($planet, $population) {
             Movement::createOccupyFrom(
-                $planet, $population
+                $planet,
+                $population
             );
         });
     }
@@ -133,14 +138,16 @@ class MovementController extends Controller
 
         $populations = auth()->user()->current->findPopulationsByUnitIds($quantities->keys())
             ->each(function (Population $population) use ($quantities) {
-                if (!$population->hasQuantity($quantities->get($population->unit_id))) {
+                if (! $population->hasQuantity($quantities->get($population->unit_id))) {
                     throw new BadRequestHttpException();
                 }
             });
 
         DB::transaction(function () use ($planet, $populations, $quantities) {
             Movement::createSupportFrom(
-                $planet, $populations, $quantities
+                $planet,
+                $populations,
+                $quantities
             );
         });
     }
@@ -169,20 +176,24 @@ class MovementController extends Controller
             $quantities->sum() / $population->unit->capacity
         );
 
-        if (!$population || !$population->hasQuantity($quantity)) {
+        if (! $population || ! $population->hasQuantity($quantity)) {
             throw new BadRequestHttpException();
         }
 
         $stocks = $user->current->findStocksByResourceIds($quantities->keys())
             ->each(function (Stock $stock) use ($quantities, $user) {
-                if (!$stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
+                if (! $stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
                     throw new BadRequestHttpException();
                 }
             });
 
         DB::transaction(function () use ($planet, $population, $stocks, $quantity, $quantities) {
             Movement::createTransportFrom(
-                $planet, $population, $stocks, $quantity, $quantities
+                $planet,
+                $population,
+                $stocks,
+                $quantity,
+                $quantities
             );
         });
     }
@@ -203,7 +214,7 @@ class MovementController extends Controller
         $building = $user->current->findBuildings()
             ->firstWhere('type', Building::TYPE_TRADER);
 
-        if (!$building) {
+        if (! $building) {
             throw new BadRequestHttpException();
         }
 
@@ -215,14 +226,14 @@ class MovementController extends Controller
             $quantities->sum() / $population->unit->capacity
         );
 
-        if (!$population || !$population->hasQuantity($quantity)) {
+        if (! $population || ! $population->hasQuantity($quantity)) {
             throw new BadRequestHttpException();
         }
 
         /** @var Stock[] $stocks */
         $stocks = $user->current->findStocksByResourceIds($quantities->keys())
             ->each(function (Stock $stock) use ($quantities, $user) {
-                if (!$stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
+                if (! $stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
                     throw new BadRequestHttpException();
                 }
             });
@@ -236,7 +247,7 @@ class MovementController extends Controller
 
                     $userResource = $user->resources->firstWhere('id', $stock->resource_id);
 
-                    if (!$userResource) {
+                    if (! $userResource) {
                         $user->resources()->attach($stock->resource_id, [
                             'is_researched' => false,
                             'quantity' => $quantities->get($stock->resource_id),
@@ -253,7 +264,11 @@ class MovementController extends Controller
                 );
             } else {
                 Movement::createTradeFrom(
-                    $building, $population, $stocks, $quantity, $quantities
+                    $building,
+                    $population,
+                    $stocks,
+                    $quantity,
+                    $quantities
                 );
             }
         });

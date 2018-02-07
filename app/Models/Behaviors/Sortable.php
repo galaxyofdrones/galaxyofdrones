@@ -10,7 +10,7 @@ trait Sortable
     public static function bootSortable()
     {
         static::creating(function ($model) {
-            if (!$model->hasSortOrder()) {
+            if (! $model->hasSortOrder()) {
                 $model->setSortOrder();
             }
         });
@@ -80,7 +80,7 @@ trait Sortable
      */
     protected function hasSortOrder()
     {
-        return !empty($this->sortOrderValue());
+        return ! empty($this->sortOrderValue());
     }
 
     /**

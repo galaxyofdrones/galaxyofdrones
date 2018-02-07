@@ -194,7 +194,7 @@ class Generator implements GeneratorContract
             $this->x = (int) ((cos($angle) * $distance + $this->randCoordinateOffset()) * static::SCALE + $center);
             $this->y = (int) ((sin($angle) * $distance + $this->randCoordinateOffset()) * static::SCALE + $center);
 
-            if (!$this->validate()) {
+            if (! $this->validate()) {
                 continue;
             }
 

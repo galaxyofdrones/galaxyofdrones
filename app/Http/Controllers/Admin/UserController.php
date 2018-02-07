@@ -33,7 +33,8 @@ class UserController extends Controller
         $this->authorize('manage', User::class);
 
         return view(
-            'admin.user.index', $provider->viewData()
+            'admin.user.index',
+            $provider->viewData()
         );
     }
 
@@ -63,7 +64,8 @@ class UserController extends Controller
         $user = new User();
 
         return view(
-            'admin.user.form', compact('user')
+            'admin.user.form',
+            compact('user')
         );
     }
 
@@ -101,7 +103,8 @@ class UserController extends Controller
         $this->authorize('edit', $user);
 
         return view(
-            'admin.user.form', compact('user')
+            'admin.user.form',
+            compact('user')
         );
     }
 

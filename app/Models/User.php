@@ -265,7 +265,7 @@ class User extends Authenticatable
      */
     public function setPasswordAttribute($value)
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -277,7 +277,7 @@ class User extends Authenticatable
      */
     public function isStarted()
     {
-        return !empty($this->started_at);
+        return ! empty($this->started_at);
     }
 
     /**

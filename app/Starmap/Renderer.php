@@ -265,7 +265,7 @@ class Renderer implements RendererContract
      */
     protected function texture($filename)
     {
-        if (!array_key_exists($filename, $this->textures)) {
+        if (! array_key_exists($filename, $this->textures)) {
             $this->textures[$filename] = $this->filesystem->exists($filename)
                 ? new Imagick($filename)
                 : null;

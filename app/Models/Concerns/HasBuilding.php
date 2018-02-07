@@ -14,7 +14,7 @@ trait HasBuilding
      */
     public function currentBuilding()
     {
-        if (!$this->building_id) {
+        if (! $this->building_id) {
             return null;
         }
 
@@ -93,7 +93,7 @@ trait HasBuilding
     {
         $building = $this->currentBuilding();
 
-        if (!$building->hasLowerLevel()) {
+        if (! $building->hasLowerLevel()) {
             return null;
         }
 
@@ -113,7 +113,7 @@ trait HasBuilding
     {
         $level = $level ?: $this->level;
 
-        if (empty($level) || !$this->building_id) {
+        if (empty($level) || ! $this->building_id) {
             return;
         }
 
@@ -130,15 +130,16 @@ trait HasBuilding
             : 0;
 
         $this->level = max(
-            $minLevel, $this->level - $level
+            $minLevel,
+            $this->level - $level
         );
 
-        if (!$this->level && $this->building->type == Building::TYPE_CENTRAL) {
+        if (! $this->level && $this->building->type == Building::TYPE_CENTRAL) {
             $this->planet->update([
                 'user_id' => null,
             ]);
         } else {
-            if (!$this->level) {
+            if (! $this->level) {
                 $this->level = null;
                 $this->building_id = null;
             }

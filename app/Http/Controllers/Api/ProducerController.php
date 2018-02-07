@@ -55,13 +55,13 @@ class ProducerController extends Controller
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
-        if (!$user->hasResource($resource)) {
+        if (! $user->hasResource($resource)) {
             throw new BadRequestHttpException();
         }
 
         $stock = $grid->planet->findStock($resource);
 
-        if (!$stock->hasQuantity($quantity)) {
+        if (! $stock->hasQuantity($quantity)) {
             throw new BadRequestHttpException();
         }
 

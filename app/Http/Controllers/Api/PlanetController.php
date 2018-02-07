@@ -74,7 +74,7 @@ class PlanetController extends Controller
      */
     public function updateName(Request $request)
     {
-        if (!$request->has('name')) {
+        if (! $request->has('name')) {
             throw new BadRequestHttpException();
         }
 
@@ -94,7 +94,7 @@ class PlanetController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->building_id) {
+        if (! $grid->building_id) {
             throw new BadRequestHttpException();
         }
 

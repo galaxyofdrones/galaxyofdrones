@@ -284,7 +284,11 @@ class Movement extends Model implements TimeableContract
         ]);
 
         return static::createTransportOrTradeFrom(
-            $movement, $population, $stocks, $quantity, $quantities
+            $movement,
+            $population,
+            $stocks,
+            $quantity,
+            $quantities
         );
     }
 
@@ -317,7 +321,11 @@ class Movement extends Model implements TimeableContract
         ]);
 
         return static::createTransportOrTradeFrom(
-            $movement, $population, $stocks, $quantity, $quantities
+            $movement,
+            $population,
+            $stocks,
+            $quantity,
+            $quantities
         );
     }
 
@@ -493,7 +501,7 @@ class Movement extends Model implements TimeableContract
         $battleLog = app(Simulator::class)->occupy($this);
 
         if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
-            if (!$battleLog->attacker->occupy($battleLog->end)) {
+            if (! $battleLog->attacker->occupy($battleLog->end)) {
                 $this->returnMovement($battleLog->attackerUnits);
             }
         }
@@ -571,7 +579,7 @@ class Movement extends Model implements TimeableContract
         foreach ($this->resources as $resource) {
             $userResource = $this->user->resources->firstWhere('id', $resource->id);
 
-            if (!$userResource) {
+            if (! $userResource) {
                 $this->user->resources()->attach($resource->id, [
                     'is_researched' => false,
                     'quantity' => $resource->pivot->quantity,

@@ -62,11 +62,11 @@ class TrainerController extends Controller
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
-        if (!$user->hasUnit($unit)) {
+        if (! $user->hasUnit($unit)) {
             throw new BadRequestHttpException();
         }
 
-        if (!$user->hasEnergy($quantity * $unit->train_cost)) {
+        if (! $user->hasEnergy($quantity * $unit->train_cost)) {
             throw new BadRequestHttpException();
         }
 
@@ -84,7 +84,9 @@ class TrainerController extends Controller
 
         DB::transaction(function () use ($grid, $unit, $quantity) {
             Training::createFrom(
-                $grid, $unit, $quantity
+                $grid,
+                $unit,
+                $quantity
             );
         });
     }
@@ -100,7 +102,7 @@ class TrainerController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->training) {
+        if (! $grid->training) {
             throw new BadRequestHttpException();
         }
 

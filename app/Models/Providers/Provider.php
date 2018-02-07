@@ -71,7 +71,7 @@ abstract class Provider extends Transformer
      */
     public function hasKeyword()
     {
-        return !empty($this->keyword());
+        return ! empty($this->keyword());
     }
 
     /**
@@ -136,7 +136,8 @@ abstract class Provider extends Transformer
     public function sort()
     {
         return $this->request->query->get(
-            'sort', $this->defaultSort()
+            'sort',
+            $this->defaultSort()
         );
     }
 
@@ -158,7 +159,8 @@ abstract class Provider extends Transformer
     public function direction()
     {
         return $this->request->query->get(
-            'direction', $this->defaultDirection()
+            'direction',
+            $this->defaultDirection()
         );
     }
 
@@ -170,7 +172,8 @@ abstract class Provider extends Transformer
     public function page()
     {
         return max(
-            1, $this->request->query->getInt('page', 1)
+            1,
+            $this->request->query->getInt('page', 1)
         );
     }
 

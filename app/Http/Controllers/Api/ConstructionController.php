@@ -56,17 +56,18 @@ class ConstructionController extends Controller
             ->keyBy('id')
             ->get($building->id);
 
-        if (!$building) {
+        if (! $building) {
             throw new BadRequestHttpException();
         }
 
-        if (!auth()->user()->hasEnergy($building->construction_cost)) {
+        if (! auth()->user()->hasEnergy($building->construction_cost)) {
             throw new BadRequestHttpException();
         }
 
         DB::transaction(function () use ($grid, $building) {
             Construction::createFrom(
-                $grid, $building
+                $grid,
+                $building
             );
         });
     }
@@ -82,7 +83,7 @@ class ConstructionController extends Controller
     {
         $this->authorize('friendly', $grid->planet);
 
-        if (!$grid->construction) {
+        if (! $grid->construction) {
             throw new BadRequestHttpException();
         }
 

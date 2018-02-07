@@ -208,7 +208,7 @@ class Building extends Model implements TranslatableContract
             $constructionTime = $this->applyExpFormula($constructionTime, 3);
         }
 
-        if (!empty($this->modifiers['construction_time_bonus'])) {
+        if (! empty($this->modifiers['construction_time_bonus'])) {
             $constructionTime *= max(0, 1 - $this->modifiers['construction_time_bonus']);
         }
 
@@ -231,7 +231,7 @@ class Building extends Model implements TranslatableContract
                 $defense = $this->applyLinearForumla($defense);
             }
 
-            if (!empty($this->modifiers['defense_bonus'])) {
+            if (! empty($this->modifiers['defense_bonus'])) {
                 $defense *= 1 + $this->modifiers['defense_bonus'];
             }
 
@@ -350,7 +350,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_DEFENSIVE && $defenseBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyLinearForumla($defenseBonus), 2
+                $this->applyLinearForumla($defenseBonus),
+                2
             );
         }
 
@@ -368,7 +369,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_CENTRAL && $constructionTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($constructionTimeBonus), 2
+                $this->applyExpFormula($constructionTimeBonus),
+                2
             );
         }
 
@@ -386,7 +388,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_TRADER && $tradeTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($tradeTimeBonus), 2
+                $this->applyExpFormula($tradeTimeBonus),
+                2
             );
         }
 
@@ -404,7 +407,8 @@ class Building extends Model implements TranslatableContract
 
         if ($this->type == static::TYPE_TRAINER && $trainTimeBonus && $this->hasLowerLevel()) {
             return round(
-                $this->applyExpFormula($trainTimeBonus), 2
+                $this->applyExpFormula($trainTimeBonus),
+                2
             );
         }
 
@@ -416,7 +420,7 @@ class Building extends Model implements TranslatableContract
      */
     protected function validateModifiers(array $modifiers)
     {
-        if (!empty($modifiers['level'])) {
+        if (! empty($modifiers['level'])) {
             return $this->hasLevel($modifiers['level']);
         }
 

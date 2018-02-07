@@ -11,7 +11,7 @@ trait HasLevel
      */
     public function getLevelAttribute()
     {
-        if (!empty($this->modifiers['level'])) {
+        if (! empty($this->modifiers['level'])) {
             return $this->modifiers['level'];
         }
 

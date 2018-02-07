@@ -58,7 +58,7 @@ class ResearchController extends Controller
 
         $resource = $user->findAvailableResource();
 
-        if (!$resource) {
+        if (! $resource) {
             throw new BadRequestHttpException();
         }
 
@@ -66,7 +66,7 @@ class ResearchController extends Controller
             throw new BadRequestHttpException();
         }
 
-        if (!$user->hasEnergy($resource->research_cost)) {
+        if (! $user->hasEnergy($resource->research_cost)) {
             throw new BadRequestHttpException();
         }
 
@@ -89,7 +89,7 @@ class ResearchController extends Controller
 
         $units = $user->findAvailableUnits();
 
-        if (!$units->contains($unit)) {
+        if (! $units->contains($unit)) {
             throw new BadRequestHttpException();
         }
 
@@ -97,7 +97,7 @@ class ResearchController extends Controller
             throw new BadRequestHttpException();
         }
 
-        if (!$user->hasEnergy($unit->research_cost)) {
+        if (! $user->hasEnergy($unit->research_cost)) {
             throw new BadRequestHttpException();
         }
 
@@ -118,13 +118,13 @@ class ResearchController extends Controller
 
         $resource = $user->findAvailableResource();
 
-        if (!$resource) {
+        if (! $resource) {
             throw new BadRequestHttpException();
         }
 
         $research = $resource->findResearchByUser($user);
 
-        if (!$research) {
+        if (! $research) {
             throw new BadRequestHttpException();
         }
 
@@ -146,7 +146,7 @@ class ResearchController extends Controller
             auth()->user()
         );
 
-        if (!$research) {
+        if (! $research) {
             throw new BadRequestHttpException();
         }
 

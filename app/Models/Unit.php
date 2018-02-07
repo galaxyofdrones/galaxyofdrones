@@ -150,7 +150,7 @@ class Unit extends Model
     {
         $trainTime = $this->attributes['train_time'];
 
-        if (!empty($this->modifiers['train_time_bonus'])) {
+        if (! empty($this->modifiers['train_time_bonus'])) {
             $trainTime *= max(0, 1 - $this->modifiers['train_time_bonus']);
         }
 
@@ -168,7 +168,7 @@ class Unit extends Model
     {
         $defense = $this->attributes['defense'];
 
-        if ($defense && !empty($this->modifiers['defense_bonus'])) {
+        if ($defense && ! empty($this->modifiers['defense_bonus'])) {
             return round(
                 $defense * (1 + $this->modifiers['defense_bonus'])
             );

@@ -75,7 +75,7 @@ class UserController extends Controller
      */
     public function show(User $user, UserShowTransformer $transformer)
     {
-        if (!$user->isStarted()) {
+        if (! $user->isStarted()) {
             throw new BadRequestHttpException();
         }
 
@@ -110,7 +110,7 @@ class UserController extends Controller
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
-        if (!$user->isCapitalChangeable()) {
+        if (! $user->isCapitalChangeable()) {
             throw new BadRequestHttpException();
         }
 

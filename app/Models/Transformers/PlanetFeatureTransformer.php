@@ -58,7 +58,7 @@ class PlanetFeatureTransformer extends Transformer
      */
     protected function status(Planet $planet)
     {
-        if (!$planet->user_id) {
+        if (! $planet->user_id) {
             return 'free';
         }
 

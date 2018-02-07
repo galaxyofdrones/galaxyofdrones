@@ -27,7 +27,8 @@ class UserProvider extends Provider
     public function query()
     {
         $query = User::orderBy(
-            $this->sort(), $this->direction()
+            $this->sort(),
+            $this->direction()
         );
 
         if ($this->hasKeyword()) {

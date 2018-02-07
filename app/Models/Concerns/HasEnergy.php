@@ -15,7 +15,7 @@ trait HasEnergy
     {
         $energy = 0;
 
-        if (!empty($this->attributes['energy'])) {
+        if (! empty($this->attributes['energy'])) {
             $energy = $this->attributes['energy'];
         }
 
