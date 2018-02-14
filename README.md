@@ -2,8 +2,8 @@
 
 An open source multiplayer space strategy game.
 
-[![Build Status](https://travis-ci.org/koodilab/galaxyofdrones-online.svg?branch=master)](https://travis-ci.org/koodilab/galaxyofdrones-online)
-[![GitHub release](https://img.shields.io/github/release/koodilab/galaxyofdrones-online.svg)](https://github.com/koodilab/galaxyofdrones-online/releases)
+[![Build Status](https://travis-ci.org/galaxyofdrones/galaxyofdrones.svg?branch=master)](https://travis-ci.org/galaxyofdrones/galaxyofdrones)
+[![GitHub release](https://img.shields.io/github/release/galaxyofdrones/galaxyofdrones.svg)](https://github.com/galaxyofdrones/galaxyofdrones/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 ![Screenshot](public/images/screenshot.png)
@@ -16,7 +16,7 @@ The game story takes place in a virtual galaxy where randomly generated planets 
 
 ## Documentation
 
-The initial documentation is available [on GitHub](https://github.com/koodilab/galaxyofdrones-online/tree/master/docs).
+The initial documentation is available [on GitHub](https://github.com/galaxyofdrones/docs).
 
 ## Security
 
