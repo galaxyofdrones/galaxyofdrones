@@ -3,7 +3,7 @@
 1. Clone the repositroy
 
     ```
-    git clone git@github.com:koodilab/galaxyofdrones-online.git
+    git clone git@github.com:galaxyofdrones/galaxyofdrones.git
     ```
 
 2. Configure the database and redis connection
