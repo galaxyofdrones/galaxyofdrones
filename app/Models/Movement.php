@@ -475,10 +475,14 @@ class Movement extends Model implements TimeableContract
      */
     protected function finishScout()
     {
-        /** @var BattleLog $battleLog */
-        $battleLog = app(Simulator::class)->scout($this);
+        if ($this->user_id == $this->end->user_id) {
+            $this->returnMovement();
+        } else {
+            /** @var BattleLog $battleLog */
+            $battleLog = app(Simulator::class)->scout($this);
 
-        $this->returnMovement($battleLog->attackerUnits);
+            $this->returnMovement($battleLog->attackerUnits);
+        }
     }
 
     /**
@@ -486,10 +490,14 @@ class Movement extends Model implements TimeableContract
      */
     protected function finishAttack()
     {
-        /** @var BattleLog $battleLog */
-        $battleLog = app(Simulator::class)->attack($this);
+        if ($this->user_id == $this->end->user_id) {
+            $this->returnMovement();
+        } else {
+            /** @var BattleLog $battleLog */
+            $battleLog = app(Simulator::class)->attack($this);
 
-        $this->returnMovement($battleLog->attackerUnits, $battleLog->resources);
+            $this->returnMovement($battleLog->attackerUnits, $battleLog->resources);
+        }
     }
 
     /**
@@ -497,12 +505,16 @@ class Movement extends Model implements TimeableContract
      */
     protected function finishOccupy()
     {
-        /** @var BattleLog $battleLog */
-        $battleLog = app(Simulator::class)->occupy($this);
+        if ($this->user_id == $this->end->user_id) {
+            $this->returnMovement();
+        } else {
+            /** @var BattleLog $battleLog */
+            $battleLog = app(Simulator::class)->occupy($this);
 
-        if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
-            if (! $battleLog->attacker->occupy($battleLog->end)) {
-                $this->returnMovement($battleLog->attackerUnits);
+            if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
+                if (! $battleLog->attacker->occupy($battleLog->end)) {
+                    $this->returnMovement($battleLog->attackerUnits);
+                }
             }
         }
     }
