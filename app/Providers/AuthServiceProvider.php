@@ -34,16 +34,6 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->registerPolicies();
 
-        Gate::before(function (User $user) {
-            if ($user->isSuperAdmin()) {
-                return true;
-            }
-        });
-
-        Gate::define('dashboard', function (User $user) {
-            return $user->canUseDashboard();
-        });
-
         Gate::define('friendly', function (User $user, Planet $planet) {
             return $user->id == $planet->user_id;
         });

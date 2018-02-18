@@ -2,7 +2,6 @@
 
 return [
 
-    'admin' => 'Admin',
     'cancel' => 'Cancel',
     'create' => 'Create',
     'delete' => 'Delete',
@@ -29,7 +28,6 @@ return [
     'search' => 'Search',
     'starmap' => 'Starmap',
     'start' => 'Start',
-    'super_admin' => 'Super admin',
     'transmute' => 'Transmute',
     'trophy' => 'Trophy',
     'yes' => 'Yes',
