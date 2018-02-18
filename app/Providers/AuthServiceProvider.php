@@ -20,7 +20,6 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Bookmark::class => \Koodilab\Policies\BookmarkPolicy::class,
         Mission::class => \Koodilab\Policies\MissionPolicy::class,
-        User::class => \Koodilab\Policies\UserPolicy::class,
     ];
 
     /**
