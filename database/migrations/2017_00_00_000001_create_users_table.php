@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_enabled');
-            $table->integer('role')->unsigned();
             $table->bigInteger('energy')->unsigned();
             $table->bigInteger('experience')->unsigned();
             $table->bigInteger('production_rate')->unsigned();

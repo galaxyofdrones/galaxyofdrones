@@ -1,0 +1,26 @@
+<producer :type="{{ constant('Koodilab\\Models\\Building::TYPE_PRODUCER') }}"
+           :building="building"
+           :grid="grid"
+           url="{{ route('api_producer', '__grid__') }}"
+           store-url="{{ route('api_producer_store', ['__grid__', '__resource__']) }}" inline-template>
+    <div v-if="isEnabled" class="producer">
+        <div class="modal-body separator">
+            <div class="tab-content" v-if="data.resources.length">
+                <div v-for="resource in data.resources" class="tab-pane" :class="{active: isSelected(resource)}">
+                    {% include 'partials.resource' %}
+                </div>
+            </div>
+        </div>
+        <div class="modal-body separator">
+            <ul class="nav nav-pills">
+                <li v-for="resource in data.resources" :class="{active: isSelected(resource)}">
+                    <a href="#" @click.prevent="select(resource)">
+                        <span class="item item-sm" :class="resource | item('resource')">
+                            {{ vue('resource.name') }}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</producer>

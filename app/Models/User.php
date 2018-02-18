@@ -21,7 +21,6 @@ use Laravel\Passport\HasApiTokens;
  * @property string                                                                                                    $password
  * @property string|null                                                                                               $remember_token
  * @property bool                                                                                                      $is_enabled
- * @property int                                                                                                       $role
  * @property int                                                                                                       $energy
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
@@ -67,7 +66,6 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProductionRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
@@ -104,27 +102,6 @@ class User extends Authenticatable
         Relations\HasManyMissionLog;
 
     /**
-     * The user role.
-     *
-     * @var int
-     */
-    const ROLE_USER = 0;
-
-    /**
-     * The administrator role.
-     *
-     * @var int
-     */
-    const ROLE_ADMIN = 1;
-
-    /**
-     * The super admin role.
-     *
-     * @var int
-     */
-    const ROLE_SUPER_ADMIN = 2;
-
-    /**
      * {@inheritdoc}
      */
     protected $perPage = 30;
@@ -134,7 +111,6 @@ class User extends Authenticatable
      */
     protected $attributes = [
         'is_enabled' => true,
-        'role' => self::ROLE_USER,
         'energy' => 1000,
         'experience' => 0,
         'production_rate' => 0,
@@ -167,44 +143,6 @@ class User extends Authenticatable
     protected $casts = [
         'is_enabled' => 'bool',
     ];
-
-    /**
-     * Get the role options.
-     *
-     * @return array
-     */
-    public static function roleOptions()
-    {
-        return [
-            static::ROLE_USER => 'messages.user.singular',
-            static::ROLE_ADMIN => 'messages.admin',
-            static::ROLE_SUPER_ADMIN => 'messages.super_admin',
-        ];
-    }
-
-    /**
-     * Get the dashboard roles.
-     *
-     * @return array
-     */
-    public static function dashboardRoles()
-    {
-        return [
-            static::ROLE_ADMIN, static::ROLE_SUPER_ADMIN,
-        ];
-    }
-
-    /**
-     * Dashboard scope.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
-     */
-    public function scopeDashboard(Builder $query)
-    {
-        return $query->whereIn('role', static::dashboardRoles());
-    }
 
     /**
      * Get the capital.
@@ -278,48 +216,6 @@ class User extends Authenticatable
     public function isStarted()
     {
         return ! empty($this->started_at);
-    }
-
-    /**
-     * Is admin?
-     *
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return $this->role == static::ROLE_ADMIN;
-    }
-
-    /**
-     * Is super admin?
-     *
-     * @return bool
-     */
-    public function isSuperAdmin()
-    {
-        return $this->role == static::ROLE_SUPER_ADMIN;
-    }
-
-    /**
-     * Can give this role?
-     *
-     * @param string $role
-     *
-     * @return bool
-     */
-    public function canGiveRole($role)
-    {
-        return $this->role >= $role;
-    }
-
-    /**
-     * Can use dashboard?
-     *
-     * @return bool
-     */
-    public function canUseDashboard()
-    {
-        return in_array($this->role, static::dashboardRoles());
     }
 
     /**

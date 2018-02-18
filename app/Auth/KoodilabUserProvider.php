@@ -3,7 +3,6 @@
 namespace Koodilab\Auth;
 
 use Illuminate\Auth\EloquentUserProvider;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -59,31 +58,11 @@ class KoodilabUserProvider extends EloquentUserProvider
         $query->where('is_enabled', true);
 
         foreach ($credentials as $key => $value) {
-            if (! Str::contains($key, ['username_or_email', 'is_enabled', 'password', 'ability'])) {
+            if (! Str::contains($key, ['username_or_email', 'is_enabled', 'password'])) {
                 $query->where($key, $value);
             }
         }
 
         return $query->first();
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param \Koodilab\Models\User $user
-     */
-    public function validateCredentials(Authenticatable $user, array $credentials)
-    {
-        $plain = $credentials['password'];
-
-        if (! $this->hasher->check($plain, $user->getAuthPassword())) {
-            return false;
-        }
-
-        if (! empty($credentials['ability']) && $user->cannot($credentials['ability'])) {
-            return false;
-        }
-
-        return true;
     }
 }

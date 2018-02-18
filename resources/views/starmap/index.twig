@@ -1,0 +1,21 @@
+{% extends 'layouts.stage' %}
+
+{% set subtitle = trans('messages.starmap') %}
+
+{% block content %}
+    <starmap size="{{ constant('Koodilab\\Starmap\\Generator::SIZE') }}"
+             max-zoom="{{ constant('Koodilab\\Starmap\\Renderer::MAX_ZOOM_LEVEL') }}"
+             geo-json-url="{{ route('api_starmap_geo_json', ['__zoom__', '__bounds__']) }}"
+             tile-url="{{ asset('tile/{z}/{x}/{y}.png') }}"
+             image-path="{{ asset('images') }}"
+             zoom-in-title="{{ trans('messages.zoom_in') }}"
+             zoom-out-title="{{ trans('messages.zoom_out') }}"
+             bookmark-title="{{ trans('messages.bookmark.plural') }}" inline-template>
+        <div class="starmap"></div>
+    </starmap>
+
+    {% include 'starmap.bookmark' %}
+    {% include 'starmap.move' %}
+    {% include 'starmap.planet' %}
+    {% include 'starmap.star' %}
+{% endblock %}

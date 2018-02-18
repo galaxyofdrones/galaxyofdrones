@@ -14,7 +14,6 @@ class UsersTableSeeder extends Seeder
             'username' => 'koodilab',
             'email' => 'support@koodilab.com',
             'password' => 'havefun',
-            'role' => User::ROLE_SUPER_ADMIN,
         ]);
     }
 }

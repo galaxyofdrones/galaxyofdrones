@@ -156,7 +156,6 @@ return [
         'research_cost' => 'Research cost',
         'research_experience' => 'Experience',
         'research_time' => 'Research time',
-        'role' => 'Role',
         'speed' => 'Speed',
         'supply' => 'Supply',
         'title' => 'Title',

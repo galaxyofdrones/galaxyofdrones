@@ -1,0 +1,14 @@
+{% extends 'layouts.stage' %}
+
+{% block content %}
+    <surface width="1920"
+             height="1080"
+             background-texture="{{ asset('images/planet-__resource__-bg.png') }}"
+             grid-texture-atlas="{{ asset('images/sprite-grid.png') }}" inline-template>
+        <canvas class="surface"></canvas>
+    </surface>
+
+    {% include 'surface.construction' %}
+    {% include 'surface.upgrade' %}
+    {% include 'surface.demolish' %}
+{% endblock %}

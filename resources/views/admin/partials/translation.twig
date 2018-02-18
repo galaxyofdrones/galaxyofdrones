@@ -1,9 +1,0 @@
-<ul class="nav nav-pills">
-    {% for translation in config('app.locales', []) %}
-        <li class="{{ translation == current ? 'active' }}">
-            <a href="{{ change_url|replace({'__translation__': translation}) }}">
-                {{ translation }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
