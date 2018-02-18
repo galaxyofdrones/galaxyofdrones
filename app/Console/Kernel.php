@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('mission:generate')->cron('0 */6 * * * *');
+        $schedule->command('mission:generate')->cron('0 */6 * * *');
     }
 
     /**
