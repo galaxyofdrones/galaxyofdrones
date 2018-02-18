@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Koodilab\Events\UserUpdated;
