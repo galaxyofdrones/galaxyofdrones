@@ -99,11 +99,7 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-    ],
+    'custom' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -139,10 +135,7 @@ return [
         'energy' => 'Energy',
         'experience' => 'Experience',
         'frequency' => 'Frequency',
-        'generated_password' => 'Generated password',
         'incoming' => 'Incoming',
-        'is_enabled' => 'Is enabled',
-        'last_login' => 'Last login',
         'level' => 'Level',
         'losing_battles' => 'Losing battles',
         'mining_rate' => 'Mining rate',

@@ -3,34 +3,23 @@
 return [
 
     'cancel' => 'Cancel',
-    'create' => 'Create',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
-    'edit' => 'Edit',
     'energy' => 'Energy',
-    'failed_job' => 'Failed job',
     'free' => 'Free',
-    'generate' => 'Generate',
-    'home' => 'Home',
     'info' => 'Info',
     'instant' => 'Instant',
     'laboratory' => 'Laboratory',
     'mailbox' => 'Mailbox',
     'mission_control' => 'Mission control',
     'move' => 'Move',
-    'no' => 'No',
-    'no_items' => 'No items.',
     'owner' => 'Owner',
-    'overview' => 'Overview',
-    'refresh' => 'Refresh',
     'required_quantity' => 'Required quantity',
     'save' => 'Save',
-    'search' => 'Search',
     'starmap' => 'Starmap',
     'start' => 'Start',
     'transmute' => 'Transmute',
     'trophy' => 'Trophy',
-    'yes' => 'Yes',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 
@@ -40,7 +29,6 @@ return [
         'email' => 'Send Password Reset Link',
         'forgot' => 'Forgot your password?',
         'login' => 'Login',
-        'logout' => 'Logout',
         'register' => 'Register',
         'reset' => 'Reset Password',
     ],
@@ -75,10 +63,6 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
-    'help' => [
-        'username' => 'English alphabet, numbers, dot, dash and underscore.',
-    ],
-
     'mission' => [
         'complete' => 'Complete',
         'empty' => 'No missions.',
@@ -100,7 +84,6 @@ return [
         'empty' => 'No movements.',
         'occupy' => 'Occupy',
         'scout' => 'Scout',
-        'singular' => 'Movement',
         'support' => 'Support',
         'transport' => 'Transport',
     ],
@@ -110,7 +93,6 @@ return [
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
         'jump' => 'Jump to surface',
-        'singular' => 'Planet',
     ],
 
     'profile' => [
@@ -128,29 +110,16 @@ return [
         'plural' => 'Resources',
     ],
 
-    'result' => [
-        'show' => 'Results:',
-        'total' => 'Total:',
-    ],
-
     'setting' => [
-        'edit' => 'Edit settings',
         'plural' => 'Settings',
     ],
 
-    'star' => [
-        'singular' => 'Star',
-    ],
-
     'success' => [
-        'create' => 'Created successfully.',
         'logout' => 'Logout successful.',
         'singular' => 'Success',
-        'update' => 'Updated successfully.',
     ],
 
     'training' => [
-        'singular' => 'Training',
         'train' => 'Train',
     ],
 
@@ -163,17 +132,12 @@ return [
     ],
 
     'user' => [
-        'create' => 'New user',
-        'edit' => 'Edit user',
         'empty' => 'No users.',
         'joined' => 'Joined the battle :datetime.',
-        'plural' => 'Users',
-        'singular' => 'User',
         'username_with_level' => ':username (Level :level)',
     ],
 
     'warning' => [
-        'delete_selected' => 'Are you sure you want to delete the selected items?',
         'demolish_building' => 'Are you sure you want to demolish the selected building?',
         'lose_planet' => 'If it is the Command Center, you will lose the planet.',
         'server' => 'Sorry, the server is full :(',
