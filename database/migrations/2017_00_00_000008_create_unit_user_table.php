@@ -12,6 +12,8 @@ class CreateUnitUserTable extends Migration
     public function up()
     {
         Schema::create('unit_user', function (Blueprint $table) {
+            $table->increments('id');
+
             $table->integer('unit_id')->unsigned();
             $table->foreign('unit_id')
                 ->references('id')
@@ -24,7 +26,11 @@ class CreateUnitUserTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->primary(['unit_id', 'user_id']);
+            $table->boolean('is_researched');
+            $table->integer('quantity')->unsigned();
+            $table->timestamps();
+
+            $table->unique(['unit_id', 'user_id']);
         });
     }
 

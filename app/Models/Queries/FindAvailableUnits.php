@@ -15,7 +15,9 @@ trait FindAvailableUnits
      */
     public function findAvailableUnits($columns = ['*'])
     {
-        $except = $this->units()->pluck('id');
+        $except = $this->units()
+            ->where('is_researched', true)
+            ->pluck('unit_id');
 
         return Unit::whereNotIn('id', $except)
             ->orderBy('sort_order')

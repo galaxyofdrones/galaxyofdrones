@@ -62,9 +62,10 @@ class StartController extends Controller
                 'quantity' => 0,
             ]);
 
-            $user->units()->sync(
-                Unit::where('is_unlocked', true)->pluck('id')
-            );
+            $user->units()->attach(Unit::where('is_unlocked', true)->pluck('id'), [
+                'is_researched' => true,
+                'quantity' => 0,
+            ]);
         });
 
         return redirect()->route('home');

@@ -50,7 +50,6 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
  * @property \Illuminate\Database\Eloquent\Collection|Unit[]                                                           $units
  *
- * @method static \Illuminate\Database\Eloquent\Builder|User dashboard()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentId($value)
@@ -92,7 +91,6 @@ class User extends Authenticatable
         Queries\PaginateAllStartedOrderByExperience,
         Queries\PaginateBattleLogs,
         Queries\PaginateMissionLogs,
-        Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
         Relations\HasManyMovement,
@@ -191,6 +189,18 @@ class User extends Authenticatable
     public function resources()
     {
         return $this->belongsToMany(Resource::class)
+            ->withPivot('is_researched', 'quantity')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the units.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class)
             ->withPivot('is_researched', 'quantity')
             ->withTimestamps();
     }

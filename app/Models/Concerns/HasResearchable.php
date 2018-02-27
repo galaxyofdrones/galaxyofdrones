@@ -32,6 +32,7 @@ trait HasResearchable
     public function hasUnit(Unit $unit)
     {
         return $this->units()
+            ->where('is_researched', true)
             ->where('unit_id', $unit->id)
             ->exists();
     }
