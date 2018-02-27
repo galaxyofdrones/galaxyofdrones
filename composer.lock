@@ -800,16 +800,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.6.5",
+            "version": "v5.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2e68209991e15aca1382ef9a3443d13f2e0d8755"
+                "reference": "d9bf9d0e103ec536e6c459f3f5400bf6b132bb2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2e68209991e15aca1382ef9a3443d13f2e0d8755",
-                "reference": "2e68209991e15aca1382ef9a3443d13f2e0d8755",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d9bf9d0e103ec536e6c459f3f5400bf6b132bb2f",
+                "reference": "d9bf9d0e103ec536e6c459f3f5400bf6b132bb2f",
                 "shasum": ""
             },
             "require": {
@@ -931,7 +931,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-02-22T19:21:38+00:00"
+            "time": "2018-02-27T14:02:09+00:00"
         },
         {
             "name": "laravel/passport",
@@ -3200,16 +3200,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "ed6ce7e2105c400ca10277643a8327957c0384b7"
+                "reference": "bf26aff803a11c5cc8eb7c4878a702c403ec67f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/ed6ce7e2105c400ca10277643a8327957c0384b7",
-                "reference": "ed6ce7e2105c400ca10277643a8327957c0384b7",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/bf26aff803a11c5cc8eb7c4878a702c403ec67f1",
+                "reference": "bf26aff803a11c5cc8eb7c4878a702c403ec67f1",
                 "shasum": ""
             },
             "require": {
@@ -3248,7 +3248,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2018-01-04T18:21:48+00:00"
+            "time": "2018-02-26T15:44:50+00:00"
         }
     ],
     "packages-dev": [
@@ -3944,16 +3944,16 @@
         },
         {
             "name": "itsgoingd/clockwork",
-            "version": "v2.0.4",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itsgoingd/clockwork.git",
-                "reference": "2f3eb28da288d82d21fa4638f8b2296f06b79017"
+                "reference": "badad80006dca2d2e07b0953c2abb24579b9a5dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/2f3eb28da288d82d21fa4638f8b2296f06b79017",
-                "reference": "2f3eb28da288d82d21fa4638f8b2296f06b79017",
+                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/badad80006dca2d2e07b0953c2abb24579b9a5dc",
+                "reference": "badad80006dca2d2e07b0953c2abb24579b9a5dc",
                 "shasum": ""
             },
             "require": {
@@ -3998,7 +3998,7 @@
                 "profiling",
                 "slim"
             ],
-            "time": "2017-12-12T20:30:32+00:00"
+            "time": "2018-02-26T11:26:21+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -4739,16 +4739,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.0.1",
+            "version": "7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "316555dbd0ed4097bbdd17c65ab416bf27a472e9"
+                "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/316555dbd0ed4097bbdd17c65ab416bf27a472e9",
-                "reference": "316555dbd0ed4097bbdd17c65ab416bf27a472e9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
+                "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
                 "shasum": ""
             },
             "require": {
@@ -4815,7 +4815,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-02-13T06:08:08+00:00"
+            "time": "2018-02-26T07:03:12+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
