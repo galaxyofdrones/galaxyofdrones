@@ -52,6 +52,11 @@
                                 {{ trans('messages.mission_control') }}
                             </a>
                         </li>
+                        <li :class="{active: isArmorySelected}">
+                            <a href="#" @click.prevent="selectArmory()">
+                                {{ trans('messages.armory') }}
+                            </a>
+                        </li>
                         <li :class="{active: isLaboratorySelected}">
                             <a href="#" @click.prevent="selectLaboratory()">
                                 {{ trans('messages.laboratory') }}
@@ -61,6 +66,7 @@
                 </div>
 
                 {% include 'partials.mission-control' %}
+                {% include 'partials.armory' %}
                 {% include 'partials.laboratory' %}
             </div>
         </div>

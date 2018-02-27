@@ -2,6 +2,7 @@
 
 return [
 
+    'armory' => 'Armory',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
@@ -112,6 +113,10 @@ return [
 
     'setting' => [
         'plural' => 'Settings',
+    ],
+
+    'slot' => [
+        'empty' => 'No training slots.'
     ],
 
     'success' => [

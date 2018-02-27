@@ -122,6 +122,13 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'armory',
+    ], function () use ($router) {
+        $router->get('/', 'ArmoryController@index')
+            ->name('armory');
+    });
+
+    $router->group([
         'prefix' => 'movement',
     ], function () use ($router) {
         $router->post('scout/{planet}', 'MovementController@storeScout')

@@ -1,4 +1,5 @@
 import { EventBus } from './event-bus';
+import Armory from './Armory';
 import Laboratory from './Laboratory';
 import MissionControl from './MissionControl';
 import Modal from './Modal';
@@ -7,7 +8,7 @@ export default Modal.extend({
     props: ['url', 'storeUrl'],
 
     components: {
-        Laboratory, MissionControl
+        Armory, Laboratory, MissionControl
     },
 
     data() {
@@ -33,6 +34,10 @@ export default Modal.extend({
             return this.selectedTab === 'mission-control';
         },
 
+        isArmorySelected() {
+            return this.selectedTab === 'armory';
+        },
+
         isLaboratorySelected() {
             return this.selectedTab === 'laboratory';
         },
@@ -49,6 +54,10 @@ export default Modal.extend({
 
         selectMissionControl() {
             this.selectedTab = 'mission-control';
+        },
+
+        selectArmory() {
+            this.selectedTab = 'armory';
         },
 
         selectLaboratory() {
