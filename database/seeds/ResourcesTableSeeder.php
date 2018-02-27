@@ -105,5 +105,19 @@ class ResourcesTableSeeder extends Seeder
             'research_cost' => 367375,
             'research_time' => 244916,
         ]);
+
+        Resource::create([
+            'name' => [
+                'en' => 'Solarion',
+            ],
+            'frequency' => 0,
+            'efficiency' => 3.9,
+            'description' => [
+                'en' => 'Finds on stars.',
+            ],
+            'research_experience' => 367375,
+            'research_cost' => 734750,
+            'research_time' => 489832,
+        ]);
     }
 }
