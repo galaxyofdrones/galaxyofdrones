@@ -3,13 +3,15 @@
         <div class="player-info" v-cloak>
             <div class="player-left">
                 <a href="#" @click.prevent="openUser()">
-                    <img class="player-avatar" :src="data.gravatar" :alt="data.username">
+                    <img class="player-avatar"
+                         :src="data.gravatar"
+                         :alt="data.username">
                 </a>
                 <div class="player-level"
                      data-content="{{ trans('validation.attributes.level') }}"
                      v-popover="{placement: 'left', trigger: 'hover'}">
                     <i class="icon-star"></i>
-                    {{ vue('data.level') }}
+                    {{ vue('data.level | number') }}
                 </div>
             </div>
             <div class="player-right">

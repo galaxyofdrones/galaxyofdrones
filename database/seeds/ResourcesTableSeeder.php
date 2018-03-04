@@ -18,7 +18,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 1.0,
             'efficiency' => 1.05,
             'description' => [
-                'en' => 'Finds on marsh planets.',
+                'en' => 'Found on the marsh planets.',
             ],
         ]);
 
@@ -29,7 +29,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 0.9,
             'efficiency' => 1.1,
             'description' => [
-                'en' => 'Finds on sea planets.',
+                'en' => 'Found on the sea planets.',
             ],
             'research_experience' => 10875,
             'research_cost' => 21750,
@@ -43,7 +43,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 0.8,
             'efficiency' => 1.2,
             'description' => [
-                'en' => 'Finds on desert planets.',
+                'en' => 'Found on the desert planets.',
             ],
             'research_experience' => 21000,
             'research_cost' => 42000,
@@ -57,7 +57,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 0.5,
             'efficiency' => 1.5,
             'description' => [
-                'en' => 'Finds on asteroids.',
+                'en' => 'Found on the asteroids.',
             ],
             'research_experience' => 41375,
             'research_cost' => 82750,
@@ -71,7 +71,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 0.4,
             'efficiency' => 1.6,
             'description' => [
-                'en' => 'Finds on volcanic planets.',
+                'en' => 'Found on the volcanic planets.',
             ],
             'research_experience' => 72500,
             'research_cost' => 145000,
@@ -85,7 +85,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 0.2,
             'efficiency' => 1.8,
             'description' => [
-                'en' => 'Finds on ice planets.',
+                'en' => 'Found on the ice planets.',
             ],
             'research_experience' => 119250,
             'research_cost' => 238500,
@@ -99,7 +99,7 @@ class ResourcesTableSeeder extends Seeder
             'frequency' => 0.05,
             'efficiency' => 1.95,
             'description' => [
-                'en' => 'Finds on extreme planets.',
+                'en' => 'Found on the extreme planets.',
             ],
             'research_experience' => 183687,
             'research_cost' => 367375,

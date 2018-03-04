@@ -17,7 +17,15 @@ class StateManager
      */
     public function syncPlanet(Planet $planet)
     {
-        $planet->createOrUpdateStock();
+        /** @var \Koodilab\Models\Stock $stock */
+        $stock = $planet->stocks()->firstOrNew([
+            'resource_id' => $planet->resource_id,
+        ]);
+
+        $stock->setRelation('planet', $planet)->fill([
+            'quantity' => max(0, $stock->quantity),
+            'last_quantity_changed' => Carbon::now(),
+        ])->save();
 
         $attributes = (new Collection($planet->attributesToArray()))->only([
             'capacity', 'supply', 'mining_rate', 'production_rate', 'defense_bonus', 'construction_time_bonus',

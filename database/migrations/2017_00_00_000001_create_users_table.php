@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->boolean('is_enabled');
             $table->bigInteger('energy')->unsigned();
+            $table->bigInteger('solarion')->unsigned();
             $table->bigInteger('experience')->unsigned();
             $table->bigInteger('production_rate')->unsigned();
             $table->timestamp('last_login')->nullable();

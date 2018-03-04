@@ -2,6 +2,8 @@
 
 return [
 
+    'armory' => 'Armory',
+    'cargo' => 'Cargo',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
@@ -11,7 +13,6 @@ return [
     'instant' => 'Instant',
     'laboratory' => 'Laboratory',
     'mailbox' => 'Mailbox',
-    'mission_control' => 'Mission control',
     'move' => 'Move',
     'owner' => 'Owner',
     'required_quantity' => 'Required quantity',
@@ -63,6 +64,10 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
+    'expedition' => [
+        'empty' => 'No expeditions.'
+    ],
+
     'mission' => [
         'complete' => 'Complete',
         'empty' => 'No missions.',
@@ -112,6 +117,11 @@ return [
 
     'setting' => [
         'plural' => 'Settings',
+    ],
+
+    'solarion' => [
+        'name' => 'Solarion',
+        'description' => 'Found on the stars.',
     ],
 
     'success' => [

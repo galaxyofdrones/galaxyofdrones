@@ -45,6 +45,8 @@ class Movement extends Model implements TimeableContract
     use Behaviors\Timeable,
         Queries\FindResourcesOrderBySortOrder,
         Queries\FindUnitsOrderBySortOrder,
+        Relations\BelongsToEnd,
+        Relations\BelongsToStart,
         Relations\BelongsToUser;
 
     /**
@@ -327,26 +329,6 @@ class Movement extends Model implements TimeableContract
             $quantity,
             $quantities
         );
-    }
-
-    /**
-     * Get the start.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function start()
-    {
-        return $this->belongsTo(Planet::class, 'start_id');
-    }
-
-    /**
-     * Get the end.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function end()
-    {
-        return $this->belongsTo(Planet::class, 'end_id');
     }
 
     /**

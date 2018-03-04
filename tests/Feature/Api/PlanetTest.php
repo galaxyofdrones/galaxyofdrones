@@ -68,6 +68,7 @@ class PlanetTest extends TestCase
                 'y',
                 'capacity',
                 'supply',
+                'solarion',
                 'mining_rate',
                 'production_rate',
                 'incoming_movement',

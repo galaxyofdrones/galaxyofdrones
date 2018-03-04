@@ -88,10 +88,15 @@ class Training extends Model implements TimeableContract
      */
     public function finish()
     {
-        $this->grid->planet->createOrUpdatePopulation(
-            $this->unit,
-            $this->quantity
-        );
+        /** @var Population $population */
+        $population = $this->grid->planet->populations()->firstOrNew([
+            'unit_id' => $this->unit->id,
+        ]);
+
+        $population->setRelations([
+            'planet' => $this->grid->planet,
+            'unit' => $this->unit,
+        ])->incrementQuantity($this->quantity);
 
         $this->delete();
 

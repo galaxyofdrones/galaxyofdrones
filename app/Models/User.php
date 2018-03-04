@@ -21,6 +21,7 @@ use Laravel\Passport\HasApiTokens;
  * @property string|null                                                                                               $remember_token
  * @property bool                                                                                                      $is_enabled
  * @property int                                                                                                       $energy
+ * @property int                                                                                                       $solarion
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
  * @property \Carbon\Carbon|null                                                                                       $last_login
@@ -50,7 +51,6 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
  * @property \Illuminate\Database\Eloquent\Collection|Unit[]                                                           $units
  *
- * @method static \Illuminate\Database\Eloquent\Builder|User dashboard()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentId($value)
@@ -65,6 +65,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProductionRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSolarion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
@@ -92,7 +93,6 @@ class User extends Authenticatable
         Queries\PaginateAllStartedOrderByExperience,
         Queries\PaginateBattleLogs,
         Queries\PaginateMissionLogs,
-        Relations\BelongsToManyUnit,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
         Relations\HasManyMovement,
@@ -111,6 +111,7 @@ class User extends Authenticatable
     protected $attributes = [
         'is_enabled' => true,
         'energy' => 1000,
+        'solarion' => 0,
         'experience' => 0,
         'production_rate' => 0,
     ];
@@ -191,6 +192,18 @@ class User extends Authenticatable
     public function resources()
     {
         return $this->belongsToMany(Resource::class)
+            ->withPivot('is_researched', 'quantity')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the units.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class)
             ->withPivot('is_researched', 'quantity')
             ->withTimestamps();
     }

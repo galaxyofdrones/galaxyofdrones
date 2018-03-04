@@ -1,4 +1,4 @@
-<laboratory :is-enabled="isEnabled && isLaboratorySelected"
+<laboratory :is-enabled="isEnabled && isSelectedTab('laboratory')"
             url="{{ route('api_research') }}"
             store-resource-url="{{ route('api_research_resource_store') }}"
             store-unit-url="{{ route('api_research_unit_store', '__unit__') }}"

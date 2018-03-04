@@ -1,11 +1,11 @@
-import Cargo from './Cargo';
 import Building from './Building';
+import Transport from './Transport';
 
 export default Building.extend({
     props: ['grid', 'close', 'tradeTimeBonus', 'url', 'storeUrl', 'unitTypes'],
 
     mixins: [
-        Cargo
+        Transport
     ],
 
     data() {

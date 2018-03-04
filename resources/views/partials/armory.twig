@@ -1,0 +1,20 @@
+<armory :is-enabled="isEnabled && isSelectedTab('armory')"
+                 url="{{ route('api_armory') }}" inline-template>
+    <div v-if="isEnabled" class="armory">
+        <div class="armory-summary modal-body separator text-center">
+            <span v-for="unit in data.units"
+                  class="item item-sm"
+                  :class="unit | item('unit')"
+                  :title="unit.name"
+                  :data-content="unit.description"
+                  v-popover="{placement: 'top', trigger: 'hover'}">
+                {{ vue('unit.quantity | number') }}
+            </span>
+        </div>
+        <div v-if="isEmpty" class="modal-body separator">
+            <p class="text-center">
+                {{ trans('messages.expedition.empty') }}
+            </p>
+        </div>
+    </div>
+</armory>

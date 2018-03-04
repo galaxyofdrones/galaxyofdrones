@@ -139,6 +139,9 @@
     &.mothership:before {
         background-position: -720px -1440px;
     }
+    &.solarion:before  {
+        background-position: -960px -1440px;
+    }
     &-sm {
         min-width: 48px;
         padding-top: 48px;
@@ -251,6 +254,9 @@
         }
         &.mothership:before {
             background-position: -144px -288px;
+        }
+        &.solarion:before {
+            background-position: -192px -288px;
         }
     }
 }
