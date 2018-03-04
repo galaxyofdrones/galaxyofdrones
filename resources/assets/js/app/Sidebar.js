@@ -21,6 +21,7 @@ export default {
                 user_id: undefined,
                 capacity: 0,
                 supply: 0,
+                solarion: 0,
                 mining_rate: 0,
                 used_capacity: 0,
                 used_supply: 0,

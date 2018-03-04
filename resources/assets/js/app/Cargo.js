@@ -11,6 +11,7 @@ export default {
     data() {
         return {
             data: {
+                solarion: 0,
                 resources: [],
                 missions: []
             }

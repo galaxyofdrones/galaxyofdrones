@@ -64,6 +64,10 @@ return [
         'wrong' => 'Something went wrong.',
     ],
 
+    'expedition' => [
+        'empty' => 'No expeditions.'
+    ],
+
     'mission' => [
         'complete' => 'Complete',
         'empty' => 'No missions.',
@@ -115,8 +119,9 @@ return [
         'plural' => 'Settings',
     ],
 
-    'slot' => [
-        'empty' => 'No training slots.'
+    'solarion' => [
+        'name' => 'Solarion',
+        'description' => 'Found on the stars.',
     ],
 
     'success' => [

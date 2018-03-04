@@ -27,6 +27,7 @@ class PlanetTransformer extends Transformer
             'y' => $item->y,
             'capacity' => $item->capacity,
             'supply' => $item->supply,
+            'solarion' => $item->user->solarion,
             'mining_rate' => (int) $item->mining_rate,
             'production_rate' => (int) $item->production_rate,
             'incoming_movement' => $item->incomingMovementCount(),

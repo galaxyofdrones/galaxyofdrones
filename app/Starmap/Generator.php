@@ -154,7 +154,7 @@ class Generator implements GeneratorContract
     public function generate()
     {
         $this->validated = [];
-        $this->resources = Resource::where('frequency', '>', 0)->get(['id', 'frequency']);
+        $this->resources = Resource::all(['id', 'frequency']);
 
         if (count($this->resources)) {
             $this->database->transaction(function () {

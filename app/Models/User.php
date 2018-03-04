@@ -21,6 +21,7 @@ use Laravel\Passport\HasApiTokens;
  * @property string|null                                                                                               $remember_token
  * @property bool                                                                                                      $is_enabled
  * @property int                                                                                                       $energy
+ * @property int                                                                                                       $solarion
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
  * @property \Carbon\Carbon|null                                                                                       $last_login
@@ -64,6 +65,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProductionRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSolarion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
@@ -109,6 +111,7 @@ class User extends Authenticatable
     protected $attributes = [
         'is_enabled' => true,
         'energy' => 1000,
+        'solarion' => 0,
         'experience' => 0,
         'production_rate' => 0,
     ];

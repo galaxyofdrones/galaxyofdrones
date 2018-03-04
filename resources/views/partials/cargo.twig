@@ -11,6 +11,12 @@
                   v-popover="{placement: 'top', trigger: 'hover'}">
                 {{ vue('resource.quantity | number') }}
             </span>
+            <span class="item item-sm solarion"
+                  title="{{ trans('messages.solarion.name') }}"
+                  data-content="{{ trans('messages.solarion.description') }}"
+                  v-popover="{placement: 'top', trigger: 'hover'}">
+                {{ vue('data.solarion | number') }}
+            </span>
         </div>
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">

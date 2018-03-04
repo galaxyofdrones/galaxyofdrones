@@ -32,6 +32,7 @@ class MissionController extends Controller
     public function index(ResourceMissionTransformer $resourceMissionTransformer, MissionTransformer $missionTransformer)
     {
         return [
+            'solarion' => auth()->user()->solarion,
             'resources' => $resourceMissionTransformer->transformCollection(
                 Resource::newModelInstance()->findAllOrderBySortOrder()
             ),

@@ -128,6 +128,13 @@
                               v-popover="{trigger: 'hover'}">
                             {{ vue('resourceQuantity(resource) | number') }}
                         </span>
+                    </div><div class="col-xs-3">
+                        <span class="item item-sm solarion"
+                              title="{{ trans('messages.solarion.name') }}"
+                              data-content="{{ trans('messages.solarion.description') }}"
+                              v-popover="{trigger: 'hover'}">
+                            {{ vue('data.solarion | number') }}
+                        </span>
                     </div>
                 </div>
             </div>
