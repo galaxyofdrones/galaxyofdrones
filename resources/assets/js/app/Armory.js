@@ -4,7 +4,6 @@ export default {
     data() {
         return {
             data: {
-                slots: [],
                 units: []
             }
         };
@@ -12,7 +11,7 @@ export default {
 
     computed: {
         isEmpty() {
-            return !this.data.slots.length;
+            return true;
         }
     },
 
