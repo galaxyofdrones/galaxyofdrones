@@ -3,6 +3,7 @@
 return [
 
     'armory' => 'Armory',
+    'cargo' => 'Cargo',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
@@ -12,7 +13,6 @@ return [
     'instant' => 'Instant',
     'laboratory' => 'Laboratory',
     'mailbox' => 'Mailbox',
-    'mission_control' => 'Mission control',
     'move' => 'Move',
     'owner' => 'Owner',
     'required_quantity' => 'Required quantity',

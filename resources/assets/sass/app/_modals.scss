@@ -11,8 +11,8 @@
     &.profile .btn {
         margin-top: $grid-gutter-width / 3 * 2;
     }
-    &.mothership .mission-control-storage .item,
-    &.mothership .armory-storage .item {
+    &.mothership .armory-summary .item,
+    &.mothership .cargo-summary .item {
         margin: 0 $grid-gutter-width / 3 * 2;
     }
     &-body.separator {

@@ -1,7 +1,7 @@
-<armory :is-enabled="isEnabled && isArmorySelected"
+<armory :is-enabled="isEnabled && isSelectedTab('armory')"
                  url="{{ route('api_armory') }}" inline-template>
     <div v-if="isEnabled" class="armory">
-        <div class="armory-storage modal-body separator text-center">
+        <div class="armory-summary modal-body separator text-center">
             <span v-for="unit in data.units"
                   class="item item-sm"
                   :class="unit | item('unit')"

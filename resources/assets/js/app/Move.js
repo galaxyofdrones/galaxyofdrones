@@ -1,12 +1,12 @@
 import { EventBus } from './event-bus';
-import Cargo from './Cargo';
 import Modal from './Modal';
+import Transport from './Transport';
 
 export default Modal.extend({
     props: ['types', 'unitTypes', 'urls'],
 
     mixins: [
-        Cargo
+        Transport
     ],
 
     data() {

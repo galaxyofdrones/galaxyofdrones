@@ -1,20 +1,20 @@
 import { EventBus } from './event-bus';
 import Armory from './Armory';
+import Cargo from './Cargo';
 import Laboratory from './Laboratory';
-import MissionControl from './MissionControl';
 import Modal from './Modal';
 
 export default Modal.extend({
     props: ['url', 'storeUrl'],
 
     components: {
-        Armory, Laboratory, MissionControl
+        Armory, Cargo, Laboratory
     },
 
     data() {
         return {
             selected: undefined,
-            selectedTab: 'mission-control',
+            selectedTab: 'armory',
             data: {
                 capital_id: undefined,
                 capital_change_remaining: 0,
@@ -30,38 +30,22 @@ export default Modal.extend({
     },
 
     computed: {
-        isMissionControlSelected() {
-            return this.selectedTab === 'mission-control';
-        },
-
-        isArmorySelected() {
-            return this.selectedTab === 'armory';
-        },
-
-        isLaboratorySelected() {
-            return this.selectedTab === 'laboratory';
-        },
-
         canHyperjump() {
             return !this.data.incoming_trade_movement && this.selected !== this.data.capital_id;
         }
     },
 
     methods: {
+        isSelectedTab(value) {
+            return this.selectedTab === value;
+        },
+
+        selectTab(value) {
+            this.selectedTab = value;
+        },
+
         open() {
             this.fetchData(true);
-        },
-
-        selectMissionControl() {
-            this.selectedTab = 'mission-control';
-        },
-
-        selectArmory() {
-            this.selectedTab = 'armory';
-        },
-
-        selectLaboratory() {
-            this.selectedTab = 'laboratory';
         },
 
         fetchData(showModal = false) {
