@@ -2,7 +2,6 @@
 
 namespace Koodilab\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
@@ -214,41 +213,6 @@ class Planet extends Model implements PositionableContract
     public function getResourceCountAttribute()
     {
         return static::RESOURCE_COUNT + $this->size;
-    }
-
-    /**
-     * Create or update stock.
-     */
-    public function createOrUpdateStock()
-    {
-        /** @var Stock $stock */
-        $stock = $this->stocks()->firstOrNew([
-            'resource_id' => $this->resource_id,
-        ]);
-
-        $stock->setRelation('planet', $this)->fill([
-            'quantity' => max(0, $stock->quantity),
-            'last_quantity_changed' => Carbon::now(),
-        ])->save();
-    }
-
-    /**
-     * Create or update population.
-     *
-     * @param Unit $unit
-     * @param int  $quantity
-     */
-    public function createOrUpdatePopulation(Unit $unit, $quantity)
-    {
-        /** @var Population $population */
-        $population = $this->populations()->firstOrNew([
-            'unit_id' => $unit->id,
-        ]);
-
-        $population->setRelations([
-            'planet' => $this,
-            'unit' => $unit,
-        ])->incrementQuantity($quantity);
     }
 
     /**

@@ -21,7 +21,7 @@ use Koodilab\Notifications\BattleLogCreated;
  * @property \Carbon\Carbon|null                                 $updated_at
  * @property User                                                $attacker
  * @property \Illuminate\Database\Eloquent\Collection|Unit[]     $attackerUnits
- * @property \Illuminate\Database\Eloquent\Collection|Building[] $buildings
+ * @property \Kalnoy\Nestedset\Collection|Building[]             $buildings
  * @property User|null                                           $defender
  * @property \Illuminate\Database\Eloquent\Collection|Unit[]     $defenderUnits
  * @property Planet                                              $end
@@ -43,6 +43,9 @@ use Koodilab\Notifications\BattleLogCreated;
  */
 class BattleLog extends Model
 {
+    use Relations\BelongsToEnd,
+        Relations\BelongsToStart;
+
     /**
      * The scout type.
      *
@@ -148,26 +151,6 @@ class BattleLog extends Model
         }
 
         return $battleLog;
-    }
-
-    /**
-     * Get the start.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function start()
-    {
-        return $this->belongsTo(Planet::class, 'start_id');
-    }
-
-    /**
-     * Get the end.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function end()
-    {
-        return $this->belongsTo(Planet::class, 'end_id');
     }
 
     /**
