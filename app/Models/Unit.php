@@ -102,11 +102,6 @@ class Unit extends Model
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
-
-    /**
-     * {@inheritdoc}
-     */
     protected $attributes = [
         'name' => '{}',
         'is_unlocked' => false,

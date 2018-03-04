@@ -104,6 +104,13 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'expedition',
+    ], function () use ($router) {
+        $router->get('/', 'ExpeditionController@index')
+            ->name('expedition');
+    });
+
+    $router->group([
         'prefix' => 'mission',
     ], function () use ($router) {
         $router->get('/', 'MissionController@index')
@@ -119,13 +126,6 @@ $router->group([
     ], function () use ($router) {
         $router->get('/', 'MissionLogController@index')
             ->name('mission_log');
-    });
-
-    $router->group([
-        'prefix' => 'armory',
-    ], function () use ($router) {
-        $router->get('/', 'ArmoryController@index')
-            ->name('armory');
     });
 
     $router->group([

@@ -51,11 +51,6 @@ class Resource extends Model implements TranslatableContract
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
-
-    /**
-     * {@inheritdoc}
-     */
     protected $attributes = [
         'name' => '{}',
         'is_unlocked' => false,
