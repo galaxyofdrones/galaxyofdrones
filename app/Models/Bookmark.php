@@ -33,11 +33,6 @@ class Bookmark extends Model
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 5;
-
-    /**
-     * {@inheritdoc}
-     */
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];

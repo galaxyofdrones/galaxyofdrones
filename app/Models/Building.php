@@ -134,11 +134,6 @@ class Building extends Model implements TranslatableContract
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
-
-    /**
-     * {@inheritdoc}
-     */
     protected $attributes = [
         'name' => '{}',
         'description' => '{}',

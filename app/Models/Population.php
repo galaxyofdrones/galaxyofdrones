@@ -33,11 +33,6 @@ class Population extends Model
     /**
      * {@inheritdoc}
      */
-    protected $perPage = 30;
-
-    /**
-     * {@inheritdoc}
-     */
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];
