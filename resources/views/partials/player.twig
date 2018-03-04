@@ -1,7 +1,7 @@
 <player url="{{ route('api_user') }}" inline-template>
     <div class="player">
-        <div class="player-info" v-cloak>
-            <div class="player-left">
+        <div class="player-info">
+            <div class="player-left" v-cloak>
                 <a href="#" @click.prevent="openUser()">
                     <img class="player-avatar"
                          :src="data.gravatar"
@@ -14,7 +14,7 @@
                     {{ vue('data.level | number') }}
                 </div>
             </div>
-            <div class="player-right">
+            <div class="player-right" v-cloak>
                 <div class="player-nav">
                     <ul class="nav nav-pills nav-justified">
                         <li :class="{unread: hasUnread}">
