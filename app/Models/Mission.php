@@ -40,14 +40,14 @@ class Mission extends Model implements TimeableContract
      *
      * @var float
      */
-    const MIN_CAPACITY = 0.1;
+    const MIN_CAPACITY = 0.2;
 
     /**
      * The maximum capacity.
      *
      * @var float
      */
-    const MAX_CAPACITY = 0.3;
+    const MAX_CAPACITY = 0.4;
 
     /**
      * The energy bonus.
