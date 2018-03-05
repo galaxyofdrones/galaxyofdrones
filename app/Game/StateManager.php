@@ -8,7 +8,7 @@ use Koodilab\Models\Building;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 
-class Manager
+class StateManager
 {
     /**
      * Synchronize the planet.
