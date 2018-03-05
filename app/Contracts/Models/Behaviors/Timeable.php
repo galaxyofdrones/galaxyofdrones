@@ -10,14 +10,4 @@ interface Timeable
      * @return int
      */
     public function getRemainingAttribute();
-
-    /**
-     * Finish.
-     */
-    public function finish();
-
-    /**
-     * Cancel.
-     */
-    public function cancel();
 }

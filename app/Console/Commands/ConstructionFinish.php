@@ -5,6 +5,7 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
+use Koodilab\Game\ConstructionManager;
 use Koodilab\Models\Construction;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -30,15 +31,24 @@ class ConstructionFinish extends Command
     protected $database;
 
     /**
+     * The construction manager instance.
+     *
+     * @var ConstructionManager
+     */
+    protected $manager;
+
+    /**
      * Constructor.
      *
-     * @param DatabaseManager $database
+     * @param DatabaseManager     $database
+     * @param ConstructionManager $manager
      */
-    public function __construct(DatabaseManager $database)
+    public function __construct(DatabaseManager $database, ConstructionManager $manager)
     {
         parent::__construct();
 
         $this->database = $database;
+        $this->manager = $manager;
     }
 
     /**
@@ -70,7 +80,7 @@ class ConstructionFinish extends Command
         $construction = Construction::find($id);
 
         if ($construction) {
-            $construction->finish();
+            $this->manager->finish($construction);
 
             $this->info(
                 $this->prependTimestamp("The construction [{$id}] has been finished!")

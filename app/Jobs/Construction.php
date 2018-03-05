@@ -5,6 +5,7 @@ namespace Koodilab\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
+use Koodilab\Game\ConstructionManager;
 use Koodilab\Models\Construction as ConstructionModel;
 
 class Construction implements ShouldQueue
@@ -31,15 +32,16 @@ class Construction implements ShouldQueue
     /**
      * Handle the job.
      *
-     * @param DatabaseManager $database
+     * @param DatabaseManager     $database
+     * @param ConstructionManager $manager
      */
-    public function handle(DatabaseManager $database)
+    public function handle(DatabaseManager $database, ConstructionManager $manager)
     {
         $construction = ConstructionModel::find($this->constructionId);
 
         if ($construction) {
-            $database->transaction(function () use ($construction) {
-                $construction->finish();
+            $database->transaction(function () use ($manager, $construction) {
+                $manager->finish($construction);
             });
         }
     }
