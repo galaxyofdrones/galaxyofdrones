@@ -8,12 +8,12 @@ use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
 use Koodilab\Contracts\Starmap\Generator as GeneratorContract;
 use Koodilab\Contracts\Starmap\NameGenerator as NameGeneratorContract;
 use Koodilab\Contracts\Starmap\Renderer as RendererContract;
+use Koodilab\Game\Manager as GameManager;
 use Koodilab\Starmap\Generator;
 use Koodilab\Starmap\NameGenerator;
 use Koodilab\Starmap\Renderer;
 use Koodilab\Support\FlashManager;
 use Koodilab\Support\SettingManager;
-use Koodilab\Support\StateManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +35,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(RendererContract::class, Renderer::class);
         $this->app->singleton(FlashManager::class);
         $this->app->singleton(SettingManager::class);
-        $this->app->singleton(StateManager::class);
+        $this->app->singleton(GameManager::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Support;
+namespace Koodilab\Game;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -8,7 +8,7 @@ use Koodilab\Models\Building;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 
-class StateManager
+class Manager
 {
     /**
      * Synchronize the planet.

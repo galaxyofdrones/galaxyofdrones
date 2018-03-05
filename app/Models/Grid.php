@@ -3,7 +3,7 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Support\StateManager;
+use Koodilab\Game\Manager as GameManager;
 
 /**
  * Grid.
@@ -89,7 +89,7 @@ class Grid extends Model
         parent::boot();
 
         static::updated(function (self $grid) {
-            app(StateManager::class)->syncPlanet($grid->planet);
+            app(GameManager::class)->syncPlanet($grid->planet);
         });
     }
 }
