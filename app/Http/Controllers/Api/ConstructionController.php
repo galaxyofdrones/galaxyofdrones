@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Koodilab\Game\ConstructionManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
-use Koodilab\Models\Construction;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\ConstructionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
