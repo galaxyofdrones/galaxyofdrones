@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * Expedition log.
  *
  * @property int                                             $id
- * @property int                                             $resource_id
  * @property int                                             $user_id
- * @property int                                             $resource_quantity
+ * @property int                                             $solarion
  * @property int                                             $experience
  * @property \Carbon\Carbon|null                             $created_at
  * @property \Carbon\Carbon|null                             $updated_at
@@ -20,8 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereResourceId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereResourceQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereSolarion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereUserId($value)
  * @mixin \Eloquent

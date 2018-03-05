@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Koodilab\Events\PlanetUpdated;
-use Koodilab\Support\StateManager;
+use Koodilab\Game\Manager as GameManager;
 
 /**
  * Planet.
@@ -267,12 +267,12 @@ class Planet extends Model implements PositionableContract
                         ]);
                     }
 
-                    app(StateManager::class)->syncUser($user);
+                    app(GameManager::class)->syncUser($user);
                 }
             }
 
             if ($planet->user_id) {
-                app(StateManager::class)->syncUser($planet->user);
+                app(GameManager::class)->syncUser($planet->user);
             }
         });
 
