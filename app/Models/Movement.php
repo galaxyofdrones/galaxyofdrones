@@ -85,11 +85,18 @@ class Movement extends Model implements TimeableContract
     const TYPE_TRANSPORT = 4;
 
     /**
-     * The transport type.
+     * The trade type.
      *
      * @var int
      */
     const TYPE_TRADE = 5;
+
+    /**
+     * The patrol type.
+     *
+     * @var int
+     */
+    const TYPE_PATROL = 6;
 
     /**
      * {@inheritdoc}
