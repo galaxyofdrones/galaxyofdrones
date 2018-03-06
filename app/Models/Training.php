@@ -2,10 +2,7 @@
 
 namespace Koodilab\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Events\PlanetUpdated;
-use Koodilab\Jobs\Train as TrainJob;
 
 /**
  * Training.
@@ -49,68 +46,4 @@ class Training extends Model
     protected $dates = [
         'ended_at',
     ];
-
-    /**
-     * Create from.
-     *
-     * @param Grid $grid
-     * @param Unit $unit
-     * @param int  $quantity
-     *
-     * @return static
-     */
-    public static function createFrom(Grid $grid, Unit $unit, $quantity)
-    {
-        auth()->user()->decrementEnergy($quantity * $unit->train_cost);
-
-        $model = static::create([
-            'grid_id' => $grid->id,
-            'unit_id' => $unit->id,
-            'quantity' => $quantity,
-            'ended_at' => Carbon::now()->addSeconds($quantity * $unit->train_time),
-        ]);
-
-        dispatch(
-            (new TrainJob($model->id))->delay($model->remaining)
-        );
-
-        return $model;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function finish()
-    {
-        /** @var Population $population */
-        $population = $this->grid->planet->populations()->firstOrNew([
-            'unit_id' => $this->unit->id,
-        ]);
-
-        $population->setRelations([
-            'planet' => $this->grid->planet,
-            'unit' => $this->unit,
-        ])->incrementQuantity($this->quantity);
-
-        $this->delete();
-
-        event(
-            new PlanetUpdated($this->grid->planet_id)
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        $totalTime = $this->grid->training->quantity * $this->grid->training->unit->train_time;
-        $totalCost = $this->grid->training->quantity * $this->grid->training->unit->train_cost;
-
-        $this->grid->planet->user->incrementEnergy(round(
-            $this->remaining / $totalTime * $totalCost
-        ));
-
-        $this->delete();
-    }
 }
