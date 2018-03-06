@@ -21,7 +21,7 @@ class TrainingManager
     protected $bus;
 
     /**
-     * The bus instance.
+     * The event instance.
      *
      * @var Event
      */
