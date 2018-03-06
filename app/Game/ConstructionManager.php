@@ -3,7 +3,6 @@
 namespace Koodilab\Game;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
 use Koodilab\Jobs\Construction as ConstructionJob;
 use Koodilab\Models\Building;
@@ -12,13 +11,6 @@ use Koodilab\Models\Grid;
 
 class ConstructionManager
 {
-    /**
-     * The auth instance.
-     *
-     * @var Auth
-     */
-    protected $auth;
-
     /**
      * The bus instance.
      *
@@ -29,12 +21,10 @@ class ConstructionManager
     /**
      * Constructor.
      *
-     * @param Auth $auth
-     * @param Bus  $bus
+     * @param Bus $bus
      */
-    public function __construct(Auth $auth, Bus $bus)
+    public function __construct(Bus $bus)
     {
-        $this->auth = $auth;
         $this->bus = $bus;
     }
 
@@ -48,10 +38,7 @@ class ConstructionManager
      */
     public function create(Grid $grid, Building $building)
     {
-        /** @var \Koodilab\Models\User $user */
-        $user = $this->auth->guard()->user();
-
-        $user->decrementEnergy($building->construction_cost);
+        $grid->planet->user->decrementEnergy($building->construction_cost);
 
         $construction = Construction::create([
             'building_id' => $building->id,
@@ -101,9 +88,11 @@ class ConstructionManager
             'level' => $construction->level,
         ]);
 
-        $construction->grid->planet->user->incrementEnergy(round(
+        $energy = round(
             $construction->remaining / $construction->building->construction_time * $construction->building->construction_cost
-        ));
+        );
+
+        $construction->grid->planet->user->incrementEnergy($energy);
 
         $construction->delete();
     }
