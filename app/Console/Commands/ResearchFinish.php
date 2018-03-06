@@ -5,6 +5,7 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
+use Koodilab\Game\ResearchManager;
 use Koodilab\Models\Research;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -15,7 +16,7 @@ class ResearchFinish extends Command
     /**
      * {@inheritdoc}
      */
-    protected $name = 'research:finish';
+    protected $name = 'finish:research';
 
     /**
      * {@inheritdoc}
@@ -30,15 +31,24 @@ class ResearchFinish extends Command
     protected $database;
 
     /**
+     * The research manager instance.
+     *
+     * @var ResearchManager
+     */
+    protected $manager;
+
+    /**
      * Constructor.
      *
      * @param DatabaseManager $database
+     * @param ResearchManager $manager
      */
-    public function __construct(DatabaseManager $database)
+    public function __construct(DatabaseManager $database, ResearchManager $manager)
     {
         parent::__construct();
 
         $this->database = $database;
+        $this->manager = $manager;
     }
 
     /**
@@ -70,7 +80,7 @@ class ResearchFinish extends Command
         $research = Research::find($id);
 
         if ($research) {
-            $research->finish();
+            $this->manager->finish($research);
 
             $this->info(
                 $this->prependTimestamp("The research [{$id}] has been finished!")
