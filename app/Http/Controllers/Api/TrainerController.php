@@ -2,12 +2,11 @@
 
 namespace Koodilab\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Koodilab\Game\TrainingManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Training;
 use Koodilab\Models\Transformers\TrainerTransformer;
 use Koodilab\Models\Unit;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -42,13 +41,13 @@ class TrainerController extends Controller
     /**
      * Store a newly created training in storage.
      *
-     * @param Request $request
-     * @param Grid    $grid
-     * @param Unit    $unit
+     * @param Grid            $grid
+     * @param Unit            $unit
+     * @param TrainingManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function store(Request $request, Grid $grid, Unit $unit)
+    public function store(Grid $grid, Unit $unit, TrainingManager $manager)
     {
         $this->authorize('friendly', $grid->planet);
         $this->authorize('building', [$grid->building, Building::TYPE_TRAINER]);
@@ -82,23 +81,20 @@ class TrainerController extends Controller
             'train_time_bonus' => $grid->building->train_time_bonus,
         ]);
 
-        DB::transaction(function () use ($grid, $unit, $quantity) {
-            Training::createFrom(
-                $grid,
-                $unit,
-                $quantity
-            );
+        DB::transaction(function () use ($grid, $unit, $quantity, $manager) {
+            $manager->create($grid, $unit, $quantity);
         });
     }
 
     /**
      * Remove the training from storage.
      *
-     * @param Grid $grid
+     * @param Grid            $grid
+     * @param TrainingManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function destroy(Grid $grid)
+    public function destroy(Grid $grid, TrainingManager $manager)
     {
         $this->authorize('friendly', $grid->planet);
 
@@ -106,8 +102,8 @@ class TrainerController extends Controller
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($grid) {
-            $grid->training->cancel();
+        DB::transaction(function () use ($grid, $manager) {
+            $manager->cancel($grid->training);
         });
     }
 }

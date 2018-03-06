@@ -7,7 +7,6 @@ use Koodilab\Game\UpgradeManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\UpgradeTransformer;
-use Koodilab\Models\Upgrade;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpgradeController extends Controller

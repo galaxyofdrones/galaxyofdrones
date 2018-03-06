@@ -5,6 +5,7 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
+use Koodilab\Game\TrainingManager;
 use Koodilab\Models\Training;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -15,7 +16,7 @@ class TrainingFinish extends Command
     /**
      * {@inheritdoc}
      */
-    protected $name = 'training:finish';
+    protected $name = 'finish:training';
 
     /**
      * {@inheritdoc}
@@ -30,15 +31,24 @@ class TrainingFinish extends Command
     protected $database;
 
     /**
+     * The training manager instance.
+     *
+     * @var TrainingManager
+     */
+    protected $manager;
+
+    /**
      * Constructor.
      *
      * @param DatabaseManager $database
+     * @param TrainingManager $manager
      */
-    public function __construct(DatabaseManager $database)
+    public function __construct(DatabaseManager $database, TrainingManager $manager)
     {
         parent::__construct();
 
         $this->database = $database;
+        $this->manager = $manager;
     }
 
     /**
@@ -70,7 +80,7 @@ class TrainingFinish extends Command
         $training = Training::find($id);
 
         if ($training) {
-            $training->finish();
+            $this->manager->finish($training);
 
             $this->info(
                 $this->prependTimestamp("The training [{$id}] has been finished!")
