@@ -16,7 +16,7 @@ class ConstructionFinish extends Command
     /**
      * {@inheritdoc}
      */
-    protected $name = 'construction:finish';
+    protected $name = 'finish:construction';
 
     /**
      * {@inheritdoc}

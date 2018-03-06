@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection as BaseCollection;
 use Koodilab\Contracts\Battle\Simulator;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
 use Koodilab\Events\UserUpdated;
 use Koodilab\Jobs\Move as MoveJob;
@@ -40,7 +39,7 @@ use Koodilab\Jobs\Move as MoveJob;
  * @method static \Illuminate\Database\Eloquent\Builder|Movement whereUserId($value)
  * @mixin \Eloquent
  */
-class Movement extends Model implements TimeableContract
+class Movement extends Model
 {
     use Behaviors\Timeable,
         Queries\FindResourcesOrderBySortOrder,

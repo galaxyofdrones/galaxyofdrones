@@ -2,10 +2,7 @@
 
 namespace Koodilab\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Jobs\Upgrade as UpgradeJob;
 
 /**
  * Upgrade.
@@ -27,7 +24,7 @@ use Koodilab\Jobs\Upgrade as UpgradeJob;
  * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Upgrade extends Model implements TimeableContract
+class Upgrade extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToGrid;
@@ -45,62 +42,4 @@ class Upgrade extends Model implements TimeableContract
     protected $dates = [
         'ended_at',
     ];
-
-    /**
-     * Create from.
-     *
-     * @param Grid $grid
-     *
-     * @return static
-     */
-    public static function createFrom(Grid $grid)
-    {
-        $building = $grid->upgradeBuilding();
-
-        auth()->user()->decrementEnergy($building->construction_cost);
-
-        $model = static::create([
-            'grid_id' => $grid->id,
-            'level' => $building->level,
-            'ended_at' => Carbon::now()->addSeconds($building->construction_time),
-        ]);
-
-        dispatch(
-            (new UpgradeJob($model->id))->delay($model->remaining)
-        );
-
-        return $model;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function finish()
-    {
-        $building = $this->grid->upgradeBuilding();
-
-        $this->grid->update([
-            'level' => $building->level,
-        ]);
-
-        $this->grid->planet->user->incrementExperience(
-            $building->construction_experience
-        );
-
-        $this->delete();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        $building = $this->grid->upgradeBuilding();
-
-        $this->grid->planet->user->incrementEnergy(round(
-            $this->remaining / $building->construction_time * $building->construction_cost
-        ));
-
-        $this->delete();
-    }
 }

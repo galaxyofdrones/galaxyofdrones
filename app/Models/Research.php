@@ -2,24 +2,21 @@
 
 namespace Koodilab\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
-use Koodilab\Jobs\Research as ResearchJob;
 
 /**
  * Research.
  *
- * @property int                                           $id
- * @property int                                           $user_id
- * @property int                                           $researchable_id
- * @property string                                        $researchable_type
- * @property \Carbon\Carbon                                $ended_at
- * @property \Carbon\Carbon|null                           $created_at
- * @property \Carbon\Carbon|null                           $updated_at
- * @property int                                           $remaining
- * @property \Illuminate\Database\Eloquent\Model|\Eloquent $researchable
- * @property User                                          $user
+ * @property int                                                                                             $id
+ * @property int                                                                                             $user_id
+ * @property int                                                                                             $researchable_id
+ * @property string                                                                                          $researchable_type
+ * @property \Carbon\Carbon                                                                                  $ended_at
+ * @property \Carbon\Carbon|null                                                                             $created_at
+ * @property \Carbon\Carbon|null                                                                             $updated_at
+ * @property int                                                                                             $remaining
+ * @property \Illuminate\Database\Eloquent\Model|\Eloquent|\Koodilab\Contracts\Models\Behaviors\Researchable $researchable
+ * @property User                                                                                            $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereEndedAt($value)
@@ -30,7 +27,7 @@ use Koodilab\Jobs\Research as ResearchJob;
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereUserId($value)
  * @mixin \Eloquent
  */
-class Research extends Model implements TimeableContract
+class Research extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToUser;
@@ -50,35 +47,6 @@ class Research extends Model implements TimeableContract
     ];
 
     /**
-     * Create from.
-     *
-     * @param Model $researchable
-     *
-     * @return static
-     */
-    public static function createFrom(Model $researchable)
-    {
-        /** @var User $user */
-        $user = auth()->user();
-
-        $user->decrementEnergy($researchable->research_cost);
-
-        $model = new static([
-            'user_id' => $user->id,
-            'ended_at' => Carbon::now()->addSeconds($researchable->research_time),
-        ]);
-
-        $model->researchable()->associate($researchable);
-        $model->save();
-
-        dispatch(
-            (new ResearchJob($model->id))->delay($model->remaining)
-        );
-
-        return $model;
-    }
-
-    /**
      * Get the researchable.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
@@ -86,83 +54,5 @@ class Research extends Model implements TimeableContract
     public function researchable()
     {
         return $this->morphTo();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function finish()
-    {
-        switch ($this->researchable_type) {
-            case Resource::class:
-                $this->finishResource();
-                break;
-            case Unit::class:
-                $this->finishUnit();
-                break;
-        }
-
-        $this->user->incrementExperience(
-            $this->researchable->research_experience
-        );
-
-        $this->delete();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        /** @var User $user */
-        $user = auth()->user();
-
-        $user->incrementEnergy(round(
-            $this->remaining / $this->researchable->research_time * $this->researchable->research_cost
-        ));
-
-        $this->delete();
-    }
-
-    /**
-     * Finish resource.
-     */
-    protected function finishResource()
-    {
-        $userResource = $this->user->resources()
-            ->where('resource_id', $this->researchable_id)
-            ->first();
-
-        if (! $userResource) {
-            $this->user->resources()->attach($this->researchable_id, [
-                'is_researched' => true,
-                'quantity' => 0,
-            ]);
-        } else {
-            $userResource->pivot->update([
-                'is_researched' => true,
-            ]);
-        }
-    }
-
-    /**
-     * Finish unit.
-     */
-    protected function finishUnit()
-    {
-        $userUnit = $this->user->units()
-            ->where('unit_id', $this->researchable_id)
-            ->first();
-
-        if (! $userUnit) {
-            $this->user->units()->attach($this->researchable_id, [
-                'is_researched' => true,
-                'quantity' => 0,
-            ]);
-        } else {
-            $userUnit->pivot->update([
-                'is_researched' => true,
-            ]);
-        }
     }
 }

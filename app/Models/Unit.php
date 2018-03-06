@@ -3,6 +3,8 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Koodilab\Contracts\Models\Behaviors\Researchable as ResearchableContract;
+use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 
 /**
  * Unit.
@@ -52,7 +54,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Unit whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Unit extends Model
+class Unit extends Model implements ResearchableContract, TranslatableContract
 {
     use Behaviors\Modifiable,
         Behaviors\Sortable,

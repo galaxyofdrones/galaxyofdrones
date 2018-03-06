@@ -5,6 +5,7 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
+use Koodilab\Game\UpgradeManager;
 use Koodilab\Models\Upgrade;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -15,7 +16,7 @@ class UpgradeFinish extends Command
     /**
      * {@inheritdoc}
      */
-    protected $name = 'upgrade:finish';
+    protected $name = 'finish:upgrade';
 
     /**
      * {@inheritdoc}
@@ -30,15 +31,24 @@ class UpgradeFinish extends Command
     protected $database;
 
     /**
+     * The upgrade manager instance.
+     *
+     * @var UpgradeManager
+     */
+    protected $manager;
+
+    /**
      * Constructor.
      *
      * @param DatabaseManager $database
+     * @param UpgradeManager  $manager
      */
-    public function __construct(DatabaseManager $database)
+    public function __construct(DatabaseManager $database, UpgradeManager $manager)
     {
         parent::__construct();
 
         $this->database = $database;
+        $this->manager = $manager;
     }
 
     /**
@@ -70,7 +80,7 @@ class UpgradeFinish extends Command
         $upgrade = Upgrade::find($id);
 
         if ($upgrade) {
-            $upgrade->finish();
+            $this->manager->finish($upgrade);
 
             $this->info(
                 $this->prependTimestamp("The upgrade [{$id}] has been finished!")

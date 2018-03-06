@@ -3,6 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
+use Koodilab\Game\UpgradeManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\UpgradeTransformer;
@@ -38,11 +39,12 @@ class UpgradeController extends Controller
     /**
      * Store a newly created upgrade in storage.
      *
-     * @param Grid $grid
+     * @param Grid           $grid
+     * @param UpgradeManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function store(Grid $grid)
+    public function store(Grid $grid, UpgradeManager $manager)
     {
         $this->authorize('friendly', $grid->planet);
 
@@ -64,21 +66,20 @@ class UpgradeController extends Controller
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($grid) {
-            Upgrade::createFrom(
-                $grid
-            );
+        DB::transaction(function () use ($grid, $manager) {
+            $manager->create($grid);
         });
     }
 
     /**
      * Remove the upgrade from storage.
      *
-     * @param Grid $grid
+     * @param Grid           $grid
+     * @param UpgradeManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function destroy(Grid $grid)
+    public function destroy(Grid $grid, UpgradeManager $manager)
     {
         $this->authorize('friendly', $grid->planet);
 
@@ -86,8 +87,8 @@ class UpgradeController extends Controller
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($grid) {
-            $grid->upgrade->cancel();
+        DB::transaction(function () use ($grid, $manager) {
+            $manager->cancel($grid->upgrade);
         });
     }
 }

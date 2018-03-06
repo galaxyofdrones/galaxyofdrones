@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 
 /**
  * Construction.
@@ -28,7 +27,7 @@ use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
  * @method static \Illuminate\Database\Eloquent\Builder|Construction whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Construction extends Model implements TimeableContract
+class Construction extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToBuilding,
