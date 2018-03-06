@@ -4,7 +4,6 @@ namespace Koodilab\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Jobs\Research as ResearchJob;
 
 /**
@@ -30,7 +29,7 @@ use Koodilab\Jobs\Research as ResearchJob;
  * @method static \Illuminate\Database\Eloquent\Builder|Research whereUserId($value)
  * @mixin \Eloquent
  */
-class Research extends Model implements TimeableContract
+class Research extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToUser;

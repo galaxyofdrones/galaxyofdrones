@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 
 /**
  * Upgrade.
@@ -25,7 +24,7 @@ use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
  * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Upgrade extends Model implements TimeableContract
+class Upgrade extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToGrid;

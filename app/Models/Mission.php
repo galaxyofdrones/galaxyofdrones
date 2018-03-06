@@ -4,7 +4,6 @@ namespace Koodilab\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Support\Util;
 
 /**
@@ -30,7 +29,7 @@ use Koodilab\Support\Util;
  * @method static \Illuminate\Database\Eloquent\Builder|Mission whereUserId($value)
  * @mixin \Eloquent
  */
-class Mission extends Model implements TimeableContract
+class Mission extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToUser;

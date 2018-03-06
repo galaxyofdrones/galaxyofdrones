@@ -4,7 +4,6 @@ namespace Koodilab\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Timeable as TimeableContract;
 use Koodilab\Events\PlanetUpdated;
 use Koodilab\Jobs\Train as TrainJob;
 
@@ -31,7 +30,7 @@ use Koodilab\Jobs\Train as TrainJob;
  * @method static \Illuminate\Database\Eloquent\Builder|Training whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Training extends Model implements TimeableContract
+class Training extends Model
 {
     use Behaviors\Timeable,
         Relations\BelongsToGrid,
