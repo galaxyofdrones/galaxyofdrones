@@ -5,6 +5,7 @@ namespace Koodilab\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
+use Koodilab\Game\ResearchManager;
 use Koodilab\Models\Research as ResearchModel;
 
 class Research implements ShouldQueue
@@ -32,14 +33,15 @@ class Research implements ShouldQueue
      * Handle the job.
      *
      * @param DatabaseManager $database
+     * @param ResearchManager $manager
      */
-    public function handle(DatabaseManager $database)
+    public function handle(DatabaseManager $database, ResearchManager $manager)
     {
         $research = ResearchModel::find($this->researchId);
 
         if ($research) {
-            $database->transaction(function () use ($research) {
-                $research->finish();
+            $database->transaction(function () use ($research, $manager) {
+                $manager->finish($research);
             });
         }
     }
