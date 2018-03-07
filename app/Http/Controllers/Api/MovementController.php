@@ -3,10 +3,9 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
-use Koodilab\Events\PlanetUpdated;
+use Koodilab\Game\MovementManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
-use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
 use Koodilab\Models\Stock;
@@ -27,11 +26,12 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet $planet
+     * @param Planet          $planet
+     * @param MovementManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeScout(Planet $planet)
+    public function storeScout(Planet $planet, MovementManager $manager)
     {
         $this->authorize('hostile', $planet);
 
@@ -46,11 +46,9 @@ class MovementController extends Controller
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($planet, $population, $quantity) {
-            Movement::createScoutFrom(
-                $planet,
-                $population,
-                $quantity
+        DB::transaction(function () use ($planet, $population, $quantity, $manager) {
+            $manager->createScout(
+                $planet, $population, $quantity
             );
         });
     }
@@ -58,11 +56,12 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet $planet
+     * @param Planet          $planet
+     * @param MovementManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeAttack(Planet $planet)
+    public function storeAttack(Planet $planet, MovementManager $manager)
     {
         $this->authorize('hostile', $planet);
 
@@ -80,11 +79,9 @@ class MovementController extends Controller
                 }
             });
 
-        DB::transaction(function () use ($planet, $populations, $quantities) {
-            Movement::createAttackFrom(
-                $planet,
-                $populations,
-                $quantities
+        DB::transaction(function () use ($planet, $populations, $quantities, $manager) {
+            $manager->createAttack(
+                $planet, $populations, $quantities
             );
         });
     }
@@ -92,11 +89,12 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet $planet
+     * @param Planet          $planet
+     * @param MovementManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeOccupy(Planet $planet)
+    public function storeOccupy(Planet $planet, MovementManager $manager)
     {
         $this->authorize('hostile', $planet);
 
@@ -115,10 +113,9 @@ class MovementController extends Controller
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($planet, $population) {
-            Movement::createOccupyFrom(
-                $planet,
-                $population
+        DB::transaction(function () use ($planet, $population, $manager) {
+            $manager->createOccupy(
+                $planet, $population
             );
         });
     }
@@ -126,11 +123,12 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet $planet
+     * @param Planet          $planet
+     * @param MovementManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeSupport(Planet $planet)
+    public function storeSupport(Planet $planet, MovementManager $manager)
     {
         $this->authorize('friendly', $planet);
 
@@ -143,11 +141,9 @@ class MovementController extends Controller
                 }
             });
 
-        DB::transaction(function () use ($planet, $populations, $quantities) {
-            Movement::createSupportFrom(
-                $planet,
-                $populations,
-                $quantities
+        DB::transaction(function () use ($planet, $populations, $quantities, $manager) {
+            $manager->createSupport(
+                $planet, $populations, $quantities
             );
         });
     }
@@ -155,11 +151,12 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet $planet
+     * @param Planet          $planet
+     * @param MovementManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeTransport(Planet $planet)
+    public function storeTransport(Planet $planet, MovementManager $manager)
     {
         $this->authorize('friendly', $planet);
 
@@ -187,13 +184,9 @@ class MovementController extends Controller
                 }
             });
 
-        DB::transaction(function () use ($planet, $population, $stocks, $quantity, $quantities) {
-            Movement::createTransportFrom(
-                $planet,
-                $population,
-                $stocks,
-                $quantity,
-                $quantities
+        DB::transaction(function () use ($planet, $population, $stocks, $quantity, $quantities, $manager) {
+            $manager->createTransport(
+                $planet, $population, $stocks, $quantity, $quantities
             );
         });
     }
@@ -201,9 +194,11 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
+     * @param MovementManager $manager
+     *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeTrade()
+    public function storeTrade(MovementManager $manager)
     {
         $quantities = $this->quantities();
 
@@ -238,37 +233,14 @@ class MovementController extends Controller
                 }
             });
 
-        DB::transaction(function () use ($user, $building, $population, $stocks, $quantity, $quantities) {
+        DB::transaction(function () use ($user, $building, $population, $stocks, $quantity, $quantities, $manager) {
             if ($user->capital_id == $user->current_id) {
-                foreach ($stocks as $stock) {
-                    $stock->decrementQuantity(
-                        $quantities->get($stock->resource_id)
-                    );
-
-                    $userResource = $user->resources->firstWhere('id', $stock->resource_id);
-
-                    if (! $userResource) {
-                        $user->resources()->attach($stock->resource_id, [
-                            'is_researched' => false,
-                            'quantity' => $quantities->get($stock->resource_id),
-                        ]);
-                    } else {
-                        $userResource->pivot->update([
-                            'quantity' => $userResource->pivot->quantity + $quantities->get($stock->resource_id),
-                        ]);
-                    }
-                }
-
-                event(
-                    new PlanetUpdated($user->capital_id)
+                $manager->createCapitalTrade(
+                    $stocks, $quantities
                 );
             } else {
-                Movement::createTradeFrom(
-                    $building,
-                    $population,
-                    $stocks,
-                    $quantity,
-                    $quantities
+                $manager->createTrade(
+                    $building, $population, $stocks, $quantity, $quantities
                 );
             }
         });
