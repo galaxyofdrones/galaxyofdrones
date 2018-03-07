@@ -1,34 +1,48 @@
+import { EventBus } from './event-bus';
 import Building from './Building';
-import Transport from './Transport';
+import HasTab from './HasTab';
+import Patrol from './Patrol';
+import Trade from './Trade';
 
 export default Building.extend({
-    props: ['grid', 'close', 'tradeTimeBonus', 'url', 'storeUrl', 'unitTypes'],
+    props: [
+        'grid',
+        'close',
+        'url'
+    ],
+
+    components: {
+        Patrol, Trade
+    },
 
     mixins: [
-        Transport
+        HasTab
     ],
 
     data() {
         return {
-            hasTimer: true,
+            selectedTab: 'trade',
+            mined: 0,
+            planet: {
+                id: undefined,
+                resource_id: undefined,
+                resources: [],
+                units: []
+            },
             data: {
                 travel_time: 0
             }
         };
     },
 
-    watch: {
-        isEnabled() {
-            this.quantity = {};
-            this.fetchData();
-        }
+    created() {
+        EventBus.$on('planet-updated', planet => this.planet = planet);
+        EventBus.$on('resource-updated', resource => this.mined = resource);
     },
 
-    computed: {
-        travelTime() {
-            return Math.round(
-                this.data.travel_time / this.transporterUnit.speed * (1 - this.building.trade_time_bonus)
-            );
+    watch: {
+        isEnabled() {
+            this.fetchData();
         }
     },
 
@@ -41,12 +55,6 @@ export default Building.extend({
             axios.get(this.url).then(
                 response => this.data = response.data
             );
-        },
-
-        transport() {
-            axios.post(this.storeUrl, {
-                quantity: this.quantity
-            }).then(this.close);
         }
     }
 });

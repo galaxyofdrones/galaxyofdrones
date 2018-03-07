@@ -113,6 +113,7 @@ return [
     'resource' => [
         'count' => 'Resource count',
         'plural' => 'Resources',
+        'singular' => 'Resource',
     ],
 
     'setting' => [
@@ -135,6 +136,7 @@ return [
 
     'unit' => [
         'plural' => 'Units',
+        'singular' => 'Unit',
     ],
 
     'upgrade' => [

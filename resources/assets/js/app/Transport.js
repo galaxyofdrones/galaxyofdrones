@@ -1,23 +1,9 @@
-import { EventBus } from './event-bus';
-
 export default {
     data() {
         return {
             hasTimer: false,
-            mined: 0,
-            quantity: {},
-            planet: {
-                id: undefined,
-                resource_id: undefined,
-                resources: [],
-                units: []
-            }
+            quantity: {}
         };
-    },
-
-    created() {
-        EventBus.$on('resource-updated', resource => this.mined = resource);
-        EventBus.$on('planet-updated', planet => this.planet = planet);
     },
 
     computed: {

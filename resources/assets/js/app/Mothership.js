@@ -1,6 +1,7 @@
 import { EventBus } from './event-bus';
 import Armory from './Armory';
 import Cargo from './Cargo';
+import HasTab from './HasTab';
 import Laboratory from './Laboratory';
 import Modal from './Modal';
 
@@ -11,14 +12,18 @@ export default Modal.extend({
         Armory, Cargo, Laboratory
     },
 
+    mixins: [
+        HasTab
+    ],
+
     data() {
         return {
             selected: undefined,
-            selectedTab: 'armory',
+            selectedTab: 'cargo',
             data: {
                 capital_id: undefined,
                 capital_change_remaining: 0,
-                incoming_trade_movement: 0,
+                incoming_capital_movement_count: 0,
                 planets: []
             }
         };
@@ -31,19 +36,11 @@ export default Modal.extend({
 
     computed: {
         canHyperjump() {
-            return !this.data.incoming_trade_movement && this.selected !== this.data.capital_id;
+            return !this.data.incoming_capital_movement_count && this.selected !== this.data.capital_id;
         }
     },
 
     methods: {
-        isSelectedTab(value) {
-            return this.selectedTab === value;
-        },
-
-        selectTab(value) {
-            this.selectedTab = value;
-        },
-
         open() {
             this.fetchData(true);
         },

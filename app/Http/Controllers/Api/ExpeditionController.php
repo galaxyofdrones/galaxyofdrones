@@ -3,7 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\UnitArmoryTransformer;
+use Koodilab\Models\Transformers\UnitExpeditionTransformer;
 use Koodilab\Models\Unit;
 
 class ExpeditionController extends Controller
@@ -20,14 +20,14 @@ class ExpeditionController extends Controller
     /**
      * Show the expeditions in json format.
      *
-     * @param UnitArmoryTransformer $unitArmoryTransformer
+     * @param UnitExpeditionTransformer $unitExpeditionTransformer
      *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function index(UnitArmoryTransformer $unitArmoryTransformer)
+    public function index(UnitExpeditionTransformer $unitExpeditionTransformer)
     {
         return [
-            'units' => $unitArmoryTransformer->transformCollection(
+            'units' => $unitExpeditionTransformer->transformCollection(
                 Unit::newModelInstance()->findAllOrderBySortOrder()
             ),
         ];

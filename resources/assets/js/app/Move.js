@@ -1,26 +1,36 @@
 import { EventBus } from './event-bus';
 import Modal from './Modal';
+import Support from './Support';
 import Transport from './Transport';
 
 export default Modal.extend({
     props: ['types', 'unitTypes', 'urls'],
 
     mixins: [
-        Transport
+        Support, Transport
     ],
 
     data() {
         return {
             type: undefined,
+            mined: 0,
             selected: {
                 id: undefined,
                 travel_time: 0
+            },
+            planet: {
+                id: undefined,
+                resource_id: undefined,
+                resources: [],
+                units: []
             }
         };
     },
 
     created() {
         EventBus.$on('move-click', this.open);
+        EventBus.$on('planet-updated', planet => this.planet = planet);
+        EventBus.$on('resource-updated', resource => this.mined = resource);
     },
 
     computed: {
@@ -52,19 +62,6 @@ export default Modal.extend({
 
         canOccupy() {
             return this.settlerUnit.quantity > 0;
-        },
-
-        hasUnits() {
-            const quantity = _.pickBy(this.quantity);
-            let hasUnits = false;
-
-            _.forEach(this.planet.units, unit => {
-                if (quantity.hasOwnProperty(unit.id)) {
-                    return hasUnits = quantity[unit.id] > 0 && quantity[unit.id] <= unit.quantity;
-                }
-            });
-
-            return hasUnits;
         },
 
         hasFighterUnits() {
@@ -117,12 +114,8 @@ export default Modal.extend({
                 return this.transporterUnit.speed;
             }
 
-            if (this.isSupportType && this.hasUnits) {
-                const quantity = _.pickBy(this.quantity);
-
-                return _.get(_.minBy(
-                    _.filter(this.planet.units, unit => quantity.hasOwnProperty(unit.id)), 'speed'
-                ), 'speed', 1);
+            if (this.isSupportType) {
+                return this.slowestSupportUnitSpeed;
             }
 
             if (this.isAttackType && this.hasFighterUnits) {

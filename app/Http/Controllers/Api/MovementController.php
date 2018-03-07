@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Koodilab\Game\MovementManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
+use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
 use Koodilab\Models\Stock;
@@ -194,26 +195,19 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
+     * @param Grid            $grid
      * @param MovementManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeTrade(MovementManager $manager)
+    public function storeTrade(Grid $grid, MovementManager $manager)
     {
+        $this->authorize('friendly', $grid->planet);
+        $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
+
         $quantities = $this->quantities();
 
-        /** @var \Koodilab\Models\User $user */
-        $user = auth()->user();
-
-        /** @var Building $building */
-        $building = $user->current->findBuildings()
-            ->firstWhere('type', Building::TYPE_TRADER);
-
-        if (! $building) {
-            throw new BadRequestHttpException();
-        }
-
-        $population = $user->current->findPopulationByUnit(
+        $population = $grid->planet->findPopulationByUnit(
             Unit::findByType(Unit::TYPE_TRANSPORTER)
         );
 
@@ -226,21 +220,64 @@ class MovementController extends Controller
         }
 
         /** @var Stock[] $stocks */
-        $stocks = $user->current->findStocksByResourceIds($quantities->keys())
-            ->each(function (Stock $stock) use ($quantities, $user) {
-                if (! $stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
+        $stocks = $grid->planet->findStocksByResourceIds($quantities->keys())
+            ->each(function (Stock $stock) use ($quantities, $grid) {
+                if (! $stock->setRelation('planet', $grid->planet)->hasQuantity($quantities->get($stock->resource_id))) {
                     throw new BadRequestHttpException();
                 }
             });
 
-        DB::transaction(function () use ($user, $building, $population, $stocks, $quantity, $quantities, $manager) {
-            if ($user->capital_id == $user->current_id) {
+        $grid->building->applyModifiers([
+            'level' => $grid->level,
+        ]);
+
+        DB::transaction(function () use ($grid, $population, $stocks, $quantity, $quantities, $manager) {
+            if ($grid->planet_id == $grid->planet->user->capital_id) {
                 $manager->createCapitalTrade(
                     $stocks, $quantities
                 );
             } else {
                 $manager->createTrade(
-                    $building, $population, $stocks, $quantity, $quantities
+                    $grid->building, $population, $stocks, $quantity, $quantities
+                );
+            }
+        });
+    }
+
+    /**
+     * Store a newly created movement in storage.
+     *
+     * @param Grid            $grid
+     * @param MovementManager $manager
+     *
+     * @return mixed|\Illuminate\Http\Response
+     */
+    public function storePatrol(Grid $grid, MovementManager $manager)
+    {
+        $this->authorize('friendly', $grid->planet);
+        $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
+
+        $quantities = $this->quantities();
+
+        $populations = $grid->planet->findPopulationsByUnitIds($quantities->keys())
+            ->each(function (Population $population) use ($quantities) {
+                if (! $population->hasQuantity($quantities->get($population->unit_id))) {
+                    throw new BadRequestHttpException();
+                }
+            });
+
+        $grid->building->applyModifiers([
+            'level' => $grid->level,
+        ]);
+
+        DB::transaction(function () use ($grid, $populations, $quantities, $manager) {
+            if ($grid->planet_id == $grid->planet->user->capital_id) {
+                $manager->createCapitalPatrol(
+                    $populations, $quantities
+                );
+            } else {
+                $manager->createPatrol(
+                    $grid->building, $populations, $quantities
                 );
             }
         });

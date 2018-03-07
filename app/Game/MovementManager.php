@@ -195,19 +195,9 @@ class MovementManager
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
-        foreach ($populations as $population) {
-            $population->decrementQuantity(
-                $quantities->get($population->unit_id)
-            );
-
-            $movement->units()->attach($population->unit_id, [
-                'quantity' => $quantities->get($population->unit_id),
-            ]);
-        }
-
-        $this->dispatchJobAndEvents($movement);
-
-        return $movement;
+        return $this->createSupportOrPatrol(
+            $movement, $populations, $quantities
+        );
     }
 
     /**
@@ -312,6 +302,72 @@ class MovementManager
     }
 
     /**
+     * Create patrol.
+     *
+     * @param Building                $building
+     * @param Collection|Population[] $populations
+     * @param BaseCollection          $quantities
+     *
+     * @return Movement
+     */
+    public function createPatrol(Building $building, Collection $populations, BaseCollection $quantities)
+    {
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
+
+        $travelTime = round(
+            $user->capital->travelTimeTo($user->current) / $populations->min('unit.speed') * (1 - $building->trade_time_bonus)
+        );
+
+        $movement = Movement::create([
+            'start_id' => $user->current_id,
+            'end_id' => $user->capital_id,
+            'user_id' => $user->id,
+            'type' => Movement::TYPE_PATROL,
+            'ended_at' => Carbon::now()->addSeconds($travelTime),
+        ]);
+
+        return $this->createSupportOrPatrol(
+            $movement, $populations, $quantities
+        );
+    }
+
+    /**
+     * Create capital patrol.
+     *
+     * @param Collection|Population[] $populations
+     * @param BaseCollection          $quantities
+     */
+    public function createCapitalPatrol(Collection $populations, BaseCollection $quantities)
+    {
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
+
+        foreach ($populations as $population) {
+            $population->decrementQuantity(
+                $quantities->get($population->unit_id)
+            );
+
+            $userUnit = $user->units->firstWhere('id', $population->unit_id);
+
+            if (! $userUnit) {
+                $user->resources()->attach($population->unit_id, [
+                    'is_researched' => false,
+                    'quantity' => $quantities->get($population->unit_id),
+                ]);
+            } else {
+                $userUnit->pivot->update([
+                    'quantity' => $userUnit->pivot->quantity + $quantities->get($population->unit_id),
+                ]);
+            }
+        }
+
+        $this->event->dispatch(
+            new PlanetUpdated($user->capital_id)
+        );
+    }
+
+    /**
      * Finish.
      *
      * @param Movement $movement
@@ -336,6 +392,9 @@ class MovementManager
                 break;
             case Movement::TYPE_TRADE:
                 $this->finishTrade($movement);
+                break;
+            case Movement::TYPE_PATROL:
+                $this->finishPatrol($movement);
                 break;
         }
 
@@ -434,12 +493,52 @@ class MovementManager
      */
     protected function finishTrade(Movement $movement)
     {
-        $this->transferMissionResources($movement);
+        $this->transferTradeResources($movement);
         $this->returnMovement($movement);
 
         $this->event->dispatch(
             new UserUpdated($movement->user_id)
         );
+    }
+
+    /**
+     * Finish the patrol movement.
+     *
+     * @param Movement $movement
+     */
+    protected function finishPatrol(Movement $movement)
+    {
+        $this->transferPatrolUnits($movement);
+
+        $this->event->dispatch(
+            new UserUpdated($movement->user_id)
+        );
+    }
+
+    /**
+     * Create support or patrol.
+     *
+     * @param Movement                $movement
+     * @param Collection|Population[] $populations
+     * @param BaseCollection          $quantities
+     *
+     * @return Movement
+     */
+    protected function createSupportOrPatrol(Movement $movement, Collection $populations, BaseCollection $quantities)
+    {
+        foreach ($populations as $population) {
+            $population->decrementQuantity(
+                $quantities->get($population->unit_id)
+            );
+
+            $movement->units()->attach($population->unit_id, [
+                'quantity' => $quantities->get($population->unit_id),
+            ]);
+        }
+
+        $this->dispatchJobAndEvents($movement);
+
+        return $movement;
     }
 
     /**
@@ -496,6 +595,29 @@ class MovementManager
     }
 
     /**
+     * Transfer the patrol units.
+     *
+     * @param Movement $movement
+     */
+    protected function transferPatrolUnits(Movement $movement)
+    {
+        foreach ($movement->units as $unit) {
+            $userUnit = $movement->user->units->firstWhere('id', $unit->id);
+
+            if (! $userUnit) {
+                $movement->user->units()->attach($unit->id, [
+                    'is_researched' => false,
+                    'quantity' => $unit->pivot->quantity,
+                ]);
+            } else {
+                $userUnit->pivot->update([
+                    'quantity' => $userUnit->pivot->quantity + $unit->pivot->quantity,
+                ]);
+            }
+        }
+    }
+
+    /**
      * Transfer the resources.
      *
      * @param Movement $movement
@@ -514,11 +636,11 @@ class MovementManager
     }
 
     /**
-     * Transfer the mission resources.
+     * Transfer the trade resources.
      *
      * @param Movement $movement
      */
-    protected function transferMissionResources(Movement $movement)
+    protected function transferTradeResources(Movement $movement)
     {
         foreach ($movement->resources as $resource) {
             $userResource = $movement->user->resources->firstWhere('id', $resource->id);

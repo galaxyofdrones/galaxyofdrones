@@ -4,7 +4,7 @@ namespace Koodilab\Models\Transformers;
 
 use Illuminate\Contracts\Auth\Factory as Auth;
 
-class UnitArmoryTransformer extends Transformer
+class UnitExpeditionTransformer extends Transformer
 {
     /**
      * The auth instance.
