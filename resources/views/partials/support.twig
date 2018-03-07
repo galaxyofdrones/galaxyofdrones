@@ -1,0 +1,44 @@
+<div class="modal-body separator">
+    <div class="item-input-row">
+        <div class="col-xs-12 col-sm-4 col-md-3" v-for="unit in planet.units">
+                <span class="item item-sm"
+                      :class="unit | item('unit')"
+                      :title="unit.name"
+                      :data-content="unit.description"
+                      v-popover="{placement: 'top', trigger: 'hover'}">
+                    {{ vue('unit.name') }}
+                </span>
+            <div class="form-group">
+                <input class="form-control"
+                       type="number"
+                       min="1"
+                       :max="unit.quantity"
+                       :placeholder="unit.quantity | bracket"
+                       v-model.number="quantity[unit.id]">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-body separator">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <ul v-if="hasTimer" class="list-inline">
+                <li v-if="planet.is_capital"
+                    data-content="{{ trans('validation.attributes.trade_time') }}"
+                    v-popover="{placement: 'top', trigger: 'hover'}">
+                    <i class="icon-time"></i>
+                    {{ trans('messages.instant') }}
+                </li>
+                <li v-else
+                    data-content="{{ trans('validation.attributes.trade_time') }}"
+                    v-popover="{placement: 'top', trigger: 'hover'}">
+                    <i class="icon-time"></i>
+                    {{ vue('travelTime | timer') }}
+                </li>
+            </ul>
+            <button class="btn btn-success btn-block" :disabled="!hasUnits" @click="support()">
+                {{ trans('messages.movement.support') }}
+            </button>
+        </div>
+    </div>
+</div>

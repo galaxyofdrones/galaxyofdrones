@@ -110,11 +110,11 @@ class UserController extends Controller
         /** @var \Koodilab\Models\User $user */
         $user = auth()->user();
 
-        if (! $user->isCapitalChangeable()) {
+        if (! $user->canChangeCapital()) {
             throw new BadRequestHttpException();
         }
 
-        if ($user->capital->incomingTradeMovementCount()) {
+        if ($user->capital->incomingCapitalMovementCount()) {
             throw new BadRequestHttpException();
         }
 

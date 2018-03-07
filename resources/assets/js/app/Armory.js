@@ -1,3 +1,5 @@
+import { EventBus } from './event-bus';
+
 export default {
     props: ['isEnabled', 'url'],
 
@@ -7,6 +9,10 @@ export default {
                 units: []
             }
         };
+    },
+
+    created() {
+        EventBus.$on('planet-update', () => this.fetchData());
     },
 
     computed: {

@@ -2,12 +2,24 @@
         :building="building"
         :grid="grid"
         :close="close"
-        url="{{ route('api_planet_capital') }}"
-        store-url="{{ route('api_movement_trade_store', '__planet__') }}"
-        :unit-types="{{ {
-            'transporter': constant('Koodilab\\Models\\Unit::TYPE_TRANSPORTER')
-        }|json_encode }}" inline-template>
+        url="{{ route('api_planet_capital') }}" inline-template>
     <div v-if="isEnabled" class="trader">
-        {% include 'partials.transport' %}
+        <div class="modal-body">
+            <ul class="nav nav-tabs nav-justified">
+                <li :class="{active: isSelectedTab('trade')}">
+                    <a href="#" @click.prevent="selectTab('trade')">
+                        {{ trans('messages.resource.singular') }}
+                    </a>
+                </li>
+                <li :class="{active: isSelectedTab('patrol')}">
+                    <a href="#" @click.prevent="selectTab('patrol')">
+                        {{ trans('messages.unit.singular') }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        {% include 'surface.trade' %}
+        {% include 'surface.patrol' %}
     </div>
 </trader>

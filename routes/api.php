@@ -151,8 +151,13 @@ $router->group([
             ->name('movement_transport_store')
             ->where('planet', '\d+');
 
-        $router->post('trade', 'MovementController@storeTrade')
-            ->name('movement_trade_store');
+        $router->post('trade/{grid}', 'MovementController@storeTrade')
+            ->name('movement_trade_store')
+            ->where('grid', '\d+');
+
+        $router->post('patrol/{grid}', 'MovementController@storePatrol')
+            ->name('movement_patrol_store')
+            ->where('grid', '\d+');
     });
 
     $router->group([

@@ -18,7 +18,7 @@ class UserCapitalTransformer extends Transformer
             'id' => $item->id,
             'capital_id' => $item->capital_id,
             'capital_change_remaining' => $item->capital_change_remaining,
-            'incoming_trade_movement' => $item->capital->incomingTradeMovementCount(),
+            'incoming_capital_movement_count' => $item->capital->incomingCapitalMovementCount(),
             'planets' => $this->planets($item),
         ];
     }

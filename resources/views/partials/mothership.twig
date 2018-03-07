@@ -47,14 +47,14 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs nav-justified">
-                        <li :class="{active: isSelectedTab('armory')}">
-                            <a href="#" @click.prevent="selectTab('armory')">
-                                {{ trans('messages.armory') }}
-                            </a>
-                        </li>
                         <li :class="{active: isSelectedTab('cargo')}">
                             <a href="#" @click.prevent="selectTab('cargo')">
                                 {{ trans('messages.cargo') }}
+                            </a>
+                        </li>
+                        <li :class="{active: isSelectedTab('armory')}">
+                            <a href="#" @click.prevent="selectTab('armory')">
+                                {{ trans('messages.armory') }}
                             </a>
                         </li>
                         <li :class="{active: isSelectedTab('laboratory')}">
@@ -65,8 +65,8 @@
                     </ul>
                 </div>
 
-                {% include 'partials.armory' %}
                 {% include 'partials.cargo' %}
+                {% include 'partials.armory' %}
                 {% include 'partials.laboratory' %}
             </div>
         </div>

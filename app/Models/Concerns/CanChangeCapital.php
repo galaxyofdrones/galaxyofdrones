@@ -7,11 +7,11 @@ use Carbon\Carbon;
 trait CanChangeCapital
 {
     /**
-     * Is capital changeable?
+     * Can change capital?
      *
      * @return bool
      */
-    public function isCapitalChangeable()
+    public function canChangeCapital()
     {
         if (! $this->last_capital_changed) {
             return false;
@@ -29,7 +29,7 @@ trait CanChangeCapital
      */
     public function getCapitalChangeRemainingAttribute()
     {
-        if ($this->isCapitalChangeable()) {
+        if ($this->canChangeCapital()) {
             return null;
         }
 
