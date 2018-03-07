@@ -5,6 +5,7 @@ namespace Koodilab\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
+use Koodilab\Game\MovementManager;
 use Koodilab\Models\Movement as MovementModel;
 
 class Move implements ShouldQueue
@@ -32,14 +33,15 @@ class Move implements ShouldQueue
      * Handle the job.
      *
      * @param DatabaseManager $database
+     * @param MovementManager $manager
      */
-    public function handle(DatabaseManager $database)
+    public function handle(DatabaseManager $database, MovementManager $manager)
     {
         $movement = MovementModel::find($this->movementId);
 
         if ($movement) {
-            $database->transaction(function () use ($movement) {
-                $movement->finish();
+            $database->transaction(function () use ($movement, $manager) {
+                $manager->finish($movement);
             });
         }
     }

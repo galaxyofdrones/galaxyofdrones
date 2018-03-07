@@ -5,6 +5,7 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
+use Koodilab\Game\MovementManager;
 use Koodilab\Models\Movement;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -15,7 +16,7 @@ class MovementFinish extends Command
     /**
      * {@inheritdoc}
      */
-    protected $name = 'movement:finish';
+    protected $name = 'finish:movement';
 
     /**
      * {@inheritdoc}
@@ -30,15 +31,24 @@ class MovementFinish extends Command
     protected $database;
 
     /**
+     * The movement manager instance.
+     *
+     * @var MovementManager
+     */
+    protected $manager;
+
+    /**
      * Constructor.
      *
      * @param DatabaseManager $database
+     * @param MovementManager $manager
      */
-    public function __construct(DatabaseManager $database)
+    public function __construct(DatabaseManager $database, MovementManager $manager)
     {
         parent::__construct();
 
         $this->database = $database;
+        $this->manager = $manager;
     }
 
     /**
@@ -70,7 +80,7 @@ class MovementFinish extends Command
         $movement = Movement::find($id);
 
         if ($movement) {
-            $movement->finish();
+            $this->manager->finish($movement);
 
             $this->info(
                 $this->prependTimestamp("The movement [{$id}] has been finished!")
