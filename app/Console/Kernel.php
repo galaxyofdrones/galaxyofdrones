@@ -10,20 +10,7 @@ class Kernel extends ConsoleKernel
     /**
      * {@inheritdoc}
      */
-    protected $commands = [
-        Commands\BuildingDemolish::class,
-        Commands\ConstructionFinish::class,
-        Commands\ExpeditionClearCommand::class,
-        Commands\MissionClearCommand::class,
-        Commands\MissionGenerateCommand::class,
-        Commands\MovementFinish::class,
-        Commands\PlanetOccupyCommand::class,
-        Commands\ResearchFinish::class,
-        Commands\StarmapGenerateCommand::class,
-        Commands\StarmapRenderCommand::class,
-        Commands\TrainingFinish::class,
-        Commands\UpgradeFinish::class,
-    ];
+    protected $commands = [];
 
     /**
      * {@inheritdoc}
