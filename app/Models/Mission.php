@@ -2,9 +2,7 @@
 
 namespace Koodilab\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Support\Util;
 
 /**
  * Mission.
@@ -84,65 +82,6 @@ class Mission extends Model
     ];
 
     /**
-     * Create a random mission.
-     *
-     * @param User $user
-     */
-    public static function createRand(User $user)
-    {
-        $mission = static::create([
-            'user_id' => $user->id,
-            'energy' => 0,
-            'experience' => 0,
-        ]);
-
-        $resources = $user->findMissionResources();
-
-        $resources = $resources->random(
-            mt_rand(1, $resources->count())
-        );
-
-        $totalFrequency = $resources->sum('frequency');
-        $totalQuantity = $user->planets->sum('capacity') * static::randMultiplier();
-
-        foreach ($resources as $resource) {
-            $quantity = round(
-                $resource->frequency / $totalFrequency * $totalQuantity
-            );
-
-            $energy = round(
-                $quantity * $resource->efficiency
-            );
-
-            $mission->energy += round(
-                $energy * static::ENERGY_BONUS
-            );
-
-            $mission->experience += round(
-                $energy * static::EXPERIENCE_BONUS
-            );
-
-            $mission->resources()->attach($resource->id, [
-                'quantity' => $quantity,
-            ]);
-        }
-
-        $mission->fill([
-            'ended_at' => Carbon::now()->addSeconds(static::MISSION_TIME),
-        ])->save();
-    }
-
-    /**
-     * Delete the expired missions.
-     *
-     * @return bool|null
-     */
-    public static function deleteExpired()
-    {
-        return static::where('ended_at', '<', Carbon::now())->delete();
-    }
-
-    /**
      * Get the resources.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -172,50 +111,5 @@ class Mission extends Model
         }
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function finish()
-    {
-        $this->user->incrementEnergyAndExperience(
-            $this->energy,
-            $this->experience
-        );
-
-        $userResources = $this->user->resources()
-            ->whereIn('resource_id', $this->resources->modelKeys())
-            ->get();
-
-        foreach ($this->resources as $resource) {
-            $userResource = $userResources->firstWhere('id', $resource->id);
-
-            $userResource->pivot->update([
-                'quantity' => max(0, $userResource->pivot->quantity - $resource->pivot->quantity),
-            ]);
-        }
-
-        MissionLog::createFrom($this);
-
-        $this->delete();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cancel()
-    {
-        $this->delete();
-    }
-
-    /**
-     * Get a random multiplier.
-     *
-     * @return float
-     */
-    protected static function randMultiplier()
-    {
-        return static::MIN_CAPACITY + (static::MAX_CAPACITY - static::MIN_CAPACITY) * Util::randFloat();
     }
 }
