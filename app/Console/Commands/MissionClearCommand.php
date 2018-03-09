@@ -50,7 +50,7 @@ class MissionClearCommand extends Command
         );
 
         $this->database->transaction(function () {
-            Mission::deleteExpired();
+            Mission::newModelInstance()->deleteExpired();
         });
 
         $this->info(

@@ -3,6 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
+use Koodilab\Game\MissionManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Mission;
 use Koodilab\Models\Resource;
@@ -45,11 +46,12 @@ class MissionController extends Controller
     /**
      * Store a newly created mission log in storage.
      *
-     * @param Mission $mission
+     * @param Mission        $mission
+     * @param MissionManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function store(Mission $mission)
+    public function store(Mission $mission, MissionManager $manager)
     {
         $this->authorize('complete', $mission);
 
@@ -57,8 +59,8 @@ class MissionController extends Controller
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($mission) {
-            $mission->finish();
+        DB::transaction(function () use ($mission, $manager) {
+            $manager->finsh($mission);
         });
     }
 }

@@ -5,7 +5,7 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Models\Mission;
+use Koodilab\Game\MissionManager;
 use Koodilab\Models\User;
 
 class MissionGenerateCommand extends Command
@@ -30,15 +30,24 @@ class MissionGenerateCommand extends Command
     protected $database;
 
     /**
+     * The mission manager instance.
+     *
+     * @var MissionManager
+     */
+    protected $manager;
+
+    /**
      * Constructor.
      *
      * @param DatabaseManager $database
+     * @param MissionManager  $manager
      */
-    public function __construct(DatabaseManager $database)
+    public function __construct(DatabaseManager $database, MissionManager $manager)
     {
         parent::__construct();
 
         $this->database = $database;
+        $this->manager = $manager;
     }
 
     /**
@@ -56,7 +65,7 @@ class MissionGenerateCommand extends Command
             $users = User::whereNotNull('started_at')->get();
 
             foreach ($users as $user) {
-                Mission::createRand($user);
+                $this->manager->createRand($user);
             }
         });
 

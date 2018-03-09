@@ -20,6 +20,16 @@ trait Timeable
     }
 
     /**
+     * Delete the expired.
+     *
+     * @return bool|null
+     */
+    public function deleteExpired()
+    {
+        return static::where($this->endedAtKey(), '<', Carbon::now())->delete();
+    }
+
+    /**
      * Get the ended at key.
      *
      * @return string

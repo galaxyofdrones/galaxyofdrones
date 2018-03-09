@@ -42,17 +42,26 @@ class MovementManager
     protected $event;
 
     /**
+     * The simulator instance.
+     *
+     * @var SimulatorContract
+     */
+    protected $simulator;
+
+    /**
      * Constructor.
      *
-     * @param Auth  $auth
-     * @param Bus   $bus
-     * @param Event $event
+     * @param Auth              $auth
+     * @param Bus               $bus
+     * @param Event             $event
+     * @param SimulatorContract $simulator
      */
-    public function __construct(Auth $auth, Bus $bus, Event $event)
+    public function __construct(Auth $auth, Bus $bus, Event $event, SimulatorContract $simulator)
     {
         $this->auth = $auth;
         $this->bus = $bus;
         $this->event = $event;
+        $this->simulator = $simulator;
     }
 
     /**
@@ -414,7 +423,7 @@ class MovementManager
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
-            $battleLog = app(SimulatorContract::class)->scout($movement);
+            $battleLog = $this->simulator->scout($movement);
 
             $this->returnMovement(
                 $movement, $battleLog->attackerUnits
@@ -433,7 +442,7 @@ class MovementManager
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
-            $battleLog = app(SimulatorContract::class)->attack($movement);
+            $battleLog = $this->simulator->attack($movement);
 
             $this->returnMovement(
                 $movement, $battleLog->attackerUnits, $battleLog->resources
@@ -452,7 +461,7 @@ class MovementManager
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
-            $battleLog = app(SimulatorContract::class)->occupy($movement);
+            $battleLog = $this->simulator->occupy($movement);
 
             if ($battleLog->winner == BattleLog::WINNER_ATTACKER) {
                 if (! $battleLog->attacker->occupy($battleLog->end)) {

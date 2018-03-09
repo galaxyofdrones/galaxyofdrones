@@ -3,6 +3,7 @@
 namespace Koodilab\Battle;
 
 use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
+use Koodilab\Game\BattleManager;
 use Koodilab\Models\BattleLog;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
@@ -77,6 +78,23 @@ class Simulator implements SimulatorContract
     protected $heavyFighterCount;
 
     /**
+     * The battle manager instance.
+     *
+     * @var BattleManager
+     */
+    protected $manager;
+
+    /**
+     * Constructor.
+     *
+     * @param BattleManager $manager
+     */
+    public function __construct(BattleManager $manager)
+    {
+        $this->manager = $manager;
+    }
+
+    /**
      * Setup.
      *
      * @param Movement $movement
@@ -84,7 +102,6 @@ class Simulator implements SimulatorContract
     protected function setup(Movement $movement)
     {
         $this->movement = $movement;
-
         $this->movement->start->load('user');
         $this->movement->end->load('user');
 
@@ -238,9 +255,8 @@ class Simulator implements SimulatorContract
             }
         }
 
-        $this->battleLog = BattleLog::createFrom(
-            $this->movement,
-            $this->attackerLossRate > $this->defenderLossRate
+        $this->battleLog = $this->manager->createLog(
+            $this->movement, $this->attackerLossRate > $this->defenderLossRate
                 ? BattleLog::WINNER_DEFENDER
                 : BattleLog::WINNER_ATTACKER
         );
@@ -255,8 +271,7 @@ class Simulator implements SimulatorContract
     {
         $this->attackerLossRate = 0;
         $this->defenderLossRate = 0;
-
-        $this->battleLog = BattleLog::createFrom($this->movement);
+        $this->battleLog = $this->manager->createLog($this->movement);
 
         $this->calculate();
     }
@@ -334,8 +349,7 @@ class Simulator implements SimulatorContract
 
         if ($total) {
             $capacity = min(
-                $total,
-                round($this->capacity * $this->defenderLossRate)
+                $total, round($this->capacity * $this->defenderLossRate)
             );
 
             foreach ($this->stocks as $stock) {
