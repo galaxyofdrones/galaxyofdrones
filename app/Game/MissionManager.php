@@ -33,11 +33,11 @@ class MissionManager
         );
 
         $totalFrequency = $resources->sum('frequency');
-        $totalQuantity = $user->planets->sum('capacity') * $this->randMultiplier();
+        $totalCapacity = $user->planets->sum('capacity') * $this->randCapacityMultiplier();
 
         foreach ($resources as $resource) {
-            $quantity = round(
-                $resource->frequency / $totalFrequency * $totalQuantity
+            $quantity = ceil(
+                $resource->frequency / $totalFrequency * $totalCapacity
             );
 
             $energy = round(
@@ -58,7 +58,7 @@ class MissionManager
         }
 
         $mission->fill([
-            'ended_at' => Carbon::now()->addSeconds(Mission::MISSION_TIME),
+            'ended_at' => Carbon::now()->addSeconds(Mission::EXPIRATION_TIME),
         ])->save();
 
         return $mission;
@@ -97,7 +97,7 @@ class MissionManager
      *
      * @param Mission $mission
      */
-    public function finsh(Mission $mission)
+    public function finish(Mission $mission)
     {
         $mission->user->incrementEnergyAndExperience(
             $mission->energy, $mission->experience
@@ -121,11 +121,11 @@ class MissionManager
     }
 
     /**
-     * Get a random multiplier.
+     * Get a random capacity multiplier.
      *
      * @return float
      */
-    protected function randMultiplier()
+    protected function randCapacityMultiplier()
     {
         return Mission::MIN_CAPACITY + (Mission::MAX_CAPACITY - Mission::MIN_CAPACITY) * Util::randFloat();
     }

@@ -127,11 +127,11 @@ class Planet extends Model implements PositionableContract
     const SETTLER_COUNT = 1;
 
     /**
-     * The capital step.
+     * The find step.
      *
      * @var int
      */
-    const CAPITAL_STEP = 1024;
+    const FIND_STEP = 1024;
 
     /**
      * {@inheritdoc}

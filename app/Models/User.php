@@ -36,6 +36,8 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
  * @property Planet|null                                                                                               $current
  * @property \Illuminate\Database\Eloquent\Collection|BattleLog[]                                                      $defenseBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|ExpeditionLog[]                                                  $expeditionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Expedition[]                                                     $expeditions
  * @property int                                                                                                       $capital_change_remaining
  * @property int                                                                                                       $level
  * @property int                                                                                                       $level_experience
@@ -83,6 +85,7 @@ class User extends Authenticatable
         Queries\FindAvailableResource,
         Queries\FindAvailableUnits,
         Queries\FindByIdOrUsername,
+        Queries\FindExpeditionStar,
         Queries\FindMissionResources,
         Queries\FindNotExpiredMissions,
         Queries\FindPlanetsOrderByName,
@@ -98,7 +101,9 @@ class User extends Authenticatable
         Relations\HasManyMovement,
         Relations\HasManyResearch,
         Relations\HasManyMission,
-        Relations\HasManyMissionLog;
+        Relations\HasManyMissionLog,
+        Relations\HasManyExpedition,
+        Relations\HasManyExpeditionLog;
 
     /**
      * {@inheritdoc}

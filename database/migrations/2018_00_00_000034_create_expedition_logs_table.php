@@ -14,6 +14,12 @@ class CreateExpeditionLogsTable extends Migration
         Schema::create('expedition_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->integer('star_id')->unsigned();
+            $table->foreign('star_id')
+                ->references('id')
+                ->on('stars')
+                ->onDelete('cascade');
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
@@ -23,6 +29,8 @@ class CreateExpeditionLogsTable extends Migration
             $table->integer('solarion')->unsigned();
             $table->integer('experience')->unsigned();
             $table->timestamps();
+
+            $table->unique(['star_id', 'user_id']);
         });
     }
 
