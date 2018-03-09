@@ -48,6 +48,14 @@ export default {
     },
 
     methods: {
+        setTotalResource(resource) {
+            const total = this.resourceQuantity(resource);
+
+            if (total > 0) {
+                this.$set(this.quantity, resource.id, total);
+            }
+        },
+
         resourceQuantity(resource) {
             if (this.planet.resource_id === resource.id) {
                 return Math.floor(this.mined);

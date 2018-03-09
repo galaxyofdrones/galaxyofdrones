@@ -31,5 +31,13 @@ export default {
 
             return 1;
         }
+    },
+
+    methods: {
+        setTotalUnit(unit) {
+            if (unit.quantity > 0) {
+                this.$set(this.quantity, unit.id, unit.quantity);
+            }
+        }
     }
 };

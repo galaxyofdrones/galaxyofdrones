@@ -8,12 +8,20 @@
     {
       "selection": [
         {
+          "order": 52,
+          "id": 41,
+          "name": "sum",
+          "prevSize": 32,
+          "code": 59652,
+          "tempChar": ""
+        },
+        {
           "order": 51,
           "id": 40,
           "name": "solarion",
           "prevSize": 32,
           "code": 59649,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 47,
@@ -21,7 +29,7 @@
           "name": "close",
           "prevSize": 32,
           "code": 59677,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 43,
@@ -29,7 +37,7 @@
           "name": "edit",
           "prevSize": 32,
           "code": 59659,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 44,
@@ -37,7 +45,7 @@
           "name": "nav",
           "prevSize": 32,
           "code": 59661,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 38,
@@ -45,7 +53,7 @@
           "name": "login",
           "prevSize": 32,
           "code": 59676,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 37,
@@ -53,7 +61,7 @@
           "prevSize": 32,
           "code": 59674,
           "name": "trophy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 35,
@@ -61,7 +69,7 @@
           "prevSize": 32,
           "code": 59673,
           "name": "more",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 29,
@@ -69,7 +77,7 @@
           "prevSize": 32,
           "code": 59654,
           "name": "envelope",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 28,
@@ -77,7 +85,7 @@
           "prevSize": 32,
           "code": 59666,
           "name": "surface",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 1,
@@ -85,7 +93,7 @@
           "prevSize": 32,
           "code": 59671,
           "name": "arrow-left",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 25,
@@ -93,7 +101,7 @@
           "prevSize": 32,
           "code": 59672,
           "name": "arrow-right",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 2,
@@ -101,7 +109,7 @@
           "prevSize": 32,
           "code": 59670,
           "name": "supply",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 3,
@@ -109,7 +117,7 @@
           "prevSize": 32,
           "code": 59669,
           "name": "xp",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 4,
@@ -117,7 +125,7 @@
           "prevSize": 32,
           "code": 59651,
           "name": "energy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 5,
@@ -125,7 +133,7 @@
           "prevSize": 32,
           "code": 59648,
           "name": "time",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 7,
@@ -133,7 +141,7 @@
           "prevSize": 32,
           "code": 59650,
           "name": "cog",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 12,
@@ -141,7 +149,7 @@
           "prevSize": 32,
           "code": 59656,
           "name": "globe",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 16,
@@ -149,7 +157,7 @@
           "prevSize": 32,
           "code": 59660,
           "name": "mothership",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 18,
@@ -157,7 +165,7 @@
           "prevSize": 32,
           "code": 59662,
           "name": "power-off",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 20,
@@ -165,7 +173,7 @@
           "prevSize": 32,
           "code": 59664,
           "name": "star",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 21,
@@ -173,7 +181,7 @@
           "prevSize": 32,
           "code": 59665,
           "name": "starmap",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 24,
@@ -181,20 +189,35 @@
           "prevSize": 32,
           "code": 59668,
           "name": "user",
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 0,
       "metadata": {
         "name": "icomoon",
         "importSize": {
-          "width": 45,
-          "height": 45
+          "width": 114,
+          "height": 114
         }
       },
       "height": 1024,
       "prevSize": 32,
       "icons": [
+        {
+          "id": 41,
+          "paths": [
+            "M37.697 983.754c10.151 24.371 33.967 40.246 60.351 40.246h827.906c36.105 0 65.368-29.254 65.368-65.377v-196.068c0-36.105-29.254-65.368-65.368-65.368s-65.377 29.254-65.377 65.368v130.709h-605.464l299.383-301.368c23.968-24.138 25.435-62.64 3.336-88.505l-318.056-372.665h620.82v43.573c0 36.105 29.254 65.359 65.377 65.359s65.368-29.254 65.368-65.359v-108.931c0-36.105-29.254-65.368-65.368-65.368h-827.923c-25.498 0-48.67 14.837-59.349 38.001s-6.904 50.414 9.632 69.804l371.011 434.688-367.657 370.081c-18.611 18.728-24.121 46.801-13.988 71.181z"
+          ],
+          "attrs": [
+            {}
+          ],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 20,
+          "tags": [
+            "sum"
+          ]
+        },
         {
           "id": 40,
           "paths": [

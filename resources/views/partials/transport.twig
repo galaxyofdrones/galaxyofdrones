@@ -59,12 +59,19 @@
                     {{ vue('resource.name') }}
                 </span>
             <div class="form-group">
-                <input class="form-control"
-                       type="number"
-                       min="1"
-                       :max="resourceQuantity(resource)"
-                       :placeholder="resourceQuantity(resource) | bracket"
-                       v-model.number="quantity[resource.id]">
+                <div class="input-group">
+                    <div class="input-group-btn" @click="setTotalResource(resource)">
+                        <button class="btn btn-info btn-block">
+                            <i class="icon-sum"></i>
+                        </button>
+                    </div>
+                    <input class="form-control"
+                           type="number"
+                           min="1"
+                           :max="resourceQuantity(resource)"
+                           :placeholder="resourceQuantity(resource) | bracket"
+                           v-model.number="quantity[resource.id]">
+                </div>
             </div>
         </div>
     </div>
