@@ -9,12 +9,19 @@
                     {{ vue('unit.name') }}
                 </span>
             <div class="form-group">
-                <input class="form-control"
-                       type="number"
-                       min="1"
-                       :max="unit.quantity"
-                       :placeholder="unit.quantity | bracket"
-                       v-model.number="quantity[unit.id]">
+                <div class="input-group">
+                    <div class="input-group-btn" @click="setTotalUnit(unit)">
+                        <button class="btn btn-info btn-block">
+                            <i class="icon-sum"></i>
+                        </button>
+                    </div>
+                    <input class="form-control"
+                           type="number"
+                           min="1"
+                           :max="unit.quantity"
+                           :placeholder="unit.quantity | bracket"
+                           v-model.number="quantity[unit.id]">
+                </div>
             </div>
         </div>
     </div>
