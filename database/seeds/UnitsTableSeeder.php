@@ -41,7 +41,7 @@ class UnitsTableSeeder extends Seeder
             'train_cost' => 170,
             'train_time' => 1500,
             'description' => [
-                'en' => 'Scouts the planets.',
+                'en' => 'Scouts the stars or planets.',
             ],
             'detection' => 25,
         ]);

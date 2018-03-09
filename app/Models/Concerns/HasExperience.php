@@ -74,6 +74,20 @@ trait HasExperience
     }
 
     /**
+     * Increment the solarion and experience.
+     *
+     * @param int $solarionAmount
+     * @param int $experienceAmount
+     */
+    public function incrementSolarionAndExperience($solarionAmount, $experienceAmount)
+    {
+        $this->update([
+            'solarion' => $this->solarion + $solarionAmount,
+            'experience' => $this->experience + $experienceAmount,
+        ]);
+    }
+
+    /**
      * Get the experience offset.
      *
      * @return float

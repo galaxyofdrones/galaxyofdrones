@@ -1,22 +1,25 @@
-<reward-log :is-enabled="isEnabled && isSelectedTab('mission-log')"
-            url="{{ route('api_mission_log') }}" inline-template>
-    <div v-if="isEnabled" class="mission-log">
+<reward-log :is-enabled="isEnabled && isSelectedTab('expedition-log')"
+            url="{{ route('api_expedition_log') }}" inline-template>
+    <div v-if="isEnabled" class="expedition-log">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.mission_log.empty') }}
+                {{ trans('messages.expedition_log.empty') }}
             </p>
         </div>
         <template v-else>
-            <div v-for="mission_log in data.data" class="modal-body separator">
+            <div v-for="expedition_log in data.data" class="modal-body separator">
                 <div class="row">
                     <div class="col-md-6">
-                        <span v-for="resource in mission_log.resources"
+                        <span class="item item-sm star">
+                            {{ vue('expedition_log.star') }}
+                        </span>
+                        <span v-for="unit in expedition_log.units"
                               class="item item-sm"
-                              :class="resource | item('resource')"
-                              :title="resource.name"
-                              :data-content="resource.description"
+                              :class="unit | item('unit')"
+                              :title="unit.name"
+                              :data-content="unit.description"
                               v-popover="{placement: 'top', trigger: 'hover'}">
-                            {{ vue('resource.quantity | number') }}
+                            {{ vue('unit.quantity | number') }}
                         </span>
                     </div>
                     <div class="col-md-2 text-center">
@@ -24,7 +27,7 @@
                             <i class="icon-time"></i>
                         </h4>
                         <h4>
-                            {{ vue('mission_log.created_at | fromNow') }}
+                            {{ vue('expedition_log.created_at | fromNow') }}
                         </h4>
                     </div>
                     <div class="col-md-2 text-center">
@@ -32,15 +35,15 @@
                             <i class="icon-xp"></i>
                         </h4>
                         <h4>
-                            {{ vue('mission_log.experience | number') }}
+                            {{ vue('expedition_log.experience | number') }}
                         </h4>
                     </div>
                     <div class="col-md-2 text-center highlight-warning">
                         <h4>
-                            <i class="icon-energy"></i>
+                            <i class="icon-solarion"></i>
                         </h4>
                         <h4>
-                            {{ vue('mission_log.energy | number') }}
+                            {{ vue('expedition_log.solarion | number') }}
                         </h4>
                     </div>
                 </div>

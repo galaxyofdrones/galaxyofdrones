@@ -14,6 +14,12 @@ class CreateExpeditionsTable extends Migration
         Schema::create('expeditions', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->integer('star_id')->unsigned();
+            $table->foreign('star_id')
+                ->references('id')
+                ->on('stars')
+                ->onDelete('cascade');
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
@@ -24,6 +30,8 @@ class CreateExpeditionsTable extends Migration
             $table->integer('experience')->unsigned();
             $table->timestamp('ended_at');
             $table->timestamps();
+
+            $table->unique(['star_id', 'user_id']);
         });
     }
 

@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
  * Expedition log.
  *
  * @property int                                             $id
+ * @property int                                             $star_id
  * @property int                                             $user_id
  * @property int                                             $solarion
  * @property int                                             $experience
  * @property \Carbon\Carbon|null                             $created_at
  * @property \Carbon\Carbon|null                             $updated_at
+ * @property Star                                            $star
  * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
  * @property User                                            $user
  *
@@ -20,13 +22,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereSolarion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereStarId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpeditionLog whereUserId($value)
  * @mixin \Eloquent
  */
 class ExpeditionLog extends Model
 {
-    use Relations\BelongsToUser;
+    use Relations\BelongsToStar,
+        Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}

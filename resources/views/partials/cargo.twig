@@ -1,6 +1,6 @@
 <cargo :is-enabled="isEnabled && isSelectedTab('cargo')"
-        url="{{ route('api_mission') }}"
-        store-url="{{ route('api_mission_store', '__mission__') }}" inline-template>
+       url="{{ route('api_mission') }}"
+       store-url="{{ route('api_mission_store', '__mission__') }}" inline-template>
     <div v-if="isEnabled" class="cargo">
         <div class="cargo-summary modal-body separator text-center">
             <span v-for="resource in data.resources"
@@ -65,7 +65,7 @@
                         <button class="btn btn-success btn-block"
                                 :disabled="!isCompletable(mission)"
                                 @click="store(mission)">
-                            {{ trans('messages.mission.complete') }}
+                            {{ trans('messages.complete') }}
                         </button>
                     </div>
                 </div>

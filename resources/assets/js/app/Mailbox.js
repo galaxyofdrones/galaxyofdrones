@@ -1,16 +1,21 @@
 import { EventBus } from './event-bus';
 import BattleLog from './BattleLog';
-import MissionLog from './MissionLog';
+import RewardLog from './RewardLog';
 import Modal from './Modal';
+import HasTab from './HasTab';
 
 export default Modal.extend({
     components: {
-        BattleLog, MissionLog
+        BattleLog, RewardLog
     },
+
+    mixins: [
+        HasTab
+    ],
 
     data() {
         return {
-            selected: 'mission-log'
+            selectedTab: 'mission-log'
         };
     },
 
@@ -18,27 +23,9 @@ export default Modal.extend({
         EventBus.$on('mailbox-click', this.open);
     },
 
-    computed: {
-        isMissionLogSelected() {
-            return this.selected === 'mission-log';
-        },
-
-        isBattleLogSelected() {
-            return this.selected === 'battle-log';
-        }
-    },
-
     methods: {
         open() {
             this.$nextTick(() => this.$modal.modal());
-        },
-
-        selectMissionLog() {
-            this.selected = 'mission-log';
-        },
-
-        selectBattleLog() {
-            this.selected = 'battle-log';
         }
     }
 });

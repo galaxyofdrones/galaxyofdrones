@@ -95,10 +95,18 @@ export default {
 
                 style: feature => {
                     if (feature.geometry.type === 'LineString') {
+                        let className = 'leaflet-movement';
+
+                        if (feature.properties.type === 'expedition') {
+                            className += ` ${feature.properties.type}`;
+                        } else if (feature.properties.type < 3) {
+                            className += ` ${feature.properties.status}-attack`;
+                        } else {
+                            className += ` ${feature.properties.status}`;
+                        }
+
                         return {
-                            className: feature.properties.type < 3
-                                ? `leaflet-movement ${feature.properties.status}-attack`
-                                : `leaflet-movement ${feature.properties.status}`
+                            className
                         };
                     }
                 }

@@ -18,10 +18,12 @@ trait FindFreeCapital
         $center = Generator::SIZE / 2;
         $bounds = new Bounds();
 
-        for ($i = Planet::CAPITAL_STEP; $i < $center; $i += Planet::CAPITAL_STEP) {
-            $capital = Planet::starter()->inBounds(
-                $bounds->setMinXY($center - $i)->setMaxXY($center + $i)
-            )->first();
+        for ($i = Planet::FIND_STEP; $i < $center; $i += Planet::FIND_STEP) {
+            $bounds->setMinXY($center - $i)->setMaxXY($center + $i);
+
+            $capital = Planet::starter()
+                ->inBounds($bounds)
+                ->first();
 
             if ($capital) {
                 return $capital;

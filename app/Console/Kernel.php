@@ -10,19 +10,7 @@ class Kernel extends ConsoleKernel
     /**
      * {@inheritdoc}
      */
-    protected $commands = [
-        Commands\BuildingDemolish::class,
-        Commands\ConstructionFinish::class,
-        Commands\MissionClearCommand::class,
-        Commands\MissionGenerateCommand::class,
-        Commands\MovementFinish::class,
-        Commands\PlanetOccupyCommand::class,
-        Commands\ResearchFinish::class,
-        Commands\StarmapGenerateCommand::class,
-        Commands\StarmapRenderCommand::class,
-        Commands\TrainingFinish::class,
-        Commands\UpgradeFinish::class,
-    ];
+    protected $commands = [];
 
     /**
      * {@inheritdoc}
@@ -41,6 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('expedition:generate')->cron('0 */6 * * *');
         $schedule->command('mission:generate')->cron('0 */6 * * *');
     }
 

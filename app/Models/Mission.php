@@ -61,11 +61,11 @@ class Mission extends Model
     const EXPERIENCE_BONUS = 2.0;
 
     /**
-     * The mission time.
+     * The expiration time.
      *
      * @var int
      */
-    const MISSION_TIME = 259200;
+    const EXPIRATION_TIME = 259200;
 
     /**
      * {@inheritdoc}

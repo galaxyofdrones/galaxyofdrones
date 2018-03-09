@@ -60,7 +60,7 @@ class MissionController extends Controller
         }
 
         DB::transaction(function () use ($mission, $manager) {
-            $manager->finsh($mission);
+            $manager->finish($mission);
         });
     }
 }
