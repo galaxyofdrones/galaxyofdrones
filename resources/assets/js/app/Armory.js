@@ -1,12 +1,18 @@
 import { EventBus } from './event-bus';
+import Expedition from './Expedition';
 
 export default {
-    props: ['isEnabled', 'url'],
+    props: ['isEnabled', 'url', 'storeUrl'],
+
+    components: {
+        Expedition
+    },
 
     data() {
         return {
             data: {
-                units: []
+                units: [],
+                expeditions: []
             }
         };
     },
@@ -17,7 +23,7 @@ export default {
 
     computed: {
         isEmpty() {
-            return true;
+            return !this.data.expeditions.length;
         }
     },
 
@@ -35,6 +41,18 @@ export default {
 
             axios.get(this.url).then(
                 response => this.data = response.data
+            );
+        },
+
+        isCompletable(expedition) {
+            return !_.some(expedition.units, unit => unit.quantity > _.find(this.data.units, {
+                id: unit.id
+            }).quantity);
+        },
+
+        store(expedition) {
+            axios.post(
+                this.storeUrl.replace('__expedition__', expedition.id)
             );
         }
     }

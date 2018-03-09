@@ -1,6 +1,7 @@
 import { EventBus } from './event-bus';
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
     props: ['isEnabled', 'url'],
 
     data() {
@@ -75,4 +76,4 @@ export default {
             this.fetchData();
         }
     }
-};
+});

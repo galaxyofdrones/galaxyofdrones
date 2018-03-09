@@ -108,6 +108,17 @@ $router->group([
     ], function () use ($router) {
         $router->get('/', 'ExpeditionController@index')
             ->name('expedition');
+
+        $router->post('{expedition}', 'ExpeditionController@store')
+            ->name('expedition_store')
+            ->where('expedition', '\d+');
+    });
+
+    $router->group([
+        'prefix' => 'expedition-log',
+    ], function () use ($router) {
+        $router->get('/', 'ExpeditionLogController@index')
+            ->name('expedition_log');
     });
 
     $router->group([

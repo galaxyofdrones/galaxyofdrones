@@ -12,13 +12,18 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs nav-justified">
-                        <li :class="{active: isMissionLogSelected}">
-                            <a href="#" @click.prevent="selectMissionLog()">
+                        <li :class="{active: isSelectedTab('mission-log')}">
+                            <a href="#" @click.prevent="selectTab('mission-log')">
                                 {{ trans('messages.mission_log.plural') }}
                             </a>
                         </li>
-                        <li :class="{active: isBattleLogSelected}">
-                            <a href="#" @click.prevent="selectBattleLog()">
+                        <li :class="{active: isSelectedTab('expedition-log')}">
+                            <a href="#" @click.prevent="selectTab('expedition-log')">
+                                {{ trans('messages.expedition_log.plural') }}
+                            </a>
+                        </li>
+                        <li :class="{active: isSelectedTab('battle-log')}">
+                            <a href="#" @click.prevent="selectTab('battle-log')">
                                 {{ trans('messages.battle_log.plural') }}
                             </a>
                         </li>
@@ -26,6 +31,7 @@
                 </div>
 
                 {% include 'partials.mission-log' %}
+                {% include 'partials.expedition-log' %}
                 {% include 'partials.battle-log' %}
             </div>
         </div>

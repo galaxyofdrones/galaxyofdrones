@@ -1,4 +1,4 @@
-<battle-log :is-enabled="isEnabled && isBattleLogSelected"
+<battle-log :is-enabled="isEnabled && isSelectedTab('battle-log')"
             :open-after-hidden="openAfterHidden"
             url="{{ route('api_battle_log') }}" inline-template>
     <div v-if="isEnabled" class="battle-log">

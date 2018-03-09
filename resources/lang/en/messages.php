@@ -5,6 +5,7 @@ return [
     'armory' => 'Armory',
     'cargo' => 'Cargo',
     'cancel' => 'Cancel',
+    'complete' => 'Complete',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
     'energy' => 'Energy',
@@ -68,8 +69,12 @@ return [
         'empty' => 'No expeditions.'
     ],
 
+    'expedition_log' => [
+        'empty' => 'No expedition logs.',
+        'plural' => 'Expedition logs',
+    ],
+
     'mission' => [
-        'complete' => 'Complete',
         'empty' => 'No missions.',
     ],
 

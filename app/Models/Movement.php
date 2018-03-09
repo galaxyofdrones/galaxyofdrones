@@ -91,13 +91,6 @@ class Movement extends Model
     const TYPE_PATROL = 6;
 
     /**
-     * The expedition type.
-     *
-     * @var int
-     */
-    const TYPE_EXPEDITION = 7;
-
-    /**
      * {@inheritdoc}
      */
     protected $guarded = [

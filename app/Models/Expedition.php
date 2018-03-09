@@ -94,4 +94,26 @@ class Expedition extends Model
     {
         return $this->belongsToMany(Unit::class)->withPivot('quantity');
     }
+
+    /**
+     * Is completable?
+     *
+     * @return bool
+     */
+    public function isCompletable()
+    {
+        $userUnits = $this->user->units()
+            ->whereIn('unit_id', $this->units->modelKeys())
+            ->get();
+
+        foreach ($this->units as $unit) {
+            $userUnit = $userUnits->firstWhere('id', $unit->id);
+
+            if ($userUnit->pivot->quantity < $unit->pivot->quantity) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
