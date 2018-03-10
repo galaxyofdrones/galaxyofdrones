@@ -46,7 +46,7 @@ class ExpeditionManager
         $totalSupply = $user->planets->sum('supply') * $this->randSupplyMultiplier();
 
         $quantity = ceil(
-            min($totalSupply / $scoutUnit->supply, $user->capital->travelTimeTo($star))
+            $totalSupply / $scoutUnit->supply
         );
 
         $expedition->units()->attach($scoutUnit->id, [
