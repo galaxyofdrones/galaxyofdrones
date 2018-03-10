@@ -4,6 +4,7 @@ namespace Koodilab\Models\Transformers;
 
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Koodilab\Models\Bookmark;
+use Koodilab\Models\Expedition;
 
 class StarShowTransformer extends Transformer
 {
@@ -37,6 +38,7 @@ class StarShowTransformer extends Transformer
         return [
             'id' => $item->id,
             'isBookmarked' => $user && Bookmark::findByStarAndUser($item, $user),
+            'hasExpedition' => $user && Expedition::findByStarAndUser($item, $user),
         ];
     }
 }

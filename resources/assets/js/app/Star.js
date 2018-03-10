@@ -13,7 +13,8 @@ export default Modal.extend({
                 }
             },
             data: {
-                isBookmarked: false
+                isBookmarked: false,
+                hasExpedition: false
             }
         };
     },
@@ -52,6 +53,12 @@ export default Modal.extend({
 
             axios.post(
                 this.bookmarkStoreUrl.replace('__star__', this.properties.id)
+            );
+        },
+
+        expedition() {
+            this.openAfterHidden(
+                () => EventBus.$emit('mothership-click', 'armory')
             );
         }
     }

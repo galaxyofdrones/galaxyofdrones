@@ -66,7 +66,8 @@ return [
     ],
 
     'expedition' => [
-        'empty' => 'No expeditions.'
+        'empty' => 'No expeditions.',
+        'star' => 'Show expedition',
     ],
 
     'expedition_log' => [
