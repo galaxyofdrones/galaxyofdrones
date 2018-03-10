@@ -1,18 +1,18 @@
 import Remaining from './Remaining';
 
 export default Remaining.extend({
-    props: ['expedition', 'isCompletable', 'store'],
+    props: ['completion', 'isCompletable', 'store'],
 
     created() {
         this.initRemaining(
-            this.expedition.remaining
+            this.completion.remaining
         );
     },
 
     watch: {
-        expedition() {
+        completion() {
             this.initRemaining(
-                this.expedition.remaining
+                this.completion.remaining
             );
         }
     }

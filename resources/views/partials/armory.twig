@@ -17,18 +17,18 @@
                 {{ trans('messages.expedition.empty') }}
             </p>
         </div>
-        <expedition v-else v-for="expedition in data.expeditions"
+        <completion v-else v-for="expedition in data.expeditions"
                     :key="expedition.id"
-                    :expedition="expedition"
+                    :completion="expedition"
                     :is-completable="isCompletable"
                     :store="store" inline-template>
             <div class="modal-body separator">
                 <div class="row">
                     <div class="col-md-6">
                         <span class="item item-sm star">
-                            {{ vue('expedition.star') }}
+                            {{ vue('completion.star') }}
                         </span>
-                        <span v-for="unit in expedition.units"
+                        <span v-for="unit in completion.units"
                               class="item item-sm"
                               :class="unit | item('unit')"
                               :title="unit.name"
@@ -50,23 +50,23 @@
                             <li data-content="{{ trans('validation.attributes.experience') }}"
                                 v-popover="{placement: 'top', trigger: 'hover'}">
                                 <i class="icon-xp"></i>
-                                {{ vue('expedition.experience | number | sign(expedition.experience)') }}
+                                {{ vue('completion.experience | number | sign(completion.experience)') }}
                             </li>
                             <li class="highlight-warning"
                                 data-content="{{ trans('messages.solarion.name') }}"
                                 v-popover="{placement: 'top', trigger: 'hover'}">
                                 <i class="icon-solarion"></i>
-                                {{ vue('expedition.solarion | number| sign(expedition.solarion)') }}
+                                {{ vue('completion.solarion | number| sign(completion.solarion)') }}
                             </li>
                         </ul>
                         <button class="btn btn-success btn-block"
-                                :disabled="!isCompletable(expedition)"
-                                @click="store(expedition)">
+                                :disabled="!isCompletable(completion)"
+                                @click="store(completion)">
                             {{ trans('messages.complete') }}
                         </button>
                     </div>
                 </div>
             </div>
-        </expedition>
+        </completion>
     </div>
 </armory>
