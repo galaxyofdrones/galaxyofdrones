@@ -1,5 +1,5 @@
-<reward-log :is-enabled="isEnabled && isSelectedTab('mission-log')"
-            url="{{ route('api_mission_log') }}" inline-template>
+<completion-log :is-enabled="isEnabled && isSelectedTab('mission-log')"
+                url="{{ route('api_mission_log') }}" inline-template>
     <div v-if="isEnabled" class="mission-log">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
@@ -61,4 +61,4 @@
             </div>
         </template>
     </div>
-</reward-log>
+</completion-log>

@@ -23,15 +23,15 @@
                 {{ trans('messages.mission.empty') }}
             </p>
         </div>
-        <mission v-else v-for="mission in data.missions"
-                 :key="mission.id"
-                 :mission="mission"
-                 :is-completable="isCompletable"
-                 :store="store" inline-template>
+        <completion v-else v-for="mission in data.missions"
+                    :key="mission.id"
+                    :completion="mission"
+                    :is-completable="isCompletable"
+                    :store="store" inline-template>
             <div class="modal-body separator">
                 <div class="row">
                     <div class="col-md-6">
-                        <span v-for="resource in mission.resources"
+                        <span v-for="resource in completion.resources"
                               class="item item-sm"
                               :class="resource | item('resource')"
                               :title="resource.name"
@@ -53,23 +53,23 @@
                             <li data-content="{{ trans('validation.attributes.experience') }}"
                                 v-popover="{placement: 'top', trigger: 'hover'}">
                                 <i class="icon-xp"></i>
-                                {{ vue('mission.experience | number | sign(mission.experience)') }}
+                                {{ vue('completion.experience | number | sign(completion.experience)') }}
                             </li>
                             <li class="highlight-warning"
                                 data-content="{{ trans('validation.attributes.energy') }}"
                                 v-popover="{placement: 'top', trigger: 'hover'}">
                                 <i class="icon-energy"></i>
-                                {{ vue('mission.energy | number| sign(mission.energy)') }}
+                                {{ vue('completion.energy | number| sign(completion.energy)') }}
                             </li>
                         </ul>
                         <button class="btn btn-success btn-block"
-                                :disabled="!isCompletable(mission)"
-                                @click="store(mission)">
+                                :disabled="!isCompletable(completion)"
+                                @click="store(completion)">
                             {{ trans('messages.complete') }}
                         </button>
                     </div>
                 </div>
             </div>
-        </mission>
+        </completion>
     </div>
 </cargo>

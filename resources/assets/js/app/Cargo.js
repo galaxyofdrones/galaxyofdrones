@@ -1,11 +1,11 @@
 import { EventBus } from './event-bus';
-import Mission from './Mission';
+import Completion from './Completion';
 
 export default {
     props: ['isEnabled', 'url', 'storeUrl'],
 
     components: {
-        Mission
+        Completion
     },
 
     data() {

@@ -1,7 +1,7 @@
 import { EventBus } from './event-bus';
-import RewardLog from './RewardLog';
+import CompletionLog from './CompletionLog';
 
-export default RewardLog.extend({
+export default CompletionLog.extend({
     props: ['openAfterHidden'],
 
     data() {

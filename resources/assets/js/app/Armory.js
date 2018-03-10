@@ -1,11 +1,11 @@
 import { EventBus } from './event-bus';
-import Expedition from './Expedition';
+import Completion from './Completion';
 
 export default {
     props: ['isEnabled', 'url', 'storeUrl'],
 
     components: {
-        Expedition
+        Completion
     },
 
     data() {
