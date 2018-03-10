@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
 class Expedition extends Model
 {
     use Behaviors\Timeable,
+        Queries\FindByStarAndUser,
         Relations\BelongsToStar,
         Relations\BelongsToUser;
 

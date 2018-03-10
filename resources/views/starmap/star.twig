@@ -42,8 +42,17 @@
                             <div class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <button class="btn btn-info btn-block" :disabled="data.isBookmarked" @click="bookmark()">
+                                        <button class="btn btn-success btn-block" :disabled="data.isBookmarked" @click="bookmark()">
                                             {{ trans('messages.bookmark.star') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="data.hasExpedition" class="attribute-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-info btn-block" @click="expedition()">
+                                            {{ trans('messages.expedition.star') }}
                                         </button>
                                     </div>
                                 </div>

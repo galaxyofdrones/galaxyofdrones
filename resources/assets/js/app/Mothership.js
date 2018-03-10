@@ -41,7 +41,11 @@ export default Modal.extend({
     },
 
     methods: {
-        open() {
+        open(tab) {
+            if (tab) {
+                this.selectTab(tab);
+            }
+
             this.fetchData(true);
         },
 
