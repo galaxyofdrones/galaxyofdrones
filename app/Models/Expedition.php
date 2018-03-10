@@ -41,14 +41,14 @@ class Expedition extends Model
      *
      * @var float
      */
-    const MIN_SUPPLY = 0.02;
+    const MIN_SUPPLY = 0.01;
 
     /**
      * The maximum supply.
      *
      * @var float
      */
-    const MAX_SUPPLY = 0.04;
+    const MAX_SUPPLY = 0.03;
 
     /**
      * The solarion count.
