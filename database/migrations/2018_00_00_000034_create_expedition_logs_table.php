@@ -29,8 +29,6 @@ class CreateExpeditionLogsTable extends Migration
             $table->integer('solarion')->unsigned();
             $table->integer('experience')->unsigned();
             $table->timestamps();
-
-            $table->unique(['star_id', 'user_id']);
         });
     }
 
