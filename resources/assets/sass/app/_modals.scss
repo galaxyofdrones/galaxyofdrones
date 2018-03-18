@@ -15,13 +15,8 @@
     &.mothership .cargo-summary .item {
         margin: 0 $grid-gutter-width / 3 * 2;
     }
-    &-body {
-        &.separator {
-            border-top: 1px solid $modal-header-border-color;
-        }
-        .row .item-sm {
-            margin-right: $grid-gutter-width / 6;
-        }
+    &-body .row .item-sm {
+        margin-right: $grid-gutter-width / 6;
     }
     &-footer {
         &-btn-group {
@@ -62,6 +57,9 @@
                 color: $nav-tabs-active-link-hover-color;
             }
         }
+    }
+    .separator {
+        border-top: 1px solid $modal-header-border-color;
     }
     .table-responsive {
         margin-bottom: 0;

@@ -16,6 +16,8 @@ return [
     'mailbox' => 'Mailbox',
     'move' => 'Move',
     'owner' => 'Owner',
+    'pve' => 'PvE',
+    'pvp' => 'PvP',
     'required_quantity' => 'Required quantity',
     'save' => 'Save',
     'starmap' => 'Starmap',

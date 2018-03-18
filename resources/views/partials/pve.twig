@@ -1,0 +1,71 @@
+<leaderboard :is-enabled="isEnabled && isSelectedTab('pve')"
+             :open-after-hidden="openAfterHidden"
+             url="{{ route('api_user_trophy_pve') }}" inline-template>
+    <div v-if="isEnabled" class="pve">
+        <div v-if="isEmpty" class="modal-body separator">
+            <p class="text-center">
+                {{ trans('messages.user.empty') }}
+            </p>
+        </div>
+        <template v-else>
+            <div class="table-responsive separator">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            {{ trans('validation.attributes.username') }}
+                        </th>
+                        <th class="text-center">
+                            {{ trans('validation.attributes.experience') }}
+                        </th>
+                        <th class="text-center">
+                            {{ trans('validation.attributes.mission') }}
+                        </th>
+                        <th class="text-center">
+                            {{ trans('validation.attributes.expedition') }}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(user, index) in data.data">
+                        <td>
+                            {{ vue('rank(index)') }}
+                        </td>
+                        <td>
+                            <a href="#" @click.prevent="openUser(user.username)">
+                                {{ vue('user.username') }}
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            {{ vue('user.experience | number') }}
+                        </td>
+                        <td class="text-center">
+                            {{ vue('user.mission_count | number') }}
+                        </td>
+                        <td class="text-center">
+                            {{ vue('user.expedition_count | number') }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div v-if="hasPrev || hasNext" class="modal-footer">
+                <ul class="pager">
+                    <li class="previous" :class="{disabled: !hasPrev}">
+                        <a href="#" @click.prevent="prevPage()">
+                            <i class="icon-arrow-left"></i>
+                        </a>
+                    </li>
+                    <li class="next" :class="{disabled: !hasNext}">
+                        <a href="#" @click.prevent="nextPage()">
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </template>
+    </div>
+</leaderboard>
