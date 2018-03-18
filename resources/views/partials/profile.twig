@@ -44,7 +44,7 @@
                                 <div class="col-md-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.missions') }}
+                                            {{ trans('validation.attributes.mission') }}
                                         </h6>
                                         <h4>
                                             {{ vue('data.mission_count | number') }}
@@ -54,7 +54,27 @@
                                 <div class="col-md-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.winning_battles') }}
+                                            {{ trans('validation.attributes.expedition') }}
+                                        </h6>
+                                        <h4>
+                                            {{ vue('data.expedition_count | number') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('validation.attributes.planet') }}
+                                        </h6>
+                                        <h4>
+                                            {{ vue('data.planet_count | number') }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="attribute">
+                                        <h6>
+                                            {{ trans('validation.attributes.winning_battle') }}
                                         </h6>
                                         <h4 class="highlight-success">
                                             {{ vue('data.winning_battle_count | number') }}
@@ -64,7 +84,7 @@
                                 <div class="col-md-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.losing_battles') }}
+                                            {{ trans('validation.attributes.losing_battle') }}
                                         </h6>
                                         <h4 class="highlight-danger">
                                             {{ vue('data.losing_battle_count | number') }}

@@ -41,6 +41,8 @@ class UserShowTransformer extends Transformer
             ]),
             'experience' => $item->experience,
             'mission_count' => $item->missionLogs()->count(),
+            'expedition_count' => $item->expeditionLogs()->count(),
+            'planet_count' => $item->planets()->count(),
             'winning_battle_count' => $item->winningBattleLogCount(),
             'losing_battle_count' => $item->losingBattleLogCount(),
             'created_at' => $item->created_at->toDateTimeString(),

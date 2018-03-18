@@ -1,4 +1,4 @@
-<trophy url="{{ route('api_user_trophy') }}" inline-template>
+<trophy inline-template>
     <div class="trophy modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -10,77 +10,23 @@
                         {{ trans('messages.trophy') }}
                     </h4>
                 </div>
-                <div v-if="isEmpty" class="modal-body separator">
-                    <p class="text-center">
-                        {{ trans('messages.user.empty') }}
-                    </p>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li :class="{active: isSelectedTab('pve')}">
+                            <a href="#" @click.prevent="selectTab('pve')">
+                                {{ trans('messages.pve') }}
+                            </a>
+                        </li>
+                        <li :class="{active: isSelectedTab('pvp')}">
+                            <a href="#" @click.prevent="selectTab('pvp')">
+                                {{ trans('messages.pvp') }}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <template v-else>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th>
-                                        {{ trans('validation.attributes.username') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ trans('validation.attributes.experience') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ trans('validation.attributes.missions') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ trans('validation.attributes.winning_battles') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ trans('validation.attributes.losing_battles') }}
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(user, index) in data.data">
-                                    <td>
-                                        {{ vue('rank + index') }}
-                                    </td>
-                                    <td>
-                                        <a href="#" @click.prevent="openUser(user.username)">
-                                            {{ vue('user.username') }}
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        {{ vue('user.experience | number') }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ vue('user.mission_count | number') }}
-                                    </td>
-                                    <td class="text-center highlight-success">
-                                        {{ vue('user.winning_battle_count | number') }}
-                                    </td>
-                                    <td class="text-center highlight-danger">
-                                        {{ vue('user.losing_battle_count | number') }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div v-if="hasPrev || hasNext" class="modal-footer">
-                        <ul class="pager">
-                            <li class="previous" :class="{disabled: !hasPrev}">
-                                <a href="#" @click.prevent="prevPage()">
-                                    <i class="icon-arrow-left"></i>
-                                </a>
-                            </li>
-                            <li class="next" :class="{disabled: !hasNext}">
-                                <a href="#" @click.prevent="nextPage()">
-                                    <i class="icon-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </template>
+
+                {% include 'partials.pve' %}
+                {% include 'partials.pvp' %}
             </div>
         </div>
     </div>
