@@ -15,8 +15,12 @@ const unbind = el => {
 };
 
 const update = (el, binding) => {
-    if (binding.value !== binding.oldValue) {
-        bind(el, binding);
+    if (binding.value.title !== binding.oldValue.title) {
+        $(el).data('bs.popover').options.title = binding.value.title;
+    }
+
+    if (binding.value.content !== binding.oldValue.content) {
+        $(el).data('bs.popover').options.content = binding.value.content;
     }
 };
 

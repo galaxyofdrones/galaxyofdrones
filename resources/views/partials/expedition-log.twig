@@ -16,9 +16,7 @@
                         <span v-for="unit in expedition_log.units"
                               class="item item-sm"
                               :class="unit | item('unit')"
-                              :title="unit.name"
-                              :data-content="unit.description"
-                              v-popover="{placement: 'top', trigger: 'hover'}">
+                              v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
                             {{ vue('unit.quantity | number') }}
                         </span>
                     </div>

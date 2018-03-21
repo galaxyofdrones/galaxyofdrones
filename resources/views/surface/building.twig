@@ -142,19 +142,16 @@
             </div>
         </div>
         <ul v-if="!grid.building_id || building.has_lower_level" class="list-inline">
-            <li data-content="{{ trans('validation.attributes.construction_experience') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_experience') }}'}">
                 <i class="icon-xp"></i>
                 {{ vue('(data.upgrade ? data.upgrade.construction_experience : building.construction_experience) | number') }}
             </li>
             <li class="highlight-warning"
-                data-content="{{ trans('validation.attributes.construction_cost') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_cost') }}'}">
                 <i class="icon-energy"></i>
                 {{ vue('(data.upgrade ? data.upgrade.construction_cost : building.construction_cost) | number') }}
             </li>
-            <li data-content="{{ trans('validation.attributes.construction_time') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_time') }}'}">
                 <i class="icon-time"></i>
                 {{ vue('(data.upgrade ? data.upgrade.construction_time : building.construction_time) | timer') }}
             </li>

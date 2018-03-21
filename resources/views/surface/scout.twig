@@ -18,17 +18,13 @@
                             <span v-for="unit in movement.units"
                                   class="item item-sm"
                                   :class="unit | item('unit')"
-                                  :title="unit.name"
-                                  :data-content="unit.description"
-                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                  v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
                                 {{ vue('unit.quantity | number') }}
                             </span>
                             <span v-for="resource in movement.resources"
                                   class="item item-sm"
                                   :class="resource | item('resource')"
-                                  :title="resource.name"
-                                  :data-content="resource.description"
-                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                  v-popover="{placement: 'top', trigger: 'hover', title: resource.name, content: resource.description}">
                                 {{ vue('resource.quantity | number') }}
                             </span>
                         </div>
@@ -57,17 +53,13 @@
                             <span v-for="unit in movement.units"
                                   class="item item-sm"
                                   :class="unit | item('unit')"
-                                  :title="unit.name"
-                                  :data-content="unit.description"
-                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                  v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
                                 {{ vue('unit.quantity | number') }}
                             </span>
                             <span v-for="resource in movement.resources"
                                   class="item item-sm"
                                   :class="resource | item('resource')"
-                                  :title="resource.name"
-                                  :data-content="resource.description"
-                                  v-popover="{placement: 'top', trigger: 'hover'}">
+                                  v-popover="{placement: 'top', trigger: 'hover', title: resource.name, content: resource.description}">
                                 {{ vue('resource.quantity | number') }}
                             </span>
                         </div>

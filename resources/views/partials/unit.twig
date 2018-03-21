@@ -65,36 +65,31 @@
             </div>
         </div>
         <ul v-if="isResearch" class="list-inline">
-            <li data-content="{{ trans('validation.attributes.research_experience') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_experience') }}'}">
                 <i class="icon-xp"></i>
                 {{ vue('unit.research_experience | number') }}
             </li>
             <li class="highlight-warning"
-                data-content="{{ trans('validation.attributes.research_cost') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_cost') }}'}">
                 <i class="icon-energy"></i>
                 {{ vue('unit.research_cost | number') }}
             </li>
-            <li data-content="{{ trans('validation.attributes.research_time') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_time') }}'}">
                 <i class="icon-time"></i>
                 {{ vue('unit.research_time | timer') }}
             </li>
         </ul>
         <ul v-else class="list-inline">
-            <li data-content="{{ trans('validation.attributes.supply') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.supply') }}'}">
                 <i class="icon-supply"></i>
                 {{ vue('unit.supply | number') }}
             </li>
-            <li class="highlight-warning" data-content="{{ trans('validation.attributes.train_cost') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li class="highlight-warning"
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_cost') }}'}">
                 <i class="icon-energy"></i>
                 {{ vue('unit.train_cost | number') }}
             </li>
-            <li data-content="{{ trans('validation.attributes.train_time') }}"
-                v-popover="{placement: 'top', trigger: 'hover'}">
+            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_time') }}'}">
                 <i class="icon-time"></i>
                 {{ vue('unit.train_time | timer') }}
             </li>

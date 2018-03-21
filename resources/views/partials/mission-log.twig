@@ -13,9 +13,7 @@
                         <span v-for="resource in mission_log.resources"
                               class="item item-sm"
                               :class="resource | item('resource')"
-                              :title="resource.name"
-                              :data-content="resource.description"
-                              v-popover="{placement: 'top', trigger: 'hover'}">
+                              v-popover="{placement: 'top', trigger: 'hover', title: resource.name, content: resource.description}">
                             {{ vue('resource.quantity | number') }}
                         </span>
                     </div>
