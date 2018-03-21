@@ -6,9 +6,7 @@
             <span v-for="unit in data.units"
                   class="item item-sm"
                   :class="unit | item('unit')"
-                  :title="unit.name"
-                  :data-content="unit.description"
-                  v-popover="{placement: 'top', trigger: 'hover'}">
+                  v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
                 {{ vue('unit.quantity | number') }}
             </span>
         </div>
@@ -31,9 +29,7 @@
                         <span v-for="unit in completion.units"
                               class="item item-sm"
                               :class="unit | item('unit')"
-                              :title="unit.name"
-                              :data-content="unit.description"
-                              v-popover="{placement: 'top', trigger: 'hover'}">
+                              v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
                             {{ vue('unit.quantity | number') }}
                         </span>
                     </div>
@@ -47,14 +43,12 @@
                     </div>
                     <div class="col-md-3 text-center">
                         <ul class="list-inline">
-                            <li data-content="{{ trans('validation.attributes.experience') }}"
-                                v-popover="{placement: 'top', trigger: 'hover'}">
+                            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.experience') }}'}">
                                 <i class="icon-xp"></i>
                                 {{ vue('completion.experience | number | sign(completion.experience)') }}
                             </li>
                             <li class="highlight-warning"
-                                data-content="{{ trans('messages.solarion.name') }}"
-                                v-popover="{placement: 'top', trigger: 'hover'}">
+                                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
                                 <i class="icon-solarion"></i>
                                 {{ vue('completion.solarion | number| sign(completion.solarion)') }}
                             </li>

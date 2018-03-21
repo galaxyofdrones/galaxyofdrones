@@ -8,8 +8,7 @@
                          :alt="data.username">
                 </a>
                 <div class="player-level"
-                     data-content="{{ trans('validation.attributes.level') }}"
-                     v-popover="{placement: 'left', trigger: 'hover'}">
+                     v-popover="{placement: 'left', trigger: 'hover', content: '{{ trans('validation.attributes.level') }}'}">
                     <i class="icon-star"></i>
                     {{ vue('data.level | number') }}
                 </div>
@@ -39,17 +38,14 @@
                 </div>
                 <div class="player-progress">
                     <div class="progress"
-                         title="{{ trans('validation.attributes.experience') }}"
-                         :data-content="experienceLabel"
-                         v-popover="{placement: 'left', trigger: 'hover'}">
+                         v-popover="{placement: 'left', trigger: 'hover', title: '{{ trans('validation.attributes.experience') }}', content: experienceLabel}">
                         <div class="progress-bar progress-bar-info" :style="{width: experienceProgress}"></div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="player-energy"
-             data-content="{{ trans('validation.attributes.energy') }}"
-             v-popover="{placement: 'bottom', trigger: 'hover'}"
+             v-popover="{placement: 'bottom', trigger: 'hover', content: '{{ trans('validation.attributes.energy') }}'}"
              v-cloak>
             <i class="icon-energy"></i>
             {{ vue('energy | number') }}
