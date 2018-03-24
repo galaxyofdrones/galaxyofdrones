@@ -35,10 +35,12 @@ class StarShowTransformer extends Transformer
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
+        $expedition = Expedition::findByStarAndUser($item, $user);
+
         return [
             'id' => $item->id,
             'isBookmarked' => $user && Bookmark::findByStarAndUser($item, $user),
-            'hasExpedition' => $user && Expedition::findByStarAndUser($item, $user),
+            'hasExpedition' => $user && $expedition && ! $expedition->isExpired(),
         ];
     }
 }
