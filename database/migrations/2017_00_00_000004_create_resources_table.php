@@ -13,11 +13,11 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->increments('id');
-            $table->json('name');
+            $table->text('name');
             $table->boolean('is_unlocked');
             $table->double('frequency')->unsigned();
             $table->double('efficiency')->unsigned();
-            $table->json('description');
+            $table->text('description');
             $table->integer('research_experience')->unsigned()->nullable();
             $table->integer('research_cost')->unsigned()->nullable();
             $table->integer('research_time')->unsigned()->nullable();

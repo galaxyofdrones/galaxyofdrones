@@ -2,6 +2,7 @@
 
 namespace Koodilab\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Koodilab\Battle\Simulator;
 use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
     }
 
     /**
