@@ -13,7 +13,7 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
-            $table->json('name');
+            $table->text('name');
             $table->integer('type')->unsigned();
             $table->boolean('is_unlocked');
             $table->integer('speed')->unsigned();
@@ -22,7 +22,7 @@ class CreateUnitsTable extends Migration
             $table->integer('supply')->unsigned();
             $table->integer('train_cost')->unsigned();
             $table->integer('train_time')->unsigned();
-            $table->json('description');
+            $table->text('description');
             $table->integer('detection')->unsigned()->nullable();
             $table->integer('capacity')->unsigned()->nullable();
             $table->integer('research_experience')->unsigned()->nullable();

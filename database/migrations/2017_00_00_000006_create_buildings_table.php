@@ -15,13 +15,13 @@ class CreateBuildingsTable extends Migration
         Schema::create('buildings', function (Blueprint $table) {
             $table->increments('id');
             NestedSet::columns($table);
-            $table->json('name');
+            $table->text('name');
             $table->integer('type')->unsigned();
             $table->integer('end_level')->unsigned();
             $table->integer('construction_experience')->unsigned();
             $table->integer('construction_cost')->unsigned();
             $table->integer('construction_time')->unsigned();
-            $table->json('description');
+            $table->text('description');
             $table->integer('limit')->unsigned()->nullable();
             $table->integer('defense')->unsigned()->nullable();
             $table->integer('detection')->unsigned()->nullable();
