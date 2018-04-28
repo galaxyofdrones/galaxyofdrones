@@ -58,7 +58,7 @@
             }
         }
     }
-    .separator {
+    .separator:not(.attribute-row) {
         border-top: 1px solid $modal-header-border-color;
     }
     .table-responsive {
