@@ -13,7 +13,8 @@ trait PaginateAllStartedOrderByPve
      */
     public static function paginateAllStartedOrderByPve($perPage = 10)
     {
-        return static::whereNotNull('started_at')
+        return static::select(['users.id', 'users.username', 'users.experience'])
+            ->whereNotNull('started_at')
             ->withCount('missionLogs', 'expeditionLogs')
             ->orderBy('experience', 'desc')
             ->paginate($perPage);

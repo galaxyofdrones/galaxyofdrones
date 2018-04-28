@@ -16,7 +16,8 @@ trait PaginateAllStartedOrderByPvp
      */
     public static function paginateAllStartedOrderByPvp($perPage = 10)
     {
-        $query = static::whereNotNull('started_at')
+        $query = static::select(['users.id', 'users.username'])
+            ->whereNotNull('started_at')
             ->withCount('planets')
             ->orderBy('winning_battle_count', 'desc');
 
