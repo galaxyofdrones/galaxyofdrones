@@ -41,4 +41,12 @@
 
 {% block javascripts %}
     <script src="{{ mix('js/app.js') }}"></script>
+    <script>
+        var Translations = {
+            error: {
+                whoops: '{{ trans('messages.error.whoops') }}',
+                wrong: '{{ trans('messages.error.wrong') }}'
+            }
+        };
+    </script>
 {% endblock %}

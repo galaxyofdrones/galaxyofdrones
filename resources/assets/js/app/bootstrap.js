@@ -54,6 +54,10 @@ window.Echo = new Echo({
     }
 });
 
+/**
+ * We will import the required libs.
+ */
+
 window.Vue = require('vue');
 window.swal = require('sweetalert2');
 
@@ -61,3 +65,23 @@ require('moment').locale(document.querySelector('html').getAttribute('lang'));
 require('leaflet');
 require('leaflet-ajax');
 require('perfect-scrollbar');
+
+/**
+ * We will register the global error handling.
+ */
+
+window.axios.interceptors.response.use(null, error => {
+    if (error.response.status === 401) {
+        window.location.reload();
+    } else if (error.response.status === 500) {
+        swal({
+            title: Translations.error.whoops,
+            text: Translations.error.wrong,
+            type: 'error',
+            showConfirmButton: false,
+            timer: 1500
+        }).catch(swal.noop);
+    }
+
+    return Promise.reject(error);
+});
