@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('#{$icomoon-font-path}/icomoon.eot?twqz1d');
-  src:  url('#{$icomoon-font-path}/icomoon.eot?twqz1d#iefix') format('embedded-opentype'),
-  url('#{$icomoon-font-path}/icomoon.ttf?twqz1d') format('truetype'),
-  url('#{$icomoon-font-path}/icomoon.woff?twqz1d') format('woff'),
-  url('#{$icomoon-font-path}/icomoon.svg?twqz1d#icomoon') format('svg');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?vdif5');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?vdif5#iefix') format('embedded-opentype'),
+  url('#{$icomoon-font-path}/icomoon.ttf?vdif5') format('truetype'),
+  url('#{$icomoon-font-path}/icomoon.woff?vdif5') format('woff'),
+  url('#{$icomoon-font-path}/icomoon.svg?vdif5#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -28,6 +28,11 @@
   @return unquote("\"") + $str + unquote("\"");
 }
 
+.icon-movement-unit {
+  &:before {
+    content: unicode($icon-movement-unit);
+  }
+}
 .icon-sum {
   &:before {
     content: unicode($icon-sum);
