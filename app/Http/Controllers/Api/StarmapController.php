@@ -2,11 +2,13 @@
 
 namespace Koodilab\Http\Controllers\Api;
 
+use Illuminate\Database\Eloquent\Collection;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Star;
 use Koodilab\Models\Transformers\ExpeditionFeatureTransformer;
 use Koodilab\Models\Transformers\MovementFeatureTransformer;
+use Koodilab\Models\Transformers\MovementUnitFeatureTransformer;
 use Koodilab\Models\Transformers\PlanetFeatureTransformer;
 use Koodilab\Models\Transformers\StarFeatureTransformer;
 use Koodilab\Support\Bounds;
@@ -67,18 +69,33 @@ class StarmapController extends Controller
             /** @var \Koodilab\Models\User $user */
             $user = auth()->user();
 
-            /** @var MovementFeatureTransformer $user */
-            $movementTransformer = app(MovementFeatureTransformer::class);
+            $incomingMovements = $user->current->findIncomingMovements();
+            $outgoingMovements = $user->current->findOutgoingMovements();
+
+            $movementFeatureTransformer = app(MovementFeatureTransformer::class);
+            $movementUnitFeatureTransformer = app(MovementUnitFeatureTransformer::class);
 
             $features = $features->merge(
-                $movementTransformer->transformCollection(
-                    $user->current->findIncomingMovements()
+                $movementFeatureTransformer->transformCollection(
+                    Collection::make($incomingMovements)
                 )
             );
 
             $features = $features->merge(
-                $movementTransformer->transformCollection(
-                    $user->current->findOutgoingMovements()
+                $movementUnitFeatureTransformer->transformCollection(
+                    $incomingMovements
+                )
+            );
+
+            $features = $features->merge(
+                $movementFeatureTransformer->transformCollection(
+                    Collection::make($outgoingMovements)
+                )
+            );
+
+            $features = $features->merge(
+                $movementUnitFeatureTransformer->transformCollection(
+                    $outgoingMovements
                 )
             );
 

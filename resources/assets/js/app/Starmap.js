@@ -2,7 +2,14 @@ import { EventBus } from './event-bus';
 
 export default {
     props: [
-        'size', 'maxZoom', 'geoJsonUrl', 'tileUrl', 'imagePath', 'zoomInTitle', 'zoomOutTitle', 'bookmarkTitle'
+        'size',
+        'maxZoom',
+        'geoJsonUrl',
+        'tileUrl',
+        'imagePath',
+        'zoomInTitle',
+        'zoomOutTitle',
+        'bookmarkTitle'
     ],
 
     data() {
@@ -62,51 +69,27 @@ export default {
                 bounds: L.latLngBounds(this.southWest(), this.northEast()),
             }).addTo(this.map);
 
+            const coordsToLatLng = coords => this.map.unproject([
+                coords[0], coords[1]
+            ], this.maxZoom);
+
             this.geoJsonLayer = L.geoJson.ajax(this.geoJson(), {
-                coordsToLatLng: coords => this.map.unproject([
-                    coords[0], coords[1]
-                ], this.maxZoom),
+                coordsToLatLng,
 
-                pointToLayer: (geoJsonPoint, latlng) => {
-                    const size = (geoJsonPoint.properties.size + 16) / this.multiplier();
-
-                    const options = {
-                        className: geoJsonPoint.properties.type === 'planet'
-                            ? `leaflet-div-icon ${geoJsonPoint.properties.status}`
-                            : 'leaflet-div-icon',
-                        iconSize: [
-                            size, size
-                        ]
-                    };
-
-                    if (this.map.getZoom() >= 8) {
-                        options.html = `<span>${geoJsonPoint.properties.name}</span>`;
+                pointToLayer: (geoJsonPoint, latLng) => {
+                    if (geoJsonPoint.properties.isMovement) {
+                        return this.movementMarker(
+                            latLng, coordsToLatLng(geoJsonPoint.properties.end), geoJsonPoint
+                        );
                     }
 
-                    const marker = L.marker(latlng, {
-                        title: geoJsonPoint.properties.name,
-                        icon: L.divIcon(options)
-                    });
-
-                    marker.on('click', () => EventBus.$emit(`${geoJsonPoint.properties.type}-click`, geoJsonPoint));
-
-                    return marker;
+                    return this.objectMarker(latLng, geoJsonPoint);
                 },
 
                 style: feature => {
                     if (feature.geometry.type === 'LineString') {
-                        let className = 'leaflet-movement';
-
-                        if (feature.properties.type === 'expedition') {
-                            className += ` ${feature.properties.type}`;
-                        } else if (feature.properties.type < 3) {
-                            className += ` ${feature.properties.status}-attack`;
-                        } else {
-                            className += ` ${feature.properties.status}`;
-                        }
-
                         return {
-                            className
+                            className: `leaflet-movement ${this.movementClassName(feature)}`
                         };
                     }
                 }
@@ -197,6 +180,86 @@ export default {
             });
 
             return new BookmarkControl();
+        },
+
+        objectMarker(latLng, geoJsonPoint) {
+            const size = (geoJsonPoint.properties.size + 16) / this.multiplier();
+
+            const options = {
+                className: geoJsonPoint.properties.type === 'planet'
+                    ? `leaflet-icon-object ${geoJsonPoint.properties.status}`
+                    : 'leaflet-icon-object',
+                iconSize: [
+                    size, size
+                ]
+            };
+
+            if (this.map.getZoom() >= 8) {
+                options.html = `<span>${geoJsonPoint.properties.name}</span>`;
+            }
+
+            const marker = L.marker(latLng, {
+                title: geoJsonPoint.properties.name,
+                icon: L.divIcon(options)
+            });
+
+            marker.on('click', () => EventBus.$emit(`${geoJsonPoint.properties.type}-click`, geoJsonPoint));
+
+            return marker;
+        },
+
+        movementMarker(latLng, endLatLng, geoJsonPoint) {
+            L.MovementMarker = L.Marker.extend({
+                options: {
+                    end: endLatLng,
+                    interval: geoJsonPoint.properties.interval
+                },
+
+                onAdd(map) {
+                    L.Marker.prototype.onAdd.call(this, map);
+
+                    if (this._icon) {
+                        this._icon.style[L.DomUtil.TRANSITION] = `all ${this.options.interval - 1}s linear`;
+                    }
+
+                    if (this._shadow) {
+                        this._shadow.style[L.DomUtil.TRANSITION] = `all ${this.options.interval - 1}s linear`;
+                    }
+
+                    setTimeout(
+                        () => this.setLatLng(this.options.end), 1000
+                    );
+                }
+            });
+
+            const size = 32 / this.multiplier();
+
+            const options = {
+                className: `leaflet-icon-movement ${this.movementClassName(geoJsonPoint)} size-${size}`,
+                iconSize: [
+                    size, size
+                ]
+            };
+
+            if (this.map.getZoom() >= 8) {
+                options.html = '<i class="icon-mothership"></i>';
+            }
+
+            return new L.MovementMarker(latLng, {
+                icon: L.divIcon(options)
+            });
+        },
+
+        movementClassName(feature) {
+            if (feature.properties.type === 'expedition') {
+                return feature.properties.type;
+            }
+
+            if (feature.properties.type < 3) {
+                return `${feature.properties.status}-attack`;
+            }
+
+            return feature.properties.status;
         }
     }
 };

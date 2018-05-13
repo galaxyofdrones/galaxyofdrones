@@ -2,7 +2,7 @@
     background: rgba(0, 0, 0, 0);
     height: 100%;
 
-    .leaflet-div-icon {
+    .leaflet-icon-object {
         background: none;
         border: none;
         border-radius: 50%;
@@ -49,6 +49,36 @@
             text-align: center;
             transform: translateX(-50%) translateY(100%);
             width: 128px;
+        }
+    }
+    .leaflet-icon-movement {
+        border: none;
+        border-radius: 50%;
+
+        &.incoming {
+            background: $brand-success;
+
+            &-attack {
+                background: $brand-danger;
+            }
+        }
+        &.outgoing {
+            background: $brand-success;
+
+            &-attack {
+                background: $brand-warning;
+            }
+        }
+        &.size-32 i {
+            font-size: 22px;
+        }
+        i {
+            color: #fff;
+            left: 50%;
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
         }
     }
     .leaflet-left .leaflet-bar {
