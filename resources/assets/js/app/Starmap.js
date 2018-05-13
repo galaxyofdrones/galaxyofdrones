@@ -242,7 +242,7 @@ export default {
             };
 
             if (this.map.getZoom() >= 8) {
-                options.html = '<i class="icon-mothership"></i>';
+                options.html = '<i class="icon-movement-unit"></i>';
             }
 
             return new L.MovementMarker(latLng, {
