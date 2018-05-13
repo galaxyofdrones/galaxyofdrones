@@ -242,7 +242,11 @@ export default {
             };
 
             if (this.map.getZoom() >= 8) {
-                options.html = '<i class="icon-movement-unit"></i>';
+                let iconAngleOffset = 45;
+                let angle = Math.atan2(endLatLng.lng - latLng.lng, endLatLng.lat - latLng.lat);
+                let angleDeg = (angle > 0 ? angle : (2 * 3.14 + angle)) * 360 / (2 * 3.14) - iconAngleOffset;
+
+                options.html = `<i class="icon-movement-unit" style="-webkit-transform: translateX(-50%) translateY(-50%) rotate(${angleDeg}deg)"></i>`;
             }
 
             return new L.MovementMarker(latLng, {
