@@ -24,6 +24,7 @@ return [
     'start' => 'Start',
     'transmute' => 'Transmute',
     'trophy' => 'Trophy',
+    'whats_new' => "What's New",
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 
