@@ -15,12 +15,6 @@ export default {
         Support
     ],
 
-    data() {
-        return {
-            hasTimer: true
-        };
-    },
-
     watch: {
         isEnabled() {
             this.quantity = {};

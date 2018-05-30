@@ -32,8 +32,8 @@
                                 <input class="form-control"
                                        type="number"
                                        min="1"
-                                       :max="scoutUnit.quantity"
-                                       :placeholder="scoutUnit.quantity | bracket"
+                                       :max="unitQuantity(scoutUnit)"
+                                       :placeholder="unitQuantity(scoutUnit) | bracket"
                                        v-model.number="quantity[scoutUnit.id]">
                                 <span class="input-group-btn">
                                     <button class="btn btn-info btn-block" :disabled="!canScout" @click="scout()">

@@ -17,12 +17,6 @@ export default {
         Transport
     ],
 
-    data() {
-        return {
-            hasTimer: true
-        };
-    },
-
     watch: {
         isEnabled() {
             this.quantity = {};

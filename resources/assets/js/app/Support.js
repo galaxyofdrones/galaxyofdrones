@@ -1,7 +1,7 @@
 export default {
     data() {
         return {
-            hasTimer: false,
+            isMove: false,
             quantity: {}
         };
     },
@@ -13,7 +13,7 @@ export default {
 
             _.forEach(this.planet.units, unit => {
                 if (quantity.hasOwnProperty(unit.id)) {
-                    return hasUnits = quantity[unit.id] > 0 && quantity[unit.id] <= unit.quantity;
+                    return hasUnits = quantity[unit.id] > 0 && quantity[unit.id] <= this.unitQuantity(unit);
                 }
             });
 
@@ -35,9 +35,21 @@ export default {
 
     methods: {
         setTotalUnit(unit) {
-            if (unit.quantity > 0) {
-                this.$set(this.quantity, unit.id, unit.quantity);
+            const total = this.unitQuantity(unit);
+
+            if (total > 0) {
+                this.$set(this.quantity, unit.id, total);
             }
+        },
+
+        unitQuantity(unit) {
+            const storage = this.isMove
+                ? _.get(unit, 'storage', 0)
+                : 0;
+
+            return storage + _.get(
+                unit, 'quantity', 0
+            );
         }
     }
 };

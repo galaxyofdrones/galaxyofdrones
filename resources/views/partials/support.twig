@@ -16,8 +16,8 @@
                     <input class="form-control"
                            type="number"
                            min="1"
-                           :max="unit.quantity"
-                           :placeholder="unit.quantity | bracket"
+                           :max="unitQuantity(unit)"
+                           :placeholder="unitQuantity(unit) | bracket"
                            v-model.number="quantity[unit.id]">
                 </div>
             </div>
@@ -27,7 +27,7 @@
 <div class="modal-body separator">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <ul v-if="hasTimer" class="list-inline">
+            <ul v-if="!isMove" class="list-inline">
                 <li v-if="planet.is_capital"
                     v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.trade_time') }}'}">
                     <i class="icon-time"></i>

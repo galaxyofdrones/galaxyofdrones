@@ -1,7 +1,7 @@
 export default {
     data() {
         return {
-            hasTimer: false,
+            isMove: false,
             quantity: {}
         };
     },
@@ -57,13 +57,17 @@ export default {
         },
 
         resourceQuantity(resource) {
+            const storage = this.isMove
+                ? _.get(resource, 'storage', 0)
+                : 0;
+
             if (this.planet.resource_id === resource.id) {
-                return Math.floor(this.mined);
+                return storage + Math.floor(this.mined);
             }
 
-            return _.get(_.find(this.planet.resources, {
-                id: resource.id
-            }), 'quantity', 0);
+            return storage + _.get(
+                resource, 'quantity', 0
+            );
         }
     }
 };
