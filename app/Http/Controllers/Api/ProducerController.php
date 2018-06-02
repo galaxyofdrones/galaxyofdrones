@@ -61,7 +61,7 @@ class ProducerController extends Controller
             throw new BadRequestHttpException();
         }
 
-        if (! $manager->hasStock($resource, $quantity)) {
+        if (! $manager->hasStock(auth()->user()->current, $resource, $quantity)) {
             throw new BadRequestHttpException();
         }
 
@@ -71,7 +71,7 @@ class ProducerController extends Controller
             );
 
             $manager->decrementStock(
-                $resource, $quantity
+                auth()->user()->current, $resource, $quantity
             );
         });
     }

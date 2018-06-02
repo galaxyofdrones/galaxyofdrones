@@ -101,7 +101,7 @@ class MovementManager
         ]);
 
         $this->storageManager->decrementPopulation(
-            $unit, $quantity
+            $user->current, $unit, $quantity
         );
 
         $movement->units()->attach($unit->id, [
@@ -141,7 +141,7 @@ class MovementManager
 
         foreach ($units as $unit) {
             $this->storageManager->decrementPopulation(
-                $unit, $quantities->get($unit->id)
+                $user->current, $unit, $quantities->get($unit->id)
             );
 
             $movement->units()->attach($unit->id, [
@@ -180,7 +180,7 @@ class MovementManager
         ]);
 
         $this->storageManager->decrementPopulation(
-            $unit, Planet::SETTLER_COUNT
+            $user->current, $unit, Planet::SETTLER_COUNT
         );
 
         $movement->units()->attach($unit->id, [
@@ -302,7 +302,7 @@ class MovementManager
 
         foreach ($resources as $resource) {
             $this->storageManager->decrementStock(
-                $resource, $quantities->get($resource->id), true
+                $user->current, $resource, $quantities->get($resource->id), true
             );
 
             $userResource = $user->resources->firstWhere('id', $resource->id);
@@ -554,9 +554,12 @@ class MovementManager
      */
     protected function createSupportOrPatrol(Movement $movement, Collection $units, BaseCollection $quantities)
     {
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
+
         foreach ($units as $unit) {
             $this->storageManager->decrementPopulation(
-                $unit, $quantities->get($unit->id)
+                $user->current, $unit, $quantities->get($unit->id)
             );
 
             $movement->units()->attach($unit->id, [
@@ -582,8 +585,11 @@ class MovementManager
      */
     protected function createTransportOrTrade(Movement $movement, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
+
         $this->storageManager->decrementPopulation(
-            $unit, $quantity
+            $user->current, $unit, $quantity
         );
 
         $movement->units()->attach($unit->id, [
@@ -592,7 +598,7 @@ class MovementManager
 
         foreach ($resources as $resource) {
             $this->storageManager->decrementStock(
-                $resource, $quantities->get($resource->id)
+                $user->current, $resource, $quantities->get($resource->id)
             );
 
             $movement->resources()->attach($resource->id, [

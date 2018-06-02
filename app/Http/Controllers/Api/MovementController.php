@@ -40,7 +40,7 @@ class MovementController extends Controller
         $quantity = $this->quantity();
         $unit = Unit::findByType(Unit::TYPE_SCOUT);
 
-        if (! $storageManager->hasPopulation($unit, $quantity)) {
+        if (! $storageManager->hasPopulation(auth()->user()->current, $unit, $quantity)) {
             throw new BadRequestHttpException();
         }
 
@@ -71,7 +71,7 @@ class MovementController extends Controller
         ]);
 
         foreach ($units as $unit) {
-            if (! $storageManager->hasPopulation($unit, $quantities->get($unit->id))) {
+            if (! $storageManager->hasPopulation(auth()->user()->current, $unit, $quantities->get($unit->id))) {
                 throw new BadRequestHttpException();
             }
         }
@@ -105,7 +105,7 @@ class MovementController extends Controller
 
         $unit = Unit::findByType(Unit::TYPE_SETTLER);
 
-        if (! $storageManager->hasPopulation($unit, Planet::SETTLER_COUNT)) {
+        if (! $storageManager->hasPopulation(auth()->user()->current, $unit, Planet::SETTLER_COUNT)) {
             throw new BadRequestHttpException();
         }
 
@@ -133,7 +133,7 @@ class MovementController extends Controller
         $units = Unit::findAllByIds($quantities->keys());
 
         foreach ($units as $unit) {
-            if (! $storageManager->hasPopulation($unit, $quantities->get($unit->id))) {
+            if (! $storageManager->hasPopulation(auth()->user()->current, $unit, $quantities->get($unit->id))) {
                 throw new BadRequestHttpException();
             }
         }
@@ -165,14 +165,14 @@ class MovementController extends Controller
             $quantities->sum() / $unit->capacity
         );
 
-        if (! $storageManager->hasPopulation($unit, $quantity)) {
+        if (! $storageManager->hasPopulation(auth()->user()->current, $unit, $quantity)) {
             throw new BadRequestHttpException();
         }
 
         $resources = Resource::findAllByIds($quantities->keys());
 
         foreach ($resources as $resource) {
-            if (! $storageManager->hasStock($resource, $quantities->get($resource->id))) {
+            if (! $storageManager->hasStock(auth()->user()->current, $resource, $quantities->get($resource->id))) {
                 throw new BadRequestHttpException();
             }
         }
@@ -205,14 +205,14 @@ class MovementController extends Controller
             $quantities->sum() / $unit->capacity
         );
 
-        if (! $storageManager->hasPopulation($unit, $quantity)) {
+        if (! $storageManager->hasPopulation(auth()->user()->current, $unit, $quantity)) {
             throw new BadRequestHttpException();
         }
 
         $resources = Resource::findAllByIds($quantities->keys());
 
         foreach ($resources as $resource) {
-            if (! $storageManager->hasStock($resource, $quantities->get($resource->id), true)) {
+            if (! $storageManager->hasStock(auth()->user()->current, $resource, $quantities->get($resource->id), true)) {
                 throw new BadRequestHttpException();
             }
         }
@@ -239,6 +239,7 @@ class MovementController extends Controller
      *
      * @param Grid            $grid
      * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -251,7 +252,7 @@ class MovementController extends Controller
         $units = Unit::findAllByIds($quantities->keys());
 
         foreach ($units as $unit) {
-            if (! $storageManager->hasPopulation($unit, $quantities->get($unit->id), true)) {
+            if (! $storageManager->hasPopulation(auth()->user()->current, $unit, $quantities->get($unit->id), true)) {
                 throw new BadRequestHttpException();
             }
         }
