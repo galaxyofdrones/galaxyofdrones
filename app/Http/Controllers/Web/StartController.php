@@ -4,6 +4,7 @@ namespace Koodilab\Http\Controllers\Web;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Koodilab\Game\ShieldManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
@@ -35,9 +36,11 @@ class StartController extends Controller
     /**
      * Store the player start.
      *
+     * @param ShieldManager $manager
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ShieldManager $manager)
     {
         $capital = Planet::findFreeCapital();
 
@@ -48,7 +51,7 @@ class StartController extends Controller
             return back();
         }
 
-        DB::transaction(function () use ($capital, $user) {
+        DB::transaction(function () use ($manager, $capital, $user) {
             $user->occupy($capital);
 
             $user->update([
@@ -66,6 +69,10 @@ class StartController extends Controller
                 'is_researched' => true,
                 'quantity' => 0,
             ]);
+
+            $manager->create(
+                $capital, 604800
+            );
         });
 
         return redirect()->route('home');

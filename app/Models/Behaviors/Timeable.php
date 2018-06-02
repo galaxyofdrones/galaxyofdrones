@@ -29,11 +29,11 @@ trait Timeable
     }
 
     /**
-     * Delete the expired.
+     * Delete all expired.
      *
      * @return bool|null
      */
-    public function deleteExpired()
+    public function deleteAllExpired()
     {
         return static::where($this->endedAtKey(), '<', Carbon::now())->delete();
     }

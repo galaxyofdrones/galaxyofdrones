@@ -433,7 +433,7 @@ class MovementManager
      */
     protected function finishScout(Movement $movement)
     {
-        if ($movement->user_id == $movement->end->user_id) {
+        if ($movement->end->hasShield() || $movement->user_id == $movement->end->user_id) {
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
@@ -452,7 +452,7 @@ class MovementManager
      */
     protected function finishAttack(Movement $movement)
     {
-        if ($movement->user_id == $movement->end->user_id) {
+        if ($movement->end->hasShield() || $movement->user_id == $movement->end->user_id) {
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
@@ -471,7 +471,7 @@ class MovementManager
      */
     protected function finishOccupy(Movement $movement)
     {
-        if ($movement->user_id == $movement->end->user_id) {
+        if ($movement->end->hasShield() || $movement->user_id == $movement->end->user_id) {
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */

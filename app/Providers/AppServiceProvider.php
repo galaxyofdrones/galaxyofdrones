@@ -14,6 +14,7 @@ use Koodilab\Game\ExpeditionManager;
 use Koodilab\Game\MissionManager;
 use Koodilab\Game\MovementManager;
 use Koodilab\Game\ResearchManager;
+use Koodilab\Game\ShieldManager;
 use Koodilab\Game\StateManager;
 use Koodilab\Game\StorageManager;
 use Koodilab\Game\TrainingManager;
@@ -51,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(MovementManager::class);
         $this->app->singleton(ResearchManager::class);
         $this->app->singleton(SettingManager::class);
+        $this->app->singleton(ShieldManager::class);
         $this->app->singleton(StateManager::class);
         $this->app->singleton(StorageManager::class);
         $this->app->singleton(TrainingManager::class);

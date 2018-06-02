@@ -28,6 +28,17 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'shield',
+    ], function () use ($router) {
+        $router->get('/', 'ShieldController@index')
+            ->name('shield');
+
+        $router->put('{planet}', 'ShieldController@update')
+            ->name('shield_update')
+            ->where('planet', '\d+');
+    });
+
+    $router->group([
         'prefix' => 'construction',
     ], function () use ($router) {
         $router->get('{grid}', 'ConstructionController@index')

@@ -122,18 +122,15 @@ class UserController extends Controller
     {
         $this->authorize('friendly', $planet);
 
-        /** @var \Koodilab\Models\User $user */
-        $user = auth()->user();
-
-        if (! $user->canChangeCapital()) {
+        if (! $planet->user->canChangeCapital()) {
             throw new BadRequestHttpException();
         }
 
-        if ($user->capital->incomingCapitalMovementCount()) {
+        if ($planet->user->capital->incomingCapitalMovementCount()) {
             throw new BadRequestHttpException();
         }
 
-        $user->update([
+        $planet->user->update([
             'capital_id' => $planet->id,
         ]);
     }
@@ -149,7 +146,7 @@ class UserController extends Controller
     {
         $this->authorize('friendly', $planet);
 
-        auth()->user()->update([
+        $planet->user->update([
             'current_id' => $planet->id,
         ]);
     }

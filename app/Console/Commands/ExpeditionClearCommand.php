@@ -50,7 +50,7 @@ class ExpeditionClearCommand extends Command
         );
 
         $this->database->transaction(function () {
-            Expedition::newModelInstance()->deleteExpired();
+            Expedition::newModelInstance()->deleteAllExpired();
         });
 
         $this->info(
