@@ -8,9 +8,7 @@ export default {
 
     computed: {
         canTransport() {
-            return this.hasResources
-                && this.transporterUnit.quantity > 0
-                && this.transporterQuantity <= this.transporterUnit.quantity;
+            return this.hasResources && this.transporterQuantity <= this.unitQuantity(this.transporterUnit);
         },
 
         hasResources() {

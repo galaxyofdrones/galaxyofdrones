@@ -4,12 +4,12 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
 use Koodilab\Game\MovementManager;
+use Koodilab\Game\StorageManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Population;
-use Koodilab\Models\Stock;
+use Koodilab\Models\Resource;
 use Koodilab\Models\Unit;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -28,28 +28,25 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Planet          $planet
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeScout(Planet $planet, MovementManager $manager)
+    public function storeScout(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('hostile', $planet);
 
         $quantity = $this->quantity();
+        $unit = Unit::findByType(Unit::TYPE_SCOUT);
 
-        /** @var \Koodilab\Models\Population $population */
-        $population = auth()->user()->current->findPopulationByUnit(
-            Unit::findByType(Unit::TYPE_SCOUT)
-        );
-
-        if (! $population || ! $population->hasQuantity($quantity)) {
+        if (! $storageManager->hasPopulation($unit, $quantity)) {
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($planet, $population, $quantity, $manager) {
-            $manager->createScout(
-                $planet, $population, $quantity
+        DB::transaction(function () use ($planet, $unit, $quantity, $movementManager) {
+            $movementManager->createScout(
+                $planet, $unit, $quantity
             );
         });
     }
@@ -58,31 +55,30 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Planet          $planet
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeAttack(Planet $planet, MovementManager $manager)
+    public function storeAttack(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('hostile', $planet);
 
         $quantities = $this->quantities();
 
-        $populations = auth()->user()->current->findPopulationsByUnitIds($quantities->keys())
-            ->filter(function (Population $population) {
-                return in_array($population->unit->type, [
-                    Unit::TYPE_FIGHTER, Unit::TYPE_HEAVY_FIGHTER,
-                ]);
-            })
-            ->each(function (Population $population) use ($quantities) {
-                if (! $population->hasQuantity($quantities->get($population->unit_id))) {
-                    throw new BadRequestHttpException();
-                }
-            });
+        $units = Unit::findAllByIdsAndTypes($quantities->keys(), [
+            Unit::TYPE_FIGHTER, Unit::TYPE_HEAVY_FIGHTER,
+        ]);
 
-        DB::transaction(function () use ($planet, $populations, $quantities, $manager) {
-            $manager->createAttack(
-                $planet, $populations, $quantities
+        foreach ($units as $unit) {
+            if (! $storageManager->hasPopulation($unit, $quantities->get($unit->id))) {
+                throw new BadRequestHttpException();
+            }
+        }
+
+        DB::transaction(function () use ($planet, $units, $quantities, $movementManager) {
+            $movementManager->createAttack(
+                $planet, $units, $quantities
             );
         });
     }
@@ -91,11 +87,12 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Planet          $planet
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeOccupy(Planet $planet, MovementManager $manager)
+    public function storeOccupy(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('hostile', $planet);
 
@@ -106,17 +103,15 @@ class MovementController extends Controller
             throw new BadRequestHttpException();
         }
 
-        $population = $user->current->findPopulationByUnit(
-            Unit::findByType(Unit::TYPE_SETTLER)
-        );
+        $unit = Unit::findByType(Unit::TYPE_SETTLER);
 
-        if (! $population || ! $population->hasQuantity(Planet::SETTLER_COUNT)) {
+        if (! $storageManager->hasPopulation($unit, Planet::SETTLER_COUNT)) {
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($planet, $population, $manager) {
-            $manager->createOccupy(
-                $planet, $population
+        DB::transaction(function () use ($planet, $unit, $movementManager) {
+            $movementManager->createOccupy(
+                $planet, $unit
             );
         });
     }
@@ -125,26 +120,27 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Planet          $planet
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeSupport(Planet $planet, MovementManager $manager)
+    public function storeSupport(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('friendly', $planet);
 
         $quantities = $this->quantities();
+        $units = Unit::findAllByIds($quantities->keys());
 
-        $populations = auth()->user()->current->findPopulationsByUnitIds($quantities->keys())
-            ->each(function (Population $population) use ($quantities) {
-                if (! $population->hasQuantity($quantities->get($population->unit_id))) {
-                    throw new BadRequestHttpException();
-                }
-            });
+        foreach ($units as $unit) {
+            if (! $storageManager->hasPopulation($unit, $quantities->get($unit->id))) {
+                throw new BadRequestHttpException();
+            }
+        }
 
-        DB::transaction(function () use ($planet, $populations, $quantities, $manager) {
-            $manager->createSupport(
-                $planet, $populations, $quantities
+        DB::transaction(function () use ($planet, $units, $quantities, $movementManager) {
+            $movementManager->createSupport(
+                $planet, $units, $quantities
             );
         });
     }
@@ -153,41 +149,37 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Planet          $planet
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeTransport(Planet $planet, MovementManager $manager)
+    public function storeTransport(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('friendly', $planet);
 
         $quantities = $this->quantities();
-
-        /** @var \Koodilab\Models\User $user */
-        $user = auth()->user();
-
-        $population = $user->current->findPopulationByUnit(
-            Unit::findByType(Unit::TYPE_TRANSPORTER)
-        );
+        $unit = Unit::findByType(Unit::TYPE_TRANSPORTER);
 
         $quantity = ceil(
-            $quantities->sum() / $population->unit->capacity
+            $quantities->sum() / $unit->capacity
         );
 
-        if (! $population || ! $population->hasQuantity($quantity)) {
+        if (! $storageManager->hasPopulation($unit, $quantity)) {
             throw new BadRequestHttpException();
         }
 
-        $stocks = $user->current->findStocksByResourceIds($quantities->keys())
-            ->each(function (Stock $stock) use ($quantities, $user) {
-                if (! $stock->setRelation('planet', $user->current)->hasQuantity($quantities->get($stock->resource_id))) {
-                    throw new BadRequestHttpException();
-                }
-            });
+        $resources = Resource::findAllByIds($quantities->keys());
 
-        DB::transaction(function () use ($planet, $population, $stocks, $quantity, $quantities, $manager) {
-            $manager->createTransport(
-                $planet, $population, $stocks, $quantity, $quantities
+        foreach ($resources as $resource) {
+            if (! $storageManager->hasStock($resource, $quantities->get($resource->id))) {
+                throw new BadRequestHttpException();
+            }
+        }
+
+        DB::transaction(function () use ($planet, $unit, $resources, $quantity, $quantities, $movementManager) {
+            $movementManager->createTransport(
+                $planet, $unit, $resources, $quantity, $quantities
             );
         });
     }
@@ -196,49 +188,47 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Grid            $grid
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
+     * @param StorageManager  $storageManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storeTrade(Grid $grid, MovementManager $manager)
+    public function storeTrade(Grid $grid, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('friendly', $grid->planet);
         $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
 
         $quantities = $this->quantities();
-
-        $population = $grid->planet->findPopulationByUnit(
-            Unit::findByType(Unit::TYPE_TRANSPORTER)
-        );
+        $unit = Unit::findByType(Unit::TYPE_TRANSPORTER);
 
         $quantity = ceil(
-            $quantities->sum() / $population->unit->capacity
+            $quantities->sum() / $unit->capacity
         );
 
-        if (! $population || ! $population->hasQuantity($quantity)) {
+        if (! $storageManager->hasPopulation($unit, $quantity)) {
             throw new BadRequestHttpException();
         }
 
-        /** @var Stock[] $stocks */
-        $stocks = $grid->planet->findStocksByResourceIds($quantities->keys())
-            ->each(function (Stock $stock) use ($quantities, $grid) {
-                if (! $stock->setRelation('planet', $grid->planet)->hasQuantity($quantities->get($stock->resource_id))) {
-                    throw new BadRequestHttpException();
-                }
-            });
+        $resources = Resource::findAllByIds($quantities->keys());
+
+        foreach ($resources as $resource) {
+            if (! $storageManager->hasStock($resource, $quantities->get($resource->id), true)) {
+                throw new BadRequestHttpException();
+            }
+        }
 
         $grid->building->applyModifiers([
             'level' => $grid->level,
         ]);
 
-        DB::transaction(function () use ($grid, $population, $stocks, $quantity, $quantities, $manager) {
-            if ($grid->planet_id == $grid->planet->user->capital_id) {
-                $manager->createCapitalTrade(
-                    $stocks, $quantities
+        DB::transaction(function () use ($grid, $unit, $resources, $quantity, $quantities, $movementManager) {
+            if ($grid->planet->isCapital()) {
+                $movementManager->createCapitalTrade(
+                    $resources, $quantities
                 );
             } else {
-                $manager->createTrade(
-                    $grid->building, $population, $stocks, $quantity, $quantities
+                $movementManager->createTrade(
+                    $grid->building, $unit, $resources, $quantity, $quantities
                 );
             }
         });
@@ -248,36 +238,36 @@ class MovementController extends Controller
      * Store a newly created movement in storage.
      *
      * @param Grid            $grid
-     * @param MovementManager $manager
+     * @param MovementManager $movementManager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function storePatrol(Grid $grid, MovementManager $manager)
+    public function storePatrol(Grid $grid, MovementManager $movementManager, StorageManager $storageManager)
     {
         $this->authorize('friendly', $grid->planet);
         $this->authorize('building', [$grid->building, Building::TYPE_TRADER]);
 
         $quantities = $this->quantities();
+        $units = Unit::findAllByIds($quantities->keys());
 
-        $populations = $grid->planet->findPopulationsByUnitIds($quantities->keys())
-            ->each(function (Population $population) use ($quantities) {
-                if (! $population->hasQuantity($quantities->get($population->unit_id))) {
-                    throw new BadRequestHttpException();
-                }
-            });
+        foreach ($units as $unit) {
+            if (! $storageManager->hasPopulation($unit, $quantities->get($unit->id), true)) {
+                throw new BadRequestHttpException();
+            }
+        }
 
         $grid->building->applyModifiers([
             'level' => $grid->level,
         ]);
 
-        DB::transaction(function () use ($grid, $populations, $quantities, $manager) {
-            if ($grid->planet_id == $grid->planet->user->capital_id) {
-                $manager->createCapitalPatrol(
-                    $populations, $quantities
+        DB::transaction(function () use ($grid, $units, $quantities, $movementManager) {
+            if ($grid->planet->isCapital()) {
+                $movementManager->createCapitalPatrol(
+                    $units, $quantities
                 );
             } else {
-                $manager->createPatrol(
-                    $grid->building, $populations, $quantities
+                $movementManager->createPatrol(
+                    $grid->building, $units, $quantities
                 );
             }
         });

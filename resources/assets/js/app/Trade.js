@@ -36,6 +36,16 @@ export default {
             axios.post(this.storeUrl.replace('__grid__', this.grid.id), {
                 quantity: this.quantity
             }).then(this.close);
+        },
+
+        unitQuantity(unit) {
+            const storage = _.get(
+                unit, 'storage', 0
+            );
+
+            return storage + _.get(
+                unit, 'quantity', 0
+            );
         }
     }
 };

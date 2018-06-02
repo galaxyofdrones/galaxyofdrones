@@ -30,33 +30,34 @@ class StorageManager
      *
      * @param resource $resource
      * @param int      $quantity
+     * @param bool     $withoutStorage
      *
      * @return bool
      */
-    public function hasStock(Resource $resource, $quantity)
+    public function hasStock(Resource $resource, $quantity, $withoutStorage = false)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        $userResource = $user->resources->firstWhere('id', $resource->id);
-
-        if (! $userResource) {
-            return false;
-        }
-
         $stock = $user->current->findStockByResource($resource);
 
-        if (! $user->current->isCapital()) {
+        if ($withoutStorage || ! $user->current->isCapital()) {
             return $stock && $stock->hasQuantity($quantity);
         }
 
-        if (! $stock) {
+        $userResource = $user->resources->firstWhere('id', $resource->id);
+
+        if ($stock && ! $userResource) {
+            return $stock && $stock->hasQuantity($quantity);
+        }
+
+        if (! $stock && $userResource) {
             return $quantity <= $userResource->pivot->quantity;
         }
 
-        $required = $quantity - $stock->quantity;
+        $storageQuantity = $quantity - $stock->quantity;
 
-        if ($required > $userResource->pivot->quantity) {
+        if ($storageQuantity > $userResource->pivot->quantity) {
             return false;
         }
 
@@ -68,33 +69,40 @@ class StorageManager
      *
      * @param resource $resource
      * @param int      $quantity
+     * @param bool     $withoutStorage
      */
-    public function decrementStock(Resource $resource, $quantity)
+    public function decrementStock(Resource $resource, $quantity, $withoutStorage = false)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $stock = $user->current->findStockByResource($resource);
 
-        if (! $user->current->isCapital()) {
+        if ($withoutStorage || ! $user->current->isCapital()) {
             $stock->decrementQuantity($quantity);
         } else {
             $userResource = $user->resources->firstWhere('id', $resource->id);
 
-            if (! $stock) {
+            if ($stock && ! $userResource) {
+                $stock->decrementQuantity($quantity);
+            } elseif (! $stock && $userResource) {
                 $userResource->pivot->update([
                     'quantity' => max(0, $userResource->pivot->quantity - $quantity),
                 ]);
             } else {
-                $required = $quantity - $stock->quantity;
+                if ($stock->hasQuantity($quantity)) {
+                    $stock->decrementQuantity($quantity);
+                } else {
+                    $storageQuantity = $quantity - $stock->quantity;
 
-                $userResource->pivot->update([
-                    'quantity' => max(0, $userResource->pivot->quantity - $required),
-                ]);
+                    $userResource->pivot->update([
+                        'quantity' => max(0, $userResource->pivot->quantity - $storageQuantity),
+                    ]);
 
-                $stock->decrementQuantity(
-                    $quantity - $required
-                );
+                    $stock->decrementQuantity(
+                        $quantity - $storageQuantity
+                    );
+                }
             }
         }
     }
@@ -103,34 +111,35 @@ class StorageManager
      * Has population?
      *
      * @param Unit $unit
-     * @param $quantity
+     * @param int  $quantity
+     * @param bool $withoutStorage
      *
      * @return bool
      */
-    public function hasPopulation(Unit $unit, $quantity)
+    public function hasPopulation(Unit $unit, $quantity, $withoutStorage = false)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        $userUnit = $user->units->firstWhere('id', $unit->id);
-
-        if (! $userUnit) {
-            return false;
-        }
-
         $population = $user->current->findPopulationByUnit($unit);
 
-        if (! $user->current->isCapital()) {
+        if ($withoutStorage || ! $user->current->isCapital()) {
             return $population && $population->hasQuantity($quantity);
         }
 
-        if (! $population) {
+        $userUnit = $user->units->firstWhere('id', $unit->id);
+
+        if ($population && ! $userUnit) {
+            return $population && $population->hasQuantity($quantity);
+        }
+
+        if (! $population && $userUnit) {
             return $quantity <= $userUnit->pivot->quantity;
         }
 
-        $required = $quantity - $population->quantity;
+        $storageQuantity = $quantity - $population->quantity;
 
-        if ($required > $userUnit->pivot->quantity) {
+        if ($storageQuantity > $userUnit->pivot->quantity) {
             return false;
         }
 
@@ -142,33 +151,40 @@ class StorageManager
      *
      * @param Unit $unit
      * @param int  $quantity
+     * @param bool $withoutStorage
      */
-    public function decrementPopulation(Unit $unit, $quantity)
+    public function decrementPopulation(Unit $unit, $quantity, $withoutStorage = false)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $population = $user->current->findPopulationByUnit($unit);
 
-        if (! $user->current->isCapital()) {
+        if ($withoutStorage || ! $user->current->isCapital()) {
             $population->decrementQuantity($quantity);
         } else {
             $userUnit = $user->units->firstWhere('id', $unit->id);
 
-            if (! $population) {
+            if ($population && ! $userUnit) {
+                $population->decrementQuantity($quantity);
+            } elseif (! $population && $userUnit) {
                 $userUnit->pivot->update([
                     'quantity' => max(0, $userUnit->pivot->quantity - $quantity),
                 ]);
             } else {
-                $required = $quantity - $population->quantity;
+                if ($population->hasQuantity($quantity)) {
+                    $population->decrementQuantity($quantity);
+                } else {
+                    $storageQuantity = $quantity - $population->quantity;
 
-                $userUnit->pivot->update([
-                    'quantity' => max(0, $userUnit->pivot->quantity - $required),
-                ]);
+                    $userUnit->pivot->update([
+                        'quantity' => max(0, $userUnit->pivot->quantity - $storageQuantity),
+                    ]);
 
-                $population->decrementQuantity(
-                    $quantity - $required
-                );
+                    $population->decrementQuantity(
+                        $quantity - $storageQuantity
+                    );
+                }
             }
         }
     }
