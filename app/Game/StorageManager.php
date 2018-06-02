@@ -38,25 +38,26 @@ class StorageManager
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        $stock = $user->current->findStockByResource(
-            $resource
-        );
+        $userResource = $user->resources->firstWhere('id', $resource->id);
 
-        if (! $stock) {
+        if (! $userResource) {
             return false;
         }
 
-        if ($quantity > $stock->quantity) {
-            if (! $user->current->isCapital()) {
-                return false;
-            }
+        $stock = $user->current->findStockByResource($resource);
 
-            $required = $quantity - $stock->quantity;
-            $userResource = $user->resources->firstWhere('id', $resource->id);
+        if (! $user->current->isCapital()) {
+            return $stock && $stock->hasQuantity($quantity);
+        }
 
-            if ($required > $userResource->pivot->quantity) {
-                return false;
-            }
+        if (! $stock) {
+            return $quantity <= $userResource->pivot->quantity;
+        }
+
+        $required = $quantity - $stock->quantity;
+
+        if ($required > $userResource->pivot->quantity) {
+            return false;
         }
 
         return true;
@@ -73,27 +74,28 @@ class StorageManager
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        $stock = $user->current->findStockByResource(
-            $resource
-        );
+        $stock = $user->current->findStockByResource($resource);
 
-        if (! $stock) {
-            return;
-        }
-
-        if ($quantity > $stock->quantity && $user->current->isCapital()) {
-            $required = $quantity - $stock->quantity;
+        if (! $user->current->isCapital()) {
+            $stock->decrementQuantity($quantity);
+        } else {
             $userResource = $user->resources->firstWhere('id', $resource->id);
 
-            $userResource->pivot->update([
-                'quantity' => max(0, $userResource->pivot->quantity - $required),
-            ]);
+            if (! $stock) {
+                $userResource->pivot->update([
+                    'quantity' => max(0, $userResource->pivot->quantity - $quantity),
+                ]);
+            } else {
+                $required = $quantity - $stock->quantity;
 
-            $stock->decrementQuantity(
-                $quantity - $required
-            );
-        } else {
-            $stock->decrementQuantity($quantity);
+                $userResource->pivot->update([
+                    'quantity' => max(0, $userResource->pivot->quantity - $required),
+                ]);
+
+                $stock->decrementQuantity(
+                    $quantity - $required
+                );
+            }
         }
     }
 
@@ -110,25 +112,26 @@ class StorageManager
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        $population = $user->current->findPopulationByUnit(
-            $unit
-        );
+        $userUnit = $user->units->firstWhere('id', $unit->id);
 
-        if (! $population) {
+        if (! $userUnit) {
             return false;
         }
 
-        if ($quantity > $population->quantity) {
-            if (! $user->current->isCapital()) {
-                return false;
-            }
+        $population = $user->current->findPopulationByUnit($unit);
 
-            $required = $quantity - $population->quantity;
-            $userUnit = $user->units->firstWhere('id', $unit->id);
+        if (! $user->current->isCapital()) {
+            return $population && $population->hasQuantity($quantity);
+        }
 
-            if ($required > $userUnit->pivot->quantity) {
-                return true;
-            }
+        if (! $population) {
+            return $quantity <= $userUnit->pivot->quantity;
+        }
+
+        $required = $quantity - $population->quantity;
+
+        if ($required > $userUnit->pivot->quantity) {
+            return false;
         }
 
         return true;
@@ -145,27 +148,28 @@ class StorageManager
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        $population = $user->current->findPopulationByUnit(
-            $unit
-        );
+        $population = $user->current->findPopulationByUnit($unit);
 
-        if (! $population) {
-            return;
-        }
-
-        if ($quantity > $population->quantity && $user->current->isCapital()) {
-            $required = $quantity - $population->quantity;
+        if (! $user->current->isCapital()) {
+            $population->decrementQuantity($quantity);
+        } else {
             $userUnit = $user->units->firstWhere('id', $unit->id);
 
-            $userUnit->pivot->update([
-                'quantity' => max(0, $userUnit->pivot->quantity - $required),
-            ]);
+            if (! $population) {
+                $userUnit->pivot->update([
+                    'quantity' => max(0, $userUnit->pivot->quantity - $quantity),
+                ]);
+            } else {
+                $required = $quantity - $population->quantity;
 
-            $population->decrementQuantity(
-                $quantity - $required
-            );
-        } else {
-            $population->decrementQuantity($quantity);
+                $userUnit->pivot->update([
+                    'quantity' => max(0, $userUnit->pivot->quantity - $required),
+                ]);
+
+                $population->decrementQuantity(
+                    $quantity - $required
+                );
+            }
         }
     }
 }
