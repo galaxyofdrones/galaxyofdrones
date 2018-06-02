@@ -4,7 +4,7 @@ namespace Koodilab\Models\Queries;
 
 use Koodilab\Models\Resource;
 
-trait FindStock
+trait FindStockByResource
 {
     /**
      * Find stock.
@@ -14,7 +14,7 @@ trait FindStock
      *
      * @return \Koodilab\Models\Stock
      */
-    public function findStock(Resource $resource, $columns = ['*'])
+    public function findStockByResource(Resource $resource, $columns = ['*'])
     {
         /** @var \Koodilab\Models\Stock $stock */
         $stock = $this->stocks()

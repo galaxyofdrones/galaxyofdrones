@@ -3,6 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\DB;
+use Koodilab\Game\StorageManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
@@ -40,12 +41,13 @@ class ProducerController extends Controller
     /**
      * Store a newly created transmute in storage.
      *
-     * @param Grid     $grid
-     * @param resource $resource
+     * @param Grid           $grid
+     * @param resource       $resource
+     * @param StorageManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function store(Grid $grid, Resource $resource)
+    public function store(Grid $grid, Resource $resource, StorageManager $manager)
     {
         $this->authorize('friendly', $grid->planet);
         $this->authorize('building', [$grid->building, Building::TYPE_PRODUCER]);
@@ -59,18 +61,18 @@ class ProducerController extends Controller
             throw new BadRequestHttpException();
         }
 
-        $stock = $grid->planet->findStock($resource);
-
-        if (! $stock->hasQuantity($quantity)) {
+        if (! $manager->hasStock($resource, $quantity)) {
             throw new BadRequestHttpException();
         }
 
-        DB::transaction(function () use ($resource, $user, $stock, $quantity) {
+        DB::transaction(function () use ($resource, $manager, $user, $quantity) {
             $user->incrementEnergy(
                 round($quantity * $resource->efficiency)
             );
 
-            $stock->decrementQuantity($quantity);
+            $manager->decrementStock(
+                $resource, $quantity
+            );
         });
     }
 }
