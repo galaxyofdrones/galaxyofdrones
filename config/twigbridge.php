@@ -66,6 +66,10 @@ return [
             'setting',
             'vue',
 
+            'shield_expiration' => [
+                'callback' => 'Koodilab\Models\Shield::expiration',
+            ],
+
             'user_role_options' => [
                 'callback' => 'Koodilab\Models\User::roleOptions',
             ],

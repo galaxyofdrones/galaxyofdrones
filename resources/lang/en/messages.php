@@ -129,6 +129,13 @@ return [
         'plural' => 'Settings',
     ],
 
+    'shield' => [
+        'add' => 'Add shield',
+        'empty' => 'No shields.',
+        'singular' => 'Shield',
+        'time' => '{1} You can add :value hour shield with|[2,*] You can add :value hours shield with',
+    ],
+
     'solarion' => [
         'name' => 'Solarion',
         'description' => 'Found on the stars.',

@@ -54,4 +54,14 @@ class Shield extends Model
     protected $dates = [
         'ended_at',
     ];
+
+    /**
+     * Get the expiration.
+     *
+     * @return float
+     */
+    public static function expiration()
+    {
+        return round(static::EXPIRATION_TIME / 60 / 60);
+    }
 }

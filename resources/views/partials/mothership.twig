@@ -26,7 +26,9 @@
                             <div class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <select class="form-control" v-model="selected" :disabled="data.incoming_trade_movement || remaining">
+                                        <select class="form-control"
+                                                v-model="selected"
+                                                :disabled="data.incoming_capital_movement_count || remaining">
                                             <option :value="planet.id" v-for="planet in data.planets">
                                                 {{ vue('planet.name') }}
                                             </option>
@@ -36,7 +38,9 @@
                                         <h4 v-if="remaining">
                                             {{ vue('remaining | timer') }}
                                         </h4>
-                                        <button v-else class="btn btn-info btn-block" :disabled="!canHyperjump" @click="store()">
+                                        <button v-else class="btn btn-info btn-block"
+                                                :disabled="!canHyperjump"
+                                                @click="store()">
                                             {{ trans('messages.mothership.hyperjump') }}
                                         </button>
                                     </div>
@@ -62,12 +66,18 @@
                                 {{ trans('messages.laboratory') }}
                             </a>
                         </li>
+                        <li :class="{active: isSelectedTab('shield')}">
+                            <a href="#" @click.prevent="selectTab('shield')">
+                                {{ trans('messages.shield.singular') }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 {% include 'partials.cargo' %}
                 {% include 'partials.armory' %}
                 {% include 'partials.laboratory' %}
+                {% include 'partials.shield' %}
             </div>
         </div>
     </div>

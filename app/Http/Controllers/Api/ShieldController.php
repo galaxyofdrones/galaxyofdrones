@@ -30,20 +30,26 @@ class ShieldController extends Controller
      */
     public function index(ShieldTransformer $transformer)
     {
-        return $transformer->transformCollection(
-            auth()->user()->findNotExpiredShields()
-        );
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        return [
+            'canStore' => $user->hasSolarion(Shield::SOLARION_COUNT),
+            'shields' => $transformer->transformCollection(
+                $user->findNotExpiredShields()
+            ),
+        ];
     }
 
     /**
-     * Update the shield.
+     * Store the shield.
      *
      * @param Planet        $planet
      * @param ShieldManager $manager
      *
      * @return mixed|\Illuminate\Http\Response
      */
-    public function update(Planet $planet, ShieldManager $manager)
+    public function store(Planet $planet, ShieldManager $manager)
     {
         $this->authorize('friendly', $planet);
 

@@ -33,8 +33,8 @@ $router->group([
         $router->get('/', 'ShieldController@index')
             ->name('shield');
 
-        $router->put('{planet}', 'ShieldController@update')
-            ->name('shield_update')
+        $router->post('{planet}', 'ShieldController@store')
+            ->name('shield_store')
             ->where('planet', '\d+');
     });
 
