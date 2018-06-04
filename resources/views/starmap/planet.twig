@@ -101,6 +101,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <button class="btn btn-info btn-block"
+                                                :disabled="data.has_shield"
                                                 @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_SCOUT') }})">
                                             {{ trans('messages.movement.scout') }}
                                         </button>
@@ -109,6 +110,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <button class="btn btn-danger btn-block"
+                                                :disabled="data.has_shield"
                                                 @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_ATTACK') }})">
                                             {{ trans('messages.movement.attack') }}
                                         </button>
@@ -116,7 +118,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <button class="btn btn-success btn-block" :disabled="!data.can_occupy"
+                                        <button class="btn btn-success btn-block"
+                                                :disabled="data.has_shield || !data.can_occupy"
                                                 @click="openMove({{ constant('Koodilab\\Models\\Movement::TYPE_OCCUPY') }})">
                                             {{ trans('messages.movement.occupy') }}
                                         </button>
