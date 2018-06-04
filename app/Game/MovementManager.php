@@ -17,6 +17,7 @@ use Koodilab\Models\Building;
 use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
+use Koodilab\Models\Unit;
 
 class MovementManager
 {
@@ -49,37 +50,46 @@ class MovementManager
     protected $simulator;
 
     /**
+     * The storage manager instance.
+     *
+     * @var StorageManager
+     */
+    protected $storageManager;
+
+    /**
      * Constructor.
      *
      * @param Auth              $auth
      * @param Bus               $bus
      * @param Event             $event
      * @param SimulatorContract $simulator
+     * @param StorageManager    $storageManager
      */
-    public function __construct(Auth $auth, Bus $bus, Event $event, SimulatorContract $simulator)
+    public function __construct(Auth $auth, Bus $bus, Event $event, SimulatorContract $simulator, StorageManager $storageManager)
     {
         $this->auth = $auth;
         $this->bus = $bus;
         $this->event = $event;
         $this->simulator = $simulator;
+        $this->storageManager = $storageManager;
     }
 
     /**
      * Create scout.
      *
-     * @param Planet     $planet
-     * @param Population $population
-     * @param int        $quantity
+     * @param Planet $planet
+     * @param Unit   $unit
+     * @param int    $quantity
      *
      * @return Movement
      */
-    public function createScout(Planet $planet, Population $population, $quantity)
+    public function createScout(Planet $planet, Unit $unit, $quantity)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $planet->travelTimeTo($user->current) / $population->unit->speed
+            $planet->travelTimeTo($user->current) / $unit->speed
         );
 
         $movement = Movement::create([
@@ -90,9 +100,11 @@ class MovementManager
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
-        $population->decrementQuantity($quantity);
+        $this->storageManager->decrementPopulation(
+            $user->current, $unit, $quantity
+        );
 
-        $movement->units()->attach($population->unit->id, [
+        $movement->units()->attach($unit->id, [
             'quantity' => $quantity,
         ]);
 
@@ -104,19 +116,19 @@ class MovementManager
     /**
      * Create attack.
      *
-     * @param Planet                  $planet
-     * @param Collection|Population[] $populations
-     * @param BaseCollection          $quantities
+     * @param Planet            $planet
+     * @param Collection|Unit[] $units
+     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
-    public function createAttack(Planet $planet, Collection $populations, BaseCollection $quantities)
+    public function createAttack(Planet $planet, Collection $units, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $planet->travelTimeTo($user->current) / $populations->min('unit.speed')
+            $planet->travelTimeTo($user->current) / $units->min('speed')
         );
 
         $movement = Movement::create([
@@ -127,13 +139,13 @@ class MovementManager
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
-        foreach ($populations as $population) {
-            $population->decrementQuantity(
-                $quantities->get($population->unit_id)
+        foreach ($units as $unit) {
+            $this->storageManager->decrementPopulation(
+                $user->current, $unit, $quantities->get($unit->id)
             );
 
-            $movement->units()->attach($population->unit_id, [
-                'quantity' => $quantities->get($population->unit_id),
+            $movement->units()->attach($unit->id, [
+                'quantity' => $quantities->get($unit->id),
             ]);
         }
 
@@ -145,18 +157,18 @@ class MovementManager
     /**
      * Create occupy.
      *
-     * @param Planet     $planet
-     * @param Population $population
+     * @param Planet $planet
+     * @param Unit   $unit
      *
      * @return Movement
      */
-    public function createOccupy(Planet $planet, Population $population)
+    public function createOccupy(Planet $planet, Unit $unit)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $planet->travelTimeTo($user->current) / $population->unit->speed
+            $planet->travelTimeTo($user->current) / $unit->speed
         );
 
         $movement = Movement::create([
@@ -167,9 +179,11 @@ class MovementManager
             'ended_at' => Carbon::now()->addSeconds($travelTime),
         ]);
 
-        $population->decrementQuantity(Planet::SETTLER_COUNT);
+        $this->storageManager->decrementPopulation(
+            $user->current, $unit, Planet::SETTLER_COUNT
+        );
 
-        $movement->units()->attach($population->unit->id, [
+        $movement->units()->attach($unit->id, [
             'quantity' => Planet::SETTLER_COUNT,
         ]);
 
@@ -181,19 +195,19 @@ class MovementManager
     /**
      * Create support.
      *
-     * @param Planet                  $planet
-     * @param Collection|Population[] $populations
-     * @param BaseCollection          $quantities
+     * @param Planet            $planet
+     * @param Collection|Unit[] $units
+     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
-    public function createSupport(Planet $planet, Collection $populations, BaseCollection $quantities)
+    public function createSupport(Planet $planet, Collection $units, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $planet->travelTimeTo($user->current) / $populations->min('unit.speed')
+            $planet->travelTimeTo($user->current) / $units->min('speed')
         );
 
         $movement = Movement::create([
@@ -205,28 +219,28 @@ class MovementManager
         ]);
 
         return $this->createSupportOrPatrol(
-            $movement, $populations, $quantities
+            $movement, $units, $quantities
         );
     }
 
     /**
      * Create transport.
      *
-     * @param Planet                              $planet
-     * @param Population                          $population
-     * @param Collection|\Koodilab\Models\Stock[] $stocks
-     * @param int                                 $quantity
-     * @param BaseCollection                      $quantities
+     * @param Planet                                 $planet
+     * @param Unit                                   $unit
+     * @param Collection|\Koodilab\Models\Resource[] $resources
+     * @param int                                    $quantity
+     * @param BaseCollection                         $quantities
      *
      * @return Movement
      */
-    public function createTransport(Planet $planet, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    public function createTransport(Planet $planet, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $planet->travelTimeTo($user->current) / $population->unit->speed
+            $planet->travelTimeTo($user->current) / $unit->speed
         );
 
         $movement = Movement::create([
@@ -238,28 +252,28 @@ class MovementManager
         ]);
 
         return $this->createTransportOrTrade(
-            $movement, $population, $stocks, $quantity, $quantities
+            $movement, $unit, $resources, $quantity, $quantities
         );
     }
 
     /**
      * Create trade.
      *
-     * @param Building                            $building
-     * @param Population                          $population
-     * @param Collection|\Koodilab\Models\Stock[] $stocks
-     * @param int                                 $quantity
-     * @param BaseCollection                      $quantities
+     * @param Building                               $building
+     * @param Unit                                   $unit
+     * @param Collection|\Koodilab\Models\Resource[] $resources
+     * @param int                                    $quantity
+     * @param BaseCollection                         $quantities
      *
      * @return Movement
      */
-    public function createTrade(Building $building, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    public function createTrade(Building $building, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $user->capital->travelTimeTo($user->current) / $population->unit->speed * (1 - $building->trade_time_bonus)
+            $user->capital->travelTimeTo($user->current) / $unit->speed * (1 - $building->trade_time_bonus)
         );
 
         $movement = Movement::create([
@@ -271,36 +285,36 @@ class MovementManager
         ]);
 
         return $this->createTransportOrTrade(
-            $movement, $population, $stocks, $quantity, $quantities
+            $movement, $unit, $resources, $quantity, $quantities
         );
     }
 
     /**
      * Create capital trade.
      *
-     * @param Collection|\Koodilab\Models\Stock[] $stocks
-     * @param BaseCollection                      $quantities
+     * @param Collection|\Koodilab\Models\Resource[] $resources
+     * @param BaseCollection                         $quantities
      */
-    public function createCapitalTrade(Collection $stocks, BaseCollection $quantities)
+    public function createCapitalTrade(Collection $resources, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        foreach ($stocks as $stock) {
-            $stock->decrementQuantity(
-                $quantities->get($stock->resource_id)
+        foreach ($resources as $resource) {
+            $this->storageManager->decrementStock(
+                $user->current, $resource, $quantities->get($resource->id), true
             );
 
-            $userResource = $user->resources->firstWhere('id', $stock->resource_id);
+            $userResource = $user->resources->firstWhere('id', $resource->id);
 
             if (! $userResource) {
-                $user->resources()->attach($stock->resource_id, [
+                $user->resources()->attach($resource->id, [
                     'is_researched' => false,
-                    'quantity' => $quantities->get($stock->resource_id),
+                    'quantity' => $quantities->get($resource->id),
                 ]);
             } else {
                 $userResource->pivot->update([
-                    'quantity' => $userResource->pivot->quantity + $quantities->get($stock->resource_id),
+                    'quantity' => $userResource->pivot->quantity + $quantities->get($resource->id),
                 ]);
             }
         }
@@ -313,19 +327,19 @@ class MovementManager
     /**
      * Create patrol.
      *
-     * @param Building                $building
-     * @param Collection|Population[] $populations
-     * @param BaseCollection          $quantities
+     * @param Building          $building
+     * @param Collection|Unit[] $units
+     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
-    public function createPatrol(Building $building, Collection $populations, BaseCollection $quantities)
+    public function createPatrol(Building $building, Collection $units, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
-            $user->capital->travelTimeTo($user->current) / $populations->min('unit.speed') * (1 - $building->trade_time_bonus)
+            $user->capital->travelTimeTo($user->current) / $units->min('speed') * (1 - $building->trade_time_bonus)
         );
 
         $movement = Movement::create([
@@ -337,36 +351,36 @@ class MovementManager
         ]);
 
         return $this->createSupportOrPatrol(
-            $movement, $populations, $quantities
+            $movement, $units, $quantities
         );
     }
 
     /**
      * Create capital patrol.
      *
-     * @param Collection|Population[] $populations
-     * @param BaseCollection          $quantities
+     * @param Collection|Unit[] $units
+     * @param BaseCollection    $quantities
      */
-    public function createCapitalPatrol(Collection $populations, BaseCollection $quantities)
+    public function createCapitalPatrol(Collection $units, BaseCollection $quantities)
     {
         /** @var \Koodilab\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        foreach ($populations as $population) {
-            $population->decrementQuantity(
-                $quantities->get($population->unit_id)
+        foreach ($units as $unit) {
+            $this->storageManager->decrementPopulation(
+                $unit, $quantities->get($unit->id), true
             );
 
-            $userUnit = $user->units->firstWhere('id', $population->unit_id);
+            $userUnit = $user->units->firstWhere('id', $unit->id);
 
             if (! $userUnit) {
-                $user->resources()->attach($population->unit_id, [
+                $user->resources()->attach($unit->id, [
                     'is_researched' => false,
-                    'quantity' => $quantities->get($population->unit_id),
+                    'quantity' => $quantities->get($unit->id),
                 ]);
             } else {
                 $userUnit->pivot->update([
-                    'quantity' => $userUnit->pivot->quantity + $quantities->get($population->unit_id),
+                    'quantity' => $userUnit->pivot->quantity + $quantities->get($unit->id),
                 ]);
             }
         }
@@ -419,7 +433,7 @@ class MovementManager
      */
     protected function finishScout(Movement $movement)
     {
-        if ($movement->user_id == $movement->end->user_id) {
+        if ($movement->end->hasShield() || $movement->user_id == $movement->end->user_id) {
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
@@ -438,7 +452,7 @@ class MovementManager
      */
     protected function finishAttack(Movement $movement)
     {
-        if ($movement->user_id == $movement->end->user_id) {
+        if ($movement->end->hasShield() || $movement->user_id == $movement->end->user_id) {
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
@@ -457,7 +471,7 @@ class MovementManager
      */
     protected function finishOccupy(Movement $movement)
     {
-        if ($movement->user_id == $movement->end->user_id) {
+        if ($movement->end->hasShield() || $movement->user_id == $movement->end->user_id) {
             $this->returnMovement($movement);
         } else {
             /** @var BattleLog $battleLog */
@@ -480,8 +494,13 @@ class MovementManager
      */
     protected function finishSupport(Movement $movement)
     {
-        $this->transferUnits($movement);
-        $this->transferResources($movement);
+        if ($movement->end->isCapital()) {
+            $this->transferPatrolUnits($movement);
+            $this->transferTradeResources($movement);
+        } else {
+            $this->transferUnits($movement);
+            $this->transferResources($movement);
+        }
     }
 
     /**
@@ -527,21 +546,24 @@ class MovementManager
     /**
      * Create support or patrol.
      *
-     * @param Movement                $movement
-     * @param Collection|Population[] $populations
-     * @param BaseCollection          $quantities
+     * @param Movement          $movement
+     * @param Collection|Unit[] $units
+     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
-    protected function createSupportOrPatrol(Movement $movement, Collection $populations, BaseCollection $quantities)
+    protected function createSupportOrPatrol(Movement $movement, Collection $units, BaseCollection $quantities)
     {
-        foreach ($populations as $population) {
-            $population->decrementQuantity(
-                $quantities->get($population->unit_id)
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
+
+        foreach ($units as $unit) {
+            $this->storageManager->decrementPopulation(
+                $user->current, $unit, $quantities->get($unit->id)
             );
 
-            $movement->units()->attach($population->unit_id, [
-                'quantity' => $quantities->get($population->unit_id),
+            $movement->units()->attach($unit->id, [
+                'quantity' => $quantities->get($unit->id),
             ]);
         }
 
@@ -553,29 +575,34 @@ class MovementManager
     /**
      * Create transport or trade.
      *
-     * @param Movement                            $movement
-     * @param Population                          $population
-     * @param Collection|\Koodilab\Models\Stock[] $stocks
-     * @param int                                 $quantity
-     * @param BaseCollection                      $quantities
+     * @param Movement                               $movement
+     * @param Unit                                   $unit
+     * @param Collection|\Koodilab\Models\Resource[] $resources
+     * @param int                                    $quantity
+     * @param BaseCollection                         $quantities
      *
      * @return Movement
      */
-    protected function createTransportOrTrade(Movement $movement, Population $population, Collection $stocks, $quantity, BaseCollection $quantities)
+    protected function createTransportOrTrade(Movement $movement, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
-        $population->decrementQuantity($quantity);
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
 
-        $movement->units()->attach($population->unit->id, [
+        $this->storageManager->decrementPopulation(
+            $user->current, $unit, $quantity
+        );
+
+        $movement->units()->attach($unit->id, [
             'quantity' => $quantity,
         ]);
 
-        foreach ($stocks as $stock) {
-            $stock->decrementQuantity(
-                $quantities->get($stock->resource_id)
+        foreach ($resources as $resource) {
+            $this->storageManager->decrementStock(
+                $user->current, $resource, $quantities->get($resource->id)
             );
 
-            $movement->resources()->attach($stock->resource_id, [
-                'quantity' => $quantities->get($stock->resource_id),
+            $movement->resources()->attach($resource->id, [
+                'quantity' => $quantities->get($resource->id),
             ]);
         }
 

@@ -60,6 +60,8 @@ class Unit extends Model implements ResearchableContract, TranslatableContract
         Behaviors\Sortable,
         Behaviors\Researchable,
         Behaviors\Translatable,
+        Queries\FindAllByIds,
+        Queries\FindAllByIdsAndType,
         Queries\FindByType,
         Queries\FindResearchByUser,
         Relations\BelongsToManyUser,

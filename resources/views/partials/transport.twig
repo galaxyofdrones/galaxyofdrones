@@ -17,12 +17,12 @@
                             {{ trans('messages.required_quantity') }}
                         </h6>
                         <h4>
-                            {{ vue('transporterQuantity') }} / {{ vue('transporterUnit.quantity') }}
+                            {{ vue('transporterQuantity') }} / {{ vue('unitQuantity(transporterUnit)') }}
                         </h4>
                     </div>
                 </div>
             </div>
-            <ul v-if="hasTimer" class="list-inline">
+            <ul v-if="!isMove" class="list-inline">
                 <li v-if="planet.is_capital"
                     v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.trade_time') }}'}">
                     <i class="icon-time"></i>

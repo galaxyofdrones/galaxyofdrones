@@ -45,6 +45,7 @@ class Resource extends Model implements ResearchableContract, TranslatableContra
     use Behaviors\Researchable,
         Behaviors\Sortable,
         Behaviors\Translatable,
+        Queries\FindAllByIds,
         Queries\FindResearchByUser,
         Relations\HasManyPlanet,
         Relations\HasManyStock;

@@ -26,8 +26,8 @@
                         <input class="form-control"
                                type="number"
                                min="1"
-                               :max="unit.quantity"
-                               :placeholder="unit.quantity | bracket"
+                               :max="unitQuantity(unit)"
+                               :placeholder="unitQuantity(unit) | bracket"
                                v-model.number="quantity[unit.id]">
                     </div>
                 </div>

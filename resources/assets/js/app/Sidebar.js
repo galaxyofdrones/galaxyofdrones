@@ -64,7 +64,7 @@ export default {
         },
 
         resourceLabel() {
-            return `${Math.round(this.usedCapacity)}/${this.data.capacity}`;
+            return `${Math.round(this.usedCapacity)} / ${this.data.capacity}`;
         },
 
         resourceProgress() {
@@ -72,7 +72,7 @@ export default {
         },
 
         unitLabel() {
-            return `${this.data.used_supply + this.data.used_training_supply}/${this.data.supply}`;
+            return `${this.data.used_supply + this.data.used_training_supply} / ${this.data.supply}`;
         },
 
         unitProgress() {
@@ -213,6 +213,12 @@ export default {
             }
 
             return resource.quantity;
+        },
+
+        resourceValue(resource) {
+            return Math.round(
+                this.resourceQuantity(resource)
+            );
         },
 
         openMothership() {

@@ -50,6 +50,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Database\Eloquent\Collection|Planet[]                                                         $planets
  * @property \Illuminate\Database\Eloquent\Collection|Research[]                                                       $researches
  * @property \Illuminate\Database\Eloquent\Collection|resource[]                                                       $resources
+ * @property \Illuminate\Database\Eloquent\Collection|Shield[]                                                         $shields
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
  * @property \Illuminate\Database\Eloquent\Collection|Unit[]                                                           $units
  *
@@ -82,6 +83,7 @@ class User extends Authenticatable
         Concerns\HasEnergy,
         Concerns\HasExperience,
         Concerns\HasResearchable,
+        Concerns\HasSolarion,
         Queries\FindAvailableResource,
         Queries\FindAvailableUnits,
         Queries\FindByIdOrUsername,
@@ -89,6 +91,7 @@ class User extends Authenticatable
         Queries\FindMissionResources,
         Queries\FindNotExpiredExpeditions,
         Queries\FindNotExpiredMissions,
+        Queries\FindNotExpiredShields,
         Queries\FindPlanetsOrderByName,
         Queries\FindResearchedResources,
         Queries\FindUnitsOrderBySortOrder,
@@ -185,6 +188,16 @@ class User extends Authenticatable
     public function defenseBattleLogs()
     {
         return $this->hasMany(BattleLog::class, 'defender_id');
+    }
+
+    /**
+     * Get the shields.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function shields()
+    {
+        return $this->hasManyThrough(Shield::class, Planet::class);
     }
 
     /**

@@ -79,13 +79,20 @@ class PlanetTransformer extends Transformer
 
         return Resource::newModelInstance()
             ->findAllOrderBySortOrder()
-            ->transform(function (Resource $resource) use ($stocks) {
+            ->transform(function (Resource $resource) use ($planet, $stocks) {
+                $userResource = $planet->isCapital()
+                    ? $planet->user->resources->firstWhere('id', $resource->id)
+                    : null;
+
                 return [
                     'id' => $resource->id,
                     'name' => $resource->translation('name'),
                     'description' => $resource->translation('description'),
                     'quantity' => $stocks->has($resource->id)
                         ? $stocks->get($resource->id)->quantity
+                        : 0,
+                    'storage' => $userResource
+                        ? $userResource->pivot->quantity
                         : 0,
                 ];
             });
@@ -104,7 +111,11 @@ class PlanetTransformer extends Transformer
 
         return Unit::newModelInstance()
             ->findAllOrderBySortOrder()
-            ->transform(function (Unit $unit) use ($populations) {
+            ->transform(function (Unit $unit) use ($planet, $populations) {
+                $userUnit = $planet->isCapital()
+                    ? $planet->user->units->firstWhere('id', $unit->id)
+                    : null;
+
                 return [
                     'id' => $unit->id,
                     'name' => $unit->translation('name'),
@@ -114,6 +125,9 @@ class PlanetTransformer extends Transformer
                     'capacity' => $unit->capacity,
                     'quantity' => $populations->has($unit->id)
                         ? $populations->get($unit->id)->quantity
+                        : 0,
+                    'storage' => $userUnit
+                        ? $userUnit->pivot->quantity
                         : 0,
                 ];
             });

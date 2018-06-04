@@ -4,6 +4,7 @@ namespace Koodilab\Battle;
 
 use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
 use Koodilab\Game\BattleManager;
+use Koodilab\Game\StorageManager;
 use Koodilab\Models\BattleLog;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
@@ -82,16 +83,25 @@ class Simulator implements SimulatorContract
      *
      * @var BattleManager
      */
-    protected $manager;
+    protected $battleManager;
+
+    /**
+     * The storage manager instance.
+     *
+     * @var StorageManager
+     */
+    protected $storageManager;
 
     /**
      * Constructor.
      *
-     * @param BattleManager $manager
+     * @param BattleManager  $battleManager
+     * @param StorageManager $storageManager
      */
-    public function __construct(BattleManager $manager)
+    public function __construct(BattleManager $battleManager, StorageManager $storageManager)
     {
-        $this->manager = $manager;
+        $this->battleManager = $battleManager;
+        $this->storageManager = $storageManager;
     }
 
     /**
@@ -200,6 +210,12 @@ class Simulator implements SimulatorContract
             return $carry + $population->unit->detection * $population->quantity;
         }, 0);
 
+        if ($this->movement->end->isCapital()) {
+            $detection = $this->movement->end->user->units->reduce(function ($carry, Unit $unit) {
+                return $carry + $unit->detection * $unit->pivot->quantity;
+            }, $detection);
+        }
+
         return $this->grids->reduce(function ($carry, Grid $grid) {
             return $carry + $grid->building->detection;
         }, $detection);
@@ -228,6 +244,12 @@ class Simulator implements SimulatorContract
             return $carry + $population->unit->defense * $population->quantity;
         }, 0);
 
+        if ($this->movement->end->isCapital()) {
+            $defense = $this->movement->end->user->units->reduce(function ($carry, Unit $unit) {
+                return $carry + $unit->defense * $unit->pivot->quantity;
+            }, $defense);
+        }
+
         return $this->grids->reduce(function ($carry, Grid $grid) {
             return $carry + $grid->building->defense;
         }, $defense);
@@ -255,7 +277,7 @@ class Simulator implements SimulatorContract
             }
         }
 
-        $this->battleLog = $this->manager->createLog(
+        $this->battleLog = $this->battleManager->createLog(
             $this->movement, $this->attackerLossRate > $this->defenderLossRate
                 ? BattleLog::WINNER_DEFENDER
                 : BattleLog::WINNER_ATTACKER
@@ -271,7 +293,7 @@ class Simulator implements SimulatorContract
     {
         $this->attackerLossRate = 0;
         $this->defenderLossRate = 0;
-        $this->battleLog = $this->manager->createLog($this->movement);
+        $this->battleLog = $this->battleManager->createLog($this->movement);
 
         $this->calculate();
     }
@@ -322,6 +344,14 @@ class Simulator implements SimulatorContract
         foreach ($this->populations as $population) {
             $quantity = $population->quantity;
 
+            if ($population->planet->isCapital()) {
+                $userUnit = $population->planet->user->units->firstWhere('id', $population->unit_id);
+
+                if ($userUnit) {
+                    $quantity += $userUnit->pivot->quantity;
+                }
+            }
+
             if ($quantity) {
                 $losses = round($quantity * $this->defenderLossRate);
 
@@ -332,7 +362,9 @@ class Simulator implements SimulatorContract
                 ]);
 
                 if (! empty($losses)) {
-                    $population->decrementQuantity($losses);
+                    $this->storageManager->decrementPopulation(
+                        $population->planet, $population->unit, $losses
+                    );
                 }
             }
         }

@@ -3,13 +3,14 @@ import Armory from './Armory';
 import Cargo from './Cargo';
 import HasTab from './HasTab';
 import Laboratory from './Laboratory';
+import Shield from './Shield';
 import Modal from './Modal';
 
 export default Modal.extend({
     props: ['url', 'storeUrl'],
 
     components: {
-        Armory, Cargo, Laboratory
+        Armory, Cargo, Laboratory, Shield
     },
 
     mixins: [

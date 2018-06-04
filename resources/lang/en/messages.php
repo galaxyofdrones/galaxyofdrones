@@ -128,6 +128,13 @@ return [
         'plural' => 'Settings',
     ],
 
+    'shield' => [
+        'add' => 'Add shield',
+        'empty' => 'No shields.',
+        'singular' => 'Shield',
+        'time' => '{1} You can add :value hour shield with|[2,*] You can add :value hours shield with',
+    ],
+
     'solarion' => [
         'name' => 'Solarion',
         'description' => 'Found on the stars.',
@@ -161,6 +168,13 @@ return [
         'demolish_building' => 'Are you sure you want to demolish the selected building?',
         'lose_planet' => 'If it is the Command Center, you will lose the planet.',
         'server' => 'Sorry, the server is full :(',
+    ],
+
+    'whats_new' => [
+        'title' => "What's New",
+        'feature' => 'New features',
+        'enhancement' => 'Enhancements',
+        'bug' => 'Bug fixes',
     ],
 
 ];

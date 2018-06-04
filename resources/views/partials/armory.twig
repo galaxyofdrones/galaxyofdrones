@@ -6,7 +6,7 @@
             <span v-for="unit in data.units"
                   class="item item-sm"
                   :class="unit | item('unit')"
-                  v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
+                  v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.quantity}">
                 {{ vue('unit.quantity | number') }}
             </span>
         </div>
@@ -29,7 +29,7 @@
                         <span v-for="unit in completion.units"
                               class="item item-sm"
                               :class="unit | item('unit')"
-                              v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
+                              v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.quantity}">
                             {{ vue('unit.quantity | number') }}
                         </span>
                     </div>

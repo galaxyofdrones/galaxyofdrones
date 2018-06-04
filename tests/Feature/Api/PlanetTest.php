@@ -104,6 +104,7 @@ class PlanetTest extends TestCase
                 'resource_count',
                 'username',
                 'can_occupy',
+                'has_shield',
                 'travel_time',
             ])->assertJson([
                 'id' => $capitalId,
@@ -130,6 +131,7 @@ class PlanetTest extends TestCase
                 'resource_count',
                 'username',
                 'can_occupy',
+                'has_shield',
                 'travel_time',
             ])->assertJson([
                 'id' => $currentId,

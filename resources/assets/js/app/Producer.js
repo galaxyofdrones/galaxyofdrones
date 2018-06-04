@@ -35,13 +35,21 @@ export default Building.extend({
         },
 
         transmutableQuantity() {
+            const resource = _.find(this.planet.resources, {
+                id: this.selected.id
+            });
+
+            const storage = _.get(
+                resource, 'storage', 0
+            );
+
             if (this.planet.resource_id === this.selected.id) {
-                return Math.floor(this.mined);
+                return storage + Math.floor(this.mined);
             }
 
-            return _.get(_.find(this.planet.resources, {
-                id: this.selected.id
-            }), 'quantity', 0);
+            return storage + _.get(
+                resource, 'quantity', 0
+            );
         },
 
         transmutableEnergy() {

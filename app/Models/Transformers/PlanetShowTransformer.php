@@ -50,6 +50,7 @@ class PlanetShowTransformer extends Transformer
                 ? $item->user->username
                 : $this->translator->trans('messages.free'),
             'can_occupy' => $this->canOccupy($item),
+            'has_shield' => $item->hasShield(),
             'travel_time' => $this->travelTime($item),
         ];
     }

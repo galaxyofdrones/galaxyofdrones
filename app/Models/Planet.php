@@ -40,6 +40,7 @@ use Koodilab\Game\StateManager;
  * @property \Illuminate\Database\Eloquent\Collection|Movement[]     $outgoingMovements
  * @property \Illuminate\Database\Eloquent\Collection|Population[]   $populations
  * @property resource                                                $resource
+ * @property Shield                                                  $shield
  * @property \Illuminate\Database\Eloquent\Collection|Stock[]        $stocks
  * @property \Illuminate\Database\Eloquent\Collection|Training[]     $trainings
  * @property \Illuminate\Database\Eloquent\Collection|Upgrade[]      $upgrades
@@ -70,6 +71,7 @@ class Planet extends Model implements PositionableContract
     use Behaviors\Positionable,
         Concerns\HasCapacity,
         Concerns\HasCustomName,
+        Concerns\HasShield,
         Concerns\HasSupply,
         Queries\FindBuildings,
         Queries\FindFreeCapital,
@@ -79,7 +81,7 @@ class Planet extends Model implements PositionableContract
         Queries\FindOutgoingMovements,
         Queries\FindPopulationByUnit,
         Queries\FindPopulationsByUnitIds,
-        Queries\FindStock,
+        Queries\FindStockByResource,
         Queries\FindStocksByResourceIds,
         Queries\IncomingMovementCount,
         Queries\IncomingCapitalMovementCount,
@@ -89,7 +91,8 @@ class Planet extends Model implements PositionableContract
         Relations\BelongsToUser,
         Relations\HasManyStock,
         Relations\HasManyPopulation,
-        Relations\HasManyGrid;
+        Relations\HasManyGrid,
+        Relations\HasOneShield;
 
     /**
      * The small size.
@@ -250,6 +253,7 @@ class Planet extends Model implements PositionableContract
                     $planet->production_rate = null;
                     $planet->defense_bonus = null;
                     $planet->construction_time_bonus = null;
+                    $planet->shield()->delete();
                     $planet->incomingMovements()->where('user_id', $user->id)->delete();
                     $planet->outgoingMovements()->where('user_id', $user->id)->delete();
                     $planet->constructions()->delete();

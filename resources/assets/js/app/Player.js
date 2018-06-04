@@ -31,11 +31,15 @@ export default {
         },
 
         experienceLabel() {
-            return `${this.data.experience}/${this.data.next_level_experience}`;
+            return `${this.data.experience} / ${this.data.next_level_experience}`;
         },
 
         experienceProgress() {
             return `${(this.data.experience - this.data.level_experience) / (this.data.next_level_experience - this.data.level_experience) * 100}%`;
+        },
+
+        energyValue() {
+            return Math.round(this.energy);
         }
     },
 

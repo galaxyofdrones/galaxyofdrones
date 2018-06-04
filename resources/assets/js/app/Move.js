@@ -12,6 +12,7 @@ export default Modal.extend({
 
     data() {
         return {
+            isMove: true,
             type: undefined,
             mined: 0,
             selected: {
@@ -57,11 +58,11 @@ export default Modal.extend({
         canScout() {
             return this.quantity.hasOwnProperty(this.scoutUnit.id)
                 && this.quantity[this.scoutUnit.id] > 0
-                && this.quantity[this.scoutUnit.id] <= this.scoutUnit.quantity;
+                && this.quantity[this.scoutUnit.id] <= this.unitQuantity(this.scoutUnit);
         },
 
         canOccupy() {
-            return this.settlerUnit.quantity > 0;
+            return this.unitQuantity(this.settlerUnit) > 0;
         },
 
         hasFighterUnits() {
@@ -70,7 +71,7 @@ export default Modal.extend({
 
             _.forEach(this.fighterUnits, unit => {
                 if (quantity.hasOwnProperty(unit.id)) {
-                    return hasFighterUnits = quantity[unit.id] > 0 && quantity[unit.id] <= unit.quantity;
+                    return hasFighterUnits = quantity[unit.id] > 0 && quantity[unit.id] <= this.unitQuantity(unit);
                 }
             });
 
