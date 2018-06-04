@@ -8,6 +8,7 @@ use Koodilab\Game\ShieldManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
+use Koodilab\Models\Shield;
 use Koodilab\Models\Unit;
 
 class StartController extends Controller
@@ -71,7 +72,7 @@ class StartController extends Controller
             ]);
 
             $manager->create(
-                $capital, 604800
+                $capital, Shield::START_EXPIRATION_TIME
             );
         });
 

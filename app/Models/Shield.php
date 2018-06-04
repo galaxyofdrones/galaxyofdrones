@@ -35,6 +35,13 @@ class Shield extends Model
     const EXPIRATION_TIME = 21600;
 
     /**
+     * The start expiration time.
+     *
+     * @var int
+     */
+    const START_EXPIRATION_TIME = 604800;
+
+    /**
      * The solarion count.
      *
      * @var int
