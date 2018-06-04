@@ -60,6 +60,10 @@ select.form-control {
     }
 }
 
+.popover {
+    text-align: center;
+}
+
 .container-app {
     background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
     height: 100vh;

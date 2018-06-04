@@ -215,6 +215,12 @@ export default {
             return resource.quantity;
         },
 
+        resourceValue(resource) {
+            return Math.round(
+                this.resourceQuantity(resource)
+            );
+        },
+
         openMothership() {
             EventBus.$emit('mothership-click');
         },
