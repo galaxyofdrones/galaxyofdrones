@@ -24,7 +24,6 @@ return [
     'start' => 'Start',
     'transmute' => 'Transmute',
     'trophy' => 'Trophy',
-    'whats_new' => "What's New",
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
 
@@ -169,6 +168,13 @@ return [
         'demolish_building' => 'Are you sure you want to demolish the selected building?',
         'lose_planet' => 'If it is the Command Center, you will lose the planet.',
         'server' => 'Sorry, the server is full :(',
+    ],
+
+    'whats_new' => [
+        'title' => "What's New",
+        'feature' => 'New features',
+        'enhancement' => 'Enhancements',
+        'bug' => 'Bug fixes',
     ],
 
 ];

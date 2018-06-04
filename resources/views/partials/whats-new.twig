@@ -1,16 +1,47 @@
-<whats-new id="xh9nea8j5g" inline-template>
+<whats-new id="fe9dwnlp4w" inline-template>
     <div class="whats-new modal fade" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
                     <h4 class="modal-title">
-                        {{ trans('messages.whats_new') }}
+                        {{ trans('messages.whats_new.title') }}
                     </h4>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body">
+                    <img class="img-responsive"
+                         src="{{ asset('images/og-website.png') }}"
+                         alt="{{ trans('messages.whats_new.title') }}">
+                    <h3>
+                        {{ trans('messages.whats_new.feature') }}
+                    </h3>
+                    <ul>
+                        <li>
+                            Added a shield system that can protect the planets
+                        </li>
+                        <li>
+                            Merged the capital and mothership storage for large battles
+                        </li>
+                    </ul>
+                    <h3>
+                        {{ trans('messages.whats_new.enhancement') }}
+                    </h3>
+                    <ul>
+                        <li>
+                            Added the number tooltips to resources and units
+                        </li>
+                    </ul>
+                    <h3>
+                        {{ trans('messages.whats_new.bug') }}
+                    </h3>
+                    <ul>
+                        <li>
+                            Fixed the Hyperjump disabled state in mothership
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
