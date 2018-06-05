@@ -8,12 +8,28 @@
     {
       "selection": [
         {
-          "order": 53,
+          "order": 56,
+          "id": 44,
+          "name": "chevron-left",
+          "prevSize": 32,
+          "code": 59655,
+          "tempChar": ""
+        },
+        {
+          "order": 57,
+          "id": 43,
+          "name": "chevron-right",
+          "prevSize": 32,
+          "code": 59657,
+          "tempChar": ""
+        },
+        {
+          "order": 55,
           "id": 42,
           "name": "movement-unit",
           "prevSize": 32,
           "code": 59653,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 52,
@@ -21,7 +37,7 @@
           "name": "sum",
           "prevSize": 32,
           "code": 59652,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 51,
@@ -29,7 +45,7 @@
           "name": "solarion",
           "prevSize": 32,
           "code": 59649,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 47,
@@ -37,7 +53,7 @@
           "name": "close",
           "prevSize": 32,
           "code": 59677,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 43,
@@ -45,7 +61,7 @@
           "name": "edit",
           "prevSize": 32,
           "code": 59659,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 44,
@@ -53,7 +69,7 @@
           "name": "nav",
           "prevSize": 32,
           "code": 59661,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 38,
@@ -61,7 +77,7 @@
           "name": "login",
           "prevSize": 32,
           "code": 59676,
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 37,
@@ -69,7 +85,7 @@
           "prevSize": 32,
           "code": 59674,
           "name": "trophy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 35,
@@ -77,7 +93,7 @@
           "prevSize": 32,
           "code": 59673,
           "name": "more",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 29,
@@ -85,7 +101,7 @@
           "prevSize": 32,
           "code": 59654,
           "name": "envelope",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 28,
@@ -93,7 +109,7 @@
           "prevSize": 32,
           "code": 59666,
           "name": "surface",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 1,
@@ -101,7 +117,7 @@
           "prevSize": 32,
           "code": 59671,
           "name": "arrow-left",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 25,
@@ -109,7 +125,7 @@
           "prevSize": 32,
           "code": 59672,
           "name": "arrow-right",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 2,
@@ -117,7 +133,7 @@
           "prevSize": 32,
           "code": 59670,
           "name": "supply",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 3,
@@ -125,7 +141,7 @@
           "prevSize": 32,
           "code": 59669,
           "name": "xp",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 4,
@@ -133,7 +149,7 @@
           "prevSize": 32,
           "code": 59651,
           "name": "energy",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 5,
@@ -141,7 +157,7 @@
           "prevSize": 32,
           "code": 59648,
           "name": "time",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 7,
@@ -149,7 +165,7 @@
           "prevSize": 32,
           "code": 59650,
           "name": "cog",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 12,
@@ -157,7 +173,7 @@
           "prevSize": 32,
           "code": 59656,
           "name": "globe",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 16,
@@ -165,7 +181,7 @@
           "prevSize": 32,
           "code": 59660,
           "name": "mothership",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 18,
@@ -173,7 +189,7 @@
           "prevSize": 32,
           "code": 59662,
           "name": "power-off",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 20,
@@ -181,7 +197,7 @@
           "prevSize": 32,
           "code": 59664,
           "name": "star",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 21,
@@ -189,7 +205,7 @@
           "prevSize": 32,
           "code": 59665,
           "name": "starmap",
-          "tempChar": ""
+          "tempChar": ""
         },
         {
           "order": 24,
@@ -197,20 +213,50 @@
           "prevSize": 32,
           "code": 59668,
           "name": "user",
-          "tempChar": ""
+          "tempChar": ""
         }
       ],
       "id": 0,
       "metadata": {
         "name": "icomoon",
         "importSize": {
-          "width": 338,
-          "height": 621
+          "width": 256,
+          "height": 256
         }
       },
       "height": 1024,
       "prevSize": 32,
       "icons": [
+        {
+          "id": 44,
+          "paths": [
+            "M828.372 120.748l-120.744-120.748-512 512 512 512 120.744-120.748-391.252-391.252z"
+          ],
+          "attrs": [
+            {}
+          ],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 20,
+          "tags": [
+            "chevron-left"
+          ]
+        },
+        {
+          "id": 43,
+          "paths": [
+            "M315.733 0l-119.467 119.467 392.533 392.533-392.533 392.533 119.467 119.467 512-512z"
+          ],
+          "attrs": [
+            {}
+          ],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 20,
+          "tags": [
+            "chevron-right"
+          ]
+        },
         {
           "id": 42,
           "paths": [

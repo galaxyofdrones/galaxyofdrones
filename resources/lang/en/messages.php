@@ -3,6 +3,7 @@
 return [
 
     'armory' => 'Armory',
+    'attack' => '{1} :value attack|[2,*] :value attacks',
     'cargo' => 'Cargo',
     'cancel' => 'Cancel',
     'complete' => 'Complete',
