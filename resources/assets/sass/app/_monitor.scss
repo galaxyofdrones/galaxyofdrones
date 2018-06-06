@@ -14,7 +14,7 @@
         font-size: 20px;
         font-weight: bold;
         position: relative;
-        text-transform: uppercase;
+        text-shadow: 0 0 15px rgba(darken($brand-danger, 10%), .6);
 
         &:focus,
         &:hover {

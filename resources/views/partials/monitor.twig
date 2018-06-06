@@ -1,12 +1,12 @@
-<monitor inline-template>
-    <div class="monitor">
-        <a class="monitor-title" href="#">
+<monitor url="{{ route('api_monitor') }}" inline-template>
+    <div v-if="isEnabled" class="monitor" v-cloak>
+        <a class="monitor-title"
+           href="#"
+           v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.incoming') }}'}">
             <i class="icon-chevron-left first"></i>
             <i class="icon-chevron-left middle"></i>
             <i class="icon-chevron-left last"></i>
-
-            {{ trans_choice('messages.attack', 32, {'value': 32}) }}
-
+            {{ vue('data.incoming | number') }}
             <i class="icon-chevron-right last"></i>
             <i class="icon-chevron-right middle"></i>
             <i class="icon-chevron-right first"></i>

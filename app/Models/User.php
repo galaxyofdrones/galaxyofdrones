@@ -95,6 +95,7 @@ class User extends Authenticatable
         Queries\FindPlanetsOrderByName,
         Queries\FindResearchedResources,
         Queries\FindUnitsOrderBySortOrder,
+        Queries\IncomingUserAttackMovementCount,
         Queries\LosingBattleLogCount,
         Queries\WinningBattleLogCount,
         Queries\PaginateAllStartedOrderByPve,
