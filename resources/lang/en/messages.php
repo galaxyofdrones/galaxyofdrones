@@ -3,7 +3,6 @@
 return [
 
     'armory' => 'Armory',
-    'attack' => '{1} :value attack|[2,*] :value attacks',
     'cargo' => 'Cargo',
     'cancel' => 'Cancel',
     'complete' => 'Complete',
@@ -19,6 +18,7 @@ return [
     'owner' => 'Owner',
     'pve' => 'PvE',
     'pvp' => 'PvP',
+    'radar' => 'Radar',
     'required_quantity' => 'Required quantity',
     'save' => 'Save',
     'starmap' => 'Starmap',

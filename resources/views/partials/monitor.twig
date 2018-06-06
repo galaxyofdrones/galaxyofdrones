@@ -2,6 +2,7 @@
     <div v-if="isEnabled" class="monitor" v-cloak>
         <a class="monitor-title"
            href="#"
+           @click.prevent="openRadar()"
            v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.incoming') }}'}">
             <i class="icon-chevron-left first"></i>
             <i class="icon-chevron-left middle"></i>

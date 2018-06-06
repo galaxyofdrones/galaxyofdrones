@@ -66,6 +66,11 @@
                                 {{ trans('messages.laboratory') }}
                             </a>
                         </li>
+                        <li :class="{active: isSelectedTab('radar')}">
+                            <a href="#" @click.prevent="selectTab('radar')">
+                                {{ trans('messages.radar') }}
+                            </a>
+                        </li>
                         <li :class="{active: isSelectedTab('shield')}">
                             <a href="#" @click.prevent="selectTab('shield')">
                                 {{ trans('messages.shield.singular') }}
@@ -77,6 +82,7 @@
                 {% include 'partials.cargo' %}
                 {% include 'partials.armory' %}
                 {% include 'partials.laboratory' %}
+                {% include 'partials.radar' %}
                 {% include 'partials.shield' %}
             </div>
         </div>

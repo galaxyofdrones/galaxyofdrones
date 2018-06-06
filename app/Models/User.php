@@ -88,6 +88,7 @@ class User extends Authenticatable
         Queries\FindAvailableUnits,
         Queries\FindByIdOrUsername,
         Queries\FindExpeditionStar,
+        Queries\FindIncomingUserAttackMovements,
         Queries\FindMissionResources,
         Queries\FindNotExpiredExpeditions,
         Queries\FindNotExpiredMissions,

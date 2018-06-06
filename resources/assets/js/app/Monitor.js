@@ -28,6 +28,10 @@ export default {
             axios.get(this.url).then(
                 response => this.data = response.data
             );
+        },
+
+        openRadar() {
+            EventBus.$emit('mothership-click', 'radar');
         }
     }
 };

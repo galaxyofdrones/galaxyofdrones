@@ -56,7 +56,7 @@ export default Modal.extend({
             );
         },
 
-        expedition() {
+        showExpedition() {
             this.openAfterHidden(
                 () => EventBus.$emit('mothership-click', 'armory')
             );
