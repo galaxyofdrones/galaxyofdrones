@@ -1,6 +1,49 @@
 <radar :is-enabled="isEnabled && isSelectedTab('radar')"
-       url="{{ route('api_monitor_show') }}" inline-template>
+       url="{{ route('api_monitor_show') }}"
+       :close="close" inline-template>
     <div v-if="isEnabled" class="radar">
-        {% include 'partials.movement' %}
+        <div v-if="isEmpty" class="modal-body separator">
+            <p class="text-center">
+                {{ trans('messages.movement.empty') }}
+            </p>
+        </div>
+        <movement v-else
+                  v-for="movement in data.incoming_movements"
+                  :key="movement.id"
+                  :movement="movement"
+                  :can-move="{{ app.request.route.getName == 'starmap'
+                      ? 'true'
+                      : 'false' }}"
+                  :move="move" inline-template>
+            <div  class="modal-body separator">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <span class="item item-sm" :class="movement.end.resource_id | item('planet')">
+                            {{ vue('movement.end.display_name') }}
+                        </span>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <h4 class="highlight-danger">
+                            <i class="icon-arrow-left"></i>
+                        </h4>
+                        <h4>
+                            {{ vue('remaining | timer') }}
+                        </h4>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <span class="item item-sm" :class="movement.start.resource_id | item('planet')">
+                            {{ vue('movement.start.display_name') }}
+                        </span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <button class="btn btn-info btn-block"
+                                :disabled="!canMove"
+                                @click="move(movement)">
+                            {{ trans('messages.move') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </movement>
     </div>
 </radar>

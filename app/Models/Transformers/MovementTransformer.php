@@ -40,6 +40,8 @@ class MovementTransformer extends Transformer
             'id' => $planet->id,
             'resource_id' => $planet->resource_id,
             'display_name' => $planet->display_name,
+            'x' => $planet->x,
+            'y' => $planet->y,
         ];
     }
 

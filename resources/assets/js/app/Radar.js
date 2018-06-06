@@ -4,7 +4,9 @@ import Movement from './Movement';
 export default {
     props: [
         'isEnabled',
-        'url'
+        'url',
+        'canMove',
+        'close',
     ],
 
     components: {
@@ -44,6 +46,14 @@ export default {
             axios.get(this.url).then(
                 response => this.data = response.data
             );
+        },
+
+        move(movement) {
+            EventBus.$emit(
+                'starmap-move', movement.end.x, movement.end.y
+            );
+
+            this.close();
         }
     }
 };

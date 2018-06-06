@@ -32,7 +32,7 @@ class PlanetTransformer extends Transformer
             'production_rate' => (int) $item->production_rate,
             'incoming_movement' => $item->incomingMovementCount(),
             'incoming_attack_movement' => $item->incomingAttackMovementCount(),
-            'outgoing_movement' => $item->outgoingMovements()->count(),
+            'outgoing_movement' => $item->outgoingMovementCount(),
             'outgoing_attack_movement' => $item->outgoingAttackMovementCount(),
             'construction' => $item->constructions()->count(),
             'upgrade' => $item->upgrades()->count(),
