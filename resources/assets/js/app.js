@@ -17,6 +17,7 @@ import Construction from './app/Construction';
 import Demolish from './app/Demolish';
 import Filters from './app/Filters';
 import Mailbox from './app/Mailbox';
+import Monitor from './app/Monitor';
 import Mothership from './app/Mothership';
 import Move from './app/Move';
 import Planet from './app/Planet';
@@ -50,8 +51,9 @@ const app = new Vue({
         Construction,
         Demolish,
         Mailbox,
-        Move,
+        Monitor,
         Mothership,
+        Move,
         Planet,
         Player,
         Profile,

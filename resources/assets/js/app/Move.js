@@ -4,10 +4,15 @@ import Support from './Support';
 import Transport from './Transport';
 
 export default Modal.extend({
-    props: ['types', 'unitTypes', 'urls'],
+    props: [
+        'types',
+        'unitTypes',
+        'urls'
+    ],
 
     mixins: [
-        Support, Transport
+        Support,
+        Transport
     ],
 
     data() {

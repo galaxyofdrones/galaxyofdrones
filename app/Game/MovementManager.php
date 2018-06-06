@@ -779,5 +779,11 @@ class MovementManager
         $this->event->dispatch(
             new PlanetUpdated($movement->end_id)
         );
+
+        if ($movement->end->user_id) {
+            $this->event->dispatch(
+                new UserUpdated($movement->end->user_id)
+            );
+        }
     }
 }

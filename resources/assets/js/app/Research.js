@@ -1,7 +1,12 @@
 import Remaining from './Remaining';
 
 export default Remaining.extend({
-    props: ['research', 'isResearchable', 'store', 'destroy'],
+    props: [
+        'research',
+        'isResearchable',
+        'store',
+        'destroy'
+    ],
 
     data() {
         return {

@@ -2,7 +2,10 @@ import { EventBus } from './event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url', 'bookmarkStoreUrl'],
+    props: [
+        'url',
+        'bookmarkStoreUrl'
+    ],
 
     data() {
         return {
@@ -56,7 +59,7 @@ export default Modal.extend({
             );
         },
 
-        expedition() {
+        showExpedition() {
             this.openAfterHidden(
                 () => EventBus.$emit('mothership-click', 'armory')
             );

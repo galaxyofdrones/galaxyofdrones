@@ -1,0 +1,86 @@
+.monitor {
+    bottom: 0;
+    height: 32px;
+    left: 0;
+    margin: 0 10px 10px 70px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+
+    &-title {
+        color: $brand-danger;
+        display: inline-block;
+        font-size: 20px;
+        font-weight: bold;
+        position: relative;
+        text-shadow: 0 0 15px rgba(darken($brand-danger, 10%), .6);
+
+        &:focus,
+        &:hover {
+            color: $brand-danger;
+            text-decoration: none;
+        }
+        @keyframes monitor-arrow-left {
+            0% {
+                opacity: 0;
+                transform: translateX(-200%);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(0%);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes monitor-arrow-right {
+            0% {
+                opacity: 0;
+                transform: translateX(200%);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(0%);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .icon-chevron-left,
+        .icon-chevron-right {
+            font-size: 16px;
+            opacity: 0;
+            position: absolute;
+            top: 7px;
+        }
+        .icon-chevron-left {
+            animation: monitor-arrow-left 1.4s infinite;
+            transform: translateX(-200%);
+
+            &.first {
+                left: -46px;
+            }
+            &.middle {
+                left: -34px;
+            }
+            &.last {
+                left: -22px;
+            }
+        }
+        .icon-chevron-right {
+            animation: monitor-arrow-right 1.4s infinite;
+            transform: translateX(200%);
+
+            &.first {
+                right: -46px;
+            }
+            &.middle {
+                right: -34px;
+            }
+            &.last {
+                right: -22px;
+            }
+        }
+    }
+}

@@ -2,7 +2,11 @@ import { EventBus } from './event-bus';
 import Completion from './Completion';
 
 export default {
-    props: ['isEnabled', 'url', 'storeUrl'],
+    props: [
+        'isEnabled',
+        'url',
+        'storeUrl'
+    ],
 
     components: {
         Completion

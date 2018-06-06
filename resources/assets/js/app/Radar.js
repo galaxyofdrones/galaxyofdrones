@@ -1,10 +1,9 @@
 import { EventBus } from './event-bus';
-import Building from './Building';
 import Movement from './Movement';
 
-export default Building.extend({
+export default {
     props: [
-        'grid',
+        'isEnabled',
         'url'
     ],
 
@@ -15,19 +14,18 @@ export default Building.extend({
     data() {
         return {
             data: {
-                incoming_movements: [],
-                outgoing_movements: []
+                incoming_movements: []
             }
         };
     },
 
     created() {
-        EventBus.$on('planet-update', () => this.fetchData());
+        EventBus.$on('user-update', () => this.fetchData());
     },
 
     computed: {
         isEmpty() {
-            return !this.data.incoming_movements.length && !this.data.outgoing_movements.length;
+            return !this.data.incoming_movements.length;
         }
     },
 
@@ -43,11 +41,9 @@ export default Building.extend({
                 return;
             }
 
-            axios.get(
-                this.url.replace('__grid__', this.grid.id)
-            ).then(
+            axios.get(this.url).then(
                 response => this.data = response.data
             );
         }
     }
-});
+};

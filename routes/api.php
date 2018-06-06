@@ -39,6 +39,16 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'monitor',
+    ], function () use ($router) {
+        $router->get('/', 'MonitorController@index')
+            ->name('monitor');
+
+        $router->get('show', 'MonitorController@show')
+            ->name('monitor_show');
+    });
+
+    $router->group([
         'prefix' => 'construction',
     ], function () use ($router) {
         $router->get('{grid}', 'ConstructionController@index')

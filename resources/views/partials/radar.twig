@@ -1,0 +1,6 @@
+<radar :is-enabled="isEnabled && isSelectedTab('radar')"
+       url="{{ route('api_monitor_show') }}" inline-template>
+    <div v-if="isEnabled" class="radar">
+        {% include 'partials.movement' %}
+    </div>
+</radar>

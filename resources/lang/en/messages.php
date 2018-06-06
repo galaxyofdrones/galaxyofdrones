@@ -18,6 +18,7 @@ return [
     'owner' => 'Owner',
     'pve' => 'PvE',
     'pvp' => 'PvP',
+    'radar' => 'Radar',
     'required_quantity' => 'Required quantity',
     'save' => 'Save',
     'starmap' => 'Starmap',
