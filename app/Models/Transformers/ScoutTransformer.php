@@ -7,16 +7,16 @@ class ScoutTransformer extends Transformer
     /**
      * The movement transformer instance.
      *
-     * @var MovementTransformer
+     * @var MovementScoutTransformer
      */
     protected $movementTransformer;
 
     /**
      * Constructor.
      *
-     * @param MovementTransformer $movementTransformer
+     * @param MovementScoutTransformer $movementTransformer
      */
-    public function __construct(MovementTransformer $movementTransformer)
+    public function __construct(MovementScoutTransformer $movementTransformer)
     {
         $this->movementTransformer = $movementTransformer;
     }
