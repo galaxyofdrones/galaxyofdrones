@@ -15,6 +15,7 @@ trait FindOutgoingMovements
     {
         return $this->outgoingMovements()
             ->with('start', 'end')
+            ->where('user_id', $this->user_id)
             ->get($columns);
     }
 }

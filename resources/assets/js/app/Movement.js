@@ -1,7 +1,11 @@
 import Remaining from './Remaining';
 
 export default Remaining.extend({
-    props: ['movement'],
+    props: [
+        'movement',
+        'canMove',
+        'move'
+    ],
 
     created() {
         this.initRemaining(
