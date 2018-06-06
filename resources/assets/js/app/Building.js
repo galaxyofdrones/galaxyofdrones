@@ -2,7 +2,10 @@ import { EventBus } from './event-bus';
 import Remaining from './Remaining';
 
 export default Remaining.extend({
-    props: ['type', 'building'],
+    props: [
+        'type',
+        'building'
+    ],
 
     data() {
         return {

@@ -2,7 +2,10 @@ import { EventBus } from './event-bus';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url', 'bookmarkStoreUrl'],
+    props: [
+        'url',
+        'bookmarkStoreUrl'
+    ],
 
     data() {
         return {

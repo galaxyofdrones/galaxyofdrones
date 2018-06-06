@@ -6,10 +6,18 @@ import Trader from './Trader';
 import Trainer from './Trainer';
 
 export default Modal.extend({
-    props: ['centralType', 'url', 'storeUrl', 'destroyUrl'],
+    props: [
+        'centralType',
+        'url',
+        'storeUrl',
+        'destroyUrl'
+    ],
 
     components: {
-        Producer, Scout, Trader, Trainer
+        Producer,
+        Scout,
+        Trader,
+        Trainer
     },
 
     data() {

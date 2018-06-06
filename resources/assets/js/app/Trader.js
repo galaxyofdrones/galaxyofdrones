@@ -12,7 +12,8 @@ export default Building.extend({
     ],
 
     components: {
-        Patrol, Trade
+        Patrol,
+        Trade
     },
 
     mixins: [

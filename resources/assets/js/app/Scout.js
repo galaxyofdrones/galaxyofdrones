@@ -3,7 +3,10 @@ import Building from './Building';
 import Movement from './Movement';
 
 export default Building.extend({
-    props: ['grid', 'url'],
+    props: [
+        'grid',
+        'url'
+    ],
 
     components: {
         Movement

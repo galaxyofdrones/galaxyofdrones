@@ -4,7 +4,12 @@ import Filters from './Filters';
 import Sprites from './Sprites';
 
 export default {
-    props: ['width', 'height', 'backgroundTexture', 'gridTextureAtlas'],
+    props: [
+        'width',
+        'height',
+        'backgroundTexture',
+        'gridTextureAtlas'
+    ],
 
     data() {
         return {

@@ -3,7 +3,11 @@ import Filters from './Filters';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url', 'canMove', 'translations'],
+    props: [
+        'url',
+        'canMove',
+        'translations'
+    ],
 
     data() {
         return {

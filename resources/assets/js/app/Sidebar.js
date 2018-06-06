@@ -2,7 +2,11 @@ import { EventBus } from './event-bus';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {
-    props: ['planetUrl', 'planetNameUrl', 'userCurrentUrl'],
+    props: [
+        'planetUrl',
+        'planetNameUrl',
+        'userCurrentUrl'
+    ],
 
     data() {
         return {

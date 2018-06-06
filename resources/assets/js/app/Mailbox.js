@@ -6,7 +6,8 @@ import HasTab from './HasTab';
 
 export default Modal.extend({
     components: {
-        BattleLog, CompletionLog
+        BattleLog,
+        CompletionLog
     },
 
     mixins: [

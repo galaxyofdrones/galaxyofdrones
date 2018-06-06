@@ -3,7 +3,12 @@ import { EventBus } from './event-bus';
 
 export default {
     props: [
-        'isEnabled', 'url', 'storeResourceUrl', 'storeUnitUrl', 'destroyResourceUrl', 'destroyUnitUrl'
+        'isEnabled',
+        'url',
+        'storeResourceUrl',
+        'storeUnitUrl',
+        'destroyResourceUrl',
+        'destroyUnitUrl'
     ],
 
     components: {

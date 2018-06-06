@@ -1,7 +1,11 @@
 import Remaining from './Remaining';
 
 export default Remaining.extend({
-    props: ['completion', 'isCompletable', 'store'],
+    props: [
+        'completion',
+        'isCompletable',
+        'store'
+    ],
 
     created() {
         this.initRemaining(

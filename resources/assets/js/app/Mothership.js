@@ -8,7 +8,10 @@ import Shield from './Shield';
 import Modal from './Modal';
 
 export default Modal.extend({
-    props: ['url', 'storeUrl'],
+    props: [
+        'url',
+        'storeUrl'
+    ],
 
     components: {
         Armory,

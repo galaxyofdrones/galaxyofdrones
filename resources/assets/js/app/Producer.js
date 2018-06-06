@@ -2,7 +2,11 @@ import { EventBus } from './event-bus';
 import Building from './Building';
 
 export default Building.extend({
-    props: ['grid', 'url', 'storeUrl'],
+    props: [
+        'grid',
+        'url',
+        'storeUrl'
+    ],
 
     data() {
         return {
