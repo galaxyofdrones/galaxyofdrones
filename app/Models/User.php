@@ -31,6 +31,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon|null                                                                                       $created_at
  * @property \Carbon\Carbon|null                                                                                       $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|BattleLog[]                                                      $attackBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Block[]                                                          $blocks
  * @property \Illuminate\Database\Eloquent\Collection|Bookmark[]                                                       $bookmarks
  * @property Planet|null                                                                                               $capital
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
@@ -104,6 +105,7 @@ class User extends Authenticatable
         Queries\PaginateBattleLogs,
         Queries\PaginateExpeditionLogs,
         Queries\PaginateMissionLogs,
+        Relations\HasManyBlock,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
         Relations\HasManyMovement,
