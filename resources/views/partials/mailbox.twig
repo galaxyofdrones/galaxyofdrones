@@ -27,6 +27,11 @@
                                 {{ trans('messages.battle_log.plural') }}
                             </a>
                         </li>
+                        <li :class="{active: isSelectedTab('message')}">
+                            <a href="#" @click.prevent="selectTab('message')">
+                                {{ trans('messages.message.plural') }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

@@ -78,6 +78,11 @@ return [
         'plural' => 'Expedition logs',
     ],
 
+    'message' => [
+        'empty' => 'No messages.',
+        'plural' => 'Messages',
+    ],
+
     'mission' => [
         'empty' => 'No missions.',
     ],
