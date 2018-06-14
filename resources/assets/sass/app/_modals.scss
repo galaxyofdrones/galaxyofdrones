@@ -17,6 +17,10 @@
     &.mothership .cargo-summary .item {
         margin: 0 $grid-gutter-width / 3 * 2;
     }
+    &.whats-new a {
+        text-decoration: none;
+        transition: ease .2s;
+    }
     &-body .row .item-sm {
         margin-right: $grid-gutter-width / 6;
     }

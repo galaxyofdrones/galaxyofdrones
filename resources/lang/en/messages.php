@@ -183,10 +183,7 @@ return [
     ],
 
     'whats_new' => [
-        'title' => "What's New",
-        'feature' => 'New features',
-        'enhancement' => 'Enhancements',
-        'bug' => 'Bug fixes',
+        'title' => "What's new",
     ],
 
 ];
