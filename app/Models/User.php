@@ -87,6 +87,7 @@ class User extends Authenticatable
         Concerns\HasSolarion,
         Queries\FindAvailableResource,
         Queries\FindAvailableUnits,
+        Queries\FindByBlocked,
         Queries\FindByIdOrUsername,
         Queries\FindExpeditionStar,
         Queries\FindIncomingUserAttackMovements,

@@ -1,4 +1,5 @@
 <profile url="{{ route('api_user_show', '__user__') }}"
+         block-url="{{ route('api_block_update', '__blocked__') }}"
          :can-move="{{ app.request.route.getName == 'starmap'
              ? 'true'
              : 'false' }}"
@@ -30,7 +31,7 @@
                             <p>
                                 {{ vue('joined') }}
                             </p>
-                            <div class="attribute-row">
+                            <div class="attribute-row" :class="{separator: data.canBlock}">
                                 <div class="col-md-6">
                                     <div class="attribute">
                                         <h6>
@@ -89,6 +90,29 @@
                                         <h4 class="highlight-danger">
                                             {{ vue('data.losing_battle_count | number') }}
                                         </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="data.canBlock" class="attribute-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block">
+                                            {{ trans('messages.message.singular') }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-block"
+                                                :class="{'btn-danger': !isBlocked, 'btn-warning': isBlocked}"
+                                                @click="toggleBlock()">
+                                            <template v-if="!isBlocked">
+                                                {{ trans('messages.block.singular') }}
+                                            </template>
+                                            <template v-else>
+                                                {{ trans('messages.block.unblock') }}
+                                            </template>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -5,12 +5,14 @@ import Modal from './Modal';
 export default Modal.extend({
     props: [
         'url',
+        'blockUrl',
         'canMove',
         'translations'
     ],
 
     data() {
         return {
+            isBlocked: false,
             username: '',
             data: {
                 created_at: ''
@@ -39,8 +41,20 @@ export default Modal.extend({
                 this.url.replace('__user__', this.username)
             ).then(response => {
                 this.data = response.data;
-                this.$nextTick(() => this.$modal.modal());
+                this.isBlocked = this.data.isBlocked;
+
+                this.$nextTick(
+                    () => this.$modal.modal()
+                );
             });
+        },
+
+        toggleBlock() {
+            this.isBlocked = !this.isBlocked;
+
+            axios.put(
+                this.blockUrl.replace('__blocked__', this.username)
+            );
         },
 
         move(planet) {

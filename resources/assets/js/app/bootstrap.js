@@ -71,9 +71,11 @@ require('perfect-scrollbar');
  */
 
 window.axios.interceptors.response.use(null, error => {
-    if (error.response.status === 401) {
+    const status = _.get(error.response, 'status');
+
+    if (status === 401) {
         window.location.reload();
-    } else if (error.response.status === 500) {
+    } else if (status === 500) {
         swal({
             title: Translations.error.whoops,
             text: Translations.error.wrong,

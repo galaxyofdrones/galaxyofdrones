@@ -2,12 +2,20 @@
 
 namespace Koodilab\Models\Transformers;
 
+use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Translation\Translator;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 
 class UserShowTransformer extends Transformer
 {
+    /**
+     * The auth instance.
+     *
+     * @var Auth
+     */
+    protected $auth;
+
     /**
      * The translator instance.
      *
@@ -18,10 +26,12 @@ class UserShowTransformer extends Transformer
     /**
      * Constructor.
      *
+     * @param Auth       $auth
      * @param Translator $translator
      */
-    public function __construct(Translator $translator)
+    public function __construct(Auth $auth, Translator $translator)
     {
+        $this->auth = $auth;
         $this->translator = $translator;
     }
 
@@ -32,6 +42,9 @@ class UserShowTransformer extends Transformer
      */
     public function transform($item)
     {
+        /** @var \Koodilab\Models\User $user */
+        $user = $this->auth->guard()->user();
+
         return [
             'id' => $item->id,
             'username' => $item->username,
@@ -46,6 +59,8 @@ class UserShowTransformer extends Transformer
             'winning_battle_count' => $item->winningBattleLogCount(),
             'losing_battle_count' => $item->losingBattleLogCount(),
             'created_at' => $item->created_at->toDateTimeString(),
+            'canBlock' => $user->id != $item->id,
+            'isBlocked' => ! empty($user->findByBlocked($item)),
             'planets' => $this->planets($item),
         ];
     }

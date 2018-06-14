@@ -49,6 +49,11 @@ return [
         'star' => 'Bookmark this star',
     ],
 
+    'block' => [
+        'singular' => 'Block',
+        'unblock' => 'Unblock',
+    ],
+
     'building' => [
         'name_with_level' => ':name (Level :level)',
     ],
@@ -81,6 +86,7 @@ return [
     'message' => [
         'empty' => 'No messages.',
         'plural' => 'Messages',
+        'singular' => 'Message',
     ],
 
     'mission' => [

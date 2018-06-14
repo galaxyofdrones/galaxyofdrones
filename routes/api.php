@@ -49,6 +49,13 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'block',
+    ], function () use ($router) {
+        $router->put('{user}', 'BlockController@update')
+            ->name('block_update');
+    });
+
+    $router->group([
         'prefix' => 'construction',
     ], function () use ($router) {
         $router->get('{grid}', 'ConstructionController@index')
