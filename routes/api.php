@@ -78,6 +78,9 @@ $router->group([
         $router->get('/', 'PlanetController@index')
             ->name('planet');
 
+        $router->get('all', 'PlanetController@all')
+            ->name('planet_all');
+
         $router->get('capital', 'PlanetController@capital')
             ->name('planet_capital');
 

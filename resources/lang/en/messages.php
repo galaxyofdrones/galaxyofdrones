@@ -86,6 +86,7 @@ return [
     'message' => [
         'empty' => 'No messages.',
         'plural' => 'Messages',
+        'send' => 'Send message',
         'singular' => 'Message',
     ],
 

@@ -1,4 +1,5 @@
 import { EventBus } from './event-bus';
+import PlanetList from './PlanetList';
 import Filters from './Filters';
 import Modal from './Modal';
 
@@ -9,6 +10,10 @@ export default Modal.extend({
         'canMove',
         'translations'
     ],
+
+    components: {
+        PlanetList
+    },
 
     data() {
         return {
@@ -53,16 +58,8 @@ export default Modal.extend({
             this.isBlocked = !this.isBlocked;
 
             axios.put(
-                this.blockUrl.replace('__blocked__', this.username)
+                this.blockUrl.replace('__user__', this.username)
             );
-        },
-
-        move(planet) {
-            EventBus.$emit(
-                'starmap-move', planet.x, planet.y
-            );
-
-            this.close();
         }
     }
 });

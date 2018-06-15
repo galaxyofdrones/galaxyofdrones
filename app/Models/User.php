@@ -106,6 +106,7 @@ class User extends Authenticatable
         Queries\PaginateBattleLogs,
         Queries\PaginateExpeditionLogs,
         Queries\PaginateMissionLogs,
+        Queries\PaginatePlanets,
         Relations\HasManyBlock,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,

@@ -9,6 +9,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
+use Koodilab\Models\Transformers\PlanetAllTransformer;
 use Koodilab\Models\Transformers\PlanetShowTransformer;
 use Koodilab\Models\Transformers\PlanetTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -35,6 +36,20 @@ class PlanetController extends Controller
     {
         return $transformer->transform(
             auth()->user()->current
+        );
+    }
+
+    /**
+     * Show the all planet in json format.
+     *
+     * @param PlanetAllTransformer $transformer
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function all(PlanetAllTransformer $transformer)
+    {
+        return $transformer->transformCollection(
+            auth()->user()->paginatePlanets()
         );
     }
 
