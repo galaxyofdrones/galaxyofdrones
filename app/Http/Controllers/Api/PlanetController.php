@@ -12,6 +12,7 @@ use Koodilab\Models\Planet;
 use Koodilab\Models\Transformers\PlanetAllTransformer;
 use Koodilab\Models\Transformers\PlanetShowTransformer;
 use Koodilab\Models\Transformers\PlanetTransformer;
+use Koodilab\Models\User;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PlanetController extends Controller
@@ -42,14 +43,15 @@ class PlanetController extends Controller
     /**
      * Show the all planet in json format.
      *
+     * @param User                 $user
      * @param PlanetAllTransformer $transformer
      *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function all(PlanetAllTransformer $transformer)
+    public function all(User $user, PlanetAllTransformer $transformer)
     {
         return $transformer->transformCollection(
-            auth()->user()->paginatePlanets()
+            $user->paginatePlanets()
         );
     }
 
