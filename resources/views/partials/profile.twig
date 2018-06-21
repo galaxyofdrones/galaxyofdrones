@@ -1,7 +1,5 @@
 <profile url="{{ route('api_user_show', '__user__') }}"
-         :can-move="{{ app.request.route.getName == 'starmap'
-             ? 'true'
-             : 'false' }}"
+         block-url="{{ route('api_block_update', '__user__') }}"
          :translations="{{ {
              'joined': trans('messages.user.joined', {
                  'datetime': '__datetime__'
@@ -30,7 +28,7 @@
                             <p>
                                 {{ vue('joined') }}
                             </p>
-                            <div class="attribute-row">
+                            <div class="attribute-row" :class="{separator: data.canBlock}">
                                 <div class="col-md-6">
                                     <div class="attribute">
                                         <h6>
@@ -92,41 +90,89 @@
                                     </div>
                                 </div>
                             </div>
+                            <div v-if="data.canBlock" class="attribute-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block"
+                                                :disabled="isBlocked || data.isBlockedBy"
+                                                @click="sendMessage()">
+                                            {{ trans('messages.message.send') }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-block"
+                                                :class="{'btn-danger': !isBlocked, 'btn-warning': isBlocked}"
+                                                @click="toggleBlock()">
+                                            <template v-if="!isBlocked">
+                                                {{ trans('messages.block.singular') }}
+                                            </template>
+                                            <template v-else>
+                                                {{ trans('messages.block.unblock') }}
+                                            </template>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-body separator" v-for="planet in data.planets">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="item item-sm" :class="planet.resource_id | item('planet')">
-                                {{ vue('planet.name') }}
-                            </span>
+                <planet-list :is-enabled="isEnabled"
+                             url="{{ route('api_planet_all') }}"
+                             :can-move="{{ app.request.route.getName == 'starmap'
+                                 ? 'true'
+                                 : 'false' }}"
+                             :close="close" inline-template>
+                    <div v-if="isEnabled" class="planet-list">
+                        <div class="modal-body separator" v-for="planet in data.data">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="item item-sm" :class="planet.resource_id | item('planet')">
+                                        {{ vue('planet.name') }}
+                                    </span>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h4>
+                                        {{ trans('messages.coordinate.x') }}
+                                    </h4>
+                                    <h4>
+                                        {{ vue('planet.x') }}
+                                    </h4>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h4>
+                                        {{ trans('messages.coordinate.y') }}
+                                    </h4>
+                                    <h4>
+                                        {{ vue('planet.y') }}
+                                    </h4>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <button class="btn btn-info btn-block"
+                                            :disabled="!canMove"
+                                            @click="move(planet)">
+                                        {{ trans('messages.move') }}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-3 text-center">
-                            <h4>
-                                {{ trans('messages.coordinate.x') }}
-                            </h4>
-                            <h4>
-                                {{ vue('planet.x') }}
-                            </h4>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <h4>
-                                {{ trans('messages.coordinate.y') }}
-                            </h4>
-                            <h4>
-                                {{ vue('planet.y') }}
-                            </h4>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <button class="btn btn-info btn-block"
-                                    :disabled="!canMove"
-                                    @click="move(planet)">
-                                {{ trans('messages.move') }}
-                            </button>
+                        <div v-if="hasPrev || hasNext" class="modal-footer">
+                            <ul class="pager">
+                                <li class="previous" :class="{disabled: !hasPrev}">
+                                    <a href="#" @click.prevent="prevPage()">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="next" :class="{disabled: !hasNext}">
+                                    <a href="#" @click.prevent="nextPage()">
+                                        <i class="icon-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
+                </planet-list>
             </div>
         </div>
     </div>

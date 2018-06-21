@@ -49,6 +49,11 @@ return [
         'star' => 'Bookmark this star',
     ],
 
+    'block' => [
+        'singular' => 'Block',
+        'unblock' => 'Unblock',
+    ],
+
     'building' => [
         'name_with_level' => ':name (Level :level)',
     ],
@@ -76,6 +81,14 @@ return [
     'expedition_log' => [
         'empty' => 'No expedition logs.',
         'plural' => 'Expedition logs',
+    ],
+
+    'message' => [
+        'empty' => 'No messages.',
+        'plural' => 'Messages',
+        'reply' => 'Reply',
+        'send' => 'Send message',
+        'singular' => 'Message',
     ],
 
     'mission' => [
@@ -172,10 +185,7 @@ return [
     ],
 
     'whats_new' => [
-        'title' => "What's New",
-        'feature' => 'New features',
-        'enhancement' => 'Enhancements',
-        'bug' => 'Bug fixes',
+        'title' => "What's new",
     ],
 
 ];

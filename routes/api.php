@@ -49,6 +49,23 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'block',
+    ], function () use ($router) {
+        $router->put('{user}', 'BlockController@update')
+            ->name('block_update');
+    });
+
+    $router->group([
+        'prefix' => 'message',
+    ], function () use ($router) {
+        $router->get('/', 'MessageController@index')
+            ->name('message');
+
+        $router->post('/', 'MessageController@store')
+            ->name('message_store');
+    });
+
+    $router->group([
         'prefix' => 'construction',
     ], function () use ($router) {
         $router->get('{grid}', 'ConstructionController@index')
@@ -70,6 +87,9 @@ $router->group([
     ], function () use ($router) {
         $router->get('/', 'PlanetController@index')
             ->name('planet');
+
+        $router->get('all', 'PlanetController@all')
+            ->name('planet_all');
 
         $router->get('capital', 'PlanetController@capital')
             ->name('planet_capital');

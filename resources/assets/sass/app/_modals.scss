@@ -1,5 +1,6 @@
 .modal {
-    &.mailbox .battle-log {
+    &.mailbox .battle-log,
+    &.mailbox .message-log {
         a {
             text-decoration: none;
             transition: ease .2s;
@@ -8,7 +9,7 @@
             margin-top: $grid-gutter-width / 3 * 2;
         }
     }
-    &.profile .btn,
+    &.profile .col-md-3 .btn,
     &.mothership .radar .btn,
     &.mothership .shield-item .btn {
         margin-top: $grid-gutter-width / 3 * 2;
@@ -16,6 +17,10 @@
     &.mothership .armory-summary .item,
     &.mothership .cargo-summary .item {
         margin: 0 $grid-gutter-width / 3 * 2;
+    }
+    &.whats-new a {
+        text-decoration: none;
+        transition: ease .2s;
     }
     &-body .row .item-sm {
         margin-right: $grid-gutter-width / 6;

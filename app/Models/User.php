@@ -31,6 +31,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon|null                                                                                       $created_at
  * @property \Carbon\Carbon|null                                                                                       $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|BattleLog[]                                                      $attackBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|Block[]                                                          $blocks
  * @property \Illuminate\Database\Eloquent\Collection|Bookmark[]                                                       $bookmarks
  * @property Planet|null                                                                                               $capital
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
@@ -43,6 +44,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int                                                                                                       $level_experience
  * @property int                                                                                                       $next_level
  * @property int                                                                                                       $next_level_experience
+ * @property \Illuminate\Database\Eloquent\Collection|Message[]                                                        $messages
  * @property \Illuminate\Database\Eloquent\Collection|MissionLog[]                                                     $missionLogs
  * @property \Illuminate\Database\Eloquent\Collection|Mission[]                                                        $missions
  * @property \Illuminate\Database\Eloquent\Collection|Movement[]                                                       $movements
@@ -86,7 +88,9 @@ class User extends Authenticatable
         Concerns\HasSolarion,
         Queries\FindAvailableResource,
         Queries\FindAvailableUnits,
+        Queries\FindByBlocked,
         Queries\FindByIdOrUsername,
+        Queries\FindByUsername,
         Queries\FindExpeditionStar,
         Queries\FindIncomingUserAttackMovements,
         Queries\FindMissionResources,
@@ -103,7 +107,10 @@ class User extends Authenticatable
         Queries\PaginateAllStartedOrderByPvp,
         Queries\PaginateBattleLogs,
         Queries\PaginateExpeditionLogs,
+        Queries\PaginateMessages,
         Queries\PaginateMissionLogs,
+        Queries\PaginatePlanets,
+        Relations\HasManyBlock,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
         Relations\HasManyMovement,
@@ -200,6 +207,16 @@ class User extends Authenticatable
     public function shields()
     {
         return $this->hasManyThrough(Shield::class, Planet::class);
+    }
+
+    /**
+     * Get the messages.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'recipient_id');
     }
 
     /**

@@ -1,0 +1,66 @@
+<message-log :is-enabled="isEnabled && isSelectedTab('message-log')"
+             :open-after-hidden="openAfterHidden"
+             url="{{ route('api_message') }}" inline-template>
+    <div v-if="isEnabled" class="message-log">
+        <div v-if="isEmpty" class="modal-body separator">
+            <p class="text-center">
+                {{ trans('messages.message.empty') }}
+            </p>
+        </div>
+        <template v-else>
+            <template v-for="message in data.data">
+                <div class="modal-body separator">
+                    <div class="row">
+                        <div class="col-md-2 text-center">
+                            <h4>
+                                <i class="icon-user"></i>
+                            </h4>
+                            <h4>
+                                <a href="#" @click.prevent="openUser(message.sender.username)">
+                                    {{ vue('message.sender.username') }}
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <h4>
+                                <i class="icon-time"></i>
+                            </h4>
+                            <h4>
+                                {{ vue('message.created_at | fromNow') }}
+                            </h4>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success btn-block"
+                               :disabled="message.sender.isBlocked || message.sender.isBlockedBy"
+                               @click="sendMessage(message.sender.username)">
+                                {{ trans('messages.message.reply') }}
+                            </button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-info btn-block" @click="collapse(message)">
+                                <i class="icon-more"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body separator collapse"
+                     :class="{in: isCollapsed(message)}"
+                     v-html="message.message"></div>
+            </template>
+            <div v-if="hasPrev || hasNext" class="modal-footer">
+                <ul class="pager">
+                    <li class="previous" :class="{disabled: !hasPrev}">
+                        <a href="#" @click.prevent="prevPage()">
+                            <i class="icon-arrow-left"></i>
+                        </a>
+                    </li>
+                    <li class="next" :class="{disabled: !hasNext}">
+                        <a href="#" @click.prevent="nextPage()">
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </template>
+    </div>
+</message-log>

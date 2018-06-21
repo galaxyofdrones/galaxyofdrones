@@ -27,12 +27,18 @@
                                 {{ trans('messages.battle_log.plural') }}
                             </a>
                         </li>
+                        <li :class="{active: isSelectedTab('message-log')}">
+                            <a href="#" @click.prevent="selectTab('message-log')">
+                                {{ trans('messages.message.plural') }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 {% include 'partials.mission-log' %}
                 {% include 'partials.expedition-log' %}
                 {% include 'partials.battle-log' %}
+                {% include 'partials.message-log' %}
             </div>
         </div>
     </div>

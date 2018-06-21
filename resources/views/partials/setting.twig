@@ -19,7 +19,7 @@
                             <input id="email"
                                    class="form-control input-lg"
                                    type="email"
-                                   name="email" value="{{ old('email') }}"
+                                   name="email"
                                    v-model="form.email"
                                    placeholder="{{ trans('validation.attributes.email') }}" required>
                             <span v-if="hasError('email')" class="help-block">
