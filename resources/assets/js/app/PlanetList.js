@@ -3,9 +3,16 @@ import CompletionLog from './CompletionLog';
 
 export default CompletionLog.extend({
     props: [
+        'username',
         'canMove',
         'close'
     ],
+
+    computed: {
+        dataUrl() {
+            return this.url.replace('__user__', this.username);
+        }
+    },
 
     methods: {
         move(planet) {

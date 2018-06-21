@@ -33,6 +33,10 @@ export default Vue.extend({
 
         hasNext() {
             return this.data.current_page < this.data.last_page;
+        },
+
+        dataUrl() {
+            return this.url;
         }
     },
 
@@ -49,7 +53,7 @@ export default Vue.extend({
                 return;
             }
 
-            axios.get(this.url, {
+            axios.get(this.dataUrl, {
                 params: {
                     page: this.page
                 }
