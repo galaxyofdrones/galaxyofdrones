@@ -42,7 +42,7 @@ class ShieldController extends Controller
     }
 
     /**
-     * Store the shield.
+     * Store a newly created shield in storage.
      *
      * @param Planet        $planet
      * @param ShieldManager $manager

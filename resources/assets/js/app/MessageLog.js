@@ -11,27 +11,33 @@ export default CompletionLog.extend({
     },
 
     methods: {
-        isCollapsed(battleLog) {
+        isCollapsed(message) {
             return _.includes(
-                this.collapsed, battleLog.id
+                this.collapsed, message.id
             );
         },
 
-        collapse(battleLog) {
+        collapse(message) {
             const index = _.indexOf(
-                this.collapsed, battleLog.id
+                this.collapsed, message.id
             );
 
             if (index > -1) {
                 this.collapsed.splice(index, 1);
             } else {
-                this.collapsed.push(battleLog.id);
+                this.collapsed.push(message.id);
             }
         },
 
         openUser(username) {
             this.openAfterHidden(
                 () => EventBus.$emit('profile-click', username)
+            );
+        },
+
+        sendMessage(recipient) {
+            this.openAfterHidden(
+                () => EventBus.$emit('message-click', recipient)
             );
         }
     }

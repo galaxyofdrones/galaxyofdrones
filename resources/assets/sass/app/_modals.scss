@@ -1,5 +1,6 @@
 .modal {
-    &.mailbox .battle-log {
+    &.mailbox .battle-log,
+    &.mailbox .message-log {
         a {
             text-decoration: none;
             transition: ease .2s;

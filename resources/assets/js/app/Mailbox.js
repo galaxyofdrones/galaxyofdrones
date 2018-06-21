@@ -1,13 +1,15 @@
 import { EventBus } from './event-bus';
 import BattleLog from './BattleLog';
 import CompletionLog from './CompletionLog';
+import MessageLog from './MessageLog';
 import Modal from './Modal';
 import HasTab from './HasTab';
 
 export default Modal.extend({
     components: {
         BattleLog,
-        CompletionLog
+        CompletionLog,
+        MessageLog
     },
 
     mixins: [

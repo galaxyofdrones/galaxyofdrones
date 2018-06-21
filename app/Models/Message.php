@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                 $sender_id
  * @property int                 $recipient_id
  * @property string              $message
- * @property \Carbon\Carbon|null $read_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property User                $recipient
@@ -20,7 +19,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Message whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereRecipientId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereSenderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereUpdatedAt($value)
@@ -33,13 +31,6 @@ class Message extends Model
      */
     protected $guarded = [
         'id', 'created_at', 'updated_at',
-    ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected $dates = [
-        'read_at',
     ];
 
     /**

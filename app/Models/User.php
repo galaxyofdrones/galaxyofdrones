@@ -44,6 +44,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int                                                                                                       $level_experience
  * @property int                                                                                                       $next_level
  * @property int                                                                                                       $next_level_experience
+ * @property \Illuminate\Database\Eloquent\Collection|Message[]                                                        $messages
  * @property \Illuminate\Database\Eloquent\Collection|MissionLog[]                                                     $missionLogs
  * @property \Illuminate\Database\Eloquent\Collection|Mission[]                                                        $missions
  * @property \Illuminate\Database\Eloquent\Collection|Movement[]                                                       $movements
@@ -89,6 +90,7 @@ class User extends Authenticatable
         Queries\FindAvailableUnits,
         Queries\FindByBlocked,
         Queries\FindByIdOrUsername,
+        Queries\FindByUsername,
         Queries\FindExpeditionStar,
         Queries\FindIncomingUserAttackMovements,
         Queries\FindMissionResources,
@@ -105,6 +107,7 @@ class User extends Authenticatable
         Queries\PaginateAllStartedOrderByPvp,
         Queries\PaginateBattleLogs,
         Queries\PaginateExpeditionLogs,
+        Queries\PaginateMessages,
         Queries\PaginateMissionLogs,
         Queries\PaginatePlanets,
         Relations\HasManyBlock,
@@ -204,6 +207,16 @@ class User extends Authenticatable
     public function shields()
     {
         return $this->hasManyThrough(Shield::class, Planet::class);
+    }
+
+    /**
+     * Get the messages.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'recipient_id');
     }
 
     /**

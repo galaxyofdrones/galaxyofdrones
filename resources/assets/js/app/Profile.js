@@ -54,6 +54,12 @@ export default Modal.extend({
             });
         },
 
+        sendMessage() {
+            this.openAfterHidden(
+                () => EventBus.$emit('message-click', this.username)
+            );
+        },
+
         toggleBlock() {
             this.isBlocked = !this.isBlocked;
 

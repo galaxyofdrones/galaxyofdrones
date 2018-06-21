@@ -56,6 +56,16 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'message',
+    ], function () use ($router) {
+        $router->get('/', 'MessageController@index')
+            ->name('message');
+
+        $router->post('/', 'MessageController@store')
+            ->name('message_store');
+    });
+
+    $router->group([
         'prefix' => 'construction',
     ], function () use ($router) {
         $router->get('{grid}', 'ConstructionController@index')

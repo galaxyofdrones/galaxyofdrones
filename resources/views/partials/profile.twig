@@ -93,7 +93,9 @@
                             <div v-if="data.canBlock" class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <button class="btn btn-success btn-block" :disabled="isBlocked">
+                                        <button class="btn btn-success btn-block"
+                                                :disabled="isBlocked || data.isBlockedBy"
+                                                @click="sendMessage()">
                                             {{ trans('messages.message.send') }}
                                         </button>
                                     </div>

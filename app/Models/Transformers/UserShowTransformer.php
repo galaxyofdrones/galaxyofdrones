@@ -61,6 +61,7 @@ class UserShowTransformer extends Transformer
             'created_at' => $item->created_at->toDateTimeString(),
             'canBlock' => $user->id != $item->id,
             'isBlocked' => ! empty($user->findByBlocked($item)),
+            'isBlockedBy' => ! empty($item->findByBlocked($user)),
             'planets' => $this->planets($item),
         ];
     }

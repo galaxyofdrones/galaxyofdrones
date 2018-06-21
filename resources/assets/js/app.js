@@ -17,6 +17,7 @@ import Construction from './app/Construction';
 import Demolish from './app/Demolish';
 import Filters from './app/Filters';
 import Mailbox from './app/Mailbox';
+import Message from './app/Message';
 import Monitor from './app/Monitor';
 import Mothership from './app/Mothership';
 import Move from './app/Move';
@@ -51,6 +52,7 @@ const app = new Vue({
         Construction,
         Demolish,
         Mailbox,
+        Message,
         Monitor,
         Mothership,
         Move,
