@@ -302,7 +302,7 @@ class MovementManager
 
         foreach ($resources as $resource) {
             $this->storageManager->decrementStock(
-                $user->current, $resource, $quantities->get($resource->id), true
+                $user->capital, $resource, $quantities->get($resource->id), true
             );
 
             $userResource = $user->resources->firstWhere('id', $resource->id);
@@ -368,7 +368,7 @@ class MovementManager
 
         foreach ($units as $unit) {
             $this->storageManager->decrementPopulation(
-                $unit, $quantities->get($unit->id), true
+                $user->capital, $unit, $quantities->get($unit->id), true
             );
 
             $userUnit = $user->units->firstWhere('id', $unit->id);
