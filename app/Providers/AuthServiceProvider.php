@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id != $planet->user_id;
         });
 
-        Gate::define('building', function (User $user, Building $building, $type) {
+        Gate::define('building', function (User $user, $building, $type) {
             return ! empty($building) && $building->type == $type;
         });
     }
