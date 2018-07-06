@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Koodilab\Auth\KoodilabUserProvider;
 use Koodilab\Models\Bookmark;
-use Koodilab\Models\Building;
 use Koodilab\Models\Expedition;
 use Koodilab\Models\Mission;
 use Koodilab\Models\Planet;
