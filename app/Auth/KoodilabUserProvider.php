@@ -3,6 +3,7 @@
 namespace Koodilab\Auth;
 
 use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -13,11 +14,10 @@ class KoodilabUserProvider extends EloquentUserProvider
      */
     public function retrieveById($identifier)
     {
-        /** @var \Koodilab\Models\User $model */
         $model = $this->createModel();
 
         return $model->newQuery()
-            ->where($model->getKeyName(), $identifier)
+            ->where($model->getAuthIdentifierName(), $identifier)
             ->where('is_enabled', true)
             ->first();
     }
@@ -27,14 +27,19 @@ class KoodilabUserProvider extends EloquentUserProvider
      */
     public function retrieveByToken($identifier, $token)
     {
-        /** @var \Koodilab\Models\User $model */
         $model = $this->createModel();
 
-        return $model->newQuery()
-            ->where($model->getAuthIdentifierName(), $identifier)
-            ->where($model->getRememberTokenName(), $token)
+        $model = $model->where($model->getAuthIdentifierName(), $identifier)
             ->where('is_enabled', true)
             ->first();
+
+        if (! $model) {
+            return null;
+        }
+
+        $rememberToken = $model->getRememberToken();
+
+        return $rememberToken && hash_equals($rememberToken, $token) ? $model : null;
     }
 
     /**
@@ -42,7 +47,9 @@ class KoodilabUserProvider extends EloquentUserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        if (empty($credentials)) {
+        if (empty($credentials) ||
+            (count($credentials) === 1 &&
+                array_key_exists('password', $credentials))) {
             return;
         }
 
@@ -58,7 +65,13 @@ class KoodilabUserProvider extends EloquentUserProvider
         $query->where('is_enabled', true);
 
         foreach ($credentials as $key => $value) {
-            if (! Str::contains($key, ['username_or_email', 'is_enabled', 'password'])) {
+            if (Str::contains($key, ['username_or_email', 'is_enabled', 'password'])) {
+                continue;
+            }
+
+            if (is_array($value) || $value instanceof Arrayable) {
+                $query->whereIn($key, $value);
+            } else {
                 $query->where($key, $value);
             }
         }

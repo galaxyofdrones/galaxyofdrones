@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddUsersPlanetForeign extends Migration
@@ -30,6 +31,10 @@ class AddUsersPlanetForeign extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            if (DB::getDriverName() == 'sqlite') {
+                return;
+            }
+
             $table->dropForeign(['capital_id']);
             $table->dropForeign(['current_id']);
         });
