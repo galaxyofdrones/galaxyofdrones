@@ -26,6 +26,6 @@ before_script:
   - php artisan passport:keys
 
 script:
-  - jscs ./resources/assets/js
+  - jscs ./resources/js
   - $HOME/.composer/vendor/bin/php-cs-fixer fix --dry-run
   - vendor/bin/phpunit
