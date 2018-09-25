@@ -39,7 +39,9 @@ class KoodilabUserProvider extends EloquentUserProvider
 
         $rememberToken = $model->getRememberToken();
 
-        return $rememberToken && hash_equals($rememberToken, $token) ? $model : null;
+        return $rememberToken && hash_equals($rememberToken, $token)
+            ? $model
+            : null;
     }
 
     /**
