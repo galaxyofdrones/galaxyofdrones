@@ -9,5 +9,10 @@ class VerifyCsrfToken extends Middleware
     /**
      * {@inheritdoc}
      */
+    protected $addHttpCookie = true;
+
+    /**
+     * {@inheritdoc}
+     */
     protected $except = [];
 }
