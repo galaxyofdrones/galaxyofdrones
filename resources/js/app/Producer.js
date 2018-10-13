@@ -80,9 +80,13 @@ export default Building.extend({
             ).then(response => {
                 this.data = response.data;
 
-                this.select(
-                    _.first(this.data.resources)
-                );
+                if (!_.find(this.data.resources, this.selected)) {
+                    this.select(
+                        _.first(this.data.resources)
+                    );
+                } else {
+                    this.quantity = '';
+                }
             });
         },
 

@@ -74,9 +74,13 @@ export default Building.extend({
                 this.data = response.data;
                 this.initRemaining(this.data.remaining);
 
-                this.select(
-                    _.first(this.data.units)
-                );
+                if (!_.find(this.data.units, this.selected)) {
+                    this.select(
+                        _.first(this.data.units)
+                    );
+                } else {
+                    this.quantity = '';
+                }
             });
         },
 
