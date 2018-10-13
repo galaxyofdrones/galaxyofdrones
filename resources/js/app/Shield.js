@@ -35,9 +35,11 @@ export default {
         },
 
         planets() {
-            this.selected = _.get(
-                _.first(this.planets), 'id'
-            );
+            if (!_.find(this.planets, { id: this.selected })) {
+                this.selected = _.get(
+                    _.first(this.planets), 'id'
+                );
+            }
         }
     },
 

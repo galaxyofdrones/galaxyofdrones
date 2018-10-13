@@ -60,9 +60,11 @@ export default Modal.extend({
                 } else {
                     this.initRemaining(this.data.remaining);
 
-                    this.select(
-                        _.first(this.data.buildings)
-                    );
+                    if (!_.find(this.data.buildings, this.selected)) {
+                        this.select(
+                            _.first(this.data.buildings)
+                        );
+                    }
 
                     if (showModal) {
                         this.$nextTick(() => this.$modal.modal());
