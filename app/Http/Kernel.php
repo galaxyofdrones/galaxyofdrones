@@ -32,7 +32,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+            'throttle:180,1',
             'bindings',
         ],
     ];
@@ -65,4 +65,16 @@ class Kernel extends HttpKernel
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function bootstrap()
+    {
+        parent::bootstrap();
+
+        if ($this->app->environment() != 'production') {
+            $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
+        }
+    }
 }
