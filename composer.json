@@ -10,6 +10,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "kalnoy/nestedset": "^4.3",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^2.0",
         "laravel/passport": "^7.0",
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",
