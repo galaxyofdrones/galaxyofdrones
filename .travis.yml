@@ -1,7 +1,23 @@
 language: php
 
+dist: trusty
+
+services:
+  - mysql
+  - redis-server
+
 php:
   - 7.1
+  - 7.2
+
+addons:
+  chrome: stable
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
 
 cache:
   yarn: true
@@ -10,22 +26,33 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_install:
+  - phpenv config-rm xdebug.ini || true
   - pear config-set preferred_state beta
   - pecl channel-update pecl.php.net
   - yes | pecl install imagick
-  - cp .env.example .env
-  - phpenv config-rm xdebug.ini
+  - cp .env.testing .env
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS galaxyofdrones_test;'
 
 install:
   - travis_retry yarn global add jscs
-  - travis_retry composer global require friendsofphp/php-cs-fixer --no-interaction --no-suggest
+  - travis_retry composer global require friendsofphp/php-cs-fixer:2.13.* --no-interaction --no-suggest
   - travis_retry composer install --no-interaction --no-suggest
 
 before_script:
   - php artisan key:generate
   - php artisan passport:keys
+  - php artisan config:clear
+  - php artisan migrate --seed --no-interaction
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - php artisan serve &
 
 script:
   - jscs ./resources/js
   - $HOME/.composer/vendor/bin/php-cs-fixer fix --dry-run
   - vendor/bin/phpunit
+  - php artisan dusk
+
+notifications:
+  email: false
+  slack:
+    secure: OtwbhJ4OQQWHHRxy8ZToPgGWgzfGJUbJUV3ZPXKHv2ehHsZPJrX8TtIuHzaicuecCnP1TdYm4TzehGX834z4H6LGAdAdbufsz7KlPJin9zB7vmJmSadE5lEZvMKPnZIevpP3EY6d7cbthCiNmJekCCdmZs85JTPTbC3YtVmKc8PeSYCD9MIbJgvI3GQXJi6XpK80oD2ReYXHuoTdx2fVAHsN+dN/nChyWSRF79YZycsZFUFsts2VHigsYW5OnwTuh9sQ6MqoQMAv6mtG4urIiG1rf7OvrfCVACarkSdNhfBJfpq/7iUvkHpj0pT7CtARil/9E8T2YNM3NGTPal1gD2K2MOPqSGwx26ZTAY9k4W5+Cjf58troJyGB6yaqLr6CZtG6Q/I8mjMdOFkaANtr6K6kBoA1+XH3IcM31scPbe8UMy/BNsMGsqerxTLz+mKxBvQpum0wIXL86Pfb4GNTd0JAD5levFdBv90B7gDEWsjSb6cVOnNURyFnIZHPuFtLTv1mR4FB3eGeThCbhK6KoTKszkyhP2UwlS6QPB65iSRAgaWVKCCnh6hAfoZlBzXbRcVniAuc4mYeX5RF0uM+dYm4yIcAT4OYzjbtupHz4qXUmtWU6AihtsxUk7uOv1XUr4/ARmKZWDTFHZdThJ8Al9RhCyFbVFB3X18J64YOiOI=

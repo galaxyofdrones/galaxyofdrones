@@ -2,7 +2,6 @@
 /public/hot
 /public/tile
 /public/storage
-/storage/clockwork
 /storage/*.key
 /vendor
 /.idea

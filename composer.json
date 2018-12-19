@@ -12,6 +12,7 @@
         "laravel/framework": "5.7.*",
         "laravel/horizon": "^2.0",
         "laravel/passport": "^7.0",
+        "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",
         "rcrowe/twigbridge": "^0.9"
@@ -22,7 +23,7 @@
         "doctrine/dbal": "^2.8",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
-        "itsgoingd/clockwork": "^3.0",
+        "laravel/dusk": "^4.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0"
@@ -40,14 +41,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Koodilab\\Tests\\": "tests/"
+            "Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "dont-discover": [
-                "barryvdh/laravel-ide-helper",
-                "itsgoingd/clockwork"
+                "barryvdh/laravel-ide-helper"
             ]
         }
     },

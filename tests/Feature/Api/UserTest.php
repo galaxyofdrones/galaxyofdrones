@@ -1,11 +1,11 @@
 <?php
 
-namespace Koodilab\Tests\Feature\Api;
+namespace Tests\Feature\Api;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Koodilab\Models\User;
-use Koodilab\Tests\TestCase;
 use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
