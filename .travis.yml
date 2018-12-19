@@ -36,7 +36,7 @@ before_install:
 
 install:
   - travis_retry yarn global add jscs
-  - travis_retry composer global require friendsofphp/php-cs-fixer --no-interaction --no-suggest
+  - travis_retry composer global require friendsofphp/php-cs-fixer:2.13.* --no-interaction --no-suggest
   - travis_retry composer install --no-interaction --no-suggest
 
 before_script:
