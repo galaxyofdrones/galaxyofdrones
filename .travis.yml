@@ -7,7 +7,9 @@ services:
   - redis-server
 
 php:
+  - 7.1
   - 7.2
+  - 7.3
 
 addons:
   chrome: stable
@@ -25,6 +27,7 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_install:
+  - phpenv config-rm xdebug.ini || true
   - pear config-set preferred_state beta
   - pecl channel-update pecl.php.net
   - yes | pecl install imagick
