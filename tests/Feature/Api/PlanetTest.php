@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Tests\Feature\Api;
+namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -12,8 +12,8 @@ use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
-use Koodilab\Tests\TestCase;
 use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class PlanetTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Tests\Unit\Starmap;
+namespace Tests\Unit\Starmap;
 
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -8,7 +8,7 @@ use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
 use Koodilab\Models\Star;
 use Koodilab\Starmap\Generator;
-use Koodilab\Tests\TestCase;
+use Tests\TestCase;
 
 class GeneratorTest extends TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Tests\Models;
+namespace Tests\Models;
 
 use Koodilab\Support\Bounds;
-use Koodilab\Tests\TestCase;
+use Tests\TestCase;
 
 class BoundsTest extends TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Tests\Unit\Starmap;
+namespace Tests\Unit\Starmap;
 
 use Koodilab\Starmap\NameGenerator;
-use Koodilab\Tests\TestCase;
+use Tests\TestCase;
 
 class NameGeneratorTest extends TestCase
 {
