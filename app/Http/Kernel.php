@@ -66,16 +66,4 @@ class Kernel extends HttpKernel
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function bootstrap()
-    {
-        parent::bootstrap();
-
-        if ($this->app->environment() != 'production') {
-            $this->app->register(\Clockwork\Support\Laravel\ClockworkServiceProvider::class);
-        }
-    }
 }

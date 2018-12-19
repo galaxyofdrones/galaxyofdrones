@@ -2,8 +2,8 @@
 
 namespace Koodilab\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider
@@ -33,7 +33,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewHorizon', function ($user) {
-            return $user->email == env('HORIZON_EMAIL');
+            return in_array($user->email, Config::get('debug.emails'));
         });
     }
 }

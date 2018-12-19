@@ -182,6 +182,7 @@ return [
         Koodilab\Providers\AuthServiceProvider::class,
         Koodilab\Providers\BroadcastServiceProvider::class,
         Koodilab\Providers\EventServiceProvider::class,
+        Koodilab\Providers\TelescopeServiceProvider::class,
         Koodilab\Providers\HorizonServiceProvider::class,
         Koodilab\Providers\RouteServiceProvider::class,
 
