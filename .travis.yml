@@ -39,7 +39,7 @@ install:
 before_script:
   - php artisan key:generate
   - php artisan passport:keys
-  - php artisan config:cache
+  - php artisan config:clear
   - php artisan migrate --seed --no-interaction
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - php artisan serve &
