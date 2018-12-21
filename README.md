@@ -1,6 +1,6 @@
 # Galaxy of Drones Online
 
-[![Build Status](https://travis-ci.com/galaxyofdrones/galaxyofdrones.svg?branch=master)](https://travis-ci.org/galaxyofdrones/galaxyofdrones)
+[![Build Status](https://travis-ci.com/galaxyofdrones/galaxyofdrones.svg?branch=master)](https://travis-ci.com/galaxyofdrones/galaxyofdrones)
 [![GitHub release](https://img.shields.io/github/release/galaxyofdrones/galaxyofdrones.svg)](https://github.com/galaxyofdrones/galaxyofdrones/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
