@@ -7,7 +7,7 @@ use Koodilab\Console\Behaviors\PrependTimestamp;
 use Koodilab\Contracts\Starmap\Generator;
 use Koodilab\Contracts\Starmap\Renderer;
 
-class StarmapGenerateCommand extends Command
+class StarmapGenerate extends Command
 {
     use PrependTimestamp;
 

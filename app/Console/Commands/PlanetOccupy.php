@@ -8,7 +8,7 @@ use Koodilab\Console\Behaviors\PrependTimestamp;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
 
-class PlanetOccupyCommand extends Command
+class PlanetOccupy extends Command
 {
     use PrependTimestamp;
 
