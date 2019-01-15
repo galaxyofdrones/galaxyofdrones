@@ -24,7 +24,7 @@ class UpgradeRequeue extends Command
     protected $description = 'Requeue the upgrade';
 
     /**
-     * The bus instance
+     * The bus instance.
      *
      * @var Bus
      */

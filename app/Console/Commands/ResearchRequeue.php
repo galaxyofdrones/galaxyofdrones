@@ -24,7 +24,7 @@ class ResearchRequeue extends Command
     protected $description = 'Requeue the research';
 
     /**
-     * The bus instance
+     * The bus instance.
      *
      * @var Bus
      */

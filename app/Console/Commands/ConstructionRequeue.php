@@ -24,7 +24,7 @@ class ConstructionRequeue extends Command
     protected $description = 'Requeue the construction';
 
     /**
-     * The bus instance
+     * The bus instance.
      *
      * @var Bus
      */

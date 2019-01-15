@@ -24,7 +24,7 @@ class MovementRequeue extends Command
     protected $description = 'Requeue the movement';
 
     /**
-     * The bus instance
+     * The bus instance.
      *
      * @var Bus
      */

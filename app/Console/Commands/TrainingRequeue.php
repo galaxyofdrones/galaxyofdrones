@@ -24,7 +24,7 @@ class TrainingRequeue extends Command
     protected $description = 'Requeue the training';
 
     /**
-     * The bus instance
+     * The bus instance.
      *
      * @var Bus
      */
