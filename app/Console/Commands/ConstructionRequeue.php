@@ -9,7 +9,7 @@ use Koodilab\Jobs\Construction as ConstructionJob;
 use Koodilab\Models\Construction;
 use Symfony\Component\Console\Input\InputArgument;
 
-class RequeueConstruction extends Command
+class ConstructionRequeue extends Command
 {
     use PrependTimestamp;
 
