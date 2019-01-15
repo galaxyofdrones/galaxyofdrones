@@ -5,22 +5,22 @@ namespace Koodilab\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Game\ExpeditionManager;
+use Koodilab\Game\MissionManager;
 use Koodilab\Models\User;
 
-class ExpeditionGenerateCommand extends Command
+class MissionGenerate extends Command
 {
     use PrependTimestamp;
 
     /**
      * {@inheritdoc}
      */
-    protected $signature = 'expedition:generate';
+    protected $signature = 'mission:generate';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Generate the expeditions';
+    protected $description = 'Generate the missions';
 
     /**
      * The database manager instance.
@@ -30,19 +30,19 @@ class ExpeditionGenerateCommand extends Command
     protected $database;
 
     /**
-     * The expedition manager instance.
+     * The mission manager instance.
      *
-     * @var ExpeditionManager
+     * @var MissionManager
      */
     protected $manager;
 
     /**
      * Constructor.
      *
-     * @param DatabaseManager   $database
-     * @param ExpeditionManager $manager
+     * @param DatabaseManager $database
+     * @param MissionManager  $manager
      */
-    public function __construct(DatabaseManager $database, ExpeditionManager $manager)
+    public function __construct(DatabaseManager $database, MissionManager $manager)
     {
         parent::__construct();
 
@@ -55,10 +55,10 @@ class ExpeditionGenerateCommand extends Command
      */
     public function handle()
     {
-        $this->call('expedition:clear');
+        $this->call('mission:clear');
 
         $this->info(
-            $this->prependTimestamp('Generating expeditions...')
+            $this->prependTimestamp('Generating missions...')
         );
 
         $this->database->transaction(function () {

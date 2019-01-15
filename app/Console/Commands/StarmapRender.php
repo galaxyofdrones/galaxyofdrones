@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Koodilab\Console\Behaviors\PrependTimestamp;
 use Koodilab\Contracts\Starmap\Renderer;
 
-class StarmapRenderCommand extends Command
+class StarmapRender extends Command
 {
     use PrependTimestamp;
 

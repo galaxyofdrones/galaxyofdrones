@@ -7,7 +7,7 @@ use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
 use Koodilab\Models\Expedition;
 
-class ExpeditionClearCommand extends Command
+class ExpeditionClear extends Command
 {
     use PrependTimestamp;
 

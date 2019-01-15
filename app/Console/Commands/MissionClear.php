@@ -7,7 +7,7 @@ use Illuminate\Database\DatabaseManager;
 use Koodilab\Console\Behaviors\PrependTimestamp;
 use Koodilab\Models\Mission;
 
-class MissionClearCommand extends Command
+class MissionClear extends Command
 {
     use PrependTimestamp;
 
