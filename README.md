@@ -28,4 +28,4 @@ If you discover a security vulnerability within Galaxy of Drones Online, please 
 
 The Galaxy of Drones Online is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
-The Artwork is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+The Galaxy of Drones Artwork is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
