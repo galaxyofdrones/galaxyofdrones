@@ -263,6 +263,16 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'rank',
+    ], function () use ($router) {
+        $router->get('pve', 'RankController@pve')
+            ->name('rank_pve');
+
+        $router->get('pvp', 'RankController@pvp')
+            ->name('rank_pvp');
+    });
+
+    $router->group([
         'prefix' => 'user',
     ], function () use ($router) {
         $router->get('/', 'UserController@index')
@@ -270,12 +280,6 @@ $router->group([
 
         $router->get('capital', 'UserController@capital')
             ->name('user_capital');
-
-        $router->get('trophy/pve', 'UserController@trophyPve')
-            ->name('user_trophy_pve');
-
-        $router->get('trophy/pvp', 'UserController@trophyPvp')
-            ->name('user_trophy_pvp');
 
         $router->get('{user}', 'UserController@show')
             ->name('user_show');

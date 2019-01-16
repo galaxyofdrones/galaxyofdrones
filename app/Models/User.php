@@ -107,8 +107,6 @@ class User extends Authenticatable
         Queries\IncomingUserAttackMovementCount,
         Queries\LosingBattleLogCount,
         Queries\WinningBattleLogCount,
-        Queries\PaginateAllStartedOrderByPve,
-        Queries\PaginateAllStartedOrderByPvp,
         Queries\PaginateBattleLogs,
         Queries\PaginateExpeditionLogs,
         Queries\PaginateMessages,
