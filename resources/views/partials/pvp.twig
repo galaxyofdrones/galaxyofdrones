@@ -1,6 +1,6 @@
 <leaderboard :is-enabled="isEnabled && isSelectedTab('pvp')"
              :open-after-hidden="openAfterHidden"
-             url="{{ route('api_user_trophy_pvp') }}" inline-template>
+             url="{{ route('api_rank_pvp') }}" inline-template>
     <div v-if="isEnabled" class="pvp">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">

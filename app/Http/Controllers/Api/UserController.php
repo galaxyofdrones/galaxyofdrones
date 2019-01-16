@@ -9,7 +9,6 @@ use Koodilab\Models\Planet;
 use Koodilab\Models\Transformers\UserCapitalTransformer;
 use Koodilab\Models\Transformers\UserShowTransformer;
 use Koodilab\Models\Transformers\UserTransformer;
-use Koodilab\Models\Transformers\UserTrophyTransformer;
 use Koodilab\Models\User;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -49,34 +48,6 @@ class UserController extends Controller
     {
         return $transformer->transform(
             auth()->user()
-        );
-    }
-
-    /**
-     * Show the trophy PvE in json format.
-     *
-     * @param UserTrophyTransformer $transformer
-     *
-     * @return mixed|\Illuminate\Http\JsonResponse
-     */
-    public function trophyPve(UserTrophyTransformer $transformer)
-    {
-        return $transformer->transformCollection(
-            User::paginateAllStartedOrderByPve()
-        );
-    }
-
-    /**
-     * Show the trophy PvP in json format.
-     *
-     * @param UserTrophyTransformer $transformer
-     *
-     * @return mixed|\Illuminate\Http\JsonResponse
-     */
-    public function trophyPvp(UserTrophyTransformer $transformer)
-    {
-        return $transformer->transformCollection(
-            User::paginateAllStartedOrderByPvp()
         );
     }
 
