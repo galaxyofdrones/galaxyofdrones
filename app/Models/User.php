@@ -24,12 +24,12 @@ use Laravel\Passport\HasApiTokens;
  * @property int                                                                                                       $solarion
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
- * @property \Carbon\Carbon|null                                                                                       $last_login
- * @property \Carbon\Carbon|null                                                                                       $last_capital_changed
- * @property \Carbon\Carbon|null                                                                                       $last_energy_changed
- * @property \Carbon\Carbon|null                                                                                       $started_at
- * @property \Carbon\Carbon|null                                                                                       $created_at
- * @property \Carbon\Carbon|null                                                                                       $updated_at
+ * @property \Illuminate\Support\Carbon|null                                                                           $last_login
+ * @property \Illuminate\Support\Carbon|null                                                                           $last_capital_changed
+ * @property \Illuminate\Support\Carbon|null                                                                           $last_energy_changed
+ * @property \Illuminate\Support\Carbon|null                                                                           $started_at
+ * @property \Illuminate\Support\Carbon|null                                                                           $created_at
+ * @property \Illuminate\Support\Carbon|null                                                                           $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|BattleLog[]                                                      $attackBattleLogs
  * @property \Illuminate\Database\Eloquent\Collection|Block[]                                                          $blocks
  * @property \Illuminate\Database\Eloquent\Collection|Bookmark[]                                                       $bookmarks
@@ -50,12 +50,16 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Database\Eloquent\Collection|Movement[]                                                       $movements
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property \Illuminate\Database\Eloquent\Collection|Planet[]                                                         $planets
+ * @property Rank                                                                                                      $rank
  * @property \Illuminate\Database\Eloquent\Collection|Research[]                                                       $researches
  * @property \Illuminate\Database\Eloquent\Collection|resource[]                                                       $resources
  * @property \Illuminate\Database\Eloquent\Collection|Shield[]                                                         $shields
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
  * @property \Illuminate\Database\Eloquent\Collection|Unit[]                                                           $units
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentId($value)
@@ -110,6 +114,7 @@ class User extends Authenticatable
         Queries\PaginateMessages,
         Queries\PaginateMissionLogs,
         Queries\PaginatePlanets,
+        Relations\HasOneRank,
         Relations\HasManyBlock,
         Relations\HasManyBookmark,
         Relations\HasManyPlanet,
