@@ -15,7 +15,7 @@ trait PaginatePveUsers
     {
         return static::join('users', 'ranks.user_id', '=', 'users.id')
             ->select(['ranks.*', 'users.username', 'users.experience'])
-            ->orderBy('users.experience')
+            ->orderBy('users.experience', 'desc')
             ->paginate($perPage);
     }
 }
