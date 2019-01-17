@@ -18,8 +18,6 @@ The project is available [on Koodilab](https://koodilab.com).
 
 The initial documentation is available [on GitHub](https://github.com/galaxyofdrones/docs).
 
-The roadmap is available [on Trello](https://trello.com/b/vWfdm6AA/galaxy-of-drones-online).
-
 ## Security
 
 If you discover a security vulnerability within Galaxy of Drones Online, please send an e-mail to Koodilab at support@koodilab.com. All security vulnerabilities will be promptly addressed.
