@@ -5453,7 +5453,7 @@ safe-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass-loader@7.*:
+sass-loader@^7.1:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-7.1.0.tgz#16fd5138cb8b424bf8a759528a1972d72aad069d"
   integrity sha512-+G+BKGglmZM2GUSfT9TLuEp6tzehHPjAMoRRItOojWIqIGPloVCMhNIQuG639eJ+y033PaGTSjLaTHts8Kw79w==
@@ -5465,7 +5465,7 @@ sass-loader@7.*:
     pify "^3.0.0"
     semver "^5.5.0"
 
-sass@^1.16.0:
+sass@^1.16:
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.16.0.tgz#c7912449b5c93463e7e7f267d55fc1b8816d122b"
   integrity sha512-uJu+dH8XlyN7WCTLg1L1L49EK9mBJyNgS0qDd9NW2eb1h0EnIs50Z0Y+XFev5ae7NdHY/xi1wVnJiLLOE/ojnQ==
