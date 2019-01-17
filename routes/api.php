@@ -295,4 +295,7 @@ $router->group([
             ->name('user_current_update')
             ->where('planet', '\d+');
     });
+
+    $router->get('status', 'StatusController@index')
+        ->name('status');
 });
