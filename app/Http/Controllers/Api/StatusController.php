@@ -9,14 +9,6 @@ use Koodilab\Models\Star;
 class StatusController extends Controller
 {
     /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
-    /**
      * Show the status in json format.
      *
      * @return mixed|\Illuminate\Http\JsonResponse
@@ -26,7 +18,7 @@ class StatusController extends Controller
         return [
             'starmap' => [
                 'star_count' => Star::count(),
-                'started_at' => Star::first()->created_at,
+                'started_at' => Star::first()->created_at->toDateTimeString(),
                 'planet' => [
                     'free_count' => Planet::whereNull('user_id')->count(),
                     'occupied_count' => Planet::whereNotNull('user_id')->count(),
