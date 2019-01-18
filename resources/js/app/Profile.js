@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import PlanetList from './PlanetList';
 import Filters from './Filters';
 import Modal from './Modal';

@@ -1,5 +1,5 @@
 import { autoDetectRenderer, Container, loaders, Sprite, utils, Text, Texture } from 'pixi.js';
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import Filters from './Filters';
 import Sprites from './Sprites';
 

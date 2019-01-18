@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import HasTab from './HasTab';
 import Leaderboard from './Leaderboard';
 import Modal from './Modal';
