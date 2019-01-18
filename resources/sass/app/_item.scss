@@ -1,0 +1,273 @@
+.item {
+    color: #fff;
+    display: inline-block;
+    overflow: hidden;
+    padding-top: 240px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+
+    //&-row {
+    //    @include make-row(20px);
+    //    text-align: center;
+    //
+    //    [class*="col-"] {
+    //        display: inline-block;
+    //        float: none;
+    //        padding: 0;
+    //    }
+    //}
+    //&-input-row {
+    //    @include make-row;
+    //    text-align: center;
+    //
+    //    [class*="col-"] {
+    //        display: inline-block;
+    //        float: none;
+    //    }
+    //}
+    &:before {
+        background: url('../../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
+        content: '';
+        display: block;
+        height: 240px;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        width: 240px;
+    }
+    &.resource-1:before {
+        background-position: 0 0;
+    }
+    &.resource-2:before {
+        background-position: -240px 0;
+    }
+    &.resource-3:before {
+        background-position: -480px 0;
+    }
+    &.resource-4:before {
+        background-position: -720px 0;
+    }
+    &.resource-5:before {
+        background-position: -960px 0;
+    }
+    &.resource-6:before {
+        background-position: 0 -240px;
+    }
+    &.resource-7:before {
+        background-position: -240px -240px;
+    }
+    &.unit-1:before {
+        background-position: -480px -240px;
+    }
+    &.unit-2:before {
+        background-position: -720px -240px;
+    }
+    &.unit-3:before {
+        background-position: -960px -240px;
+    }
+    &.unit-4:before {
+        background-position: 0 -480px;
+    }
+    &.unit-5:before {
+        background-position: -240px -480px;
+    }
+    &.unit-6:before {
+        background-position: -480px -480px;
+    }
+    &.unit-7:before {
+        background-position: -720px -480px;
+    }
+    &.unit-8:before {
+        background-position: -960px -480px;
+    }
+    &.building-1:before {
+        background-position: 0 -720px;
+    }
+    &.building-2:before {
+        background-position: -240px -720px;
+    }
+    &.building-3:before {
+        background-position: -480px -720px;
+    }
+    &.building-4:before {
+        background-position: -720px -720px;
+    }
+    &.building-5:before {
+        background-position: -960px -720px;
+    }
+    &.building-6:before {
+        background-position: 0 -960px;
+    }
+    &.building-7:before {
+        background-position: -240px -960px;
+    }
+    &.building-8:before {
+        background-position: -480px -960px;
+    }
+    &.building-9:before {
+        background-position: -720px -960px;
+    }
+    &.building-10:before {
+        background-position: -960px -960px;
+    }
+    &.star:before {
+        background-position: 0 -1200px;
+    }
+    &.planet-1:before {
+        background-position: -240px -1200px;
+    }
+    &.planet-2:before {
+        background-position: -480px -1200px;
+    }
+    &.planet-3:before {
+        background-position: -720px -1200px;
+    }
+    &.planet-4:before {
+        background-position: -960px -1200px;
+    }
+    &.planet-5:before {
+        background-position: 0 -1440px;
+    }
+    &.planet-6:before {
+        background-position: -240px -1440px;
+    }
+    &.planet-7:before {
+        background-position: -480px -1440px;
+    }
+    &.mothership:before {
+        background-position: -720px -1440px;
+    }
+    &.solarion:before  {
+        background-position: -960px -1440px;
+    }
+    &-sm {
+        min-width: 48px;
+        padding-top: 48px;
+        width: auto;
+
+        &:before {
+            background-image: url('../../images/sprite-item-sm.png?v=#{$cache-buster}');
+            background-size: 240px 336px;
+            height: 48px;
+            width: 48px;
+        }
+        &.resource-1:before {
+            background-position: 0 0;
+        }
+        &.resource-2:before {
+            background-position: -48px 0;
+        }
+        &.resource-3:before {
+            background-position: -96px 0;
+        }
+        &.resource-4:before {
+            background-position: -144px 0;
+        }
+        &.resource-5:before {
+            background-position: -192px 0;
+        }
+        &.resource-6:before {
+            background-position: 0 -48px;
+        }
+        &.resource-7:before {
+            background-position: -48px -48px;
+        }
+        &.unit-1:before {
+            background-position: -96px -48px;
+        }
+        &.unit-2:before {
+            background-position: -144px -48px;
+        }
+        &.unit-3:before {
+            background-position: -192px -48px;
+        }
+        &.unit-4:before {
+            background-position: 0 -96px;
+        }
+        &.unit-5:before {
+            background-position: -48px -96px;
+        }
+        &.unit-6:before {
+            background-position: -96px -96px;
+        }
+        &.unit-7:before {
+            background-position: -144px -96px;
+        }
+        &.unit-8:before {
+            background-position: -192px -96px;
+        }
+        &.building-1:before {
+            background-position: 0 -144px;
+        }
+        &.building-2:before {
+            background-position: -48px -144px;
+        }
+        &.building-3:before {
+            background-position: -96px -144px;
+        }
+        &.building-4:before {
+            background-position: -144px -144px;
+        }
+        &.building-5:before {
+            background-position: -192px -144px;
+        }
+        &.building-6:before {
+            background-position: 0 -192px;
+        }
+        &.building-7:before {
+            background-position: -48px -192px;
+        }
+        &.building-8:before {
+            background-position: -96px -192px;
+        }
+        &.building-9:before {
+            background-position: -144px -192px;
+        }
+        &.building-10:before {
+            background-position: -192px -192px;
+        }
+        &.star:before {
+            background-position: 0 -240px;
+        }
+        &.planet-1:before {
+            background-position: -48px -240px;
+        }
+        &.planet-2:before {
+            background-position: -96px -240px;
+        }
+        &.planet-3:before {
+            background-position: -144px -240px;
+        }
+        &.planet-4:before {
+            background-position: -192px -240px;
+        }
+        &.planet-5:before {
+            background-position: 0 -288px;
+        }
+        &.planet-6:before {
+            background-position: -48px -288px;
+        }
+        &.planet-7:before {
+            background-position: -96px -288px;
+        }
+        &.mothership:before {
+            background-position: -144px -288px;
+        }
+        &.solarion:before {
+            background-position: -192px -288px;
+        }
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .item {
+        min-width: 240px;
+        width: auto;
+
+        &-sm {
+            min-width: 48px;
+        }
+    }
+}

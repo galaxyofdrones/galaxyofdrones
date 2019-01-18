@@ -1,0 +1,31 @@
+// Custom
+
+$base-transition: ease .2s;
+$cache-buster: 'A1r5xayaunisxcCDtuNi';
+$card-inner-border-color: #243851;
+$text-color-light: darken(#b6bfca, 20%);
+$text-color-disabled: darken(#b6bfca, 40%);
+
+// Bootstrap
+
+$blue: #4183d7;
+$red: #f84646;
+$yellow: #ebb237;
+$green: #29bc94;
+
+$body-bg: #0b0e14;
+$body-color: #b6bfca;
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;
+$card-bg: rgba(#0e141c, .95);
+$card-border-color: $blue;
+$card-cap-bg: rgba(0, 0, 0, 0);
+$font-family-sans-serif:  'Exo 2', sans-serif;
+$input-bg: #243851;
+$input-border-color: lighten($input-bg, 10%);
+$input-color: #fff;
+$input-disabled-bg: #19222f;
+$input-focus-border-color: $blue;
+$input-placeholder-color: $text-color-light;
+$link-color: $green;

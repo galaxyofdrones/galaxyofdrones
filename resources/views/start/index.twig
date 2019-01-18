@@ -5,32 +5,38 @@
 {% block body %}
     <section id="app" class="container-app container-app-standalone">
         <a class="logo" href="{{ route('home') }}">
-            <img class="img-responsive" src="{{ asset('images/logo.png') }}" alt="{{ title }}">
+            <img class="img-fluid"
+                 src="{{ asset('images/logo.png') }}"
+                 alt="{{ title }}">
         </a>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <i class="icon-globe"></i>
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">
+                    <i class="fas fa-globe-americas"></i>
                     {{ subtitle }}
-                </h3>
+                </h6>
             </div>
             {% if count %}
                 <form action="{{ route('start') }}" method="post">
                     {{ csrf_field() }}
 
-                    <div class="panel-body text-center">
+                    <div class="card-body text-center">
                         <span class="item planet-1"></span>
-                        <h3>{{ trans_choice('messages.planet.free', count) }}</h3>
+                        <h4>
+                            {{ trans_choice('messages.planet.free', count) }}
+                        </h4>
                     </div>
-                    <div class="panel-footer">
-                        <button class="btn btn-info btn-lg btn-block" type="submit">
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">
                             {{ trans('messages.planet.first') }}
                         </button>
                     </div>
                 </form>
             {% else %}
-                <div class="panel-body text-center">
-                    <h3>{{ trans('messages.warning.server') }}</h3>
+                <div class="card-body text-center">
+                    <h4>
+                        {{ trans('messages.warning.server') }}
+                    </h4>
                 </div>
             {% endif %}
         </div>
