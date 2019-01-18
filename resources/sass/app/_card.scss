@@ -2,17 +2,16 @@
     &-header {
         border-color: $card-inner-border-color;
 
+        .card-title {
+            color: $white;
+            margin: 0;
+        }
         i {
             margin: 0 5px 0 0;
         }
     }
-    &-title {
-        color: $white;
-        margin: .75rem 0;
-    }
     &-footer {
         border-color: $card-inner-border-color;
-        padding: $card-spacer-x $card-spacer-x;
 
         a {
             text-decoration: none;
