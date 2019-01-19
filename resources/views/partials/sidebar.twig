@@ -19,7 +19,7 @@
                     </select>
                     <div class="input-group-btn">
                         <a class="btn btn-success" href="#" @click.prevent="toggleEdit()">
-                            <i class="icon-edit"></i>
+                            <i class="fas fa-pencil-alt"></i>
                         </a>
                     </div>
                 </div>
@@ -155,30 +155,36 @@
         <div class="sidebar-nav">
             {% set route_name = app.request.route.getName %}
 
-            <ul class="nav nav-pills nav-stacked">
-                <li>
-                    <a href="#" @click.prevent="toggle()">
-                        <i :class="{'icon-nav': !isActive, 'icon-close': isActive}"></i>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#"
+                       @click.prevent="toggle()">
+                        <i :class="{'fas fa-bars': !isActive, 'fas fa-times': isActive}"></i>
                     </a>
                 </li>
-                <li class="{{ route_name == 'home' ? 'active' }}">
-                    <a href="{{ route('home') }}">
-                        <i class="icon-surface"></i>
+                <li class="nav-item">
+                    <a class="nav-link {{ route_name == 'home' ? 'active' }}" href="{{ route('home') }}">
+                        <i class="fas fa-globe-americas"></i>
                     </a>
                 </li>
-                <li class="{{ route_name == 'starmap' ? 'active' }}">
-                    <a href="{{ route('starmap') }}">
-                        <i class="icon-starmap"></i>
+                <li class="nav-item">
+                    <a class="nav-link {{ route_name == 'starmap' ? 'active' }}" href="{{ route('starmap') }}">
+                        <i class="fas fa-satellite-dish"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#" @click.prevent="openMothership()">
-                        <i class="icon-mothership"></i>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#"
+                       @click.prevent="openMothership()">
+                        <i class="fas fa-rocket"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#" @click.prevent="openTrophy()">
-                        <i class="icon-trophy"></i>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#"
+                       @click.prevent="openTrophy()">
+                        <i class="fas fa-trophy"></i>
                     </a>
                 </li>
             </ul>

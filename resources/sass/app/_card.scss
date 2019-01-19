@@ -1,11 +1,11 @@
 .card {
     &-header {
         border-color: $card-inner-border-color;
+    }
+    &-title {
+        color: $white;
+        margin: 0;
 
-        .card-title {
-            color: $white;
-            margin: 0;
-        }
         i {
             margin: 0 5px 0 0;
         }

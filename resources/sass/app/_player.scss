@@ -1,0 +1,93 @@
+.player {
+    &-info,
+    &-energy {
+        background: $card-bg;
+        border: 1px solid $primary;
+        position: absolute;
+        right: 10px;
+        width: 202px;
+        z-index: $zindex-player;
+    }
+    &-info {
+        height: 82px;
+        top: 10px;
+    }
+    &-energy {
+        border-color: $primary;
+        color: $warning;
+        display: flex;
+        font-size: .875rem;
+        height: 32px;
+        line-height: 32px;
+        padding: 0 15px;
+        text-align: right;
+        top: 102px;
+
+        i {
+            margin: 10px auto 0 0;
+        }
+    }
+    &-top {
+        display: flex;
+    }
+    &-avatar {
+        height: 50px;
+        width: 50px;
+    }
+    &-nav {
+        border-bottom: 1px solid $card-inner-border-color;
+        height: 100%;
+        padding: 4px;
+        width: 150px;
+
+        .nav-link {
+            color: $primary;
+            font-size: 20px;
+            height: 41px;
+            line-height: 41px;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            transition: ease .2s;
+
+            &:focus,
+            &:hover {
+                color: $white;
+                text-shadow: 0 0 15px $glow-color;
+            }
+            &.unread .notification {
+                display: block;
+            }
+            .notification {
+                background: $danger;
+                border-radius: 2px;
+                color: $white;
+                display: none;
+                font-size: 10px;
+                font-weight: 500;
+                line-height: 1;
+                padding: 0 4px 2px;
+                position: absolute;
+                right: 6px;
+                top: 6px;
+            }
+        }
+    }
+    &-progress {
+        display: flex;
+        height: 30px;
+        padding: 0 15px;
+
+        .progress {
+            height: 5px;
+            margin: 12px 8px;
+        }
+        .text {
+            color: $white;
+            height: 30px;
+            font-size: .875rem;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
+}

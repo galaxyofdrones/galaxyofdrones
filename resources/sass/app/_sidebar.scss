@@ -1,0 +1,66 @@
+.sidebar {
+    background: $card-bg;
+    border-right: 1px solid $primary;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    top: 0;
+    transform: translateX(-260px);
+    transition: $base-transition;
+    width: 320px;
+    z-index: $zindex-sidebar;
+
+    &.active {
+        transform: translateX(0);
+    }
+    &-content {
+        height: 100%;
+        position: relative;
+        width: 260px;
+    }
+    &-nav {
+        border-left: 1px solid $card-inner-border-color;
+        height: 100%;
+        padding: 4px;
+        width: 59px;
+
+        .nav-link {
+            color: $primary;
+            font-size: 1.75rem;
+            height: 52px;
+            line-height: 52px;
+            padding: 0;
+            text-align: center;
+            transition: $base-transition;
+            width: 50px;
+
+            &:focus,
+            &:hover {
+                color: $white;
+                text-shadow: 0 0 15px $glow-color;
+            }
+            &.active {
+                &,
+                &:hover,
+                &:focus {
+                    background: none;
+                    color: $white;
+                    text-shadow: 0 0 15px $glow-color;
+                }
+            }
+        }
+    }
+    &-block {
+        border-bottom: 1px solid $card-inner-border-color;
+        padding: 10px;
+
+        .progress {
+            height: 5px;
+            margin-bottom: 0;
+
+            &-unit {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

@@ -3,8 +3,9 @@
 $base-transition: ease .2s;
 $cache-buster: 'A1r5xayaunisxcCDtuNi';
 $card-inner-border-color: #243851;
-$text-color-light: darken(#b6bfca, 20%);
-$text-color-disabled: darken(#b6bfca, 40%);
+$glow-color: rgba(255, 255, 255, .6);
+$zindex-player: 1030;
+$zindex-sidebar: 1030;
 
 // Bootstrap
 
@@ -29,5 +30,9 @@ $input-border-color: lighten($input-bg, 10%);
 $input-color: #fff;
 $input-disabled-bg: #19222f;
 $input-focus-border-color: $blue;
-$input-placeholder-color: $text-color-light;
+$input-placeholder-color: darken(#b6bfca, 20%);
 $link-color: $green;
+$nav-link-disabled-color: darken(#b6bfca, 40%);
+$popover-bg: #19222f;
+$popover-border-color: $blue;
+$progress-bg: #243141;
