@@ -65,7 +65,7 @@ class BookmarkTest extends TestCase
                         'x' => $bookmark->star->x,
                         'y' => $bookmark->star->y,
                         'created_at' => $bookmark->created_at,
-                    ]
+                    ],
                 ],
             ]);
     }

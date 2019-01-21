@@ -30,7 +30,7 @@ class BattleLogTest extends TestCase
 
     public function testIndex()
     {
-        $this->getJson("/api/battle-log")
+        $this->getJson('/api/battle-log')
             ->assertStatus(200)
             ->assertJsonStructure([
                 'current_page',
