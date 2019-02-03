@@ -379,7 +379,7 @@ class Simulator implements SimulatorContract
             return $carry + $stock->quantity;
         }, 0);
 
-        if ($total) {
+        if ($total > 0) {
             $capacity = min(
                 $total, round($this->capacity * $this->defenderLossRate)
             );
