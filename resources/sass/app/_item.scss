@@ -1,31 +1,26 @@
 .item {
     color: #fff;
     display: inline-block;
+    font-size: 14px;
     overflow: hidden;
     padding-top: 240px;
     position: relative;
     text-align: center;
     width: 100%;
 
-    //&-row {
-    //    @include make-row(20px);
-    //    text-align: center;
-    //
-    //    [class*="col-"] {
-    //        display: inline-block;
-    //        float: none;
-    //        padding: 0;
-    //    }
-    //}
-    //&-input-row {
-    //    @include make-row;
-    //    text-align: center;
-    //
-    //    [class*="col-"] {
-    //        display: inline-block;
-    //        float: none;
-    //    }
-    //}
+    &-row {
+        @include make-row(20px);
+        text-align: center;
+
+        [class*="col-"] {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    &-input-row {
+        @include make-row;
+        text-align: center;
+    }
     &:before {
         background: url('../../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
         content: '';
