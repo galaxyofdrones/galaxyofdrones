@@ -1,0 +1,151 @@
+.starmap {
+    background: rgba(0, 0, 0, 0);
+    height: 100%;
+
+    .leaflet-icon-object {
+        background: none;
+        border: none;
+        border-radius: 50%;
+
+        &:after {
+            background: radial-gradient(
+                ellipse at center,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0) 40%,
+                $glow-color 45%,
+                rgba(0, 0, 0, 0) 65%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            border-radius: 50%;
+            bottom: 0;
+            content: '';
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: $base-transition;
+        }
+        &:hover:after {
+            opacity: 1;
+        }
+        &.current {
+            border: 2px dotted rgba($primary, 0.7);
+        }
+        &.friendly {
+            border: 2px dotted rgba($success, 0.7);
+        }
+        &.capital {
+            border: 2px dotted rgba($warning, 0.7);
+        }
+        &.hostile {
+            border: 2px dotted rgba($danger, 0.7);
+        }
+        span {
+            bottom: 0;
+            color: #fff;
+            left: 50%;
+            position: absolute;
+            text-align: center;
+            transform: translateX(-50%) translateY(100%);
+            width: 128px;
+        }
+    }
+    .leaflet-icon-movement {
+        border: none;
+        border-radius: 50%;
+
+        &.incoming {
+            background: $success;
+
+            &-attack {
+                background: $danger;
+            }
+        }
+        &.outgoing {
+            background: $success;
+
+            &-attack {
+                background: $warning;
+            }
+        }
+        &.size-32 i {
+            font-size: 22px;
+        }
+        i {
+            color: #fff;
+            left: 50%;
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    }
+    .leaflet-left .leaflet-bar {
+        margin-left: 70px;
+    }
+    .leaflet-bar {
+        border: 1px solid $primary;
+        border-radius: 0;
+        box-shadow: none;
+
+        a {
+            border-bottom: 1px solid $card-inner-border-color;
+            background: $card-bg;
+            color: $primary;
+            height: 30px;
+            line-height: 30px;
+            transition: $base-transition;
+            width: 30px;
+
+            &:hover {
+                color: $white;
+                text-shadow: 0 0 15px $glow-color;
+            }
+            &:first-child {
+                border-radius: 0;
+            }
+            &:last-child {
+                border-bottom: none;
+                border-radius: 0;
+            }
+        }
+    }
+    .leaflet-control-zoom a {
+        height: 40px;
+        line-height: 40px;
+    }
+    .leaflet-control-bookmark {
+        font-size: 14px;
+
+        i {
+            vertical-align: middle;
+        }
+    }
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+    .leaflet-movement {
+        animation: dash 1s linear infinite;
+        stroke-dasharray: 1, 5;
+        stroke-dashoffset: 6;
+        stroke-width: 2;
+
+        &.incoming {
+            stroke: $success;
+
+            &-attack {
+                stroke: $danger;
+            }
+        }
+        &.outgoing {
+            stroke: $success;
+
+            &-attack {
+                stroke: $warning;
+            }
+        }
+    }
+}

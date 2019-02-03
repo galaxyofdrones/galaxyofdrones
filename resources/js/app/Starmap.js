@@ -159,7 +159,7 @@ export default {
                 options: {
                     position: 'topleft',
                     bookmarkTitle: this.bookmarkTitle,
-                    bookmarkIconClass: 'icon-star'
+                    bookmarkIconClass: 'fas fa-star'
                 },
 
                 onAdd() {

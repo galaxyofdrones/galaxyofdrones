@@ -17,10 +17,12 @@
                             {{ vue('planet.name') }}
                         </option>
                     </select>
-                    <div class="input-group-btn">
-                        <a class="btn btn-success" href="#" @click.prevent="toggleEdit()">
+                    <div class="input-group-append">
+                        <button class="btn btn-success"
+                                href="#"
+                                @click.prevent="toggleEdit()">
                             <i class="fas fa-pencil-alt"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -9,3 +9,15 @@ body {
     min-height: 320px;
     min-width: 320px;
 }
+
+.highlight-success {
+    color: $success !important;
+}
+
+.highlight-danger {
+    color: $danger !important;
+}
+
+.highlight-warning {
+    color: $warning !important;
+}
