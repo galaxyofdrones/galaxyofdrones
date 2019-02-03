@@ -33,7 +33,9 @@ trait HasResourceQuantity
             return $quantity;
         }
 
-        $free = $this->planet->capacity - $this->planet->stocks()->sum('quantity');
+        $free = max(
+            0, $this->planet->capacity - $this->planet->stocks()->sum('quantity')
+        );
 
         $mined = round(
             $this->planet->mining_rate / 3600 * Carbon::now()->diffInSeconds($this->last_quantity_changed)
