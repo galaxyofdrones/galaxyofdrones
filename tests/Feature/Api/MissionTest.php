@@ -66,7 +66,7 @@ class MissionTest extends TestCase
                                 'quantity',
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ])->assertJson([
                 'solarion' => $user->solarion,
@@ -92,7 +92,7 @@ class MissionTest extends TestCase
                                 'quantity' => 10,
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ]);
     }
