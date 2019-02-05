@@ -54,15 +54,15 @@ class RankUpdate extends Command
             $users = User::whereNotNull('started_at')->get();
 
             foreach ($users as $user) {
-                tap(Rank::firstOrNew([
+                Rank::firstOrNew([
                     'user_id' => $user->id,
-                ], [
+                ])->fill([
                     'mission_count' => $user->missionLogs()->count(),
                     'expedition_count' => $user->expeditionLogs()->count(),
                     'planet_count' => $user->planets()->count(),
                     'winning_battle_count' => $user->winningBattleLogCount(),
                     'losing_battle_count' => $user->losingBattleLogCount(),
-                ]))->save();
+                ])->save();
             }
         });
 
