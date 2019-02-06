@@ -1,6 +1,6 @@
 .card {
     &-header {
-        border-color: $card-inner-border-color;
+        border-color: $blue-dark;
     }
     &-title {
         color: $white;
@@ -11,7 +11,7 @@
         }
     }
     &-footer {
-        border-color: $card-inner-border-color;
+        border-color: $blue-dark;
 
         a {
             text-decoration: none;

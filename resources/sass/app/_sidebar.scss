@@ -19,7 +19,7 @@
         width: 260px;
     }
     &-nav {
-        border-left: 1px solid $card-inner-border-color;
+        border-left: 1px solid $blue-dark;
         height: 100%;
         padding: 4px;
         width: 59px;
@@ -51,7 +51,7 @@
         }
     }
     &-block {
-        border-bottom: 1px solid $card-inner-border-color;
+        border-bottom: 1px solid $blue-dark;
         padding: 10px;
 
         .progress {

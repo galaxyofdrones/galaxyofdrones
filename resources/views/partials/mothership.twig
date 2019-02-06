@@ -4,12 +4,12 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ trans('messages.mothership.singular') }}
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
-                    <h4 class="modal-title">
-                        {{ trans('messages.mothership.singular') }}
-                    </h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -51,28 +51,43 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs nav-justified">
-                        <li :class="{active: isSelectedTab('cargo')}">
-                            <a href="#" @click.prevent="selectTab('cargo')">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('cargo')}"
+                               href="#"
+                               @click.prevent="selectTab('cargo')">
                                 {{ trans('messages.cargo') }}
                             </a>
                         </li>
-                        <li :class="{active: isSelectedTab('armory')}">
-                            <a href="#" @click.prevent="selectTab('armory')">
+                        <li>
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('armory')}"
+                               href="#"
+                               @click.prevent="selectTab('armory')">
                                 {{ trans('messages.armory') }}
                             </a>
                         </li>
-                        <li :class="{active: isSelectedTab('laboratory')}">
-                            <a href="#" @click.prevent="selectTab('laboratory')">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('laboratory')}"
+                               href="#"
+                               @click.prevent="selectTab('laboratory')">
                                 {{ trans('messages.laboratory') }}
                             </a>
                         </li>
-                        <li :class="{active: isSelectedTab('radar')}">
-                            <a href="#" @click.prevent="selectTab('radar')">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('radar')}"
+                               href="#"
+                               @click.prevent="selectTab('radar')">
                                 {{ trans('messages.radar') }}
                             </a>
                         </li>
-                        <li :class="{active: isSelectedTab('shield')}">
-                            <a href="#" @click.prevent="selectTab('shield')">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('shield')}"
+                               href="#"
+                               @click.prevent="selectTab('shield')">
                                 {{ trans('messages.shield.singular') }}
                             </a>
                         </li>

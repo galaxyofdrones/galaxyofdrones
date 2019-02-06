@@ -35,14 +35,14 @@
         width: 50px;
     }
     &-nav {
-        border-bottom: 1px solid $card-inner-border-color;
+        border-bottom: 1px solid $blue-dark;
         height: 100%;
         padding: 4px;
         width: 150px;
 
         .nav-link {
             color: $primary;
-            font-size: 20px;
+            font-size: 1.25rem;
             height: 41px;
             line-height: 41px;
             margin: 0;
@@ -63,7 +63,7 @@
                 border-radius: 2px;
                 color: $white;
                 display: none;
-                font-size: 10px;
+                font-size: .625rem;
                 font-weight: 500;
                 line-height: 1;
                 padding: 0 4px 2px;

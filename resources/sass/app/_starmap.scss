@@ -70,7 +70,7 @@
             }
         }
         &.size-32 i {
-            font-size: 22px;
+            font-size: 1.375rem;
         }
         i {
             color: #fff;
@@ -90,7 +90,7 @@
         box-shadow: none;
 
         a {
-            border-bottom: 1px solid $card-inner-border-color;
+            border-bottom: 1px solid $blue-dark;
             background: $card-bg;
             color: $primary;
             height: 30px;
@@ -116,7 +116,7 @@
         line-height: 40px;
     }
     .leaflet-control-bookmark {
-        font-size: 14px;
+        font-size: .875rem;
 
         i {
             vertical-align: middle;
