@@ -38,7 +38,7 @@
                                         <h4 v-if="remaining">
                                             {{ vue('remaining | timer') }}
                                         </h4>
-                                        <button v-else class="btn btn-info btn-block"
+                                        <button v-else class="btn btn-primary btn-block"
                                                 :disabled="!canHyperjump"
                                                 @click="store()">
                                             {{ trans('messages.mothership.hyperjump') }}
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <ul class="nav nav-tabs nav-justified">
+                    <ul class="nav nav-tabs nav-fill">
                         <li class="nav-item">
                             <a class="nav-link"
                                :class="{active: isSelectedTab('cargo')}"
@@ -59,7 +59,7 @@
                                 {{ trans('messages.cargo') }}
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item">
                             <a class="nav-link"
                                :class="{active: isSelectedTab('armory')}"
                                href="#"
