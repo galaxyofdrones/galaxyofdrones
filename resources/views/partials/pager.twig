@@ -1,0 +1,14 @@
+<div v-if="hasPrev || hasNext" class="modal-footer d-flex justify-content-between">
+    <button class="btn btn-primary"
+            :disabled="!hasPrev"
+            type="button"
+            @click.prevent="prevPage()">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <button class="btn btn-primary"
+            :disabled="!hasNext"
+            type="button"
+            @click.prevent="nextPage()">
+        <i class="fas fa-arrow-right"></i>
+    </button>
+</div>

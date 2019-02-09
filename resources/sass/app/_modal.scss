@@ -1,9 +1,24 @@
 .modal {
-    &.mothership .armory-summary .item,
-    &.mothership .cargo-summary .item {
-        margin: 0 20px;
+    &.mothership {
+        .armory-summary,
+        .cargo-summary {
+            .item {
+                margin: 0 20px;
+            }
+        }
     }
     .separator:not(.attribute-row) {
         border-top: 1px solid $modal-header-border-color;
+    }
+    .table-responsive {
+        margin-bottom: 0;
+    }
+    .table {
+        margin-bottom: 0;
+
+        a {
+            text-decoration: none;
+            transition: $base-transition;
+        }
     }
 }
