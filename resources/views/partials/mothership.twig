@@ -1,7 +1,7 @@
 <mothership url="{{ route('api_user_capital') }}"
             store-url="{{ route('api_user_capital_update', '__planet__') }}" inline-template>
     <div class="mothership modal fade" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
@@ -13,13 +13,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6 text-center">
+                        <div class="col-lg-6 text-center">
                             <span class="item mothership"></span>
                         </div>
-                        <div class="col-md-6">
-                            <h4>
+                        <div class="col-lg-6">
+                            <h5>
                                 {{ trans('messages.mothership.singular') }}
-                            </h4>
+                            </h5>
                             <p>
                                 {{ trans('messages.mothership.description') }}
                             </p>
@@ -35,9 +35,9 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <h4 v-if="remaining">
+                                        <h5 v-if="remaining">
                                             {{ vue('remaining | timer') }}
-                                        </h4>
+                                        </h5>
                                         <button v-else class="btn btn-primary btn-block"
                                                 :disabled="!canHyperjump"
                                                 @click="store()">

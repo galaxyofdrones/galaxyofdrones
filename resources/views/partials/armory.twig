@@ -22,7 +22,7 @@
                     :store="store" inline-template>
             <div class="modal-body separator">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-6 text-center text-lg-left">
                         <span class="item item-sm star">
                             {{ vue('completion.star') }}
                         </span>
@@ -33,23 +33,23 @@
                             {{ vue('unit.quantity | number') }}
                         </span>
                     </div>
-                    <div class="col-md-3 text-center">
-                        <h4>
-                            <i class="icon-time"></i>
-                        </h4>
-                        <h4>
+                    <div class="col-lg-3 pt-2 text-center">
+                        <h5>
+                            <i class="far fa-clock"></i>
+                        </h5>
+                        <h5>
                             {{ vue('remaining | timer') }}
-                        </h4>
+                        </h5>
                     </div>
-                    <div class="col-md-3 text-center">
+                    <div class="col-lg-3 text-center">
                         <ul class="list-inline">
-                            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.experience') }}'}">
-                                <i class="icon-xp"></i>
+                            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.experience') }}'}">
+                                <i class="fas fa-flask"></i>
                                 {{ vue('completion.experience | number | sign(completion.experience)') }}
                             </li>
-                            <li class="highlight-warning"
+                            <li class="list-inline-item highlight-warning"
                                 v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
-                                <i class="icon-solarion"></i>
+                                <i class="far fa-sun"></i>
                                 {{ vue('completion.solarion | number| sign(completion.solarion)') }}
                             </li>
                         </ul>
