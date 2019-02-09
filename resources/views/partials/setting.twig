@@ -3,60 +3,63 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ trans('messages.setting.plural') }}
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
-                    <h4 class="modal-title">
-                        {{ trans('messages.setting.plural') }}
-                    </h4>
                 </div>
                 <form method="post" @submit.prevent="submit()">
-                    <div class="panel-body">
+                    <div class="modal-body">
                         <div class="form-group" :class="{'has-error': hasError('email')}">
-                            <label class="control-label required" for="email">
+                            <label class="required" for="email">
                                 {{ trans('validation.attributes.email') }}
                             </label>
                             <input id="email"
-                                   class="form-control input-lg"
+                                   class="form-control form-control-lg"
+                                   :class="{'is-invalid': hasError('email')}"
                                    type="email"
                                    name="email"
                                    v-model="form.email"
                                    placeholder="{{ trans('validation.attributes.email') }}" required>
-                            <span v-if="hasError('email')" class="help-block">
-                                <strong>{{ vue("error('email')") }}</strong>
+                            <span v-if="hasError('email')" class="invalid-feedback">
+                                {{ vue("error('email')") }}
                             </span>
                         </div>
                         <div class="form-group" :class="{'has-error': hasError('password')}">
-                            <label class="control-label" for="password">
+                            <label for="password">
                                 {{ trans('validation.attributes.password') }}
                             </label>
                             <input id="password"
-                                   class="form-control input-lg"
+                                   class="form-control form-control-lg"
+                                   :class="{'is-invalid': hasError('password')}"
                                    type="password"
                                    name="password"
                                    v-model="form.password"
                                    placeholder="{{ trans('validation.attributes.password') }}">
-                            <span v-if="hasError('password')" class="help-block">
-                                <strong>{{ vue("error('password')") }}</strong>
+                            <span v-if="hasError('password')" class="invalid-feedback">
+                                {{ vue("error('password')") }}
                             </span>
                         </div>
                         <div class="form-group" :class="{'has-error': hasError('password_confirmation')}">
-                            <label class="control-label" for="password_confirmation">
+                            <label for="password_confirmation">
                                 {{ trans('validation.attributes.password_confirmation') }}
                             </label>
                             <input id="password_confirmation"
-                                   class="form-control input-lg"
+                                   class="form-control form-control-lg"
+                                   :class="{'is-invalid': hasError('password_confirmation')}"
                                    type="password"
                                    name="password_confirmation"
                                    v-model="form.password_confirmation"
                                    placeholder="{{ trans('validation.attributes.password_confirmation') }}">
-                            <span v-if="hasError('password_confirmation')" class="help-block">
-                                <strong>{{ vue("error('password_confirmation')") }}</strong>
+                            <span v-if="hasError('password_confirmation')" class="invalid-feedback">
+                                {{ vue("error('password_confirmation')") }}
                             </span>
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        <button class="btn btn-info btn-lg btn-block" type="submit">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">
                             {{ trans('messages.save') }}
                         </button>
                     </div>

@@ -22,3 +22,11 @@
         }
     }
 }
+
+@include media-breakpoint-up(sm) {
+    .modal {
+        &.setting .modal-dialog {
+            max-width: 360px;
+        }
+    }
+}
