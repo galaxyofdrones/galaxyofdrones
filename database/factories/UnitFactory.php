@@ -8,7 +8,7 @@ $factory->define(Koodilab\Models\Unit::class, function (Faker $faker) {
         'name' => [
             'en' => $faker->word,
         ],
-        'type' => $faker->numberBetween(0, 4),
+        'type' => $faker->numberBetween(0, Koodilab\Models\Unit::TYPE_SETTLER),
         'is_unlocked' => $faker->boolean,
         'speed' => $faker->numberBetween(1, 100),
         'attack' => $faker->numberBetween(1, 100),
