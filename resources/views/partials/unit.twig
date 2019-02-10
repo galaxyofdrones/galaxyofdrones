@@ -111,7 +111,9 @@
         <div v-else-if="isResearch" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store(unit)" :disabled="!isResearchable(unit)">
+                    <button class="btn btn-success btn-block"
+                            @click="store(unit)"
+                            :disabled="!isResearchable(unit)">
                         {{ trans('messages.research.singular') }}
                     </button>
                 </div>
@@ -127,8 +129,10 @@
                                :max="trainableQuantity"
                                :placeholder="trainableQuantity | bracket"
                                v-model.number="quantity">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success btn-block" @click="store()" :disabled="!isTrainable">
+                        <span class="input-group-append">
+                            <button class="btn btn-success btn-block"
+                                    @click="store()"
+                                    :disabled="!isTrainable">
                                 {{ trans('messages.training.train') }}
                             </button>
                         </span>

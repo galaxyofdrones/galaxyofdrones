@@ -3,34 +3,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ trans('messages.demolish') }}
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
-                    <h4 class="modal-title">
-                        {{ trans('messages.demolish') }}
-                    </h4>
                 </div>
                 <div class="modal-body text-center">
-                    <p>{{ trans('messages.warning.demolish_building') }}</p>
-                    <p>{{ trans('messages.warning.lose_planet') }}</p>
+                    <p>
+                        {{ trans('messages.warning.demolish_building') }}
+                    </p>
+                    <p>
+                        {{ trans('messages.warning.lose_planet') }}
+                    </p>
                 </div>
-                <div class="modal-footer modal-footer-btn-group">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <button class="btn btn-danger btn-block" @click="demolish()">
-                                    {{ trans('messages.demolish') }}
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <button class="btn btn-warning btn-block" @click="close()">
-                                    {{ trans('messages.cancel') }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger"
+                            type="button"
+                            @click="demolish()">
+                        {{ trans('messages.demolish') }}
+                    </button>
+                    <button class="btn btn-warning"
+                            type="button"
+                            @click="close()">
+                        {{ trans('messages.cancel') }}
+                    </button>
                 </div>
             </div>
         </div>

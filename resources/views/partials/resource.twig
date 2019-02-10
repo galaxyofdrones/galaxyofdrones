@@ -69,7 +69,9 @@
         <div v-else-if="isResearch" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store()" :disabled="!isResearchable(resource)">
+                    <button class="btn btn-success btn-block"
+                            @click="store()"
+                            :disabled="!isResearchable(resource)">
                         {{ trans('messages.research.singular') }}
                     </button>
                 </div>
@@ -85,8 +87,10 @@
                                :max="transmutableQuantity"
                                :placeholder="transmutableQuantity | bracket"
                                v-model.number="quantity">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success btn-block" @click="store()" :disabled="!isTransmutable">
+                        <span class="input-group-append">
+                            <button class="btn btn-success btn-block"
+                                    @click="store()"
+                                    :disabled="!isTransmutable">
                                 {{ trans('messages.transmute') }}
                             </button>
                         </span>

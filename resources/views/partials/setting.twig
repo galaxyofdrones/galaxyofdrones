@@ -12,7 +12,7 @@
                 </div>
                 <form method="post" @submit.prevent="submit()">
                     <div class="modal-body">
-                        <div class="form-group" :class="{'has-error': hasError('email')}">
+                        <div class="form-group">
                             <label class="required" for="email">
                                 {{ trans('validation.attributes.email') }}
                             </label>
@@ -27,7 +27,7 @@
                                 {{ vue("error('email')") }}
                             </span>
                         </div>
-                        <div class="form-group" :class="{'has-error': hasError('password')}">
+                        <div class="form-group">
                             <label for="password">
                                 {{ trans('validation.attributes.password') }}
                             </label>
@@ -42,7 +42,7 @@
                                 {{ vue("error('password')") }}
                             </span>
                         </div>
-                        <div class="form-group" :class="{'has-error': hasError('password_confirmation')}">
+                        <div class="form-group">
                             <label for="password_confirmation">
                                 {{ trans('validation.attributes.password_confirmation') }}
                             </label>

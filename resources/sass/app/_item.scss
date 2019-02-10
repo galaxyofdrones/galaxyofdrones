@@ -10,6 +10,7 @@
 
     &-row {
         @include make-row(20px);
+        justify-content: center;
         text-align: center;
 
         [class*="col-"] {
@@ -19,6 +20,7 @@
     }
     &-input-row {
         @include make-row;
+        justify-content: center;
         text-align: center;
     }
     &:before {
