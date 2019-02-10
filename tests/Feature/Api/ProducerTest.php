@@ -4,12 +4,10 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Bookmark;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Star;
 use Koodilab\Models\Stock;
 use Koodilab\Models\User;
 use Laravel\Passport\Passport;

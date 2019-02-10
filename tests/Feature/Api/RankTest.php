@@ -4,9 +4,7 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Bookmark;
 use Koodilab\Models\Rank;
-use Koodilab\Models\Star;
 use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
