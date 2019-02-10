@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import Remaining from './Remaining';
 
 export default Remaining.extend({

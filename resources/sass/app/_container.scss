@@ -1,0 +1,26 @@
+.container-app {
+    background: url('../../images/starmap-bg.png?v=#{$cache-buster}') center top no-repeat;
+    height: 100vh;
+    margin: 0 auto;
+    max-height: 1080px;
+    max-width: 1920px;
+    overflow: hidden;
+    position: relative;
+
+    &-standalone {
+        height: auto;
+        min-height: 100vh;
+        @extend .container-fluid;
+
+        .logo {
+            display: block;
+            height: 100px;
+            margin: 2rem auto;
+            width: 240px;
+        }
+        .card {
+            margin: 0 auto 2rem auto;
+            max-width: 360px;
+        }
+    }
+}

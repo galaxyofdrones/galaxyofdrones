@@ -1,0 +1,58 @@
+.modal {
+    &-body .row .item-sm {
+        margin-right: 5px;
+
+        &:first-child {
+            margin-left: 5px;
+        }
+    }
+    .separator:not(.attribute-row) {
+        border-top: 1px solid $modal-header-border-color;
+    }
+    .table-responsive {
+        margin-bottom: 0;
+    }
+    .table {
+        margin-bottom: 0;
+
+        a {
+            text-decoration: none;
+            transition: $base-transition;
+        }
+    }
+    &.mothership {
+        .armory-summary,
+        .cargo-summary {
+            .item {
+                margin: 0 20px;
+            }
+        }
+    }
+    &.mailbox {
+        a {
+            text-decoration: none;
+            transition: ease .2s;
+        }
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .modal {
+        &.setting .modal-dialog {
+            max-width: 360px;
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .modal {
+        &-body .row .item-sm {
+            &:first-child {
+                margin-left: 0;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

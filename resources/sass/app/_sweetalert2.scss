@@ -1,42 +1,42 @@
 @import '~sweetalert2/src/sweetalert2';
 
 button.styled {
-    transition: ease .2s;
+    transition: $base-transition;
 }
 
 .swal2-icon {
     &.swal2-error {
-        border-color: $brand-danger;
+        border-color: $danger;
 
         .line {
-            background-color: $brand-danger;
+            background-color: $danger;
         }
     }
 
     &.swal2-warning {
-        color: $brand-warning;
-        border-color: $brand-warning;
+        color: $warning;
+        border-color: $warning;
     }
 
     &.swal2-info {
-        color: $brand-info;
-        border-color: $brand-info;
+        color: $primary;
+        border-color: $primary;
     }
 
     &.swal2-question {
-        color: $brand-primary;
-        border-color: $brand-primary;
+        color: $blue-dark;
+        border-color: $blue-dark;
     }
 
     &.swal2-success {
-        border-color: $brand-success;
+        border-color: $success;
 
         .placeholder {
-            border-color: rgba($brand-success, .2);
+            border-color: rgba($success, .2);
         }
 
         .line {
-            background-color: $brand-success;
+            background-color: $success;
         }
     }
 }

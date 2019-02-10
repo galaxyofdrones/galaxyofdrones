@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import Armory from './Armory';
 import Cargo from './Cargo';
 import HasTab from './HasTab';

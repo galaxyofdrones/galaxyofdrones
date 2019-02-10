@@ -1,21 +1,25 @@
 .attribute {
     background: $attribute-bg;
-    margin: 0 0 $grid-gutter-width / 3 0;
+    margin: 0 0 10px 0;
     overflow: hidden;
     text-align: center;
 
-    h4 {
-        color: #fff;
+    h6 {
+        font-size: .875rem;
+        margin-top: 10px;
+    }
+    h5 {
+        color: $white;
     }
     a {
         text-decoration: none;
-        transition: ease .2s;
+        transition: $base-transition;
     }
     &-row {
         @include make-row(10px);
 
         &.separator {
-            margin-bottom: $grid-gutter-width;
+            margin-bottom: 30px;
         }
         .sidebar &:last-child .attribute {
             margin-bottom: 0;

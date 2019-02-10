@@ -1,24 +1,30 @@
 <trophy inline-template>
     <div class="trophy modal fade" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ trans('messages.trophy') }}
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
-                    <h4 class="modal-title">
-                        {{ trans('messages.trophy') }}
-                    </h4>
                 </div>
                 <div class="modal-body">
-                    <ul class="nav nav-tabs nav-justified">
-                        <li :class="{active: isSelectedTab('pve')}">
-                            <a href="#" @click.prevent="selectTab('pve')">
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('pve')}"
+                               href="#"
+                               @click.prevent="selectTab('pve')">
                                 {{ trans('messages.pve') }}
                             </a>
                         </li>
-                        <li :class="{active: isSelectedTab('pvp')}">
-                            <a href="#" @click.prevent="selectTab('pvp')">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               :class="{active: isSelectedTab('pvp')}"
+                               href="#"
+                               @click.prevent="selectTab('pvp')">
                                 {{ trans('messages.pvp') }}
                             </a>
                         </li>

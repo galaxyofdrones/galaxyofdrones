@@ -1,0 +1,21 @@
+.card {
+    &-header {
+        border-color: $blue-dark;
+    }
+    &-title {
+        color: $white;
+        margin: 0;
+
+        i {
+            margin: 0 5px 0 0;
+        }
+    }
+    &-footer {
+        border-color: $blue-dark;
+
+        a {
+            text-decoration: none;
+            transition: $base-transition;
+        }
+    }
+}

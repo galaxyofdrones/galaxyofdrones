@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import Modal from './Modal';
 import Producer from './Producer';
 import Scout from './Scout';

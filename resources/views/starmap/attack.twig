@@ -1,16 +1,16 @@
 <div v-if="isAttackType" class="modal-content">
     <div class="modal-header">
+        <h5 class="modal-title">
+            {{ trans('messages.movement.attack') }}
+        </h5>
         <button type="button" class="close" data-dismiss="modal">
             &times;
         </button>
-        <h4 class="modal-title">
-            {{ trans('messages.movement.attack') }}
-        </h4>
     </div>
     {% include 'starmap.time' %}
     <div class="modal-body separator">
         <div class="item-input-row">
-            <div class="col-xs-12 col-sm-4 col-md-3" v-for="unit in fighterUnits">
+            <div class="col-md-4 col-lg-3" v-for="unit in fighterUnits">
                 <span class="item item-sm"
                       :class="unit | item('unit')"
                       v-popover="{placement: 'top', trigger: 'hover', title: unit.name, content: unit.description}">
@@ -19,8 +19,8 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-btn" @click="setTotalUnit(unit)">
-                            <button class="btn btn-info btn-block">
-                                <i class="icon-sum"></i>
+                            <button class="btn btn-primary btn-block">
+                                <i class="fas fa-clipboard-check"></i>
                             </button>
                         </div>
                         <input class="form-control"
@@ -36,8 +36,11 @@
     </div>
     <div class="modal-body separator">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <button class="btn btn-danger btn-block" :disabled="!hasFighterUnits" @click="attack()">
+            <div class="col-lg-4 offset-lg-4">
+                <button class="btn btn-danger btn-block"
+                        type="button"
+                        @click="attack()"
+                        :disabled="!hasFighterUnits">
                     {{ trans('messages.movement.attack') }}
                 </button>
             </div>

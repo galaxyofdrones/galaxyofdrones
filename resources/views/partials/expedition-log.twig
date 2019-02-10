@@ -9,7 +9,7 @@
         <template v-else>
             <div v-for="expedition_log in data.data" class="modal-body separator">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-6 text-center text-lg-left">
                         <span class="item item-sm star">
                             {{ vue('expedition_log.star') }}
                         </span>
@@ -20,46 +20,34 @@
                             {{ vue('unit.quantity | number') }}
                         </span>
                     </div>
-                    <div class="col-md-2 text-center">
-                        <h4>
-                            <i class="icon-time"></i>
-                        </h4>
-                        <h4>
+                    <div class="col-lg-2 pt-lg-2 text-center">
+                        <h5>
+                            <i class="far fa-clock"></i>
+                        </h5>
+                        <h5>
                             {{ vue('expedition_log.created_at | fromNow') }}
-                        </h4>
+                        </h5>
                     </div>
-                    <div class="col-md-2 text-center">
-                        <h4>
-                            <i class="icon-xp"></i>
-                        </h4>
-                        <h4>
+                    <div class="col-lg-2 pt-lg-2 text-center">
+                        <h5>
+                            <i class="fas fa-flask"></i>
+                        </h5>
+                        <h5>
                             {{ vue('expedition_log.experience | number') }}
-                        </h4>
+                        </h5>
                     </div>
-                    <div class="col-md-2 text-center highlight-warning">
-                        <h4>
-                            <i class="icon-solarion"></i>
-                        </h4>
-                        <h4>
+                    <div class="col-lg-2 pt-lg-2 text-center highlight-warning">
+                        <h5>
+                            <i class="far fa-sun"></i>
+                        </h5>
+                        <h5>
                             {{ vue('expedition_log.solarion | number') }}
-                        </h4>
+                        </h5>
                     </div>
                 </div>
             </div>
-            <div v-if="hasPrev || hasNext" class="modal-footer">
-                <ul class="pager">
-                    <li class="previous" :class="{disabled: !hasPrev}">
-                        <a href="#" @click.prevent="prevPage()">
-                            <i class="icon-arrow-left"></i>
-                        </a>
-                    </li>
-                    <li class="next" :class="{disabled: !hasNext}">
-                        <a href="#" @click.prevent="nextPage()">
-                            <i class="icon-arrow-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+
+            {% include 'partials.pager' %}
         </template>
     </div>
 </completion-log>
