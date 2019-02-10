@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
 use Koodilab\Events\UserUpdated;
-use Koodilab\Models\Bookmark;
 use Koodilab\Models\Building;
 use Koodilab\Models\Construction;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Star;
 use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
@@ -132,50 +130,74 @@ class ConstructionTest extends TestCase
             ]);
     }
 
-//    public function testStore()
-//    {
-//        $star = factory(Star::class)->create();
-//
-//        $bookmark = factory(Bookmark::class)->create([
-//            'user_id' => auth()->user()->id,
-//            'star_id' => $star->id,
-//        ]);
-//
-//        $this->post('/api/bookmark/10')
-//            ->assertStatus(404);
-//
-//        $this->post('/api/bookmark/not-id')
-//            ->assertStatus(404);
-//
-//        $this->post("/api/bookmark/{$star->id}")
-//            ->assertStatus(200);
-//
-//        $this->assertDatabaseHas('bookmarks', [
-//            'id' => $bookmark->id,
-//        ]);
-//    }
-//
-//    public function testDestroy()
-//    {
-//        $bookmark = factory(Bookmark::class)->create([
-//            'user_id' => auth()->user()->id,
-//        ]);
-//
-//        $this->delete('/api/bookmark/10')
-//            ->assertStatus(404);
-//
-//        $this->delete('/api/bookmark/not-id')
-//            ->assertStatus(404);
-//
-//        $this->assertDatabaseHas('bookmarks', [
-//            'id' => $bookmark->id,
-//        ]);
-//
-//        $this->delete("/api/bookmark/{$bookmark->id}")
-//            ->assertStatus(200);
-//
-//        $this->assertDatabaseMissing('bookmarks', [
-//            'id' => $bookmark->id,
-//        ]);
-//    }
+    public function testStore()
+    {
+        $building = factory(Building::class)->create();
+        $grid = factory(Grid::class)->create([
+            'planet_id' => auth()->user()->current->id,
+        ]);
+
+        $construction = factory(Construction::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $this->post('/api/construction/10/10')
+            ->assertStatus(404);
+
+        $this->post('/api/construction/not-id')
+            ->assertStatus(404);
+
+        $this->post("/api/construction/{$grid->id}/{$building->id}")
+            ->assertStatus(400);
+
+        $building2 = factory(Building::class)->create([
+            'parent_id' => $building->id,
+            'type' => Building::TYPE_MINER,
+        ]);
+
+        $grid3 = factory(Grid::class)->create([
+            'building_id' => $building->id,
+            'planet_id' => auth()->user()->current->id,
+        ]);
+
+        $grid2 = factory(Grid::class)->create([
+            'building_id' => null,
+            'planet_id' => auth()->user()->current->id,
+            'type' => Grid::TYPE_RESOURCE,
+        ]);
+
+        $this->post("/api/construction/{$grid2->id}/{$building2->id}")
+            ->assertStatus(200);
+    }
+
+    public function testDestroy()
+    {
+        $grid = factory(Grid::class)->create([
+            'planet_id' => auth()->user()->current->id,
+        ]);
+
+        $this->delete('/api/construction/10')
+            ->assertStatus(404);
+
+        $this->delete('/api/construction/not-id')
+            ->assertStatus(404);
+
+        $this->delete("/api/construction/{$grid->id}")
+            ->assertStatus(400);
+
+        $construction = factory(Construction::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $this->assertDatabaseHas('constructions', [
+            'id' => $construction->id,
+        ]);
+
+        $this->delete("/api/construction/{$grid->id}")
+            ->assertStatus(200);
+
+        $this->assertDatabaseMissing('constructions', [
+            'id' => $construction->id,
+        ]);
+    }
 }
