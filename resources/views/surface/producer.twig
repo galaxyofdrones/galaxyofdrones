@@ -13,8 +13,11 @@
         </div>
         <div class="modal-body separator">
             <ul class="nav nav-pills">
-                <li v-for="resource in data.resources" :class="{active: isSelected(resource)}">
-                    <a href="#" @click.prevent="select(resource)">
+                <li class="nav-item" v-for="resource in data.resources">
+                    <a class="nav-link"
+                       :class="{active: isSelected(resource)}"
+                       href="#"
+                       @click.prevent="select(resource)">
                         <span class="item item-sm" :class="resource | item('resource')">
                             {{ vue('resource.name') }}
                         </span>

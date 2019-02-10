@@ -1,85 +1,70 @@
 .player {
     &-info,
     &-energy {
-        background: $panel-bg;
-        border: 1px solid $brand-info;
+        background: $card-bg;
+        border: 1px solid $primary;
         position: absolute;
-        right: $grid-gutter-width / 3;
+        right: 10px;
         width: 202px;
-        z-index: 999;
+        z-index: $zindex-player;
     }
     &-info {
-        display: flex;
         height: 82px;
-        top: $grid-gutter-width / 3;
+        top: 10px;
     }
     &-energy {
-        border-color: $brand-info;
-        color: $brand-warning;
+        border-color: $primary;
+        color: $warning;
+        display: flex;
+        font-size: .875rem;
         height: 32px;
         line-height: 32px;
-        padding: 0 $grid-gutter-width / 2;
+        padding: 0 15px;
         text-align: right;
-        top: 92px + $grid-gutter-width / 3;
-        @include clearfix;
+        top: 102px;
 
         i {
-            float: left;
-            margin-top: $grid-gutter-width / 3;
+            margin: 10px auto 0 0;
         }
     }
-    &-left {
-        height: 100%;
-        width: 50px;
-    }
-    &-right {
-        height: 100%;
-        width: 150px;
+    &-top {
+        display: flex;
     }
     &-avatar {
         height: 50px;
         width: 50px;
     }
-    &-level {
-        color: #fff;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-    }
     &-nav {
-        border-bottom: 1px solid $panel-inner-border;
+        border-bottom: 1px solid $blue-dark;
+        height: 100%;
         padding: 4px;
+        width: 150px;
 
-        .nav > li {
-            display: table-cell;
+        .nav-link {
+            color: $primary;
+            font-size: 1.25rem;
+            height: 41px;
+            line-height: 41px;
             margin: 0;
-            width: 1%;
+            padding: 0;
+            position: relative;
+            text-align: center;
+            transition: ease .2s;
 
-            > a {
-                color: $brand-info;
-                font-size: 20px;
-                height: 41px;
-                line-height: 41px;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-                transition: ease .2s;
-
-                &:focus,
-                &:hover {
-                    color: #fff;
-                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
-                }
+            &:focus,
+            &:hover {
+                color: $white;
+                text-shadow: 0 0 15px $glow-color;
             }
             &.unread .notification {
                 display: block;
             }
             .notification {
-                background: $brand-danger;
+                background: $danger;
                 border-radius: 2px;
-                color: #fff;
+                color: $white;
                 display: none;
-                font-size: 10px;
+                font-size: .625rem;
                 font-weight: 500;
                 line-height: 1;
                 padding: 0 4px 2px;
@@ -90,12 +75,20 @@
         }
     }
     &-progress {
+        display: flex;
         height: 30px;
-        padding: 12px 0;
+        padding: 0 15px;
 
         .progress {
             height: 5px;
-            margin: 0 8px;
+            margin: 12px 8px;
+        }
+        .text {
+            color: $white;
+            height: 30px;
+            font-size: .875rem;
+            line-height: 30px;
+            text-align: center;
         }
     }
 }

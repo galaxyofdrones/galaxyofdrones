@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2:400,500,700&subset=latin,latin-ext');
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
+[v-cloak] {
+    display: none !important;
+}
+
+body {
+    min-height: 320px;
+    min-width: 320px;
+}
+
+.highlight-success {
+    color: $success !important;
+}
+
+.highlight-danger {
+    color: $danger !important;
+}
+
+.highlight-warning {
+    color: $warning !important;
+}

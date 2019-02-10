@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import CompletionLog from './CompletionLog';
 
 export default CompletionLog.extend({

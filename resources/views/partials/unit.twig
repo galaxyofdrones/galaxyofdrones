@@ -1,96 +1,96 @@
 <div class="row">
-    <div class="col-md-6 text-center">
+    <div class="col-lg-6 text-center">
         <span class="item" :class="unit | item('unit')"></span>
     </div>
-    <div class="col-md-6">
-        <h4 v-if="!isResearch && remaining">
+    <div class="col-lg-6">
+        <h5 v-if="!isResearch && remaining">
             {{ vue('trainName') }}
-        </h4>
-        <h4 v-else>
+        </h5>
+        <h5 v-else>
             {{ vue('unit.name') }}
-        </h4>
+        </h5>
         <p>
             {{ vue('unit.description') }}
         </p>
         <div class="attribute-row">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.speed') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('unit.speed') }}
-                    </h4>
+                    </h5>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.attack') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('unit.attack') }}
-                    </h4>
+                    </h5>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.defense') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('unit.defense') }}
-                    </h4>
+                    </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="unit.detection !== null">
+            <div class="col-lg-6" v-if="unit.detection !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.detection') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('unit.detection') }}
-                    </h4>
+                    </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="unit.capacity !== null">
+            <div class="col-lg-6" v-if="unit.capacity !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.capacity') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('unit.capacity') }}
-                    </h4>
+                    </h5>
                 </div>
             </div>
         </div>
         <ul v-if="isResearch" class="list-inline">
-            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_experience') }}'}">
-                <i class="icon-xp"></i>
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_experience') }}'}">
+                <i class="fas fa-flask"></i>
                 {{ vue('unit.research_experience | number') }}
             </li>
-            <li class="highlight-warning"
+            <li class="list-inline-item highlight-warning"
                 v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_cost') }}'}">
-                <i class="icon-energy"></i>
+                <i class="fas fa-bolt"></i>
                 {{ vue('unit.research_cost | number') }}
             </li>
-            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_time') }}'}">
-                <i class="icon-time"></i>
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_time') }}'}">
+                <i class="far fa-clock"></i>
                 {{ vue('unit.research_time | timer') }}
             </li>
         </ul>
         <ul v-else class="list-inline">
-            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.supply') }}'}">
-                <i class="icon-supply"></i>
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.supply') }}'}">
+                <i class="fas fa-warehouse"></i>
                 {{ vue('unit.supply | number') }}
             </li>
-            <li class="highlight-warning"
+            <li class="list-inline-item highlight-warning"
                 v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_cost') }}'}">
-                <i class="icon-energy"></i>
+                <i class="fas fa-bolt"></i>
                 {{ vue('unit.train_cost | number') }}
             </li>
-            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_time') }}'}">
-                <i class="icon-time"></i>
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_time') }}'}">
+                <i class="far fa-clock"></i>
                 {{ vue('unit.train_time | timer') }}
             </li>
         </ul>
@@ -103,13 +103,17 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <h4>{{ vue('remaining | timer') }}</h4>
+                <h5>
+                    {{ vue('remaining | timer') }}
+                </h5>
             </div>
         </div>
         <div v-else-if="isResearch" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store(unit)" :disabled="!isResearchable(unit)">
+                    <button class="btn btn-success btn-block"
+                            @click="store(unit)"
+                            :disabled="!isResearchable(unit)">
                         {{ trans('messages.research.singular') }}
                     </button>
                 </div>
@@ -125,8 +129,10 @@
                                :max="trainableQuantity"
                                :placeholder="trainableQuantity | bracket"
                                v-model.number="quantity">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success btn-block" @click="store()" :disabled="!isTrainable">
+                        <span class="input-group-append">
+                            <button class="btn btn-success btn-block"
+                                    @click="store()"
+                                    :disabled="!isTrainable">
                                 {{ trans('messages.training.train') }}
                             </button>
                         </span>
@@ -134,7 +140,9 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <h4>{{ vue('trainTime | timer') }}</h4>
+                <h5>
+                    {{ vue('trainTime | timer') }}
+                </h5>
             </div>
         </div>
     </div>

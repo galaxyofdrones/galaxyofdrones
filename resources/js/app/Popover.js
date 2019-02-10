@@ -11,16 +11,16 @@ const bind = (el, binding) => {
 };
 
 const unbind = el => {
-    $(el).popover('destroy');
+    $(el).popover('dispose');
 };
 
 const update = (el, binding) => {
     if (binding.value.title !== binding.oldValue.title) {
-        $(el).data('bs.popover').options.title = binding.value.title;
+        $(el).data('bs.popover').config.title = binding.value.title;
     }
 
     if (binding.value.content !== binding.oldValue.content) {
-        $(el).data('bs.popover').options.content = binding.value.content;
+        $(el).data('bs.popover').config.content = binding.value.content;
     }
 };
 

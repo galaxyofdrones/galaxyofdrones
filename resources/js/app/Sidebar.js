@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {

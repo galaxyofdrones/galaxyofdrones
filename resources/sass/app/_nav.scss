@@ -1,0 +1,8 @@
+.nav-tabs .nav-link {
+    color: $blue;
+    transition: $base-transition;
+
+    @include hover-focus {
+        color: $white;
+    }
+}
