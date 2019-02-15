@@ -1,0 +1,160 @@
+<?php
+
+namespace Tests\Feature\Api;
+
+use Carbon\Carbon;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Koodilab\Models\Bookmark;
+use Koodilab\Models\Building;
+use Koodilab\Models\Grid;
+use Koodilab\Models\Planet;
+use Koodilab\Models\Star;
+use Koodilab\Models\Training;
+use Koodilab\Models\Upgrade;
+use Koodilab\Models\User;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
+
+class UpgradeTest extends TestCase
+{
+    use DatabaseMigrations;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $user = factory(User::class)->create([
+            'started_at' => Carbon::now(),
+        ]);
+
+        Passport::actingAs($user);
+    }
+
+    public function testIndex()
+    {
+        $user = auth()->user();
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $building = factory(Building::class)->create([
+            'end_level' => 100,
+            'defense_bonus' => 0,
+            'construction_experience' => 0,
+            'construction_cost' => 0,
+            'construction_time' => 0,
+            'construction_time_bonus' => 0,
+            'production_rate' => 0,
+            'type' => Building::TYPE_CENTRAL,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building->id,
+        ]);
+
+        $upgrade = factory(Upgrade::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $training = factory(Training::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $modifiedLevel = $grid->level + 1;
+
+        $this->getJson("/api/upgrade/{$grid->id}")->assertStatus(200)
+            ->assertJsonStructure([
+                'hasTraining',
+                'remaining',
+                'building' => [
+                    'id',
+                    'name',
+                    'name_with_level',
+                    'type',
+                    'construction_experience',
+                    'construction_cost',
+                    'construction_time',
+                    'description',
+                    'defense',
+                    'detection',
+                    'capacity',
+                    'supply',
+                    'mining_rate',
+                    'production_rate',
+                    'defense_bonus',
+                    'construction_time_bonus',
+                    'trade_time_bonus',
+                    'train_time_bonus',
+                    'has_lower_level',
+                ],
+                'upgrade' => [
+                    'id',
+                    'name',
+                    'name_with_level',
+                    'type',
+                    'construction_experience',
+                    'construction_cost',
+                    'construction_time',
+                    'description',
+                    'defense',
+                    'detection',
+                    'capacity',
+                    'supply',
+                    'mining_rate',
+                    'production_rate',
+                    'defense_bonus',
+                    'construction_time_bonus',
+                    'trade_time_bonus',
+                    'train_time_bonus',
+                    'has_lower_level',
+                ],
+            ])->assertJson([
+                'hasTraining' => true,
+                'remaining' => $upgrade->remaning,
+                'building' => [
+                    'id' => $building->id,
+                    'name' => $building->name['en'],
+                    'name_with_level' => "{$building->name['en']} (Level {$grid->level})",
+                    'type' => $building->type,
+                    'construction_experience' => $building->construction_experience,
+                    'construction_cost' => $building->construction_cost,
+                    'construction_time' => $building->construction_time,
+                    'description' => $building->description['en'],
+                    'defense' => $building->defense,
+                    'detection' => $building->detection,
+                    'capacity' => $building->capacity,
+                    'supply' => $building->supply,
+                    'mining_rate' => $building->mining_rate,
+                    'production_rate' => $building->production_rate,
+                    'defense_bonus' => $building->defense_bonus,
+                    'construction_time_bonus' => $building->construction_time_bonus,
+                    'trade_time_bonus' => $building->trade_time_bonus,
+                    'train_time_bonus' => $building->train_time_bonus,
+                    'has_lower_level' => true,
+                ],
+                'upgrade' => [
+                    'id' => null,
+                    'name' => $building->name['en'],
+                    'name_with_level' => "{$building->name['en']} (Level {$modifiedLevel})",
+                    'type' => $building->type,
+                    'construction_experience' => $building->construction_experience,
+                    'construction_cost' => $building->construction_cost,
+                    'construction_time' => $building->construction_time,
+                    'description' => $building->description['en'],
+                    'defense' => $building->defense,
+                    'detection' => $building->detection,
+                    'capacity' => $building->capacity,
+                    'supply' => $building->supply,
+                    'mining_rate' => $building->mining_rate,
+                    'production_rate' => $building->production_rate,
+                    'defense_bonus' => $building->defense_bonus,
+                    'construction_time_bonus' => $building->construction_time_bonus,
+                    'trade_time_bonus' => $building->trade_time_bonus,
+                    'train_time_bonus' => $building->train_time_bonus,
+                    'has_lower_level' => true,
+                ],
+            ]);
+    }
+}
