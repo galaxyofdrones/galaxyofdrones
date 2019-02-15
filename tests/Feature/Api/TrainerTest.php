@@ -25,6 +25,7 @@ class TrainerTest extends TestCase
 
         $user = factory(User::class)->create([
             'started_at' => Carbon::now(),
+            'energy' => 1000,
         ]);
 
         Passport::actingAs($user);
@@ -104,50 +105,89 @@ class TrainerTest extends TestCase
             ]);
     }
 
-//    public function testStore()
-//    {
-//        $star = factory(Star::class)->create();
-//
-//        $bookmark = factory(Bookmark::class)->create([
-//            'user_id' => auth()->user()->id,
-//            'star_id' => $star->id,
-//        ]);
-//
-//        $this->post('/api/bookmark/10')
-//            ->assertStatus(404);
-//
-//        $this->post('/api/bookmark/not-id')
-//            ->assertStatus(404);
-//
-//        $this->post("/api/bookmark/{$star->id}")
-//            ->assertStatus(200);
-//
-//        $this->assertDatabaseHas('bookmarks', [
-//            'id' => $bookmark->id,
-//        ]);
-//    }
-//
-//    public function testDestroy()
-//    {
-//        $bookmark = factory(Bookmark::class)->create([
-//            'user_id' => auth()->user()->id,
-//        ]);
-//
-//        $this->delete('/api/bookmark/10')
-//            ->assertStatus(404);
-//
-//        $this->delete('/api/bookmark/not-id')
-//            ->assertStatus(404);
-//
-//        $this->assertDatabaseHas('bookmarks', [
-//            'id' => $bookmark->id,
-//        ]);
-//
-//        $this->delete("/api/bookmark/{$bookmark->id}")
-//            ->assertStatus(200);
-//
-//        $this->assertDatabaseMissing('bookmarks', [
-//            'id' => $bookmark->id,
-//        ]);
-//    }
+    public function testStore()
+    {
+        $user = auth()->user();
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+            'supply' => 500,
+        ]);
+
+        $building = factory(Building::class)->create([
+            'type' => Building::TYPE_TRAINER,
+            'train_time_bonus' => 5,
+            'end_level' => 1,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'building_id' => $building->id,
+            'planet_id' => $planet->id,
+        ]);
+
+        $unit = factory(Unit::class)->create([
+            'train_cost' => 10,
+            'supply' => 10,
+        ]);
+
+        $training = factory(Training::class)->create([
+            'grid_id' => $grid->id,
+            'unit_id' => $unit->id,
+        ]);
+
+        $this->post('/api/trainer/10/10')
+            ->assertStatus(404);
+
+        $this->post('/api/trainer/not-id/not-id')
+            ->assertStatus(404);
+
+        $this->post("/api/trainer/{$grid->id}/{$unit->id}")
+            ->assertStatus(400);
+
+        $training->delete();
+
+        $user->units()->attach($unit, [
+            'is_researched' => true,
+            'quantity' => 10,
+        ]);
+
+        $this->post("/api/trainer/{$grid->id}/{$unit->id}")
+            ->assertStatus(400);
+
+        $this->post("/api/trainer/{$grid->id}/{$unit->id}", [
+            'quantity' => 5,
+        ])->assertStatus(200);
+    }
+
+    public function testDestroy()
+    {
+        $planet = factory(Planet::class)->create([
+            'user_id' => auth()->user()->id,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+        ]);
+
+        $training = factory(Training::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $this->delete('/api/trainer/10')
+            ->assertStatus(404);
+
+        $this->delete('/api/trainer/not-id')
+            ->assertStatus(404);
+
+        $this->assertDatabaseHas('trainings', [
+            'grid_id' => $grid->id,
+        ]);
+
+        $this->delete("/api/trainer/{$grid->id}")
+            ->assertStatus(200);
+
+        $this->assertDatabaseMissing('trainings', [
+            'grid_id' => $grid->id,
+        ]);
+    }
 }
