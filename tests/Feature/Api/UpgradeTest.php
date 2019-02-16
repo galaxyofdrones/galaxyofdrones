@@ -227,13 +227,14 @@ class UpgradeTest extends TestCase
 
         $building = factory(Building::class)->create([
             'end_level' => 50,
-            'construction_time' => 2000,
-            'construction_cost' => 3000,
+            'construction_time' => 200,
+            'construction_cost' => 300,
         ]);
 
         $grid = factory(Grid::class)->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
+            'level' => 10,
         ]);
 
         $this->delete('/api/upgrade/10')
