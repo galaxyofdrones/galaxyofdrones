@@ -157,4 +157,107 @@ class UpgradeTest extends TestCase
                 ],
             ]);
     }
+
+    public function testStore()
+    {
+        $user = auth()->user();
+
+        $user->update([
+            'energy' => 100,
+        ]);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $building = factory(Building::class)->create([
+            'end_level' => 0,
+            'construction_cost' => 150,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => null,
+        ]);
+
+        $this->post('/api/upgrade/10')
+            ->assertStatus(404);
+
+        $this->post('/api/upgrade/not-id')
+            ->assertStatus(404);
+
+        $this->post("/api/upgrade/{$grid->id}")
+            ->assertStatus(400);
+
+        $grid->update([
+            'building_id' => $building->id,
+        ]);
+
+        $upgrade = factory(Upgrade::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $this->post("/api/upgrade/{$grid->id}")
+            ->assertStatus(400);
+
+        $upgrade->delete();
+
+        $this->post("/api/upgrade/{$grid->id}")
+            ->assertStatus(400);
+
+        $building->update([
+            'end_level' => 100,
+        ]);
+
+        $this->post("/api/upgrade/{$grid->id}")
+            ->assertStatus(200);
+    }
+
+    public function testDestroy()
+    {
+        $user = auth()->user();
+
+        $user->update([
+            'energy' => 100,
+        ]);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $building = factory(Building::class)->create([
+            'end_level' => 50,
+            'construction_time' => 2000,
+            'construction_cost' => 3000,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building->id,
+        ]);
+
+        $this->delete('/api/upgrade/10')
+            ->assertStatus(404);
+
+        $this->delete('/api/upgrade/not-id')
+            ->assertStatus(404);
+
+        $this->delete("/api/upgrade/{$grid->id}")
+            ->assertStatus(400);
+
+        $upgrade = factory(Upgrade::class)->create([
+            'grid_id' => $grid->id,
+        ]);
+
+        $this->assertDatabaseHas('upgrades', [
+            'id' => $upgrade->id,
+        ]);
+
+        $this->delete("/api/upgrade/{$grid->id}")
+            ->assertStatus(200);
+
+        $this->assertDatabaseMissing('upgrades', [
+            'id' => $upgrade->id,
+        ]);
+    }
 }
