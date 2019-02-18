@@ -127,4 +127,141 @@ class ResearchTest extends TestCase
                 ],
             ]);
     }
+
+    public function testStoreResource()
+    {
+        $user = auth()->user();
+
+        $this->post('/api/research/resource')
+            ->assertStatus(400);
+
+        $resource = factory(Resource::class)->create([
+            'research_cost' => 50,
+        ]);
+
+        $resourceResearch = factory(Research::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $resourceResearch->researchable()->associate($resource);
+
+        $user->resources()->attach($resource, [
+            'is_researched' => true,
+            'quantity' => 1,
+        ]);
+
+        $this->post('/api/research/resource')
+            ->assertStatus(400);
+
+        $user->resources()->detach($resource);
+
+        $user->update([
+            'energy' => 10,
+        ]);
+
+        $this->post('/api/research/resource')
+            ->assertStatus(400);
+
+        $user->update([
+            'energy' => 100,
+        ]);
+
+        $this->post('/api/research/resource')
+            ->assertStatus(200);
+    }
+
+    public function testStoreUnit()
+    {
+        $user = auth()->user();
+
+        $this->post('/api/research/10')
+            ->assertStatus(404);
+
+        $this->post('/api/research/not-id')
+            ->assertStatus(404);
+
+        $unit = factory(Unit::class)->create([
+            'research_cost' => 50,
+        ]);
+
+        $unitResearch = factory(Research::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $unitResearch->researchable()->associate($unit);
+
+        $user->units()->attach($unit, [
+            'is_researched' => true,
+            'quantity' => 1,
+        ]);
+
+        $this->post("/api/research/{$unit->id}")
+            ->assertStatus(400);
+
+        $user->units()->detach($unit);
+
+        $user->update([
+            'energy' => 10,
+        ]);
+
+        $this->post("/api/research/{$unit->id}")
+            ->assertStatus(400);
+
+        $user->update([
+            'energy' => 100,
+        ]);
+
+        $this->post("/api/research/{$unit->id}")
+            ->assertStatus(200);
+    }
+
+    public function testDestroyResource()
+    {
+        $user = auth()->user();
+
+        $this->delete('/api/research/resource')
+            ->assertStatus(400);
+
+        $resource = factory(Resource::class)->create([
+            'research_time' => 60,
+            'research_cost' => 50,
+        ]);
+
+        $resourceResearch = factory(Research::class)->create([
+            'user_id' => $user->id,
+            'researchable_type' => Resource::class,
+            'researchable_id' => $resource->id,
+        ]);
+
+        $this->delete('/api/research/resource')
+            ->assertStatus(200);
+    }
+
+    public function testDestroyUnit()
+    {
+        $user = auth()->user();
+
+        $this->delete('/api/research/10')
+            ->assertStatus(404);
+
+        $this->delete('/api/research/not-id')
+            ->assertStatus(404);
+
+        $unit = factory(Unit::class)->create([
+            'research_time' => 60,
+            'research_cost' => 50,
+        ]);
+
+        $this->delete("/api/research/{$unit->id}")
+            ->assertStatus(400);
+
+        $unitResearch = factory(Research::class)->create([
+            'user_id' => $user->id,
+            'researchable_type' => Unit::class,
+            'researchable_id' => $unit->id,
+        ]);
+
+        $this->delete("/api/research/{$unit->id}")
+            ->assertStatus(200);
+    }
 }
