@@ -4,11 +4,9 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Bookmark;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Star;
 use Koodilab\Models\Training;
 use Koodilab\Models\Unit;
 use Koodilab\Models\User;
@@ -78,7 +76,7 @@ class TrainerTest extends TestCase
                         'research_experience',
                         'research_cost',
                         'research_time',
-                    ]
+                    ],
                 ],
             ])->assertJson([
                 'remaining' => $training->remaining,
@@ -100,7 +98,7 @@ class TrainerTest extends TestCase
                         'research_experience' => $unit->research_experience,
                         'research_cost' => $unit->research_cost,
                         'research_time' => $unit->research_time,
-                    ]
+                    ],
                 ],
             ]);
     }

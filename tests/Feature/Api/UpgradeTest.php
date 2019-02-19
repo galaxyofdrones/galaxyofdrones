@@ -4,11 +4,9 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Bookmark;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Star;
 use Koodilab\Models\Training;
 use Koodilab\Models\Upgrade;
 use Koodilab\Models\User;

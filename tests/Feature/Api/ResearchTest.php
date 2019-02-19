@@ -4,10 +4,8 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Bookmark;
 use Koodilab\Models\Research;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Star;
 use Koodilab\Models\Unit;
 use Koodilab\Models\User;
 use Laravel\Passport\Passport;
@@ -91,7 +89,7 @@ class ResearchTest extends TestCase
                         'research_cost',
                         'research_time',
                         'remaining',
-                    ]
+                    ],
                 ],
             ])->assertJson([
                 'resource' => [
