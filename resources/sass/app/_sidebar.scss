@@ -34,15 +34,12 @@
             transition: $base-transition;
             width: 50px;
 
-            &:focus,
-            &:hover {
+            @include hover-focus {
                 color: $white;
                 text-shadow: 0 0 15px $glow-color;
             }
             &.active {
-                &,
-                &:hover,
-                &:focus {
+                @include plain-hover-focus {
                     background: none;
                     color: $white;
                     text-shadow: 0 0 15px $glow-color;

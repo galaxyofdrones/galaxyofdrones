@@ -1,12 +1,16 @@
 <navigation inline-template>
-    <ul class="navigation">
-        <li>
-            <a href="#" @click.prevent="prev()">
+    <ul class="navigation nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="#"
+               @click.prevent="prev()">
                 <i class="fas fa-arrow-up"></i>
             </a>
         </li>
-        <li>
-            <a href="#" @click.prevent="next()">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="#"
+               @click.prevent="next()">
                 <i class="fas fa-arrow-down"></i>
             </a>
         </li>

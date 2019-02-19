@@ -1,5 +1,4 @@
 .navigation {
-    @include list-unstyled;
     background: $card-bg;
     border: 1px solid $primary;
     left: 70px;
@@ -7,11 +6,11 @@
     top: 10px;
     z-index: $zindex-navigation;
 
-    > li > a {
+    .nav-link {
         color: $primary;
-        display: block;
         height: 40px;
         line-height: 40px;
+        padding: 0;
         text-align: center;
         transition: $base-transition;
         width: 30px;
@@ -19,6 +18,13 @@
         @include hover-focus {
             color: $white;
             text-shadow: 0 0 15px $glow-color;
+        }
+        &.active {
+            @include plain-hover-focus {
+                background: none;
+                color: $white;
+                text-shadow: 0 0 15px $glow-color;
+            }
         }
         &:first-child {
             border-bottom: 1px solid $blue-dark;

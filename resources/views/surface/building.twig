@@ -173,7 +173,9 @@
         <div v-else-if="grid.building_id && building.has_lower_level" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store()" :disabled="!canConstruct">
+                    <button class="btn btn-success btn-block"
+                            @click="store()"
+                            :disabled="!canConstruct">
                         {{ trans('messages.upgrade.singular') }}
                     </button>
                 </div>
@@ -182,7 +184,9 @@
         <div v-else-if="!grid.building_id" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store()" :disabled="!canConstruct">
+                    <button class="btn btn-success btn-block"
+                            @click="store()"
+                            :disabled="!canConstruct">
                         {{ trans('messages.construction.construct') }}
                     </button>
                 </div>
@@ -191,7 +195,9 @@
         <div v-if="grid.building_id" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-danger btn-block" @click="openDemolish()" :disabled="!canDemolish">
+                    <button class="btn btn-danger btn-block"
+                            @click="openDemolish()"
+                            :disabled="!canDemolish">
                         {{ trans('messages.demolish') }}
                     </button>
                 </div>
