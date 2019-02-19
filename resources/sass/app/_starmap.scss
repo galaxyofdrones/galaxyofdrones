@@ -98,7 +98,7 @@
             transition: $base-transition;
             width: 30px;
 
-            &:hover {
+            @include hover-focus {
                 color: $white;
                 text-shadow: 0 0 15px $glow-color;
             }
