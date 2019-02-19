@@ -33,6 +33,7 @@ import Starmap from './app/Starmap';
 import Surface from './app/Surface';
 import Trophy from './app/Trophy';
 import Upgrade from './app/Upgrade';
+import UpgradeAll from './app/UpgradeAll';
 
 Vue.filter('bracket', Filters.bracket);
 Vue.filter('fromNow', Filters.fromNow);
@@ -66,6 +67,7 @@ const app = new Vue({
         Starmap,
         Surface,
         Trophy,
-        Upgrade
+        Upgrade,
+        UpgradeAll
     }
 });

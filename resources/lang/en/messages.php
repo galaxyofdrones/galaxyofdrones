@@ -169,6 +169,7 @@ return [
     ],
 
     'upgrade' => [
+        'all' => 'Upgrade all',
         'singular' => 'Upgrade',
     ],
 

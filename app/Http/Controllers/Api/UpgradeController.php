@@ -71,6 +71,18 @@ class UpgradeController extends Controller
     }
 
     /**
+     * Store the newly created upgrades in storage.
+     *
+     * @param UpgradeManager $manager
+     *
+     * @return mixed|\Illuminate\Http\Response
+     */
+    public function storeAll(UpgradeManager $manager)
+    {
+        // TODO: Implement the method
+    }
+
+    /**
      * Remove the upgrade from storage.
      *
      * @param Grid           $grid

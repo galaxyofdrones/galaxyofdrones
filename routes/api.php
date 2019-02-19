@@ -223,6 +223,9 @@ $router->group([
             ->name('upgrade_store')
             ->where('grid', '\d+');
 
+        $router->post('/', 'UpgradeController@storeAll')
+            ->name('upgrade_store_all');
+
         $router->delete('{grid}', 'UpgradeController@destroy')
             ->name('upgrade_destroy')
             ->where('grid', '\d+');
