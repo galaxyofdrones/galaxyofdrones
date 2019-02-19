@@ -42,6 +42,8 @@ export default {
         this.fetchData();
 
         EventBus.$on('change-planet', planet => this.selected = planet);
+        EventBus.$on('prev-planet', this.prevPlanet);
+        EventBus.$on('next-planet', this.nextPlanet);
     },
 
     mounted() {
@@ -126,6 +128,26 @@ export default {
             axios.put(
                 this.userCurrentUrl.replace('__planet__', this.selected)
             );
+        },
+
+        prevPlanet() {
+            let index = _.findIndex(this.data.planets, {
+                id: this.selected
+            });
+
+            if (!_.isUndefined(this.data.planets[--index])) {
+                this.selected = this.data.planets[index].id;
+            }
+        },
+
+        nextPlanet() {
+            let index = _.findIndex(this.data.planets, {
+                id: this.selected
+            });
+
+            if (!_.isUndefined(this.data.planets[++index])) {
+                this.selected = this.data.planets[index].id;
+            }
         },
 
         initName() {

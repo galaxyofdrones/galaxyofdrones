@@ -21,6 +21,7 @@ import Message from './app/Message';
 import Monitor from './app/Monitor';
 import Mothership from './app/Mothership';
 import Move from './app/Move';
+import Navigation from './app/Navigation';
 import Planet from './app/Planet';
 import Player from './app/Player';
 import Popover from './app/Popover';
@@ -55,6 +56,7 @@ const app = new Vue({
         Monitor,
         Mothership,
         Move,
+        Navigation,
         Planet,
         Player,
         Profile,
