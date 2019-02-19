@@ -3,10 +3,9 @@
 namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Event;
-use Koodilab\Events\PlanetUpdated;
+use Illuminate\Support\Facades\Bus;
+use Koodilab\Jobs\Move;
 use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
@@ -32,12 +31,6 @@ class MovementTest extends TestCase
             'name' => 'Earth',
         ]);
 
-        $initialDispatcher = Event::getFacadeRoot();
-
-        Event::fake();
-
-        Model::setEventDispatcher($initialDispatcher);
-
         $user->update([
             'current_id' => $planet->id,
             'started_at' => Carbon::now(),
@@ -47,6 +40,19 @@ class MovementTest extends TestCase
     public function testStoreScout()
     {
         $user = auth()->user();
+
+        $this->post('/api/movement/scout/10')
+            ->assertStatus(404);
+
+        $this->post('/api/movement/scout/not-id')
+            ->assertStatus(404);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $this->post("/api/movement/scout/{$planet->id}")
+            ->assertStatus(403);
 
         $unit = factory(Unit::class)->create([
             'type' => Unit::TYPE_SCOUT,
@@ -63,30 +69,22 @@ class MovementTest extends TestCase
             'user_id' => null,
         ]);
 
-        $this->post('/api/movement/scout/10')
-            ->assertStatus(404);
-
-        $this->post('/api/movement/scout/not-id')
-            ->assertStatus(404);
-
         $this->assertDatabaseMissing('movements', [
             'user_id' => $user->id,
             'type' => Movement::TYPE_SCOUT,
         ]);
 
+        Bus::fake();
+
         $this->post("/api/movement/scout/{$planet->id}", [
             'quantity' => 10,
         ])->assertStatus(200);
 
-        // TODO
+        Bus::assertDispatched(Move::class);
 
-//        Event::assertDispatched(PlanetUpdated::class, function ($event) use ($user) {
-//            return $event->startId === $user->current_id;
-//        });
-//
-//        $this->assertDatabaseHas('movements', [
-//            'user_id' => $user->id,
-//            'type' => Movement::TYPE_SCOUT,
-//        ]);
+        $this->assertDatabaseHas('movements', [
+            'user_id' => $user->id,
+            'type' => Movement::TYPE_SCOUT,
+        ]);
     }
 }
