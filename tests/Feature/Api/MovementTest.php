@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Bus;
 use Koodilab\Jobs\Move;
+use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
@@ -366,6 +367,204 @@ class MovementTest extends TestCase
         $this->assertDatabaseHas('movements', [
             'user_id' => $user->id,
             'type' => Movement::TYPE_TRANSPORT,
+        ]);
+    }
+
+    public function testStoreTrade()
+    {
+        $user = auth()->user();
+
+        $this->post('/api/movement/trade/10')
+            ->assertStatus(404);
+
+        $this->post('/api/movement/trade/not-id')
+            ->assertStatus(404);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => null,
+        ]);
+
+        $building = factory(Building::class)->create([
+            'type' => Building::TYPE_TRAINER,
+            'trade_time_bonus' => 0.5,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building->id,
+            'level' => 10,
+        ]);
+
+        $this->post("/api/movement/trade/{$grid->id}")
+            ->assertStatus(403);
+
+        $planet->update([
+            'user_id' => $user->id,
+        ]);
+
+        $this->post("/api/movement/trade/{$grid->id}")
+            ->assertStatus(403);
+
+        $user->update([
+            'capital_id' => $user->current_id,
+        ]);
+
+        $building->update([
+            'type' => Building::TYPE_TRADER,
+        ]);
+
+        $unit = factory(Unit::class)->create([
+            'type' => Unit::TYPE_TRANSPORTER,
+            'speed' => 100,
+            'capacity' => 10,
+        ]);
+
+        $resource = factory(Resource::class)->create();
+
+        $population = factory(Population::class)->create([
+            'planet_id' => $user->current_id,
+            'unit_id' => $unit->id,
+            'quantity' => 5,
+        ]);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $stock = factory(Stock::class)->create([
+            'planet_id' => $user->current_id,
+            'resource_id' => $resource->id,
+            'quantity' => 5,
+        ]);
+
+        $this->post("/api/movement/trade/{$grid->id}", [
+            'quantity' => [
+                $resource->id => 10,
+            ],
+        ])->assertStatus(400);
+
+        $population->update([
+            'quantity' => 20,
+        ]);
+
+        $this->post("/api/movement/transport/{$grid->id}", [
+            'quantity' => [
+                $resource->id => 10,
+            ],
+        ])->assertStatus(400);
+
+        $stock->update([
+            'quantity' => 20,
+        ]);
+
+        $this->assertDatabaseMissing('movements', [
+            'user_id' => $user->id,
+            'type' => Movement::TYPE_TRADE,
+        ]);
+
+        Bus::fake();
+
+        $this->post("/api/movement/trade/{$grid->id}", [
+            'quantity' => [
+                $resource->id => 10,
+            ],
+        ])->assertStatus(200);
+
+        Bus::assertDispatched(Move::class);
+
+        $this->assertDatabaseHas('movements', [
+            'user_id' => $user->id,
+            'type' => Movement::TYPE_TRADE,
+        ]);
+    }
+
+    public function testStorePatrol()
+    {
+        $user = auth()->user();
+
+        $this->post('/api/movement/patrol/10')
+            ->assertStatus(404);
+
+        $this->post('/api/movement/patrol/not-id')
+            ->assertStatus(404);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => null,
+        ]);
+
+        $building = factory(Building::class)->create([
+            'type' => Building::TYPE_TRAINER,
+            'trade_time_bonus' => 0.5,
+        ]);
+
+        $grid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building->id,
+            'level' => 10,
+        ]);
+
+        $this->post("/api/movement/patrol/{$grid->id}")
+            ->assertStatus(403);
+
+        $planet->update([
+            'user_id' => $user->id,
+        ]);
+
+        $this->post("/api/movement/patrol/{$grid->id}")
+            ->assertStatus(403);
+
+        $user->update([
+            'capital_id' => $user->current_id,
+        ]);
+
+        $building->update([
+            'type' => Building::TYPE_TRADER,
+        ]);
+
+        $unit = factory(Unit::class)->create([
+            'type' => Unit::TYPE_TRANSPORTER,
+            'speed' => 100,
+            'capacity' => 10,
+        ]);
+
+        $population = factory(Population::class)->create([
+            'planet_id' => $user->current_id,
+            'unit_id' => $unit->id,
+            'quantity' => 5,
+        ]);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $this->post("/api/movement/patrol/{$grid->id}", [
+            'quantity' => [
+                $unit->id => 10,
+            ],
+        ])->assertStatus(400);
+
+        $population->update([
+            'quantity' => 20,
+        ]);
+
+        $this->assertDatabaseMissing('movements', [
+            'user_id' => $user->id,
+            'type' => Movement::TYPE_PATROL,
+        ]);
+
+        Bus::fake();
+
+        $this->post("/api/movement/patrol/{$grid->id}", [
+            'quantity' => [
+                $unit->id => 10,
+            ],
+        ])->assertStatus(200);
+
+        Bus::assertDispatched(Move::class);
+
+        $this->assertDatabaseHas('movements', [
+            'user_id' => $user->id,
+            'type' => Movement::TYPE_PATROL,
         ]);
     }
 }
