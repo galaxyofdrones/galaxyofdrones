@@ -8,6 +8,10 @@ export default {
 
         next() {
             EventBus.$emit('next-planet');
+        },
+
+        upgradeAll() {
+            EventBus.$emit('upgrade-all-open');
         }
     }
 };

@@ -16,8 +16,9 @@ export default {
 
     data() {
         return {
+            selected: undefined,
             data: {
-                selected: undefined,
+                can_store: true,
                 shields: []
             }
         };

@@ -1,33 +1,48 @@
 .navigation {
-    background: $card-bg;
-    border: 1px solid $primary;
-    left: 70px;
-    position: absolute;
-    top: 10px;
-    z-index: $zindex-navigation;
+    .nav {
+        background: $card-bg;
+        border: 1px solid $primary;
+        left: 70px;
+        position: absolute;
+        z-index: $zindex-navigation;
 
-    .nav-link {
-        color: $primary;
-        height: 40px;
-        line-height: 40px;
-        padding: 0;
-        text-align: center;
-        transition: $base-transition;
-        width: 30px;
+        &-link {
+            color: $primary;
+            padding: 0;
+            text-align: center;
+            transition: $base-transition;
+            width: 30px;
 
-        @include hover-focus {
-            color: $white;
-            text-shadow: 0 0 15px $glow-color;
-        }
-        &.active {
-            @include plain-hover-focus {
-                background: none;
+            @include hover-focus {
                 color: $white;
                 text-shadow: 0 0 15px $glow-color;
             }
+            &.active {
+                @include plain-hover-focus {
+                    background: none;
+                    color: $white;
+                    text-shadow: 0 0 15px $glow-color;
+                }
+            }
+            &:first-child {
+                border-bottom: 1px solid $blue-dark;
+            }
         }
         &:first-child {
-            border-bottom: 1px solid $blue-dark;
+            top: 10px;
+
+            .nav-link {
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+        &:last-child {
+            top: 102px;
+
+            .nav-link {
+                height: 30px;
+                line-height: 30px;
+            }
         }
     }
 }

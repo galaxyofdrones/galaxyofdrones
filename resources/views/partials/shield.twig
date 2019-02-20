@@ -20,14 +20,14 @@
                     <div class="input-group">
                         <select class="form-control"
                                 v-model="selected"
-                                :disabled="!data.canStore">
+                                :disabled="!data.can_store">
                             <option :value="planet.id" v-for="planet in planets">
                                 {{ vue('planet.name') }}
                             </option>
                         </select>
                         <div class="input-group-append">
                             <button class="btn btn-success"
-                                    :disabled="!data.canStore"
+                                    :disabled="!data.can_store"
                                     @click="store()">
                                 {{ trans('messages.shield.add') }}
                             </button>

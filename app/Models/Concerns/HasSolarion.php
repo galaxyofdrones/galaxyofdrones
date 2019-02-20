@@ -2,6 +2,8 @@
 
 namespace Koodilab\Models\Concerns;
 
+use Carbon\Carbon;
+
 trait HasSolarion
 {
     /**
@@ -37,6 +39,21 @@ trait HasSolarion
     {
         $this->update([
             'solarion' => max(0, $this->solarion - $amount),
+        ]);
+    }
+
+    /**
+     * Decrement the energy and solarion.
+     *
+     * @param int $energyAmount
+     * @param int $solarionAmount
+     */
+    public function decrementEnergyAndSolarion($energyAmount, $solarionAmount)
+    {
+        $this->update([
+            'energy' => max(0, $this->energy - $energyAmount),
+            'last_energy_changed' => Carbon::now(),
+            'solarion' => max(0, $this->solarion - $solarionAmount),
         ]);
     }
 }
