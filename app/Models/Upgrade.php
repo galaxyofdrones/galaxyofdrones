@@ -30,6 +30,13 @@ class Upgrade extends Model
         Relations\BelongsToGrid;
 
     /**
+     * The solarion count.
+     *
+     * @var int
+     */
+    const SOLARION_COUNT = 1;
+
+    /**
      * {@inheritdoc}
      */
     protected $guarded = [

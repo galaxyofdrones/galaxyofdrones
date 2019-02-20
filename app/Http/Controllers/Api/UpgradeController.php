@@ -7,6 +7,7 @@ use Koodilab\Game\UpgradeManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Transformers\UpgradeTransformer;
+use Koodilab\Models\Upgrade;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpgradeController extends Controller
@@ -33,6 +34,22 @@ class UpgradeController extends Controller
         $this->authorize('friendly', $grid->planet);
 
         return $transformer->transform($grid);
+    }
+
+    /**
+     * Show the cost of all upgrades in json format.
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function indexAll()
+    {
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        return [
+            'has_solarion' => $user->hasSolarion(Upgrade::SOLARION_COUNT),
+            'upgrade_cost' => $user->current->upgradeCost(),
+        ];
     }
 
     /**
@@ -79,7 +96,22 @@ class UpgradeController extends Controller
      */
     public function storeAll(UpgradeManager $manager)
     {
-        // TODO: Implement the method
+        /** @var \Koodilab\Models\User $user */
+        $user = auth()->user();
+
+        $upgradeCost = $user->current->upgradeCost();
+
+        if (! $upgradeCost || ! $user->hasEnergy($upgradeCost)) {
+            throw new BadRequestHttpException();
+        }
+
+        if (! $user->hasSolarion(Upgrade::SOLARION_COUNT)) {
+            throw new BadRequestHttpException();
+        }
+
+        DB::transaction(function () use ($manager, $user) {
+            $manager->createAll($user);
+        });
     }
 
     /**

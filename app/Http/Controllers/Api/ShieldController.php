@@ -34,7 +34,7 @@ class ShieldController extends Controller
         $user = auth()->user();
 
         return [
-            'canStore' => $user->hasSolarion(Shield::SOLARION_COUNT),
+            'can_store' => $user->hasSolarion(Shield::SOLARION_COUNT),
             'shields' => $transformer->transformCollection(
                 $user->findNotExpiredShields()
             ),

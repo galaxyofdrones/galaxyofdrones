@@ -1,4 +1,4 @@
-<upgrade-all url="{{ route('api_upgrade_store_all') }}" inline-template>
+<upgrade-all url="{{ route('api_upgrade_all') }}" store-url="{{ route('api_upgrade_store_all') }}" inline-template>
     <div class="upgrade-all modal fade" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -10,13 +10,33 @@
                         &times;
                     </button>
                 </div>
-                <div class="modal-body text-center">
-
+                <div v-if="canStore" class="modal-body text-center">
+                    <p>
+                        {{ trans('messages.warning.upgrade') }}
+                    </p>
+                    <ul class="list-inline">
+                        <li class="list-inline-item highlight-warning"
+                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.energy') }}'}">
+                            <i class="fas fa-bolt"></i>
+                            {{ vue('data.upgrade_cost') }}
+                        </li>
+                        <li class="list-inline-item highlight-warning"
+                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
+                            <i class="far fa-sun"></i>
+                            {{ constant('Koodilab\\Models\\Upgrade::SOLARION_COUNT') }}
+                        </li>
+                    </ul>
+                </div>
+                <div v-else class="modal-body text-center">
+                    <p>
+                        {{ trans('messages.warning.upgraded') }}
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success"
                             type="button"
-                            @click="upgradeAll()">
+                            @click="store()"
+                            :disabled="!canStore">
                         {{ trans('messages.upgrade.all') }}
                     </button>
                     <button class="btn btn-warning"
