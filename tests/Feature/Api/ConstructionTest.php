@@ -135,6 +135,8 @@ class ConstructionTest extends TestCase
         $building = factory(Building::class)->create();
         $grid = factory(Grid::class)->create([
             'planet_id' => auth()->user()->current->id,
+            'x' => 5,
+            'y' => 7,
         ]);
 
         $construction = factory(Construction::class)->create([
@@ -158,12 +160,16 @@ class ConstructionTest extends TestCase
         $grid3 = factory(Grid::class)->create([
             'building_id' => $building->id,
             'planet_id' => auth()->user()->current->id,
+            'x' => 10,
+            'y' => 8,
         ]);
 
         $grid2 = factory(Grid::class)->create([
             'building_id' => null,
             'planet_id' => auth()->user()->current->id,
             'type' => Grid::TYPE_RESOURCE,
+            'x' => 3,
+            'y' => 9,
         ]);
 
         $this->post("/api/construction/{$grid2->id}/{$building2->id}")
