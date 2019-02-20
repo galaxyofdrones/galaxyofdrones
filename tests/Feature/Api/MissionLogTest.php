@@ -4,11 +4,8 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\ExpeditionLog;
 use Koodilab\Models\MissionLog;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Star;
-use Koodilab\Models\Unit;
 use Koodilab\Models\User;
 use Koodilab\Notifications\MissionLogCreated;
 use Laravel\Passport\Passport;
@@ -40,7 +37,7 @@ class MissionLogTest extends TestCase
         $resource = factory(Resource::class)->create();
 
         $missionLog->resources()->attach($resource->id, [
-            'quantity' => 10,
+            'quantity' => 5,
         ]);
 
         $missionLog->user->notify(
@@ -51,38 +48,40 @@ class MissionLogTest extends TestCase
             ->where('type', MissionLogCreated::class)
             ->count(), 1);
 
-        $this->get('/api/mission-log')->assertStatus(200)
+        $this->getJson('/api/mission-log')->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-//                    [
-//                        'id',
-//                        'star',
-//                        'solarion',
-//                        'experience',
-//                        'created_at',
-//                        'units' => [
-//                            'id',
-//                            'name',
-//                            'description',
-//                            'quantity',
-//                        ],
-//                    ],
+                    [
+                        'id',
+                        'energy',
+                        'experience',
+                        'created_at',
+                        'resources' => [
+                            [
+                                'id',
+                                'name',
+                                'description',
+                                'quantity',
+                            ],
+                        ],
+                    ],
                 ],
             ])->assertJson([
                 'data' => [
-//                    [
-//                        'id' => $expeditionLog->id,
-//                        'star' => $star->name,
-//                        'solarion' => $expeditionLog->solarion,
-//                        'experience' => $expeditionLog->experience,
-//                        'created_at' => $expeditionLog->created_at->toDateTimeString(),
-//                        'units' => [
-//                            'id' => $unit->id,
-//                            'name' => $unit->translation('name'),
-//                            'description' => $unit->translation('description'),
-//                            'quantity' => 10,
-//                        ],
-//                    ],
+                    [
+                        'id' => $missionLog->id,
+                        'energy' => $missionLog->energy,
+                        'experience' => $missionLog->experience,
+                        'created_at' => $missionLog->created_at,
+                        'resources' => [
+                            [
+                                'id' => $resource->id,
+                                'name' => $resource->translation('name'),
+                                'description' => $resource->translation('description'),
+                                'quantity' => 5,
+                            ],
+                        ],
+                    ],
                 ],
             ]);
 

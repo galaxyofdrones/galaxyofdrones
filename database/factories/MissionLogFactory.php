@@ -8,7 +8,7 @@ $factory->define(Koodilab\Models\MissionLog::class, function (Faker $faker) {
         'user_id' => function () {
             return factory(Koodilab\Models\User::class)->create()->id;
         },
-        'energy' => $faker->numberBetween(0, 1000),
-        'experience' => $faker->numberBetween(0, 100),
+        'energy' => $faker->numberBetween(1, 1000),
+        'experience' => $faker->numberBetween(1, 100),
     ];
 });

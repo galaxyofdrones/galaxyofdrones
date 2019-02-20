@@ -52,38 +52,42 @@ class ExpeditionLogTest extends TestCase
             ->where('type', ExpeditionLogCreated::class)
             ->count(), 1);
 
-        $this->get('/api/expedition-log')->assertStatus(200)
+        $this->getJson('/api/expedition-log')->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
                     [
-//                        'id',
-//                        'star',
-//                        'solarion',
-//                        'experience',
-//                        'created_at',
-//                        'units' => [
-//                            'id',
-//                            'name',
-//                            'description',
-//                            'quantity',
-//                        ],
+                        'id',
+                        'star',
+                        'solarion',
+                        'experience',
+                        'created_at',
+                        'units' => [
+                            [
+                                'id',
+                                'name',
+                                'description',
+                                'quantity',
+                            ],
+                        ],
                     ],
                 ],
             ])->assertJson([
                 'data' => [
-//                    [
-//                        'id' => $expeditionLog->id,
-//                        'star' => $star->name,
-//                        'solarion' => $expeditionLog->solarion,
-//                        'experience' => $expeditionLog->experience,
-//                        'created_at' => $expeditionLog->created_at->toDateTimeString(),
-//                        'units' => [
-//                            'id' => $unit->id,
-//                            'name' => $unit->translation('name'),
-//                            'description' => $unit->translation('description'),
-//                            'quantity' => 10,
-//                        ],
-//                    ],
+                    [
+                        'id' => $expeditionLog->id,
+                        'star' => $star->name,
+                        'solarion' => $expeditionLog->solarion,
+                        'experience' => $expeditionLog->experience,
+                        'created_at' => $expeditionLog->created_at->toDateTimeString(),
+                        'units' => [
+                            [
+                                'id' => $unit->id,
+                                'name' => $unit->translation('name'),
+                                'description' => $unit->translation('description'),
+                                'quantity' => 10,
+                            ],
+                        ],
+                    ],
                 ],
             ]);
 
