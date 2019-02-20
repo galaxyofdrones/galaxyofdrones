@@ -38,25 +38,31 @@ class ResearchTest extends TestCase
 
         $resourceResearch = factory(Research::class)->create([
             'user_id' => $user->id,
+            'researchable_type' => Resource::class,
+            'researchable_id' => $resource2->id,
         ]);
-
-        $resourceResearch->researchable()->associate($resource2);
 
         $unitResearch = factory(Research::class)->create([
             'user_id' => $user->id,
+            'researchable_type' => Unit::class,
+            'researchable_id' => $unit2->id,
         ]);
-
-        $unitResearch->researchable()->associate($unit2);
 
         $user->resources()->attach($resource1, [
             'is_researched' => true,
             'quantity' => 1,
         ]);
 
+        //dd($unit2->researches()->count());
+
         $user->units()->attach($unit1, [
             'is_researched' => true,
             'quantity' => 1,
         ]);
+
+//        $rs = json_decode($this->getJson('/api/research')->getContent());
+
+//        dd($rs->resource, $resource2, $resourceResearch);
 
         $this->getJson('/api/research')->assertStatus(200)
             ->assertJsonStructure([
@@ -133,17 +139,19 @@ class ResearchTest extends TestCase
         $this->post('/api/research/resource')
             ->assertStatus(400);
 
-        $resource = factory(Resource::class)->create([
+        $resource1 = factory(Resource::class)->create([
             'research_cost' => 50,
         ]);
 
+        $resource2 = factory(Resource::class)->create();
+
         $resourceResearch = factory(Research::class)->create([
             'user_id' => $user->id,
+            'researchable_type' => Resource::class,
+            'researchable_id' => $resource2->id,
         ]);
 
-        $resourceResearch->researchable()->associate($resource);
-
-        $user->resources()->attach($resource, [
+        $user->resources()->attach($resource1, [
             'is_researched' => true,
             'quantity' => 1,
         ]);
@@ -151,7 +159,7 @@ class ResearchTest extends TestCase
         $this->post('/api/research/resource')
             ->assertStatus(400);
 
-        $user->resources()->detach($resource);
+        $user->resources()->detach($resource1);
 
         $user->update([
             'energy' => 10,
@@ -178,38 +186,40 @@ class ResearchTest extends TestCase
         $this->post('/api/research/not-id')
             ->assertStatus(404);
 
-        $unit = factory(Unit::class)->create([
+        $unit1 = factory(Unit::class)->create([
             'research_cost' => 50,
         ]);
 
+        $unit2 = factory(Unit::class)->create();
+
         $unitResearch = factory(Research::class)->create([
             'user_id' => $user->id,
+            'researchable_type' => Unit::class,
+            'researchable_id' => $unit2->id,
         ]);
 
-        $unitResearch->researchable()->associate($unit);
-
-        $user->units()->attach($unit, [
+        $user->units()->attach($unit1, [
             'is_researched' => true,
             'quantity' => 1,
         ]);
 
-        $this->post("/api/research/{$unit->id}")
+        $this->post("/api/research/{$unit1->id}")
             ->assertStatus(400);
 
-        $user->units()->detach($unit);
+        $user->units()->detach($unit1);
 
         $user->update([
             'energy' => 10,
         ]);
 
-        $this->post("/api/research/{$unit->id}")
+        $this->post("/api/research/{$unit1->id}")
             ->assertStatus(400);
 
         $user->update([
             'energy' => 100,
         ]);
 
-        $this->post("/api/research/{$unit->id}")
+        $this->post("/api/research/{$unit1->id}")
             ->assertStatus(200);
     }
 

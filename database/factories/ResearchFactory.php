@@ -8,8 +8,6 @@ $factory->define(Koodilab\Models\Research::class, function (Faker $faker) {
         'user_id' => function () {
             return factory(Koodilab\Models\User::class)->create()->id;
         },
-        'researchable_type' => \Koodilab\Models\Unit::class,
-        'researchable_id' => factory(Koodilab\Models\Unit::class)->create()->id,
-        'ended_at' => $faker->dateTime(),
+        'ended_at' => $faker->dateTimeBetween('+1 week', '+1 month'),
     ];
 });
