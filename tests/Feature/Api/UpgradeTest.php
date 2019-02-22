@@ -4,6 +4,8 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Bus;
+use Koodilab\Jobs\Upgrade as UpgradeJob;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
@@ -156,6 +158,69 @@ class UpgradeTest extends TestCase
             ]);
     }
 
+    public function testIndexAll()
+    {
+        $user = auth()->user();
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $user->update([
+            'current_id' => $planet->id,
+            'solarion' => 2,
+        ]);
+
+        $building1 = factory(Building::class)->create([
+            'end_level' => 20,
+            'construction_cost' => 20,
+        ]);
+
+        $grid1 = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building1->id,
+            'level' => 9,
+        ]);
+
+        $building2 = factory(Building::class)->create([
+            'end_level' => 20,
+            'construction_cost' => 100,
+        ]);
+
+        $grid2 = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building2->id,
+            'level' => 9,
+        ]);
+
+        $emptyGrid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => null,
+        ]);
+
+        $this->getJson('/api/upgrade/all')->assertStatus(200)
+            ->assertJsonStructure([
+                'has_solarion',
+                'upgrade_cost',
+            ])->assertJson([
+                'has_solarion' => true,
+                'upgrade_cost' => 30,
+            ]);
+
+        $upgrade = factory(Upgrade::class)->create([
+            'grid_id' => $grid1->id,
+        ]);
+
+        $this->getJson('/api/upgrade/all')->assertStatus(200)
+            ->assertJsonStructure([
+                'has_solarion',
+                'upgrade_cost',
+            ])->assertJson([
+                'has_solarion' => true,
+                'upgrade_cost' => 25,
+            ]);
+    }
+
     public function testStore()
     {
         $user = auth()->user();
@@ -209,6 +274,72 @@ class UpgradeTest extends TestCase
 
         $this->post("/api/upgrade/{$grid->id}")
             ->assertStatus(200);
+    }
+
+    public function testStoreAll()
+    {
+        $user = auth()->user();
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $user->update([
+            'current_id' => $planet->id,
+            'energy' => 28,
+            'solarion' => 0,
+        ]);
+
+        $building1 = factory(Building::class)->create([
+            'end_level' => 20,
+            'construction_cost' => 20,
+        ]);
+
+        $grid1 = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building1->id,
+            'level' => 9,
+        ]);
+
+        $building2 = factory(Building::class)->create([
+            'end_level' => 20,
+            'construction_cost' => 100,
+        ]);
+
+        $grid2 = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => $building2->id,
+            'level' => 9,
+        ]);
+
+        $emptyGrid = factory(Grid::class)->create([
+            'planet_id' => $planet->id,
+            'building_id' => null,
+        ]);
+
+        $this->post('/api/upgrade/all')
+            ->assertStatus(400);
+
+        $upgrade = factory(Upgrade::class)->create([
+            'grid_id' => $grid1->id,
+        ]);
+
+        $this->post('/api/upgrade/all')
+            ->assertStatus(400);
+
+        $user->update([
+            'solarion' => 1,
+        ]);
+
+        Bus::fake();
+
+        $this->post('/api/upgrade/all')
+            ->assertStatus(200);
+
+        Bus::assertDispatched(UpgradeJob::class);
+
+        $this->assertEquals($user->energy, 3);
+        $this->assertEquals($user->solarion, 0);
     }
 
     public function testDestroy()
