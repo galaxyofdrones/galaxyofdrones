@@ -60,7 +60,7 @@ window.Echo = new Echo({
  */
 
 window.Vue = require('vue');
-window.swal = require('sweetalert2');
+window.Swal = require('sweetalert2');
 
 require('moment').locale(document.querySelector('html').getAttribute('lang'));
 require('leaflet');
@@ -77,13 +77,13 @@ window.axios.interceptors.response.use(null, error => {
     if (status === 401) {
         window.location.reload();
     } else if (status === 500) {
-        swal({
+        Swal.fire({
             title: Translations.error.whoops,
             text: Translations.error.wrong,
             type: 'error',
             showConfirmButton: false,
             timer: 1500
-        }).catch(swal.noop);
+        });
     }
 
     return Promise.reject(error);

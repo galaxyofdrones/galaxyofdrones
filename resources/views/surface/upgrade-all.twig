@@ -10,9 +10,12 @@
                         &times;
                     </button>
                 </div>
-                <div v-if="canStore" class="modal-body text-center">
-                    <p>
+                <div v-if="data.upgrade_cost" class="modal-body text-center">
+                    <p v-if="canStore">
                         {{ trans('messages.warning.upgrade') }}
+                    </p>
+                    <p v-else>
+                        {{ trans('messages.warning.resource') }}
                     </p>
                     <ul class="list-inline">
                         <li class="list-inline-item highlight-warning"
@@ -28,7 +31,10 @@
                     </ul>
                 </div>
                 <div v-else class="modal-body text-center">
-                    <p>
+                    <p v-if="data.upgrade_count">
+                        {{ trans('messages.warning.upgrade_in_progress') }}
+                    </p>
+                    <p v-else>
                         {{ trans('messages.warning.upgraded') }}
                     </p>
                 </div>

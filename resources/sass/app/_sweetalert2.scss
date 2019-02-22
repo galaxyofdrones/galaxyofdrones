@@ -19,13 +19,13 @@ button.styled {
     }
 
     &.swal2-info {
-        color: $primary;
-        border-color: $primary;
+        color: $info;
+        border-color: $info;
     }
 
     &.swal2-question {
-        color: $blue-dark;
-        border-color: $blue-dark;
+        color: $primary;
+        border-color: $primary;
     }
 
     &.swal2-success {
