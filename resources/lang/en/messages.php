@@ -182,8 +182,10 @@ return [
     'warning' => [
         'demolish_building' => 'Are you sure you want to demolish the selected building?',
         'lose_planet' => 'If it is the Command Center, you will lose the planet.',
+        'resource' => "You don't have enough resources.",
         'server' => 'Sorry, the server is full :(',
         'upgrade' => 'Are you sure you want to upgrade all buildings?',
+        'upgrade_in_progress' => 'Upgrades in progress.',
         'upgraded' => 'All buildings are fully upgraded.',
     ],
 

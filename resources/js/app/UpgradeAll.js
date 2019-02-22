@@ -12,6 +12,7 @@ export default Modal.extend({
             energy: 0,
             data: {
                 has_solarion: true,
+                upgrade_count: 0,
                 upgrade_cost: 0
             }
         };

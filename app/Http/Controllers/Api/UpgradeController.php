@@ -48,6 +48,7 @@ class UpgradeController extends Controller
 
         return [
             'has_solarion' => $user->hasSolarion(Upgrade::SOLARION_COUNT),
+            'upgrade_count' => $user->current->upgrades()->count(),
             'upgrade_cost' => $user->current->upgradeCost(),
         ];
     }
