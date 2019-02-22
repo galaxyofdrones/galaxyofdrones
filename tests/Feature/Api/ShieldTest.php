@@ -44,7 +44,7 @@ class ShieldTest extends TestCase
 
         $this->getJson('/api/shield')->assertStatus(200)
             ->assertJsonStructure([
-                'canStore',
+                'can_store',
                 'shields' => [
                     [
                         'id',
@@ -59,7 +59,7 @@ class ShieldTest extends TestCase
                     ],
                 ],
             ])->assertJson([
-                'canStore' => true,
+                'can_store' => true,
                 'shields' => [
                     [
                         'id' => $shield->id,
