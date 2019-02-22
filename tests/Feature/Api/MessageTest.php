@@ -26,17 +26,13 @@ class MessageTest extends TestCase
         Passport::actingAs($user);
 
         $sender = factory(User::class)->create([
-            'id' => 2,
             'username' => 'Mike',
             'started_at' => Carbon::now(),
         ]);
 
         $message = factory(Message::class)->create([
-            'id' => 1,
-            'message' => 'Test message',
             'recipient_id' => $user->id,
             'sender_id' => $sender->id,
-            'created_at' => Carbon::create(2018, 1, 1, 19),
         ]);
 
         Notification::fake();
@@ -69,12 +65,12 @@ class MessageTest extends TestCase
             ])->assertJson([
                 'data' => [
                     [
-                        'id' => 1,
-                        'message' => 'Test message',
-                        'created_at' => Carbon::create(2018, 1, 1, 19),
+                        'id' => $message->id,
+                        'message' => nl2br(e($message->message)),
+                        'created_at' => $message->created_at->toDateTimeString(),
                         'sender' => [
-                            'id' => 2,
-                            'username' => 'Mike',
+                            'id' => $message->sender->id,
+                            'username' => $message->sender->username,
                             'isBlocked' => false,
                             'isBlockedBy' => false,
                         ],

@@ -53,16 +53,10 @@ class ResearchTest extends TestCase
             'quantity' => 1,
         ]);
 
-        //dd($unit2->researches()->count());
-
         $user->units()->attach($unit1, [
             'is_researched' => true,
             'quantity' => 1,
         ]);
-
-//        $rs = json_decode($this->getJson('/api/research')->getContent());
-
-//        dd($rs->resource, $resource2, $resourceResearch);
 
         $this->getJson('/api/research')->assertStatus(200)
             ->assertJsonStructure([

@@ -104,7 +104,7 @@ class ShieldTest extends TestCase
         $this->post("/api/shield/{$planet->id}")
             ->assertStatus(200);
 
-        $this->assertEquals($planet->user->solarion, 2 - Shield::SOLARION_COUNT);
+        $this->assertEquals($planet->user->solarion, 1);
 
         $this->assertDatabaseHas('shields', [
             'planet_id' => $planet->id,

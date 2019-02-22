@@ -11,6 +11,6 @@ $factory->define(Koodilab\Models\Message::class, function (Faker $faker) {
         'recipient_id' => function () {
             return factory(Koodilab\Models\User::class)->create()->id;
         },
-        'message' => $faker->words,
+        'message' => $faker->text,
     ];
 });

@@ -83,24 +83,24 @@ class ExpeditionTest extends TestCase
             ])->assertJson([
                 'units' => [
                     [
-                        'id' => 1,
-                        'name' => 'Fighter',
-                        'description' => 'english description',
+                        'id' => $unit->id,
+                        'name' => $unit->translation('name'),
+                        'description' => $unit->translation('description'),
                         'quantity' => 0,
                     ],
                 ],
                 'expeditions' => [
                     [
-                        'id' => 1,
-                        'star' => 'Voyager',
-                        'solarion' => 5,
-                        'experience' => 2,
-                        'remaining' => 0,
+                        'id' => $expedition->id,
+                        'star' => $star->name,
+                        'solarion' => $expedition->solarion,
+                        'experience' => $expedition->experience,
+                        'remaining' => $expedition->remaining,
                         'units' => [
                             [
-                                'id' => 1,
-                                'name' => 'Fighter',
-                                'description' => 'english description',
+                                'id' => $unit->id,
+                                'name' => $unit->translation('name'),
+                                'description' => $unit->translation('description'),
                                 'quantity' => 5,
                             ],
                         ],

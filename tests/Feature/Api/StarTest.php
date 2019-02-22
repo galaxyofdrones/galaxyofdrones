@@ -4,6 +4,8 @@ namespace Tests\Feature\Api;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Koodilab\Models\Bookmark;
+use Koodilab\Models\Expedition;
 use Koodilab\Models\Star;
 use Koodilab\Models\User;
 use Laravel\Passport\Passport;
@@ -26,10 +28,19 @@ class StarTest extends TestCase
 
     public function testShow()
     {
-        $star = factory(Star::class)->create([
-            'name' => 'Voyager',
-            'x' => 15,
-            'y' => 27,
+        $user = auth()->user();
+
+        $star = factory(Star::class)->create();
+
+        $bookmark = factory(Bookmark::class)->create([
+            'user_id' => $user->id,
+            'star_id' => $star->id,
+        ]);
+
+        $expedition = factory(Expedition::class)->create([
+            'user_id' => $user->id,
+            'star_id' => $star->id,
+            'ended_at' => Carbon::now()->addHour(),
         ]);
 
         $this->get('/api/star/10')
@@ -45,9 +56,9 @@ class StarTest extends TestCase
                 'isBookmarked',
                 'hasExpedition',
             ])->assertJson([
-                'id' => 1,
-                'isBookmarked' => false,
-                'hasExpedition' => false,
+                'id' => $star->id,
+                'isBookmarked' => true,
+                'hasExpedition' => true,
             ]);
     }
 }
