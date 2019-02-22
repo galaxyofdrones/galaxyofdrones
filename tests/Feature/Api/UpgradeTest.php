@@ -214,9 +214,11 @@ class UpgradeTest extends TestCase
         $this->getJson('/api/upgrade/all')->assertStatus(200)
             ->assertJsonStructure([
                 'has_solarion',
+                'upgrade_count',
                 'upgrade_cost',
             ])->assertJson([
                 'has_solarion' => true,
+                'upgrade_count' => 1,
                 'upgrade_cost' => 25,
             ]);
     }
