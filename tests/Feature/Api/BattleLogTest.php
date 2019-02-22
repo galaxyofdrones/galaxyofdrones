@@ -97,7 +97,7 @@ class BattleLogTest extends TestCase
                                 'description',
                                 'quantity',
                                 'losses',
-                            ]
+                            ],
                         ],
                         'buildings' => [
                             [
@@ -106,7 +106,7 @@ class BattleLogTest extends TestCase
                                 'description',
                                 'level',
                                 'losses',
-                            ]
+                            ],
                         ],
                         'attacker_units' => [
                             [
@@ -115,7 +115,7 @@ class BattleLogTest extends TestCase
                                 'description',
                                 'quantity',
                                 'losses',
-                            ]
+                            ],
                         ],
                         'defender_units' => [
                             [
@@ -124,7 +124,7 @@ class BattleLogTest extends TestCase
                                 'description',
                                 'quantity',
                                 'losses',
-                            ]
+                            ],
                         ],
                     ],
                 ],
@@ -162,7 +162,7 @@ class BattleLogTest extends TestCase
                                 'description' => $resource->translation('description'),
                                 'quantity' => 10,
                                 'losses' => 5,
-                            ]
+                            ],
                         ],
                         'buildings' => [
                             [
@@ -171,7 +171,7 @@ class BattleLogTest extends TestCase
                                 'description' => $building->translation('description'),
                                 'level' => 10,
                                 'losses' => 5,
-                            ]
+                            ],
                         ],
                         'attacker_units' => [
                             [
@@ -180,7 +180,7 @@ class BattleLogTest extends TestCase
                                 'description' => $attackerUnit->translation('description'),
                                 'quantity' => 10,
                                 'losses' => 5,
-                            ]
+                            ],
                         ],
                         'defender_units' => [
                             [
@@ -189,7 +189,7 @@ class BattleLogTest extends TestCase
                                 'description' => $defenderUnit->translation('description'),
                                 'quantity' => 10,
                                 'losses' => 5,
-                            ]
+                            ],
                         ],
                     ],
                 ],
