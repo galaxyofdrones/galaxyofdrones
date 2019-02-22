@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import Building from './Building';
 import HasTab from './HasTab';
 import Patrol from './Patrol';

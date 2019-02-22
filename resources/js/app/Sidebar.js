@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {
@@ -41,6 +41,8 @@ export default {
     created() {
         this.fetchData();
 
+        EventBus.$on('prev-planet', this.prevPlanet);
+        EventBus.$on('next-planet', this.nextPlanet);
         EventBus.$on('change-planet', planet => this.selected = planet);
     },
 
@@ -65,6 +67,12 @@ export default {
 
         isUnitFull() {
             return this.data.supply === this.data.used_supply;
+        },
+
+        selectedIndex() {
+            return _.findIndex(this.data.planets, {
+                id: this.selected
+            });
         },
 
         resourceLabel() {
@@ -118,6 +126,26 @@ export default {
             }
         },
 
+        prevPlanet() {
+            let index = this.selectedIndex;
+
+            if (--index < 0) {
+                index = this.data.planets.length - 1;
+            }
+
+            this.changePlanetByIndex(index);
+        },
+
+        nextPlanet() {
+            let index = this.selectedIndex;
+
+            if (++index === this.data.planets.length) {
+                index = 0;
+            }
+
+            this.changePlanetByIndex(index);
+        },
+
         changePlanet() {
             if (this.selected === this.data.id) {
                 return;
@@ -125,6 +153,16 @@ export default {
 
             axios.put(
                 this.userCurrentUrl.replace('__planet__', this.selected)
+            );
+        },
+
+        changePlanetByIndex(index) {
+            if (_.isUndefined(this.data.planets[index])) {
+                return;
+            }
+
+            this.selected = _.get(
+                this.data.planets[index], 'id'
             );
         },
 

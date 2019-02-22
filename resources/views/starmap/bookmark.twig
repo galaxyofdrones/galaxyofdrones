@@ -1,15 +1,15 @@
 <bookmark url="{{ route('api_bookmark') }}"
           destroy-url="{{ route('api_bookmark_destroy', '__bookmark__') }}" inline-template>
     <div class="bookmark modal fade" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ trans('messages.bookmark.plural') }}
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
-                    <h4 class="modal-title">
-                        {{ trans('messages.bookmark.plural') }}
-                    </h4>
                 </div>
                 <div v-if="isEmpty" class="modal-body">
                     <p class="text-center">
@@ -21,43 +21,37 @@
                          class="modal-body"
                          :class="{separator: index > 0}">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-lg-5 text-center text-lg-left">
                                 <span class="item item-sm star">
                                     {{ vue('bookmark.name') }}
                                 </span>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <h4>
-                                    <i class="icon-time"></i>
-                                </h4>
-                                <h4>
+                            <div class="col-lg-3 pt-lg-2 text-center">
+                                <h5>
+                                    <i class="far fa-clock"></i>
+                                </h5>
+                                <h5>
                                     {{ vue('bookmark.created_at | fromNow') }}
-                                </h4>
+                                </h5>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <button class="btn btn-info btn-block" @click="move(bookmark)">
+                            <div class="col-lg-2 pt-lg-3">
+                                <button class="btn btn-primary btn-block"
+                                        type="button"
+                                        @click="move(bookmark)">
                                     {{ trans('messages.move') }}
                                 </button>
-                                <button class="btn btn-danger btn-block" @click="destroy(bookmark)">
+                            </div>
+                            <div class="col-lg-2 pt-2 pt-lg-3">
+                                <button class="btn btn-danger btn-block"
+                                        type="button"
+                                        @click="destroy(bookmark)">
                                     {{ trans('messages.delete') }}
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div v-if="hasPrev || hasNext" class="modal-footer">
-                        <ul class="pager">
-                            <li class="previous" :class="{disabled: !hasPrev}">
-                                <a href="#" @click.prevent="prevPage()">
-                                    <i class="icon-arrow-left"></i>
-                                </a>
-                            </li>
-                            <li class="next" :class="{disabled: !hasNext}">
-                                <a href="#" @click.prevent="nextPage()">
-                                    <i class="icon-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
+                    {% include 'partials.pager' %}
                 </template>
             </div>
         </div>

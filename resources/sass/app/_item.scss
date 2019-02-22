@@ -1,6 +1,7 @@
 .item {
     color: #fff;
     display: inline-block;
+    font-size: .875rem;
     overflow: hidden;
     padding-top: 240px;
     position: relative;
@@ -9,22 +10,18 @@
 
     &-row {
         @include make-row(20px);
+        justify-content: center;
         text-align: center;
 
         [class*="col-"] {
-            display: inline-block;
-            float: none;
-            padding: 0;
+            padding-left: 0;
+            padding-right: 0;
         }
     }
     &-input-row {
         @include make-row;
+        justify-content: center;
         text-align: center;
-
-        [class*="col-"] {
-            display: inline-block;
-            float: none;
-        }
     }
     &:before {
         background: url('../../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
@@ -261,7 +258,7 @@
     }
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(md) {
     .item {
         min-width: 240px;
         width: auto;

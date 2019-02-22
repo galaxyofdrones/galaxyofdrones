@@ -169,6 +169,7 @@ return [
     ],
 
     'upgrade' => [
+        'all' => 'Upgrade all',
         'singular' => 'Upgrade',
     ],
 
@@ -182,6 +183,8 @@ return [
         'demolish_building' => 'Are you sure you want to demolish the selected building?',
         'lose_planet' => 'If it is the Command Center, you will lose the planet.',
         'server' => 'Sorry, the server is full :(',
+        'upgrade' => 'Are you sure you want to upgrade all buildings?',
+        'upgraded' => 'All buildings are fully upgraded.',
     ],
 
     'whats_new' => [

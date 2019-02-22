@@ -9,16 +9,16 @@
     z-index: 999;
 
     &-title {
-        color: $brand-danger;
+        color: $danger;
         display: inline-block;
         font-size: 20px;
         font-weight: bold;
         position: relative;
-        text-shadow: 0 0 15px rgba(darken($brand-danger, 10%), .6);
+        text-shadow: 0 0 15px rgba(darken($danger, 10%), .6);
 
         &:focus,
         &:hover {
-            color: $brand-danger;
+            color: $danger;
             text-decoration: none;
         }
         @keyframes monitor-arrow-left {
@@ -47,14 +47,14 @@
                 opacity: 0;
             }
         }
-        .icon-chevron-left,
-        .icon-chevron-right {
+        .fa-chevron-left,
+        .fa-chevron-right {
             font-size: 16px;
             opacity: 0;
             position: absolute;
             top: 7px;
         }
-        .icon-chevron-left {
+        .fa-chevron-left {
             animation: monitor-arrow-left 1.4s infinite;
             transform: translateX(-200%);
 
@@ -68,7 +68,7 @@
                 left: -22px;
             }
         }
-        .icon-chevron-right {
+        .fa-chevron-right {
             animation: monitor-arrow-right 1.4s infinite;
             transform: translateX(200%);
 

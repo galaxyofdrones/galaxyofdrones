@@ -1,14 +1,14 @@
 .sidebar {
-    background: $panel-bg;
-    border-right: 1px solid $brand-info;
+    background: $card-bg;
+    border-right: 1px solid $primary;
     bottom: 0;
     display: flex;
     position: absolute;
     top: 0;
     transform: translateX(-260px);
-    transition: ease .2s;
+    transition: $base-transition;
     width: 320px;
-    z-index: 9999;
+    z-index: $zindex-sidebar;
 
     &.active {
         transform: translateX(0);
@@ -19,42 +19,36 @@
         width: 260px;
     }
     &-nav {
-        border-left: 1px solid $panel-inner-border;
+        border-left: 1px solid $blue-dark;
         height: 100%;
         padding: 4px;
         width: 59px;
 
-        .nav > li {
-            margin: 0;
+        .nav-link {
+            color: $primary;
+            font-size: 1.75rem;
+            height: 52px;
+            line-height: 52px;
+            padding: 0;
+            text-align: center;
+            transition: $base-transition;
+            width: 50px;
 
-            > a {
-                color: $brand-info;
-                font-size: 32px;
-                height: 52px;
-                line-height: 52px;
-                padding: 0;
-                text-align: center;
-                transition: ease .2s;
-
-                &:focus,
-                &:hover {
-                    color: #fff;
-                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
-                }
+            @include hover-focus {
+                color: $white;
+                text-shadow: 0 0 15px $glow-color;
             }
-            &.active > a {
-                &,
-                &:hover,
-                &:focus {
+            &.active {
+                @include plain-hover-focus {
                     background: none;
-                    color: #fff;
-                    text-shadow: 0 0 15px rgba(255, 255, 255, .6);
+                    color: $white;
+                    text-shadow: 0 0 15px $glow-color;
                 }
             }
         }
     }
     &-block {
-        border-bottom: 1px solid $panel-inner-border;
+        border-bottom: 1px solid $blue-dark;
         padding: 10px;
 
         .progress {
@@ -62,7 +56,7 @@
             margin-bottom: 0;
 
             &-unit {
-                margin-bottom: $grid-gutter-width / 3;
+                margin-bottom: 10px;
             }
         }
     }

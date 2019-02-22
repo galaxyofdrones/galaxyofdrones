@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import BattleLog from './BattleLog';
 import CompletionLog from './CompletionLog';
 import MessageLog from './MessageLog';

@@ -1,140 +1,140 @@
 <div class="row">
-    <div class="col-md-6 text-center">
+    <div class="col-lg-6 text-center">
         <span class="item" :class="building | item('building')"></span>
     </div>
-    <div class="col-md-6">
-        <h4>
+    <div class="col-lg-6">
+        <h5>
             {{ vue('building.name_with_level') }}
-        </h4>
+        </h5>
         <p>
             {{ vue('building.description') }}
         </p>
         <div class="attribute-row">
-            <div class="col-md-6" v-if="building.defense !== null">
+            <div class="col-lg-6" v-if="building.defense !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.defense') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.defense') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.defense !== null">
                         {{ vue('data.upgrade.defense - building.defense | sign') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.detection !== null">
+            <div class="col-lg-6" v-if="building.detection !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.detection') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.detection') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.detection !== null">
                         {{ vue('data.upgrade.detection - building.detection | sign') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.capacity !== null">
+            <div class="col-lg-6" v-if="building.capacity !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.capacity') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.capacity') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.capacity !== null">
                         {{ vue('data.upgrade.capacity - building.capacity | sign') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.supply !== null">
+            <div class="col-lg-6" v-if="building.supply !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.supply') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.supply') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.supply !== null">
                         {{ vue('data.upgrade.supply - building.supply | sign') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.mining_rate !== null">
+            <div class="col-lg-6" v-if="building.mining_rate !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.mining_rate') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.mining_rate') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.mining_rate !== null">
                         {{ vue('data.upgrade.mining_rate - building.mining_rate | sign') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.production_rate !== null">
+            <div class="col-lg-6" v-if="building.production_rate !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.production_rate') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.production_rate') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.production_rate !== null">
                         {{ vue('data.upgrade.production_rate - building.production_rate | sign') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.defense_bonus !== null">
+            <div class="col-lg-6" v-if="building.defense_bonus !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.defense_bonus') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.defense_bonus | percent') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.defense_bonus !== null">
                         {{ vue('data.upgrade.defense_bonus - building.defense_bonus | percent | sign(data.upgrade.defense_bonus - building.defense_bonus)') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.construction_time_bonus !== null">
+            <div class="col-lg-6" v-if="building.construction_time_bonus !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.construction_time_bonus') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.construction_time_bonus | percent') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.construction_time_bonus !== null">
                         {{ vue('data.upgrade.construction_time_bonus - building.construction_time_bonus | percent | sign(data.upgrade.construction_time_bonus - building.construction_time_bonus)') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.trade_time_bonus !== null">
+            <div class="col-lg-6" v-if="building.trade_time_bonus !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.trade_time_bonus') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.trade_time_bonus | percent') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.trade_time_bonus !== null">
                         {{ vue('data.upgrade.trade_time_bonus - building.trade_time_bonus | percent | sign(data.upgrade.trade_time_bonus - building.trade_time_bonus)') }}
                     </h5>
                 </div>
             </div>
-            <div class="col-md-6" v-if="building.train_time_bonus !== null">
+            <div class="col-lg-6" v-if="building.train_time_bonus !== null">
                 <div class="attribute">
                     <h6>
                         {{ trans('validation.attributes.train_time_bonus') }}
                     </h6>
-                    <h4>
+                    <h5>
                         {{ vue('building.train_time_bonus | percent') }}
-                    </h4>
+                    </h5>
                     <h5 class="highlight-success" v-if="data.upgrade && data.upgrade.train_time_bonus !== null">
                         {{ vue('data.upgrade.train_time_bonus - building.train_time_bonus | percent | sign(data.upgrade.train_time_bonus - building.train_time_bonus)') }}
                     </h5>
@@ -142,17 +142,17 @@
             </div>
         </div>
         <ul v-if="!grid.building_id || building.has_lower_level" class="list-inline">
-            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_experience') }}'}">
-                <i class="icon-xp"></i>
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_experience') }}'}">
+                <i class="fas fa-flask"></i>
                 {{ vue('(data.upgrade ? data.upgrade.construction_experience : building.construction_experience) | number') }}
             </li>
-            <li class="highlight-warning"
+            <li class="list-inline-item highlight-warning"
                 v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_cost') }}'}">
-                <i class="icon-energy"></i>
+                <i class="fas fa-bolt"></i>
                 {{ vue('(data.upgrade ? data.upgrade.construction_cost : building.construction_cost) | number') }}
             </li>
-            <li v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_time') }}'}">
-                <i class="icon-time"></i>
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_time') }}'}">
+                <i class="far fa-clock"></i>
                 {{ vue('(data.upgrade ? data.upgrade.construction_time : building.construction_time) | timer') }}
             </li>
         </ul>
@@ -165,13 +165,17 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <h4>{{ vue('remaining | timer') }}</h4>
+                <h5>
+                    {{ vue('remaining | timer') }}
+                </h5>
             </div>
         </div>
         <div v-else-if="grid.building_id && building.has_lower_level" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store()" :disabled="!canConstruct">
+                    <button class="btn btn-success btn-block"
+                            @click="store()"
+                            :disabled="!canConstruct">
                         {{ trans('messages.upgrade.singular') }}
                     </button>
                 </div>
@@ -180,7 +184,9 @@
         <div v-else-if="!grid.building_id" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-success btn-block" @click="store()" :disabled="!canConstruct">
+                    <button class="btn btn-success btn-block"
+                            @click="store()"
+                            :disabled="!canConstruct">
                         {{ trans('messages.construction.construct') }}
                     </button>
                 </div>
@@ -189,7 +195,9 @@
         <div v-if="grid.building_id" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <button class="btn btn-danger btn-block" @click="openDemolish()" :disabled="!canDemolish">
+                    <button class="btn btn-danger btn-block"
+                            @click="openDemolish()"
+                            :disabled="!canDemolish">
                         {{ trans('messages.demolish') }}
                     </button>
                 </div>

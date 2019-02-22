@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./app/bootstrap');
+require('./bootstrap');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,6 +21,7 @@ import Message from './app/Message';
 import Monitor from './app/Monitor';
 import Mothership from './app/Mothership';
 import Move from './app/Move';
+import Navigation from './app/Navigation';
 import Planet from './app/Planet';
 import Player from './app/Player';
 import Popover from './app/Popover';
@@ -32,7 +33,7 @@ import Starmap from './app/Starmap';
 import Surface from './app/Surface';
 import Trophy from './app/Trophy';
 import Upgrade from './app/Upgrade';
-import WhatsNew from './app/WhatsNew';
+import UpgradeAll from './app/UpgradeAll';
 
 Vue.filter('bracket', Filters.bracket);
 Vue.filter('fromNow', Filters.fromNow);
@@ -56,6 +57,7 @@ const app = new Vue({
         Monitor,
         Mothership,
         Move,
+        Navigation,
         Planet,
         Player,
         Profile,
@@ -66,6 +68,6 @@ const app = new Vue({
         Surface,
         Trophy,
         Upgrade,
-        WhatsNew
+        UpgradeAll
     }
 });

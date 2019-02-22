@@ -5,14 +5,20 @@
         url="{{ route('api_planet_capital') }}" inline-template>
     <div v-if="isEnabled" class="trader">
         <div class="modal-body">
-            <ul class="nav nav-tabs nav-justified">
-                <li :class="{active: isSelectedTab('trade')}">
-                    <a href="#" @click.prevent="selectTab('trade')">
+            <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       :class="{active: isSelectedTab('trade')}"
+                       href="#"
+                       @click.prevent="selectTab('trade')">
                         {{ trans('messages.resource.singular') }}
                     </a>
                 </li>
-                <li :class="{active: isSelectedTab('patrol')}">
-                    <a href="#" @click.prevent="selectTab('patrol')">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       :class="{active: isSelectedTab('patrol')}"
+                       href="#"
+                       @click.prevent="selectTab('patrol')">
                         {{ trans('messages.unit.singular') }}
                     </a>
                 </li>

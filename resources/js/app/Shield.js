@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 import Completion from './Completion';
 
 export default {
@@ -16,8 +16,9 @@ export default {
 
     data() {
         return {
+            selected: undefined,
             data: {
-                selected: undefined,
+                can_store: true,
                 shields: []
             }
         };

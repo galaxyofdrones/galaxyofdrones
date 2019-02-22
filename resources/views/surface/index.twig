@@ -1,6 +1,8 @@
 {% extends 'layouts.stage' %}
 
 {% block content %}
+    {% include 'surface.navigation' %}
+
     <surface width="1920"
              height="1080"
              background-texture="{{ asset('images/planet-__resource__-bg.png') }}"
@@ -10,5 +12,6 @@
 
     {% include 'surface.construction' %}
     {% include 'surface.upgrade' %}
+    {% include 'surface.upgrade-all' %}
     {% include 'surface.demolish' %}
 {% endblock %}

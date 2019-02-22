@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from '../event-bus';
 
 export default {
     props: [
@@ -159,7 +159,7 @@ export default {
                 options: {
                     position: 'topleft',
                     bookmarkTitle: this.bookmarkTitle,
-                    bookmarkIconClass: 'icon-star'
+                    bookmarkIconClass: 'fas fa-star'
                 },
 
                 onAdd() {
@@ -242,10 +242,11 @@ export default {
             };
 
             if (this.map.getZoom() >= 8) {
-                let angle = Math.atan2(endLatLng.lng - latLng.lng, endLatLng.lat - latLng.lat);
-                let angleDeg = (angle > 0 ? angle : (2 * Math.PI + angle)) * 360 / (2 * Math.PI);
+                const angleOffset = 45;
+                const angle = Math.atan2(endLatLng.lng - latLng.lng, endLatLng.lat - latLng.lat);
+                const angleDeg = (angle > 0 ? angle : (2 * Math.PI + angle)) * 360 / (2 * Math.PI) - angleOffset;
 
-                options.html = `<i class="icon-movement-unit" style="${L.DomUtil.TRANSFORM}: translateX(-50%) translateY(-50%) rotate(${angleDeg}deg)"></i>`;
+                options.html = `<i class="fas fa-rocket" style="${L.DomUtil.TRANSFORM}: translateX(-50%) translateY(-50%) rotate(${angleDeg}deg)"></i>`;
             }
 
             return new L.MovementMarker(latLng, {
