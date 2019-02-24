@@ -28,6 +28,7 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
  * @property int                                                     $mining_rate
  * @property int                                                     $production_rate
  * @property float                                                   $defense_bonus
+ * @property float                                                   $construction_cost_bonus
  * @property float                                                   $construction_time_bonus
  * @property float                                                   $trade_time_bonus
  * @property float                                                   $train_time_bonus
@@ -182,9 +183,13 @@ class Building extends Model implements TranslatableContract
         $constructionCost = $this->attributes['construction_cost'];
 
         if ($this->hasLowerLevel()) {
-            return round(
+            $constructionCost = round(
                 $this->applyExpFormula($constructionCost)
             );
+        }
+
+        if (! empty($this->modifiers['construction_cost_bonus'])) {
+            $constructionCost += max(0, $this->modifiers['construction_cost_bonus']);
         }
 
         return $constructionCost;
