@@ -71,6 +71,7 @@ class Planet extends Model implements PositionableContract
     use Behaviors\Positionable,
         Concerns\HasCapacity,
         Concerns\HasCustomName,
+        Concerns\HasDistance,
         Concerns\HasGrid,
         Concerns\HasShield,
         Concerns\HasSupply,
