@@ -1,5 +1,5 @@
-<navigation upgrade-url="#" inline-template>
-    <div class="navigation">
+<navigation v-if="isRouteName('home')" inline-template>
+    <div class="navigation" v-cloak>
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
                 <a class="nav-link"

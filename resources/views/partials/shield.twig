@@ -44,9 +44,7 @@
         <completion v-else v-for="shield in data.shields"
                     :key="shield.id"
                     :completion="shield"
-                    :is-completable="{{ app.request.route.getName == 'starmap'
-                        ? 'true'
-                        : 'false' }}"
+                    :is-completable="isRouteName('starmap')"
                     :store="move" inline-template>
             <div class="modal-body separator shield-item">
                 <div class="row">

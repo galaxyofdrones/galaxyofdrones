@@ -15,7 +15,7 @@
                 <div class="modal-body">
                     <div class="tab-content" v-if="data.buildings.length">
                         <div v-for="building in data.buildings" class="tab-pane" :class="{active: isSelected(building)}">
-                            {% include 'surface.building' %}
+                            {% include 'partials.building' %}
                         </div>
                     </div>
                 </div>
