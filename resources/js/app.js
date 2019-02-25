@@ -26,14 +26,16 @@ import Planet from './app/Planet';
 import Player from './app/Player';
 import Popover from './app/Popover';
 import Profile from './app/Profile';
+import Routing from './app/Routing';
 import Setting from './app/Setting';
 import Sidebar from './app/Sidebar';
 import Star from './app/Star';
-import Starmap from './app/Starmap';
-import Surface from './app/Surface';
+import Starmap from './app/Starmap.vue';
+import Surface from './app/Surface.vue';
 import Trophy from './app/Trophy';
 import Upgrade from './app/Upgrade';
 import UpgradeAll from './app/UpgradeAll';
+import VueRouter from 'vue-router';
 
 Vue.filter('bracket', Filters.bracket);
 Vue.filter('fromNow', Filters.fromNow);
@@ -45,8 +47,29 @@ Vue.filter('timer', Filters.timer);
 
 Vue.directive('popover', Popover);
 
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    mode: 'history',
+
+    routes: [
+        {
+            path: '/starmap',
+            name: 'starmap',
+            component: Starmap,
+            props: true
+        },
+        {
+            path: '/',
+            name: 'home',
+            component: Surface,
+            props: true
+        }
+    ]
+});
+
 const app = new Vue({
-    el: '#app',
+    router,
 
     components: {
         Bookmark,
@@ -64,10 +87,12 @@ const app = new Vue({
         Setting,
         Sidebar,
         Star,
-        Starmap,
-        Surface,
         Trophy,
         Upgrade,
         UpgradeAll
-    }
-});
+    },
+
+    mixins: [
+        Routing
+    ]
+}).$mount('#app');

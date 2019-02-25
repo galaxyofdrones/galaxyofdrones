@@ -121,9 +121,7 @@
                 <planet-list :is-enabled="isEnabled"
                              url="{{ route('api_planet_all', '__user__') }}"
                              :username="username"
-                             :can-move="{{ app.request.route.getName == 'starmap'
-                                 ? 'true'
-                                 : 'false' }}"
+                             :can-move="isRouteName('starmap')"
                              :close="close" inline-template>
                     <div v-if="isEnabled" class="planet-list">
                         <div class="modal-body separator" v-for="planet in data.data">

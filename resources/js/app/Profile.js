@@ -2,6 +2,7 @@ import { EventBus } from '../event-bus';
 import PlanetList from './PlanetList';
 import Filters from './Filters';
 import Modal from './Modal';
+import Routing from './Routing';
 
 export default Modal.extend({
     props: [
@@ -14,6 +15,10 @@ export default Modal.extend({
     components: {
         PlanetList
     },
+
+    mixins: [
+        Routing
+    ],
 
     data() {
         return {

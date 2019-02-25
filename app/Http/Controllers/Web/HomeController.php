@@ -4,7 +4,7 @@ namespace Koodilab\Http\Controllers\Web;
 
 use Koodilab\Http\Controllers\Controller;
 
-class StarmapController extends Controller
+class HomeController extends Controller
 {
     /**
      * Constructor.
@@ -16,12 +16,12 @@ class StarmapController extends Controller
     }
 
     /**
-     * Show the starmap.
+     * Show the homepage.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('starmap.index');
+        return view('home.index');
     }
 }
