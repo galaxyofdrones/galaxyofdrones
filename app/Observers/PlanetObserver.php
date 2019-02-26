@@ -2,7 +2,7 @@
 
 namespace Koodilab\Observers;
 
-use Illuminate\Events\Dispatcher as Event;
+use Illuminate\Contracts\Events\Dispatcher as Event;
 use Koodilab\Events\PlanetUpdated;
 use Koodilab\Game\StateManager;
 use Koodilab\Models\Planet;
