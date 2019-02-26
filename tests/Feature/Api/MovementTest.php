@@ -33,6 +33,8 @@ class MovementTest extends TestCase
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
             'name' => 'Earth',
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $user->update([
@@ -53,6 +55,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 2,
+            'y' => 2,
         ]);
 
         $this->post("/api/movement/scout/{$planet->id}")
@@ -71,6 +75,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 3,
+            'y' => 3,
         ]);
 
         $this->post("/api/movement/scout/{$planet->id}", [
@@ -112,6 +118,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 4,
+            'y' => 4,
         ]);
 
         $this->post("/api/movement/attack/{$planet->id}")
@@ -130,6 +138,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 5,
+            'y' => 5,
         ]);
 
         $this->post("/api/movement/attack/{$planet->id}", [
@@ -175,6 +185,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 6,
+            'y' => 6,
         ]);
 
         $this->post("/api/movement/occupy/{$planet->id}")
@@ -185,6 +197,8 @@ class MovementTest extends TestCase
         $planet = factory(Planet::class)->create([
             'user_id' => null,
             'resource_id' => $resource->id,
+            'x' => 7,
+            'y' => 7,
         ]);
 
         $this->post("/api/movement/occupy/{$planet->id}")->assertStatus(400);
@@ -238,6 +252,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 8,
+            'y' => 8,
         ]);
 
         $this->post("/api/movement/support/{$planet->id}")
@@ -255,6 +271,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 9,
+            'y' => 9,
         ]);
 
         $this->post("/api/movement/support/{$planet->id}", [
@@ -300,6 +318,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 10,
+            'y' => 10,
         ]);
 
         $this->post("/api/movement/transport/{$planet->id}")
@@ -321,6 +341,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 11,
+            'y' => 11,
         ]);
 
         $stock = factory(Stock::class)->create([
@@ -382,6 +404,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 12,
+            'y' => 12,
         ]);
 
         $building = factory(Building::class)->create([
@@ -429,6 +453,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 13,
+            'y' => 13,
         ]);
 
         $stock = factory(Stock::class)->create([
@@ -490,6 +516,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 14,
+            'y' => 14,
         ]);
 
         $building = factory(Building::class)->create([
@@ -535,6 +563,8 @@ class MovementTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 15,
+            'y' => 15,
         ]);
 
         $this->post("/api/movement/patrol/{$grid->id}", [

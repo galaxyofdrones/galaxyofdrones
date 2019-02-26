@@ -31,6 +31,8 @@ class MonitorTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $movement = factory(Movement::class)->create([
@@ -50,10 +52,15 @@ class MonitorTest extends TestCase
     {
         $user = auth()->user();
 
-        $startPlanet = factory(Planet::class)->create();
+        $startPlanet = factory(Planet::class)->create([
+            'x' => 2,
+            'y' => 2,
+        ]);
 
         $endPlanet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 3,
+            'y' => 3,
         ]);
 
         $movement = factory(Movement::class)->create([

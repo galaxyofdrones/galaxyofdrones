@@ -28,6 +28,8 @@ class ExpeditionTest extends TestCase
 
     public function testIndex()
     {
+        $user = auth()->user();
+
         $star = factory(Star::class)->create([
             'name' => 'Voyager',
         ]);
@@ -43,14 +45,19 @@ class ExpeditionTest extends TestCase
 
         $expedition = factory(Expedition::class)->create([
             'star_id' => $star->id,
-            'user_id' => auth()->user()->id,
+            'user_id' => $user->id,
             'solarion' => 5,
             'experience' => 2,
-            'ended_at' => Carbon::now(),
+            'ended_at' => Carbon::now()->addHour(),
         ]);
 
         $expedition->units()->attach($unit, [
             'quantity' => 5,
+        ]);
+
+        $user->units()->attach($unit, [
+            'is_researched' => true,
+            'quantity' => 4,
         ]);
 
         $this->getJson('/api/expedition')->assertStatus(200)
@@ -86,7 +93,7 @@ class ExpeditionTest extends TestCase
                         'id' => $unit->id,
                         'name' => $unit->translation('name'),
                         'description' => $unit->translation('description'),
-                        'quantity' => 0,
+                        'quantity' => 4,
                     ],
                 ],
                 'expeditions' => [
