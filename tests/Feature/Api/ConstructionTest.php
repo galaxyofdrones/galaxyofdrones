@@ -165,7 +165,7 @@ class ConstructionTest extends TestCase
             ->assertStatus(400);
 
         $building2 = factory(Building::class)->create([
-            'construction_cost' => 100,
+            'construction_cost' => 10000,
             'parent_id' => $building->id,
             'type' => Building::TYPE_MINER,
             'limit' => 0,
@@ -186,8 +186,17 @@ class ConstructionTest extends TestCase
             'y' => 9,
         ]);
 
+        for ($i=1; $i<10; ++$i) {
+            factory(Planet::class)->create([
+                'user_id' => $user->id,
+                'x' => $user->current->x + $i,
+                'y' => $user->current->y + $i,
+            ]);
+        }
+
         $user->update([
-            'energy' => 100,
+            'energy' => 199,
+            'cost_penalty' => $user->current->hasPenalty() ? $user->current->penaltyRate() + 1 : 1,
         ]);
 
         $this->post("/api/construction/{$grid2->id}/{$building2->id}")
