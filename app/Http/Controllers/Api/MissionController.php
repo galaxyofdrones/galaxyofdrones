@@ -7,8 +7,8 @@ use Koodilab\Game\MissionManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Mission;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Transformers\MissionTransformer;
-use Koodilab\Models\Transformers\ResourceMissionTransformer;
+use Koodilab\Transformers\MissionTransformer;
+use Koodilab\Transformers\ResourceMissionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class MissionController extends Controller

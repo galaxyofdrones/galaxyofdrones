@@ -7,7 +7,7 @@ use Koodilab\Game\ShieldManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Shield;
-use Koodilab\Models\Transformers\ShieldTransformer;
+use Koodilab\Transformers\ShieldTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ShieldController extends Controller

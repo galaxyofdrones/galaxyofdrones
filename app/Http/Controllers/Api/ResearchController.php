@@ -5,8 +5,8 @@ namespace Koodilab\Http\Controllers\Api;
 use Illuminate\Support\Facades\DB;
 use Koodilab\Game\ResearchManager;
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\ResourceAvailableTransformer;
-use Koodilab\Models\Transformers\UnitAvailableTransformer;
+use Koodilab\Transformers\ResourceAvailableTransformer;
+use Koodilab\Transformers\UnitAvailableTransformer;
 use Koodilab\Models\Unit;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 

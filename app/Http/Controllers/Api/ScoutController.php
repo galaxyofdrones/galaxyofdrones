@@ -5,7 +5,7 @@ namespace Koodilab\Http\Controllers\Api;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Transformers\ScoutTransformer;
+use Koodilab\Transformers\ScoutTransformer;
 
 class ScoutController extends Controller
 {

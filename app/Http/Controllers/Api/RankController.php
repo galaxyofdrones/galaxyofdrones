@@ -4,7 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Rank;
-use Koodilab\Models\Transformers\RankTransformer;
+use Koodilab\Transformers\RankTransformer;
 
 class RankController extends Controller
 {

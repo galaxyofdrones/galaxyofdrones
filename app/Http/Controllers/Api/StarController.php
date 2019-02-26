@@ -4,7 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Star;
-use Koodilab\Models\Transformers\StarShowTransformer;
+use Koodilab\Transformers\StarShowTransformer;
 
 class StarController extends Controller
 {

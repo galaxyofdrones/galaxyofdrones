@@ -3,7 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\BattleLogTransformer;
+use Koodilab\Transformers\BattleLogTransformer;
 use Koodilab\Notifications\BattleLogCreated;
 
 class BattleLogController extends Controller

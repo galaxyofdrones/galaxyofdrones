@@ -3,7 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\ExpeditionLogTransformer;
+use Koodilab\Transformers\ExpeditionLogTransformer;
 use Koodilab\Notifications\ExpeditionLogCreated;
 
 class ExpeditionLogController extends Controller

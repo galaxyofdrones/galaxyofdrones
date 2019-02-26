@@ -7,7 +7,7 @@ use Koodilab\Game\TrainingManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Transformers\TrainerTransformer;
+use Koodilab\Transformers\TrainerTransformer;
 use Koodilab\Models\Unit;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
