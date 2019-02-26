@@ -4,6 +4,7 @@ namespace Koodilab\Models\Behaviors;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Koodilab\Models\Planet;
 use Koodilab\Support\Bounds;
 
 trait Positionable
@@ -40,5 +41,34 @@ trait Positionable
             ->where('y', '<=', $bounds->maxY());
 
         return $query;
+    }
+
+    /**
+     * Has penalty by the others' position.
+     *
+     * @return bool
+     */
+    public function hasPenalty()
+    {
+        return $this->penaltyRate() > Planet::PENALTY_RATE;
+    }
+
+    /**
+     * Get penalty rate by the others' position.
+     *
+     * @return double
+     */
+    public function penaltyRate()
+    {
+        $bounds = new Bounds(
+            $this->x - Planet::PENALTY_STEP,
+            $this->y - Planet::PENALTY_STEP,
+            $this->x + Planet::PENALTY_STEP,
+            $this->y + Planet::PENALTY_STEP
+        );
+
+        $query = Planet::query()->where('user_id', '=', $this->user_id);
+
+        return $this->scopeInBounds($query, $bounds)->count() / $this->user->planets()->count();
     }
 }

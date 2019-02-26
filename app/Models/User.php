@@ -22,6 +22,7 @@ use Laravel\Passport\HasApiTokens;
  * @property bool                                                                                                      $is_enabled
  * @property int                                                                                                       $energy
  * @property int                                                                                                       $solarion
+ * @property double                                                                                                    $cost_penalty
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
  * @property \Illuminate\Support\Carbon|null                                                                           $last_login

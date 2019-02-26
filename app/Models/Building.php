@@ -188,9 +188,7 @@ class Building extends Model implements TranslatableContract
             );
         }
 
-        if (! empty($this->modifiers['construction_cost_bonus'])) {
-            $constructionCost += max(0, $this->modifiers['construction_cost_bonus']);
-        }
+        $constructionCost *= max(1, auth()->user()->cost_penalty);
 
         return $constructionCost;
     }

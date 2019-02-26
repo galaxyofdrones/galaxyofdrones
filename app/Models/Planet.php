@@ -71,7 +71,6 @@ class Planet extends Model implements PositionableContract
     use Behaviors\Positionable,
         Concerns\HasCapacity,
         Concerns\HasCustomName,
-        Concerns\HasDistance,
         Concerns\HasGrid,
         Concerns\HasShield,
         Concerns\HasSupply,
@@ -138,6 +137,20 @@ class Planet extends Model implements PositionableContract
      * @var int
      */
     const FIND_STEP = 1024;
+
+    /**
+     * The penalty step.
+     *
+     * @var int
+     */
+    const PENALTY_STEP = 1024;
+
+    /**
+     * The penalty rate.
+     *
+     * @var int
+     */
+    const PENALTY_RATE = 0.5;
 
     /**
      * {@inheritdoc}

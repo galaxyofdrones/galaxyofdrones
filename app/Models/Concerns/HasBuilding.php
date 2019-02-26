@@ -44,10 +44,6 @@ trait HasBuilding
             'construction_time_bonus' => $this->planet->construction_time_bonus,
         ];
 
-        if ($this->planet->hasExtraCostByDistance(auth()->user()->current)) {
-            $modifiers['construction_cost_bonus'] = $this->planet->getExtraCostByDistance(auth()->user()->current);
-        }
-
         if ($this->construction) {
             return $buildings->add(
                 $this->construction->building->applyModifiers($modifiers)

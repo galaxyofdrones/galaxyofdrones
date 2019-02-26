@@ -52,6 +52,7 @@ class StateManager
     public function syncUser(User $user)
     {
         $user->update([
+            'cost_penalty' => $user->current->hasPenalty() ? $user->current->penaltyRate() + 1 : 1,
             'energy' => $user->energy,
             'production_rate' => $user->planets->sum('production_rate'),
             'last_energy_changed' => Carbon::now(),
