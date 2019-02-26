@@ -2,7 +2,7 @@
 
 namespace Koodilab\Transformers;
 
-use Koodilab\Contracts\Models\Transformers\Transformer as TransformerContract;
+use Koodilab\Contracts\Transformers\Transformer as TransformerContract;
 
 abstract class Transformer implements TransformerContract
 {

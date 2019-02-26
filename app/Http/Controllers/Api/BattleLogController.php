@@ -3,8 +3,8 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Transformers\BattleLogTransformer;
 use Koodilab\Notifications\BattleLogCreated;
+use Koodilab\Transformers\BattleLogTransformer;
 
 class BattleLogController extends Controller
 {
