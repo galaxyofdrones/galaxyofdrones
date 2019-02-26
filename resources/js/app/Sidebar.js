@@ -1,11 +1,16 @@
 import { EventBus } from '../event-bus';
 import PerfectScrollbar from 'perfect-scrollbar';
+import Routing from './Routing';
 
 export default {
     props: [
         'planetUrl',
         'planetNameUrl',
         'userCurrentUrl'
+    ],
+
+    mixins: [
+        Routing
     ],
 
     data() {
@@ -51,6 +56,10 @@ export default {
     },
 
     watch: {
+        $route() {
+            EventBus.$emit('planet-updated', this.data);
+        },
+
         selected() {
             this.changePlanet();
         },

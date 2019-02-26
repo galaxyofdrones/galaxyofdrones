@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Bookmark;
 use Koodilab\Models\Star;
-use Koodilab\Models\Transformers\BookmarkTransformer;
+use Koodilab\Transformers\BookmarkTransformer;
 
 class BookmarkController extends Controller
 {

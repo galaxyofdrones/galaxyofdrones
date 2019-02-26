@@ -8,7 +8,7 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Resource;
-use Koodilab\Models\Transformers\ProducerTransformer;
+use Koodilab\Transformers\ProducerTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProducerController extends Controller

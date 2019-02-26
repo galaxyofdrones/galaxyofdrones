@@ -9,10 +9,10 @@ use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Transformers\PlanetAllTransformer;
-use Koodilab\Models\Transformers\PlanetShowTransformer;
-use Koodilab\Models\Transformers\PlanetTransformer;
 use Koodilab\Models\User;
+use Koodilab\Transformers\PlanetAllTransformer;
+use Koodilab\Transformers\PlanetShowTransformer;
+use Koodilab\Transformers\PlanetTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PlanetController extends Controller

@@ -156,8 +156,6 @@
             </div>
         </div>
         <div class="sidebar-nav">
-            {% set route_name = app.request.route.getName %}
-
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
                     <a class="nav-link"
@@ -167,14 +165,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route_name == 'home' ? 'active' }}" href="{{ route('home') }}">
+                    <router-link :to="{name: 'home'}"
+                                 class="nav-link"
+                                 :class="{active: isRouteName('home')}">
                         <i class="fas fa-globe-americas"></i>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ route_name == 'starmap' ? 'active' }}" href="{{ route('starmap') }}">
+                    <router-link :to="{name: 'starmap'}"
+                                 class="nav-link"
+                                 :class="{active: isRouteName('starmap')}">
                         <i class="fas fa-satellite-dish"></i>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"

@@ -5,9 +5,9 @@ namespace Koodilab\Http\Controllers\Api;
 use Illuminate\Support\Facades\DB;
 use Koodilab\Game\ResearchManager;
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\ResourceAvailableTransformer;
-use Koodilab\Models\Transformers\UnitAvailableTransformer;
 use Koodilab\Models\Unit;
+use Koodilab\Transformers\ResourceAvailableTransformer;
+use Koodilab\Transformers\UnitAvailableTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ResearchController extends Controller

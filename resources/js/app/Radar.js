@@ -1,5 +1,6 @@
 import { EventBus } from '../event-bus';
 import Movement from './Movement';
+import Routing from './Routing';
 
 export default {
     props: [
@@ -12,6 +13,10 @@ export default {
     components: {
         Movement
     },
+
+    mixins: [
+        Routing
+    ],
 
     data() {
         return {

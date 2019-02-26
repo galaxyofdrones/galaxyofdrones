@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Koodilab\Game\ExpeditionManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Expedition;
-use Koodilab\Models\Transformers\ExpeditionTransformer;
-use Koodilab\Models\Transformers\UnitExpeditionTransformer;
 use Koodilab\Models\Unit;
+use Koodilab\Transformers\ExpeditionTransformer;
+use Koodilab\Transformers\UnitExpeditionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ExpeditionController extends Controller

@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Http\Requests\Api\UserUpdateRequest;
 use Koodilab\Models\Planet;
-use Koodilab\Models\Transformers\UserCapitalTransformer;
-use Koodilab\Models\Transformers\UserShowTransformer;
-use Koodilab\Models\Transformers\UserTransformer;
 use Koodilab\Models\User;
+use Koodilab\Transformers\UserCapitalTransformer;
+use Koodilab\Transformers\UserShowTransformer;
+use Koodilab\Transformers\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UserController extends Controller

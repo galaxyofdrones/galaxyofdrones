@@ -15,13 +15,6 @@ $router->group([
     });
 
     $router->group([
-        'prefix' => 'starmap',
-    ], function () use ($router) {
-        $router->get('/', 'StarmapController@index')
-            ->name('starmap');
-    });
-
-    $router->group([
         'prefix' => 'register',
     ], function () use ($router) {
         $router->get('/', 'RegisterController@showRegistrationForm')
@@ -60,6 +53,7 @@ $router->group([
     $router->get('logout', 'LoginController@logout')
         ->name('logout');
 
-    $router->get('/', 'SurfaceController@index')
-        ->name('home');
+    $router->get('/{vue?}', 'HomeController@index')
+        ->name('home')
+        ->where('vue', 'starmap');
 });
