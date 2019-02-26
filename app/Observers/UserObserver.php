@@ -4,7 +4,7 @@ namespace Koodilab\Observers;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use Illuminate\Events\Dispatcher as Event;
+use Illuminate\Contracts\Events\Dispatcher as Event;
 use Koodilab\Events\UserUpdated;
 use Koodilab\Models\User;
 

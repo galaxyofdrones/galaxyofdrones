@@ -4,7 +4,7 @@ namespace Koodilab\Game;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
-use Illuminate\Events\Dispatcher as Event;
+use Illuminate\Contracts\Events\Dispatcher as Event;
 use Koodilab\Events\PlanetUpdated;
 use Koodilab\Jobs\Train as TrainJob;
 use Koodilab\Models\Grid;
