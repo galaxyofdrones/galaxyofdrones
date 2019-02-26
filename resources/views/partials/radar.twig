@@ -11,9 +11,7 @@
                   v-for="movement in data.incoming_movements"
                   :key="movement.id"
                   :movement="movement"
-                  :can-move="{{ app.request.route.getName == 'starmap'
-                      ? 'true'
-                      : 'false' }}"
+                  :can-move="isRouteName('starmap')"
                   :move="move" inline-template>
             <div  class="modal-body separator">
                 <div class="row">

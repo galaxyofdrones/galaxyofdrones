@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Star;
-use Koodilab\Models\Transformers\ExpeditionFeatureTransformer;
-use Koodilab\Models\Transformers\MovementFeatureTransformer;
-use Koodilab\Models\Transformers\MovementUnitFeatureTransformer;
-use Koodilab\Models\Transformers\PlanetFeatureTransformer;
-use Koodilab\Models\Transformers\StarFeatureTransformer;
 use Koodilab\Support\Bounds;
+use Koodilab\Transformers\ExpeditionFeatureTransformer;
+use Koodilab\Transformers\MovementFeatureTransformer;
+use Koodilab\Transformers\MovementUnitFeatureTransformer;
+use Koodilab\Transformers\PlanetFeatureTransformer;
+use Koodilab\Transformers\StarFeatureTransformer;
 
 class StarmapController extends Controller
 {

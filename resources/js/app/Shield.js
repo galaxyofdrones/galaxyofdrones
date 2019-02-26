@@ -1,5 +1,6 @@
 import { EventBus } from '../event-bus';
 import Completion from './Completion';
+import Routing from './Routing';
 
 export default {
     props: [
@@ -13,6 +14,10 @@ export default {
     components: {
         Completion
     },
+
+    mixins: [
+        Routing
+    ],
 
     data() {
         return {

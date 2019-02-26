@@ -7,7 +7,7 @@ use Koodilab\Game\ConstructionManager;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\Building;
 use Koodilab\Models\Grid;
-use Koodilab\Models\Transformers\ConstructionTransformer;
+use Koodilab\Transformers\ConstructionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ConstructionController extends Controller
