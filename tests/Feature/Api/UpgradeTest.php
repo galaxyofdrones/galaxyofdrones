@@ -27,7 +27,17 @@ class UpgradeTest extends TestCase
             'started_at' => Carbon::now(),
         ]);
 
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+            'x' => 2,
+            'y' => 1,
+        ]);
+
         Passport::actingAs($user);
+
+        $user->update([
+            'current_id' => $planet->id,
+        ]);
     }
 
     public function testIndex()
@@ -36,6 +46,8 @@ class UpgradeTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 5,
+            'y' => 1,
         ]);
 
         $building = factory(Building::class)->create([
@@ -164,6 +176,8 @@ class UpgradeTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 2,
+            'y' => 6,
         ]);
 
         $user->update([
@@ -180,6 +194,8 @@ class UpgradeTest extends TestCase
             'planet_id' => $planet->id,
             'building_id' => $building1->id,
             'level' => 9,
+            'x' => 9,
+            'y' => 6,
         ]);
 
         $building2 = factory(Building::class)->create([
@@ -191,6 +207,8 @@ class UpgradeTest extends TestCase
             'planet_id' => $planet->id,
             'building_id' => $building2->id,
             'level' => 9,
+            'x' => 8,
+            'y' => 16,
         ]);
 
         $emptyGrid = factory(Grid::class)->create([
@@ -233,6 +251,8 @@ class UpgradeTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 8,
+            'y' => 1,
         ]);
 
         $building = factory(Building::class)->create([
@@ -284,6 +304,8 @@ class UpgradeTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 21,
+            'y' => 11,
         ]);
 
         $user->update([
@@ -301,6 +323,8 @@ class UpgradeTest extends TestCase
             'planet_id' => $planet->id,
             'building_id' => $building1->id,
             'level' => 9,
+            'x' => 14,
+            'y' => 12,
         ]);
 
         $building2 = factory(Building::class)->create([
@@ -312,6 +336,8 @@ class UpgradeTest extends TestCase
             'planet_id' => $planet->id,
             'building_id' => $building2->id,
             'level' => 9,
+            'x' => 20,
+            'y' => 11,
         ]);
 
         $emptyGrid = factory(Grid::class)->create([
@@ -354,6 +380,8 @@ class UpgradeTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 12,
+            'y' => 15,
         ]);
 
         $building = factory(Building::class)->create([

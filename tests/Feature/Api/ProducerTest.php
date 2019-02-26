@@ -27,6 +27,8 @@ class ProducerTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $user->update([
@@ -46,6 +48,8 @@ class ProducerTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 2,
+            'y' => 2,
         ]);
 
         $grid = factory(Grid::class)->create([
@@ -100,6 +104,8 @@ class ProducerTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 3,
+            'y' => 3,
         ]);
 
         $resource = factory(Resource::class)->create();

@@ -32,13 +32,18 @@ class MissionTest extends TestCase
 
         $mission = factory(Mission::class)->create([
             'user_id' => $user->id,
-            'ended_at' => Carbon::now(),
+            'ended_at' => Carbon::now()->addHour(),
         ]);
 
         $resource = factory(Resource::class)->create();
 
         $mission->resources()->attach($resource->id, [
             'quantity' => 10,
+        ]);
+
+        $user->resources()->attach($resource->id, [
+            'is_researched' => true,
+            'quantity' => 8,
         ]);
 
         $this->getJson('/api/mission')->assertStatus(200)
@@ -75,7 +80,7 @@ class MissionTest extends TestCase
                         'id' => $resource->id,
                         'name' => $resource->name['en'],
                         'description' => $resource->description['en'],
-                        'quantity' => $resource->quantity,
+                        'quantity' => 8,
                     ],
                 ],
                 'missions' => [

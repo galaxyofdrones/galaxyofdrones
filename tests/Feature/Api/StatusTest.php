@@ -23,10 +23,14 @@ class StatusTest extends TestCase
         $planet = factory(Planet::class)->create([
             'user_id' => null,
             'resource_id' => $resource->id,
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $planet2 = factory(Planet::class)->create([
             'resource_id' => $resource->id,
+            'x' => 2,
+            'y' => 2,
         ]);
 
         $resource2 = factory(Resource::class)->create([
@@ -37,6 +41,8 @@ class StatusTest extends TestCase
             'user_id' => null,
             'resource_id' => $resource2->id,
             'size' => Planet::SIZE_SMALL,
+            'x' => 3,
+            'y' => 3,
         ]);
 
         $this->getJson('/api/status')->assertStatus(200)
