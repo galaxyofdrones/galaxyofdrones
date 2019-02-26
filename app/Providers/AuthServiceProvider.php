@@ -11,6 +11,9 @@ use Koodilab\Models\Expedition;
 use Koodilab\Models\Mission;
 use Koodilab\Models\Planet;
 use Koodilab\Models\User;
+use Koodilab\Policies\BookmarkPolicy;
+use Koodilab\Policies\ExpeditionPolicy;
+use Koodilab\Policies\MissionPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -18,9 +21,9 @@ class AuthServiceProvider extends ServiceProvider
      * {@inheritdoc}
      */
     protected $policies = [
-        Bookmark::class => \Koodilab\Policies\BookmarkPolicy::class,
-        Expedition::class => \Koodilab\Policies\ExpeditionPolicy::class,
-        Mission::class => \Koodilab\Policies\MissionPolicy::class,
+        Bookmark::class => BookmarkPolicy::class,
+        Expedition::class => ExpeditionPolicy::class,
+        Mission::class => MissionPolicy::class,
     ];
 
     /**
