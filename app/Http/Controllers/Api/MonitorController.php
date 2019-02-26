@@ -3,7 +3,7 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\MovementTransformer;
+use Koodilab\Transformers\MovementTransformer;
 
 class MonitorController extends Controller
 {

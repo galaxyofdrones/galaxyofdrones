@@ -3,7 +3,6 @@
 namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Game\StateManager;
 
 /**
  * Grid.
@@ -80,16 +79,4 @@ class Grid extends Model
     protected $casts = [
         'is_enabled' => 'bool',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::updated(function (self $grid) {
-            app(StateManager::class)->syncPlanet($grid->planet);
-        });
-    }
 }

@@ -3,8 +3,8 @@
 namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Transformers\MissionLogTransformer;
 use Koodilab\Notifications\MissionLogCreated;
+use Koodilab\Transformers\MissionLogTransformer;
 
 class MissionLogController extends Controller
 {

@@ -5,8 +5,8 @@ namespace Koodilab\Http\Controllers\Api;
 use Illuminate\Support\Facades\DB;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Http\Requests\Api\MessageStoreRequest;
-use Koodilab\Models\Transformers\MessageTransformer;
 use Koodilab\Notifications\MessageSended;
+use Koodilab\Transformers\MessageTransformer;
 
 class MessageController extends Controller
 {

@@ -4,7 +4,6 @@ namespace Koodilab\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
-use Koodilab\Support\SettingManager;
 
 /**
  * Setting.
@@ -46,16 +45,4 @@ class Setting extends Model implements TranslatableContract
     protected $casts = [
         'value' => 'json',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saved(function () {
-            app(SettingManager::class)->forget();
-        });
-    }
 }
