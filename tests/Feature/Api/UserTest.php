@@ -76,6 +76,8 @@ class UserTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $user->update([
@@ -121,6 +123,8 @@ class UserTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 2,
+            'y' => 2,
         ]);
 
         $this->getJson("/api/user/{$user->id}")->assertStatus(200)
@@ -194,6 +198,8 @@ class UserTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 3,
+            'y' => 3,
         ]);
 
         $this->put('/api/user/capital/14')->assertStatus(404);
@@ -202,12 +208,16 @@ class UserTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 4,
+            'y' => 4,
         ]);
 
         $this->put("/api/user/capital/{$planet->id}")->assertStatus(400);
 
         $capital = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 5,
+            'y' => 5,
         ]);
 
         $user->update([
@@ -226,7 +236,10 @@ class UserTest extends TestCase
         $this->put("/api/user/capital/{$planet->id}")->assertStatus(400);
 
         $movement->update([
-            'end_id' => factory(Planet::class)->create()->id,
+            'end_id' => factory(Planet::class)->create([
+                'x' => 6,
+                'y' => 6,
+            ])->id,
         ]);
 
         $this->put("/api/user/capital/{$planet->id}")->assertStatus(200);
@@ -239,6 +252,8 @@ class UserTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => null,
+            'x' => 7,
+            'y' => 7,
         ]);
 
         $this->put('/api/user/current/14')->assertStatus(404);
@@ -247,6 +262,8 @@ class UserTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 8,
+            'y' => 8,
         ]);
 
         $this->put("/api/user/current/{$planet->id}")->assertStatus(200);

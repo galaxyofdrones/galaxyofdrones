@@ -33,6 +33,8 @@ class TrainerTest extends TestCase
     {
         $planet = factory(Planet::class)->create([
             'user_id' => auth()->user()->id,
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $building = factory(Building::class)->create([
@@ -110,6 +112,8 @@ class TrainerTest extends TestCase
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
             'supply' => 500,
+            'x' => 2,
+            'y' => 2,
         ]);
 
         $building = factory(Building::class)->create([
@@ -161,6 +165,8 @@ class TrainerTest extends TestCase
     {
         $planet = factory(Planet::class)->create([
             'user_id' => auth()->user()->id,
+            'x' => 3,
+            'y' => 3,
         ]);
 
         $grid = factory(Grid::class)->create([

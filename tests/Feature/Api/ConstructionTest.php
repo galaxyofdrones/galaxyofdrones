@@ -30,6 +30,8 @@ class ConstructionTest extends TestCase
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
             'name' => 'Earth',
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $initialDispatcher = Event::getFacadeRoot();

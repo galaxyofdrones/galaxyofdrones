@@ -31,6 +31,8 @@ class ShieldTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 1,
+            'y' => 1,
         ]);
 
         $shield = factory(Shield::class)->create([
@@ -82,6 +84,8 @@ class ShieldTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
+            'x' => 2,
+            'y' => 2,
         ]);
 
         $user->update([
