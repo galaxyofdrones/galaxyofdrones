@@ -4,7 +4,6 @@ namespace Koodilab\Models\Behaviors;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Models\Planet;
 use Koodilab\Support\Bounds;
 
 trait Positionable
@@ -44,31 +43,35 @@ trait Positionable
     }
 
     /**
-     * Has penalty by the others' position.
-     *
-     * @return bool
-     */
-    public function hasPenalty()
-    {
-        return $this->penaltyRate() > Planet::PENALTY_RATE;
-    }
-
-    /**
-     * Get penalty rate by the others' position.
+     * Get the penalty rate.
      *
      * @return double
      */
     public function penaltyRate()
     {
         $bounds = new Bounds(
-            $this->x - Planet::PENALTY_STEP,
-            $this->y - Planet::PENALTY_STEP,
-            $this->x + Planet::PENALTY_STEP,
-            $this->y + Planet::PENALTY_STEP
+            $this->x - static::PENALTY_STEP,
+            $this->y - static::PENALTY_STEP,
+            $this->x + static::PENALTY_STEP,
+            $this->y + static::PENALTY_STEP
         );
 
-        $query = Planet::query()->where('user_id', '=', $this->user_id);
+        $planetsInBounds = static::inBounds($bounds)
+            ->where('user_id', '=', $this->user_id)
+            ->where('id', '!=', $this->id)
+            ->count();
 
-        return $this->scopeInBounds($query, $bounds)->count() / $this->user->planets()->count();
+        $planetsCount = $this->user->planets()->where('id', '!=', $this->id)->count();
+        $planetsRate = 1;
+
+        if ($planetsCount > 0) {
+            $planetsRate = $planetsInBounds / $planetsCount;
+        }
+
+        if ($planetsRate < static::PENALTY_RATE) {
+            return 2 - $planetsRate;
+        }
+
+        return 1;
     }
 }

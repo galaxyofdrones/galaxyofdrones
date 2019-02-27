@@ -14,7 +14,6 @@ class UsersTableSeeder extends Seeder
             'username' => 'koodilab',
             'email' => 'support@koodilab.com',
             'password' => 'havefun',
-            'cost_penalty' => 1,
         ]);
     }
 }
