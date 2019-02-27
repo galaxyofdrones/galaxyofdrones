@@ -187,23 +187,26 @@ class ConstructionTest extends TestCase
         ]);
 
         for ($i=1; $i<10; ++$i) {
-            factory(Planet::class)->create([
+            $tmpPlanet = factory(Planet::class)->create([
+                'user_id' => null,
+                'x' => $user->capital->x + 2000 + $i,
+                'y' => $user->capital->y + 2000 + $i,
+            ]);
+
+            $tmpPlanet->update([
                 'user_id' => $user->id,
-                'x' => $user->current->x + $i,
-                'y' => $user->current->y + $i,
             ]);
         }
 
         $user->update([
-            'energy' => 199,
-            'cost_penalty' => $user->current->hasPenalty() ? $user->current->penaltyRate() + 1 : 1,
+            'energy' => 188,
         ]);
 
         $this->post("/api/construction/{$grid2->id}/{$building2->id}")
             ->assertStatus(400);
 
         $user->update([
-            'energy' => 200,
+            'energy' => 189,
         ]);
 
         $this->post("/api/construction/{$grid2->id}/{$building2->id}")
