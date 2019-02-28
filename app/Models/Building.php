@@ -28,7 +28,6 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
  * @property int                                                     $mining_rate
  * @property int                                                     $production_rate
  * @property float                                                   $defense_bonus
- * @property float                                                   $construction_cost_bonus
  * @property float                                                   $construction_time_bonus
  * @property float                                                   $trade_time_bonus
  * @property float                                                   $train_time_bonus
