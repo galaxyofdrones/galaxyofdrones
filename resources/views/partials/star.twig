@@ -45,12 +45,12 @@
                                         <button class="btn btn-success btn-block"
                                                 type="button"
                                                 @click="bookmark()"
-                                                :disabled="data.isBookmarked">
+                                                :disabled="data.is_bookmarked">
                                             {{ trans('messages.bookmark.star') }}
                                         </button>
                                     </div>
                                 </div>
-                                <div v-if="data.hasExpedition" class="col-lg-6">
+                                <div v-if="data.has_expedition" class="col-lg-6">
                                     <div class="form-group">
                                         <button class="btn btn-primary btn-block"
                                                 type="button"

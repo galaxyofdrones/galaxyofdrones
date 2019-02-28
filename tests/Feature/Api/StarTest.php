@@ -53,12 +53,12 @@ class StarTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'id',
-                'isBookmarked',
-                'hasExpedition',
+                'is_bookmarked',
+                'has_expedition',
             ])->assertJson([
                 'id' => $star->id,
-                'isBookmarked' => true,
-                'hasExpedition' => true,
+                'is_bookmarked' => true,
+                'has_expedition' => true,
             ]);
     }
 }
