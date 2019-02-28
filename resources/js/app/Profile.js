@@ -25,6 +25,7 @@ export default Modal.extend({
             isBlocked: false,
             username: '',
             data: {
+                is_blocked: false,
                 created_at: ''
             }
         };
@@ -51,7 +52,7 @@ export default Modal.extend({
                 this.url.replace('__user__', this.username)
             ).then(response => {
                 this.data = response.data;
-                this.isBlocked = this.data.isBlocked;
+                this.isBlocked = this.data.is_blocked;
 
                 this.$nextTick(
                     () => this.$modal.modal()

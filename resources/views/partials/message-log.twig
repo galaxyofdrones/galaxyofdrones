@@ -31,8 +31,8 @@
                         </div>
                         <div class="col-lg-2 pt-lg-3">
                             <button class="btn btn-success btn-block"
-                               :disabled="message.sender.isBlocked || message.sender.isBlockedBy"
-                               @click="sendMessage(message.sender.username)">
+                                    :disabled="message.sender.is_blocked || message.sender.is_blocked_by"
+                                    @click="sendMessage(message.sender.username)">
                                 {{ trans('messages.message.reply') }}
                             </button>
                         </div>

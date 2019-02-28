@@ -78,7 +78,7 @@ class UpgradeTest extends TestCase
 
         $this->getJson("/api/upgrade/{$grid->id}")->assertStatus(200)
             ->assertJsonStructure([
-                'hasTraining',
+                'has_training',
                 'remaining',
                 'building' => [
                     'id',
@@ -123,7 +123,7 @@ class UpgradeTest extends TestCase
                     'has_lower_level',
                 ],
             ])->assertJson([
-                'hasTraining' => true,
+                'has_training' => true,
                 'remaining' => $upgrade->remaning,
                 'building' => [
                     'id' => $building->id,

@@ -59,9 +59,9 @@ class UserShowTransformer extends Transformer
             'winning_battle_count' => $item->winningBattleLogCount(),
             'losing_battle_count' => $item->losingBattleLogCount(),
             'created_at' => $item->created_at->toDateTimeString(),
-            'canBlock' => $user->id != $item->id,
-            'isBlocked' => ! empty($user->findByBlocked($item)),
-            'isBlockedBy' => ! empty($item->findByBlocked($user)),
+            'can_block' => $user->id != $item->id,
+            'is_blocked' => ! empty($user->findByBlocked($item)),
+            'is_blocked_by' => ! empty($item->findByBlocked($user)),
             'planets' => $this->planets($item),
         ];
     }

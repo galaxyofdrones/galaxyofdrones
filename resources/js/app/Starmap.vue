@@ -93,7 +93,7 @@
                     coordsToLatLng,
 
                     pointToLayer: (geoJsonPoint, latLng) => {
-                        if (geoJsonPoint.properties.isMovement) {
+                        if (geoJsonPoint.properties.is_movement) {
                             return this.movementMarker(
                                 latLng, coordsToLatLng(geoJsonPoint.properties.end), geoJsonPoint
                             );

@@ -57,8 +57,8 @@ class MessageTest extends TestCase
                         'sender' => [
                             'id',
                             'username',
-                            'isBlocked',
-                            'isBlockedBy',
+                            'is_blocked',
+                            'is_blocked_by',
                         ],
                     ],
                 ],
@@ -71,8 +71,8 @@ class MessageTest extends TestCase
                         'sender' => [
                             'id' => $message->sender->id,
                             'username' => $message->sender->username,
-                            'isBlocked' => false,
-                            'isBlockedBy' => false,
+                            'is_blocked' => false,
+                            'is_blocked_by' => false,
                         ],
                     ],
                 ],
