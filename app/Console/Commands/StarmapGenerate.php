@@ -14,7 +14,7 @@ class StarmapGenerate extends Command
     /**
      * {@inheritdoc}
      */
-    protected $signature = 'starmap:generate';
+    protected $signature = 'starmap:generate {--no-render}';
 
     /**
      * {@inheritdoc}
@@ -60,10 +60,16 @@ class StarmapGenerate extends Command
 
         $this->generator->generate();
 
-        $this->info(
-            $this->prependTimestamp('Generation complete! Rendering starmap...')
-        );
+        if ($this->hasOption('no-render')) {
+            $this->info(
+                $this->prependTimestamp('Generation complete!')
+            );
+        } else {
+            $this->info(
+                $this->prependTimestamp('Generation complete! Rendering starmap...')
+            );
 
-        $this->call('starmap:render');
+            $this->call('starmap:render');
+        }
     }
 }
