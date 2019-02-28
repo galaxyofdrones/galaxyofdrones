@@ -16,7 +16,7 @@ class ExpeditionLogTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

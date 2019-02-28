@@ -26,6 +26,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
      */
     public function register()
     {
+        // Horizon::night();
     }
 
     /**

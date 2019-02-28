@@ -10,7 +10,7 @@ trait FindByUsername
      * @param string $username
      * @param array  $columns
      *
-     * @return \Illuminate\Database\Eloquent\Model|null|static
+     * @return \Illuminate\Database\Eloquent\Model|static|null
      */
     public static function findByUsername($username, $columns = ['*'])
     {

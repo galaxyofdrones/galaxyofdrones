@@ -24,7 +24,7 @@ class GeneratorTest extends TestCase
      */
     protected $generator;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

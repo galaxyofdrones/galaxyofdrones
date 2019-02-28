@@ -16,7 +16,7 @@ class SettingManagerTest extends TestCase
      */
     protected $settingManager;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
