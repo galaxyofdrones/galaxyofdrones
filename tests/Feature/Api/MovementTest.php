@@ -38,6 +38,7 @@ class MovementTest extends TestCase
         ]);
 
         $user->update([
+            'capital_id' => $planet->id,
             'current_id' => $planet->id,
             'started_at' => Carbon::now(),
         ]);

@@ -36,6 +36,7 @@ class UpgradeTest extends TestCase
         Passport::actingAs($user);
 
         $user->update([
+            'capital_id' => $planet->id,
             'current_id' => $planet->id,
         ]);
     }
