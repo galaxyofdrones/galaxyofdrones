@@ -28,7 +28,7 @@
                             <p>
                                 {{ vue('joined') }}
                             </p>
-                            <div class="attribute-row" :class="{separator: data.canBlock}">
+                            <div class="attribute-row" :class="{separator: data.can_block}">
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
@@ -90,11 +90,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="data.canBlock" class="attribute-row">
+                            <div v-if="data.can_block" class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <button class="btn btn-success btn-block"
-                                                :disabled="isBlocked || data.isBlockedBy"
+                                                :disabled="isBlocked || data.is_blocked_by"
                                                 @click="sendMessage()">
                                             {{ trans('messages.message.send') }}
                                         </button>

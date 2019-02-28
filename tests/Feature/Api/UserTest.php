@@ -139,9 +139,9 @@ class UserTest extends TestCase
                 'winning_battle_count',
                 'losing_battle_count',
                 'created_at',
-                'canBlock',
-                'isBlocked',
-                'isBlockedBy',
+                'can_block',
+                'is_blocked',
+                'is_blocked_by',
                 'planets' => [
                     [
                         'id',
@@ -162,9 +162,9 @@ class UserTest extends TestCase
                 'winning_battle_count' => $user->winningBattleLogCount(),
                 'losing_battle_count' => $user->losingBattleLogCount(),
                 'created_at' => $user->created_at->toDateTimeString(),
-                'canBlock' => $loggedUser->id != $user->id,
-                'isBlocked' => ! empty($loggedUser->findByBlocked($user)),
-                'isBlockedBy' => ! empty($user->findByBlocked($loggedUser)),
+                'can_block' => $loggedUser->id != $user->id,
+                'is_blocked' => ! empty($loggedUser->findByBlocked($user)),
+                'is_blocked_by' => ! empty($user->findByBlocked($loggedUser)),
                 'planets' => [
                     [
                         'id' => $planet->id,

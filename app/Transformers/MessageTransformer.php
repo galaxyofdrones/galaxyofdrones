@@ -41,8 +41,8 @@ class MessageTransformer extends Transformer
             'sender' => [
                 'id' => $item->sender->id,
                 'username' => $item->sender->username,
-                'isBlocked' => ! empty($user->findByBlocked($item->sender)),
-                'isBlockedBy' => ! empty($item->sender->findByBlocked($user)),
+                'is_blocked' => ! empty($user->findByBlocked($item->sender)),
+                'is_blocked_by' => ! empty($item->sender->findByBlocked($user)),
             ],
         ];
     }
