@@ -41,37 +41,4 @@ trait Positionable
 
         return $query;
     }
-
-    /**
-     * Get the penalty rate.
-     *
-     * @return double
-     */
-    public function penaltyRate()
-    {
-        $bounds = new Bounds(
-            $this->x - static::PENALTY_STEP,
-            $this->y - static::PENALTY_STEP,
-            $this->x + static::PENALTY_STEP,
-            $this->y + static::PENALTY_STEP
-        );
-
-        $planetsInBounds = static::inBounds($bounds)
-            ->where('user_id', '=', $this->user_id)
-            ->where('id', '!=', $this->id)
-            ->count();
-
-        $planetsCount = $this->user->planets()->where('id', '!=', $this->id)->count();
-        $planetsRate = 1;
-
-        if ($planetsCount > 0) {
-            $planetsRate = $planetsInBounds / $planetsCount;
-        }
-
-        if ($planetsRate < static::PENALTY_RATE) {
-            return 2 - $planetsRate;
-        }
-
-        return 1;
-    }
 }

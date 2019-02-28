@@ -53,9 +53,7 @@ class StateManager
     {
         $user->update([
             'energy' => $user->energy,
-            'penalty_rate' => $user->capital
-                ? $user->capital->penaltyRate()
-                : 1,
+            'penalty_rate' => $user->calculatePenaltyRate(),
             'production_rate' => $user->planets->sum('production_rate'),
             'last_energy_changed' => Carbon::now(),
         ]);

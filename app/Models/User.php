@@ -5,7 +5,6 @@ namespace Koodilab\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Koodilab\Events\UserUpdated;
-use Koodilab\Support\Bounds;
 use Koodilab\Support\Util;
 use Laravel\Passport\HasApiTokens;
 
@@ -22,7 +21,7 @@ use Laravel\Passport\HasApiTokens;
  * @property bool                                                                                                      $is_enabled
  * @property int                                                                                                       $energy
  * @property int                                                                                                       $solarion
- * @property double                                                                                                    $penalty_rate
+ * @property float                                                                                                     $penalty_rate
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
  * @property \Illuminate\Support\Carbon|null                                                                           $last_login
@@ -89,6 +88,7 @@ class User extends Authenticatable
         Concerns\CanOccupy,
         Concerns\HasEnergy,
         Concerns\HasExperience,
+        Concerns\HasPenaltyRate,
         Concerns\HasResearchable,
         Concerns\HasSolarion,
         Queries\FindAvailableResource,

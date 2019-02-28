@@ -4,7 +4,6 @@ namespace Koodilab\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Collection;
 use Koodilab\Models\Building;
-use Koodilab\Models\User;
 
 trait HasBuilding
 {
