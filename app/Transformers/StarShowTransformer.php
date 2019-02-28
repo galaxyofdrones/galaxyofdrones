@@ -39,8 +39,8 @@ class StarShowTransformer extends Transformer
 
         return [
             'id' => $item->id,
-            'isBookmarked' => $user && Bookmark::findByStarAndUser($item, $user),
-            'hasExpedition' => $user && $expedition && ! $expedition->isExpired(),
+            'is_bookmarked' => $user && Bookmark::findByStarAndUser($item, $user),
+            'has_expedition' => $user && $expedition && ! $expedition->isExpired(),
         ];
     }
 }

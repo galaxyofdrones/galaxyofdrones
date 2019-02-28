@@ -28,7 +28,7 @@ class MovementUnitFeatureTransformer extends MovementFeatureTransformer
         return [
             'type' => 'Feature',
             'properties' => [
-                'isMovement' => true,
+                'is_movement' => true,
                 'type' => $item->type,
                 'status' => $this->status($item),
                 'interval' => $item->remaining,

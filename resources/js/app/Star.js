@@ -16,8 +16,8 @@ export default Modal.extend({
                 }
             },
             data: {
-                isBookmarked: false,
-                hasExpedition: false
+                is_bookmarked: false,
+                has_expedition: false
             }
         };
     },
@@ -52,7 +52,7 @@ export default Modal.extend({
         },
 
         bookmark() {
-            this.data.isBookmarked = true;
+            this.data.is_bookmarked = true;
 
             axios.post(
                 this.bookmarkStoreUrl.replace('__star__', this.properties.id)

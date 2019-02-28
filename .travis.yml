@@ -44,6 +44,7 @@ before_script:
   - php artisan passport:keys
   - php artisan config:clear
   - php artisan migrate --seed --no-interaction
+  - php artisan starmap:generate --no-render
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - php artisan serve &
 

@@ -29,7 +29,7 @@ export default Modal.extend({
                 building_id: undefined
             },
             data: {
-                hasTraining: false,
+                has_training: false,
                 remaining: 0,
                 building: {},
                 upgrade: {}
@@ -50,7 +50,7 @@ export default Modal.extend({
         },
 
         canDemolish() {
-            return !this.data.hasTraining && !this.remaining && (!this.isCapitalPlanet || this.data.building.type !== this.centralType);
+            return !this.data.has_training && !this.remaining && (!this.isCapitalPlanet || this.data.building.type !== this.centralType);
         },
 
         building() {
