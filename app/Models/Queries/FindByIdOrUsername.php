@@ -10,7 +10,7 @@ trait FindByIdOrUsername
      * @param mixed $value
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Model|null|static
+     * @return \Illuminate\Database\Eloquent\Model|static|null
      */
     public static function findByIdOrUsername($value, $columns = ['*'])
     {
