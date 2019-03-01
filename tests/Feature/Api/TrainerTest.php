@@ -26,7 +26,17 @@ class TrainerTest extends TestCase
             'energy' => 1000,
         ]);
 
+        $planet = factory(Planet::class)->create([
+            'user_id' => $user->id,
+            'x' => 12,
+            'y' => 17,
+        ]);
+
         Passport::actingAs($user);
+
+        $user->update([
+            'capital_id' => $planet->id,
+        ]);
     }
 
     public function testIndex()
@@ -110,10 +120,14 @@ class TrainerTest extends TestCase
         $user = auth()->user();
 
         $planet = factory(Planet::class)->create([
-            'user_id' => $user->id,
+            'user_id' => null,
             'supply' => 500,
             'x' => 2,
             'y' => 2,
+        ]);
+
+        $planet->update([
+            'user_id' => $user->id,
         ]);
 
         $building = factory(Building::class)->create([
@@ -155,6 +169,30 @@ class TrainerTest extends TestCase
 
         $this->post("/api/trainer/{$grid->id}/{$unit->id}")
             ->assertStatus(400);
+
+        for ($i = 1; $i < 10; ++$i) {
+            $tmpPlanet = factory(Planet::class)->create([
+                'user_id' => null,
+                'x' => $user->capital->x + Planet::PENALTY_STEP + $i,
+                'y' => $user->capital->y + Planet::PENALTY_STEP + $i,
+            ]);
+
+            $tmpPlanet->update([
+                'user_id' => $user->id,
+            ]);
+        }
+
+        $user->update([
+            'energy' => 51,
+        ]);
+
+        $this->post("/api/trainer/{$grid->id}/{$unit->id}", [
+            'quantity' => 5,
+        ])->assertStatus(400);
+
+        $user->update([
+            'energy' => 100,
+        ]);
 
         $this->post("/api/trainer/{$grid->id}/{$unit->id}", [
             'quantity' => 5,
