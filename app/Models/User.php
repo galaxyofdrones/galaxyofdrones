@@ -133,6 +133,7 @@ class User extends Authenticatable
         'solarion' => 0,
         'experience' => 0,
         'production_rate' => 0,
+        'penalty_rate' => 0,
     ];
 
     /**
