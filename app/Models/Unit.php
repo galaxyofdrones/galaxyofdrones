@@ -141,6 +141,24 @@ class Unit extends Model implements ResearchableContract, TranslatableContract
     }
 
     /**
+     * Get the train cost attribute.
+     *
+     * @return int
+     */
+    public function getTrainCostAttribute()
+    {
+        $trainCost = $this->attributes['train_cost'];
+
+        if (! empty($this->modifiers['train_cost_penalty'])) {
+            $trainCost = round(
+                $trainCost * max(1, $this->modifiers['train_cost_penalty'])
+            );
+        }
+
+        return $trainCost;
+    }
+
+    /**
      * Get the train time attribute.
      *
      * @return int
