@@ -14,7 +14,7 @@ trait HasPenaltyRate
      */
     public function calculatePenaltyRate()
     {
-        if (! $this->capital) {
+        if (! $this->capital_id) {
             return 0;
         }
 
