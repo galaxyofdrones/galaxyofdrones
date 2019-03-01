@@ -182,9 +182,13 @@ class Building extends Model implements TranslatableContract
         $constructionCost = $this->attributes['construction_cost'];
 
         if ($this->hasLowerLevel()) {
-            return round(
+            $constructionCost = round(
                 $this->applyExpFormula($constructionCost)
             );
+        }
+
+        if (! empty($this->modifiers['construction_cost_penalty'])) {
+            $constructionCost *= 1 + $this->modifiers['construction_cost_penalty'];
         }
 
         return $constructionCost;
