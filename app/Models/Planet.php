@@ -141,7 +141,7 @@ class Planet extends Model implements PositionableContract
      *
      * @var int
      */
-    const PENALTY_STEP = 1024;
+    const PENALTY_STEP = 4096;
 
     /**
      * The penalty rate.
