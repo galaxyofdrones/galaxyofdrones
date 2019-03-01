@@ -22,6 +22,7 @@ trait HasBuilding
             'level' => $this->level,
             'defense_bonus' => $this->planet->defense_bonus,
             'construction_time_bonus' => $this->planet->construction_time_bonus,
+            'construction_cost_penalty' => $this->planet->user->penalty_rate,
         ]);
     }
 
@@ -42,6 +43,7 @@ trait HasBuilding
             'level' => 1,
             'defense_bonus' => $this->planet->defense_bonus,
             'construction_time_bonus' => $this->planet->construction_time_bonus,
+            'construction_cost_penalty' => $this->planet->user->penalty_rate,
         ];
 
         if ($this->construction) {
@@ -101,6 +103,7 @@ trait HasBuilding
             'level' => $this->level + 1,
             'defense_bonus' => $this->planet->defense_bonus,
             'construction_time_bonus' => $this->planet->construction_time_bonus,
+            'construction_cost_penalty' => $this->planet->user->penalty_rate,
         ]);
     }
 
