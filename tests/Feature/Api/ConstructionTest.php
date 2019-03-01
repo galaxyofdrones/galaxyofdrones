@@ -189,8 +189,8 @@ class ConstructionTest extends TestCase
         for ($i = 1; $i < 10; ++$i) {
             $tmpPlanet = factory(Planet::class)->create([
                 'user_id' => null,
-                'x' => $user->capital->x + 2000 + $i,
-                'y' => $user->capital->y + 2000 + $i,
+                'x' => $user->capital->x + Planet::PENALTY_STEP + $i,
+                'y' => $user->capital->y + Planet::PENALTY_STEP + $i,
             ]);
 
             $tmpPlanet->update([
