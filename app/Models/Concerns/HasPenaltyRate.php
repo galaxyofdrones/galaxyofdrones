@@ -14,6 +14,10 @@ trait HasPenaltyRate
      */
     public function calculatePenaltyRate()
     {
+        if (! $this->capital) {
+            return 0;
+        }
+
         $bounds = new Bounds(
             $this->capital->x - Planet::PENALTY_STEP,
             $this->capital->y - Planet::PENALTY_STEP,
