@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('solarion')->unsigned();
             $table->bigInteger('experience')->unsigned();
             $table->bigInteger('production_rate')->unsigned();
+            $table->double('penalty_rate')->unsigned();
             $table->timestamp('last_login')->nullable();
             $table->timestamp('last_capital_changed')->nullable();
             $table->timestamp('last_energy_changed')->nullable();

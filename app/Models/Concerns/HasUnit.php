@@ -29,6 +29,7 @@ trait HasUnit
             return $units->add(
                 $this->training->unit->applyModifiers([
                     'train_time_bonus' => $this->building->train_time_bonus,
+                    'train_cost_penalty' => $this->planet->user->penalty_rate,
                 ])
             );
         }
@@ -37,6 +38,7 @@ trait HasUnit
             ->transform(function (Unit $unit) {
                 return $unit->applyModifiers([
                     'train_time_bonus' => $this->building->train_time_bonus,
+                    'train_cost_penalty' => $this->planet->user->penalty_rate,
                 ]);
             });
     }

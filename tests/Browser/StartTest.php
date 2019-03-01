@@ -32,6 +32,7 @@ class StartTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->click('.fa-bars')
+                ->assertVisible('.sidebar-content')
                 ->assertSeeIn('.sidebar-content', 'Mining rate')
                 ->assertSeeIn('.sidebar-content', 'Production rate')
                 ->assertSeeIn('.sidebar-content', 'Incoming')

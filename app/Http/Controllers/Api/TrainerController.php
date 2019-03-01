@@ -65,6 +65,11 @@ class TrainerController extends Controller
             throw new BadRequestHttpException();
         }
 
+        $unit->applyModifiers([
+            'train_time_bonus' => $grid->building->train_time_bonus,
+            'train_cost_penalty' => $grid->planet->user->penalty_rate,
+        ]);
+
         if (! $user->hasEnergy($quantity * $unit->train_cost)) {
             throw new BadRequestHttpException();
         }
@@ -75,10 +80,6 @@ class TrainerController extends Controller
 
         $grid->building->applyModifiers([
             'level' => $grid->level,
-        ]);
-
-        $unit->applyModifiers([
-            'train_time_bonus' => $grid->building->train_time_bonus,
         ]);
 
         DB::transaction(function () use ($grid, $unit, $quantity, $manager) {

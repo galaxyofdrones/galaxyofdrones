@@ -29,7 +29,6 @@ class ConstructionTest extends TestCase
 
         $planet = factory(Planet::class)->create([
             'user_id' => $user->id,
-            'name' => 'Earth',
             'x' => 1,
             'y' => 1,
         ]);
@@ -134,9 +133,20 @@ class ConstructionTest extends TestCase
 
     public function testStore()
     {
-        $building = factory(Building::class)->create();
+        $user = auth()->user();
+
+        $building = factory(Building::class)->create([
+            'construction_cost' => 100,
+        ]);
+
+        $planet = factory(Planet::class)->create([
+            'user_id' => auth()->user()->id,
+            'x' => 800,
+            'y' => 800,
+        ]);
+
         $grid = factory(Grid::class)->create([
-            'planet_id' => auth()->user()->current->id,
+            'planet_id' => $planet->id,
             'x' => 5,
             'y' => 7,
         ]);
@@ -155,23 +165,48 @@ class ConstructionTest extends TestCase
             ->assertStatus(400);
 
         $building2 = factory(Building::class)->create([
+            'construction_cost' => 10000,
             'parent_id' => $building->id,
             'type' => Building::TYPE_MINER,
+            'limit' => 0,
         ]);
 
         $grid3 = factory(Grid::class)->create([
             'building_id' => $building->id,
-            'planet_id' => auth()->user()->current->id,
+            'planet_id' => $planet->id,
             'x' => 10,
             'y' => 8,
         ]);
 
         $grid2 = factory(Grid::class)->create([
             'building_id' => null,
-            'planet_id' => auth()->user()->current->id,
+            'planet_id' => $planet->id,
             'type' => Grid::TYPE_RESOURCE,
             'x' => 3,
             'y' => 9,
+        ]);
+
+        for ($i = 1; $i < 10; ++$i) {
+            $tmpPlanet = factory(Planet::class)->create([
+                'user_id' => null,
+                'x' => $user->capital->x + Planet::PENALTY_STEP + $i,
+                'y' => $user->capital->y + Planet::PENALTY_STEP + $i,
+            ]);
+
+            $tmpPlanet->update([
+                'user_id' => $user->id,
+            ]);
+        }
+
+        $user->update([
+            'energy' => 188,
+        ]);
+
+        $this->post("/api/construction/{$grid2->id}/{$building2->id}")
+            ->assertStatus(400);
+
+        $user->update([
+            'energy' => 189,
         ]);
 
         $this->post("/api/construction/{$grid2->id}/{$building2->id}")

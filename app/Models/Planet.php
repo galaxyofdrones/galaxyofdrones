@@ -137,6 +137,20 @@ class Planet extends Model implements PositionableContract
     const FIND_STEP = 1024;
 
     /**
+     * The penalty step.
+     *
+     * @var int
+     */
+    const PENALTY_STEP = 4096;
+
+    /**
+     * The penalty rate.
+     *
+     * @var int
+     */
+    const PENALTY_RATE = 0.5;
+
+    /**
      * {@inheritdoc}
      */
     protected $guarded = [

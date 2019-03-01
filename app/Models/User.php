@@ -21,6 +21,7 @@ use Laravel\Passport\HasApiTokens;
  * @property bool                                                                                                      $is_enabled
  * @property int                                                                                                       $energy
  * @property int                                                                                                       $solarion
+ * @property float                                                                                                     $penalty_rate
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
  * @property \Illuminate\Support\Carbon|null                                                                           $last_login
@@ -87,6 +88,7 @@ class User extends Authenticatable
         Concerns\CanOccupy,
         Concerns\HasEnergy,
         Concerns\HasExperience,
+        Concerns\HasPenaltyRate,
         Concerns\HasResearchable,
         Concerns\HasSolarion,
         Queries\FindAvailableResource,
@@ -131,6 +133,7 @@ class User extends Authenticatable
         'solarion' => 0,
         'experience' => 0,
         'production_rate' => 0,
+        'penalty_rate' => 0,
     ];
 
     /**
