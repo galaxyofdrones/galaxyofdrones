@@ -188,9 +188,7 @@ class Building extends Model implements TranslatableContract
         }
 
         if (! empty($this->modifiers['construction_cost_penalty'])) {
-            $constructionCost = round(
-                $constructionCost * max(1, $this->modifiers['construction_cost_penalty'])
-            );
+            $constructionCost *= 1 + $this->modifiers['construction_cost_penalty'];
         }
 
         return $constructionCost;

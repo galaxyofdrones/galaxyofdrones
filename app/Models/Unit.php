@@ -150,9 +150,7 @@ class Unit extends Model implements ResearchableContract, TranslatableContract
         $trainCost = $this->attributes['train_cost'];
 
         if (! empty($this->modifiers['train_cost_penalty'])) {
-            $trainCost = round(
-                $trainCost * max(1, $this->modifiers['train_cost_penalty'])
-            );
+            $trainCost *= 1 + $this->modifiers['train_cost_penalty'];
         }
 
         return $trainCost;

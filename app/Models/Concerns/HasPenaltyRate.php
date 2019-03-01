@@ -34,9 +34,9 @@ trait HasPenaltyRate
         }
 
         if ($planetFrequency < Planet::PENALTY_RATE) {
-            return 2 - $planetFrequency;
+            return 1 - round($planetFrequency, 2);
         }
 
-        return 1;
+        return 0;
     }
 }
