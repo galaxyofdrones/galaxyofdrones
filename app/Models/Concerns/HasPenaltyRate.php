@@ -33,7 +33,7 @@ trait HasPenaltyRate
         $planetCount = $this->planets()
             ->where('id', '!=', $this->capital_id)
             ->count();
-        
+
         $planetFrequency = 1;
 
         if ($planetCount > 0) {
