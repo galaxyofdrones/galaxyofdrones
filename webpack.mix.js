@@ -12,9 +12,7 @@ const webpack = require('webpack');
  |
  */
 
-mix.options({
-    processCssUrls: false
-})
+mix.options({ processCssUrls: false })
     .webpackConfig({
         plugins: [
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)

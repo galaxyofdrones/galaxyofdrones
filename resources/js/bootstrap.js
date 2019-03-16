@@ -60,8 +60,10 @@ window.Echo = new Echo({
 
 window.Vue = require('vue');
 window.Swal = require('sweetalert2');
+window.moment = require('moment');
 
-require('moment').locale(document.querySelector('html').getAttribute('lang'));
+moment.locale(document.querySelector('html').getAttribute('lang'));
+
 require('leaflet');
 require('leaflet-ajax');
 require('perfect-scrollbar');
