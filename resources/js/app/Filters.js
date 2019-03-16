@@ -16,7 +16,7 @@ export default {
     },
 
     item(value, type = 'resource') {
-        return `${type}-${value && value.hasOwnProperty('id')
+        return `${type}-${value && _.has(value, 'id')
             ? value.id
             : value}`;
     },
@@ -24,14 +24,20 @@ export default {
     number(value, decimals = 2) {
         const abs = Math.abs(value);
 
-        if (abs >= Math.pow(10, 13)) {
-            return `${(value / Math.pow(10, 12)).toFixed(decimals)}t`;
-        } else if (abs >= Math.pow(10, 10)) {
-            return `${(value / Math.pow(10, 9)).toFixed(decimals)}b`;
-        } else if (abs >= Math.pow(10, 7)) {
-            return `${(value / Math.pow(10, 6)).toFixed(decimals)}m`;
-        } else if (abs >= Math.pow(10, 4)) {
-            return `${(value / Math.pow(10, 3)).toFixed(decimals)}k`;
+        if (abs >= 10 ** 13) {
+            return `${(value / (10 ** 12)).toFixed(decimals)}t`;
+        }
+
+        if (abs >= 10 ** 10) {
+            return `${(value / (10 ** 9)).toFixed(decimals)}b`;
+        }
+
+        if (abs >= 10 ** 7) {
+            return `${(value / (10 ** 6)).toFixed(decimals)}m`;
+        }
+
+        if (abs >= 10 ** 4) {
+            return `${(value / (10 ** 3)).toFixed(decimals)}k`;
         }
 
         return Math.round(value);
@@ -42,26 +48,28 @@ export default {
     },
 
     sign(value, number) {
-        if (!number) {
-            number = value;
+        let direction = number;
+
+        if (!direction) {
+            direction = value;
         }
 
-        value = !isNaN(value)
+        const result = !Number.isNaN(value)
             ? Math.abs(value)
             : value;
 
-        if (number < 0) {
-            return `-${value}`;
+        if (direction < 0) {
+            return `-${result}`;
         }
 
-        return `+${value}`;
+        return `+${result}`;
     },
 
     timer(value) {
         const abs = Math.abs(value);
 
         const hours = _.padStart(Math.floor(abs / 3600), 2, '0');
-        const minutes = _.padStart(Math.floor(abs / 60 % 60), 2, '0');
+        const minutes = _.padStart(Math.floor(abs / (60 % 6)), 2, '0');
         const seconds = _.padStart(Math.floor(abs % 60), 2, '0');
 
         return `${hours}:${minutes}:${seconds}`;

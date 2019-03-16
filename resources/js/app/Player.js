@@ -69,7 +69,9 @@ export default {
             this.energy = this.data.energy;
 
             if (this.data.production_rate) {
-                this.energyInterval = setInterval(() => this.energy += this.data.production_rate / 3600, 1000);
+                this.energyInterval = setInterval(
+                    () => { this.energy += this.data.production_rate / 3600; }, 1000
+                );
             }
         },
 

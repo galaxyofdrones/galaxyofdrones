@@ -35,7 +35,7 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS galaxyofdrones_test;'
 
 install:
-  - travis_retry yarn global add jscs
+  - travis_retry yarn global add eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-vue
   - travis_retry composer global require friendsofphp/php-cs-fixer:2.14.* --no-interaction --no-suggest
   - travis_retry composer install --no-interaction --no-suggest
 
@@ -49,7 +49,7 @@ before_script:
   - php artisan serve &
 
 script:
-  - jscs ./resources/js
+  - eslint --ext .js,.vue ./resources/js
   - $HOME/.composer/vendor/bin/php-cs-fixer fix --dry-run
   - vendor/bin/phpunit
   - php artisan dusk

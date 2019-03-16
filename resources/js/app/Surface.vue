@@ -2,373 +2,393 @@
     <canvas class="surface"></canvas>
 </template>
 <script>
-    import { autoDetectRenderer, Container, loaders, Sprite, utils, Text, Texture } from 'pixi.js';
-    import { EventBus } from '../event-bus';
-    import Filters from './Filters';
-    import Sprites from './Sprites';
+import {
+    autoDetectRenderer, Container, loaders, Sprite, utils, Text, Texture
+} from 'pixi.js';
 
-    export default {
-        props: [
-            'width',
-            'height',
-            'backgroundTexture',
-            'gridTextureAtlas'
-        ],
+import { EventBus } from '../event-bus';
+import Filters from './Filters';
+import Sprites from './Sprites';
 
-        data() {
-            return {
-                $viewport: undefined,
-                animationFrame: undefined,
-                clickTreshold: 5,
-                isDragging: false,
-                dragStartX: 0,
-                dragStartY: 0,
-                dragged: 0,
-                container: undefined,
-                intervals: [],
-                loader: undefined,
-                renderer: undefined,
-                stage: undefined,
-                planet: {
-                    resource_id: undefined,
-                    grids: []
-                },
-                textStyle: {
-                    fontFamily: 'Exo 2',
-                    fontSize: '14px',
-                    fill: '#fff',
-                    align: 'center',
-                    stroke: '#0e141c',
-                    strokeThickness: 4
-                }
-            };
+export default {
+    props: {
+        width: {
+            type: Number,
+            required: true
         },
 
-        created() {
-            utils.skipHello();
+        height: {
+            type: Number,
+            required: true
         },
 
-        mounted() {
-            this.$viewport = $(this.$el).parent();
-
-            EventBus.$on('planet-updated', this.planetUpdated);
+        backgroundTexture: {
+            type: String,
+            required: true
         },
 
-        beforeDestroy() {
-            EventBus.$off('planet-updated', this.planetUpdated);
+        gridTextureAtlas: {
+            type: String,
+            required: true
+        }
+    },
 
-            this.destoryPixi();
+    data() {
+        return {
+            $viewport: undefined,
+            animationFrame: undefined,
+            clickTreshold: 5,
+            isDragging: false,
+            dragStartX: 0,
+            dragStartY: 0,
+            dragged: 0,
+            container: undefined,
+            intervals: [],
+            loader: undefined,
+            renderer: undefined,
+            stage: undefined,
+            planet: {
+                resource_id: undefined,
+                grids: []
+            },
+            textStyle: {
+                fontFamily: 'Exo 2',
+                fontSize: '14px',
+                fill: '#fff',
+                align: 'center',
+                stroke: '#0e141c',
+                strokeThickness: 4
+            }
+        };
+    },
+
+    created() {
+        utils.skipHello();
+    },
+
+    mounted() {
+        this.$viewport = $(this.$el).parent();
+
+        EventBus.$on('planet-updated', this.planetUpdated);
+    },
+
+    beforeDestroy() {
+        EventBus.$off('planet-updated', this.planetUpdated);
+
+        this.destoryPixi();
+    },
+
+    methods: {
+        planetUpdated(planet) {
+            this.planet = planet;
+
+            if (!this.stage) {
+                this.initPixi();
+            } else {
+                this.updatePixi();
+            }
         },
 
-        methods: {
-            planetUpdated(planet) {
-                this.planet = planet;
-
-                if (!this.stage) {
-                    this.initPixi();
-                } else {
-                    this.updatePixi();
-                }
-            },
-
-            initPixi() {
-                this.loader = new loaders.Loader();
-                this.loader.add(this.backgroundName(), this.background());
-                this.loader.add('grid', this.gridTextureAtlas);
-                this.loader.load(() => {
-                    this.setup();
-                    this.align();
-                    this.animate();
-                });
-
-                this.stage = new Container();
-                this.container = new Container();
-                this.container.interactive = true;
-                this.container.on('mousedown', this.mouseDown);
-                this.container.on('mousemove', this.mouseMove);
-                this.container.on('mouseup', this.mouseUp);
-                this.container.on('mouseupoutside', this.mouseUp);
-                this.container.on('touchstart', this.mouseDown);
-                this.container.on('touchmove', this.mouseMove);
-                this.container.on('touchend', this.mouseUp);
-                this.container.on('touchendoutside', this.mouseUp);
-                this.stage.addChild(this.container);
-
-                this.renderer = autoDetectRenderer(this.rendererWidth(), this.rendererHeight(), {
-                    view: this.$el,
-                    transparent: true
-                });
-
-                window.addEventListener('resize', this.resize);
-            },
-
-            updatePixi() {
-                const backgroundName = this.backgroundName();
-
-                if (!this.loader.resources[backgroundName]) {
-                    this.loader.add(backgroundName, this.background());
-                    this.loader.load(this.setup);
-                } else {
-                    this.setup();
-                }
-            },
-
-            destoryPixi() {
-                if (!this.stage) {
-                    return;
-                }
-
-                this.clearIntervals();
-
-                cancelAnimationFrame(this.animationFrame);
-
-                this.renderer.destroy();
-                this.renderer = undefined;
-
-                this.container.destroy(true, true, true);
-                this.container = undefined;
-
-                this.stage.destroy(true, true, true);
-                this.stage = undefined;
-
-                this.loader.destroy();
-                this.loader = undefined;
-
-                utils.destroyTextureCache();
-            },
-
-            setup() {
-                this.clearIntervals();
-
-                this.container.removeChildren();
-                this.container.addChild(this.backgroundSprite());
-
-                _.forEach(
-                    this.planet.grids, grid => this.container.addChild(this.gridSprite(grid))
-                );
-            },
-
-            clearIntervals() {
-                _.forEach(
-                    this.intervals, interval => clearInterval(interval)
-                );
-
-                this.intervals = [];
-            },
-
-            resize() {
-                this.renderer.resize(this.rendererWidth(), this.rendererHeight());
+        initPixi() {
+            this.loader = new loaders.Loader();
+            this.loader.add(this.backgroundName(), this.background());
+            this.loader.add('grid', this.gridTextureAtlas);
+            this.loader.load(() => {
+                this.setup();
                 this.align();
-            },
+                this.animate();
+            });
 
-            align() {
-                this.container.position.x = this.centerX();
-                this.container.position.y = this.centerY();
-            },
+            this.stage = new Container();
+            this.container = new Container();
+            this.container.interactive = true;
+            this.container.on('mousedown', this.mouseDown);
+            this.container.on('mousemove', this.mouseMove);
+            this.container.on('mouseup', this.mouseUp);
+            this.container.on('mouseupoutside', this.mouseUp);
+            this.container.on('touchstart', this.mouseDown);
+            this.container.on('touchmove', this.mouseMove);
+            this.container.on('touchend', this.mouseUp);
+            this.container.on('touchendoutside', this.mouseUp);
+            this.stage.addChild(this.container);
 
-            animate() {
-                this.animationFrame = requestAnimationFrame(this.animate);
+            this.renderer = autoDetectRenderer(this.rendererWidth(), this.rendererHeight(), {
+                view: this.$el,
+                transparent: true
+            });
 
-                const x = this.containerX();
-                const y = this.containerY();
+            window.addEventListener('resize', this.resize);
+        },
 
-                if (this.container.position.x < x) {
-                    this.container.position.x = x;
-                }
+        updatePixi() {
+            const backgroundName = this.backgroundName();
 
-                if (this.container.position.y < y) {
-                    this.container.position.y = y;
-                }
+            if (!this.loader.resources[backgroundName]) {
+                this.loader.add(backgroundName, this.background());
+                this.loader.load(this.setup);
+            } else {
+                this.setup();
+            }
+        },
 
-                if (this.container.position.x > 0) {
-                    this.container.position.x = 0;
-                }
+        destoryPixi() {
+            if (!this.stage) {
+                return;
+            }
 
-                if (this.container.position.y > 0) {
-                    this.container.position.y = 0;
-                }
+            this.clearIntervals();
 
-                this.renderer.render(this.stage);
-            },
+            cancelAnimationFrame(this.animationFrame);
 
-            mouseDown(e) {
-                const start = e.data.getLocalPosition(this.container.parent);
+            this.renderer.destroy();
+            this.renderer = undefined;
 
-                this.dragStartX = start.x - this.container.position.x;
-                this.dragStartY = start.y - this.container.position.y;
+            this.container.destroy(true, true, true);
+            this.container = undefined;
 
-                this.isDragging = true;
-                this.dragged = 0;
-            },
+            this.stage.destroy(true, true, true);
+            this.stage = undefined;
 
-            mouseMove(e) {
-                if (this.isDragging) {
-                    const moved = e.data.getLocalPosition(this.container.parent);
+            this.loader.destroy();
+            this.loader = undefined;
 
-                    const positionX = this.container.position.x;
-                    const positionY = this.container.position.y;
+            utils.destroyTextureCache();
+        },
 
-                    this.container.position.x = moved.x - this.dragStartX;
-                    this.container.position.y = moved.y - this.dragStartY;
+        setup() {
+            this.clearIntervals();
 
-                    this.dragged += Math.abs(positionX - this.container.position.x);
-                    this.dragged += Math.abs(positionY - this.container.position.y);
-                }
-            },
+            this.container.removeChildren();
+            this.container.addChild(this.backgroundSprite());
 
-            mouseUp() {
-                this.isDragging = false;
-            },
+            _.forEach(
+                this.planet.grids, grid => this.container.addChild(this.gridSprite(grid))
+            );
+        },
 
-            background() {
-                return this.backgroundTexture.replace('__resource__', this.planet.resource_id);
-            },
+        clearIntervals() {
+            _.forEach(
+                this.intervals, interval => clearInterval(interval)
+            );
 
-            backgroundName() {
-                return `background_${this.planet.resource_id}`;
-            },
+            this.intervals = [];
+        },
 
-            backgroundSprite() {
-                return new Sprite(this.loader.resources[this.backgroundName()].texture);
-            },
+        resize() {
+            this.renderer.resize(this.rendererWidth(), this.rendererHeight());
+            this.align();
+        },
 
-            rendererWidth() {
-                return this.$viewport.width();
-            },
+        align() {
+            this.container.position.x = this.centerX();
+            this.container.position.y = this.centerY();
+        },
 
-            rendererHeight() {
-                return this.$viewport.height();
-            },
+        animate() {
+            this.animationFrame = requestAnimationFrame(this.animate);
 
-            centerX() {
-                return this.containerX() / 2;
-            },
+            const x = this.containerX();
+            const y = this.containerY();
 
-            centerY() {
-                return this.containerY() / 2;
-            },
+            if (this.container.position.x < x) {
+                this.container.position.x = x;
+            }
 
-            containerX() {
-                return this.renderer.width - this.container.width;
-            },
+            if (this.container.position.y < y) {
+                this.container.position.y = y;
+            }
 
-            containerY() {
-                return this.renderer.height - this.container.height;
-            },
+            if (this.container.position.x > 0) {
+                this.container.position.x = 0;
+            }
 
-            gridSprite(grid) {
-                const sprite = new Sprite(this.gridTexture(grid));
+            if (this.container.position.y > 0) {
+                this.container.position.y = 0;
+            }
 
-                sprite.interactive = true;
-                sprite.hitArea = Sprites.hitArea;
+            this.renderer.render(this.stage);
+        },
 
-                sprite.x = this.gridX(grid);
-                sprite.y = this.gridY(grid);
+        mouseDown(e) {
+            const start = e.data.getLocalPosition(this.container.parent);
 
-                sprite.on('mouseover', () => this.gridOver(sprite));
-                sprite.on('mouseout', () => this.gridOut(sprite));
-                sprite.on('click', () => this.gridClick(grid));
-                sprite.on('tap', () => this.gridClick(grid));
+            this.dragStartX = start.x - this.container.position.x;
+            this.dragStartY = start.y - this.container.position.y;
 
-                this.gridLevel(grid, sprite);
-                this.gridRemaining(grid, sprite);
+            this.isDragging = true;
+            this.dragged = 0;
+        },
 
-                return sprite;
-            },
+        mouseMove(e) {
+            if (this.isDragging) {
+                const moved = e.data.getLocalPosition(this.container.parent);
 
-            gridTexture(grid) {
-                let frame = Sprites.plain;
+                const positionX = this.container.position.x;
+                const positionY = this.container.position.y;
 
-                if (grid.construction) {
-                    frame = Sprites.constructions[grid.construction.building_id];
-                } else if (grid.type === 1) {
-                    frame = grid.building_id
-                        ? Sprites.buildings[grid.building_id][this.planet.resource_id]
-                        : Sprites.resources[this.planet.resource_id];
-                } else if (grid.building_id) {
-                    frame = Sprites.buildings[grid.building_id];
-                }
+                this.container.position.x = moved.x - this.dragStartX;
+                this.container.position.y = moved.y - this.dragStartY;
 
-                return new Texture(this.loader.resources.grid.texture, frame);
-            },
+                this.dragged += Math.abs(positionX - this.container.position.x);
+                this.dragged += Math.abs(positionY - this.container.position.y);
+            }
+        },
 
-            gridX(grid) {
-                return (grid.x - grid.y + 4) * 162 + (this.width - 1608) / 2;
-            },
+        mouseUp() {
+            this.isDragging = false;
+        },
 
-            gridY(grid) {
-                return (grid.x + grid.y) * 81 + (this.height - 888) / 2;
-            },
+        background() {
+            return this.backgroundTexture.replace('__resource__', this.planet.resource_id);
+        },
 
-            gridOver(sprite) {
-                sprite.alpha = 0.6;
-            },
+        backgroundName() {
+            return `background_${this.planet.resource_id}`;
+        },
 
-            gridOut(sprite) {
-                sprite.alpha = 1;
-            },
+        backgroundSprite() {
+            return new Sprite(this.loader.resources[this.backgroundName()].texture);
+        },
 
-            gridClick(grid) {
-                if (this.dragged > this.clickTreshold) {
-                    return;
-                }
+        rendererWidth() {
+            return this.$viewport.width();
+        },
 
-                EventBus.$emit(grid.building_id
-                    ? 'building-click'
-                    : 'grid-click', grid);
-            },
+        rendererHeight() {
+            return this.$viewport.height();
+        },
 
-            gridLevel(grid, sprite) {
-                if (!grid.level) {
-                    return;
-                }
+        centerX() {
+            return this.containerX() / 2;
+        },
 
-                const text = new Text(grid.level, this.textStyle);
+        centerY() {
+            return this.containerY() / 2;
+        },
 
-                text.position.x = (sprite.width - text.width) / 2;
-                text.position.y = sprite.height - 50;
+        containerX() {
+            return this.renderer.width - this.container.width;
+        },
 
-                sprite.addChild(text);
-            },
+        containerY() {
+            return this.renderer.height - this.container.height;
+        },
 
-            gridRemaining(grid, sprite) {
-                let remaining;
-                let textStyle;
+        gridSprite(grid) {
+            const sprite = new Sprite(this.gridTexture(grid));
 
-                if (grid.construction) {
-                    remaining = grid.construction.remaining;
-                    textStyle = this.textStyle;
-                } else if (grid.training) {
-                    remaining = grid.training.remaining;
-                    textStyle = _.assignIn({}, this.textStyle, {
-                        fill: '#ebb237'
-                    });
-                } else if (grid.upgrade) {
-                    remaining = grid.upgrade.remaining;
-                    textStyle = this.textStyle;
-                }
+            sprite.interactive = true;
+            sprite.hitArea = Sprites.hitArea;
+
+            sprite.x = this.gridX(grid);
+            sprite.y = this.gridY(grid);
+
+            sprite.on('mouseover', () => this.gridOver(sprite));
+            sprite.on('mouseout', () => this.gridOut(sprite));
+            sprite.on('click', () => this.gridClick(grid));
+            sprite.on('tap', () => this.gridClick(grid));
+
+            this.gridLevel(grid, sprite);
+            this.gridRemaining(grid, sprite);
+
+            return sprite;
+        },
+
+        gridTexture(grid) {
+            let frame = Sprites.plain;
+
+            if (grid.construction) {
+                frame = Sprites.constructions[grid.construction.building_id];
+            } else if (grid.type === 1) {
+                frame = grid.building_id
+                    ? Sprites.buildings[grid.building_id][this.planet.resource_id]
+                    : Sprites.resources[this.planet.resource_id];
+            } else if (grid.building_id) {
+                frame = Sprites.buildings[grid.building_id];
+            }
+
+            return new Texture(this.loader.resources.grid.texture, frame);
+        },
+
+        gridX(grid) {
+            return (grid.x - grid.y + 4) * 162 + (this.width - 1608) / 2;
+        },
+
+        gridY(grid) {
+            return (grid.x + grid.y) * 81 + (this.height - 888) / 2;
+        },
+
+        gridOver(sprite) {
+            sprite.alpha = 0.6;
+        },
+
+        gridOut(sprite) {
+            sprite.alpha = 1;
+        },
+
+        gridClick(grid) {
+            if (this.dragged > this.clickTreshold) {
+                return;
+            }
+
+            EventBus.$emit(grid.building_id
+                ? 'building-click'
+                : 'grid-click', grid);
+        },
+
+        gridLevel(grid, sprite) {
+            if (!grid.level) {
+                return;
+            }
+
+            const text = new Text(grid.level, this.textStyle);
+
+            text.position.x = (sprite.width - text.width) / 2;
+            text.position.y = sprite.height - 50;
+
+            sprite.addChild(text);
+        },
+
+        gridRemaining(grid, sprite) {
+            let remaining;
+            let textStyle;
+
+            if (grid.construction) {
+                ({ remaining } = grid.construction);
+                ({ textStyle } = this);
+            } else if (grid.training) {
+                ({ remaining } = grid.training);
+                textStyle = _.assignIn({}, this.textStyle, {
+                    fill: '#ebb237'
+                });
+            } else if (grid.upgrade) {
+                ({ remaining } = grid.upgrade);
+                ({ textStyle } = this);
+            }
+
+            if (!remaining) {
+                return;
+            }
+
+            const text = new Text(Filters.timer(remaining), textStyle);
+
+            text.position.x = (sprite.width - text.width) / 2;
+            text.position.y = (sprite.height - text.height) / 2;
+
+            sprite.addChild(text);
+
+            const interval = setInterval(() => {
+                remaining -= 1;
+
+                text.text = Filters.timer(remaining);
 
                 if (!remaining) {
-                    return;
+                    clearInterval(interval);
                 }
+            }, 1000);
 
-                const text = new Text(Filters.timer(remaining), textStyle);
-
-                text.position.x = (sprite.width - text.width) / 2;
-                text.position.y = (sprite.height - text.height) / 2;
-
-                sprite.addChild(text);
-
-                const interval = setInterval(() => {
-                    text.text = Filters.timer(--remaining);
-
-                    if (!remaining) {
-                        clearInterval(interval);
-                    }
-                }, 1000);
-
-                this.intervals.push(interval);
-            }
+            this.intervals.push(interval);
         }
-    };
+    }
+};
 </script>

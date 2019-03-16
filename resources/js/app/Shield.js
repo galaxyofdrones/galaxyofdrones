@@ -56,7 +56,7 @@ export default {
             }
 
             axios.get(this.url).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         },
 

@@ -12,9 +12,13 @@ export default {
             let hasUnits = false;
 
             _.forEach(this.planet.units, unit => {
-                if (quantity.hasOwnProperty(unit.id)) {
-                    return hasUnits = quantity[unit.id] > 0 && quantity[unit.id] <= this.unitQuantity(unit);
+                if (_.has(quantity, unit.id)) {
+                    hasUnits = quantity[unit.id] > 0;
+
+                    return hasUnits && quantity[unit.id] <= this.unitQuantity(unit);
                 }
+
+                return true;
             });
 
             return hasUnits;
@@ -25,7 +29,7 @@ export default {
                 const quantity = _.pickBy(this.quantity);
 
                 return _.get(_.minBy(
-                    _.filter(this.planet.units, unit => quantity.hasOwnProperty(unit.id)), 'speed'
+                    _.filter(this.planet.units, unit => _.has(quantity, unit.id)), 'speed'
                 ), 'speed', 1);
             }
 

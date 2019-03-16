@@ -29,9 +29,9 @@ export default Building.extend({
     },
 
     created() {
-        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('energy-updated', energy => { this.energy = energy; });
         EventBus.$on('planet-update', () => this.fetchData());
-        EventBus.$on('planet-updated', planet => this.supply = planet.supply - planet.used_supply - planet.used_training_supply);
+        EventBus.$on('planet-updated', planet => { this.supply = planet.supply - planet.used_supply - planet.used_training_supply; });
     },
 
     computed: {

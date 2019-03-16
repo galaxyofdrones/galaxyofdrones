@@ -1,9 +1,7 @@
 import { EventBus } from '../event-bus';
 
 export default {
-    props: [
-        'url',
-    ],
+    props: ['url'],
 
     data() {
         return {
@@ -26,7 +24,7 @@ export default {
     methods: {
         fetchData() {
             axios.get(this.url).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         },
 

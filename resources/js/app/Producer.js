@@ -19,7 +19,7 @@ export default Building.extend({
             },
             selected: {
                 id: undefined,
-                efficiency: 0,
+                efficiency: 0
             },
             data: {
                 resources: []
@@ -28,9 +28,9 @@ export default Building.extend({
     },
 
     created() {
-        EventBus.$on('resource-updated', resource => this.mined = resource);
+        EventBus.$on('resource-updated', resource => { this.mined = resource; });
         EventBus.$on('planet-update', () => this.fetchData());
-        EventBus.$on('planet-updated', planet => this.planet = planet);
+        EventBus.$on('planet-updated', planet => { this.planet = planet; });
     },
 
     computed: {

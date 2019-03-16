@@ -46,7 +46,7 @@ export default Building.extend({
             axios.get(
                 this.url.replace('__grid__', this.grid.id)
             ).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         }
     }

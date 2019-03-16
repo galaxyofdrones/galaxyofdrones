@@ -45,14 +45,15 @@ export default {
             }
 
             axios.get(this.url).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         },
 
         isCompletable(mission) {
-            return !_.some(mission.resources, resource => resource.quantity > _.find(this.data.resources, {
-                id: resource.id
-            }).quantity);
+            return !_.some(mission.resources,
+                resource => resource.quantity > _.find(this.data.resources, {
+                    id: resource.id
+                }).quantity);
         },
 
         store(mission) {

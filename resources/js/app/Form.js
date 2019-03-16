@@ -26,7 +26,7 @@ export default Modal.extend({
 
     methods: {
         hasError(name) {
-            return this.errors.hasOwnProperty(name);
+            return _.has(this.errors, name);
         },
 
         values() {
@@ -46,7 +46,7 @@ export default Modal.extend({
                     this.close();
                 })
                 .catch(
-                    error => this.errors = error.response.data.errors
+                    error => { this.errors = error.response.data.errors; }
                 );
         }
     }

@@ -1,11 +1,15 @@
-import { EventBus } from '../event-bus';
 import Vue from 'vue';
+import { EventBus } from '../event-bus';
 
 export default Vue.extend({
-    props: [
-        'isEnabled',
-        'url'
-    ],
+    props: {
+        isEnabled: Boolean,
+
+        url: {
+            type: String,
+            required: true
+        }
+    },
 
     data() {
         return {
@@ -16,10 +20,6 @@ export default Vue.extend({
                 total: 0
             }
         };
-    },
-
-    created() {
-        EventBus.$on('user-updated', () => this.fetchData());
     },
 
     computed: {
@@ -47,6 +47,10 @@ export default Vue.extend({
         }
     },
 
+    created() {
+        EventBus.$on('user-updated', () => this.fetchData());
+    },
+
     methods: {
         fetchData() {
             if (!this.isEnabled) {
@@ -58,7 +62,7 @@ export default Vue.extend({
                     page: this.page
                 }
             }).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         },
 

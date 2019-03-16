@@ -1,11 +1,11 @@
-import { EventBus } from '../event-bus';
 import Vue from 'vue';
+import { EventBus } from '../event-bus';
 
 export default Vue.extend({
     data() {
         return {
             remaining: 0,
-            remainingInterval: undefined,
+            remainingInterval: undefined
         };
     },
 
@@ -27,7 +27,7 @@ export default Vue.extend({
             }
 
             this.remainingInterval = setInterval(() => {
-                this.remaining--;
+                this.remaining -= 1;
 
                 if (!this.remaining) {
                     this.clearRemaining();

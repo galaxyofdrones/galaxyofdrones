@@ -18,6 +18,6 @@ export default Form.extend({
                 recipient: '',
                 message: ''
             };
-        },
+        }
     }
 });

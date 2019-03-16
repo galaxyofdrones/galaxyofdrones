@@ -1,5 +1,5 @@
-import { EventBus } from '../event-bus';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { EventBus } from '../event-bus';
 import Routing from './Routing';
 
 export default {
@@ -48,7 +48,7 @@ export default {
 
         EventBus.$on('prev-planet', this.prevPlanet);
         EventBus.$on('next-planet', this.nextPlanet);
-        EventBus.$on('change-planet', planet => this.selected = planet);
+        EventBus.$on('change-planet', planet => { this.selected = planet; });
     },
 
     mounted() {
@@ -136,9 +136,9 @@ export default {
         },
 
         prevPlanet() {
-            let index = this.selectedIndex;
+            let index = this.selectedIndex - 1;
 
-            if (--index < 0) {
+            if (index < 0) {
                 index = this.data.planets.length - 1;
             }
 
@@ -146,9 +146,9 @@ export default {
         },
 
         nextPlanet() {
-            let index = this.selectedIndex;
+            let index = this.selectedIndex + 1;
 
-            if (++index === this.data.planets.length) {
+            if (index === this.data.planets.length) {
                 index = 0;
             }
 

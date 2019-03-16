@@ -23,9 +23,9 @@ export default {
 
     computed: {
         travelTime() {
-            return Math.round(
-                this.data.travel_time / this.slowestSupportUnitSpeed * (1 - this.building.trade_time_bonus)
-            );
+            return Math.round(this.data.travel_time
+                / this.slowestSupportUnitSpeed
+                * (1 - this.building.trade_time_bonus));
         }
     },
 
