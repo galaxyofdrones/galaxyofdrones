@@ -10,7 +10,7 @@ export default Form.extend({
 
     created() {
         EventBus.$on('setting-click', this.open);
-        EventBus.$on('user-updated', user => this.email = user.email);
+        EventBus.$on('user-updated', user => { this.email = user.email; });
     },
 
     computed: {

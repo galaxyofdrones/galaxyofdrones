@@ -37,8 +37,8 @@ export default Building.extend({
     },
 
     created() {
-        EventBus.$on('planet-updated', planet => this.planet = planet);
-        EventBus.$on('resource-updated', resource => this.mined = resource);
+        EventBus.$on('planet-updated', planet => { this.planet = planet; });
+        EventBus.$on('resource-updated', resource => { this.mined = resource; });
     },
 
     watch: {
@@ -54,7 +54,7 @@ export default Building.extend({
             }
 
             axios.get(this.url).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         }
     }

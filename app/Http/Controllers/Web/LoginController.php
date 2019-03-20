@@ -21,14 +21,6 @@ class LoginController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function username()
     {
         return 'username_or_email';
@@ -49,10 +41,11 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 
-        $request->session()->flush();
-        $request->session()->regenerate();
+        $request->session()->invalidate();
 
-        flash()->success(trans('messages.success.logout'));
+        flash()->success(
+            trans('messages.success.logout')
+        );
 
         return redirect()->route('login');
     }

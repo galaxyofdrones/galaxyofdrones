@@ -29,7 +29,7 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('grid-click', this.open);
-        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('energy-updated', energy => { this.energy = energy; });
         EventBus.$on('planet-update', () => this.fetchData());
     },
 

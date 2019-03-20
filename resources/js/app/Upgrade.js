@@ -39,9 +39,9 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('building-click', this.open);
-        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('energy-updated', energy => { this.energy = energy; });
         EventBus.$on('planet-update', () => this.fetchData());
-        EventBus.$on('planet-updated', planet => this.isCapitalPlanet = planet.is_capital);
+        EventBus.$on('planet-updated', planet => { this.isCapitalPlanet = planet.is_capital; });
     },
 
     computed: {
@@ -50,7 +50,9 @@ export default Modal.extend({
         },
 
         canDemolish() {
-            return !this.data.has_training && !this.remaining && (!this.isCapitalPlanet || this.data.building.type !== this.centralType);
+            return !this.data.has_training
+                && !this.remaining
+                && (!this.isCapitalPlanet || this.data.building.type !== this.centralType);
         },
 
         building() {

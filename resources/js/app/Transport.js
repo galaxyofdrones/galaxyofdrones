@@ -8,7 +8,8 @@ export default {
 
     computed: {
         canTransport() {
-            return this.hasResources && this.transporterQuantity <= this.unitQuantity(this.transporterUnit);
+            return this.hasResources
+                && this.transporterQuantity <= this.unitQuantity(this.transporterUnit);
         },
 
         hasResources() {
@@ -16,9 +17,13 @@ export default {
             let hasResources = false;
 
             _.forEach(this.planet.resources, resource => {
-                if (quantity.hasOwnProperty(resource.id)) {
-                    return hasResources = quantity[resource.id] > 0 && quantity[resource.id] <= this.resourceQuantity(resource);
+                if (_.has(quantity, resource.id)) {
+                    hasResources = quantity[resource.id] > 0;
+
+                    return hasResources && quantity[resource.id] <= this.resourceQuantity(resource);
                 }
+
+                return true;
             });
 
             return hasResources;

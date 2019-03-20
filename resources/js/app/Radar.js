@@ -7,7 +7,7 @@ export default {
         'isEnabled',
         'url',
         'canMove',
-        'close',
+        'close'
     ],
 
     components: {
@@ -49,7 +49,7 @@ export default {
             }
 
             axios.get(this.url).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         },
 

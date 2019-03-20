@@ -1,3 +1,4 @@
+import Echo from 'laravel-echo';
 
 window._ = require('lodash');
 
@@ -30,7 +31,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
+const token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
@@ -43,8 +44,6 @@ if (token) {
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-
-import Echo from 'laravel-echo';
 
 window.io = require('socket.io-client');
 
@@ -61,8 +60,10 @@ window.Echo = new Echo({
 
 window.Vue = require('vue');
 window.Swal = require('sweetalert2');
+window.moment = require('moment');
 
-require('moment').locale(document.querySelector('html').getAttribute('lang'));
+moment.locale(document.querySelector('html').getAttribute('lang'));
+
 require('leaflet');
 require('leaflet-ajax');
 require('perfect-scrollbar');

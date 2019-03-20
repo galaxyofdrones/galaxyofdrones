@@ -26,7 +26,7 @@ export default {
     },
 
     created() {
-        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('energy-updated', energy => { this.energy = energy; });
         EventBus.$on('user-updated', () => this.fetchData());
     },
 
@@ -49,7 +49,7 @@ export default {
             }
 
             axios.get(this.url).then(
-                response => this.data = response.data
+                response => { this.data = response.data; }
             );
         },
 

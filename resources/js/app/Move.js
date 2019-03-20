@@ -35,8 +35,8 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('move-click', this.open);
-        EventBus.$on('planet-updated', planet => this.planet = planet);
-        EventBus.$on('resource-updated', resource => this.mined = resource);
+        EventBus.$on('planet-updated', planet => { this.planet = planet; });
+        EventBus.$on('resource-updated', resource => { this.mined = resource; });
     },
 
     computed: {
@@ -61,7 +61,7 @@ export default Modal.extend({
         },
 
         canScout() {
-            return this.quantity.hasOwnProperty(this.scoutUnit.id)
+            return _.has(this.quantity, this.scoutUnit.id)
                 && this.quantity[this.scoutUnit.id] > 0
                 && this.quantity[this.scoutUnit.id] <= this.unitQuantity(this.scoutUnit);
         },
@@ -75,9 +75,13 @@ export default Modal.extend({
             let hasFighterUnits = false;
 
             _.forEach(this.fighterUnits, unit => {
-                if (quantity.hasOwnProperty(unit.id)) {
-                    return hasFighterUnits = quantity[unit.id] > 0 && quantity[unit.id] <= this.unitQuantity(unit);
+                if (_.has(quantity, unit.id)) {
+                    hasFighterUnits = quantity[unit.id] > 0;
+
+                    return hasFighterUnits && quantity[unit.id] <= this.unitQuantity(unit);
                 }
+
+                return true;
             });
 
             return hasFighterUnits;
@@ -96,9 +100,8 @@ export default Modal.extend({
         },
 
         fighterUnits() {
-            return _.filter(
-                this.planet.units, unit => unit.type === this.unitTypes.fighter || unit.type === this.unitTypes.heavyFighter
-            );
+            return _.filter(this.planet.units, unit => unit.type === this.unitTypes.fighter
+                || unit.type === this.unitTypes.heavyFighter);
         },
 
         travelTime() {
@@ -128,7 +131,7 @@ export default Modal.extend({
                 const quantity = _.pickBy(this.quantity);
 
                 return _.get(_.minBy(
-                    _.filter(this.fighterUnits, unit => quantity.hasOwnProperty(unit.id)), 'speed'
+                    _.filter(this.fighterUnits, unit => _.has(quantity, unit.id)), 'speed'
                 ), 'speed', 1);
             }
 

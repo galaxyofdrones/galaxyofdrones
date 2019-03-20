@@ -45,7 +45,8 @@ export default Modal.extend({
 
     computed: {
         canHyperjump() {
-            return !this.data.incoming_capital_movement_count && this.selected !== this.data.capital_id;
+            return !this.data.incoming_capital_movement_count
+                && this.selected !== this.data.capital_id;
         }
     },
 

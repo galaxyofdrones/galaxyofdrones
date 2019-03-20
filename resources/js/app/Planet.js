@@ -25,7 +25,7 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('planet-click', this.open);
-        EventBus.$on('planet-updated', planet => this.planet = planet);
+        EventBus.$on('planet-updated', planet => { this.planet = planet; });
     },
 
     computed: {

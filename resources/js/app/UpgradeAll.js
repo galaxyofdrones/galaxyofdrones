@@ -20,7 +20,7 @@ export default Modal.extend({
 
     created() {
         EventBus.$on('upgrade-all-open', this.open);
-        EventBus.$on('energy-updated', energy => this.energy = energy);
+        EventBus.$on('energy-updated', energy => { this.energy = energy; });
     },
 
     computed: {
