@@ -20,6 +20,9 @@
     "Translations": "readonly",
     "Vue": "readonly"
   },
+  "settings": {
+    "import/core-modules": ["webpack"]
+  },
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "never"],
