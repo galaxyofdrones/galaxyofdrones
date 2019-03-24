@@ -394,6 +394,8 @@ class MovementManager
      * Finish.
      *
      * @param Movement $movement
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Movement $movement)
     {

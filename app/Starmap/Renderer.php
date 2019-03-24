@@ -210,6 +210,8 @@ class Renderer implements RendererContract
      *
      * @param mixed   $objects
      * @param Closure $textureFilename
+     *
+     * @throws \Exception|\Throwable
      */
     protected function compositeObjects($objects, Closure $textureFilename)
     {
@@ -260,6 +262,8 @@ class Renderer implements RendererContract
      * Get the texture.
      *
      * @param string $filename
+     *
+     * @throws \Exception|\Throwable
      *
      * @return Imagick
      */

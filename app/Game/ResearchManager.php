@@ -72,6 +72,8 @@ class ResearchManager
      * Finish.
      *
      * @param Research $research
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Research $research)
     {
@@ -95,6 +97,8 @@ class ResearchManager
      * Cancel.
      *
      * @param Research $research
+     *
+     * @throws \Exception|\Throwable
      */
     public function cancel(Research $research)
     {

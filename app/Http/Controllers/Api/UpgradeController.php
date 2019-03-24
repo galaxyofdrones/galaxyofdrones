@@ -27,6 +27,8 @@ class UpgradeController extends Controller
      * @param Grid               $grid
      * @param UpgradeTransformer $transformer
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, UpgradeTransformer $transformer)
@@ -58,6 +60,8 @@ class UpgradeController extends Controller
      *
      * @param Grid           $grid
      * @param UpgradeManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -93,6 +97,8 @@ class UpgradeController extends Controller
      *
      * @param UpgradeManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function storeAll(UpgradeManager $manager)
@@ -120,6 +126,8 @@ class UpgradeController extends Controller
      *
      * @param Grid           $grid
      * @param UpgradeManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

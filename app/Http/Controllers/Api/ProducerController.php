@@ -28,6 +28,8 @@ class ProducerController extends Controller
      * @param Grid                $grid
      * @param ProducerTransformer $transformer
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, ProducerTransformer $transformer)
@@ -44,6 +46,8 @@ class ProducerController extends Controller
      * @param Grid           $grid
      * @param resource       $resource
      * @param StorageManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

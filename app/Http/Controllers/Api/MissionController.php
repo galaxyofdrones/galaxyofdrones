@@ -49,6 +49,8 @@ class MissionController extends Controller
      * @param Mission        $mission
      * @param MissionManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function store(Mission $mission, MissionManager $manager)

@@ -105,6 +105,8 @@ class PlanetController extends Controller
      *
      * @param Grid $grid
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function demolish(Grid $grid)

@@ -70,6 +70,8 @@ class TrainingManager
      * Finish.
      *
      * @param Training $training
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Training $training)
     {
@@ -94,6 +96,8 @@ class TrainingManager
      * Cancel.
      *
      * @param Training $training
+     *
+     * @throws \Exception|\Throwable
      */
     public function cancel(Training $training)
     {

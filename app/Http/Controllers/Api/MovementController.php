@@ -31,6 +31,8 @@ class MovementController extends Controller
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function storeScout(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
@@ -57,6 +59,8 @@ class MovementController extends Controller
      * @param Planet          $planet
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -89,6 +93,8 @@ class MovementController extends Controller
      * @param Planet          $planet
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -123,6 +129,8 @@ class MovementController extends Controller
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function storeSupport(Planet $planet, MovementManager $movementManager, StorageManager $storageManager)
@@ -151,6 +159,8 @@ class MovementController extends Controller
      * @param Planet          $planet
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -190,6 +200,8 @@ class MovementController extends Controller
      * @param Grid            $grid
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -240,6 +252,8 @@ class MovementController extends Controller
      * @param Grid            $grid
      * @param MovementManager $movementManager
      * @param StorageManager  $storageManager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

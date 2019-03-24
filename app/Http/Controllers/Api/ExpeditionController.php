@@ -48,6 +48,8 @@ class ExpeditionController extends Controller
      * @param Expedition        $expedition
      * @param ExpeditionManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function store(Expedition $expedition, ExpeditionManager $manager)

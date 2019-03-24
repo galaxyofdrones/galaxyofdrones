@@ -73,6 +73,8 @@ class MovementFinish extends Command
      * Finish the movement.
      *
      * @param int $id
+     *
+     * @throws \Exception|\Throwable
      */
     protected function finishMovement($id)
     {

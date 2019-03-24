@@ -34,6 +34,8 @@ class Move implements ShouldQueue
      *
      * @param DatabaseManager $database
      * @param MovementManager $manager
+     *
+     * @throws \Exception|\Throwable
      */
     public function handle(DatabaseManager $database, MovementManager $manager)
     {

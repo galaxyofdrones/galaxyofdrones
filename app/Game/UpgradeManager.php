@@ -98,6 +98,8 @@ class UpgradeManager
      * Finish.
      *
      * @param Upgrade $upgrade
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Upgrade $upgrade)
     {
@@ -118,6 +120,8 @@ class UpgradeManager
      * Cancel.
      *
      * @param Upgrade $upgrade
+     *
+     * @throws \Exception|\Throwable
      */
     public function cancel(Upgrade $upgrade)
     {

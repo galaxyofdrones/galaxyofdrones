@@ -51,6 +51,8 @@ class ResearchController extends Controller
      *
      * @param ResearchManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function storeResource(ResearchManager $manager)
@@ -83,6 +85,8 @@ class ResearchController extends Controller
      * @param Unit            $unit
      * @param ResearchManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function storeUnit(Unit $unit, ResearchManager $manager)
@@ -114,6 +118,8 @@ class ResearchController extends Controller
      *
      * @param ResearchManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function destroyResource(ResearchManager $manager)
@@ -143,6 +149,8 @@ class ResearchController extends Controller
      *
      * @param Unit            $unit
      * @param ResearchManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

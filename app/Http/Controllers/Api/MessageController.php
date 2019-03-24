@@ -43,6 +43,8 @@ class MessageController extends Controller
      *
      * @param MessageStoreRequest $request
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function store(MessageStoreRequest $request)

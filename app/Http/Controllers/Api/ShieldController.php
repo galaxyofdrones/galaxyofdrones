@@ -47,6 +47,8 @@ class ShieldController extends Controller
      * @param Planet        $planet
      * @param ShieldManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function store(Planet $planet, ShieldManager $manager)

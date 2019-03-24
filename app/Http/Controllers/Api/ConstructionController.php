@@ -27,6 +27,8 @@ class ConstructionController extends Controller
      * @param Grid                    $grid
      * @param ConstructionTransformer $transformer
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, ConstructionTransformer $transformer)
@@ -42,6 +44,8 @@ class ConstructionController extends Controller
      * @param Grid                $grid
      * @param Building            $building
      * @param ConstructionManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -75,6 +79,8 @@ class ConstructionController extends Controller
      *
      * @param Grid                $grid
      * @param ConstructionManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

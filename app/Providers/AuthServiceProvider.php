@@ -55,6 +55,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @param array $config
      *
+     * @throws \Exception|\Throwable
+     *
      * @return KoodilabUserProvider
      */
     protected function userProvider(array $config)

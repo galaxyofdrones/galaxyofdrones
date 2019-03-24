@@ -44,6 +44,8 @@ class BookmarkController extends Controller
      *
      * @param Star $star
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function store(Star $star)
@@ -62,6 +64,8 @@ class BookmarkController extends Controller
      * Remove the bookmark from storage.
      *
      * @param Bookmark $bookmark
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

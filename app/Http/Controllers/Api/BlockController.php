@@ -23,6 +23,8 @@ class BlockController extends Controller
      *
      * @param User $user
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function update(User $user)

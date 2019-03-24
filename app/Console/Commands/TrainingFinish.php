@@ -73,6 +73,8 @@ class TrainingFinish extends Command
      * Finish the training.
      *
      * @param int $id
+     *
+     * @throws \Exception|\Throwable
      */
     protected function finishTraining($id)
     {
