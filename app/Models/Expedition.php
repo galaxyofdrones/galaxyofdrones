@@ -7,27 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Expedition.
  *
- * @property int                                             $id
- * @property int                                             $star_id
- * @property int                                             $user_id
- * @property int                                             $solarion
- * @property int                                             $experience
- * @property \Carbon\Carbon                                  $ended_at
- * @property \Carbon\Carbon|null                             $created_at
- * @property \Carbon\Carbon|null                             $updated_at
- * @property int                                             $remaining
- * @property Star                                            $star
- * @property \Illuminate\Database\Eloquent\Collection|Unit[] $units
- * @property User                                            $user
+ * @property int                                                              $id
+ * @property int                                                              $star_id
+ * @property int                                                              $user_id
+ * @property int                                                              $solarion
+ * @property int                                                              $experience
+ * @property \Illuminate\Support\Carbon                                       $ended_at
+ * @property \Illuminate\Support\Carbon|null                                  $created_at
+ * @property \Illuminate\Support\Carbon|null                                  $updated_at
+ * @property int                                                              $remaining
+ * @property \Koodilab\Models\Star                                            $star
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Unit[] $units
+ * @property \Koodilab\Models\User                                            $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereSolarion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereStarId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Expedition whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereSolarion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereStarId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Expedition whereUserId($value)
  * @mixin \Eloquent
  */
 class Expedition extends Model

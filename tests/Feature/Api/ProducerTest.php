@@ -110,7 +110,7 @@ class ProducerTest extends TestCase
 
         $resource = factory(Resource::class)->create();
 
-        $stock = factory(Stock::class)->create([
+        factory(Stock::class)->create([
             'planet_id' => $user->current_id,
             'resource_id' => $resource->id,
             'quantity' => 20,

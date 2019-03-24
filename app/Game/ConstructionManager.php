@@ -58,6 +58,8 @@ class ConstructionManager
      * Finish.
      *
      * @param Construction $construction
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Construction $construction)
     {
@@ -81,6 +83,8 @@ class ConstructionManager
      * Cancel.
      *
      * @param Construction $construction
+     *
+     * @throws \Exception|\Throwable
      */
     public function cancel(Construction $construction)
     {

@@ -7,19 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Shield.
  *
- * @property int                 $id
- * @property int                 $planet_id
- * @property \Carbon\Carbon      $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property int                 $remaining
- * @property Planet              $planet
+ * @property int                             $id
+ * @property int                             $planet_id
+ * @property \Illuminate\Support\Carbon      $ended_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int                             $remaining
+ * @property \Koodilab\Models\Planet         $planet
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Shield whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Shield whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Shield whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Shield wherePlanetId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Shield whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield wherePlanetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Shield whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Shield extends Model

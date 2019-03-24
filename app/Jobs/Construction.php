@@ -34,6 +34,8 @@ class Construction implements ShouldQueue
      *
      * @param DatabaseManager     $database
      * @param ConstructionManager $manager
+     *
+     * @throws \Exception|\Throwable
      */
     public function handle(DatabaseManager $database, ConstructionManager $manager)
     {

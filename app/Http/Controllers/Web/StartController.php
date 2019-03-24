@@ -39,6 +39,8 @@ class StartController extends Controller
      *
      * @param ShieldManager $manager
      *
+     * @throws \Exception|\Throwable
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(ShieldManager $manager)

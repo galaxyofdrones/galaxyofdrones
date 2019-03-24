@@ -73,6 +73,8 @@ class UserController extends Controller
      *
      * @param UserUpdateRequest $request
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function update(UserUpdateRequest $request)
@@ -86,6 +88,8 @@ class UserController extends Controller
      * Update the capital planet.
      *
      * @param Planet $planet
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -110,6 +114,8 @@ class UserController extends Controller
      * Update the current planet.
      *
      * @param Planet $planet
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

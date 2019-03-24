@@ -28,6 +28,8 @@ class TrainerController extends Controller
      * @param Grid               $grid
      * @param TrainerTransformer $transformer
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, TrainerTransformer $transformer)
@@ -44,6 +46,8 @@ class TrainerController extends Controller
      * @param Grid            $grid
      * @param Unit            $unit
      * @param TrainingManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -92,6 +96,8 @@ class TrainerController extends Controller
      *
      * @param Grid            $grid
      * @param TrainingManager $manager
+     *
+     * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
      */

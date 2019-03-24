@@ -34,6 +34,8 @@ class Research implements ShouldQueue
      *
      * @param DatabaseManager $database
      * @param ResearchManager $manager
+     *
+     * @throws \Exception|\Throwable
      */
     public function handle(DatabaseManager $database, ResearchManager $manager)
     {

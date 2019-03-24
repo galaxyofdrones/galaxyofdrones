@@ -7,31 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Grid.
  *
- * @property int                 $id
- * @property int                 $planet_id
- * @property int|null            $building_id
- * @property int                 $x
- * @property int                 $y
- * @property int|null            $level
- * @property int                 $type
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property Building|null       $building
- * @property Construction        $construction
- * @property Planet              $planet
- * @property Training            $training
- * @property Upgrade             $upgrade
+ * @property int                             $id
+ * @property int                             $planet_id
+ * @property int|null                        $building_id
+ * @property int                             $x
+ * @property int                             $y
+ * @property int|null                        $level
+ * @property int                             $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Koodilab\Models\Building|null  $building
+ * @property \Koodilab\Models\Construction   $construction
+ * @property \Koodilab\Models\Planet         $planet
+ * @property \Koodilab\Models\Training       $training
+ * @property \Koodilab\Models\Upgrade        $upgrade
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereBuildingId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereIsEnabled($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid wherePlanetId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereX($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Grid whereY($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereBuildingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid wherePlanetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereX($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Grid whereY($value)
  * @mixin \Eloquent
  */
 class Grid extends Model

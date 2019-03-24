@@ -34,6 +34,8 @@ class Train implements ShouldQueue
      *
      * @param DatabaseManager $database
      * @param TrainingManager $manager
+     *
+     * @throws \Exception|\Throwable
      */
     public function handle(DatabaseManager $database, TrainingManager $manager)
     {

@@ -4,7 +4,6 @@ namespace Koodilab\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider

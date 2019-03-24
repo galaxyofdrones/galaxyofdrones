@@ -73,6 +73,8 @@ class UpgradeFinish extends Command
      * Finish the upgrade.
      *
      * @param int $id
+     *
+     * @throws \Exception|\Throwable
      */
     protected function finishUpgrade($id)
     {

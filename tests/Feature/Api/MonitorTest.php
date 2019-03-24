@@ -35,7 +35,7 @@ class MonitorTest extends TestCase
             'y' => 1,
         ]);
 
-        $movement = factory(Movement::class)->create([
+        factory(Movement::class)->create([
             'end_id' => $planet->id,
             'type' => Movement::TYPE_ATTACK,
         ]);

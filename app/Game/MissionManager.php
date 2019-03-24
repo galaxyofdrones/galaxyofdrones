@@ -96,6 +96,8 @@ class MissionManager
      * Finish.
      *
      * @param Mission $mission
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Mission $mission)
     {

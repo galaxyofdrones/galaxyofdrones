@@ -70,7 +70,7 @@ class ConstructionTest extends TestCase
             'planet_id' => auth()->user()->current->id,
         ]);
 
-        $construction = factory(Construction::class)->create([
+        factory(Construction::class)->create([
             'building_id' => $building->id,
             'grid_id' => $grid->id,
         ]);
@@ -151,7 +151,7 @@ class ConstructionTest extends TestCase
             'y' => 7,
         ]);
 
-        $construction = factory(Construction::class)->create([
+        factory(Construction::class)->create([
             'grid_id' => $grid->id,
         ]);
 
@@ -171,7 +171,7 @@ class ConstructionTest extends TestCase
             'limit' => 0,
         ]);
 
-        $grid3 = factory(Grid::class)->create([
+        factory(Grid::class)->create([
             'building_id' => $building->id,
             'planet_id' => $planet->id,
             'x' => 10,

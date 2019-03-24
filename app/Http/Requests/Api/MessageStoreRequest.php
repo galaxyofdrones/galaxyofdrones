@@ -23,6 +23,8 @@ class MessageStoreRequest extends Request
     /**
      * Get the validation rules that apply to the request.
      *
+     * @throws \Exception|\Throwable
+     *
      * @return array
      */
     public function rules()

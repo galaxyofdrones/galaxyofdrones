@@ -34,6 +34,8 @@ class Upgrade implements ShouldQueue
      *
      * @param DatabaseManager $database
      * @param UpgradeManager  $manager
+     *
+     * @throws \Exception|\Throwable
      */
     public function handle(DatabaseManager $database, UpgradeManager $manager)
     {

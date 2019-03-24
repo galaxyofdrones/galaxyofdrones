@@ -73,6 +73,8 @@ class ConstructionFinish extends Command
      * Finish the construction.
      *
      * @param int $id
+     *
+     * @throws \Exception|\Throwable
      */
     protected function finishConstruction($id)
     {

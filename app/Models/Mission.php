@@ -7,24 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Mission.
  *
- * @property int                                                 $id
- * @property int                                                 $user_id
- * @property int                                                 $energy
- * @property int                                                 $experience
- * @property \Carbon\Carbon                                      $ended_at
- * @property \Carbon\Carbon|null                                 $created_at
- * @property \Carbon\Carbon|null                                 $updated_at
- * @property int                                                 $remaining
- * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property User                                                $user
+ * @property int                                                                  $id
+ * @property int                                                                  $user_id
+ * @property int                                                                  $energy
+ * @property int                                                                  $experience
+ * @property \Illuminate\Support\Carbon                                           $ended_at
+ * @property \Illuminate\Support\Carbon|null                                      $created_at
+ * @property \Illuminate\Support\Carbon|null                                      $updated_at
+ * @property int                                                                  $remaining
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources
+ * @property \Koodilab\Models\User                                                $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereEnergy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mission whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereUserId($value)
  * @mixin \Eloquent
  */
 class Mission extends Model

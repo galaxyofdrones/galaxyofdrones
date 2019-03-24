@@ -73,6 +73,8 @@ class ResearchFinish extends Command
      * Finish the research.
      *
      * @param int $id
+     *
+     * @throws \Exception|\Throwable
      */
     protected function finishResearch($id)
     {

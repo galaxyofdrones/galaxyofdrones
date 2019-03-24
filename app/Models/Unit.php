@@ -9,49 +9,52 @@ use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 /**
  * Unit.
  *
- * @property int                                                   $id
- * @property array                                                 $name
- * @property int                                                   $type
- * @property bool                                                  $is_unlocked
- * @property int                                                   $speed
- * @property int                                                   $attack
- * @property int                                                   $defense
- * @property int                                                   $supply
- * @property int                                                   $train_cost
- * @property int                                                   $train_time
- * @property array                                                 $description
- * @property int|null                                              $detection
- * @property int|null                                              $capacity
- * @property int|null                                              $research_experience
- * @property int|null                                              $research_cost
- * @property int                                                   $research_time
- * @property int                                                   $sort_order
- * @property \Carbon\Carbon|null                                   $created_at
- * @property \Carbon\Carbon|null                                   $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|Population[] $populations
- * @property \Illuminate\Database\Eloquent\Collection|Research[]   $researches
- * @property \Illuminate\Database\Eloquent\Collection|Training[]   $trainings
- * @property \Illuminate\Database\Eloquent\Collection|User[]       $users
+ * @property int                                                                    $id
+ * @property array                                                                  $name
+ * @property int                                                                    $type
+ * @property bool                                                                   $is_unlocked
+ * @property int                                                                    $speed
+ * @property int                                                                    $attack
+ * @property int                                                                    $defense
+ * @property int                                                                    $supply
+ * @property int                                                                    $train_cost
+ * @property int                                                                    $train_time
+ * @property array                                                                  $description
+ * @property int|null                                                               $detection
+ * @property int|null                                                               $capacity
+ * @property int                                                                    $research_experience
+ * @property int                                                                    $research_cost
+ * @property int                                                                    $research_time
+ * @property int                                                                    $sort_order
+ * @property \Illuminate\Support\Carbon|null                                        $created_at
+ * @property \Illuminate\Support\Carbon|null                                        $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Population[] $populations
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Research[]   $researches
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Training[]   $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\User[]       $users
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereAttack($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereCapacity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereDefense($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereDetection($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereIsUnlocked($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereResearchCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereResearchExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereResearchTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereSpeed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereSupply($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereTrainCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereTrainTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Unit whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereAttack($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereCapacity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereDefense($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereDetection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereIsUnlocked($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereResearchCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereResearchExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereResearchTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereSpeed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereTrainCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereTrainTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Unit whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Unit extends Model implements ResearchableContract, TranslatableContract

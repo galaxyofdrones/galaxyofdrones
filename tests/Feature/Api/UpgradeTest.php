@@ -71,7 +71,7 @@ class UpgradeTest extends TestCase
             'grid_id' => $grid->id,
         ]);
 
-        $training = factory(Training::class)->create([
+        factory(Training::class)->create([
             'grid_id' => $grid->id,
         ]);
 
@@ -204,7 +204,7 @@ class UpgradeTest extends TestCase
             'construction_cost' => 100,
         ]);
 
-        $grid2 = factory(Grid::class)->create([
+        factory(Grid::class)->create([
             'planet_id' => $planet->id,
             'building_id' => $building2->id,
             'level' => 9,
@@ -212,7 +212,7 @@ class UpgradeTest extends TestCase
             'y' => 16,
         ]);
 
-        $emptyGrid = factory(Grid::class)->create([
+        factory(Grid::class)->create([
             'planet_id' => $planet->id,
             'building_id' => null,
         ]);
@@ -226,7 +226,7 @@ class UpgradeTest extends TestCase
                 'upgrade_cost' => 30,
             ]);
 
-        $upgrade = factory(Upgrade::class)->create([
+        factory(Upgrade::class)->create([
             'grid_id' => $grid1->id,
         ]);
 
@@ -333,7 +333,7 @@ class UpgradeTest extends TestCase
             'construction_cost' => 100,
         ]);
 
-        $grid2 = factory(Grid::class)->create([
+        factory(Grid::class)->create([
             'planet_id' => $planet->id,
             'building_id' => $building2->id,
             'level' => 9,
@@ -341,7 +341,7 @@ class UpgradeTest extends TestCase
             'y' => 11,
         ]);
 
-        $emptyGrid = factory(Grid::class)->create([
+        factory(Grid::class)->create([
             'planet_id' => $planet->id,
             'building_id' => null,
         ]);
@@ -349,7 +349,7 @@ class UpgradeTest extends TestCase
         $this->post('/api/upgrade/all')
             ->assertStatus(400);
 
-        $upgrade = factory(Upgrade::class)->create([
+        factory(Upgrade::class)->create([
             'grid_id' => $grid1->id,
         ]);
 

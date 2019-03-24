@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Upgrade.
  *
- * @property int                 $id
- * @property int                 $grid_id
- * @property int                 $level
- * @property \Carbon\Carbon      $ended_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property int                 $remaining
- * @property Grid                $grid
+ * @property int                             $id
+ * @property int                             $grid_id
+ * @property int                             $level
+ * @property \Illuminate\Support\Carbon      $ended_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int                             $remaining
+ * @property \Koodilab\Models\Grid           $grid
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereGridId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Upgrade whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade whereGridId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade whereLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Upgrade whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Upgrade extends Model

@@ -94,6 +94,8 @@ class ExpeditionManager
      * Finish.
      *
      * @param Expedition $expedition
+     *
+     * @throws \Exception|\Throwable
      */
     public function finish(Expedition $expedition)
     {

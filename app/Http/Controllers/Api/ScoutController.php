@@ -24,6 +24,8 @@ class ScoutController extends Controller
      * @param ScoutTransformer $transformer
      * @param Grid             $grid
      *
+     * @throws \Exception|\Throwable
+     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(Grid $grid, ScoutTransformer $transformer)

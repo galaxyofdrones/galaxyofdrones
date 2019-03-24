@@ -11,7 +11,7 @@ trait FindMissionResources
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[]
+     * @return \Illuminate\Support\Collection|\Koodilab\Models\Resource[]
      */
     public function findMissionResources($columns = ['*'])
     {
