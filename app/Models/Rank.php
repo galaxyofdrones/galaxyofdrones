@@ -16,20 +16,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                             $losing_battle_count
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property User                            $user
+ * @property \Koodilab\Models\User           $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Rank newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Rank newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Rank query()
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereExpeditionCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereLosingBattleCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereMissionCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank wherePlanetCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rank whereWinningBattleCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereExpeditionCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereLosingBattleCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereMissionCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank wherePlanetCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Rank whereWinningBattleCount($value)
  * @mixin \Eloquent
  */
 class Rank extends Model

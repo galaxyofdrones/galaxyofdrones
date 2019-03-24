@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Mission log.
  *
- * @property int                                                 $id
- * @property int                                                 $user_id
- * @property int                                                 $energy
- * @property int                                                 $experience
- * @property \Carbon\Carbon|null                                 $created_at
- * @property \Carbon\Carbon|null                                 $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|resource[] $resources
- * @property User                                                $user
+ * @property int                                                                  $id
+ * @property int                                                                  $user_id
+ * @property int                                                                  $energy
+ * @property int                                                                  $experience
+ * @property \Illuminate\Support\Carbon|null                                      $created_at
+ * @property \Illuminate\Support\Carbon|null                                      $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources
+ * @property \Koodilab\Models\User                                                $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereEnergy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MissionLog whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereUserId($value)
  * @mixin \Eloquent
  */
 class MissionLog extends Model

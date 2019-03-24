@@ -7,19 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Block.
  *
- * @property int                 $id
- * @property int                 $blocked_id
- * @property int                 $user_id
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property User                $blocked
- * @property User                $user
+ * @property int                             $id
+ * @property int                             $blocked_id
+ * @property int                             $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Koodilab\Models\User           $blocked
+ * @property \Koodilab\Models\User           $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Block whereBlockedId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Block whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Block whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Block whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Block whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block whereBlockedId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Block whereUserId($value)
  * @mixin \Eloquent
  */
 class Block extends Model
