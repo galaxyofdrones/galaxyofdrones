@@ -7,6 +7,9 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function testTitle()
     {
         $this->browse(function (Browser $browser) {
@@ -15,6 +18,9 @@ class LoginTest extends DuskTestCase
         });
     }
 
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function testError()
     {
         $this->browse(function (Browser $browser) {
@@ -27,6 +33,9 @@ class LoginTest extends DuskTestCase
         });
     }
 
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function testSuccess()
     {
         $this->browse(function (Browser $browser) {

@@ -211,7 +211,7 @@ class TrainerTest extends TestCase
             'planet_id' => $planet->id,
         ]);
 
-        $training = factory(Training::class)->create([
+        factory(Training::class)->create([
             'grid_id' => $grid->id,
         ]);
 

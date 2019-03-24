@@ -8,6 +8,9 @@ use Tests\DuskTestCase;
 
 class StartTest extends DuskTestCase
 {
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function testFirstPlanet()
     {
         Planet::first()->update([
@@ -27,6 +30,9 @@ class StartTest extends DuskTestCase
         });
     }
 
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function testSidebar()
     {
         $this->browse(function (Browser $browser) {

@@ -21,6 +21,6 @@ class NameGeneratorTest extends TestCase
 
     public function testGenerate()
     {
-        $this->assertInternalType('string', $this->nameGenerator->generate());
+        $this->assertIsString($this->nameGenerator->generate());
     }
 }

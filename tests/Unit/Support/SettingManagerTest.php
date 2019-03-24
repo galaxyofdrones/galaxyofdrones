@@ -23,6 +23,9 @@ class SettingManagerTest extends TestCase
         $this->settingManager = app(SettingManager::class);
     }
 
+    /**
+     * @throws \Exception|\Throwable|\Psr\SimpleCache\InvalidArgumentException
+     */
     public function testAll()
     {
         factory(Setting::class, 2)->create();
@@ -54,6 +57,9 @@ class SettingManagerTest extends TestCase
         $this->assertEquals('Colour', $this->settingManager->value('color', 'en_GB'));
     }
 
+    /**
+     * @throws \Exception|\Throwable|\Psr\SimpleCache\InvalidArgumentException
+     */
     public function testForget()
     {
         factory(Setting::class, 2)->create();

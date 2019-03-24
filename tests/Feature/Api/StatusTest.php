@@ -20,14 +20,14 @@ class StatusTest extends TestCase
             'is_unlocked' => false,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        factory(Planet::class)->create([
             'user_id' => null,
             'resource_id' => $resource->id,
             'x' => 1,
             'y' => 1,
         ]);
 
-        $planet2 = factory(Planet::class)->create([
+        factory(Planet::class)->create([
             'resource_id' => $resource->id,
             'x' => 2,
             'y' => 2,
@@ -37,7 +37,7 @@ class StatusTest extends TestCase
             'is_unlocked' => true,
         ]);
 
-        $planet3 = factory(Planet::class)->create([
+        factory(Planet::class)->create([
             'user_id' => null,
             'resource_id' => $resource2->id,
             'size' => Planet::SIZE_SMALL,

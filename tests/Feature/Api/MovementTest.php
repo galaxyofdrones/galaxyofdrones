@@ -214,12 +214,12 @@ class MovementTest extends TestCase
             'speed' => 100,
         ]);
 
-        $population = factory(Population::class)->create([
+        factory(Population::class)->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        factory(Grid::class)->create([
             'planet_id' => $planet->id,
             'type' => Grid::TYPE_CENTRAL,
         ]);
@@ -452,7 +452,7 @@ class MovementTest extends TestCase
             'quantity' => 5,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        factory(Planet::class)->create([
             'user_id' => $user->id,
             'x' => 13,
             'y' => 13,
@@ -562,7 +562,7 @@ class MovementTest extends TestCase
             'quantity' => 5,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        factory(Planet::class)->create([
             'user_id' => $user->id,
             'x' => 15,
             'y' => 15,

@@ -24,6 +24,9 @@ class GeneratorTest extends TestCase
      */
     protected $generator;
 
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function setUp(): void
     {
         parent::setUp();
