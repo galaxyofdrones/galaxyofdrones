@@ -126,6 +126,8 @@ class Renderer implements RendererContract
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Exception|\Throwable
      */
     public function render()
     {
@@ -135,6 +137,8 @@ class Renderer implements RendererContract
 
     /**
      * Render the tiles.
+     *
+     * @throws \Exception|\Throwable
      */
     protected function renderTiles()
     {
@@ -172,6 +176,8 @@ class Renderer implements RendererContract
 
     /**
      * Render a tile.
+     *
+     * @throws \Exception|\Throwable
      */
     protected function renderTile()
     {
@@ -198,6 +204,8 @@ class Renderer implements RendererContract
 
     /**
      * Make a tile instance.
+     *
+     * @throws \Exception|\Throwable
      */
     protected function makeTile()
     {

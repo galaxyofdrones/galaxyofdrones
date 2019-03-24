@@ -36,6 +36,9 @@ class GeneratorTest extends TestCase
         $this->generator = $this->app->make(Generator::class);
     }
 
+    /**
+     * @throws \Exception|\Throwable
+     */
     public function testGenerate()
     {
         factory(Resource::class)->create();

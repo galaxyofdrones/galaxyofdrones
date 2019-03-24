@@ -53,6 +53,8 @@ class MovementFinish extends Command
 
     /**
      * Execute the console command.
+     *
+     * @throws \Exception|\Throwable
      */
     public function handle()
     {
