@@ -150,6 +150,8 @@ class Generator implements GeneratorContract
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Exception|\Throwable
      */
     public function generate()
     {
