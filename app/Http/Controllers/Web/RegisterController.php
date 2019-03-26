@@ -22,14 +22,6 @@ class RegisterController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function redirectPath()
     {
         return route('home');
@@ -45,9 +37,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|min:3|max:20|regex:/^[a-zA-Z0-9\.\-_]+$/u|unique:users',
-            'email' => 'required|max:255|email|unique:users',
-            'password' => 'required|min:6|max:255|confirmed',
+            'username' => 'required|string|min:3|max:20|regex:/^[a-zA-Z0-9\.\-_]+$/u|unique:users',
+            'email' => 'required|string|max:255|email|unique:users',
+            'password' => 'required|string|min:8|confirmed',
         ]);
     }
 
