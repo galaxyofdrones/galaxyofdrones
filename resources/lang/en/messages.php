@@ -189,8 +189,4 @@ return [
         'upgraded' => 'All buildings are fully upgraded.',
     ],
 
-    'whats_new' => [
-        'title' => "What's new",
-    ],
-
 ];

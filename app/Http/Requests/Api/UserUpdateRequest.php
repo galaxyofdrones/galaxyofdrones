@@ -26,8 +26,8 @@ class UserUpdateRequest extends Request
         $user = $this->user();
 
         return str_replace(':id', $user->id, [
-            'email' => 'required|max:255|email|unique:users,email,:id',
-            'password' => 'nullable|min:6|max:255|confirmed',
+            'email' => 'required|string|max:255|email|unique:users,email,:id',
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
     }
 
