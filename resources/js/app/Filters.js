@@ -68,9 +68,19 @@ export default {
     timer(value) {
         const abs = Math.abs(value);
 
-        const hours = _.padStart(Math.floor(abs / 3600), 2, '0');
-        const minutes = _.padStart(Math.floor(abs / 60), 2, '0');
-        const seconds = _.padStart(Math.floor(abs % 60), 2, '0');
+        let segments = [
+            abs / 3600,
+            (abs % 3600) / 60,
+            abs % 60
+        ];
+
+        segments = _.map(
+            segments, segment => _.padStart(Math.floor(segment), 2, '0')
+        );
+
+        const [
+            hours, minutes, seconds
+        ] = segments;
 
         return `${hours}:${minutes}:${seconds}`;
     }
