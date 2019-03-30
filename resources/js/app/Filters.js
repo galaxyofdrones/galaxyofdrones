@@ -69,7 +69,7 @@ export default {
         const abs = Math.abs(value);
 
         const hours = _.padStart(Math.floor(abs / 3600), 2, '0');
-        const minutes = _.padStart(Math.floor((abs / 60) % 6), 2, '0');
+        const minutes = _.padStart(Math.floor(abs / 60), 2, '0');
         const seconds = _.padStart(Math.floor(abs % 60), 2, '0');
 
         return `${hours}:${minutes}:${seconds}`;
