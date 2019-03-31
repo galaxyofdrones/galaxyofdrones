@@ -60,7 +60,7 @@ class StarmapGenerate extends Command
 
         $this->generator->generate();
 
-        if ($this->hasOption('no-render')) {
+        if ($this->option('no-render')) {
             $this->info(
                 $this->prependTimestamp('Generation complete!')
             );
