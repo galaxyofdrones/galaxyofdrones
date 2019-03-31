@@ -54,7 +54,7 @@ export default {
             direction = value;
         }
 
-        const result = !Number.isNaN(value)
+        const result = _.isNumber(value)
             ? Math.abs(value)
             : value;
 
