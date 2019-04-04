@@ -66,9 +66,9 @@
                             <div v-if="isCurrent" class="attribute-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <a class="btn btn-primary btn-block" href="{{ route('home') }}">
+                                        <router-link :to="{name: 'home'}" class="btn btn-primary btn-block">
                                             {{ trans('messages.planet.jump') }}
-                                        </a>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
