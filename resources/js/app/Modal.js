@@ -21,6 +21,12 @@ export default Remaining.extend({
             });
     },
 
+    watch: {
+        $route() {
+            this.close();
+        }
+    },
+
     methods: {
         openAfterHidden(callback) {
             const handler = () => {
