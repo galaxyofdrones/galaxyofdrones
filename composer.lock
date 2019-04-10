@@ -869,16 +869,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.10",
+            "version": "v5.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "505325b4577968750e622d7a5a271cf8785a7a1a"
+                "reference": "a2cf7a7983329d63edc6fde43142b232bb61aa0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/505325b4577968750e622d7a5a271cf8785a7a1a",
-                "reference": "505325b4577968750e622d7a5a271cf8785a7a1a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a2cf7a7983329d63edc6fde43142b232bb61aa0a",
+                "reference": "a2cf7a7983329d63edc6fde43142b232bb61aa0a",
                 "shasum": ""
             },
             "require": {
@@ -1012,7 +1012,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-04-04T13:39:49+00:00"
+            "time": "2019-04-10T13:05:18+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -4271,16 +4271,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.8.4",
+            "version": "1.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "bc364c2480c17941e2135cfc568fa41794392534"
+                "reference": "949b116f9e7d98d8d276594fed74b580d125c0e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/bc364c2480c17941e2135cfc568fa41794392534",
-                "reference": "bc364c2480c17941e2135cfc568fa41794392534",
+                "url": "https://api.github.com/repos/composer/composer/zipball/949b116f9e7d98d8d276594fed74b580d125c0e6",
+                "reference": "949b116f9e7d98d8d276594fed74b580d125c0e6",
                 "shasum": ""
             },
             "require": {
@@ -4347,7 +4347,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-02-11T09:52:10+00:00"
+            "time": "2019-04-09T15:46:48+00:00"
         },
         {
             "name": "composer/semver",
@@ -5217,20 +5217,20 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "78af75148f9fdd34ea727c8b529a9b4a8f7b740c"
+                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/78af75148f9fdd34ea727c8b529a9b4a8f7b740c",
-                "reference": "78af75148f9fdd34ea727c8b529a9b4a8f7b740c",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
+                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.1"
             },
             "replace": {
                 "myclabs/deep-copy": "self.version"
@@ -5238,8 +5238,6 @@
             "require-dev": {
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.6",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-phpunit": "^0.9.4",
                 "phpunit/phpunit": "^7.1"
             },
             "type": "library",
@@ -5263,7 +5261,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2018-10-30T00:14:44+00:00"
+            "time": "2019-04-07T13:18:21+00:00"
         },
         {
             "name": "nunomaduro/collision",
