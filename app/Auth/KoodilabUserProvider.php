@@ -12,41 +12,6 @@ class KoodilabUserProvider extends EloquentUserProvider
     /**
      * {@inheritdoc}
      */
-    public function retrieveById($identifier)
-    {
-        $model = $this->createModel();
-
-        return $model->newQuery()
-            ->where($model->getAuthIdentifierName(), $identifier)
-            ->where('is_enabled', true)
-            ->first();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function retrieveByToken($identifier, $token)
-    {
-        $model = $this->createModel();
-
-        $model = $model->where($model->getAuthIdentifierName(), $identifier)
-            ->where('is_enabled', true)
-            ->first();
-
-        if (! $model) {
-            return null;
-        }
-
-        $rememberToken = $model->getRememberToken();
-
-        return $rememberToken && hash_equals($rememberToken, $token)
-            ? $model
-            : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function retrieveByCredentials(array $credentials)
     {
         if (empty($credentials) ||
@@ -55,7 +20,7 @@ class KoodilabUserProvider extends EloquentUserProvider
             return;
         }
 
-        $query = $this->createModel()->newQuery();
+        $query = $this->newModelQuery();
 
         if (! empty($credentials['username_or_email'])) {
             $query->where(function (Builder $query) use ($credentials) {
@@ -63,8 +28,6 @@ class KoodilabUserProvider extends EloquentUserProvider
                     ->orWhere('email', $credentials['username_or_email']);
             });
         }
-
-        $query->where('is_enabled', true);
 
         foreach ($credentials as $key => $value) {
             if (Str::contains($key, ['username_or_email', 'is_enabled', 'password'])) {
@@ -79,5 +42,17 @@ class KoodilabUserProvider extends EloquentUserProvider
         }
 
         return $query->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function newModelQuery($model = null)
+    {
+        $query = ($model ?: $this->createModel())->newQuery();
+
+        $query->where('is_enabled', true);
+
+        return $query;
     }
 }
