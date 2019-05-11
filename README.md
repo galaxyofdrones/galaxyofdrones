@@ -16,7 +16,7 @@ The game story takes place in a virtual galaxy where randomly generated planets 
 
 The project is available [on Koodilab](https://koodilab.com).
 
-The initial documentation is available [on GitHub](https://github.com/galaxyofdrones/docs).
+The gamer and developer guides is available [on Website](http://galaxyofdrones.com/gamer-guide/).
 
 ## Security
 
