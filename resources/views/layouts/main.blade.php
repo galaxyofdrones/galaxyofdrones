@@ -7,10 +7,10 @@
 @endphp
 
 @section('title')
-    {{ $title }}
     @hasSection('subtitle')
-        - @yield('subtitle')
+        @yield('subtitle') -
     @endif
+    {{ $title }}
 @endsection
 
 @section('head')

@@ -55,7 +55,7 @@ export default Modal.extend({
             ).then(response => {
                 this.data = response.data;
 
-                if (!showModal && !this.data.buildings.length) {
+                if (!showModal || !this.data.buildings.length) {
                     this.close();
                 } else {
                     this.initRemaining(this.data.remaining);

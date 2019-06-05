@@ -57,7 +57,7 @@ export default {
 
     watch: {
         $route() {
-            EventBus.$emit('planet-updated', this.data);
+            this.fetchData();
         },
 
         selected() {
