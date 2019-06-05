@@ -1,29 +1,31 @@
-{% extends 'layouts.main' %}
+@extends('layouts.main')
 
-{% set subtitle = trans('messages.start') %}
+@php
+    $subtitle = trans('messages.start');
+@endphp
 
-{% block body %}
+@section('body')
     <section id="app" class="container-app container-app-standalone">
         <a class="logo" href="{{ route('home') }}">
             <img class="img-fluid"
-                 src="{{ asset('images/logo.png') }}"
-                 alt="{{ title }}">
+                 src="{{ mix('images/logo.png') }}"
+                 alt="{{ setting('title') }}">
         </a>
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
                     <i class="fas fa-globe-americas"></i>
-                    {{ subtitle }}
+                    {{ $subtitle }}
                 </h5>
             </div>
-            {% if count %}
+            @if ($count)
                 <form action="{{ route('start') }}" method="post">
                     {{ csrf_field() }}
 
                     <div class="card-body text-center">
                         <span class="item planet-1"></span>
                         <h5>
-                            {{ trans_choice('messages.planet.free', count) }}
+                            {{ trans_choice('messages.planet.free', $count) }}
                         </h5>
                     </div>
                     <div class="card-footer">
@@ -32,13 +34,13 @@
                         </button>
                     </div>
                 </form>
-            {% else %}
+            @else
                 <div class="card-body text-center">
                     <h5>
                         {{ trans('messages.warning.server') }}
                     </h5>
                 </div>
-            {% endif %}
+            @endif
         </div>
     </section>
-{% endblock %}
+@endsection

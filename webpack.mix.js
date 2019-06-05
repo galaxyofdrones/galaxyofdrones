@@ -21,5 +21,6 @@ mix.options({ processCssUrls: false })
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .copy('resources/images/favicon.ico', 'public/favicon.ico')
+    .copy('resources/images/logo.png', 'public/images/logo.png')
     .version()
     .extract();
