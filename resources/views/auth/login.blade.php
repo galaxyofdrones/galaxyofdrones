@@ -1,19 +1,23 @@
-{% extends 'layouts.main' %}
+@extends('layouts.main')
 
-{% set subtitle = trans('messages.auth.login') %}
+@php
+    $subtitle = trans('messages.auth.login');
+@endphp
 
-{% block body %}
+@section('subtitle', $subtitle)
+
+@section('body')
     <section id="app" class="container-app container-app-standalone">
         <a class="logo" href="{{ route('home') }}">
             <img class="img-fluid"
-                 src="{{ asset('images/logo.png') }}"
-                 alt="{{ title }}">
+                 src="{{ mix('images/logo.png') }}"
+                 alt="{{ setting('title') }}">
         </a>
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
                     <i class="fas fa-sign-in-alt"></i>
-                    {{ subtitle }}
+                    {{ $subtitle }}
                 </h5>
             </div>
             <form action="{{ route('login') }}" method="post">
@@ -25,31 +29,31 @@
                             {{ trans('validation.attributes.username_or_email') }}
                         </label>
                         <input id="username_or_email"
-                               class="form-control form-control-lg {{ errors.has('username_or_email') ? 'is-invalid' }}"
+                               class="form-control form-control-lg {{ $errors->has('username_or_email') ? 'is-invalid' : '' }}"
                                type="text"
                                name="username_or_email"
                                value="{{ old('username_or_email') }}"
                                placeholder="{{ trans('validation.attributes.username_or_email') }}" required>
-                        {% if errors.has('username_or_email') %}
+                        @if ($errors->has('username_or_email'))
                             <span class="invalid-feedback">
-                                {{ errors.first('username_or_email') }}
+                                {{ $errors->first('username_or_email') }}
                             </span>
-                        {% endif %}
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="required" for="password">
                             {{ trans('validation.attributes.password') }}
                         </label>
                         <input id="password"
-                               class="form-control form-control-lg {{ errors.has('password') ? 'is-invalid' }}"
+                               class="form-control form-control-lg {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                type="password"
                                name="password"
                                placeholder="{{ trans('validation.attributes.password') }}" required>
-                        {% if errors.has('password') %}
+                        @if ($errors->has('password'))
                             <span class="invalid-feedback">
-                                {{ errors.first('password') }}
+                                {{ $errors->first('password') }}
                             </span>
-                        {% endif %}
+                        @endif
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
@@ -62,7 +66,7 @@
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">
-                        {{ subtitle }}
+                        {{ $subtitle }}
                     </button>
                 </div>
                 <div class="card-footer text-center">
@@ -81,9 +85,8 @@
             </form>
         </div>
     </section>
-{% endblock %}
+@endsection
 
-{% block javascripts %}
-    {{ parent() }}
-    {% include('partials.flash') %}
-{% endblock %}
+@push('javascripts')
+    @include('partials.flash')
+@endpush

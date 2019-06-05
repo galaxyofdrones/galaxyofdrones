@@ -4,6 +4,8 @@
     $subtitle = trans('messages.start');
 @endphp
 
+@section('subtitle', $subtitle)
+
 @section('body')
     <section id="app" class="container-app container-app-standalone">
         <a class="logo" href="{{ route('home') }}">

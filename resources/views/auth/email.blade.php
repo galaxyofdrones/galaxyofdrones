@@ -1,19 +1,23 @@
-{% extends 'layouts.main' %}
+@extends('layouts.main')
 
-{% set subtitle = trans('messages.auth.email') %}
+@php
+    $subtitle = trans('messages.auth.email');
+@endphp
 
-{% block body %}
+@section('subtitle', $subtitle)
+
+@section('body')
     <section id="app" class="container-app container-app-standalone">
         <a class="logo" href="{{ route('home') }}">
             <img class="img-fluid"
-                 src="{{ asset('images/logo.png') }}"
-                 alt="{{ title }}">
+                 src="{{ mix('images/logo.png') }}"
+                 alt="{{ setting('title') }}">
         </a>
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
                     <i class="fas fa-sign-in-alt"></i>
-                    {{ subtitle }}
+                    {{ $subtitle }}
                 </h5>
             </div>
             <form action="{{ route('password.email') }}" method="post">
@@ -25,21 +29,21 @@
                             {{ trans('validation.attributes.email') }}
                         </label>
                         <input id="email"
-                               class="form-control form-control-lg {{ errors.has('email') ? 'is-invalid' }}"
+                               class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                type="email"
                                name="email"
                                value="{{ old('email') }}"
                                placeholder="{{ trans('validation.attributes.email') }}" required>
-                        {% if errors.has('email') %}
+                        @if ($errors->has('email'))
                             <span class="invalid-feedback">
-                                {{ errors.first('email') }}
+                                {{ $errors->first('email') }}
                             </span>
-                        {% endif %}
+                        @endif
                     </div>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">
-                        {{ subtitle }}
+                        {{ $subtitle }}
                     </button>
                 </div>
                 <div class="card-footer text-center">
@@ -59,9 +63,8 @@
             </form>
         </div>
     </section>
-{% endblock %}
+@endsection
 
-{% block javascripts %}
-    {{ parent() }}
-    {% include('partials.flash') %}
-{% endblock %}
+@push('javascripts')
+    @include('partials.flash')
+@endpush
