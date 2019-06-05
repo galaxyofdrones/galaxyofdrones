@@ -17,7 +17,7 @@
                             {{ trans('messages.required_quantity') }}
                         </h6>
                         <h5>
-                            @{{ transporterQuantity') }} / {{ vue('unitQuantity(transporterUnit) }}
+                            @{{ transporterQuantity }} / @{{ unitQuantity(transporterUnit) }}
                         </h5>
                     </div>
                 </div>

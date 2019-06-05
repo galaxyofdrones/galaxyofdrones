@@ -24,7 +24,7 @@
                                    v-model="form.email"
                                    placeholder="{{ trans('validation.attributes.email') }}" required>
                             <span v-if="hasError('email')" class="invalid-feedback">
-                                {{ vue("error('email')") }}
+                                @{{ error('email') }}
                             </span>
                         </div>
                         <div class="form-group">
@@ -39,7 +39,7 @@
                                    v-model="form.password"
                                    placeholder="{{ trans('validation.attributes.password') }}">
                             <span v-if="hasError('password')" class="invalid-feedback">
-                                {{ vue("error('password')") }}
+                                @{{ error('password') }}
                             </span>
                         </div>
                         <div class="form-group">
@@ -54,7 +54,7 @@
                                    v-model="form.password_confirmation"
                                    placeholder="{{ trans('validation.attributes.password_confirmation') }}">
                             <span v-if="hasError('password_confirmation')" class="invalid-feedback">
-                                {{ vue("error('password_confirmation')") }}
+                                @{{ error('password_confirmation') }}
                             </span>
                         </div>
                     </div>

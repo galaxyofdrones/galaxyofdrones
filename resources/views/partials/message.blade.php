@@ -24,7 +24,7 @@
                                    :value="form.recipient"
                                    placeholder="{{ trans('validation.attributes.recipient') }}" disabled>
                             <span v-if="hasError('recipient')" class="invalid-feedback">
-                                {{ vue("error('recipient')") }}
+                                @{{ error('recipient') }}
                             </span>
                         </div>
                         <div class="form-group" :class="{'has-error': hasError('message')}">
@@ -39,7 +39,7 @@
                                       v-model="form.message"
                                       placeholder="{{ trans('validation.attributes.message') }}" required></textarea>
                             <span v-if="hasError('message')" class="invalid-feedback">
-                                {{ vue("error('message')") }}
+                                @{{ error('message') }}
                             </span>
                         </div>
                     </div>
