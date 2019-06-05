@@ -22,5 +22,6 @@ mix.options({ processCssUrls: false })
     .sass('resources/sass/app.scss', 'public/css')
     .copy('resources/images/favicon.ico', 'public/favicon.ico')
     .copy('resources/images/logo.png', 'public/images/logo.png')
+    .copy('resources/images/sprite-grid.png', 'public/images/sprite-grid.png')
     .version()
     .extract();
