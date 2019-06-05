@@ -34,17 +34,3 @@ if (! function_exists('setting')) {
         return Util::setting($key, $locale, $fallbackToDefault);
     }
 }
-
-if (! function_exists('vue')) {
-    /**
-     * Show the vue value.
-     *
-     * @param string $value
-     *
-     * @return string
-     */
-    function vue($value)
-    {
-        return Util::vue($value);
-    }
-}
