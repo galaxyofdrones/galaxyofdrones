@@ -37,6 +37,18 @@ class UserObserver
     }
 
     /**
+     * Updating.
+     *
+     * @param User $user
+     */
+    public function updating(User $user)
+    {
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+    }
+
+    /**
      * Saving.
      *
      * @param User $user
