@@ -15,6 +15,7 @@ class BlockController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        $this->middleware('verified');
         $this->middleware('player');
     }
 

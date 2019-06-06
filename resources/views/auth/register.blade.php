@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
-                    <i class="fas fa-sign-in-alt"></i>
+                    <i class="fas fa-user-plus"></i>
                     {{ $subtitle }}
                 </h5>
             </div>

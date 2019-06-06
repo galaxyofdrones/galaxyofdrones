@@ -19,14 +19,14 @@ return [
     'pve' => 'PvE',
     'pvp' => 'PvP',
     'radar' => 'Radar',
-    'required_quantity' => 'Required quantity',
+    'required_quantity' => 'Required Quantity',
     'save' => 'Save',
     'starmap' => 'Starmap',
     'start' => 'Start',
     'transmute' => 'Transmute',
     'trophy' => 'Trophy',
-    'zoom_in' => 'Zoom in',
-    'zoom_out' => 'Zoom out',
+    'zoom_in' => 'Zoom In',
+    'zoom_out' => 'Zoom Out',
 
     'auth' => [
         'already_have' => 'Already have an account?',
@@ -40,7 +40,7 @@ return [
 
     'battle_log' => [
         'empty' => 'No battle logs.',
-        'plural' => 'Battle logs',
+        'plural' => 'Battle Logs',
     ],
 
     'bookmark' => [
@@ -68,6 +68,10 @@ return [
         'singular' => 'Construction',
     ],
 
+    'email' => [
+        'update' => 'Update Email Address',
+    ],
+
     'error' => [
         'whoops' => 'Whoops',
         'wrong' => 'Something went wrong.',
@@ -75,19 +79,19 @@ return [
 
     'expedition' => [
         'empty' => 'No expeditions.',
-        'star' => 'Show expedition',
+        'star' => 'Show Expedition',
     ],
 
     'expedition_log' => [
         'empty' => 'No expedition logs.',
-        'plural' => 'Expedition logs',
+        'plural' => 'Expedition Logs',
     ],
 
     'message' => [
         'empty' => 'No messages.',
         'plural' => 'Messages',
         'reply' => 'Reply',
-        'send' => 'Send message',
+        'send' => 'Send Message',
         'singular' => 'Message',
     ],
 
@@ -97,7 +101,7 @@ return [
 
     'mission_log' => [
         'empty' => 'No mission logs.',
-        'plural' => 'Mission logs',
+        'plural' => 'Mission Logs',
     ],
 
     'mothership' => [
@@ -116,15 +120,10 @@ return [
     ],
 
     'planet' => [
-        'change' => 'Change planet',
+        'change' => 'Change Planet',
         'free' => 'Only one planet is free.|Only :count planets are free.',
         'first' => 'Get my first planet',
         'jump' => 'Jump to surface',
-    ],
-
-    'profile' => [
-        'edit' => 'Edit profile',
-        'singular' => 'Profile',
     ],
 
     'research' => [
@@ -133,7 +132,7 @@ return [
     ],
 
     'resource' => [
-        'count' => 'Resource count',
+        'count' => 'Resource Count',
         'plural' => 'Resources',
         'singular' => 'Resource',
     ],
@@ -143,7 +142,7 @@ return [
     ],
 
     'shield' => [
-        'add' => 'Add shield',
+        'add' => 'Add Shield',
         'empty' => 'No shields.',
         'singular' => 'Shield',
         'time' => '{1} You can add :value hour shield with|[2,*] You can add :value hours shield with',
@@ -169,7 +168,7 @@ return [
     ],
 
     'upgrade' => [
-        'all' => 'Upgrade all',
+        'all' => 'Upgrade All',
         'singular' => 'Upgrade',
     ],
 

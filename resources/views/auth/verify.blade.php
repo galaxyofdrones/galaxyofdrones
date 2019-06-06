@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-    $subtitle = trans('messages.auth.email');
+    $subtitle = trans('verification.verify');
 @endphp
 
 @section('subtitle', $subtitle)
@@ -16,11 +16,26 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-envelope-open-text"></i>
                     {{ $subtitle }}
                 </h5>
             </div>
-            <form action="{{ route('password.email') }}" method="post">
+            <div class="card-body">
+                <p class="mb-0">
+                    {{ trans('verification.check') }}
+                    {{ trans('verification.not_receive') }},
+                    <a href="{{ route('verification.resend') }}">{{ trans('verification.resend') }}</a>.
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-user-edit"></i>
+                    {{ trans('messages.email.update') }}
+                </h5>
+            </div>
+            <form action="{{ route('verification.update') }}" method="post">
                 {{ csrf_field() }}
 
                 <div class="card-body">
@@ -32,7 +47,7 @@
                                class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                type="email"
                                name="email"
-                               value="{{ old('email') }}"
+                               value="{{ old('email', auth()->user()->email) }}"
                                placeholder="{{ trans('validation.attributes.email') }}" required>
                         @if ($errors->has('email'))
                             <span class="invalid-feedback">
@@ -43,22 +58,8 @@
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">
-                        {{ $subtitle }}
+                        {{ trans('messages.save') }}
                     </button>
-                </div>
-                <div class="card-footer text-center">
-                    <p class="mb-1">
-                        {{ trans('messages.auth.already_have') }}
-                        <a href="{{ route('login') }}">
-                            {{ trans('messages.auth.login') }}
-                        </a>
-                    </p>
-                    <p class="mb-0">
-                        {{ trans('messages.auth.dont_have') }}
-                        <a href="{{ route('register') }}">
-                            {{ trans('messages.auth.register') }}
-                        </a>
-                    </p>
                 </div>
             </form>
         </div>

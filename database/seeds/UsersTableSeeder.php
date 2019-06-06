@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Koodilab\Models\User;
 
@@ -13,6 +14,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'username' => 'koodilab',
             'email' => 'support@koodilab.com',
+            'email_verified_at' => Carbon::now(),
             'password' => 'havefun',
         ]);
     }
