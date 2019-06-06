@@ -8,6 +8,16 @@
             timer: 1500
         });
     </script>
+@elseif (session()->has('resent'))
+    <script type="text/javascript">
+        Swal.fire({
+            title: '{{ trans('messages.success.singular') }}',
+            text: '{{ trans('verification.sent') }}',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
 @elseif (session()->has('status'))
     <script type="text/javascript">
         Swal.fire({

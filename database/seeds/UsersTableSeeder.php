@@ -1,6 +1,8 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Koodilab\Models\User;
 
 class UsersTableSeeder extends Seeder
@@ -13,7 +15,8 @@ class UsersTableSeeder extends Seeder
         User::create([
             'username' => 'koodilab',
             'email' => 'support@koodilab.com',
-            'password' => 'havefun',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('havefun'),
         ]);
     }
 }

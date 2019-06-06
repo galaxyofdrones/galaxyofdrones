@@ -41,6 +41,22 @@ $router->group([
     });
 
     $router->group([
+        'prefix' => 'email',
+    ], function () use ($router) {
+        $router->get('verify', 'VerificationController@show')
+            ->name('verification.notice');
+
+        $router->get('verify/{id}', 'VerificationController@verify')
+            ->name('verification.verify');
+
+        $router->get('resend', 'VerificationController@resend')
+            ->name('verification.resend');
+
+        $router->post('update', 'VerificationController@update')
+            ->name('verification.update');
+    });
+
+    $router->group([
         'prefix' => 'login',
     ], function () use ($router) {
         $router->get('/', 'LoginController@showLoginForm')

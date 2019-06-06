@@ -2,6 +2,7 @@
 
 namespace Koodilab\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Koodilab\Events\UserUpdated;
@@ -16,6 +17,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int|null                                                                                                  $current_id
  * @property string                                                                                                    $username
  * @property string                                                                                                    $email
+ * @property \Illuminate\Support\Carbon|null                                                                           $email_verified_at
  * @property string                                                                                                    $password
  * @property string|null                                                                                               $remember_token
  * @property bool                                                                                                      $is_enabled
@@ -64,6 +66,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCurrentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEnergy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereId($value)
@@ -81,7 +84,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereUsername($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens,
         Notifiable,
@@ -163,6 +166,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'is_enabled' => 'bool',
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -247,18 +251,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Unit::class)
             ->withPivot('is_researched', 'quantity')
             ->withTimestamps();
-    }
-
-    /**
-     * Set the password attribute.
-     *
-     * @param string $value
-     */
-    public function setPasswordAttribute($value)
-    {
-        if (! empty($value)) {
-            $this->attributes['password'] = bcrypt($value);
-        }
     }
 
     /**

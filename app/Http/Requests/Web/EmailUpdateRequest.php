@@ -1,11 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Requests\Api;
+namespace Koodilab\Http\Requests\Web;
 
-use Illuminate\Support\Facades\Hash;
 use Koodilab\Http\Requests\Request;
 
-class UserUpdateRequest extends Request
+class EmailUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +27,6 @@ class UserUpdateRequest extends Request
 
         return str_replace(':id', $user->id, [
             'email' => 'required|string|max:255|email|unique:users,email,:id',
-            'password' => 'nullable|string|min:8|confirmed',
         ]);
     }
 
@@ -37,14 +35,8 @@ class UserUpdateRequest extends Request
      */
     public function persist()
     {
-        $attributes = $this->onlyRulesExcept('password');
-
-        if ($this->filled('password')) {
-            $attributes['password'] = Hash::make($this->get('password'));
-        }
-
         $this->user()->update(
-            $attributes
+            $this->onlyRules()
         );
     }
 }
