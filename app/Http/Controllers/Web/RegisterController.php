@@ -3,6 +3,7 @@
 namespace Koodilab\Http\Controllers\Web;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\User;
@@ -55,7 +56,7 @@ class RegisterController extends Controller
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
-            'password' => $data['password'],
+            'password' => Hash::make($data['password']),
         ]);
     }
 }

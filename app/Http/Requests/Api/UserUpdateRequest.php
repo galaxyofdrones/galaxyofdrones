@@ -2,6 +2,7 @@
 
 namespace Koodilab\Http\Requests\Api;
 
+use Illuminate\Support\Facades\Hash;
 use Koodilab\Http\Requests\Request;
 
 class UserUpdateRequest extends Request
@@ -36,8 +37,14 @@ class UserUpdateRequest extends Request
      */
     public function persist()
     {
+        $attributes = $this->onlyRulesExcept('password');
+
+        if ($this->filled('password')) {
+            $attributes['password'] = Hash::make($this->get('password'));
+        }
+
         $this->user()->update(
-            $this->onlyRules()
+            $attributes
         );
     }
 }
