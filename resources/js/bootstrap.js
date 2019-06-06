@@ -75,7 +75,7 @@ require('perfect-scrollbar');
 window.axios.interceptors.response.use(null, error => {
     const status = _.get(error.response, 'status');
 
-    if (status === 401) {
+    if (status === 401 || status === 403) {
         window.location.reload();
     } else if (status === 500) {
         Swal.fire({
