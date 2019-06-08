@@ -37,15 +37,17 @@
 @endprepend
 
 @prepend('javascripts')
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
     <script>
-        var Translations = {
+        window.PUSHER_APP_KEY = '{{ config('broadcasting.connections.pusher.key') }}';
+
+        window.Translations = {
             error: {
                 whoops: '{{ trans('messages.error.whoops') }}',
                 wrong: '{{ trans('messages.error.wrong') }}'
             }
         };
     </script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 @endprepend
