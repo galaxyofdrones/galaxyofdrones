@@ -16,6 +16,7 @@
     "Echo": "readonly",
     "L": "readonly",
     "moment": "readonly",
+    "Pusher": "readonly",
     "Swal": "readonly",
     "Translations": "readonly",
     "Vue": "readonly"

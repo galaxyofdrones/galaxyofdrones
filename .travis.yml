@@ -51,6 +51,7 @@ before_script:
   - php artisan dusk:chrome-driver 74
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - php artisan serve &
+  - php artisan websockets:serve &
 
 script:
   - eslint --ext .js,.vue ./resources/js
