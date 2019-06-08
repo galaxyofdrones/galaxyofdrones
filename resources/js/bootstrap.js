@@ -45,13 +45,15 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-window.io = require('socket.io-client');
+window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
-    broadcaster: 'socket.io',
-    host: {
-        path: '/ws'
-    }
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    wsHost: window.location.hostname,
+    wsPath: '/ws',
+    disableStats: true,
+    enabledTransports: ['ws', 'wss']
 });
 
 /**

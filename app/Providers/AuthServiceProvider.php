@@ -4,6 +4,7 @@ namespace Koodilab\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Koodilab\Auth\KoodilabUserProvider;
 use Koodilab\Models\Bookmark;
@@ -47,6 +48,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('building', function (User $user, $building, $type) {
             return ! empty($building) && $building->type == $type;
+        });
+
+        Gate::define('viewWebSocketsDashboard', function ($user) {
+            return in_array($user->email, Config::get('debug.emails'));
         });
     }
 
