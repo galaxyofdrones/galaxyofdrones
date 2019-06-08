@@ -33,6 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('mission:generate')->cron('0 */6 * * *');
         $schedule->command('rank:update')->hourly();
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
+        $schedule->command('websockets:clean')->daily();
     }
 
     /**
