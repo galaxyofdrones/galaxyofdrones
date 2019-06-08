@@ -17,6 +17,7 @@
     "L": "readonly",
     "moment": "readonly",
     "Pusher": "readonly",
+    "PUSHER_APP_KEY": "readonly",
     "Swal": "readonly",
     "Translations": "readonly",
     "Vue": "readonly"
