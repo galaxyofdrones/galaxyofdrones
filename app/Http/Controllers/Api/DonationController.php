@@ -23,21 +23,23 @@ class DonationController extends Controller
             throw new NotFoundHttpException();
         }
 
-        if ($key == request()->get('key')) {
-            $user = User::findNotDonated(request()->get('email'));
-
-            if (empty($user)) {
-                throw new BadRequestHttpException();
-            }
-
-            $user->forceFill([
-                'solarion' => $user->solarion + config('donation.reward'),
-                'donated_at' => $user->freshTimestamp(),
-            ])->save();
-
-            $user->notify(
-                new DonationCreated()
-            );
+        if ($key != request()->get('key')) {
+            throw new BadRequestHttpException();
         }
+
+        $user = User::findNotDonated(request()->get('email'));
+
+        if (empty($user)) {
+            throw new BadRequestHttpException();
+        }
+
+        $user->forceFill([
+            'solarion' => $user->solarion + config('donation.reward'),
+            'donated_at' => $user->freshTimestamp(),
+        ])->save();
+
+        $user->notify(
+            new DonationCreated()
+        );
     }
 }

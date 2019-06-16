@@ -13,11 +13,16 @@ class DonationTest extends TestCase
 
     public function testIndex()
     {
-        $this->post('/api/donation')->assertStatus(200);
+        $this->post('/api/donation')->assertStatus(400);
 
         $this->post('/api/donation', [
             'key' => 'invalidkey',
-        ])->assertStatus(200);
+        ])->assertStatus(400);
+
+        $this->post('/api/donation', [
+            'key' => 'invalidkey',
+            'email' => 'invalidemail',
+        ])->assertStatus(400);
 
         $this->post('/api/donation', [
             'key' => 'testkey',
