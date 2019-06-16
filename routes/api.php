@@ -304,4 +304,7 @@ $router->group([
 
     $router->get('status', 'StatusController@index')
         ->name('status');
+
+    $router->post('donation', 'DonationController@index')
+        ->name('donation');
 });
