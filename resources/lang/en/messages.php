@@ -8,6 +8,7 @@ return [
     'complete' => 'Complete',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
+    'donation' => 'Donation',
     'energy' => 'Energy',
     'free' => 'Free',
     'info' => 'Info',
