@@ -14,5 +14,9 @@
         @include('partials.profile')
         @include('partials.setting')
         @include('partials.trophy')
+
+        @if (config('donation.key'))
+            @include('partials.donation')
+        @endif
     </section>
 @endsection

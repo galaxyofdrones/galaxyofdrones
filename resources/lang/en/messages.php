@@ -16,6 +16,7 @@ return [
     'mailbox' => 'Mailbox',
     'move' => 'Move',
     'owner' => 'Owner',
+    'play_now' => 'Play Now',
     'pve' => 'PvE',
     'pvp' => 'PvP',
     'radar' => 'Radar',
@@ -66,6 +67,22 @@ return [
     'construction' => [
         'construct' => 'Construct',
         'singular' => 'Construction',
+    ],
+
+    'donation' => [
+        'android' => 'in Android version',
+        'buy' => 'Buy the singleplayer version',
+        'buy_in_app' => 'Buy the in-app product',
+        'description' => 'Galaxy of Drones Online is a free open source project without microtransactions. Please consider donating for the future developments. You can donate by the following methods:',
+        'future' => 'Thank you for donating our future developments!',
+        'how' => 'How to get your one-time reward?',
+        'reward' => 'Your reward has arrived!',
+        'singular' => 'Donation',
+        'steam' => 'on Steam',
+        'step_1' => '1. Multiplayer',
+        'step_2' => '2. Get Reward',
+        'step_3' => '3. Fill Email',
+        'step_4' => '4. Thank You!',
     ],
 
     'email' => [

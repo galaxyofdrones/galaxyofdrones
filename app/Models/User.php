@@ -30,6 +30,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Support\Carbon|null                                                                           $last_capital_changed
  * @property \Illuminate\Support\Carbon|null                                                                           $last_energy_changed
  * @property \Illuminate\Support\Carbon|null                                                                           $started_at
+ * @property \Illuminate\Support\Carbon|null                                                                           $donated_at
  * @property \Illuminate\Support\Carbon|null                                                                           $created_at
  * @property \Illuminate\Support\Carbon|null                                                                           $updated_at
  * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\BattleLog[]                                     $attackBattleLogs
@@ -65,6 +66,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCapitalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCurrentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereDonatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEnergy($value)
@@ -103,6 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
         Queries\FindExpeditionStar,
         Queries\FindIncomingUserAttackMovements,
         Queries\FindMissionResources,
+        Queries\FindNotDonated,
         Queries\FindNotExpiredExpeditions,
         Queries\FindNotExpiredMissions,
         Queries\FindNotExpiredShields,
@@ -158,7 +161,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * {@inheritdoc}
      */
     protected $dates = [
-        'last_login', 'last_capital_changed', 'last_energy_changed', 'started_at',
+        'last_login', 'last_capital_changed', 'last_energy_changed', 'started_at', 'donated_at',
     ];
 
     /**

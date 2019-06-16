@@ -34,6 +34,15 @@
             transition: ease .2s;
         }
     }
+    &.donation {
+        a {
+            color: $warning;
+            text-decoration: none;
+        }
+        .step {
+            border-radius: 50%;
+        }
+    }
 }
 
 @include media-breakpoint-up(sm) {
