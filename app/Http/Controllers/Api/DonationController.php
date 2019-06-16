@@ -4,6 +4,7 @@ namespace Koodilab\Http\Controllers\Api;
 
 use Koodilab\Http\Controllers\Controller;
 use Koodilab\Models\User;
+use Koodilab\Notifications\DonationCreated;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -30,8 +31,13 @@ class DonationController extends Controller
             }
 
             $user->forceFill([
+                'solarion' => $user->solarion + config('donation.reward'),
                 'donated_at' => $user->freshTimestamp(),
             ])->save();
+
+            $user->notify(
+                new DonationCreated()
+            );
         }
     }
 }

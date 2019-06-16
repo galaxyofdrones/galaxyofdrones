@@ -8,7 +8,6 @@ return [
     'complete' => 'Complete',
     'delete' => 'Delete',
     'demolish' => 'Demolish',
-    'donation' => 'Donation',
     'energy' => 'Energy',
     'free' => 'Free',
     'info' => 'Info',
@@ -17,6 +16,7 @@ return [
     'mailbox' => 'Mailbox',
     'move' => 'Move',
     'owner' => 'Owner',
+    'play_now' => 'Play Now',
     'pve' => 'PvE',
     'pvp' => 'PvP',
     'radar' => 'Radar',
@@ -67,6 +67,12 @@ return [
     'construction' => [
         'construct' => 'Construct',
         'singular' => 'Construction',
+    ],
+
+    'donation' => [
+        'future' => 'Thank you for donating our future developments!',
+        'reward' => 'Your reward has arrived!',
+        'singular' => 'Donation',
     ],
 
     'email' => [
