@@ -22,7 +22,7 @@
             </div>
             <form action="{{ route('password.update') }}" method="post">
                 {{ csrf_field() }}
-                <input type="hidden" name="token" value="{{ token }}">
+                <input type="hidden" name="token" value="{{ $token }}">
 
                 <div class="card-body">
                     <div class="form-group">
