@@ -26,6 +26,7 @@ use Laravel\Passport\HasApiTokens;
  * @property int                                                                                                       $experience
  * @property int                                                                                                       $production_rate
  * @property float                                                                                                     $penalty_rate
+ * @property bool                                                                                                      $is_notification_enabled
  * @property \Illuminate\Support\Carbon|null                                                                           $last_login
  * @property \Illuminate\Support\Carbon|null                                                                           $last_capital_changed
  * @property \Illuminate\Support\Carbon|null                                                                           $last_energy_changed
@@ -73,6 +74,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereExperience($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereIsEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereIsNotificationEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereLastCapitalChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereLastEnergyChanged($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereLastLogin($value)
@@ -141,6 +143,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'experience' => 0,
         'production_rate' => 0,
         'penalty_rate' => 0,
+        'is_notification_enabled' => true,
     ];
 
     /**
@@ -170,6 +173,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'is_enabled' => 'bool',
         'email_verified_at' => 'datetime',
+        'is_notification_enabled' => 'bool',
     ];
 
     /**

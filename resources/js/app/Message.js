@@ -8,6 +8,7 @@ export default Form.extend({
 
     methods: {
         open(recipient) {
+            this.form = this.values();
             this.form.recipient = recipient;
 
             this.$nextTick(() => this.$modal.modal());

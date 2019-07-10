@@ -40,9 +40,7 @@ export default Modal.extend({
         submit() {
             axios[this.method](this.url, this.parameters)
                 .then(() => {
-                    this.form = this.values();
                     this.errors = {};
-
                     this.close();
                 })
                 .catch(
