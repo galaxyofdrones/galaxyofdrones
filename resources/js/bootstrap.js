@@ -51,6 +51,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: window.PUSHER_APP_KEY,
     wsHost: window.location.hostname,
+    wsPort: window.location.port,
     wsPath: '/ws',
     disableStats: true,
     enabledTransports: ['ws', 'wss']
