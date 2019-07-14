@@ -47,6 +47,23 @@ export default {
             loader: undefined,
             renderer: undefined,
             stage: undefined,
+            breakpoints: [
+                {
+                    minWidth: 1,
+                    maxHeight: 592,
+                    ratio: 0.64
+                },
+                {
+                    minWidth: 992,
+                    maxHeight: 765,
+                    ratio: 0.827
+                },
+                {
+                    minWidth: 1200,
+                    maxHeight: false,
+                    ratio: 1
+                }
+            ],
             planet: {
                 resource_id: undefined,
                 grids: []
@@ -102,6 +119,7 @@ export default {
             this.stage = new Container();
             this.container = new Container();
             this.container.interactive = true;
+            this.container.scale.set(this.containerScale());
             this.container.on('mousedown', this.mouseDown);
             this.container.on('mousemove', this.mouseMove);
             this.container.on('mouseup', this.mouseUp);
@@ -178,6 +196,7 @@ export default {
 
         resize() {
             this.renderer.resize(this.rendererWidth(), this.rendererHeight());
+            this.container.scale.set(this.containerScale());
             this.align();
         },
 
@@ -274,6 +293,29 @@ export default {
 
         containerY() {
             return this.renderer.height - this.container.height;
+        },
+
+        containerScale() {
+            const width = this.rendererWidth();
+            const height = this.rendererHeight();
+
+            let current = _.findLast(
+                this.breakpoints, breakpoint => breakpoint.minWidth <= width
+            );
+
+            if (current.maxHeight === false || current.maxHeight >= height) {
+                return current.ratio;
+            }
+
+            current = _.findLast(
+                this.breakpoints, breakpoint => breakpoint.maxHeight >= height
+            );
+
+            if (!_.isUndefined(current)) {
+                return current.ratio;
+            }
+
+            return 1;
         },
 
         gridSprite(grid) {
