@@ -23,6 +23,7 @@ return PhpCsFixer\Config::create()
         'ordered_class_elements' => true,
         'ordered_imports' => true,
         'phpdoc_order' => true,
+        'single_trait_insert_per_statement' => false,
         'yoda_style' => false,
     ])
     ->setFinder($finder);
