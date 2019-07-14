@@ -17,6 +17,7 @@
         "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",
+        "react/dns": "^0.4",
         "wildbit/swiftmailer-postmark": "^3.0"
     },
     "require-dev": {
