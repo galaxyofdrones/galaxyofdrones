@@ -107,8 +107,11 @@ return [
     ],
 
     'message' => [
+        'description' => 'New message received!',
         'empty' => 'No messages.',
+        'new' => 'New Message',
         'plural' => 'Messages',
+        'read' => 'You can read it in the game.',
         'reply' => 'Reply',
         'send' => 'Send Message',
         'singular' => 'Message',
@@ -179,6 +182,12 @@ return [
 
     'training' => [
         'train' => 'Train',
+    ],
+
+    'under_attack' => [
+        'description' => 'We are under attack!',
+        'prepare' => 'Prepare our defense!',
+        'singular' => 'Under Attack',
     ],
 
     'unit' => [

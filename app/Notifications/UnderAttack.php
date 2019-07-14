@@ -7,7 +7,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class DonationCreated extends Notification
+class UnderAttack extends Notification
 {
     use Queueable;
 
@@ -35,9 +35,9 @@ class DonationCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject(Lang::trans('messages.donation.singular'))
-            ->line(Lang::trans('messages.donation.reward'))
+            ->subject(Lang::trans('messages.under_attack.singular'))
+            ->line(Lang::trans('messages.under_attack.description'))
             ->action(Lang::trans('messages.play_now'), route('home'))
-            ->line(Lang::trans('messages.donation.future'));
+            ->line(Lang::trans('messages.under_attack.prepare'));
     }
 }

@@ -18,6 +18,7 @@ use Koodilab\Models\Movement;
 use Koodilab\Models\Planet;
 use Koodilab\Models\Population;
 use Koodilab\Models\Unit;
+use Koodilab\Notifications\UnderAttack;
 
 class MovementManager
 {
@@ -150,6 +151,12 @@ class MovementManager
         }
 
         $this->dispatchJobAndEvents($movement);
+
+        if ($planet->user_id) {
+            $planet->user->notify(
+                new UnderAttack()
+            );
+        }
 
         return $movement;
     }
