@@ -3,7 +3,7 @@
 </template>
 <script>
 import {
-    autoDetectRenderer, Container, loaders, Sprite, utils, Text, Texture
+    autoDetectRenderer, Container, Loader, Sprite, utils, Text, Texture
 } from 'pixi.js';
 
 import { EventBus } from '../event-bus';
@@ -90,7 +90,7 @@ export default {
         },
 
         initPixi() {
-            this.loader = new loaders.Loader();
+            this.loader = new Loader();
             this.loader.add(this.backgroundName(), this.background());
             this.loader.add('grid', this.gridTextureAtlas);
             this.loader.load(() => {
@@ -112,9 +112,11 @@ export default {
             this.container.on('touchendoutside', this.mouseUp);
             this.stage.addChild(this.container);
 
-            this.renderer = autoDetectRenderer(this.rendererWidth(), this.rendererHeight(), {
+            this.renderer = autoDetectRenderer({
+                height: this.rendererHeight(),
+                transparent: true,
                 view: this.$el,
-                transparent: true
+                width: this.rendererWidth()
             });
 
             window.addEventListener('resize', this.resize);
