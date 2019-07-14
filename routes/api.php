@@ -302,6 +302,9 @@ $router->group([
             ->where('planet', '\d+');
     });
 
+    $router->put('setting', 'SettingController@update')
+        ->name('setting_update');
+
     $router->get('status', 'StatusController@index')
         ->name('status');
 

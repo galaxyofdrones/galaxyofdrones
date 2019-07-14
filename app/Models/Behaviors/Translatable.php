@@ -86,6 +86,18 @@ trait Translatable
     }
 
     /**
+     * Set the fallback locale.
+     *
+     * @return static
+     */
+    public function setFallbackLocale()
+    {
+        $this->locale = $this->fallbackLocale();
+
+        return $this;
+    }
+
+    /**
      * Get the fallback locale.
      *
      * @return string
