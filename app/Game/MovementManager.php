@@ -152,7 +152,7 @@ class MovementManager
 
         $this->dispatchJobAndEvents($movement);
 
-        if ($planet->user_id && $planet->user->hasVerifiedEmail() && $planet->user->is_notification_enabled) {
+        if ($planet->user_id) {
             $planet->user->notify(
                 new UnderAttack()
             );

@@ -107,8 +107,11 @@ return [
     ],
 
     'message' => [
+        'description' => 'New message received!',
         'empty' => 'No messages.',
+        'new' => 'New Message',
         'plural' => 'Messages',
+        'read' => 'You can read it in the game.',
         'reply' => 'Reply',
         'send' => 'Send Message',
         'singular' => 'Message',

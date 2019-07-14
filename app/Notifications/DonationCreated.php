@@ -14,13 +14,15 @@ class DonationCreated extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param \Koodilab\Models\User $notifiable
      *
      * @return array
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return $notifiable->hasVerifiedEmail() && $notifiable->is_notification_enabled
+            ? ['mail']
+            : [];
     }
 
     /**
