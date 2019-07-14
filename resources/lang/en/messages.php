@@ -181,6 +181,12 @@ return [
         'train' => 'Train',
     ],
 
+    'under_attack' => [
+        'description' => 'We are under attack!',
+        'prepare' => 'Prepare our defense!',
+        'singular' => 'Under Attack',
+    ],
+
     'unit' => [
         'plural' => 'Units',
         'singular' => 'Unit',
