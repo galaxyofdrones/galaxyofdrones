@@ -56,7 +56,9 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">
+        <button class="btn btn-primary btn-lg btn-block"
+                type="submit"
+                :disabled="isSubmitted">
             {{ trans('messages.save') }}
         </button>
     </div>

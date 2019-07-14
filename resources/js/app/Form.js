@@ -5,6 +5,7 @@ export default Modal.extend({
 
     data() {
         return {
+            isSubmitted: false,
             errors: {},
             form: {}
         };
@@ -38,14 +39,26 @@ export default Modal.extend({
         },
 
         submit() {
+            if (this.isSubmitted) {
+                return;
+            }
+
+            this.isSubmitted = true;
+
             axios[this.method](this.url, this.parameters)
-                .then(() => {
-                    this.errors = {};
-                    this.close();
-                })
-                .catch(
-                    error => { this.errors = error.response.data.errors; }
-                );
+                .then(this.handleSuccess)
+                .catch(this.handleError);
+        },
+
+        handleSuccess() {
+            this.isSubmitted = false;
+            this.errors = {};
+            this.close();
+        },
+
+        handleError(error) {
+            this.isSubmitted = false;
+            this.errors = error.response.data.errors;
         }
     }
 });

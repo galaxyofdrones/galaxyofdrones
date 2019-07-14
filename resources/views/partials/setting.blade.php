@@ -34,6 +34,10 @@
                 @endcan
 
                 @include('partials.setting-profile')
+
+                @can('viewDeveloperSetting')
+                    @include('partials.setting-developer')
+                @endcan
             </div>
         </div>
     </div>

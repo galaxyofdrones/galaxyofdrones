@@ -1,8 +1,13 @@
 import { EventBus } from '../event-bus';
+import DeveloperSetting from './DeveloperSetting';
 import Form from './Form';
 import HasTab from './HasTab';
 
 export default Form.extend({
+    components: {
+        DeveloperSetting
+    },
+
     mixins: [
         HasTab
     ],
