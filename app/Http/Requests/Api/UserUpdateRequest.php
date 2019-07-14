@@ -29,6 +29,7 @@ class UserUpdateRequest extends Request
         return str_replace(':id', $user->id, [
             'email' => 'required|string|max:255|email|unique:users,email,:id',
             'password' => 'nullable|string|min:8|confirmed',
+            'is_notification_enabled' => 'required|boolean',
         ]);
     }
 

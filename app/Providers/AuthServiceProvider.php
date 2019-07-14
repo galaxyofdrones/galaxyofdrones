@@ -50,6 +50,10 @@ class AuthServiceProvider extends ServiceProvider
             return ! empty($building) && $building->type == $type;
         });
 
+        Gate::define('viewDeveloperSetting', function ($user) {
+            return in_array($user->email, Config::get('debug.emails'));
+        });
+
         Gate::define('viewWebSocketsDashboard', function ($user) {
             return in_array($user->email, Config::get('debug.emails'));
         });

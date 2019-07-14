@@ -22,6 +22,7 @@ class UserTransformer extends Transformer
             'level_experience' => $item->level_experience,
             'next_level_experience' => $item->next_level_experience,
             'notification_count' => $item->notifications()->count(),
+            'is_notification_enabled' => $item->is_notification_enabled,
             'gravatar' => $item->gravatar([
                 's' => 100,
             ]),

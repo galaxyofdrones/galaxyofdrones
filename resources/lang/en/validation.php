@@ -169,6 +169,7 @@ return [
         'experience' => 'Experience',
         'frequency' => 'Frequency',
         'incoming' => 'Incoming',
+        'is_notification_enabled' => 'Would you like to receive e-mail notifications?',
         'level' => 'Level',
         'losing_battle' => 'Losing battle',
         'message' => 'Message',

@@ -187,6 +187,7 @@ class UserTest extends TestCase
 
         $this->put('/api/user', [
             'email' => $email,
+            'is_notification_enabled' => true,
         ])->assertStatus(200);
 
         $this->assertEquals($user->email, $email);
