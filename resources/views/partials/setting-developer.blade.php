@@ -4,7 +4,7 @@
 <developer-setting v-if="isSelectedTab('developer')"
                    url="{{ route('api_setting_update') }}"
                    :settings='@json($settings)' inline-template>
-    <form method="post" @submit.prevent="submit()" novalidate>
+    <form method="post" @submit.prevent="submit()">
         <div class="modal-body">
             <div class="form-group">
                 <label class="required" for="title">
