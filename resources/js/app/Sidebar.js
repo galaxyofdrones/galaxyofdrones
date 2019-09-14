@@ -89,7 +89,7 @@ export default {
         },
 
         resourceProgress() {
-            return `${Math.min(100, this.usedCapacity / this.data.capacity * 100)}%`;
+            return `${Math.min(100, (this.usedCapacity / this.data.capacity) * 100)}%`;
         },
 
         unitLabel() {
@@ -97,11 +97,11 @@ export default {
         },
 
         unitProgress() {
-            return `${this.data.used_supply / this.data.supply * 100}%`;
+            return `${(this.data.used_supply / this.data.supply) * 100}%`;
         },
 
         unitTrainingProgress() {
-            return `${this.data.used_training_supply / this.data.supply * 100}%`;
+            return `${(this.data.used_training_supply / this.data.supply) * 100}%`;
         }
     },
 
