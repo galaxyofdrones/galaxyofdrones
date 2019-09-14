@@ -1,6 +1,6 @@
 language: php
 
-dist: trusty
+dist: xenial
 
 services:
   - mysql
@@ -13,12 +13,6 @@ php:
 
 addons:
   chrome: stable
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
 
 cache:
   yarn: true
@@ -38,7 +32,7 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS galaxyofdrones_test;'
 
 install:
-  - travis_retry yarn global add eslint@^5.3 eslint-plugin-import@^2.14 eslint-plugin-vue eslint-config-airbnb-base
+  - travis_retry yarn global add eslint@^5.16 eslint-plugin-import@^2.18 eslint-plugin-vue eslint-config-airbnb-base
   - travis_retry composer global require friendsofphp/php-cs-fixer:2.15.* --no-interaction --no-suggest
   - travis_retry composer install --no-interaction --no-suggest
 
