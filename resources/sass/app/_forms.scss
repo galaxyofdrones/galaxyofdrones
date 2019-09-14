@@ -5,6 +5,6 @@ label.required:after {
 
 select.form-control {
     appearance: none;
-    background: $input-bg url('../../images/select-arrow.svg?v=#{$cache-buster}') 94% center no-repeat;
+    background: $input-bg url('../images/select-arrow.svg?v=#{$cache-buster}') 94% center no-repeat;
     background-size: 12px;
 }

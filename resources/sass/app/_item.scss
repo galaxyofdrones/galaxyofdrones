@@ -24,7 +24,7 @@
         text-align: center;
     }
     &:before {
-        background: url('../../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
+        background: url('../images/sprite-item.png?v=#{$cache-buster}') 0 0 no-repeat;
         content: '';
         display: block;
         height: 240px;
@@ -145,7 +145,7 @@
         width: auto;
 
         &:before {
-            background-image: url('../../images/sprite-item-sm.png?v=#{$cache-buster}');
+            background-image: url('../images/sprite-item-sm.png?v=#{$cache-buster}');
             background-size: 240px 336px;
             height: 48px;
             width: 48px;
