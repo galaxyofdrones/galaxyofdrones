@@ -303,9 +303,9 @@ export default {
                 const angleOffset = 45;
                 const angle = Math.atan2(endLatLng.lng - latLng.lng, endLatLng.lat - latLng.lat);
 
-                const angleDeg = (angle > 0
+                const angleDeg = ((angle > 0
                     ? angle
-                    : (2 * Math.PI + angle)) * 360 / (2 * Math.PI) - angleOffset;
+                    : (2 * Math.PI + angle)) * 360) / (2 * Math.PI) - angleOffset;
 
                 options.html = `<i class="fas fa-rocket" style="${L.DomUtil.TRANSFORM}: translateX(-50%) translateY(-50%) rotate(${angleDeg}deg)"></i>`;
             }
