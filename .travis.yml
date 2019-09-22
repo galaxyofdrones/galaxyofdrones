@@ -24,7 +24,6 @@ before_install:
   - pear config-set preferred_state beta
   - pecl channel-update pecl.php.net
   - yes | pecl install imagick
-  - echo '' | pecl install redis
   - sudo rm -rf ~/.nvm
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   - sudo apt-get install -y nodejs
