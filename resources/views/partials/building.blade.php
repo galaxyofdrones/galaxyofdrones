@@ -13,7 +13,7 @@
             <div class="col-lg-6" v-if="building.defense !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.defense') }}
+                        {{ __('validation.attributes.defense') }}
                     </h6>
                     <h5>
                         @{{ building.defense }}
@@ -26,7 +26,7 @@
             <div class="col-lg-6" v-if="building.detection !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.detection') }}
+                        {{ __('validation.attributes.detection') }}
                     </h6>
                     <h5>
                         @{{ building.detection }}
@@ -39,7 +39,7 @@
             <div class="col-lg-6" v-if="building.capacity !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.capacity') }}
+                        {{ __('validation.attributes.capacity') }}
                     </h6>
                     <h5>
                         @{{ building.capacity }}
@@ -52,7 +52,7 @@
             <div class="col-lg-6" v-if="building.supply !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.supply') }}
+                        {{ __('validation.attributes.supply') }}
                     </h6>
                     <h5>
                         @{{ building.supply }}
@@ -65,7 +65,7 @@
             <div class="col-lg-6" v-if="building.mining_rate !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.mining_rate') }}
+                        {{ __('validation.attributes.mining_rate') }}
                     </h6>
                     <h5>
                         @{{ building.mining_rate }}
@@ -78,7 +78,7 @@
             <div class="col-lg-6" v-if="building.production_rate !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.production_rate') }}
+                        {{ __('validation.attributes.production_rate') }}
                     </h6>
                     <h5>
                         @{{ building.production_rate }}
@@ -91,7 +91,7 @@
             <div class="col-lg-6" v-if="building.defense_bonus !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.defense_bonus') }}
+                        {{ __('validation.attributes.defense_bonus') }}
                     </h6>
                     <h5>
                         @{{ building.defense_bonus | percent }}
@@ -104,7 +104,7 @@
             <div class="col-lg-6" v-if="building.construction_time_bonus !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.construction_time_bonus') }}
+                        {{ __('validation.attributes.construction_time_bonus') }}
                     </h6>
                     <h5>
                         @{{ building.construction_time_bonus | percent }}
@@ -117,7 +117,7 @@
             <div class="col-lg-6" v-if="building.trade_time_bonus !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.trade_time_bonus') }}
+                        {{ __('validation.attributes.trade_time_bonus') }}
                     </h6>
                     <h5>
                         @{{ building.trade_time_bonus | percent }}
@@ -130,7 +130,7 @@
             <div class="col-lg-6" v-if="building.train_time_bonus !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.train_time_bonus') }}
+                        {{ __('validation.attributes.train_time_bonus') }}
                     </h6>
                     <h5>
                         @{{ building.train_time_bonus | percent }}
@@ -142,16 +142,16 @@
             </div>
         </div>
         <ul v-if="!grid.building_id || building.has_lower_level" class="list-inline">
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_experience') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.construction_experience') }}'}">
                 <i class="fas fa-flask"></i>
                 @{{ (data.upgrade ? data.upgrade.construction_experience : building.construction_experience) | number }}
             </li>
             <li class="list-inline-item highlight-warning"
-                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_cost') }}'}">
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.construction_cost') }}'}">
                 <i class="fas fa-bolt"></i>
                 @{{ (data.upgrade ? data.upgrade.construction_cost : building.construction_cost) | number }}
             </li>
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.construction_time') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.construction_time') }}'}">
                 <i class="far fa-clock"></i>
                 @{{ (data.upgrade ? data.upgrade.construction_time : building.construction_time) | timer }}
             </li>
@@ -160,7 +160,7 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-warning btn-block" @click="destroy()">
-                        {{ trans('messages.cancel') }}
+                        {{ __('messages.cancel') }}
                     </button>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                     <button class="btn btn-success btn-block"
                             @click="store()"
                             :disabled="!canConstruct">
-                        {{ trans('messages.upgrade.singular') }}
+                        {{ __('messages.upgrade.singular') }}
                     </button>
                 </div>
             </div>
@@ -187,7 +187,7 @@
                     <button class="btn btn-success btn-block"
                             @click="store()"
                             :disabled="!canConstruct">
-                        {{ trans('messages.construction.construct') }}
+                        {{ __('messages.construction.construct') }}
                     </button>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                     <button class="btn btn-danger btn-block"
                             @click="openDemolish()"
                             :disabled="!canDemolish">
-                        {{ trans('messages.demolish') }}
+                        {{ __('messages.demolish') }}
                     </button>
                 </div>
             </div>

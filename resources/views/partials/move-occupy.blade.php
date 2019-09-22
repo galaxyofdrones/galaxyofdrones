@@ -1,7 +1,7 @@
 <div v-if="isOccupyType" class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">
-            {{ trans('messages.movement.occupy') }}
+            {{ __('messages.movement.occupy') }}
         </h5>
         <button type="button" class="close" data-dismiss="modal">
             &times;
@@ -24,7 +24,7 @@
                     <div class="col-lg-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('messages.required_quantity') }}
+                                {{ __('messages.required_quantity') }}
                             </h6>
                             <h5>
                                 {{ Koodilab\Models\Planet::SETTLER_COUNT }} / @{{ unitQuantity(settlerUnit) }}
@@ -39,7 +39,7 @@
                                     type="button"
                                     @click="occupy()"
                                     :disabled="!canOccupy">
-                                {{ trans('messages.movement.occupy') }}
+                                {{ __('messages.movement.occupy') }}
                             </button>
                         </div>
                     </div>

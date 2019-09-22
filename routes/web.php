@@ -46,10 +46,10 @@ $router->group([
         $router->get('verify', 'VerificationController@show')
             ->name('verification.notice');
 
-        $router->get('verify/{id}', 'VerificationController@verify')
+        $router->get('verify/{id}/{hash}', 'VerificationController@verify')
             ->name('verification.verify');
 
-        $router->get('resend', 'VerificationController@resend')
+        $router->post('resend', 'VerificationController@resend')
             ->name('verification.resend');
 
         $router->post('update', 'VerificationController@update')

@@ -72,7 +72,7 @@ class BattleLogTransformer extends Transformer
                 'id' => $item->defender_id,
                 'username' => $item->defender_id
                     ? $item->defender->username
-                    : $this->translator->trans('messages.free'),
+                    : $this->translator->get('messages.free'),
             ],
             'resources' => $this->resources($item),
             'buildings' => $this->buildings($item),

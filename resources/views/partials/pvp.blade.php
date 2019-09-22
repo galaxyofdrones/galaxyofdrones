@@ -4,7 +4,7 @@
     <div v-if="isEnabled" class="pvp">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.user.empty') }}
+                {{ __('messages.user.empty') }}
             </p>
         </div>
         <template v-else>
@@ -16,16 +16,16 @@
                                 #
                             </th>
                             <th>
-                                {{ trans('validation.attributes.username') }}
+                                {{ __('validation.attributes.username') }}
                             </th>
                             <th class="text-center">
-                                {{ trans('validation.attributes.planet') }}
+                                {{ __('validation.attributes.planet') }}
                             </th>
                             <th class="text-center">
-                                {{ trans('validation.attributes.winning_battle') }}
+                                {{ __('validation.attributes.winning_battle') }}
                             </th>
                             <th class="text-center">
-                                {{ trans('validation.attributes.losing_battle') }}
+                                {{ __('validation.attributes.losing_battle') }}
                             </th>
                         </tr>
                     </thead>

@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.mothership.singular') }}
+                        {{ __('messages.mothership.singular') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -18,10 +18,10 @@
                         </div>
                         <div class="col-lg-6">
                             <h5>
-                                {{ trans('messages.mothership.singular') }}
+                                {{ __('messages.mothership.singular') }}
                             </h5>
                             <p>
-                                {{ trans('messages.mothership.description') }}
+                                {{ __('messages.mothership.description') }}
                             </p>
                             <div class="attribute-row">
                                 <div class="col-lg-6">
@@ -41,7 +41,7 @@
                                         <button v-else class="btn btn-primary btn-block"
                                                 :disabled="!canHyperjump"
                                                 @click="store()">
-                                            {{ trans('messages.mothership.hyperjump') }}
+                                            {{ __('messages.mothership.hyperjump') }}
                                         </button>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                :class="{active: isSelectedTab('cargo')}"
                                href="#"
                                @click.prevent="selectTab('cargo')">
-                                {{ trans('messages.cargo') }}
+                                {{ __('messages.cargo') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -64,7 +64,7 @@
                                :class="{active: isSelectedTab('armory')}"
                                href="#"
                                @click.prevent="selectTab('armory')">
-                                {{ trans('messages.armory') }}
+                                {{ __('messages.armory') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -72,7 +72,7 @@
                                :class="{active: isSelectedTab('laboratory')}"
                                href="#"
                                @click.prevent="selectTab('laboratory')">
-                                {{ trans('messages.laboratory') }}
+                                {{ __('messages.laboratory') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -80,7 +80,7 @@
                                :class="{active: isSelectedTab('radar')}"
                                href="#"
                                @click.prevent="selectTab('radar')">
-                                {{ trans('messages.radar') }}
+                                {{ __('messages.radar') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -88,7 +88,7 @@
                                :class="{active: isSelectedTab('shield')}"
                                href="#"
                                @click.prevent="selectTab('shield')">
-                                {{ trans('messages.shield.singular') }}
+                                {{ __('messages.shield.singular') }}
                             </a>
                         </li>
                     </ul>

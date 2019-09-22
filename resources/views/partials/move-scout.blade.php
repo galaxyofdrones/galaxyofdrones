@@ -1,7 +1,7 @@
 <div v-if="isScoutType" class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">
-            {{ trans('messages.movement.scout') }}
+            {{ __('messages.movement.scout') }}
         </h5>
         <button type="button" class="close" data-dismiss="modal">
             &times;
@@ -42,7 +42,7 @@
                                             type="button"
                                             @click="scout()"
                                             :disabled="!canScout">
-                                        {{ trans('messages.movement.scout') }}
+                                        {{ __('messages.movement.scout') }}
                                     </button>
                                 </span>
                             </div>

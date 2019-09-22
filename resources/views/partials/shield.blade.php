@@ -15,7 +15,7 @@
                             {{ trans_choice('messages.shield.time', $expiration, ['value' => $expiration]) }}
                         </li>
                         <li class="list-inline-item highlight-warning"
-                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
+                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.solarion.name') }}'}">
                             <i class="far fa-sun"></i>
                             {{ Koodilab\Models\Shield::SOLARION_COUNT }}
                         </li>
@@ -32,7 +32,7 @@
                             <button class="btn btn-success"
                                     :disabled="!data.can_store"
                                     @click="store()">
-                                {{ trans('messages.shield.add') }}
+                                {{ __('messages.shield.add') }}
                             </button>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
         </div>
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.shield.empty') }}
+                {{ __('messages.shield.empty') }}
             </p>
         </div>
         <completion v-else v-for="shield in data.shields"
@@ -68,7 +68,7 @@
                         <button class="btn btn-primary btn-block"
                                 :disabled="!isCompletable"
                                 @click="store(completion)">
-                            {{ trans('messages.move') }}
+                            {{ __('messages.move') }}
                         </button>
                     </div>
                 </div>

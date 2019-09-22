@@ -11,8 +11,8 @@
 @elseif (session()->has('resent'))
     <script type="text/javascript">
         Swal.fire({
-            title: '{{ trans('messages.success.singular') }}',
-            text: '{{ trans('verification.sent') }}',
+            title: '{{ __('messages.success.singular') }}',
+            text: '{{ __('verification.sent') }}',
             type: 'success',
             showConfirmButton: false,
             timer: 1500
@@ -21,7 +21,7 @@
 @elseif (session()->has('status'))
     <script type="text/javascript">
         Swal.fire({
-            title: '{{ trans('messages.success.singular') }}',
+            title: '{{ __('messages.success.singular') }}',
             text: '{{ session('status') }}',
             type: 'success',
             showConfirmButton: false,
@@ -31,8 +31,8 @@
 @elseif ($errors->any())
     <script type="text/javascript">
         Swal.fire({
-            title: '{{ trans('messages.error.whoops') }}',
-            text: '{{ trans('messages.error.wrong') }}',
+            title: '{{ __('messages.error.whoops') }}',
+            text: '{{ __('messages.error.wrong') }}',
             type: 'error',
             showConfirmButton: false,
             timer: 1500

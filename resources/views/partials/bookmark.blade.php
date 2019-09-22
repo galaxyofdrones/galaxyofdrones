@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.bookmark.plural') }}
+                        {{ __('messages.bookmark.plural') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -13,7 +13,7 @@
                 </div>
                 <div v-if="isEmpty" class="modal-body">
                     <p class="text-center">
-                        {{ trans('messages.bookmark.empty') }}
+                        {{ __('messages.bookmark.empty') }}
                     </p>
                 </div>
                 <template v-else>
@@ -38,14 +38,14 @@
                                 <button class="btn btn-primary btn-block"
                                         type="button"
                                         @click="move(bookmark)">
-                                    {{ trans('messages.move') }}
+                                    {{ __('messages.move') }}
                                 </button>
                             </div>
                             <div class="col-lg-2 pt-2 pt-lg-3">
                                 <button class="btn btn-danger btn-block"
                                         type="button"
                                         @click="destroy(bookmark)">
-                                    {{ trans('messages.delete') }}
+                                    {{ __('messages.delete') }}
                                 </button>
                             </div>
                         </div>

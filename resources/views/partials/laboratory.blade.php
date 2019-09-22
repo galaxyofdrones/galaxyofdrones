@@ -7,7 +7,7 @@
     <div v-if="isEnabled" class="laboratory">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.research.empty') }}
+                {{ __('messages.research.empty') }}
             </p>
         </div>
         <template v-else>

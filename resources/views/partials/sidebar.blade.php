@@ -31,7 +31,7 @@
                     <div class="col-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.mining_rate') }}
+                                {{ __('validation.attributes.mining_rate') }}
                             </h6>
                             <h5>
                                 @{{ data.mining_rate }}
@@ -41,7 +41,7 @@
                     <div class="col-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.production_rate') }}
+                                {{ __('validation.attributes.production_rate') }}
                             </h6>
                             <h5>
                                 @{{ data.production_rate }}
@@ -53,7 +53,7 @@
                     <div class="col-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.incoming') }}
+                                {{ __('validation.attributes.incoming') }}
                             </h6>
                             <h5>
                                 @{{ data.incoming_movement }}
@@ -66,7 +66,7 @@
                     <div class="col-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.outgoing') }}
+                                {{ __('validation.attributes.outgoing') }}
                             </h6>
                             <h5>
                                 @{{ data.outgoing_movement }}
@@ -81,7 +81,7 @@
                     <div class="col-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.construction') }}
+                                {{ __('validation.attributes.construction') }}
                             </h6>
                             <h5>
                                 @{{ data.construction }}
@@ -91,7 +91,7 @@
                     <div class="col-6">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.upgrade') }}
+                                {{ __('validation.attributes.upgrade') }}
                             </h6>
                             <h5>
                                 @{{ data.upgrade }}
@@ -103,7 +103,7 @@
                     <div class="col-12">
                         <div class="attribute">
                             <h6>
-                                {{ trans('validation.attributes.training') }}
+                                {{ __('validation.attributes.training') }}
                             </h6>
                             <h5>
                                 @{{ data.training }}
@@ -114,7 +114,7 @@
             </div>
             <div class="sidebar-block" v-cloak>
                 <div class="progress"
-                     v-popover="{trigger: 'hover', title: '{{ trans('messages.resource.plural') }}', content: resourceLabel}">
+                     v-popover="{trigger: 'hover', title: '{{ __('messages.resource.plural') }}', content: resourceLabel}">
                     <div class="progress-bar"
                          :class="{'bg-success': !isResourceFull, 'bg-danger': isResourceFull}"
                          :style="{width: resourceProgress}"></div>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="col-3">
                         <span class="item item-sm solarion"
-                              v-popover="{trigger: 'hover', title: '{{ trans('messages.solarion.name') }}', content: data.solarion}">
+                              v-popover="{trigger: 'hover', title: '{{ __('messages.solarion.name') }}', content: data.solarion}">
                             @{{ data.solarion | number }}
                         </span>
                     </div>
@@ -137,7 +137,7 @@
             </div>
             <div class="sidebar-block" v-cloak>
                 <div class="progress progress-unit"
-                     v-popover="{trigger: 'hover', title: '{{ trans('messages.unit.plural') }}', content: unitLabel}">
+                     v-popover="{trigger: 'hover', title: '{{ __('messages.unit.plural') }}', content: unitLabel}">
                     <div class="progress-bar bg-success"
                          :class="{'bg-success': !isUnitFull, 'bg-danger': isUnitFull}"
                          :style="{width: unitProgress}"></div>

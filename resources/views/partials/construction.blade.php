@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.construction.singular') }}
+                        {{ __('messages.construction.singular') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;

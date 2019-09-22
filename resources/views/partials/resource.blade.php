@@ -13,7 +13,7 @@
             <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.frequency') }}
+                        {{ __('validation.attributes.frequency') }}
                     </h6>
                     <h5>
                         @{{ resource.frequency | percent }}
@@ -23,7 +23,7 @@
             <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.efficiency') }}
+                        {{ __('validation.attributes.efficiency') }}
                     </h6>
                     <h5>
                         @{{ resource.efficiency | percent }}
@@ -32,31 +32,31 @@
             </div>
         </div>
         <ul v-if="isResearch" class="list-inline">
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_experience') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.research_experience') }}'}">
                 <i class="fas fa-flask"></i>
                 @{{ unit.research_experience | number }}
             </li>
             <li class="list-inline-item highlight-warning"
-                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_cost') }}'}">
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.research_cost') }}'}">
                 <i class="fas fa-bolt"></i>
                 @{{ unit.research_cost | number }}
             </li>
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_time') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.research_time') }}'}">
                 <i class="far fa-clock"></i>
                 @{{ unit.research_time | timer }}
             </li>
         </ul>
         <ul v-else class="list-inline">
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.transmute_time') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.transmute_time') }}'}">
                 <i class="far fa-clock"></i>
-                {{ trans('messages.instant') }}
+                {{ __('messages.instant') }}
             </li>
         </ul>
         <div v-if="remaining" class="attribute-row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-warning btn-block" @click="destroy()">
-                        {{ trans('messages.cancel') }}
+                        {{ __('messages.cancel') }}
                     </button>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     <button class="btn btn-success btn-block"
                             @click="store()"
                             :disabled="!isResearchable(resource)">
-                        {{ trans('messages.research.singular') }}
+                        {{ __('messages.research.singular') }}
                     </button>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                             <button class="btn btn-success btn-block"
                                     @click="store()"
                                     :disabled="!isTransmutable">
-                                {{ trans('messages.transmute') }}
+                                {{ __('messages.transmute') }}
                             </button>
                         </span>
                     </div>

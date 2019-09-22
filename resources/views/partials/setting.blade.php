@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.setting.plural') }}
+                        {{ __('messages.setting.plural') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -18,7 +18,7 @@
                                    :class="{active: isSelectedTab('profile')}"
                                    href="#"
                                    @click.prevent="selectTab('profile')">
-                                    {{ trans('messages.profile') }}
+                                    {{ __('messages.profile') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -26,7 +26,7 @@
                                    :class="{active: isSelectedTab('developer')}"
                                    href="#"
                                    @click.prevent="selectTab('developer')">
-                                    {{ trans('messages.developer') }}
+                                    {{ __('messages.developer') }}
                                 </a>
                             </li>
                         </ul>

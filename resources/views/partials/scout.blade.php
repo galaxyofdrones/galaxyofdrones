@@ -5,7 +5,7 @@
     <div v-if="isEnabled" class="scout">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.movement.empty') }}
+                {{ __('messages.movement.empty') }}
             </p>
         </div>
         <template v-else>

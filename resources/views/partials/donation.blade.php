@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.donation.singular') }}
+                        {{ __('messages.donation.singular') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -19,21 +19,21 @@
                         </div>
                         <div class="col-lg-9">
                             <p>
-                                {{ trans('messages.donation.description') }}
+                                {{ __('messages.donation.description') }}
                             </p>
                             <ul>
                                 <li>
-                                    {{ trans('messages.donation.buy') }}
+                                    {{ __('messages.donation.buy') }}
                                     <a href="http://store.steampowered.com/app/672940/Galaxy_of_Drones/"
                                        target="_blank">
-                                        {{ trans('messages.donation.steam') }}
+                                        {{ __('messages.donation.steam') }}
                                     </a>
                                 </li>
                                 <li>
-                                    {{ trans('messages.donation.buy_in_app') }}
+                                    {{ __('messages.donation.buy_in_app') }}
                                     <a href="https://play.google.com/store/apps/details?id=com.koodilab.galaxyofdrones"
                                        target="_blank">
-                                        {{ trans('messages.donation.android') }}
+                                        {{ __('messages.donation.android') }}
                                     </a>
                                 </li>
                             </ul>
@@ -42,9 +42,9 @@
                 </div>
                 <div class="modal-body separator">
                     <h5 class="text-center mb-5">
-                        {{ trans('messages.donation.how') }}
+                        {{ __('messages.donation.how') }}
                         <small class="ml-1 highlight-warning"
-                               v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
+                               v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.solarion.name') }}'}">
                             <i class="far fa-sun"></i>
                             {{ config('donation.reward') }}
                         </small>
@@ -53,33 +53,33 @@
                         <div class="col-lg-3 text-center">
                             <img class="step img-fluid"
                                  src="{{ mix('images/donation-1.png') }}"
-                                 alt="{{ trans('messages.donation.step_1') }}">
+                                 alt="{{ __('messages.donation.step_1') }}">
                             <p class="mt-3">
-                                {{ trans('messages.donation.step_1') }}
+                                {{ __('messages.donation.step_1') }}
                             </p>
                         </div>
                         <div class="col-lg-3 text-center">
                             <img class="step img-fluid"
                                  src="{{ mix('images/donation-2.png') }}"
-                                 alt="{{ trans('messages.donation.step_2') }}">
+                                 alt="{{ __('messages.donation.step_2') }}">
                             <p class="mt-3">
-                                {{ trans('messages.donation.step_2') }}
+                                {{ __('messages.donation.step_2') }}
                             </p>
                         </div>
                         <div class="col-lg-3 text-center">
                             <img class="step img-fluid"
                                  src="{{ mix('images/donation-3.png') }}"
-                                 alt="{{ trans('messages.donation.step_3') }}">
+                                 alt="{{ __('messages.donation.step_3') }}">
                             <p class="mt-3">
-                                {{ trans('messages.donation.step_3') }}
+                                {{ __('messages.donation.step_3') }}
                             </p>
                         </div>
                         <div class="col-lg-3 text-center">
                             <img class="step img-fluid"
                                  src="{{ mix('images/donation-4.png') }}"
-                                 alt="{{ trans('messages.donation.step_4') }}">
+                                 alt="{{ __('messages.donation.step_4') }}">
                             <p class="mt-3">
-                                {{ trans('messages.donation.step_4') }}
+                                {{ __('messages.donation.step_4') }}
                             </p>
                         </div>
                     </div>

@@ -4,7 +4,7 @@
     <div v-if="isEnabled" class="battle-log">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.battle_log.empty') }}
+                {{ __('messages.battle_log.empty') }}
             </p>
         </div>
         <template v-else>
@@ -91,7 +91,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h5>
-                                {{ trans('validation.attributes.attacker_units') }}
+                                {{ __('validation.attributes.attacker_units') }}
                             </h5>
                             <div class="attribute-row">
                                 <div v-for="unit in battle_log.attacker_units" class="col-lg-3">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <h5 v-if="battle_log.resources.length">
-                                {{ trans('validation.attributes.defender_resources') }}
+                                {{ __('validation.attributes.defender_resources') }}
                             </h5>
                             <div v-if="battle_log.resources.length" class="attribute-row">
                                 <div v-for="resource in battle_log.resources" class="col-lg-3">
@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-lg-6">
                             <h5 v-if="battle_log.defender_units.length">
-                                {{ trans('validation.attributes.defender_units') }}
+                                {{ __('validation.attributes.defender_units') }}
                             </h5>
                             <div v-if="battle_log.defender_units.length" class="attribute-row">
                                 <div v-for="unit in battle_log.defender_units" class="col-lg-3">
@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                             <h5 v-if="battle_log.buildings.length">
-                                {{ trans('validation.attributes.defender_buildings') }}
+                                {{ __('validation.attributes.defender_buildings') }}
                             </h5>
                             <div v-if="battle_log.buildings.length" class="attribute-row">
                                 <div v-for="building in battle_log.buildings" class="col-lg-3">

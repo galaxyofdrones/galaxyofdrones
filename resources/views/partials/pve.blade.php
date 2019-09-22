@@ -4,7 +4,7 @@
     <div v-if="isEnabled" class="pve">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.user.empty') }}
+                {{ __('messages.user.empty') }}
             </p>
         </div>
         <template v-else>
@@ -16,16 +16,16 @@
                                 #
                             </th>
                             <th>
-                                {{ trans('validation.attributes.username') }}
+                                {{ __('validation.attributes.username') }}
                             </th>
                             <th class="text-center">
-                                {{ trans('validation.attributes.experience') }}
+                                {{ __('validation.attributes.experience') }}
                             </th>
                             <th class="text-center">
-                                {{ trans('validation.attributes.mission') }}
+                                {{ __('validation.attributes.mission') }}
                             </th>
                             <th class="text-center">
-                                {{ trans('validation.attributes.expedition') }}
+                                {{ __('validation.attributes.expedition') }}
                             </th>
                         </tr>
                     </thead>

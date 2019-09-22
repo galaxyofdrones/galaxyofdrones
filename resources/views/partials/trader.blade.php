@@ -11,7 +11,7 @@
                        :class="{active: isSelectedTab('trade')}"
                        href="#"
                        @click.prevent="selectTab('trade')">
-                        {{ trans('messages.resource.singular') }}
+                        {{ __('messages.resource.singular') }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -19,7 +19,7 @@
                        :class="{active: isSelectedTab('patrol')}"
                        href="#"
                        @click.prevent="selectTab('patrol')">
-                        {{ trans('messages.unit.singular') }}
+                        {{ __('messages.unit.singular') }}
                     </a>
                 </li>
             </ul>

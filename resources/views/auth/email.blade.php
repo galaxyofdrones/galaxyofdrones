@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-    $subtitle = trans('messages.auth.email');
+    $subtitle = __('messages.auth.email');
 @endphp
 
 @section('subtitle', $subtitle)
@@ -26,14 +26,14 @@
                 <div class="card-body">
                     <div class="form-group mb-0">
                         <label class="required" for="email">
-                            {{ trans('validation.attributes.email') }}
+                            {{ __('validation.attributes.email') }}
                         </label>
                         <input id="email"
                                class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                type="email"
                                name="email"
                                value="{{ old('email') }}"
-                               placeholder="{{ trans('validation.attributes.email') }}" required>
+                               placeholder="{{ __('validation.attributes.email') }}" required>
                         @if ($errors->has('email'))
                             <span class="invalid-feedback">
                                 {{ $errors->first('email') }}
@@ -48,15 +48,15 @@
                 </div>
                 <div class="card-footer text-center">
                     <p class="mb-1">
-                        {{ trans('messages.auth.already_have') }}
+                        {{ __('messages.auth.already_have') }}
                         <a href="{{ route('login') }}">
-                            {{ trans('messages.auth.login') }}
+                            {{ __('messages.auth.login') }}
                         </a>
                     </p>
                     <p class="mb-0">
-                        {{ trans('messages.auth.dont_have') }}
+                        {{ __('messages.auth.dont_have') }}
                         <a href="{{ route('register') }}">
-                            {{ trans('messages.auth.register') }}
+                            {{ __('messages.auth.register') }}
                         </a>
                     </p>
                 </div>

@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.mailbox') }}
+                        {{ __('messages.mailbox') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -17,7 +17,7 @@
                                :class="{active: isSelectedTab('mission-log')}"
                                href="#"
                                @click.prevent="selectTab('mission-log')">
-                                {{ trans('messages.mission_log.plural') }}
+                                {{ __('messages.mission_log.plural') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -25,7 +25,7 @@
                                :class="{active: isSelectedTab('expedition-log')}"
                                href="#"
                                @click.prevent="selectTab('expedition-log')">
-                                {{ trans('messages.expedition_log.plural') }}
+                                {{ __('messages.expedition_log.plural') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -33,7 +33,7 @@
                                :class="{active: isSelectedTab('battle-log')}"
                                href="#"
                                @click.prevent="selectTab('battle-log')">
-                                {{ trans('messages.battle_log.plural') }}
+                                {{ __('messages.battle_log.plural') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -41,7 +41,7 @@
                                :class="{active: isSelectedTab('message-log')}"
                                href="#"
                                @click.prevent="selectTab('message-log')">
-                                {{ trans('messages.message.plural') }}
+                                {{ __('messages.message.plural') }}
                             </a>
                         </li>
                     </ul>

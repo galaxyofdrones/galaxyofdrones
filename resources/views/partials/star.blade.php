@@ -21,7 +21,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('messages.coordinate.x') }}
+                                            {{ __('messages.coordinate.x') }}
                                         </h6>
                                         <h5>
                                             @{{ geometry.coordinates[0] }}
@@ -31,7 +31,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('messages.coordinate.y') }}
+                                            {{ __('messages.coordinate.y') }}
                                         </h6>
                                         <h5>
                                             @{{ geometry.coordinates[1] }}
@@ -46,7 +46,7 @@
                                                 type="button"
                                                 @click="bookmark()"
                                                 :disabled="data.is_bookmarked">
-                                            {{ trans('messages.bookmark.star') }}
+                                            {{ __('messages.bookmark.star') }}
                                         </button>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                         <button class="btn btn-primary btn-block"
                                                 type="button"
                                                 @click="showExpedition()">
-                                            {{ trans('messages.expedition.star') }}
+                                            {{ __('messages.expedition.star') }}
                                         </button>
                                     </div>
                                 </div>

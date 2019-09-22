@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-    $subtitle = trans('messages.auth.login');
+    $subtitle = __('messages.auth.login');
 @endphp
 
 @section('subtitle', $subtitle)
@@ -26,14 +26,14 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="required" for="username_or_email">
-                            {{ trans('validation.attributes.username_or_email') }}
+                            {{ __('validation.attributes.username_or_email') }}
                         </label>
                         <input id="username_or_email"
                                class="form-control form-control-lg {{ $errors->has('username_or_email') ? 'is-invalid' : '' }}"
                                type="text"
                                name="username_or_email"
                                value="{{ old('username_or_email') }}"
-                               placeholder="{{ trans('validation.attributes.username_or_email') }}" required>
+                               placeholder="{{ __('validation.attributes.username_or_email') }}" required>
                         @if ($errors->has('username_or_email'))
                             <span class="invalid-feedback">
                                 {{ $errors->first('username_or_email') }}
@@ -42,13 +42,13 @@
                     </div>
                     <div class="form-group">
                         <label class="required" for="password">
-                            {{ trans('validation.attributes.password') }}
+                            {{ __('validation.attributes.password') }}
                         </label>
                         <input id="password"
                                class="form-control form-control-lg {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                type="password"
                                name="password"
-                               placeholder="{{ trans('validation.attributes.password') }}" required>
+                               placeholder="{{ __('validation.attributes.password') }}" required>
                         @if ($errors->has('password'))
                             <span class="invalid-feedback">
                                 {{ $errors->first('password') }}
@@ -60,7 +60,7 @@
                             <input class="form-check-input"
                                    type="checkbox"
                                    name="remember" checked>
-                            {{ trans('validation.attributes.remember') }}
+                            {{ __('validation.attributes.remember') }}
                         </label>
                     </div>
                 </div>
@@ -72,13 +72,13 @@
                 <div class="card-footer text-center">
                     <p class="mb-1">
                         <a href="{{ route('password.request') }}">
-                            {{ trans('messages.auth.forgot') }}
+                            {{ __('messages.auth.forgot') }}
                         </a>
                     </p>
                     <p class="mb-0">
-                        {{ trans('messages.auth.dont_have') }}
+                        {{ __('messages.auth.dont_have') }}
                         <a href="{{ route('register') }}">
-                            {{ trans('messages.auth.register') }}
+                            {{ __('messages.auth.register') }}
                         </a>
                     </p>
                 </div>
