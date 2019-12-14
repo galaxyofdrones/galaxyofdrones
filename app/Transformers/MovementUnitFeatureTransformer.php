@@ -13,7 +13,7 @@ class MovementUnitFeatureTransformer extends MovementFeatureTransformer
      */
     public function transform($item)
     {
-        $current = $item->remaining / max(0, $item->created_at->diffInSeconds(
+        $current = $item->remaining / max(1, $item->created_at->diffInSeconds(
             $item->ended_at, false
         ));
 
