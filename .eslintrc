@@ -29,7 +29,7 @@
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "never"],
     "global-require": "off",
-    "import/extensions": ["error", "never", { "vue": "always" }],
+    "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "indent": ["error", 4],
