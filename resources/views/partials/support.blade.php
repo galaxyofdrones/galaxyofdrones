@@ -30,19 +30,19 @@
             <ul v-if="!isMove" class="list-inline">
                 <li v-if="planet.is_capital"
                     class="list-inline-item"
-                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.trade_time') }}'}">
+                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.trade_time') }}'}">
                     <i class="far fa-clock"></i>
-                    {{ trans('messages.instant') }}
+                    {{ __('messages.instant') }}
                 </li>
                 <li v-else
                     class="list-inline-item"
-                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.trade_time') }}'}">
+                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.trade_time') }}'}">
                     <i class="far fa-clock"></i>
                     @{{ travelTime | timer }}
                 </li>
             </ul>
             <button class="btn btn-success btn-block" :disabled="!hasUnits" @click="support()">
-                {{ trans('messages.movement.support') }}
+                {{ __('messages.movement.support') }}
             </button>
         </div>
     </div>

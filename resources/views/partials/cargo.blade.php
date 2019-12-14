@@ -10,13 +10,13 @@
                 @{{ resource.quantity | number }}
             </span>
             <span class="item item-sm solarion"
-                  v-popover="{placement: 'top', trigger: 'hover', title: '{{ trans('messages.solarion.name') }}', content: data.solarion}">
+                  v-popover="{placement: 'top', trigger: 'hover', title: '{{ __('messages.solarion.name') }}', content: data.solarion}">
                 @{{ data.solarion | number }}
             </span>
         </div>
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.mission.empty') }}
+                {{ __('messages.mission.empty') }}
             </p>
         </div>
         <completion v-else v-for="mission in data.missions"
@@ -44,12 +44,12 @@
                     </div>
                     <div class="col-lg-3 text-center">
                         <ul class="list-inline">
-                            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.experience') }}'}">
+                            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.experience') }}'}">
                                 <i class="fas fa-flask"></i>
                                 @{{ completion.experience | number | sign(completion.experience) }}
                             </li>
                             <li class="list-inline-item highlight-warning"
-                                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.energy') }}'}">
+                                v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.energy') }}'}">
                                 <i class="fas fa-bolt"></i>
                                 @{{ completion.energy | number| sign(completion.energy) }}
                             </li>
@@ -57,7 +57,7 @@
                         <button class="btn btn-success btn-block"
                                 :disabled="!isCompletable(completion)"
                                 @click="store(completion)">
-                            {{ trans('messages.complete') }}
+                            {{ __('messages.complete') }}
                         </button>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
         </div>
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.expedition.empty') }}
+                {{ __('messages.expedition.empty') }}
             </p>
         </div>
         <completion v-else v-for="expedition in data.expeditions"
@@ -43,12 +43,12 @@
                     </div>
                     <div class="col-lg-3 text-center">
                         <ul class="list-inline">
-                            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.experience') }}'}">
+                            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.experience') }}'}">
                                 <i class="fas fa-flask"></i>
                                 @{{ completion.experience | number | sign(completion.experience) }}
                             </li>
                             <li class="list-inline-item highlight-warning"
-                                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
+                                v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.solarion.name') }}'}">
                                 <i class="far fa-sun"></i>
                                 @{{ completion.solarion | number| sign(completion.solarion) }}
                             </li>
@@ -56,7 +56,7 @@
                         <button class="btn btn-success btn-block"
                                 :disabled="!isCompletable(completion)"
                                 @click="store(completion)">
-                            {{ trans('messages.complete') }}
+                            {{ __('messages.complete') }}
                         </button>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
     <div v-if="isEnabled" class="expedition-log">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.expedition_log.empty') }}
+                {{ __('messages.expedition_log.empty') }}
             </p>
         </div>
         <template v-else>

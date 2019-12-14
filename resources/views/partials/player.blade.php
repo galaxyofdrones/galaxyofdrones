@@ -37,21 +37,21 @@
             </div>
             <div class="player-progress" v-cloak>
                 <div class="text"
-                     v-popover="{placement: 'left', trigger: 'hover', title: '{{ trans('validation.attributes.level') }}', content: data.level}">
+                     v-popover="{placement: 'left', trigger: 'hover', title: '{{ __('validation.attributes.level') }}', content: data.level}">
                     <i class="fas fa-star"></i>
                 </div>
                 <div class="progress flex-fill"
-                     v-popover="{placement: 'left', trigger: 'hover', title: '{{ trans('validation.attributes.experience') }}', content: experienceLabel}">
+                     v-popover="{placement: 'left', trigger: 'hover', title: '{{ __('validation.attributes.experience') }}', content: experienceLabel}">
                     <div class="progress-bar" :style="{width: experienceProgress}"></div>
                 </div>
                 <div class="text"
-                      v-popover="{placement: 'left', trigger: 'hover', title: '{{ trans('validation.attributes.level') }}', content: data.level}">
+                      v-popover="{placement: 'left', trigger: 'hover', title: '{{ __('validation.attributes.level') }}', content: data.level}">
                     @{{ data.level | number }}
                 </div>
             </div>
         </div>
         <div class="player-energy"
-             v-popover="{placement: 'left', trigger: 'hover', title: '{{ trans('validation.attributes.energy') }}', content: energyValue}" v-cloak>
+             v-popover="{placement: 'left', trigger: 'hover', title: '{{ __('validation.attributes.energy') }}', content: energyValue}" v-cloak>
             <i class="fas fa-bolt"></i>
             @{{ energy | number }}
         </div>

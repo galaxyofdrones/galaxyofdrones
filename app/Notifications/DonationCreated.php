@@ -35,9 +35,9 @@ class DonationCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject(Lang::trans('messages.donation.singular'))
-            ->line(Lang::trans('messages.donation.reward'))
-            ->action(Lang::trans('messages.play_now'), route('home'))
-            ->line(Lang::trans('messages.donation.future'));
+            ->subject(Lang::get('messages.donation.singular'))
+            ->line(Lang::get('messages.donation.reward'))
+            ->action(Lang::get('messages.play_now'), route('home'))
+            ->line(Lang::get('messages.donation.future'));
     }
 }

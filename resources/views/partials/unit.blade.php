@@ -16,7 +16,7 @@
             <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.speed') }}
+                        {{ __('validation.attributes.speed') }}
                     </h6>
                     <h5>
                         @{{ unit.speed }}
@@ -26,7 +26,7 @@
             <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.attack') }}
+                        {{ __('validation.attributes.attack') }}
                     </h6>
                     <h5>
                         @{{ unit.attack }}
@@ -36,7 +36,7 @@
             <div class="col-lg-6">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.defense') }}
+                        {{ __('validation.attributes.defense') }}
                     </h6>
                     <h5>
                         @{{ unit.defense }}
@@ -46,7 +46,7 @@
             <div class="col-lg-6" v-if="unit.detection !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.detection') }}
+                        {{ __('validation.attributes.detection') }}
                     </h6>
                     <h5>
                         @{{ unit.detection }}
@@ -56,7 +56,7 @@
             <div class="col-lg-6" v-if="unit.capacity !== null">
                 <div class="attribute">
                     <h6>
-                        {{ trans('validation.attributes.capacity') }}
+                        {{ __('validation.attributes.capacity') }}
                     </h6>
                     <h5>
                         @{{ unit.capacity }}
@@ -65,31 +65,31 @@
             </div>
         </div>
         <ul v-if="isResearch" class="list-inline">
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_experience') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.research_experience') }}'}">
                 <i class="fas fa-flask"></i>
                 @{{ unit.research_experience | number }}
             </li>
             <li class="list-inline-item highlight-warning"
-                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_cost') }}'}">
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.research_cost') }}'}">
                 <i class="fas fa-bolt"></i>
                 @{{ unit.research_cost | number }}
             </li>
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.research_time') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.research_time') }}'}">
                 <i class="far fa-clock"></i>
                 @{{ unit.research_time | timer }}
             </li>
         </ul>
         <ul v-else class="list-inline">
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.supply') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.supply') }}'}">
                 <i class="fas fa-warehouse"></i>
                 @{{ unit.supply | number }}
             </li>
             <li class="list-inline-item highlight-warning"
-                v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_cost') }}'}">
+                v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.train_cost') }}'}">
                 <i class="fas fa-bolt"></i>
                 @{{ unit.train_cost | number }}
             </li>
-            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.train_time') }}'}">
+            <li class="list-inline-item" v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.train_time') }}'}">
                 <i class="far fa-clock"></i>
                 @{{ unit.train_time | timer }}
             </li>
@@ -98,7 +98,7 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <button class="btn btn-warning btn-block" @click="destroy(unit)">
-                        {{ trans('messages.cancel') }}
+                        {{ __('messages.cancel') }}
                     </button>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                     <button class="btn btn-success btn-block"
                             @click="store(unit)"
                             :disabled="!isResearchable(unit)">
-                        {{ trans('messages.research.singular') }}
+                        {{ __('messages.research.singular') }}
                     </button>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                             <button class="btn btn-success btn-block"
                                     @click="store()"
                                     :disabled="!isTrainable">
-                                {{ trans('messages.training.train') }}
+                                {{ __('messages.training.train') }}
                             </button>
                         </span>
                     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-    $subtitle = trans('verification.verify');
+    $subtitle = __('verification.verify');
 @endphp
 
 @section('subtitle', $subtitle)
@@ -21,18 +21,23 @@
                 </h5>
             </div>
             <div class="card-body">
-                <p class="mb-0">
-                    {{ trans('verification.check') }}
-                    {{ trans('verification.not_receive') }},
-                    <a href="{{ route('verification.resend') }}">{{ trans('verification.resend') }}</a>.
-                </p>
+                {{ __('verification.check') }}
+                {{ __('verification.not_receive') }},
+
+                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    @csrf
+
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+                        {{ __('verification.resend') }}
+                    </button>.
+                </form>
             </div>
         </div>
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
                     <i class="fas fa-user-edit"></i>
-                    {{ trans('messages.email.update') }}
+                    {{ __('messages.email.update') }}
                 </h5>
             </div>
             <form action="{{ route('verification.update') }}" method="post">
@@ -41,14 +46,14 @@
                 <div class="card-body">
                     <div class="form-group mb-0">
                         <label class="required" for="email">
-                            {{ trans('validation.attributes.email') }}
+                            {{ __('validation.attributes.email') }}
                         </label>
                         <input id="email"
                                class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                type="email"
                                name="email"
                                value="{{ old('email', auth()->user()->email) }}"
-                               placeholder="{{ trans('validation.attributes.email') }}" required>
+                               placeholder="{{ __('validation.attributes.email') }}" required>
                         @if ($errors->has('email'))
                             <span class="invalid-feedback">
                                 {{ $errors->first('email') }}
@@ -58,7 +63,7 @@
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">
-                        {{ trans('messages.save') }}
+                        {{ __('messages.save') }}
                     </button>
                 </div>
             </form>

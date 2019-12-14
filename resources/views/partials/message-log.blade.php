@@ -4,7 +4,7 @@
     <div v-if="isEnabled" class="message-log">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.message.empty') }}
+                {{ __('messages.message.empty') }}
             </p>
         </div>
         <template v-else>
@@ -33,7 +33,7 @@
                             <button class="btn btn-success btn-block"
                                     :disabled="message.sender.is_blocked || message.sender.is_blocked_by"
                                     @click="sendMessage(message.sender.username)">
-                                {{ trans('messages.message.reply') }}
+                                {{ __('messages.message.reply') }}
                             </button>
                         </div>
                         <div class="col-lg-2 pt-2 pt-lg-3">

@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.upgrade.all') }}
+                        {{ __('messages.upgrade.all') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -12,19 +12,19 @@
                 </div>
                 <div v-if="data.upgrade_cost" class="modal-body text-center">
                     <p v-if="canStore">
-                        {{ trans('messages.warning.upgrade') }}
+                        {{ __('messages.warning.upgrade') }}
                     </p>
                     <p v-else>
-                        {{ trans('messages.warning.resource') }}
+                        {{ __('messages.warning.resource') }}
                     </p>
                     <ul class="list-inline">
                         <li class="list-inline-item highlight-warning"
-                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.energy') }}'}">
+                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.energy') }}'}">
                             <i class="fas fa-bolt"></i>
                             @{{ data.upgrade_cost }}
                         </li>
                         <li class="list-inline-item highlight-warning"
-                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('messages.solarion.name') }}'}">
+                            v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.solarion.name') }}'}">
                             <i class="far fa-sun"></i>
                             {{ Koodilab\Models\Upgrade::SOLARION_COUNT }}
                         </li>
@@ -32,10 +32,10 @@
                 </div>
                 <div v-else class="modal-body text-center">
                     <p v-if="data.upgrade_count">
-                        {{ trans('messages.warning.upgrade_in_progress') }}
+                        {{ __('messages.warning.upgrade_in_progress') }}
                     </p>
                     <p v-else>
-                        {{ trans('messages.warning.upgraded') }}
+                        {{ __('messages.warning.upgraded') }}
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -43,12 +43,12 @@
                             type="button"
                             @click="store()"
                             :disabled="!canStore">
-                        {{ trans('messages.upgrade.all') }}
+                        {{ __('messages.upgrade.all') }}
                     </button>
                     <button class="btn btn-warning"
                             type="button"
                             @click="close()">
-                        {{ trans('messages.cancel') }}
+                        {{ __('messages.cancel') }}
                     </button>
                 </div>
             </div>

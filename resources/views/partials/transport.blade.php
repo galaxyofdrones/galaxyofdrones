@@ -14,7 +14,7 @@
                 <div class="col-lg-6">
                     <div class="attribute">
                         <h6>
-                            {{ trans('messages.required_quantity') }}
+                            {{ __('messages.required_quantity') }}
                         </h6>
                         <h5>
                             @{{ transporterQuantity }} / @{{ unitQuantity(transporterUnit) }}
@@ -25,13 +25,13 @@
             <ul v-if="!isMove" class="list-inline">
                 <li v-if="planet.is_capital"
                     class="list-inline-item"
-                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.trade_time') }}'}">
+                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.trade_time') }}'}">
                     <i class="far fa-clock"></i>
-                    {{ trans('messages.instant') }}
+                    {{ __('messages.instant') }}
                 </li>
                 <li v-else
                     class="list-inline-item"
-                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.trade_time') }}'}">
+                    v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.trade_time') }}'}">
                     <i class="far fa-clock"></i>
                     @{{ travelTime | timer }}
                 </li>
@@ -42,7 +42,7 @@
                         <button class="btn btn-success btn-block"
                                 @click="transport()"
                                 :disabled="!canTransport">
-                            {{ trans('messages.movement.transport') }}
+                            {{ __('messages.movement.transport') }}
                         </button>
                     </div>
                 </div>

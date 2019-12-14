@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @php
-    $subtitle = trans('messages.start');
+    $subtitle = __('messages.start');
 @endphp
 
 @section('subtitle', $subtitle)
@@ -32,14 +32,14 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">
-                            {{ trans('messages.planet.first') }}
+                            {{ __('messages.planet.first') }}
                         </button>
                     </div>
                 </form>
             @else
                 <div class="card-body text-center">
                     <h5>
-                        {{ trans('messages.warning.server') }}
+                        {{ __('messages.warning.server') }}
                     </h5>
                 </div>
             @endif

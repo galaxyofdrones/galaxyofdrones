@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'domain' => null,
+    'domain' => env('TELESCOPE_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'path' => 'telescope',
+    'path' => env('TELESCOPE_PATH', 'telescope'),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,6 +47,7 @@ return [
     'storage' => [
         'database' => [
             'connection' => env('DB_CONNECTION', 'mysql'),
+            'chunk' => 1000,
         ],
     ],
 
@@ -151,5 +152,7 @@ return [
         ],
 
         Watchers\ScheduleWatcher::class => env('TELESCOPE_SCHEDULE_WATCHER', true),
+
+        Watchers\ViewWatcher::class => env('TELESCOPE_VIEW_WATCHER', true),
     ],
 ];

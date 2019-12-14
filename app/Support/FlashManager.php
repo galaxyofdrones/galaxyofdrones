@@ -70,7 +70,7 @@ class FlashManager
     public function info($message, $title = null)
     {
         if (! $title) {
-            $title = $this->translator->trans('messages.info');
+            $title = $this->translator->get('messages.info');
         }
 
         $this->message($title, $message, static::TYPE_INFO);
@@ -85,7 +85,7 @@ class FlashManager
     public function success($message, $title = null)
     {
         if (! $title) {
-            $title = $this->translator->trans('messages.success.singular');
+            $title = $this->translator->get('messages.success.singular');
         }
 
         $this->message($title, $message, static::TYPE_SUCCESS);
@@ -100,7 +100,7 @@ class FlashManager
     public function error($message, $title = null)
     {
         if (! $title) {
-            $title = $this->translator->trans('messages.error.whoops');
+            $title = $this->translator->get('messages.error.whoops');
         }
 
         $this->message($title, $message, static::TYPE_ERROR);

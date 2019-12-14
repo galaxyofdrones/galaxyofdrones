@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        {{ trans('messages.trophy') }}
+                        {{ __('messages.trophy') }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
@@ -17,7 +17,7 @@
                                :class="{active: isSelectedTab('pve')}"
                                href="#"
                                @click.prevent="selectTab('pve')">
-                                {{ trans('messages.pve') }}
+                                {{ __('messages.pve') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -25,7 +25,7 @@
                                :class="{active: isSelectedTab('pvp')}"
                                href="#"
                                @click.prevent="selectTab('pvp')">
-                                {{ trans('messages.pvp') }}
+                                {{ __('messages.pvp') }}
                             </a>
                         </li>
                     </ul>

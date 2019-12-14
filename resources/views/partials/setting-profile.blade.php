@@ -2,7 +2,7 @@
     <div class="modal-body {{ auth()->user()->can('viewDeveloperSetting') ? 'separator' : '' }}">
         <div class="form-group">
             <label class="required" for="email">
-                {{ trans('validation.attributes.email') }}
+                {{ __('validation.attributes.email') }}
             </label>
             <input id="email"
                    class="form-control form-control-lg"
@@ -10,14 +10,14 @@
                    type="email"
                    name="email"
                    v-model="form.email"
-                   placeholder="{{ trans('validation.attributes.email') }}" required>
+                   placeholder="{{ __('validation.attributes.email') }}" required>
             <span v-if="hasError('email')" class="invalid-feedback">
                 @{{ error('email') }}
             </span>
         </div>
         <div class="form-group">
             <label for="password">
-                {{ trans('validation.attributes.password') }}
+                {{ __('validation.attributes.password') }}
             </label>
             <input id="password"
                    class="form-control form-control-lg"
@@ -25,14 +25,14 @@
                    type="password"
                    name="password"
                    v-model="form.password"
-                   placeholder="{{ trans('validation.attributes.password') }}">
+                   placeholder="{{ __('validation.attributes.password') }}">
             <span v-if="hasError('password')" class="invalid-feedback">
                 @{{ error('password') }}
             </span>
         </div>
         <div class="form-group">
             <label for="password_confirmation">
-                {{ trans('validation.attributes.password_confirmation') }}
+                {{ __('validation.attributes.password_confirmation') }}
             </label>
             <input id="password_confirmation"
                    class="form-control form-control-lg"
@@ -40,7 +40,7 @@
                    type="password"
                    name="password_confirmation"
                    v-model="form.password_confirmation"
-                   placeholder="{{ trans('validation.attributes.password_confirmation') }}">
+                   placeholder="{{ __('validation.attributes.password_confirmation') }}">
             <span v-if="hasError('password_confirmation')" class="invalid-feedback">
                 @{{ error('password_confirmation') }}
             </span>
@@ -51,7 +51,7 @@
                        type="checkbox"
                        name="is_notification_enabled"
                        v-model="form.is_notification_enabled">
-                {{ trans('validation.attributes.is_notification_enabled') }}
+                {{ __('validation.attributes.is_notification_enabled') }}
             </label>
         </div>
     </div>
@@ -59,7 +59,7 @@
         <button class="btn btn-primary btn-lg btn-block"
                 type="submit"
                 :disabled="isSubmitted">
-            {{ trans('messages.save') }}
+            {{ __('messages.save') }}
         </button>
     </div>
 </form>

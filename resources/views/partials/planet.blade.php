@@ -20,7 +20,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('messages.coordinate.x') }}
+                                            {{ __('messages.coordinate.x') }}
                                         </h6>
                                         <h5>
                                             @{{ geometry.coordinates[0] }}
@@ -30,7 +30,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('messages.coordinate.y') }}
+                                            {{ __('messages.coordinate.y') }}
                                         </h6>
                                         <h5>
                                             @{{ geometry.coordinates[1] }}
@@ -40,7 +40,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('messages.resource.count') }}
+                                            {{ __('messages.resource.count') }}
                                         </h6>
                                         <h5>
                                             @{{ data.resource_count }}
@@ -50,7 +50,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('messages.owner') }}
+                                            {{ __('messages.owner') }}
                                         </h6>
                                         <h5 v-if="data.user_id">
                                             <a href="#" @click.prevent="openUser()">
@@ -67,7 +67,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <router-link :to="{name: 'home'}" class="btn btn-primary btn-block">
-                                            {{ trans('messages.planet.jump') }}
+                                            {{ __('messages.planet.jump') }}
                                         </router-link>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                         <button class="btn btn-primary btn-block"
                                                 type="button"
                                                 @click="changePlanet()">
-                                            {{ trans('messages.planet.change') }}
+                                            {{ __('messages.planet.change') }}
                                         </button>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                         <button class="btn btn-success btn-block"
                                                 type="button"
                                                 @click="openMove({{ Koodilab\Models\Movement::TYPE_SUPPORT }})">
-                                            {{ trans('messages.movement.support') }}
+                                            {{ __('messages.movement.support') }}
                                         </button>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         <button class="btn btn-success btn-block"
                                                 type="button"
                                                 @click="openMove({{ Koodilab\Models\Movement::TYPE_TRANSPORT }})">
-                                            {{ trans('messages.movement.transport') }}
+                                            {{ __('messages.movement.transport') }}
                                         </button>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                                 type="button"
                                                 @click="openMove({{ Koodilab\Models\Movement::TYPE_SCOUT }})"
                                                 :disabled="data.has_shield">
-                                            {{ trans('messages.movement.scout') }}
+                                            {{ __('messages.movement.scout') }}
                                         </button>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                                 type="button"
                                                 @click="openMove({{ Koodilab\Models\Movement::TYPE_ATTACK }})"
                                                 :disabled="data.has_shield">
-                                            {{ trans('messages.movement.attack') }}
+                                            {{ __('messages.movement.attack') }}
                                         </button>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                                                 type="button"
                                                 @click="openMove({{ Koodilab\Models\Movement::TYPE_OCCUPY }})"
                                                 :disabled="data.has_shield || !data.can_occupy">
-                                            {{ trans('messages.movement.occupy') }}
+                                            {{ __('messages.movement.occupy') }}
                                         </button>
                                     </div>
                                 </div>

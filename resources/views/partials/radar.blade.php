@@ -4,7 +4,7 @@
     <div v-if="isEnabled" class="radar">
         <div v-if="isEmpty" class="modal-body separator">
             <p class="text-center">
-                {{ trans('messages.movement.empty') }}
+                {{ __('messages.movement.empty') }}
             </p>
         </div>
         <movement v-else
@@ -37,7 +37,7 @@
                         <button class="btn btn-primary btn-block"
                                 :disabled="!canMove"
                                 @click="move(movement)">
-                            {{ trans('messages.move') }}
+                            {{ __('messages.move') }}
                         </button>
                     </div>
                 </div>

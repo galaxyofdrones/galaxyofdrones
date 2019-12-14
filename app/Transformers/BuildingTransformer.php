@@ -33,7 +33,7 @@ class BuildingTransformer extends Transformer
         return [
             'id' => $item->id,
             'name' => $item->translation('name'),
-            'name_with_level' => $this->translator->trans('messages.building.name_with_level', [
+            'name_with_level' => $this->translator->get('messages.building.name_with_level', [
                 'name' => $item->translation('name'),
                 'level' => $item->level,
             ]),

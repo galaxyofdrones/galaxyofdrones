@@ -14,3 +14,4 @@ yarn-error.log
 _ide_helper.php
 .env
 .php_cs.cache
+.phpunit.result.cache

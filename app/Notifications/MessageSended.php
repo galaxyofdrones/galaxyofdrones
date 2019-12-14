@@ -58,10 +58,10 @@ class MessageSended extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject(Lang::trans('messages.message.new'))
-            ->line(Lang::trans('messages.message.description'))
-            ->action(Lang::trans('messages.play_now'), route('home'))
-            ->line(Lang::trans('messages.message.read'));
+            ->subject(Lang::get('messages.message.new'))
+            ->line(Lang::get('messages.message.description'))
+            ->action(Lang::get('messages.play_now'), route('home'))
+            ->line(Lang::get('messages.message.read'));
     }
 
     /**

@@ -48,7 +48,7 @@ class UserShowTransformer extends Transformer
         return [
             'id' => $item->id,
             'username' => $item->username,
-            'username_with_level' => $this->translator->trans('messages.user.username_with_level', [
+            'username_with_level' => $this->translator->get('messages.user.username_with_level', [
                 'username' => $item->username,
                 'level' => $item->level,
             ]),

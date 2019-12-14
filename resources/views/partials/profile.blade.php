@@ -1,6 +1,6 @@
 @php
     $translations = [
-        'joined' => trans('messages.user.joined', [
+        'joined' => __('messages.user.joined', [
             'datetime' => '__datetime__',
         ]),
     ];
@@ -35,7 +35,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.experience') }}
+                                            {{ __('validation.attributes.experience') }}
                                         </h6>
                                         <h5>
                                             @{{ data.experience | number }}
@@ -45,7 +45,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.mission') }}
+                                            {{ __('validation.attributes.mission') }}
                                         </h6>
                                         <h5>
                                             @{{ data.mission_count | number }}
@@ -55,7 +55,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.expedition') }}
+                                            {{ __('validation.attributes.expedition') }}
                                         </h6>
                                         <h5>
                                             @{{ data.expedition_count | number }}
@@ -65,7 +65,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.planet') }}
+                                            {{ __('validation.attributes.planet') }}
                                         </h6>
                                         <h5>
                                             @{{ data.planet_count | number }}
@@ -75,7 +75,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.winning_battle') }}
+                                            {{ __('validation.attributes.winning_battle') }}
                                         </h6>
                                         <h5 class="highlight-success">
                                             @{{ data.winning_battle_count | number }}
@@ -85,7 +85,7 @@
                                 <div class="col-lg-6">
                                     <div class="attribute">
                                         <h6>
-                                            {{ trans('validation.attributes.losing_battle') }}
+                                            {{ __('validation.attributes.losing_battle') }}
                                         </h6>
                                         <h5 class="highlight-danger">
                                             @{{ data.losing_battle_count | number }}
@@ -99,7 +99,7 @@
                                         <button class="btn btn-success btn-block"
                                                 :disabled="isBlocked || data.is_blocked_by"
                                                 @click="sendMessage()">
-                                            {{ trans('messages.message.send') }}
+                                            {{ __('messages.message.send') }}
                                         </button>
                                     </div>
                                 </div>
@@ -109,10 +109,10 @@
                                                 :class="{'btn-danger': !isBlocked, 'btn-warning': isBlocked}"
                                                 @click="toggleBlock()">
                                             <template v-if="!isBlocked">
-                                                {{ trans('messages.block.singular') }}
+                                                {{ __('messages.block.singular') }}
                                             </template>
                                             <template v-else>
-                                                {{ trans('messages.block.unblock') }}
+                                                {{ __('messages.block.unblock') }}
                                             </template>
                                         </button>
                                     </div>
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="col-lg-3 pt-lg-2 text-center">
                                     <h5>
-                                        {{ trans('messages.coordinate.x') }}
+                                        {{ __('messages.coordinate.x') }}
                                     </h5>
                                     <h5>
                                         @{{ planet.x }}
@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="col-lg-3 pt-lg-2 text-center">
                                     <h5>
-                                        {{ trans('messages.coordinate.y') }}
+                                        {{ __('messages.coordinate.y') }}
                                     </h5>
                                     <h5>
                                         @{{ planet.y }}
@@ -154,7 +154,7 @@
                                     <button class="btn btn-primary btn-block"
                                             :disabled="!canMove"
                                             @click="move(planet)">
-                                        {{ trans('messages.move') }}
+                                        {{ __('messages.move') }}
                                     </button>
                                 </div>
                             </div>

@@ -48,7 +48,7 @@ class PlanetShowTransformer extends Transformer
             'resource_count' => $item->resource_count,
             'username' => $item->user_id
                 ? $item->user->username
-                : $this->translator->trans('messages.free'),
+                : $this->translator->get('messages.free'),
             'can_occupy' => $this->canOccupy($item),
             'has_shield' => $item->hasShield(),
             'travel_time' => $this->travelTime($item),

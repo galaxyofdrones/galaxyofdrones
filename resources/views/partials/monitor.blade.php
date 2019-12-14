@@ -3,7 +3,7 @@
         <a class="monitor-title"
            href="#"
            @click.prevent="openRadar()"
-           v-popover="{placement: 'top', trigger: 'hover', content: '{{ trans('validation.attributes.incoming') }}'}">
+           v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('validation.attributes.incoming') }}'}">
             <i class="fas fa-chevron-left first"></i>
             <i class="fas fa-chevron-left middle"></i>
             <i class="fas fa-chevron-left last"></i>

@@ -65,6 +65,6 @@ class Recipient implements Rule
      */
     public function message()
     {
-        return $this->translator->trans('validation.exists');
+        return $this->translator->get('validation.exists');
     }
 }

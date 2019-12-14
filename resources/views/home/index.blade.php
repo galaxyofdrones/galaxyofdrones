@@ -12,9 +12,9 @@
                  geo-json-url="{{ route('api_starmap_geo_json', ['__zoom__', '__bounds__']) }}"
                  tile-url="{{ asset('tile/{z}/{x}/{y}.png') }}"
                  image-path="{{ asset('images') }}"
-                 zoom-in-title="{{ trans('messages.zoom_in') }}"
-                 zoom-out-title="{{ trans('messages.zoom_out') }}"
-                 bookmark-title="{{ trans('messages.bookmark.plural') }}"></router-view>
+                 zoom-in-title="{{ __('messages.zoom_in') }}"
+                 zoom-out-title="{{ __('messages.zoom_out') }}"
+                 bookmark-title="{{ __('messages.bookmark.plural') }}"></router-view>
 
     @include('partials.construction')
     @include('partials.upgrade')

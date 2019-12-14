@@ -42,8 +42,8 @@
 
         window.Translations = {
             error: {
-                whoops: '{{ trans('messages.error.whoops') }}',
-                wrong: '{{ trans('messages.error.wrong') }}'
+                whoops: '{{ __('messages.error.whoops') }}',
+                wrong: '{{ __('messages.error.wrong') }}'
             }
         };
     </script>

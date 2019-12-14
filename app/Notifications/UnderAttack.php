@@ -35,9 +35,9 @@ class UnderAttack extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject(Lang::trans('messages.under_attack.singular'))
-            ->line(Lang::trans('messages.under_attack.description'))
-            ->action(Lang::trans('messages.play_now'), route('home'))
-            ->line(Lang::trans('messages.under_attack.prepare'));
+            ->subject(Lang::get('messages.under_attack.singular'))
+            ->line(Lang::get('messages.under_attack.description'))
+            ->action(Lang::get('messages.play_now'), route('home'))
+            ->line(Lang::get('messages.under_attack.prepare'));
     }
 }

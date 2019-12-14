@@ -1,7 +1,7 @@
 <div v-if="isAttackType" class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">
-            {{ trans('messages.movement.attack') }}
+            {{ __('messages.movement.attack') }}
         </h5>
         <button type="button" class="close" data-dismiss="modal">
             &times;
@@ -41,7 +41,7 @@
                         type="button"
                         @click="attack()"
                         :disabled="!hasFighterUnits">
-                    {{ trans('messages.movement.attack') }}
+                    {{ __('messages.movement.attack') }}
                 </button>
             </div>
         </div>
