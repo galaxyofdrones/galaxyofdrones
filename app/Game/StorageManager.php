@@ -36,9 +36,11 @@ class StorageManager
             return $quantity <= $userResource->pivot->quantity;
         }
 
-        $storageQuantity = $quantity - $stock->quantity;
+        if ($stock) {
+            $quantity -= $stock->quantity;
+        }
 
-        if ($storageQuantity > $userResource->pivot->quantity) {
+        if ($quantity > $userResource->pivot->quantity) {
             return false;
         }
 
@@ -114,9 +116,11 @@ class StorageManager
             return $quantity <= $userUnit->pivot->quantity;
         }
 
-        $storageQuantity = $quantity - $population->quantity;
+        if ($population) {
+            $quantity -= $population->quantity;
+        }
 
-        if ($storageQuantity > $userUnit->pivot->quantity) {
+        if ($quantity > $userUnit->pivot->quantity) {
             return false;
         }
 
