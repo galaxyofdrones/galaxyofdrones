@@ -42,7 +42,7 @@ before_script:
   - php artisan config:clear
   - php artisan migrate --seed --no-interaction
   - php artisan starmap:generate --no-render
-  - php artisan dusk:chrome-driver 79
+  - php artisan dusk:chrome-driver 80
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - php artisan serve &
   - php artisan websockets:serve &
