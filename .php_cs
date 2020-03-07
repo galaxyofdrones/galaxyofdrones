@@ -1,6 +1,6 @@
 <?php
 
-$cacheDir = getenv('TRAVIS')
+$cacheDir = getenv('CIRCLECI')
     ? getenv('HOME').'/.php-cs-fixer'
     : __DIR__;
 

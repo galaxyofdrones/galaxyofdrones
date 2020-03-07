@@ -24,7 +24,7 @@ jobs:
       - restore_cache:
           key: v1-global-yarn-dependencies-
 
-      - run: yarn global add eslint@^5.16 eslint-plugin-import@^2.18 eslint-config-airbnb-base
+      - run: yarn global add eslint@^5.16 eslint-plugin-import@^2.18 eslint-plugin-vue eslint-config-airbnb-base
 
       - save_cache:
           key: v1-global-yarn-dependencies-{{ checksum "~/.config/yarn/global/yarn.lock" }}
@@ -68,7 +68,7 @@ jobs:
       - run: php artisan config:clear
       - run: php artisan dusk:chrome-driver 80
       - run: php artisan migrate --seed --no-interaction
-      - run: ~/.yarn/bin/eslint ./resources/js
+      - run: ~/.yarn/bin/eslint --ext .js,.vue ./resources/js
 
       - restore_cache:
           key: v1-php-cs-
