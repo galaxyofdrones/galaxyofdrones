@@ -18,8 +18,6 @@ class BattleLogCreated extends Notification
 
     /**
      * Constructor.
-     *
-     * @param int $battleLogId
      */
     public function __construct(int $battleLogId)
     {

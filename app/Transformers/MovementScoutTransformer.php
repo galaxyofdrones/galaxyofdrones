@@ -22,8 +22,6 @@ class MovementScoutTransformer extends MovementTransformer
     /**
      * Get the units.
      *
-     * @param Movement $item
-     *
      * @return array
      */
     protected function units(Movement $item)
@@ -41,8 +39,6 @@ class MovementScoutTransformer extends MovementTransformer
 
     /**
      * Get the resources.
-     *
-     * @param Movement $item
      *
      * @return array
      */

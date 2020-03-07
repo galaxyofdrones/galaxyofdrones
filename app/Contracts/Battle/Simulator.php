@@ -10,8 +10,6 @@ interface Simulator
     /**
      * Scout.
      *
-     * @param Movement $movement
-     *
      * @return BattleLog
      */
     public function scout(Movement $movement);
@@ -19,16 +17,12 @@ interface Simulator
     /**
      * Attack.
      *
-     * @param Movement $movement
-     *
      * @return BattleLog
      */
     public function attack(Movement $movement);
 
     /**
      * Occupy.
-     *
-     * @param Movement $movement
      *
      * @return BattleLog
      */

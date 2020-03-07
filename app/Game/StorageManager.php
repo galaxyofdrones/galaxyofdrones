@@ -11,10 +11,8 @@ class StorageManager
     /**
      * Has stock?
      *
-     * @param Planet   $planet
-     * @param resource $resource
-     * @param int      $quantity
-     * @param bool     $withoutStorage
+     * @param int  $quantity
+     * @param bool $withoutStorage
      *
      * @return bool
      */
@@ -50,10 +48,8 @@ class StorageManager
     /**
      * Decrement the stock.
      *
-     * @param Planet   $planet
-     * @param resource $resource
-     * @param int      $quantity
-     * @param bool     $withoutStorage
+     * @param int  $quantity
+     * @param bool $withoutStorage
      */
     public function decrementStock(Planet $planet, Resource $resource, $quantity, $withoutStorage = false)
     {
@@ -91,10 +87,8 @@ class StorageManager
     /**
      * Has population?
      *
-     * @param Planet $planet
-     * @param Unit   $unit
-     * @param int    $quantity
-     * @param bool   $withoutStorage
+     * @param int  $quantity
+     * @param bool $withoutStorage
      *
      * @return bool
      */
@@ -130,10 +124,8 @@ class StorageManager
     /**
      * Decrement the population.
      *
-     * @param Planet $planet
-     * @param Unit   $unit
-     * @param int    $quantity
-     * @param bool   $withoutStorage
+     * @param int  $quantity
+     * @param bool $withoutStorage
      */
     public function decrementPopulation(Planet $planet, Unit $unit, $quantity, $withoutStorage = false)
     {

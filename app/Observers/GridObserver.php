@@ -16,8 +16,6 @@ class GridObserver
 
     /**
      * Constructor.
-     *
-     * @param StateManager $stateManager
      */
     public function __construct(StateManager $stateManager)
     {
@@ -26,8 +24,6 @@ class GridObserver
 
     /**
      * Updated.
-     *
-     * @param Grid $grid
      */
     public function updated(Grid $grid)
     {

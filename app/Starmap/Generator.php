@@ -136,10 +136,6 @@ class Generator implements GeneratorContract
 
     /**
      * Constructor.
-     *
-     * @param Repository      $config
-     * @param DatabaseManager $database
-     * @param NameGenerator   $nameGenerator
      */
     public function __construct(Repository $config, DatabaseManager $database, NameGenerator $nameGenerator)
     {

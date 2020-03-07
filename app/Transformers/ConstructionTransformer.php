@@ -13,8 +13,6 @@ class ConstructionTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param BuildingTransformer $buildingTransformer
      */
     public function __construct(BuildingTransformer $buildingTransformer)
     {

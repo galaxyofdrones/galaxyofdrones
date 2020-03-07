@@ -22,9 +22,6 @@ class ScoutController extends Controller
     /**
      * Show the scout in json format.
      *
-     * @param ScoutTransformer $transformer
-     * @param Grid             $grid
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\JsonResponse

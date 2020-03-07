@@ -15,8 +15,6 @@ class BuildingTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Translator $translator
      */
     public function __construct(Translator $translator)
     {

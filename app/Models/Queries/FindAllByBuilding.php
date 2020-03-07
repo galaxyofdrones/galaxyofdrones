@@ -9,8 +9,7 @@ trait FindAllByBuilding
     /**
      * Find all by building.
      *
-     * @param Building $building
-     * @param array    $columns
+     * @param array $columns
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */

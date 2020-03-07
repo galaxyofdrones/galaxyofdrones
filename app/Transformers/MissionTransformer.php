@@ -26,8 +26,6 @@ class MissionTransformer extends Transformer
     /**
      * Get the resources.
      *
-     * @param Mission $mission
-     *
      * @return array
      */
     protected function resources(Mission $mission)

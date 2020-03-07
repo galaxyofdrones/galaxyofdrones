@@ -26,9 +26,6 @@ class PlanetObserver
 
     /**
      * Constructor.
-     *
-     * @param Event        $event
-     * @param StateManager $stateManager
      */
     public function __construct(Event $event, StateManager $stateManager)
     {
@@ -38,8 +35,6 @@ class PlanetObserver
 
     /**
      * Updating.
-     *
-     * @param Planet $planet
      */
     public function updating(Planet $planet)
     {
@@ -85,8 +80,6 @@ class PlanetObserver
 
     /**
      * Updated.
-     *
-     * @param Planet $planet
      */
     public function updated(Planet $planet)
     {

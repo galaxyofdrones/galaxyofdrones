@@ -16,8 +16,6 @@ class MovementFeatureTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Auth $auth
      */
     public function __construct(Auth $auth)
     {
@@ -55,8 +53,6 @@ class MovementFeatureTransformer extends Transformer
 
     /**
      * Get the status.
-     *
-     * @param Movement $movement
      *
      * @return string
      */

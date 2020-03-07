@@ -51,8 +51,6 @@ class PlanetTransformer extends Transformer
     /**
      * Get the planets.
      *
-     * @param User $user
-     *
      * @return array
      */
     protected function planets(User $user)
@@ -68,8 +66,6 @@ class PlanetTransformer extends Transformer
 
     /**
      * Get the resources.
-     *
-     * @param Planet $planet
      *
      * @return array
      */
@@ -100,8 +96,6 @@ class PlanetTransformer extends Transformer
 
     /**
      * Get the units.
-     *
-     * @param Planet $planet
      *
      * @return array
      */
@@ -135,8 +129,6 @@ class PlanetTransformer extends Transformer
 
     /**
      * Get the grids.
-     *
-     * @param Planet $planet
      *
      * @return array
      */

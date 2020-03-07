@@ -42,8 +42,6 @@ trait Sortable
 
     /**
      * Update the sort order by ids.
-     *
-     * @param array $ids
      */
     public function updateSortOrderByIds(array $ids)
     {

@@ -13,8 +13,6 @@ class TrainerTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param UnitTransformer $unitTransformer
      */
     public function __construct(UnitTransformer $unitTransformer)
     {

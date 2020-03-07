@@ -18,8 +18,6 @@ class MissionLogCreated extends Notification
 
     /**
      * Constructor.
-     *
-     * @param int $missionLogId
      */
     public function __construct(int $missionLogId)
     {

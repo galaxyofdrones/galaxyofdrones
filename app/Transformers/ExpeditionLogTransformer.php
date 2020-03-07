@@ -27,8 +27,6 @@ class ExpeditionLogTransformer extends Transformer
     /**
      * Get the units.
      *
-     * @param ExpeditionLog $expeditionLog
-     *
      * @return array
      */
     protected function units(ExpeditionLog $expeditionLog)

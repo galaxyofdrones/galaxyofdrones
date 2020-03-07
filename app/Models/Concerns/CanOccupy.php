@@ -11,8 +11,6 @@ trait CanOccupy
     /**
      * Can occupy?
      *
-     * @param Planet $planet
-     *
      * @return bool
      */
     public function canOccupy(Planet $planet)
@@ -34,8 +32,6 @@ trait CanOccupy
 
     /**
      * Occupy.
-     *
-     * @param Planet $planet
      *
      * @return bool
      */

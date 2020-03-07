@@ -10,8 +10,6 @@ trait FindByStarAndUser
     /**
      * Find by star and user.
      *
-     * @param Star  $star
-     * @param User  $user
      * @param array $columns
      *
      * @return static

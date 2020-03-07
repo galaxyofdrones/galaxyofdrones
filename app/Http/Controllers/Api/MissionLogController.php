@@ -21,8 +21,6 @@ class MissionLogController extends Controller
     /**
      * Get the mission logs in json format.
      *
-     * @param MissionLogTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(MissionLogTransformer $transformer)

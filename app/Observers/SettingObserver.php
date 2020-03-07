@@ -15,8 +15,6 @@ class SettingObserver
 
     /**
      * Constructor.
-     *
-     * @param SettingManager $settingManager
      */
     public function __construct(SettingManager $settingManager)
     {

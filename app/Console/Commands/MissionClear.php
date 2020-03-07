@@ -30,8 +30,6 @@ class MissionClear extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager $database
      */
     public function __construct(DatabaseManager $database)
     {

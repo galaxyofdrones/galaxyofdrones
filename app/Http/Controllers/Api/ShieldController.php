@@ -25,8 +25,6 @@ class ShieldController extends Controller
     /**
      * Show the shields in json format.
      *
-     * @param ShieldTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(ShieldTransformer $transformer)
@@ -44,9 +42,6 @@ class ShieldController extends Controller
 
     /**
      * Store a newly created shield in storage.
-     *
-     * @param Planet        $planet
-     * @param ShieldManager $manager
      *
      * @throws \Exception|\Throwable
      *

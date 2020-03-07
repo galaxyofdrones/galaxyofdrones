@@ -30,8 +30,6 @@ class PlanetController extends Controller
     /**
      * Show the current planet in json format.
      *
-     * @param PlanetTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(PlanetTransformer $transformer)
@@ -43,9 +41,6 @@ class PlanetController extends Controller
 
     /**
      * Show the all planet in json format.
-     *
-     * @param User                 $user
-     * @param PlanetAllTransformer $transformer
      *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
@@ -59,8 +54,6 @@ class PlanetController extends Controller
     /**
      * Show the capital planet in json format.
      *
-     * @param PlanetShowTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function capital(PlanetShowTransformer $transformer)
@@ -73,9 +66,6 @@ class PlanetController extends Controller
     /**
      * Show the planet in json format.
      *
-     * @param Planet                $planet
-     * @param PlanetShowTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function show(Planet $planet, PlanetShowTransformer $transformer)
@@ -85,8 +75,6 @@ class PlanetController extends Controller
 
     /**
      * Update the current name.
-     *
-     * @param Request $request
      *
      * @return mixed|\Illuminate\Http\Response
      */
@@ -107,8 +95,6 @@ class PlanetController extends Controller
 
     /**
      * Demolish the building from the grid.
-     *
-     * @param Grid $grid
      *
      * @throws \Exception|\Throwable
      *

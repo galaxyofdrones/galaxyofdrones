@@ -21,9 +21,6 @@ class StarController extends Controller
     /**
      * Show the star in json format.
      *
-     * @param Star                $star
-     * @param StarShowTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function show(Star $star, StarShowTransformer $transformer)

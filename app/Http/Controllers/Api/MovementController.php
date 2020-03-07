@@ -28,10 +28,6 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet          $planet
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
@@ -56,10 +52,6 @@ class MovementController extends Controller
 
     /**
      * Store a newly created movement in storage.
-     *
-     * @param Planet          $planet
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
      *
      * @throws \Exception|\Throwable
      *
@@ -90,10 +82,6 @@ class MovementController extends Controller
 
     /**
      * Store a newly created movement in storage.
-     *
-     * @param Planet          $planet
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
      *
      * @throws \Exception|\Throwable
      *
@@ -126,10 +114,6 @@ class MovementController extends Controller
     /**
      * Store a newly created movement in storage.
      *
-     * @param Planet          $planet
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
@@ -156,10 +140,6 @@ class MovementController extends Controller
 
     /**
      * Store a newly created movement in storage.
-     *
-     * @param Planet          $planet
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
      *
      * @throws \Exception|\Throwable
      *
@@ -197,10 +177,6 @@ class MovementController extends Controller
 
     /**
      * Store a newly created movement in storage.
-     *
-     * @param Grid            $grid
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
      *
      * @throws \Exception|\Throwable
      *
@@ -249,10 +225,6 @@ class MovementController extends Controller
 
     /**
      * Store a newly created movement in storage.
-     *
-     * @param Grid            $grid
-     * @param MovementManager $movementManager
-     * @param StorageManager  $storageManager
      *
      * @throws \Exception|\Throwable
      *

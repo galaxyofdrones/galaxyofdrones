@@ -22,8 +22,6 @@ class BlockController extends Controller
     /**
      * Update.
      *
-     * @param User $user
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response

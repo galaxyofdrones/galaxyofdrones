@@ -23,8 +23,6 @@ class MessageController extends Controller
     /**
      * Get the messages in json format.
      *
-     * @param MessageTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(MessageTransformer $transformer)
@@ -41,8 +39,6 @@ class MessageController extends Controller
 
     /**
      * Store a newly created message in storage.
-     *
-     * @param MessageStoreRequest $request
      *
      * @throws \Exception|\Throwable
      *

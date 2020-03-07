@@ -38,9 +38,6 @@ class MissionGenerate extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager $database
-     * @param MissionManager  $manager
      */
     public function __construct(DatabaseManager $database, MissionManager $manager)
     {

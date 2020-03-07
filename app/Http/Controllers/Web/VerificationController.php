@@ -32,8 +32,6 @@ class VerificationController extends Controller
     /**
      * Update the email in storage.
      *
-     * @param EmailUpdateRequest $request
-     *
      * @throws \Exception|\Throwable
      *
      * @return \Illuminate\Http\Response

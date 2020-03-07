@@ -9,7 +9,6 @@ trait FindPopulationByUnit
     /**
      * Find the population by unit.
      *
-     * @param Unit  $unit
      * @param array $columns
      *
      * @return \Koodilab\Models\Population

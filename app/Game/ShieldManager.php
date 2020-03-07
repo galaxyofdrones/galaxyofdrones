@@ -11,7 +11,6 @@ class ShieldManager
     /**
      * Create.
      *
-     * @param Planet   $planet
      * @param int|null $expirationTime
      *
      * @return Shield
@@ -40,8 +39,6 @@ class ShieldManager
 
     /**
      * Create from solarion.
-     *
-     * @param Planet $planet
      *
      * @return Shield
      */

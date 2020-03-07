@@ -55,8 +55,6 @@ class NameGenerator implements NameGeneratorContract
     /**
      * Get a random item.
      *
-     * @param array $items
-     *
      * @return string
      */
     protected function rand(array $items)

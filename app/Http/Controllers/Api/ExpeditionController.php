@@ -26,9 +26,6 @@ class ExpeditionController extends Controller
     /**
      * Show the expeditions in json format.
      *
-     * @param UnitExpeditionTransformer $unitExpeditionTransformer
-     * @param ExpeditionTransformer     $expeditionTransformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(UnitExpeditionTransformer $unitExpeditionTransformer, ExpeditionTransformer $expeditionTransformer)
@@ -45,9 +42,6 @@ class ExpeditionController extends Controller
 
     /**
      * Store a newly created expedition log in storage.
-     *
-     * @param Expedition        $expedition
-     * @param ExpeditionManager $manager
      *
      * @throws \Exception|\Throwable
      *

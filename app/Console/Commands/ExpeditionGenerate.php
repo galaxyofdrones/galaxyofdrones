@@ -38,9 +38,6 @@ class ExpeditionGenerate extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager   $database
-     * @param ExpeditionManager $manager
      */
     public function __construct(DatabaseManager $database, ExpeditionManager $manager)
     {

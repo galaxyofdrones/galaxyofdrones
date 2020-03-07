@@ -14,8 +14,6 @@ class MissionManager
     /**
      * Create rand.
      *
-     * @param User $user
-     *
      * @return Mission
      */
     public function createRand(User $user)
@@ -67,8 +65,6 @@ class MissionManager
     /**
      * Create log.
      *
-     * @param Mission $mission
-     *
      * @return MissionLog
      */
     public function createLog(Mission $mission)
@@ -94,8 +90,6 @@ class MissionManager
 
     /**
      * Finish.
-     *
-     * @param Mission $mission
      *
      * @throws \Exception|\Throwable
      */

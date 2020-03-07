@@ -26,8 +26,6 @@ class MissionLogTransformer extends Transformer
     /**
      * Get the resources.
      *
-     * @param MissionLog $missionLog
-     *
      * @return array
      */
     protected function resources(MissionLog $missionLog)

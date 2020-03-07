@@ -39,9 +39,6 @@ class MovementFinish extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager $database
-     * @param MovementManager $manager
      */
     public function __construct(DatabaseManager $database, MovementManager $manager)
     {

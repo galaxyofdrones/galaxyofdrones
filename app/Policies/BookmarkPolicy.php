@@ -13,9 +13,6 @@ class BookmarkPolicy
     /**
      * Check the destroy ability.
      *
-     * @param User     $user
-     * @param Bookmark $bookmark
-     *
      * @return bool
      */
     public function destroy(User $user, Bookmark $bookmark)

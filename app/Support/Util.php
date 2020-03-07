@@ -27,7 +27,6 @@ class Util
      * Get the gravatar.
      *
      * @param string $email
-     * @param array  $parameters
      *
      * @return string
      */

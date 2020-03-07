@@ -25,9 +25,6 @@ class ResearchController extends Controller
     /**
      * Show the researches in json format.
      *
-     * @param ResourceAvailableTransformer $resourceTransformer
-     * @param UnitAvailableTransformer     $unitTransformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(ResourceAvailableTransformer $resourceTransformer, UnitAvailableTransformer $unitTransformer)
@@ -49,8 +46,6 @@ class ResearchController extends Controller
 
     /**
      * Store a newly created research in storage.
-     *
-     * @param ResearchManager $manager
      *
      * @throws \Exception|\Throwable
      *
@@ -83,9 +78,6 @@ class ResearchController extends Controller
     /**
      * Store a newly created research in storage.
      *
-     * @param Unit            $unit
-     * @param ResearchManager $manager
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
@@ -117,8 +109,6 @@ class ResearchController extends Controller
     /**
      * Remove the research from storage.
      *
-     * @param ResearchManager $manager
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
@@ -147,9 +137,6 @@ class ResearchController extends Controller
 
     /**
      * Remove the research from storage.
-     *
-     * @param Unit            $unit
-     * @param ResearchManager $manager
      *
      * @throws \Exception|\Throwable
      *

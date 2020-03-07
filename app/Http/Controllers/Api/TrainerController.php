@@ -26,9 +26,6 @@ class TrainerController extends Controller
     /**
      * Show the trainer in json format.
      *
-     * @param Grid               $grid
-     * @param TrainerTransformer $transformer
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\JsonResponse
@@ -43,10 +40,6 @@ class TrainerController extends Controller
 
     /**
      * Store a newly created training in storage.
-     *
-     * @param Grid            $grid
-     * @param Unit            $unit
-     * @param TrainingManager $manager
      *
      * @throws \Exception|\Throwable
      *
@@ -94,9 +87,6 @@ class TrainerController extends Controller
 
     /**
      * Remove the training from storage.
-     *
-     * @param Grid            $grid
-     * @param TrainingManager $manager
      *
      * @throws \Exception|\Throwable
      *

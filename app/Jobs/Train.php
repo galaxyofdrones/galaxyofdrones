@@ -32,9 +32,6 @@ class Train implements ShouldQueue
     /**
      * Handle the job.
      *
-     * @param DatabaseManager $database
-     * @param TrainingManager $manager
-     *
      * @throws \Exception|\Throwable
      */
     public function handle(DatabaseManager $database, TrainingManager $manager)

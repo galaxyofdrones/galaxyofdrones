@@ -24,9 +24,6 @@ class PlanetShowTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Auth       $auth
-     * @param Translator $translator
      */
     public function __construct(Auth $auth, Translator $translator)
     {
@@ -58,8 +55,6 @@ class PlanetShowTransformer extends Transformer
     /**
      * Can occupy?
      *
-     * @param Planet $planet
-     *
      * @return bool
      */
     protected function canOccupy(Planet $planet)
@@ -75,8 +70,6 @@ class PlanetShowTransformer extends Transformer
 
     /**
      * Get the travel from current planet.
-     *
-     * @param Planet $planet
      *
      * @return int
      */

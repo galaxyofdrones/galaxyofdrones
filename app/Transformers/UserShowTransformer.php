@@ -25,9 +25,6 @@ class UserShowTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Auth       $auth
-     * @param Translator $translator
      */
     public function __construct(Auth $auth, Translator $translator)
     {
@@ -68,8 +65,6 @@ class UserShowTransformer extends Transformer
 
     /**
      * Get the planets.
-     *
-     * @param User $user
      *
      * @return array
      */

@@ -114,9 +114,6 @@ class Renderer implements RendererContract
 
     /**
      * Constructor.
-     *
-     * @param Repository $config
-     * @param Filesystem $filesystem
      */
     public function __construct(Repository $config, Filesystem $filesystem)
     {
@@ -216,8 +213,7 @@ class Renderer implements RendererContract
     /**
      * Composite the objects.
      *
-     * @param mixed   $objects
-     * @param Closure $textureFilename
+     * @param mixed $objects
      *
      * @throws \Exception|\Throwable
      */

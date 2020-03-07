@@ -27,9 +27,6 @@ class BattleLogTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Auth       $auth
-     * @param Translator $translator
      */
     public function __construct(Auth $auth, Translator $translator)
     {
@@ -84,8 +81,6 @@ class BattleLogTransformer extends Transformer
     /**
      * Get the resources.
      *
-     * @param BattleLog $battleLog
-     *
      * @return array
      */
     protected function resources(BattleLog $battleLog)
@@ -103,8 +98,6 @@ class BattleLogTransformer extends Transformer
 
     /**
      * Get the buildings.
-     *
-     * @param BattleLog $battleLog
      *
      * @return array
      */
@@ -124,8 +117,6 @@ class BattleLogTransformer extends Transformer
     /**
      * Get the attacker units.
      *
-     * @param BattleLog $battleLog
-     *
      * @return array
      */
     protected function attackerUnits(BattleLog $battleLog)
@@ -143,8 +134,6 @@ class BattleLogTransformer extends Transformer
 
     /**
      * Get the defender units.
-     *
-     * @param BattleLog $battleLog
      *
      * @return array
      */

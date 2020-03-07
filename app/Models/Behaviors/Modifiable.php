@@ -14,8 +14,6 @@ trait Modifiable
     /**
      * Apply the modifiers.
      *
-     * @param array $modifiers
-     *
      * @return static
      */
     public function applyModifiers(array $modifiers)
@@ -29,8 +27,6 @@ trait Modifiable
 
     /**
      * Validate the modifiers.
-     *
-     * @param array $modifiers
      *
      * @return bool
      */

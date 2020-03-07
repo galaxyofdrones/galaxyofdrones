@@ -39,9 +39,6 @@ class ResearchFinish extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager $database
-     * @param ResearchManager $manager
      */
     public function __construct(DatabaseManager $database, ResearchManager $manager)
     {

@@ -25,8 +25,6 @@ class MovementTransformer extends Transformer
     /**
      * Get the planet.
      *
-     * @param Planet $planet
-     *
      * @return array
      */
     protected function planet(Planet $planet)

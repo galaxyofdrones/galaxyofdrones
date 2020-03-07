@@ -9,8 +9,7 @@ trait FindStockByResource
     /**
      * Find stock.
      *
-     * @param resource $resource
-     * @param array    $columns
+     * @param array $columns
      *
      * @return \Koodilab\Models\Stock
      */
