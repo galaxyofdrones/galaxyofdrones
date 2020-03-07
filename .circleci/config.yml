@@ -65,9 +65,11 @@ jobs:
 
       - run: yarn prod
       - run: php artisan key:generate
+      - run: php artisan passport:keys
       - run: php artisan config:clear
-      - run: php artisan dusk:chrome-driver 80
       - run: php artisan migrate --seed --no-interaction
+      - run: php artisan starmap:generate --no-render
+      - run: php artisan dusk:chrome-driver 80
       - run: ~/.yarn/bin/eslint --ext .js,.vue ./resources/js
 
       - restore_cache:
