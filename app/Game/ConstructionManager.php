@@ -20,8 +20,6 @@ class ConstructionManager
 
     /**
      * Constructor.
-     *
-     * @param Bus $bus
      */
     public function __construct(Bus $bus)
     {
@@ -30,9 +28,6 @@ class ConstructionManager
 
     /**
      * Create.
-     *
-     * @param Grid     $grid
-     * @param Building $building
      *
      * @return Construction
      */
@@ -57,8 +52,6 @@ class ConstructionManager
     /**
      * Finish.
      *
-     * @param Construction $construction
-     *
      * @throws \Exception|\Throwable
      */
     public function finish(Construction $construction)
@@ -81,8 +74,6 @@ class ConstructionManager
 
     /**
      * Cancel.
-     *
-     * @param Construction $construction
      *
      * @throws \Exception|\Throwable
      */

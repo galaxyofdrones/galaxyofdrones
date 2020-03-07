@@ -35,8 +35,6 @@ class MonitorController extends Controller
     /**
      * Show the monitor movements in json format.
      *
-     * @param MovementTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function show(MovementTransformer $transformer)

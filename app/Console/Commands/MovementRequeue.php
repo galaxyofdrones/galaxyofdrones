@@ -32,8 +32,6 @@ class MovementRequeue extends Command
 
     /**
      * Constructor.
-     *
-     * @param Bus $bus
      */
     public function __construct(Bus $bus)
     {

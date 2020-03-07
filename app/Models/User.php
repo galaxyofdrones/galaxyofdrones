@@ -273,8 +273,6 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the gravatar.
      *
-     * @param array $parameters
-     *
      * @return string
      */
     public function gravatar(array $parameters = [])

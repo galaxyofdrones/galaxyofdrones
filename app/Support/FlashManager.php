@@ -51,9 +51,6 @@ class FlashManager
 
     /**
      * Constructor.
-     *
-     * @param SessionManager $session
-     * @param Translator     $translator
      */
     public function __construct(SessionManager $session, Translator $translator)
     {

@@ -62,8 +62,6 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Create the user provider instance.
      *
-     * @param array $config
-     *
      * @throws \Exception|\Throwable
      *
      * @return KoodilabUserProvider

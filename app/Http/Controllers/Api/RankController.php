@@ -21,8 +21,6 @@ class RankController extends Controller
     /**
      * Show the PvE in json format.
      *
-     * @param RankTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function pve(RankTransformer $transformer)
@@ -34,8 +32,6 @@ class RankController extends Controller
 
     /**
      * Show the PvP in json format.
-     *
-     * @param RankTransformer $transformer
      *
      * @return mixed|\Illuminate\Http\JsonResponse
      */

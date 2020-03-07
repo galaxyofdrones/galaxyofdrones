@@ -13,9 +13,6 @@ class MissionPolicy
     /**
      * Check the complete ability.
      *
-     * @param User    $user
-     * @param Mission $mission
-     *
      * @return bool
      */
     public function complete(User $user, Mission $mission)

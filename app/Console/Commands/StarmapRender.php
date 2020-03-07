@@ -29,8 +29,6 @@ class StarmapRender extends Command
 
     /**
      * Constructor.
-     *
-     * @param Renderer $renderer
      */
     public function __construct(Renderer $renderer)
     {

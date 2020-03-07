@@ -23,8 +23,6 @@ class ShieldTransformer extends Transformer
     /**
      * Get the planet.
      *
-     * @param Shield $shield
-     *
      * @return array
      */
     protected function planet(Shield $shield)

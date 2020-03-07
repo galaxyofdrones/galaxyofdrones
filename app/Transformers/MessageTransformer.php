@@ -16,8 +16,6 @@ class MessageTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Auth $auth
      */
     public function __construct(Auth $auth)
     {

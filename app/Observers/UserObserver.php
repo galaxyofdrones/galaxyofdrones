@@ -26,9 +26,6 @@ class UserObserver
 
     /**
      * Constructor.
-     *
-     * @param Auth  $auth
-     * @param Event $event
      */
     public function __construct(Auth $auth, Event $event)
     {
@@ -38,8 +35,6 @@ class UserObserver
 
     /**
      * Updating.
-     *
-     * @param User $user
      */
     public function updating(User $user)
     {
@@ -50,8 +45,6 @@ class UserObserver
 
     /**
      * Saving.
-     *
-     * @param User $user
      */
     public function saving(User $user)
     {
@@ -62,8 +55,6 @@ class UserObserver
 
     /**
      * Deleting.
-     *
-     * @param User $user
      *
      * @return bool
      */
@@ -82,8 +73,6 @@ class UserObserver
 
     /**
      * Updated.
-     *
-     * @param User $user
      */
     public function updated(User $user)
     {

@@ -38,8 +38,6 @@ class StartController extends Controller
     /**
      * Store the player start.
      *
-     * @param ShieldManager $manager
-     *
      * @throws \Exception|\Throwable
      *
      * @return \Illuminate\Http\Response

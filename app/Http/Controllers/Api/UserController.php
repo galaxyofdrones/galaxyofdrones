@@ -27,8 +27,6 @@ class UserController extends Controller
     /**
      * Show the authenticated user in json format.
      *
-     * @param UserTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(UserTransformer $transformer)
@@ -41,8 +39,6 @@ class UserController extends Controller
     /**
      * Show the capital in json format.
      *
-     * @param UserCapitalTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\Response
      */
     public function capital(UserCapitalTransformer $transformer)
@@ -54,9 +50,6 @@ class UserController extends Controller
 
     /**
      * Show the user in json format.
-     *
-     * @param User                $user
-     * @param UserShowTransformer $transformer
      *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
@@ -72,8 +65,6 @@ class UserController extends Controller
     /**
      * Update the user in storage.
      *
-     * @param UserUpdateRequest $request
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
@@ -87,8 +78,6 @@ class UserController extends Controller
 
     /**
      * Update the capital planet.
-     *
-     * @param Planet $planet
      *
      * @throws \Exception|\Throwable
      *
@@ -113,8 +102,6 @@ class UserController extends Controller
 
     /**
      * Update the current planet.
-     *
-     * @param Planet $planet
      *
      * @throws \Exception|\Throwable
      *

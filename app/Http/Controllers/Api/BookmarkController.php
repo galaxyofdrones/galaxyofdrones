@@ -23,8 +23,6 @@ class BookmarkController extends Controller
     /**
      * Get the bookmarks in json format.
      *
-     * @param BookmarkTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(BookmarkTransformer $transformer)
@@ -42,8 +40,6 @@ class BookmarkController extends Controller
 
     /**
      * Store a newly created bookmark in storage.
-     *
-     * @param Star $star
      *
      * @throws \Exception|\Throwable
      *
@@ -63,8 +59,6 @@ class BookmarkController extends Controller
 
     /**
      * Remove the bookmark from storage.
-     *
-     * @param Bookmark $bookmark
      *
      * @throws \Exception|\Throwable
      *

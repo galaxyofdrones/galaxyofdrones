@@ -15,8 +15,6 @@ class ExpeditionManager
     /**
      * Create rand.
      *
-     * @param User $user
-     *
      * @return Expedition
      */
     public function createRand(User $user)
@@ -64,8 +62,6 @@ class ExpeditionManager
     /**
      * Create log.
      *
-     * @param Expedition $expedition
-     *
      * @return ExpeditionLog
      */
     public function createLog(Expedition $expedition)
@@ -92,8 +88,6 @@ class ExpeditionManager
 
     /**
      * Finish.
-     *
-     * @param Expedition $expedition
      *
      * @throws \Exception|\Throwable
      */

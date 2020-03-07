@@ -9,7 +9,6 @@ trait FindResearchByUser
     /**
      * Find research by user.
      *
-     * @param User  $user
      * @param array $columns
      *
      * @return \Koodilab\Models\Research

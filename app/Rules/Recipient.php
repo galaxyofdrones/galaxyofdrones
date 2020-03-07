@@ -25,9 +25,6 @@ class Recipient implements Rule
 
     /**
      * Constructor.
-     *
-     * @param Auth       $auth
-     * @param Translator $translator
      */
     public function __construct(Auth $auth, Translator $translator)
     {

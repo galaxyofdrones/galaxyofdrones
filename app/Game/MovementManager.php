@@ -59,12 +59,6 @@ class MovementManager
 
     /**
      * Constructor.
-     *
-     * @param Auth              $auth
-     * @param Bus               $bus
-     * @param Event             $event
-     * @param SimulatorContract $simulator
-     * @param StorageManager    $storageManager
      */
     public function __construct(Auth $auth, Bus $bus, Event $event, SimulatorContract $simulator, StorageManager $storageManager)
     {
@@ -78,9 +72,7 @@ class MovementManager
     /**
      * Create scout.
      *
-     * @param Planet $planet
-     * @param Unit   $unit
-     * @param int    $quantity
+     * @param int $quantity
      *
      * @return Movement
      */
@@ -117,9 +109,7 @@ class MovementManager
     /**
      * Create attack.
      *
-     * @param Planet            $planet
      * @param Collection|Unit[] $units
-     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
@@ -164,9 +154,6 @@ class MovementManager
     /**
      * Create occupy.
      *
-     * @param Planet $planet
-     * @param Unit   $unit
-     *
      * @return Movement
      */
     public function createOccupy(Planet $planet, Unit $unit)
@@ -202,9 +189,7 @@ class MovementManager
     /**
      * Create support.
      *
-     * @param Planet            $planet
      * @param Collection|Unit[] $units
-     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
@@ -233,11 +218,8 @@ class MovementManager
     /**
      * Create transport.
      *
-     * @param Planet                                 $planet
-     * @param Unit                                   $unit
      * @param Collection|\Koodilab\Models\Resource[] $resources
      * @param int                                    $quantity
-     * @param BaseCollection                         $quantities
      *
      * @return Movement
      */
@@ -266,11 +248,8 @@ class MovementManager
     /**
      * Create trade.
      *
-     * @param Building                               $building
-     * @param Unit                                   $unit
      * @param Collection|\Koodilab\Models\Resource[] $resources
      * @param int                                    $quantity
-     * @param BaseCollection                         $quantities
      *
      * @return Movement
      */
@@ -300,7 +279,6 @@ class MovementManager
      * Create capital trade.
      *
      * @param Collection|\Koodilab\Models\Resource[] $resources
-     * @param BaseCollection                         $quantities
      */
     public function createCapitalTrade(Collection $resources, BaseCollection $quantities)
     {
@@ -334,9 +312,7 @@ class MovementManager
     /**
      * Create patrol.
      *
-     * @param Building          $building
      * @param Collection|Unit[] $units
-     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
@@ -366,7 +342,6 @@ class MovementManager
      * Create capital patrol.
      *
      * @param Collection|Unit[] $units
-     * @param BaseCollection    $quantities
      */
     public function createCapitalPatrol(Collection $units, BaseCollection $quantities)
     {
@@ -399,8 +374,6 @@ class MovementManager
 
     /**
      * Finish.
-     *
-     * @param Movement $movement
      *
      * @throws \Exception|\Throwable
      */
@@ -437,8 +410,6 @@ class MovementManager
 
     /**
      * Finish the scout.
-     *
-     * @param Movement $movement
      */
     protected function finishScout(Movement $movement)
     {
@@ -456,8 +427,6 @@ class MovementManager
 
     /**
      * Finish the attack.
-     *
-     * @param Movement $movement
      */
     protected function finishAttack(Movement $movement)
     {
@@ -475,8 +444,6 @@ class MovementManager
 
     /**
      * Finish the occupy.
-     *
-     * @param Movement $movement
      */
     protected function finishOccupy(Movement $movement)
     {
@@ -498,8 +465,6 @@ class MovementManager
 
     /**
      * Finish the support.
-     *
-     * @param Movement $movement
      */
     protected function finishSupport(Movement $movement)
     {
@@ -514,8 +479,6 @@ class MovementManager
 
     /**
      * Finish the transport movement.
-     *
-     * @param Movement $movement
      */
     protected function finishTransport(Movement $movement)
     {
@@ -525,8 +488,6 @@ class MovementManager
 
     /**
      * Finish the trade movement.
-     *
-     * @param Movement $movement
      */
     protected function finishTrade(Movement $movement)
     {
@@ -540,8 +501,6 @@ class MovementManager
 
     /**
      * Finish the patrol movement.
-     *
-     * @param Movement $movement
      */
     protected function finishPatrol(Movement $movement)
     {
@@ -555,9 +514,7 @@ class MovementManager
     /**
      * Create support or patrol.
      *
-     * @param Movement          $movement
      * @param Collection|Unit[] $units
-     * @param BaseCollection    $quantities
      *
      * @return Movement
      */
@@ -584,11 +541,8 @@ class MovementManager
     /**
      * Create transport or trade.
      *
-     * @param Movement                               $movement
-     * @param Unit                                   $unit
      * @param Collection|\Koodilab\Models\Resource[] $resources
      * @param int                                    $quantity
-     * @param BaseCollection                         $quantities
      *
      * @return Movement
      */
@@ -622,8 +576,6 @@ class MovementManager
 
     /**
      * Transfer the units.
-     *
-     * @param Movement $movement
      */
     protected function transferUnits(Movement $movement)
     {
@@ -641,8 +593,6 @@ class MovementManager
 
     /**
      * Transfer the patrol units.
-     *
-     * @param Movement $movement
      */
     protected function transferPatrolUnits(Movement $movement)
     {
@@ -664,8 +614,6 @@ class MovementManager
 
     /**
      * Transfer the resources.
-     *
-     * @param Movement $movement
      */
     protected function transferResources(Movement $movement)
     {
@@ -682,8 +630,6 @@ class MovementManager
 
     /**
      * Transfer the trade resources.
-     *
-     * @param Movement $movement
      */
     protected function transferTradeResources(Movement $movement)
     {
@@ -706,7 +652,6 @@ class MovementManager
     /**
      * Start a return movement.
      *
-     * @param Movement                               $movement
      * @param Collection|\Koodilab\Models\Unit[]     $units
      * @param Collection|\Koodilab\Models\Resource[] $resources
      */
@@ -753,8 +698,6 @@ class MovementManager
 
     /**
      * Dispatch the job and events.
-     *
-     * @param Movement $movement
      */
     protected function dispatchJobAndEvents(Movement $movement)
     {
@@ -764,8 +707,6 @@ class MovementManager
 
     /**
      * Dispatch the job.
-     *
-     * @param Movement $movement
      */
     protected function dispatchJob(Movement $movement)
     {
@@ -776,8 +717,6 @@ class MovementManager
 
     /**
      * Dispatch the events.
-     *
-     * @param Movement $movement
      */
     protected function dispatchEvents(Movement $movement)
     {

@@ -37,9 +37,6 @@ class StarmapGenerate extends Command
 
     /**
      * Constructor.
-     *
-     * @param Generator $generator
-     * @param Renderer  $renderer
      */
     public function __construct(Generator $generator, Renderer $renderer)
     {

@@ -21,8 +21,6 @@ class ExpeditionLogController extends Controller
     /**
      * Get the expedition logs in json format.
      *
-     * @param ExpeditionLogTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(ExpeditionLogTransformer $transformer)

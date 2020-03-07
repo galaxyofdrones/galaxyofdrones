@@ -26,9 +26,6 @@ class MissionController extends Controller
     /**
      * Show the missions in json format.
      *
-     * @param ResourceMissionTransformer $resourceMissionTransformer
-     * @param MissionTransformer         $missionTransformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(ResourceMissionTransformer $resourceMissionTransformer, MissionTransformer $missionTransformer)
@@ -46,9 +43,6 @@ class MissionController extends Controller
 
     /**
      * Store a newly created mission log in storage.
-     *
-     * @param Mission        $mission
-     * @param MissionManager $manager
      *
      * @throws \Exception|\Throwable
      *

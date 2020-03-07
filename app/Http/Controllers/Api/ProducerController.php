@@ -26,9 +26,6 @@ class ProducerController extends Controller
     /**
      * Show the producer in json format.
      *
-     * @param Grid                $grid
-     * @param ProducerTransformer $transformer
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\JsonResponse
@@ -43,10 +40,6 @@ class ProducerController extends Controller
 
     /**
      * Store a newly created transmute in storage.
-     *
-     * @param Grid           $grid
-     * @param resource       $resource
-     * @param StorageManager $manager
      *
      * @throws \Exception|\Throwable
      *

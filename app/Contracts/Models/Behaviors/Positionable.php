@@ -25,17 +25,12 @@ interface Positionable
     /**
      * Get the travel time to the other.
      *
-     * @param Model $other
-     *
      * @return int
      */
     public function travelTimeTo(Model $other);
 
     /**
      * In bounds scope.
-     *
-     * @param Builder $query
-     * @param Bounds  $bounds
      *
      * @return Builder
      */

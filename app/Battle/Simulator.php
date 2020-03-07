@@ -94,9 +94,6 @@ class Simulator implements SimulatorContract
 
     /**
      * Constructor.
-     *
-     * @param BattleManager  $battleManager
-     * @param StorageManager $storageManager
      */
     public function __construct(BattleManager $battleManager, StorageManager $storageManager)
     {
@@ -106,8 +103,6 @@ class Simulator implements SimulatorContract
 
     /**
      * Setup.
-     *
-     * @param Movement $movement
      */
     protected function setup(Movement $movement)
     {

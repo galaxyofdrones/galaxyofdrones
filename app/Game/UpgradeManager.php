@@ -21,8 +21,6 @@ class UpgradeManager
 
     /**
      * Constructor.
-     *
-     * @param Bus $bus
      */
     public function __construct(Bus $bus)
     {
@@ -31,8 +29,6 @@ class UpgradeManager
 
     /**
      * Create.
-     *
-     * @param Grid $grid
      *
      * @return Upgrade
      */
@@ -57,8 +53,6 @@ class UpgradeManager
 
     /**
      * Create all.
-     *
-     * @param User $user
      *
      * @return Collection|Upgrade[]
      */
@@ -97,8 +91,6 @@ class UpgradeManager
     /**
      * Finish.
      *
-     * @param Upgrade $upgrade
-     *
      * @throws \Exception|\Throwable
      */
     public function finish(Upgrade $upgrade)
@@ -118,8 +110,6 @@ class UpgradeManager
 
     /**
      * Cancel.
-     *
-     * @param Upgrade $upgrade
      *
      * @throws \Exception|\Throwable
      */

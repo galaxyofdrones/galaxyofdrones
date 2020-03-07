@@ -233,8 +233,6 @@ class Planet extends Model implements PositionableContract
     /**
      * Starter scope.
      *
-     * @param Builder $query
-     *
      * @return Builder
      */
     public function scopeStarter(Builder $query)

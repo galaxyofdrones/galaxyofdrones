@@ -15,8 +15,6 @@ class ResourceAvailableTransformer extends ResourceTransformer
 
     /**
      * Constructor.
-     *
-     * @param Auth $auth
      */
     public function __construct(Auth $auth)
     {

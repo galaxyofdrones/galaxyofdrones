@@ -39,9 +39,6 @@ class UpgradeFinish extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager $database
-     * @param UpgradeManager  $manager
      */
     public function __construct(DatabaseManager $database, UpgradeManager $manager)
     {

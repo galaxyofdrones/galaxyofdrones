@@ -18,8 +18,6 @@ class ExpeditionLogCreated extends Notification
 
     /**
      * Constructor.
-     *
-     * @param int $expeditionLogId
      */
     public function __construct(int $expeditionLogId)
     {

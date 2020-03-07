@@ -9,7 +9,6 @@ trait FindByBlocked
     /**
      * Find by blocked.
      *
-     * @param User  $blocked
      * @param array $columns
      *
      * @return \Koodilab\Models\Block

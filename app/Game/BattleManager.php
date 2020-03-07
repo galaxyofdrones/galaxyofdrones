@@ -11,8 +11,7 @@ class BattleManager
     /**
      * Create log.
      *
-     * @param Movement $movement
-     * @param bool     $winner
+     * @param bool $winner
      *
      * @return BattleLog
      */

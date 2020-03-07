@@ -29,9 +29,6 @@ class TrainingManager
 
     /**
      * Constructor.
-     *
-     * @param Bus   $bus
-     * @param Event $event
      */
     public function __construct(Bus $bus, Event $event)
     {
@@ -42,9 +39,7 @@ class TrainingManager
     /**
      * Create.
      *
-     * @param Grid $grid
-     * @param Unit $unit
-     * @param int  $quantity
+     * @param int $quantity
      *
      * @return Training
      */
@@ -69,8 +64,6 @@ class TrainingManager
     /**
      * Finish.
      *
-     * @param Training $training
-     *
      * @throws \Exception|\Throwable
      */
     public function finish(Training $training)
@@ -94,8 +87,6 @@ class TrainingManager
 
     /**
      * Cancel.
-     *
-     * @param Training $training
      *
      * @throws \Exception|\Throwable
      */

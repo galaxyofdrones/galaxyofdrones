@@ -25,9 +25,6 @@ class ConstructionController extends Controller
     /**
      * Show the construction in json format.
      *
-     * @param Grid                    $grid
-     * @param ConstructionTransformer $transformer
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\JsonResponse
@@ -41,10 +38,6 @@ class ConstructionController extends Controller
 
     /**
      * Store a newly created construction in storage.
-     *
-     * @param Grid                $grid
-     * @param Building            $building
-     * @param ConstructionManager $manager
      *
      * @throws \Exception|\Throwable
      *
@@ -77,9 +70,6 @@ class ConstructionController extends Controller
 
     /**
      * Remove the construction from storage.
-     *
-     * @param Grid                $grid
-     * @param ConstructionManager $manager
      *
      * @throws \Exception|\Throwable
      *

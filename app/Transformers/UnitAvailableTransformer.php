@@ -15,8 +15,6 @@ class UnitAvailableTransformer extends UnitTransformer
 
     /**
      * Constructor.
-     *
-     * @param Auth $auth
      */
     public function __construct(Auth $auth)
     {

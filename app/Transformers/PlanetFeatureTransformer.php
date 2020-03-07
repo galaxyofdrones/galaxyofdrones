@@ -16,8 +16,6 @@ class PlanetFeatureTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param Auth $auth
      */
     public function __construct(Auth $auth)
     {
@@ -51,8 +49,6 @@ class PlanetFeatureTransformer extends Transformer
 
     /**
      * Get the status.
-     *
-     * @param Planet $planet
      *
      * @return string
      */

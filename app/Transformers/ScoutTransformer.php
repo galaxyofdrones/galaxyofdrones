@@ -13,8 +13,6 @@ class ScoutTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param MovementScoutTransformer $movementTransformer
      */
     public function __construct(MovementScoutTransformer $movementTransformer)
     {

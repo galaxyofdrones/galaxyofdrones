@@ -12,8 +12,6 @@ class StateManager
 {
     /**
      * Synchronize the planet.
-     *
-     * @param Planet $planet
      */
     public function syncPlanet(Planet $planet)
     {
@@ -46,8 +44,6 @@ class StateManager
 
     /**
      * Synchronize the user.
-     *
-     * @param User $user
      */
     public function syncUser(User $user)
     {

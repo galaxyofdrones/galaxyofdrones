@@ -13,8 +13,6 @@ class ProducerTransformer extends Transformer
 
     /**
      * Constructor.
-     *
-     * @param ResourceTransformer $resourceTransfomer
      */
     public function __construct(ResourceTransformer $resourceTransfomer)
     {

@@ -10,8 +10,6 @@ trait HasResearchable
     /**
      * Has resource?
      *
-     * @param resource $resource
-     *
      * @return bool
      */
     public function hasResource(Resource $resource)
@@ -24,8 +22,6 @@ trait HasResearchable
 
     /**
      * Has unit?
-     *
-     * @param Unit $unit
      *
      * @return bool
      */

@@ -21,8 +21,6 @@ class BattleLogController extends Controller
     /**
      * Get the battle logs in json format.
      *
-     * @param BattleLogTransformer $transformer
-     *
      * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index(BattleLogTransformer $transformer)

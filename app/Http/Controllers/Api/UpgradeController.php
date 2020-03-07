@@ -25,9 +25,6 @@ class UpgradeController extends Controller
     /**
      * Show the upgrade in json format.
      *
-     * @param Grid               $grid
-     * @param UpgradeTransformer $transformer
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\JsonResponse
@@ -58,9 +55,6 @@ class UpgradeController extends Controller
 
     /**
      * Store a newly created upgrade in storage.
-     *
-     * @param Grid           $grid
-     * @param UpgradeManager $manager
      *
      * @throws \Exception|\Throwable
      *
@@ -96,8 +90,6 @@ class UpgradeController extends Controller
     /**
      * Store the newly created upgrades in storage.
      *
-     * @param UpgradeManager $manager
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response
@@ -124,9 +116,6 @@ class UpgradeController extends Controller
 
     /**
      * Remove the upgrade from storage.
-     *
-     * @param Grid           $grid
-     * @param UpgradeManager $manager
      *
      * @throws \Exception|\Throwable
      *

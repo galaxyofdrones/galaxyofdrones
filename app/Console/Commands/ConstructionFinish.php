@@ -39,9 +39,6 @@ class ConstructionFinish extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager     $database
-     * @param ConstructionManager $manager
      */
     public function __construct(DatabaseManager $database, ConstructionManager $manager)
     {

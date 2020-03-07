@@ -20,8 +20,6 @@ class MessageSended extends Notification
 
     /**
      * Constructor.
-     *
-     * @param int $messageId
      */
     public function __construct(int $messageId)
     {

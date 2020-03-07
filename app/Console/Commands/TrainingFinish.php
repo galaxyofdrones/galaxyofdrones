@@ -39,9 +39,6 @@ class TrainingFinish extends Command
 
     /**
      * Constructor.
-     *
-     * @param DatabaseManager $database
-     * @param TrainingManager $manager
      */
     public function __construct(DatabaseManager $database, TrainingManager $manager)
     {

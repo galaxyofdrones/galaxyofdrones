@@ -22,8 +22,6 @@ class SettingController extends Controller
     /**
      * Update the settings in storage.
      *
-     * @param SettingUpdateRequest $request
-     *
      * @throws \Exception|\Throwable
      *
      * @return mixed|\Illuminate\Http\Response

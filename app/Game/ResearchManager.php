@@ -29,9 +29,6 @@ class ResearchManager
 
     /**
      * Constructor.
-     *
-     * @param Auth $auth
-     * @param Bus  $bus
      */
     public function __construct(Auth $auth, Bus $bus)
     {
@@ -71,8 +68,6 @@ class ResearchManager
     /**
      * Finish.
      *
-     * @param Research $research
-     *
      * @throws \Exception|\Throwable
      */
     public function finish(Research $research)
@@ -96,8 +91,6 @@ class ResearchManager
     /**
      * Cancel.
      *
-     * @param Research $research
-     *
      * @throws \Exception|\Throwable
      */
     public function cancel(Research $research)
@@ -116,8 +109,6 @@ class ResearchManager
 
     /**
      * Finish the research of resource.
-     *
-     * @param Research $research
      */
     protected function finishResource(Research $research)
     {
@@ -139,8 +130,6 @@ class ResearchManager
 
     /**
      * Finish the research of unit.
-     *
-     * @param Research $research
      */
     protected function finishUnit(Research $research)
     {
