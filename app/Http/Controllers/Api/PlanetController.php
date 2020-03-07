@@ -96,8 +96,12 @@ class PlanetController extends Controller
             throw new BadRequestHttpException();
         }
 
+        $name = strip_tags(
+            $request->get('name')
+        );
+
         auth()->user()->current->update([
-            'custom_name' => $request->get('name'),
+            'custom_name' => $name,
         ]);
     }
 
