@@ -9,6 +9,13 @@ use Koodilab\Models\User;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
+     * The path to the "home" route for your application.
+     *
+     * @var string
+     */
+    public const HOME = '/home';
+
+    /**
      * {@inheritdoc}
      */
     protected $namespace = 'Koodilab\Http\Controllers';
