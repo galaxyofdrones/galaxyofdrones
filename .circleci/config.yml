@@ -81,6 +81,10 @@ jobs:
           paths:
             - ~/.php-cs-fixer
 
+      - run:
+          command: php artisan websockets:serve
+          background: true
+
       - run: vendor/bin/phpunit
 
       - run:
@@ -89,10 +93,6 @@ jobs:
 
       - run:
           command: php artisan serve
-          background: true
-
-      - run:
-          command: php artisan websockets:serve
           background: true
 
       - run: php artisan dusk
