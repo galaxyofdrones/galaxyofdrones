@@ -1,0 +1,106 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.4-node-browsers
+      - image: mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+      - image: redis
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run: sudo apt-get install -y default-mysql-client libmagickwand-dev
+      - run: sudo pecl install imagick redis
+      - run: sudo docker-php-ext-enable imagick redis
+      - run: sudo docker-php-ext-install bcmath pcntl pdo pdo_mysql
+      - run: cp .env.testing.example .env
+      - run: mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE IF NOT EXISTS galaxyofdrones_test;'
+
+      - restore_cache:
+          key: v1-global-yarn-dependencies-
+
+      - run: yarn global add eslint@^5.16 eslint-plugin-import@^2.18 eslint-config-airbnb-base
+
+      - save_cache:
+          key: v1-global-yarn-dependencies-{{ checksum "~/.config/yarn/global/yarn.lock" }}
+          paths:
+            - ~/.config/yarn/global/node_modules
+
+      - restore_cache:
+          key: v1-yarn-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          key: v1-yarn-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+
+      - restore_cache:
+          key: v1-global-dependencies-
+
+      - run: composer global require friendsofphp/php-cs-fixer:2.16.* -n --prefer-dist
+
+      - save_cache:
+          key: v1-global-dependencies-{{ checksum "~/.composer/composer.json" }}
+          paths:
+            - ~/.composer/vendor
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+
+      - run: yarn prod
+      - run: php artisan key:generate
+      - run: php artisan config:clear
+      - run: php artisan dusk:chrome-driver 80
+      - run: php artisan migrate --seed --no-interaction
+      - run: ~/.yarn/bin/eslint ./resources/js
+
+      - restore_cache:
+          key: v1-php-cs-
+
+      - run: mkdir -p ~/.php-cs-fixer
+      - run: ~/.composer/vendor/bin/php-cs-fixer fix --dry-run
+
+      - save_cache:
+          key: v1-php-cs-{{ checksum "~/.php-cs-fixer/.php_cs.cache" }}
+          paths:
+            - ~/.php-cs-fixer
+
+      - run: vendor/bin/phpunit
+
+      - run:
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          background: true
+
+      - run:
+          command: php artisan serve
+          background: true
+
+      - run:
+          command: php artisan websockets:serve
+          background: true
+
+      - run: php artisan dusk
+
+      - store_artifacts:
+          path: ./tests/Browser/console
+          destination: console
+
+      - store_artifacts:
+          path: ./tests/Browser/screenshots
+          destination: screenshots
