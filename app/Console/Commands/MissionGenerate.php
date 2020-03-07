@@ -63,13 +63,13 @@ class MissionGenerate extends Command
             $this->prependTimestamp('Generating missions...')
         );
 
-        $this->database->transaction(function () {
-            $users = User::whereNotNull('started_at')->get();
+        $users = User::whereNotNull('started_at')->get();
 
-            foreach ($users as $user) {
+        foreach ($users as $user) {
+            $this->database->transaction(function () use ($user) {
                 $this->manager->createRand($user);
-            }
-        });
+            });
+        }
 
         $this->info(
             $this->prependTimestamp('Generation complete!')

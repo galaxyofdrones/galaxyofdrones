@@ -52,10 +52,10 @@ class RankUpdate extends Command
             $this->prependTimestamp('Updating ranks...')
         );
 
-        $this->database->transaction(function () {
-            $users = User::whereNotNull('started_at')->get();
+        $users = User::whereNotNull('started_at')->get();
 
-            foreach ($users as $user) {
+        foreach ($users as $user) {
+            $this->database->transaction(function () use ($user) {
                 Rank::firstOrNew([
                     'user_id' => $user->id,
                 ])->fill([
@@ -65,8 +65,8 @@ class RankUpdate extends Command
                     'winning_battle_count' => $user->winningBattleLogCount(),
                     'losing_battle_count' => $user->losingBattleLogCount(),
                 ])->save();
-            }
-        });
+            });
+        }
 
         $this->info(
             $this->prependTimestamp('Update complete!')
