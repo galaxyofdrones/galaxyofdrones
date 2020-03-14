@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Models;
+namespace Tests\Unit\Support;
 
 use Koodilab\Support\Bounds;
 use Tests\TestCase;
