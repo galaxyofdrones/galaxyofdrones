@@ -10,164 +10,132 @@ object-assign
  */
 
 /*!
-  * Bootstrap v4.4.1 (https://getbootstrap.com/)
-  * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * Bootstrap v4.5.2 (https://getbootstrap.com/)
+  * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
 /*!
-  * vue-router v3.1.6
+  * vue-router v3.4.2
   * (c) 2020 Evan You
   * @license MIT
   */
 
 /*!
- * @pixi/app - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
- *
- * @pixi/app is licensed under the MIT License.
- * http://www.opensource.org/licenses/mit-license
- */
-
-/*!
- * @pixi/core - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/core - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/core is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/display - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/display - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/display is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/extract - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/extract - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/extract is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/filter-displacement - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/filter-displacement - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/filter-displacement is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/loaders - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/loaders - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/loaders is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/math - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/math - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/math is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/mesh - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/mesh-extras - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
- * @pixi/mesh is licensed under the MIT License.
+ * @pixi/mesh-extras is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/mixin-get-child-by-name - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/mixin-get-child-by-name - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/mixin-get-child-by-name is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/mixin-get-global-position - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/mixin-get-global-position - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/mixin-get-global-position is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/particles - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/particles - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/polyfill - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/polyfill - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/polyfill is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/prepare - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/prepare - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/prepare is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/settings - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/settings - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/settings is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/sprite - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
- *
- * @pixi/sprite is licensed under the MIT License.
- * http://www.opensource.org/licenses/mit-license
- */
-
-/*!
- * @pixi/sprite-tiling - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
- *
- * @pixi/sprite-tiling is licensed under the MIT License.
- * http://www.opensource.org/licenses/mit-license
- */
-
-/*!
- * @pixi/spritesheet - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
- *
- * @pixi/spritesheet is licensed under the MIT License.
- * http://www.opensource.org/licenses/mit-license
- */
-
-/*!
- * @pixi/ticker - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/ticker - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/ticker is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/utils - v5.2.1
- * Compiled Tue, 28 Jan 2020 23:33:11 UTC
+ * @pixi/utils - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *
  * @pixi/utils is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -182,14 +150,14 @@ object-assign
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.4
+ * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2019-04-08
+ * Date: 2020-03-14
  */
 
 /*!
@@ -206,7 +174,7 @@ object-assign
  */
 
 /*!
- * jQuery JavaScript Library v3.4.1
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -216,13 +184,21 @@ object-assign
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2019-05-01T21:04Z
+ * Date: 2020-05-04T22:49Z
  */
 
 /*!
  * perfect-scrollbar v1.5.0
  * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
  * Licensed under MIT
+ */
+
+/*!
+ * pixi.js - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
+ *
+ * pixi.js is licensed under the MIT License.
+ * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
@@ -233,6 +209,21 @@ object-assign
  * resource-loader is licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license
  */
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
 
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 
@@ -269,3 +260,5 @@ object-assign
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+//! moment.js
