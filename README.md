@@ -3,12 +3,6 @@
 [![GitHub release](https://img.shields.io/github/release/galaxyofdrones/galaxyofdrones.svg)](https://github.com/galaxyofdrones/galaxyofdrones/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-An open source multiplayer space strategy game.
-
-![Screenshot](public/images/screenshot.png)
-
-## About the game
-
 The game story takes place in a virtual galaxy where randomly generated planets produce various raw materials which can be used by the Players to develop their infrastructure and fleet. In addition, players may trade with the Earth or engage in battles, so beyond various military arrangements, economic decisions should be taken as well.
 
 ## Links
