@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Star;
-use Koodilab\Support\Bounds;
+use App\Models\Star;
+use App\Support\Bounds;
 
 trait FindExpeditionStar
 {

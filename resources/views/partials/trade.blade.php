@@ -1,6 +1,6 @@
 @php
     $unitTypes = [
-        'transporter' => Koodilab\Models\Unit::TYPE_TRANSPORTER,
+        'transporter' => App\Models\Unit::TYPE_TRANSPORTER,
     ];
 @endphp
 <trade :is-enabled="isEnabled && isSelectedTab('trade')"

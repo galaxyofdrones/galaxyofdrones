@@ -2,7 +2,7 @@
 
 namespace Tests\Browser;
 
-use Koodilab\Models\Planet;
+use App\Models\Planet;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 

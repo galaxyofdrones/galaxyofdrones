@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Jobs\Train as TrainJob;
+use App\Models\Training;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Jobs\Train as TrainJob;
-use Koodilab\Models\Training;
 use Symfony\Component\Console\Input\InputArgument;
 
 class TrainingRequeue extends Command

@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Game\UpgradeManager;
+use App\Models\Upgrade;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Game\UpgradeManager;
-use Koodilab\Models\Upgrade;
 use Symfony\Component\Console\Input\InputArgument;
 
 class UpgradeFinish extends Command

@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 class BookmarkTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Bookmark $item
+     * @param \App\Models\Bookmark $item
      */
     public function transform($item)
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Notifications\MissionLogCreated;
-use Koodilab\Transformers\MissionLogTransformer;
+use App\Http\Controllers\Controller;
+use App\Notifications\MissionLogCreated;
+use App\Transformers\MissionLogTransformer;
 
 class MissionLogController extends Controller
 {
@@ -25,7 +25,7 @@ class MissionLogController extends Controller
      */
     public function index(MissionLogTransformer $transformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $user->deleteNotificationsByType(MissionLogCreated::class);

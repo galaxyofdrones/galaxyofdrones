@@ -3,12 +3,12 @@
 use Faker\Generator as Faker;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Koodilab\Models\Unit::class, function (Faker $faker) {
+$factory->define(App\Models\Unit::class, function (Faker $faker) {
     return [
         'name' => [
             'en' => $faker->word,
         ],
-        'type' => $faker->numberBetween(0, Koodilab\Models\Unit::TYPE_SETTLER),
+        'type' => $faker->numberBetween(0, App\Models\Unit::TYPE_SETTLER),
         'is_unlocked' => $faker->boolean,
         'speed' => $faker->numberBetween(1, 100),
         'attack' => $faker->numberBetween(1, 100),

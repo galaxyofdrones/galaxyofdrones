@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Models\Planet;
+use App\Models\Shield;
 use Carbon\Carbon;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Shield;
 
 class ShieldManager
 {

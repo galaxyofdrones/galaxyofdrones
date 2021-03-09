@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Contracts\Transformers;
+namespace App\Contracts\Transformers;
 
 interface Transformer
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
+use App\Models\Building;
 use Illuminate\Database\Eloquent\Collection;
-use Koodilab\Models\Building;
 
 trait HasBuilding
 {

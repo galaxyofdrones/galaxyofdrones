@@ -1,7 +1,7 @@
 <?php
 
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
+use App\Models\Planet;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------

@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Rank;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Rank;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

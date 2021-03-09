@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Contracts\Battle;
+namespace App\Contracts\Battle;
 
-use Koodilab\Models\BattleLog;
-use Koodilab\Models\Movement;
+use App\Models\BattleLog;
+use App\Models\Movement;
 
 interface Simulator
 {

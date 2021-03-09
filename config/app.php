@@ -180,13 +180,13 @@ return [
         /*
          * Application Service Providers...
          */
-        Koodilab\Providers\AppServiceProvider::class,
-        Koodilab\Providers\AuthServiceProvider::class,
-        Koodilab\Providers\BroadcastServiceProvider::class,
-        Koodilab\Providers\EventServiceProvider::class,
-        Koodilab\Providers\TelescopeServiceProvider::class,
-        Koodilab\Providers\HorizonServiceProvider::class,
-        Koodilab\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 

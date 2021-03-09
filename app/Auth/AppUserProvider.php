@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Auth;
+namespace App\Auth;
 
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
-class KoodilabUserProvider extends EloquentUserProvider
+class AppUserProvider extends EloquentUserProvider
 {
     /**
      * {@inheritdoc}

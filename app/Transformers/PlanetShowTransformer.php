@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\Planet;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Translation\Translator;
-use Koodilab\Models\Planet;
 
 class PlanetShowTransformer extends Transformer
 {
@@ -34,7 +34,7 @@ class PlanetShowTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Planet $item
+     * @param \App\Models\Planet $item
      */
     public function transform($item)
     {
@@ -87,7 +87,7 @@ class PlanetShowTransformer extends Transformer
     /**
      * Get the authenticated user.
      *
-     * @return \Koodilab\Models\User
+     * @return \App\Models\User
      */
     protected function user()
     {

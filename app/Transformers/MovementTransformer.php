@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Planet;
+use App\Models\Planet;
 
 class MovementTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Movement $item
+     * @param \App\Models\Movement $item
      */
     public function transform($item)
     {

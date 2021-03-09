@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Resource;
+use App\Models\Resource;
 
 trait FindStockByResource
 {
@@ -11,11 +11,11 @@ trait FindStockByResource
      *
      * @param array $columns
      *
-     * @return \Koodilab\Models\Stock
+     * @return \App\Models\Stock
      */
     public function findStockByResource(Resource $resource, $columns = ['*'])
     {
-        /** @var \Koodilab\Models\Stock $stock */
+        /** @var \App\Models\Stock $stock */
         $stock = $this->stocks()
             ->where('resource_id', $resource->id)
             ->first($columns);

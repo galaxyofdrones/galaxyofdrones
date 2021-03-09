@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait FindPlanetsOrderByName
 {
@@ -9,7 +9,7 @@ trait FindPlanetsOrderByName
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Planet[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Planet[]
      */
     public function findPlanetsOrderByName($columns = ['*'])
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\User;
-use Koodilab\Notifications\DonationCreated;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\DonationCreated;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 use Carbon\Carbon;
 
@@ -11,7 +11,7 @@ trait FindNotExpiredExpeditions
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Expedition[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Expedition[]
      */
     public function findNotExpiredExpeditions($columns = ['*'])
     {

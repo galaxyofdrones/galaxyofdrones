@@ -1,20 +1,20 @@
 <?php
 
-namespace Koodilab\Providers;
+namespace App\Providers;
 
+use App\Listeners\UserLoginListener;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\Setting;
+use App\Models\User;
+use App\Observers\GridObserver;
+use App\Observers\PlanetObserver;
+use App\Observers\SettingObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Koodilab\Listeners\UserLoginListener;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Setting;
-use Koodilab\Models\User;
-use Koodilab\Observers\GridObserver;
-use Koodilab\Observers\PlanetObserver;
-use Koodilab\Observers\SettingObserver;
-use Koodilab\Observers\UserObserver;
 use Laravel\Passport\Passport;
 
 class EventServiceProvider extends ServiceProvider

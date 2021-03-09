@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
+use App\Models\Planet;
+use App\Models\User;
 
 class UserCapitalTransformer extends Transformer
 {

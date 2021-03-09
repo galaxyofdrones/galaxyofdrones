@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Unit;
 use Illuminate\Database\Seeder;
-use Koodilab\Models\Unit;
 
 class UnitsTableSeeder extends Seeder
 {

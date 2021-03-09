@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\Message;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use Koodilab\Models\Message;
 
 class MessageTransformer extends Transformer
 {
@@ -29,7 +29,7 @@ class MessageTransformer extends Transformer
      */
     public function transform($item)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         return [

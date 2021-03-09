@@ -1,24 +1,24 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Contracts\Battle\Simulator as SimulatorContract;
+use App\Events\PlanetUpdated;
+use App\Events\UserUpdated;
+use App\Jobs\Move as MoveJob;
+use App\Models\BattleLog;
+use App\Models\Building;
+use App\Models\Movement;
+use App\Models\Planet;
+use App\Models\Population;
+use App\Models\Unit;
+use App\Notifications\UnderAttack;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
 use Illuminate\Contracts\Events\Dispatcher as Event;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as BaseCollection;
-use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
-use Koodilab\Events\PlanetUpdated;
-use Koodilab\Events\UserUpdated;
-use Koodilab\Jobs\Move as MoveJob;
-use Koodilab\Models\BattleLog;
-use Koodilab\Models\Building;
-use Koodilab\Models\Movement;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Population;
-use Koodilab\Models\Unit;
-use Koodilab\Notifications\UnderAttack;
 
 class MovementManager
 {
@@ -78,7 +78,7 @@ class MovementManager
      */
     public function createScout(Planet $planet, Unit $unit, $quantity)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -115,7 +115,7 @@ class MovementManager
      */
     public function createAttack(Planet $planet, Collection $units, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -158,7 +158,7 @@ class MovementManager
      */
     public function createOccupy(Planet $planet, Unit $unit)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -195,7 +195,7 @@ class MovementManager
      */
     public function createSupport(Planet $planet, Collection $units, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -218,14 +218,14 @@ class MovementManager
     /**
      * Create transport.
      *
-     * @param Collection|\Koodilab\Models\Resource[] $resources
-     * @param int                                    $quantity
+     * @param Collection|\App\Models\Resource[] $resources
+     * @param int                               $quantity
      *
      * @return Movement
      */
     public function createTransport(Planet $planet, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -248,14 +248,14 @@ class MovementManager
     /**
      * Create trade.
      *
-     * @param Collection|\Koodilab\Models\Resource[] $resources
-     * @param int                                    $quantity
+     * @param Collection|\App\Models\Resource[] $resources
+     * @param int                               $quantity
      *
      * @return Movement
      */
     public function createTrade(Building $building, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -278,11 +278,11 @@ class MovementManager
     /**
      * Create capital trade.
      *
-     * @param Collection|\Koodilab\Models\Resource[] $resources
+     * @param Collection|\App\Models\Resource[] $resources
      */
     public function createCapitalTrade(Collection $resources, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         foreach ($resources as $resource) {
@@ -318,7 +318,7 @@ class MovementManager
      */
     public function createPatrol(Building $building, Collection $units, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $travelTime = round(
@@ -345,7 +345,7 @@ class MovementManager
      */
     public function createCapitalPatrol(Collection $units, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         foreach ($units as $unit) {
@@ -520,7 +520,7 @@ class MovementManager
      */
     protected function createSupportOrPatrol(Movement $movement, Collection $units, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         foreach ($units as $unit) {
@@ -541,14 +541,14 @@ class MovementManager
     /**
      * Create transport or trade.
      *
-     * @param Collection|\Koodilab\Models\Resource[] $resources
-     * @param int                                    $quantity
+     * @param Collection|\App\Models\Resource[] $resources
+     * @param int                               $quantity
      *
      * @return Movement
      */
     protected function createTransportOrTrade(Movement $movement, Unit $unit, Collection $resources, $quantity, BaseCollection $quantities)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $this->storageManager->decrementPopulation(
@@ -618,7 +618,7 @@ class MovementManager
     protected function transferResources(Movement $movement)
     {
         foreach ($movement->resources as $resource) {
-            /** @var \Koodilab\Models\Stock $stock */
+            /** @var \App\Models\Stock $stock */
             $stock = $movement->end->stocks()->firstOrNew([
                 'resource_id' => $resource->id,
             ]);
@@ -652,8 +652,8 @@ class MovementManager
     /**
      * Start a return movement.
      *
-     * @param Collection|\Koodilab\Models\Unit[]     $units
-     * @param Collection|\Koodilab\Models\Resource[] $resources
+     * @param Collection|\App\Models\Unit[]     $units
+     * @param Collection|\App\Models\Resource[] $resources
      */
     protected function returnMovement(Movement $movement, Collection $units = null, Collection $resources = null)
     {

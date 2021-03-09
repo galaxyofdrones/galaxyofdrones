@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Support;
+namespace App\Support;
 
+use App\Models\Setting;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use InvalidArgumentException;
-use Koodilab\Models\Setting;
 
 class SettingManager
 {

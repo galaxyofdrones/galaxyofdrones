@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Koodilab\Models\User;
 
 class UsersTableSeeder extends Seeder
 {

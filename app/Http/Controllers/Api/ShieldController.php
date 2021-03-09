@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\ShieldManager;
+use App\Http\Controllers\Controller;
+use App\Models\Planet;
+use App\Models\Shield;
+use App\Transformers\ShieldTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\ShieldManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Shield;
-use Koodilab\Transformers\ShieldTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ShieldController extends Controller
@@ -29,7 +29,7 @@ class ShieldController extends Controller
      */
     public function index(ShieldTransformer $transformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         return [

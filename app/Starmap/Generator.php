@@ -1,17 +1,17 @@
 <?php
 
-namespace Koodilab\Starmap;
+namespace App\Starmap;
 
+use App\Contracts\Starmap\Generator as GeneratorContract;
+use App\Contracts\Starmap\NameGenerator;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Star;
+use App\Support\Bounds;
+use App\Support\Util;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Contracts\Starmap\Generator as GeneratorContract;
-use Koodilab\Contracts\Starmap\NameGenerator;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Star;
-use Koodilab\Support\Bounds;
-use Koodilab\Support\Util;
 
 class Generator implements GeneratorContract
 {
@@ -109,7 +109,7 @@ class Generator implements GeneratorContract
     /**
      * The resources.
      *
-     * @var \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[]
+     * @var \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[]
      */
     protected $resources;
 

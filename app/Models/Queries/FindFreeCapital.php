@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Planet;
-use Koodilab\Starmap\Generator;
-use Koodilab\Support\Bounds;
+use App\Models\Planet;
+use App\Starmap\Generator;
+use App\Support\Bounds;
 
 trait FindFreeCapital
 {

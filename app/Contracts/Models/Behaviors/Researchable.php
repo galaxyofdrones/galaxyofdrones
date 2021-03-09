@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Contracts\Models\Behaviors;
+namespace App\Contracts\Models\Behaviors;
 
 interface Researchable
 {

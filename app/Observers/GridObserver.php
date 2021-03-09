@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Observers;
+namespace App\Observers;
 
-use Koodilab\Game\StateManager;
-use Koodilab\Models\Grid;
+use App\Game\StateManager;
+use App\Models\Grid;
 
 class GridObserver
 {

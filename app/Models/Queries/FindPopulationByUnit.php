@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Unit;
+use App\Models\Unit;
 
 trait FindPopulationByUnit
 {
@@ -11,11 +11,11 @@ trait FindPopulationByUnit
      *
      * @param array $columns
      *
-     * @return \Koodilab\Models\Population
+     * @return \App\Models\Population
      */
     public function findPopulationByUnit(Unit $unit, $columns = ['*'])
     {
-        /** @var \Koodilab\Models\Population $population */
+        /** @var \App\Models\Population $population */
         $population = $this->populations()
             ->where('unit_id', $unit->id)
             ->first($columns);

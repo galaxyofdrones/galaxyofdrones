@@ -1,14 +1,14 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\StorageManager;
+use App\Http\Controllers\Controller;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Resource;
+use App\Transformers\ProducerTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\StorageManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Resource;
-use Koodilab\Transformers\ProducerTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProducerController extends Controller
@@ -52,7 +52,7 @@ class ProducerController extends Controller
 
         $quantity = $this->quantity();
 
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         if (! $user->hasResource($resource)) {

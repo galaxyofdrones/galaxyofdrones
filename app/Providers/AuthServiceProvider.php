@@ -1,20 +1,20 @@
 <?php
 
-namespace Koodilab\Providers;
+namespace App\Providers;
 
+use App\Auth\AppUserProvider;
+use App\Models\Bookmark;
+use App\Models\Expedition;
+use App\Models\Mission;
+use App\Models\Planet;
+use App\Models\User;
+use App\Policies\BookmarkPolicy;
+use App\Policies\ExpeditionPolicy;
+use App\Policies\MissionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
-use Koodilab\Auth\KoodilabUserProvider;
-use Koodilab\Models\Bookmark;
-use Koodilab\Models\Expedition;
-use Koodilab\Models\Mission;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
-use Koodilab\Policies\BookmarkPolicy;
-use Koodilab\Policies\ExpeditionPolicy;
-use Koodilab\Policies\MissionPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Auth::provider('koodilab', function ($app, array $config) {
+        Auth::provider('app', function ($app, array $config) {
             return $this->userProvider($config);
         });
 
@@ -64,11 +64,11 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @throws \Exception|\Throwable
      *
-     * @return KoodilabUserProvider
+     * @return AppUserProvider
      */
     protected function userProvider(array $config)
     {
-        return new KoodilabUserProvider(
+        return new AppUserProvider(
             $this->app->make('hash'), $config['model']
         );
     }

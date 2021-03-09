@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait PaginatePveUsers
 {
@@ -9,7 +9,7 @@ trait PaginatePveUsers
      *
      * @param int $perPage
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Koodilab\Models\Rank[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\App\Models\Rank[]
      */
     public static function paginatePveUsers($perPage = 10)
     {

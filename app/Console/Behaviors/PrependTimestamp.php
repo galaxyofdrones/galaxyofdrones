@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Console\Behaviors;
+namespace App\Console\Behaviors;
 
 trait PrependTimestamp
 {

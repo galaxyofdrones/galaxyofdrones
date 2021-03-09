@@ -1,16 +1,16 @@
 <?php
 
-namespace Koodilab\Starmap;
+namespace App\Starmap;
 
+use App\Contracts\Starmap\Renderer as RendererContract;
+use App\Models\Planet;
+use App\Models\Star;
+use App\Support\Bounds;
 use Closure;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Imagick;
 use ImagickPixel;
-use Koodilab\Contracts\Starmap\Renderer as RendererContract;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Star;
-use Koodilab\Support\Bounds;
 
 class Renderer implements RendererContract
 {

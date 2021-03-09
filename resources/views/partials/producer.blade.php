@@ -1,4 +1,4 @@
-<producer :type="{{ Koodilab\Models\Building::TYPE_PRODUCER }}"
+<producer :type="{{ App\Models\Building::TYPE_PRODUCER }}"
            :building="building"
            :grid="grid"
            url="{{ route('api_producer', '__grid__') }}"

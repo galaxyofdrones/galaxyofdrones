@@ -1,14 +1,14 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Models\Expedition;
+use App\Models\ExpeditionLog;
+use App\Models\Unit;
+use App\Models\User;
+use App\Notifications\ExpeditionLogCreated;
+use App\Support\Util;
 use Carbon\Carbon;
-use Koodilab\Models\Expedition;
-use Koodilab\Models\ExpeditionLog;
-use Koodilab\Models\Unit;
-use Koodilab\Models\User;
-use Koodilab\Notifications\ExpeditionLogCreated;
-use Koodilab\Support\Util;
 
 class ExpeditionManager
 {

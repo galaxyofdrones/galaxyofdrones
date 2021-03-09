@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Contracts\Starmap;
+namespace App\Contracts\Starmap;
 
 interface NameGenerator extends Generator
 {

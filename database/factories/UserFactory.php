@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\User;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
-use Koodilab\Models\User;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(User::class, function (Faker $faker) {

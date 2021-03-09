@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Models\Mission;
+use App\Models\MissionLog;
+use App\Models\User;
+use App\Notifications\MissionLogCreated;
+use App\Support\Util;
 use Carbon\Carbon;
-use Koodilab\Models\Mission;
-use Koodilab\Models\MissionLog;
-use Koodilab\Models\User;
-use Koodilab\Notifications\MissionLogCreated;
-use Koodilab\Support\Util;
 
 class MissionManager
 {

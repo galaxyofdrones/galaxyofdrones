@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\User;
+use App\Models\User;
 
 trait FindByBlocked
 {
@@ -11,7 +11,7 @@ trait FindByBlocked
      *
      * @param array $columns
      *
-     * @return \Koodilab\Models\Block
+     * @return \App\Models\Block
      */
     public function findByBlocked(User $blocked, $columns = ['*'])
     {

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Planet;
+use App\Models\Shield;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Shield;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

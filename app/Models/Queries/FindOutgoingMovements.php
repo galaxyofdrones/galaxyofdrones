@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait FindOutgoingMovements
 {
@@ -9,7 +9,7 @@ trait FindOutgoingMovements
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Movement[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Movement[]
      */
     public function findOutgoingMovements($columns = ['*'])
     {

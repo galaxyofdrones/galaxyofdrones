@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Relations;
+namespace App\Models\Relations;
 
-use Koodilab\Models\Planet;
+use App\Models\Planet;
 
 trait BelongsToStart
 {

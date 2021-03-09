@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait PaginatePlanets
 {
@@ -9,7 +9,7 @@ trait PaginatePlanets
      *
      * @param int $perPage
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Koodilab\Models\Planet[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\App\Models\Planet[]
      */
     public function paginatePlanets($perPage = 5)
     {

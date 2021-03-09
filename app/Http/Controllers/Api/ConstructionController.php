@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\ConstructionManager;
+use App\Http\Controllers\Controller;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Transformers\ConstructionTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\ConstructionManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Transformers\ConstructionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ConstructionController extends Controller

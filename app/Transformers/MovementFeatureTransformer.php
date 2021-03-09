@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\Movement;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use Koodilab\Models\Movement;
 
 class MovementFeatureTransformer extends Transformer
 {
@@ -58,7 +58,7 @@ class MovementFeatureTransformer extends Transformer
      */
     protected function status(Movement $movement)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         if ($user && $user->current_id == $movement->end_id) {

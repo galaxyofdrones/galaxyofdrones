@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Contracts\Transformers\Transformer as TransformerContract;
+use App\Contracts\Transformers\Transformer as TransformerContract;
 
 abstract class Transformer implements TransformerContract
 {

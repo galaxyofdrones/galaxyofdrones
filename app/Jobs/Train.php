@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Jobs;
+namespace App\Jobs;
 
+use App\Game\TrainingManager;
+use App\Models\Training as TrainingModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Game\TrainingManager;
-use Koodilab\Models\Training as TrainingModel;
 
 class Train implements ShouldQueue
 {

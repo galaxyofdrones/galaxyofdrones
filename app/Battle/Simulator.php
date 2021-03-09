@@ -1,17 +1,17 @@
 <?php
 
-namespace Koodilab\Battle;
+namespace App\Battle;
 
-use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
-use Koodilab\Game\BattleManager;
-use Koodilab\Game\StorageManager;
-use Koodilab\Models\BattleLog;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Movement;
-use Koodilab\Models\Population;
-use Koodilab\Models\Stock;
-use Koodilab\Models\Unit;
+use App\Contracts\Battle\Simulator as SimulatorContract;
+use App\Game\BattleManager;
+use App\Game\StorageManager;
+use App\Models\BattleLog;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Movement;
+use App\Models\Population;
+use App\Models\Stock;
+use App\Models\Unit;
 
 class Simulator implements SimulatorContract
 {

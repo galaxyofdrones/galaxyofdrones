@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait FindNotEmptyGrids
 {
@@ -9,7 +9,7 @@ trait FindNotEmptyGrids
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Grid[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Grid[]
      */
     public function findNotEmptyGrids($columns = ['*'])
     {

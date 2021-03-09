@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Movement;
+use App\Models\Movement;
 
 trait FindIncomingMovements
 {
@@ -11,7 +11,7 @@ trait FindIncomingMovements
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Movement[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Movement[]
      */
     public function findIncomingMovements($columns = ['*'])
     {

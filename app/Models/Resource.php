@@ -1,46 +1,46 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
+use App\Contracts\Models\Behaviors\Researchable as ResearchableContract;
+use App\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Researchable as ResearchableContract;
-use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 
 /**
  * Resource.
  *
- * @property int                                                                  $id
- * @property array                                                                $name
- * @property bool                                                                 $is_unlocked
- * @property float                                                                $frequency
- * @property float                                                                $efficiency
- * @property array                                                                $description
- * @property int                                                                  $research_experience
- * @property int                                                                  $research_cost
- * @property int                                                                  $research_time
- * @property int                                                                  $sort_order
- * @property \Illuminate\Support\Carbon|null                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                      $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Planet[]   $planets
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Research[] $researches
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Stock[]    $stocks
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\User[]     $users
+ * @property int                                                             $id
+ * @property array                                                           $name
+ * @property bool                                                            $is_unlocked
+ * @property float                                                           $frequency
+ * @property float                                                           $efficiency
+ * @property array                                                           $description
+ * @property int                                                             $research_experience
+ * @property int                                                             $research_cost
+ * @property int                                                             $research_time
+ * @property int                                                             $sort_order
+ * @property \Illuminate\Support\Carbon|null                                 $created_at
+ * @property \Illuminate\Support\Carbon|null                                 $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Planet[]   $planets
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Research[] $researches
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Stock[]    $stocks
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\User[]     $users
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereEfficiency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereFrequency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereIsUnlocked($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereResearchCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereResearchExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereResearchTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Resource whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereEfficiency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereIsUnlocked($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereResearchCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereResearchExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereResearchTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Resource whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Resource extends Model implements ResearchableContract, TranslatableContract

@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\SettingUpdateRequest;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Http\Requests\Api\SettingUpdateRequest;
 
 class SettingController extends Controller
 {

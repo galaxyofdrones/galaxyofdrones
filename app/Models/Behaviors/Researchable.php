@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Behaviors;
+namespace App\Models\Behaviors;
 
-use Koodilab\Models\Relations\MorphManyResearch;
+use App\Models\Relations\MorphManyResearch;
 
 trait Researchable
 {

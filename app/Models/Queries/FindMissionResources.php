@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Resource;
+use App\Models\Resource;
 
 trait FindMissionResources
 {
@@ -11,7 +11,7 @@ trait FindMissionResources
      *
      * @param array $columns
      *
-     * @return \Illuminate\Support\Collection|\Koodilab\Models\Resource[]
+     * @return \Illuminate\Support\Collection|\App\Models\Resource[]
      */
     public function findMissionResources($columns = ['*'])
     {

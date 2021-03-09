@@ -1,13 +1,13 @@
 <?php
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Koodilab\Models\Block::class, function () {
+$factory->define(App\Models\Block::class, function () {
     return [
         'blocked_id' => function () {
-            return factory(Koodilab\Models\User::class)->create()->id;
+            return factory(App\Models\User::class)->create()->id;
         },
         'user_id' => function () {
-            return factory(Koodilab\Models\User::class)->create()->id;
+            return factory(App\Models\User::class)->create()->id;
         },
     ];
 });

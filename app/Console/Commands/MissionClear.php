@@ -1,11 +1,11 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Models\Mission;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Models\Mission;
 
 class MissionClear extends Command
 {

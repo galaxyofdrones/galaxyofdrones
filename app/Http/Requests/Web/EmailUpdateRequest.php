@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Http\Requests\Web;
+namespace App\Http\Requests\Web;
 
-use Koodilab\Http\Requests\Request;
+use App\Http\Requests\Request;
 
 class EmailUpdateRequest extends Request
 {

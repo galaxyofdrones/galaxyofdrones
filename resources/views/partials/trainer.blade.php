@@ -1,4 +1,4 @@
-<trainer :type="{{ Koodilab\Models\Building::TYPE_TRAINER }}"
+<trainer :type="{{ App\Models\Building::TYPE_TRAINER }}"
           :building="building"
           :grid="grid"
           url="{{ route('api_trainer', '__grid__') }}"

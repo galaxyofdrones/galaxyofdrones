@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Jobs;
+namespace App\Jobs;
 
+use App\Game\MovementManager;
+use App\Models\Movement as MovementModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Game\MovementManager;
-use Koodilab\Models\Movement as MovementModel;
 
 class Move implements ShouldQueue
 {

@@ -27,7 +27,7 @@
                                 {{ __('messages.required_quantity') }}
                             </h6>
                             <h5>
-                                {{ Koodilab\Models\Planet::SETTLER_COUNT }} / @{{ unitQuantity(settlerUnit) }}
+                                {{ App\Models\Planet::SETTLER_COUNT }} / @{{ unitQuantity(settlerUnit) }}
                             </h5>
                         </div>
                     </div>

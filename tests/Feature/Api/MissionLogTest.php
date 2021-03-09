@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\MissionLog;
+use App\Models\Resource;
+use App\Models\User;
+use App\Notifications\MissionLogCreated;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\MissionLog;
-use Koodilab\Models\Resource;
-use Koodilab\Models\User;
-use Koodilab\Notifications\MissionLogCreated;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

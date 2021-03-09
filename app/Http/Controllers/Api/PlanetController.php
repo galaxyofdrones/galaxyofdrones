@@ -1,18 +1,18 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Events\PlanetUpdated;
+use App\Http\Controllers\Controller;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\User;
+use App\Transformers\PlanetAllTransformer;
+use App\Transformers\PlanetShowTransformer;
+use App\Transformers\PlanetTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Events\PlanetUpdated;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
-use Koodilab\Transformers\PlanetAllTransformer;
-use Koodilab\Transformers\PlanetShowTransformer;
-use Koodilab\Transformers\PlanetTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PlanetController extends Controller

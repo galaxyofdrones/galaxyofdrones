@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
+use App\Models\BattleLog;
 use Illuminate\Database\Eloquent\Builder;
-use Koodilab\Models\BattleLog;
 
 trait LosingBattleLogCount
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Jobs;
+namespace App\Jobs;
 
+use App\Game\ResearchManager;
+use App\Models\Research as ResearchModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Game\ResearchManager;
-use Koodilab\Models\Research as ResearchModel;
 
 class Research implements ShouldQueue
 {

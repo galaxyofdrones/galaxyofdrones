@@ -1,72 +1,72 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
+use App\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NestedSet;
-use Koodilab\Contracts\Models\Behaviors\Translatable as TranslatableContract;
 
 /**
  * Building.
  *
- * @property int                                                                      $id
- * @property int                                                                      $_lft
- * @property int                                                                      $_rgt
- * @property int|null                                                                 $parent_id
- * @property array                                                                    $name
- * @property int                                                                      $type
- * @property int                                                                      $end_level
- * @property int                                                                      $construction_experience
- * @property int                                                                      $construction_cost
- * @property int                                                                      $construction_time
- * @property array                                                                    $description
- * @property int|null                                                                 $limit
- * @property int                                                                      $defense
- * @property int                                                                      $detection
- * @property int                                                                      $capacity
- * @property int                                                                      $supply
- * @property int                                                                      $mining_rate
- * @property int                                                                      $production_rate
- * @property float                                                                    $defense_bonus
- * @property float                                                                    $construction_time_bonus
- * @property float                                                                    $trade_time_bonus
- * @property float                                                                    $train_time_bonus
- * @property \Illuminate\Support\Carbon|null                                          $created_at
- * @property \Illuminate\Support\Carbon|null                                          $updated_at
- * @property \Kalnoy\Nestedset\Collection|\Koodilab\Models\Building[]                 $children
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Construction[] $constructions
- * @property int                                                                      $level
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Grid[]         $grids
- * @property \Koodilab\Models\Building|null                                           $parent
+ * @property int                                                                 $id
+ * @property int                                                                 $_lft
+ * @property int                                                                 $_rgt
+ * @property int|null                                                            $parent_id
+ * @property array                                                               $name
+ * @property int                                                                 $type
+ * @property int                                                                 $end_level
+ * @property int                                                                 $construction_experience
+ * @property int                                                                 $construction_cost
+ * @property int                                                                 $construction_time
+ * @property array                                                               $description
+ * @property int|null                                                            $limit
+ * @property int                                                                 $defense
+ * @property int                                                                 $detection
+ * @property int                                                                 $capacity
+ * @property int                                                                 $supply
+ * @property int                                                                 $mining_rate
+ * @property int                                                                 $production_rate
+ * @property float                                                               $defense_bonus
+ * @property float                                                               $construction_time_bonus
+ * @property float                                                               $trade_time_bonus
+ * @property float                                                               $train_time_bonus
+ * @property \Illuminate\Support\Carbon|null                                     $created_at
+ * @property \Illuminate\Support\Carbon|null                                     $updated_at
+ * @property \Kalnoy\Nestedset\Collection|\App\Models\Building[]                 $children
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Construction[] $constructions
+ * @property int                                                                 $level
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Grid[]         $grids
+ * @property \App\Models\Building|null                                           $parent
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building d()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereCapacity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereConstructionCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereConstructionExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereConstructionTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereConstructionTimeBonus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereDefense($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereDefenseBonus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereDetection($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereEndLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereLft($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereLimit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereMiningRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereProductionRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereRgt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereSupply($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereTradeTimeBonus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereTrainTimeBonus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Building whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building d()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereCapacity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereConstructionCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereConstructionExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereConstructionTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereConstructionTimeBonus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereDefense($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereDefenseBonus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereDetection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereEndLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereLft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereMiningRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereProductionRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereRgt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereTradeTimeBonus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereTrainTimeBonus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Building whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Building extends Model implements TranslatableContract

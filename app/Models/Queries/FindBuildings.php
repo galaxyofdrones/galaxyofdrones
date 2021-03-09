@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Grid;
+use App\Models\Grid;
 
 trait FindBuildings
 {
     /**
      * Find the buildings.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Building[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Building[]
      */
     public function findBuildings()
     {

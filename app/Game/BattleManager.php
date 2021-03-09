@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
-use Koodilab\Models\BattleLog;
-use Koodilab\Models\Movement;
-use Koodilab\Notifications\BattleLogCreated;
+use App\Models\BattleLog;
+use App\Models\Movement;
+use App\Notifications\BattleLogCreated;
 
 class BattleManager
 {

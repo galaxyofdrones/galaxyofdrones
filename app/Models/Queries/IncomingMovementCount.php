@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Movement;
+use App\Models\Movement;
 
 trait IncomingMovementCount
 {

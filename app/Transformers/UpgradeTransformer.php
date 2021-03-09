@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 class UpgradeTransformer extends Transformer
 {
@@ -22,7 +22,7 @@ class UpgradeTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Grid $item
+     * @param \App\Models\Grid $item
      */
     public function transform($item)
     {

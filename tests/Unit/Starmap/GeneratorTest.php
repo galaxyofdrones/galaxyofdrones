@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Starmap;
 
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Star;
+use App\Starmap\Generator;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Star;
-use Koodilab\Starmap\Generator;
 use Tests\TestCase;
 
 class GeneratorTest extends TestCase

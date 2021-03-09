@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\User;
+use App\Models\User;
 
 trait FindResearchByUser
 {
@@ -11,11 +11,11 @@ trait FindResearchByUser
      *
      * @param array $columns
      *
-     * @return \Koodilab\Models\Research
+     * @return \App\Models\Research
      */
     public function findResearchByUser(User $user, $columns = ['*'])
     {
-        /** @var \Koodilab\Models\Research $research */
+        /** @var \App\Models\Research $research */
         $research = $this->researches()
             ->where('user_id', $user->id)
             ->first($columns);

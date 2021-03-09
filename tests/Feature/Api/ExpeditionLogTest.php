@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\ExpeditionLog;
+use App\Models\Star;
+use App\Models\Unit;
+use App\Models\User;
+use App\Notifications\ExpeditionLogCreated;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\ExpeditionLog;
-use Koodilab\Models\Star;
-use Koodilab\Models\Unit;
-use Koodilab\Models\User;
-use Koodilab\Notifications\ExpeditionLogCreated;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

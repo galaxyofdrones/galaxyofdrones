@@ -1,14 +1,14 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\ExpeditionManager;
+use App\Http\Controllers\Controller;
+use App\Models\Expedition;
+use App\Models\Unit;
+use App\Transformers\ExpeditionTransformer;
+use App\Transformers\UnitExpeditionTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\ExpeditionManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Expedition;
-use Koodilab\Models\Unit;
-use Koodilab\Transformers\ExpeditionTransformer;
-use Koodilab\Transformers\UnitExpeditionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ExpeditionController extends Controller

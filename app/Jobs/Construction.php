@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Jobs;
+namespace App\Jobs;
 
+use App\Game\ConstructionManager;
+use App\Models\Construction as ConstructionModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Game\ConstructionManager;
-use Koodilab\Models\Construction as ConstructionModel;
 
 class Construction implements ShouldQueue
 {

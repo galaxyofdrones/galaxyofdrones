@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Stock;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Stock;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

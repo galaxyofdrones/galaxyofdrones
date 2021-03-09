@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Game\ResearchManager;
+use App\Models\Research;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Game\ResearchManager;
-use Koodilab\Models\Research;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ResearchFinish extends Command

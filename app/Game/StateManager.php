@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Models\Building;
+use App\Models\Planet;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Koodilab\Models\Building;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
 
 class StateManager
 {
@@ -15,7 +15,7 @@ class StateManager
      */
     public function syncPlanet(Planet $planet)
     {
-        /** @var \Koodilab\Models\Stock $stock */
+        /** @var \App\Models\Stock $stock */
         $stock = $planet->stocks()->firstOrNew([
             'resource_id' => $planet->resource_id,
         ]);

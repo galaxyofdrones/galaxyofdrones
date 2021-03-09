@@ -1,46 +1,46 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Battle log.
  *
- * @property int                                                                  $id
- * @property int                                                                  $start_id
- * @property int                                                                  $end_id
- * @property int                                                                  $attacker_id
- * @property int|null                                                             $defender_id
- * @property string                                                               $start_name
- * @property string                                                               $end_name
- * @property int                                                                  $type
- * @property int                                                                  $winner
- * @property \Illuminate\Support\Carbon|null                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                      $updated_at
- * @property \Koodilab\Models\User                                                $attacker
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Unit[]     $attackerUnits
- * @property \Kalnoy\Nestedset\Collection|\Koodilab\Models\Building[]             $buildings
- * @property \Koodilab\Models\User|null                                           $defender
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Unit[]     $defenderUnits
- * @property \Koodilab\Models\Planet                                              $end
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources
- * @property \Koodilab\Models\Planet                                              $start
+ * @property int                                                             $id
+ * @property int                                                             $start_id
+ * @property int                                                             $end_id
+ * @property int                                                             $attacker_id
+ * @property int|null                                                        $defender_id
+ * @property string                                                          $start_name
+ * @property string                                                          $end_name
+ * @property int                                                             $type
+ * @property int                                                             $winner
+ * @property \Illuminate\Support\Carbon|null                                 $created_at
+ * @property \Illuminate\Support\Carbon|null                                 $updated_at
+ * @property \App\Models\User                                                $attacker
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Unit[]     $attackerUnits
+ * @property \Kalnoy\Nestedset\Collection|\App\Models\Building[]             $buildings
+ * @property \App\Models\User|null                                           $defender
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Unit[]     $defenderUnits
+ * @property \App\Models\Planet                                              $end
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[] $resources
+ * @property \App\Models\Planet                                              $start
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereAttackerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereDefenderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereEndId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereEndName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereStartId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereStartName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\BattleLog whereWinner($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereAttackerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereDefenderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereEndId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereEndName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereStartId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereStartName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BattleLog whereWinner($value)
  * @mixin \Eloquent
  */
 class BattleLog extends Model

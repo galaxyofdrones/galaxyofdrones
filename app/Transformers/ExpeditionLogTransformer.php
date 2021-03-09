@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\ExpeditionLog;
-use Koodilab\Models\Unit;
+use App\Models\ExpeditionLog;
+use App\Models\Unit;
 
 class ExpeditionLogTransformer extends Transformer
 {

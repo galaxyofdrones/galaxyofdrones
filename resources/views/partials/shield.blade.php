@@ -10,14 +10,14 @@
                     <ul class="list-inline">
                         <li class="list-inline-item">
                             @php
-                                $expiration = Koodilab\Models\Shield::expiration();
+                                $expiration = App\Models\Shield::expiration();
                             @endphp
                             {{ trans_choice('messages.shield.time', $expiration, ['value' => $expiration]) }}
                         </li>
                         <li class="list-inline-item highlight-warning"
                             v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.solarion.name') }}'}">
                             <i class="far fa-sun"></i>
-                            {{ Koodilab\Models\Shield::SOLARION_COUNT }}
+                            {{ App\Models\Shield::SOLARION_COUNT }}
                         </li>
                     </ul>
                     <div class="input-group">

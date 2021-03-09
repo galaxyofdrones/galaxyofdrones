@@ -1,11 +1,11 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Web;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\EmailUpdateRequest;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Http\Requests\Web\EmailUpdateRequest;
 
 class VerificationController extends Controller
 {

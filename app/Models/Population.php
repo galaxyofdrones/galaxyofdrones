@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,18 +13,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                             $quantity
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Koodilab\Models\Planet         $planet
- * @property \Koodilab\Models\Unit           $unit
+ * @property \App\Models\Planet              $planet
+ * @property \App\Models\Unit                $unit
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population wherePlanetId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population whereQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population whereUnitId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Population whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population wherePlanetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population whereUnitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Population whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Population extends Model

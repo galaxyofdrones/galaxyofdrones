@@ -1,4 +1,4 @@
-<trader :type="{{ Koodilab\Models\Building::TYPE_TRADER }}"
+<trader :type="{{ App\Models\Building::TYPE_TRADER }}"
         :building="building"
         :grid="grid"
         :close="close"

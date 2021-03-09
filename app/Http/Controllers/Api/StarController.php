@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Star;
-use Koodilab\Transformers\StarShowTransformer;
+use App\Http\Controllers\Controller;
+use App\Models\Star;
+use App\Transformers\StarShowTransformer;
 
 class StarController extends Controller
 {

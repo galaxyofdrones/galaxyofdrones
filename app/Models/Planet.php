@@ -1,70 +1,70 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
+use App\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Contracts\Models\Behaviors\Positionable as PositionableContract;
 
 /**
  * Planet.
  *
- * @property int                                                                      $id
- * @property int                                                                      $resource_id
- * @property int|null                                                                 $user_id
- * @property string                                                                   $name
- * @property string|null                                                              $custom_name
- * @property int                                                                      $x
- * @property int                                                                      $y
- * @property int                                                                      $size
- * @property int|null                                                                 $capacity
- * @property int|null                                                                 $supply
- * @property int|null                                                                 $mining_rate
- * @property int|null                                                                 $production_rate
- * @property float|null                                                               $defense_bonus
- * @property float|null                                                               $construction_time_bonus
- * @property \Illuminate\Support\Carbon|null                                          $created_at
- * @property \Illuminate\Support\Carbon|null                                          $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Construction[] $constructions
- * @property string                                                                   $display_name
- * @property int                                                                      $free_capacity
- * @property int                                                                      $free_supply
- * @property int                                                                      $resource_count
- * @property int                                                                      $used_capacity
- * @property int                                                                      $used_supply
- * @property int                                                                      $used_training_supply
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Grid[]         $grids
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Movement[]     $incomingMovements
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Movement[]     $outgoingMovements
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Population[]   $populations
- * @property \Koodilab\Models\Resource                                                $resource
- * @property \Koodilab\Models\Shield                                                  $shield
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Stock[]        $stocks
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Training[]     $trainings
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Upgrade[]      $upgrades
- * @property \Koodilab\Models\User|null                                               $user
+ * @property int                                                                 $id
+ * @property int                                                                 $resource_id
+ * @property int|null                                                            $user_id
+ * @property string                                                              $name
+ * @property string|null                                                         $custom_name
+ * @property int                                                                 $x
+ * @property int                                                                 $y
+ * @property int                                                                 $size
+ * @property int|null                                                            $capacity
+ * @property int|null                                                            $supply
+ * @property int|null                                                            $mining_rate
+ * @property int|null                                                            $production_rate
+ * @property float|null                                                          $defense_bonus
+ * @property float|null                                                          $construction_time_bonus
+ * @property \Illuminate\Support\Carbon|null                                     $created_at
+ * @property \Illuminate\Support\Carbon|null                                     $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Construction[] $constructions
+ * @property string                                                              $display_name
+ * @property int                                                                 $free_capacity
+ * @property int                                                                 $free_supply
+ * @property int                                                                 $resource_count
+ * @property int                                                                 $used_capacity
+ * @property int                                                                 $used_supply
+ * @property int                                                                 $used_training_supply
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Grid[]         $grids
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Movement[]     $incomingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Movement[]     $outgoingMovements
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Population[]   $populations
+ * @property \App\Models\Resource                                                $resource
+ * @property \App\Models\Shield                                                  $shield
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Stock[]        $stocks
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Training[]     $trainings
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Upgrade[]      $upgrades
+ * @property \App\Models\User|null                                               $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet inBounds(\Koodilab\Support\Bounds $bounds)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet starter()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereCapacity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereConstructionTimeBonus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereCustomName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereDefenseBonus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereMiningRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereProductionRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereResourceId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereSupply($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereX($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Planet whereY($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet inBounds(\App\Support\Bounds $bounds)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet starter()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereCapacity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereConstructionTimeBonus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereCustomName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereDefenseBonus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereMiningRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereProductionRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereResourceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereSupply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereX($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Planet whereY($value)
  * @mixin \Eloquent
  */
 class Planet extends Model implements PositionableContract

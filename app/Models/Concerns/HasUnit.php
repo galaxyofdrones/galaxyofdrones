@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
+use App\Models\Building;
+use App\Models\Unit;
 use Illuminate\Database\Eloquent\Collection;
-use Koodilab\Models\Building;
-use Koodilab\Models\Unit;
 
 trait HasUnit
 {

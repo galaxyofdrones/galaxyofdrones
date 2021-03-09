@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Contracts\Models\Behaviors;
+namespace App\Contracts\Models\Behaviors;
 
+use App\Support\Bounds;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Koodilab\Support\Bounds;
 
 interface Positionable
 {

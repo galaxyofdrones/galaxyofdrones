@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UserUpdateRequest;
+use App\Models\Planet;
+use App\Models\User;
+use App\Transformers\UserCapitalTransformer;
+use App\Transformers\UserShowTransformer;
+use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Http\Requests\Api\UserUpdateRequest;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
-use Koodilab\Transformers\UserCapitalTransformer;
-use Koodilab\Transformers\UserShowTransformer;
-use Koodilab\Transformers\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UserController extends Controller

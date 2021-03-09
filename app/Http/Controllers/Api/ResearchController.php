@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\ResearchManager;
+use App\Http\Controllers\Controller;
+use App\Models\Unit;
+use App\Transformers\ResourceAvailableTransformer;
+use App\Transformers\UnitAvailableTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\ResearchManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Unit;
-use Koodilab\Transformers\ResourceAvailableTransformer;
-use Koodilab\Transformers\UnitAvailableTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ResearchController extends Controller
@@ -29,7 +29,7 @@ class ResearchController extends Controller
      */
     public function index(ResourceAvailableTransformer $resourceTransformer, UnitAvailableTransformer $unitTransformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $resource = $user->findAvailableResource();
@@ -53,7 +53,7 @@ class ResearchController extends Controller
      */
     public function storeResource(ResearchManager $manager)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $resource = $user->findAvailableResource();
@@ -84,7 +84,7 @@ class ResearchController extends Controller
      */
     public function storeUnit(Unit $unit, ResearchManager $manager)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $units = $user->findAvailableUnits();
@@ -115,7 +115,7 @@ class ResearchController extends Controller
      */
     public function destroyResource(ResearchManager $manager)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $resource = $user->findAvailableResource();

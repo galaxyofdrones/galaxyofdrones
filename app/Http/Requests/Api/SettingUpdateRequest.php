@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Http\Requests\Api;
+namespace App\Http\Requests\Api;
 
-use Koodilab\Http\Requests\Request;
-use Koodilab\Models\Setting;
+use App\Http\Requests\Request;
+use App\Models\Setting;
 
 class SettingUpdateRequest extends Request
 {

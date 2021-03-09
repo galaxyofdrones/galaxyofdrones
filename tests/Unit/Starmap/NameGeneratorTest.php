@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Starmap;
 
-use Koodilab\Starmap\NameGenerator;
+use App\Starmap\NameGenerator;
 use Tests\TestCase;
 
 class NameGeneratorTest extends TestCase

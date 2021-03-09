@@ -2,16 +2,16 @@
 
 namespace Tests\Feature\Api;
 
+use App\Jobs\Upgrade as UpgradeJob;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\Training;
+use App\Models\Upgrade;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Bus;
-use Koodilab\Jobs\Upgrade as UpgradeJob;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Training;
-use Koodilab\Models\Upgrade;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

@@ -1,29 +1,29 @@
 <?php
 
-namespace Koodilab\Providers;
+namespace App\Providers;
 
+use App\Battle\Simulator;
+use App\Contracts\Battle\Simulator as SimulatorContract;
+use App\Contracts\Starmap\Generator as GeneratorContract;
+use App\Contracts\Starmap\NameGenerator as NameGeneratorContract;
+use App\Contracts\Starmap\Renderer as RendererContract;
+use App\Game\BattleManager;
+use App\Game\ConstructionManager;
+use App\Game\ExpeditionManager;
+use App\Game\MissionManager;
+use App\Game\MovementManager;
+use App\Game\ResearchManager;
+use App\Game\ShieldManager;
+use App\Game\StateManager;
+use App\Game\StorageManager;
+use App\Game\TrainingManager;
+use App\Game\UpgradeManager;
+use App\Starmap\Generator;
+use App\Starmap\NameGenerator;
+use App\Starmap\Renderer;
+use App\Support\FlashManager;
+use App\Support\SettingManager;
 use Illuminate\Support\ServiceProvider;
-use Koodilab\Battle\Simulator;
-use Koodilab\Contracts\Battle\Simulator as SimulatorContract;
-use Koodilab\Contracts\Starmap\Generator as GeneratorContract;
-use Koodilab\Contracts\Starmap\NameGenerator as NameGeneratorContract;
-use Koodilab\Contracts\Starmap\Renderer as RendererContract;
-use Koodilab\Game\BattleManager;
-use Koodilab\Game\ConstructionManager;
-use Koodilab\Game\ExpeditionManager;
-use Koodilab\Game\MissionManager;
-use Koodilab\Game\MovementManager;
-use Koodilab\Game\ResearchManager;
-use Koodilab\Game\ShieldManager;
-use Koodilab\Game\StateManager;
-use Koodilab\Game\StorageManager;
-use Koodilab\Game\TrainingManager;
-use Koodilab\Game\UpgradeManager;
-use Koodilab\Starmap\Generator;
-use Koodilab\Starmap\NameGenerator;
-use Koodilab\Starmap\Renderer;
-use Koodilab\Support\FlashManager;
-use Koodilab\Support\SettingManager;
 
 class AppServiceProvider extends ServiceProvider
 {
