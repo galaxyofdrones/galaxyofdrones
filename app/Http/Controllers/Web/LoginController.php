@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Web;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Koodilab\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {

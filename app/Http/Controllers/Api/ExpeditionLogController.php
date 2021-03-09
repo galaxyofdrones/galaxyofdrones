@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Notifications\ExpeditionLogCreated;
-use Koodilab\Transformers\ExpeditionLogTransformer;
+use App\Http\Controllers\Controller;
+use App\Notifications\ExpeditionLogCreated;
+use App\Transformers\ExpeditionLogTransformer;
 
 class ExpeditionLogController extends Controller
 {
@@ -25,7 +25,7 @@ class ExpeditionLogController extends Controller
      */
     public function index(ExpeditionLogTransformer $transformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $user->deleteNotificationsByType(ExpeditionLogCreated::class);

@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Jobs\Research as ResearchJob;
+use App\Models\Research;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Jobs\Research as ResearchJob;
-use Koodilab\Models\Research;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ResearchRequeue extends Command

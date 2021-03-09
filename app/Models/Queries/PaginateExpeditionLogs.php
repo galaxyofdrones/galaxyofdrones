@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait PaginateExpeditionLogs
 {
@@ -9,7 +9,7 @@ trait PaginateExpeditionLogs
      *
      * @param int $perPage
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Koodilab\Models\ExpeditionLog[]
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\App\Models\ExpeditionLog[]
      */
     public function paginateExpeditionLogs($perPage = 5)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait FindResearchedResources
 {
@@ -9,7 +9,7 @@ trait FindResearchedResources
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[]
      */
     public function findResearchedResources($columns = ['*'])
     {

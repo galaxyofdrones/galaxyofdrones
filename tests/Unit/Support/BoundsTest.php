@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Support;
 
-use Koodilab\Support\Bounds;
+use App\Support\Bounds;
 use Tests\TestCase;
 
 class BoundsTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Relations;
+namespace App\Models\Relations;
 
-use Koodilab\Models\Grid;
+use App\Models\Grid;
 
 trait HasManyGrid
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\UpgradeManager;
+use App\Http\Controllers\Controller;
+use App\Models\Grid;
+use App\Models\Upgrade;
+use App\Transformers\UpgradeTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\UpgradeManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Upgrade;
-use Koodilab\Transformers\UpgradeTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpgradeController extends Controller
@@ -43,7 +43,7 @@ class UpgradeController extends Controller
      */
     public function indexAll()
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         return [
@@ -96,7 +96,7 @@ class UpgradeController extends Controller
      */
     public function storeAll(UpgradeManager $manager)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $upgradeCost = $user->current->upgradeCost();

@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Expedition;
+use App\Models\Star;
+use App\Models\Unit;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Expedition;
-use Koodilab\Models\Star;
-use Koodilab\Models\Unit;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

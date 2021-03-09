@@ -1,11 +1,11 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\Planet;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Translation\Translator;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
 
 class UserShowTransformer extends Transformer
 {
@@ -35,11 +35,11 @@ class UserShowTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\User $item
+     * @param \App\Models\User $item
      */
     public function transform($item)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         return [

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Notifications;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

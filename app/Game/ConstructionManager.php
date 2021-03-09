@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Jobs\Construction as ConstructionJob;
+use App\Models\Building;
+use App\Models\Construction;
+use App\Models\Grid;
 use Carbon\Carbon;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
-use Koodilab\Jobs\Construction as ConstructionJob;
-use Koodilab\Models\Building;
-use Koodilab\Models\Construction;
-use Koodilab\Models\Grid;
 
 class ConstructionManager
 {

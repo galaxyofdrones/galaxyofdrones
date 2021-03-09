@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Star;
-use Koodilab\Models\User;
+use App\Models\Star;
+use App\Models\User;
 
 trait FindByStarAndUser
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Unit;
 
 class StorageManager
 {

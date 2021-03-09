@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Transformers\MovementTransformer;
+use App\Http\Controllers\Controller;
+use App\Transformers\MovementTransformer;
 
 class MonitorController extends Controller
 {
@@ -24,7 +24,7 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         return [
@@ -39,7 +39,7 @@ class MonitorController extends Controller
      */
     public function show(MovementTransformer $transformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         return [

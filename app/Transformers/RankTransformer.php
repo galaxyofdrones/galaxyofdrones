@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 class RankTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Rank $item
+     * @param \App\Models\Rank $item
      */
     public function transform($item)
     {

@@ -1,38 +1,38 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Movement.
  *
- * @property int                                                                  $id
- * @property int                                                                  $start_id
- * @property int                                                                  $end_id
- * @property int                                                                  $user_id
- * @property int                                                                  $type
- * @property \Illuminate\Support\Carbon                                           $ended_at
- * @property \Illuminate\Support\Carbon|null                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                      $updated_at
- * @property \Koodilab\Models\Planet                                              $end
- * @property int                                                                  $remaining
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources
- * @property \Koodilab\Models\Planet                                              $start
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Unit[]     $units
- * @property \Koodilab\Models\User                                                $user
+ * @property int                                                             $id
+ * @property int                                                             $start_id
+ * @property int                                                             $end_id
+ * @property int                                                             $user_id
+ * @property int                                                             $type
+ * @property \Illuminate\Support\Carbon                                      $ended_at
+ * @property \Illuminate\Support\Carbon|null                                 $created_at
+ * @property \Illuminate\Support\Carbon|null                                 $updated_at
+ * @property \App\Models\Planet                                              $end
+ * @property int                                                             $remaining
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[] $resources
+ * @property \App\Models\Planet                                              $start
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Unit[]     $units
+ * @property \App\Models\User                                                $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereEndId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereStartId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Movement whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereEndId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereStartId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movement whereUserId($value)
  * @mixin \Eloquent
  */
 class Movement extends Model

@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
-use Koodilab\Models\Population;
-use Koodilab\Models\Training;
+use App\Models\Population;
+use App\Models\Training;
 
 trait HasSupply
 {

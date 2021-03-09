@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Movement;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
+use App\Models\Movement;
+use App\Models\Resource;
+use App\Models\Unit;
 
 class MovementScoutTransformer extends MovementTransformer
 {

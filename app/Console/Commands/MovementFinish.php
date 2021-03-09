@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Game\MovementManager;
+use App\Models\Movement;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Game\MovementManager;
-use Koodilab\Models\Movement;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MovementFinish extends Command

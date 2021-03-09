@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Planet;
 
 trait CanOccupy
 {

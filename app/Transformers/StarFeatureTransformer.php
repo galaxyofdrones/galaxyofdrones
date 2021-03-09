@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 class StarFeatureTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Star $item
+     * @param \App\Models\Star $item
      */
     public function transform($item)
     {

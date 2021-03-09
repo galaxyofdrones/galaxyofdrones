@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\Bookmark;
+use App\Models\Expedition;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use Koodilab\Models\Bookmark;
-use Koodilab\Models\Expedition;
 
 class StarShowTransformer extends Transformer
 {
@@ -26,11 +26,11 @@ class StarShowTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Star $item
+     * @param \App\Models\Star $item
      */
     public function transform($item)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $expedition = Expedition::findByStarAndUser($item, $user);

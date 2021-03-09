@@ -1,4 +1,4 @@
-<upgrade :central-type="{{ Koodilab\Models\Building::TYPE_CENTRAL }}"
+<upgrade :central-type="{{ App\Models\Building::TYPE_CENTRAL }}"
          url="{{ route('api_upgrade', '__grid__') }}"
          store-url="{{ route('api_upgrade_store', '__grid__') }}"
          destroy-url="{{ route('api_upgrade_destroy', '__grid__') }}" inline-template>

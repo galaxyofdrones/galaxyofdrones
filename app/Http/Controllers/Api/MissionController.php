@@ -1,14 +1,14 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\MissionManager;
+use App\Http\Controllers\Controller;
+use App\Models\Mission;
+use App\Models\Resource;
+use App\Transformers\MissionTransformer;
+use App\Transformers\ResourceMissionTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\MissionManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Mission;
-use Koodilab\Models\Resource;
-use Koodilab\Transformers\MissionTransformer;
-use Koodilab\Transformers\ResourceMissionTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class MissionController extends Controller

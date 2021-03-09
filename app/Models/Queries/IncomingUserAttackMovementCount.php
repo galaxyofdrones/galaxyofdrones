@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
+use App\Models\Movement;
 use Illuminate\Database\Eloquent\Builder;
-use Koodilab\Models\Movement;
 
 trait IncomingUserAttackMovementCount
 {

@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-success btn-block"
                                                 type="button"
-                                                @click="openMove({{ Koodilab\Models\Movement::TYPE_SUPPORT }})">
+                                                @click="openMove({{ App\Models\Movement::TYPE_SUPPORT }})">
                                             {{ __('messages.movement.support') }}
                                         </button>
                                     </div>
@@ -95,7 +95,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-success btn-block"
                                                 type="button"
-                                                @click="openMove({{ Koodilab\Models\Movement::TYPE_TRANSPORT }})">
+                                                @click="openMove({{ App\Models\Movement::TYPE_TRANSPORT }})">
                                             {{ __('messages.movement.transport') }}
                                         </button>
                                     </div>
@@ -106,7 +106,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-primary btn-block"
                                                 type="button"
-                                                @click="openMove({{ Koodilab\Models\Movement::TYPE_SCOUT }})"
+                                                @click="openMove({{ App\Models\Movement::TYPE_SCOUT }})"
                                                 :disabled="data.has_shield">
                                             {{ __('messages.movement.scout') }}
                                         </button>
@@ -116,7 +116,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-danger btn-block"
                                                 type="button"
-                                                @click="openMove({{ Koodilab\Models\Movement::TYPE_ATTACK }})"
+                                                @click="openMove({{ App\Models\Movement::TYPE_ATTACK }})"
                                                 :disabled="data.has_shield">
                                             {{ __('messages.movement.attack') }}
                                         </button>
@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-success btn-block"
                                                 type="button"
-                                                @click="openMove({{ Koodilab\Models\Movement::TYPE_OCCUPY }})"
+                                                @click="openMove({{ App\Models\Movement::TYPE_OCCUPY }})"
                                                 :disabled="data.has_shield || !data.can_occupy">
                                             {{ __('messages.movement.occupy') }}
                                         </button>

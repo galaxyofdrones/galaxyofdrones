@@ -1,6 +1,6 @@
 <?php
 
-use Koodilab\Support\Util;
+use App\Support\Util;
 
 if (! function_exists('flash')) {
     /**
@@ -9,7 +9,7 @@ if (! function_exists('flash')) {
      * @param string $message
      * @param string $title
      *
-     * @return \Koodilab\Support\FlashManager|null
+     * @return \App\Support\FlashManager|null
      */
     function flash($message = null, $title = null)
     {
@@ -27,7 +27,7 @@ if (! function_exists('setting')) {
      *
      * @throws InvalidArgumentException
      *
-     * @return \Koodilab\Support\SettingManager|mixed
+     * @return \App\Support\SettingManager|mixed
      */
     function setting($key = null, $locale = null, $fallbackToDefault = true)
     {

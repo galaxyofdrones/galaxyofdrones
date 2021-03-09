@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\MessageStoreRequest;
+use App\Notifications\MessageSended;
+use App\Transformers\MessageTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Http\Requests\Api\MessageStoreRequest;
-use Koodilab\Notifications\MessageSended;
-use Koodilab\Transformers\MessageTransformer;
 
 class MessageController extends Controller
 {
@@ -27,7 +27,7 @@ class MessageController extends Controller
      */
     public function index(MessageTransformer $transformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         $user->deleteNotificationsByType(MessageSended::class);

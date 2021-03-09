@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
-use Koodilab\Models\Stock;
+use App\Models\Stock;
 
 trait HasCapacity
 {

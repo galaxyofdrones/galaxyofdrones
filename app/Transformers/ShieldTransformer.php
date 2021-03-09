@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Shield;
+use App\Models\Shield;
 
 class ShieldTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Shield $item
+     * @param \App\Models\Shield $item
      */
     public function transform($item)
     {

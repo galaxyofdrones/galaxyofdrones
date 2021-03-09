@@ -1,16 +1,16 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\MovementManager;
+use App\Game\StorageManager;
+use App\Http\Controllers\Controller;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\MovementManager;
-use Koodilab\Game\StorageManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class MovementController extends Controller
@@ -91,7 +91,7 @@ class MovementController extends Controller
     {
         $this->authorize('hostile', $planet);
 
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         if (! $user->canOccupy($planet)) {

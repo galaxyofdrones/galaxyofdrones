@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Support;
+namespace App\Support;
 
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Session\SessionManager;

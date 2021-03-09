@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
-use Koodilab\Models\User;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Unit;
+use App\Models\User;
 
 class PlanetTransformer extends Transformer
 {

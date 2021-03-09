@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Starmap;
+namespace App\Starmap;
 
-use Koodilab\Contracts\Starmap\NameGenerator as NameGeneratorContract;
+use App\Contracts\Starmap\NameGenerator as NameGeneratorContract;
 
 class NameGenerator implements NameGeneratorContract
 {

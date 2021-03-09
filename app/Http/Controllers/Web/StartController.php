@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Web;
+namespace App\Http\Controllers\Web;
 
+use App\Game\ShieldManager;
+use App\Http\Controllers\Controller;
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Shield;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\ShieldManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Shield;
-use Koodilab\Models\Unit;
 
 class StartController extends Controller
 {
@@ -46,7 +46,7 @@ class StartController extends Controller
     {
         $capital = Planet::findFreeCapital();
 
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         if (! $capital || ! $user->canOccupy($capital)) {

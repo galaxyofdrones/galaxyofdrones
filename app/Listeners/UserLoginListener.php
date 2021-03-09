@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Listeners;
+namespace App\Listeners;
 
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;

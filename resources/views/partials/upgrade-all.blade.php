@@ -26,7 +26,7 @@
                         <li class="list-inline-item highlight-warning"
                             v-popover="{placement: 'top', trigger: 'hover', content: '{{ __('messages.solarion.name') }}'}">
                             <i class="far fa-sun"></i>
-                            {{ Koodilab\Models\Upgrade::SOLARION_COUNT }}
+                            {{ App\Models\Upgrade::SOLARION_COUNT }}
                         </li>
                     </ul>
                 </div>

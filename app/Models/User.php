@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
+use App\Events\UserUpdated;
+use App\Support\Util;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Koodilab\Events\UserUpdated;
-use Koodilab\Support\Util;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -34,58 +34,58 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Support\Carbon|null                                                                           $donated_at
  * @property \Illuminate\Support\Carbon|null                                                                           $created_at
  * @property \Illuminate\Support\Carbon|null                                                                           $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\BattleLog[]                                     $attackBattleLogs
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Block[]                                         $blocks
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Bookmark[]                                      $bookmarks
- * @property \Koodilab\Models\Planet|null                                                                              $capital
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\BattleLog[]                                          $attackBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Block[]                                              $blocks
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Bookmark[]                                           $bookmarks
+ * @property \App\Models\Planet|null                                                                                   $capital
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
- * @property \Koodilab\Models\Planet|null                                                                              $current
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\BattleLog[]                                     $defenseBattleLogs
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\ExpeditionLog[]                                 $expeditionLogs
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Expedition[]                                    $expeditions
+ * @property \App\Models\Planet|null                                                                                   $current
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\BattleLog[]                                          $defenseBattleLogs
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\ExpeditionLog[]                                      $expeditionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Expedition[]                                         $expeditions
  * @property int                                                                                                       $capital_change_remaining
  * @property int                                                                                                       $level
  * @property int                                                                                                       $level_experience
  * @property int                                                                                                       $next_level
  * @property int                                                                                                       $next_level_experience
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Message[]                                       $messages
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\MissionLog[]                                    $missionLogs
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Mission[]                                       $missions
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Movement[]                                      $movements
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Message[]                                            $messages
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\MissionLog[]                                         $missionLogs
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Mission[]                                            $missions
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Movement[]                                           $movements
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Planet[]                                        $planets
- * @property \Koodilab\Models\Rank                                                                                     $rank
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Research[]                                      $researches
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[]                                      $resources
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Shield[]                                        $shields
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Planet[]                                             $planets
+ * @property \App\Models\Rank                                                                                          $rank
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Research[]                                           $researches
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[]                                           $resources
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Shield[]                                             $shields
  * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Unit[]                                          $units
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Unit[]                                               $units
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCapitalId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereCurrentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereDonatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereEnergy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereIsEnabled($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereIsNotificationEnabled($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereLastCapitalChanged($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereLastEnergyChanged($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereLastLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User wherePenaltyRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereProductionRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereSolarion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereStartedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\User whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCapitalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCurrentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereDonatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsNotificationEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastCapitalChanged($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastEnergyChanged($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePenaltyRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereProductionRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereSolarion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereStartedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail

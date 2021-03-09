@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Rank;
-use Koodilab\Transformers\RankTransformer;
+use App\Http\Controllers\Controller;
+use App\Models\Rank;
+use App\Transformers\RankTransformer;
 
 class RankController extends Controller
 {

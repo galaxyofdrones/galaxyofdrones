@@ -1,11 +1,11 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Models\Block;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Block;
-use Koodilab\Models\User;
 
 class BlockController extends Controller
 {

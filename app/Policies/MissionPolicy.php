@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Policies;
+namespace App\Policies;
 
+use App\Models\Mission;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Koodilab\Models\Mission;
-use Koodilab\Models\User;
 
 class MissionPolicy
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Movement;
+use App\Models\Movement;
 
 class MovementUnitFeatureTransformer extends MovementFeatureTransformer
 {

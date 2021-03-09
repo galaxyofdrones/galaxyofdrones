@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Http\Requests\Api;
+namespace App\Http\Requests\Api;
 
+use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Hash;
-use Koodilab\Http\Requests\Request;
 
 class UserUpdateRequest extends Request
 {

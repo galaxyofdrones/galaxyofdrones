@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\BattleLog;
+use App\Models\Building;
+use App\Models\Resource;
+use App\Models\Unit;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Translation\Translator;
-use Koodilab\Models\BattleLog;
-use Koodilab\Models\Building;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
 
 class BattleLogTransformer extends Transformer
 {
@@ -41,7 +41,7 @@ class BattleLogTransformer extends Transformer
      */
     public function transform($item)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         return [

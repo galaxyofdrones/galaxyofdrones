@@ -2,16 +2,16 @@
 
 namespace Tests\Feature\Api;
 
+use App\Events\UserUpdated;
+use App\Models\Building;
+use App\Models\Construction;
+use App\Models\Grid;
+use App\Models\Planet;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
-use Koodilab\Events\UserUpdated;
-use Koodilab\Models\Building;
-use Koodilab\Models\Construction;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

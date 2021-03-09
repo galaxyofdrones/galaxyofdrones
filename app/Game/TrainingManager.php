@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Events\PlanetUpdated;
+use App\Jobs\Train as TrainJob;
+use App\Models\Grid;
+use App\Models\Training;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
 use Illuminate\Contracts\Events\Dispatcher as Event;
-use Koodilab\Events\PlanetUpdated;
-use Koodilab\Jobs\Train as TrainJob;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Training;
-use Koodilab\Models\Unit;
 
 class TrainingManager
 {
@@ -68,7 +68,7 @@ class TrainingManager
      */
     public function finish(Training $training)
     {
-        /** @var \Koodilab\Models\Population $population */
+        /** @var \App\Models\Population $population */
         $population = $training->grid->planet->populations()->firstOrNew([
             'unit_id' => $training->unit->id,
         ]);

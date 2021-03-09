@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Unit;
+use App\Models\Unit;
 
 trait FindUnitsOrderBySortOrder
 {

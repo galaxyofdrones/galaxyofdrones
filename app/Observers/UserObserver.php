@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Observers;
+namespace App\Observers;
 
+use App\Events\UserUpdated;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Events\Dispatcher as Event;
-use Koodilab\Events\UserUpdated;
-use Koodilab\Models\User;
 
 class UserObserver
 {

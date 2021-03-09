@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Koodilab\Models\Building::class, function (Faker $faker) {
+$factory->define(App\Models\Building::class, function (Faker $faker) {
     return [
         'name' => [
             'en' => $faker->word,
@@ -11,7 +11,7 @@ $factory->define(Koodilab\Models\Building::class, function (Faker $faker) {
         'description' => [
             'en' => $faker->word,
         ],
-        'type' => $faker->numberBetween(0, Koodilab\Models\Building::TYPE_DEFENSIVE),
+        'type' => $faker->numberBetween(0, App\Models\Building::TYPE_DEFENSIVE),
         'end_level' => 10,
         'construction_experience' => $faker->numberBetween(1, 1000),
         'construction_cost' => $faker->numberBetween(1, 1000),

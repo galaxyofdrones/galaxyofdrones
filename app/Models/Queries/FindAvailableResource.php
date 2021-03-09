@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
-use Koodilab\Models\Resource;
+use App\Models\Resource;
 
 trait FindAvailableResource
 {
@@ -11,7 +11,7 @@ trait FindAvailableResource
      *
      * @param array $columns
      *
-     * @return \Koodilab\Models\Resource
+     * @return \App\Models\Resource
      */
     public function findAvailableResource($columns = ['*'])
     {

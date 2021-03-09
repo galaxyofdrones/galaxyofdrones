@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
+use App\Models\Resource;
+use App\Models\Unit;
 
 trait HasResearchable
 {

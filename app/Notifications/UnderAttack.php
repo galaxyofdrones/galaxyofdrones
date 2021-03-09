@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Notifications;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +14,7 @@ class UnderAttack extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param \Koodilab\Models\User $notifiable
+     * @param \App\Models\User $notifiable
      *
      * @return array
      */

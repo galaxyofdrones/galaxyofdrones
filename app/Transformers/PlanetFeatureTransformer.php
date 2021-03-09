@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
+use App\Models\Planet;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use Koodilab\Models\Planet;
 
 class PlanetFeatureTransformer extends Transformer
 {
@@ -58,7 +58,7 @@ class PlanetFeatureTransformer extends Transformer
             return 'free';
         }
 
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         if ($user) {

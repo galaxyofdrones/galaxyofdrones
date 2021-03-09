@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Support;
 
+use App\Models\Setting;
+use App\Support\SettingManager;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Setting;
-use Koodilab\Support\SettingManager;
 use Tests\TestCase;
 
 class SettingManagerTest extends TestCase

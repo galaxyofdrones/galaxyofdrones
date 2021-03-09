@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Bookmark;
+use App\Models\Star;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Bookmark;
-use Koodilab\Models\Star;
-use Koodilab\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

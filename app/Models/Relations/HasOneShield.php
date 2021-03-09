@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Relations;
+namespace App\Models\Relations;
 
-use Koodilab\Models\Shield;
+use App\Models\Shield;
 
 trait HasOneShield
 {

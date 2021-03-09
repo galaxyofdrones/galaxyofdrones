@@ -1,17 +1,17 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Models\Planet;
+use App\Models\Star;
+use App\Support\Bounds;
+use App\Transformers\ExpeditionFeatureTransformer;
+use App\Transformers\MovementFeatureTransformer;
+use App\Transformers\MovementUnitFeatureTransformer;
+use App\Transformers\PlanetFeatureTransformer;
+use App\Transformers\StarFeatureTransformer;
 use Illuminate\Database\Eloquent\Collection;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Star;
-use Koodilab\Support\Bounds;
-use Koodilab\Transformers\ExpeditionFeatureTransformer;
-use Koodilab\Transformers\MovementFeatureTransformer;
-use Koodilab\Transformers\MovementUnitFeatureTransformer;
-use Koodilab\Transformers\PlanetFeatureTransformer;
-use Koodilab\Transformers\StarFeatureTransformer;
 
 class StarmapController extends Controller
 {
@@ -67,7 +67,7 @@ class StarmapController extends Controller
                     ->get())
             );
 
-            /** @var \Koodilab\Models\User $user */
+            /** @var \App\Models\User $user */
             $user = auth()->user();
 
             $incomingMovements = $user->current->findIncomingMovements();

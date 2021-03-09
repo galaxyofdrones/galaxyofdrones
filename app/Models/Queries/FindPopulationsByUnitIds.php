@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
 trait FindPopulationsByUnitIds
 {
@@ -10,7 +10,7 @@ trait FindPopulationsByUnitIds
      * @param array $unitIds
      * @param array $columns
      *
-     * @return \Koodilab\Models\Population[]
+     * @return \App\Models\Population[]
      */
     public function findPopulationsByUnitIds($unitIds, $columns = ['*'])
     {

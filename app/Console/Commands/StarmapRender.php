@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Contracts\Starmap\Renderer;
 use Illuminate\Console\Command;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Contracts\Starmap\Renderer;
 
 class StarmapRender extends Command
 {

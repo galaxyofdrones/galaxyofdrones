@@ -1,4 +1,4 @@
-<scout :type="{{ Koodilab\Models\Building::TYPE_SCOUT }}"
+<scout :type="{{ App\Models\Building::TYPE_SCOUT }}"
           :building="building"
           :grid="grid"
           url="{{ route('api_scout', '__grid__') }}" inline-template>

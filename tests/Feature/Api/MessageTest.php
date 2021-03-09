@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Message;
+use App\Models\User;
+use App\Notifications\MessageSended;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Notification;
-use Koodilab\Models\Message;
-use Koodilab\Models\User;
-use Koodilab\Notifications\MessageSended;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

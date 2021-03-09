@@ -1,11 +1,11 @@
 <?php
 
-namespace Koodilab\Rules;
+namespace App\Rules;
 
+use App\Models\User;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\Validation\Rule;
-use Koodilab\Models\User;
 
 class Recipient implements Rule
 {
@@ -43,7 +43,7 @@ class Recipient implements Rule
             return false;
         }
 
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         if ($user->findByBlocked($recipient)) {

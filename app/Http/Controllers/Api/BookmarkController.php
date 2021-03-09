@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Models\Bookmark;
+use App\Models\Star;
+use App\Transformers\BookmarkTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Bookmark;
-use Koodilab\Models\Star;
-use Koodilab\Transformers\BookmarkTransformer;
 
 class BookmarkController extends Controller
 {
@@ -27,7 +27,7 @@ class BookmarkController extends Controller
      */
     public function index(BookmarkTransformer $transformer)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         return $transformer->transformCollection(

@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Providers;
+namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Koodilab\Models\User;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * {@inheritdoc}
      */
-    protected $namespace = 'Koodilab\Http\Controllers';
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * {@inheritdoc}

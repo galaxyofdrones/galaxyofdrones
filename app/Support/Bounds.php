@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Support;
+namespace App\Support;
 
 class Bounds
 {

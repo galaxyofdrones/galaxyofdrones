@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,18 +13,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string                          $message
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Koodilab\Models\User           $recipient
- * @property \Koodilab\Models\User           $sender
+ * @property \App\Models\User                $recipient
+ * @property \App\Models\User                $sender
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message whereRecipientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message whereSenderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Message whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereRecipientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereSenderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Message extends Model

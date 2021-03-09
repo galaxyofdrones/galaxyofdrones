@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Jobs\Construction as ConstructionJob;
+use App\Models\Construction;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Jobs\Construction as ConstructionJob;
-use Koodilab\Models\Construction;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ConstructionRequeue extends Command

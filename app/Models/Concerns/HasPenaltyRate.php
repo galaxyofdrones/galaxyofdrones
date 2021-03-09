@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Concerns;
+namespace App\Models\Concerns;
 
-use Koodilab\Models\Planet;
-use Koodilab\Support\Bounds;
+use App\Models\Planet;
+use App\Support\Bounds;
 
 trait HasPenaltyRate
 {

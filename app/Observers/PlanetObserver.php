@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Observers;
+namespace App\Observers;
 
+use App\Events\PlanetUpdated;
+use App\Game\StateManager;
+use App\Models\Planet;
+use App\Models\User;
 use Illuminate\Contracts\Events\Dispatcher as Event;
-use Koodilab\Events\PlanetUpdated;
-use Koodilab\Game\StateManager;
-use Koodilab\Models\Planet;
-use Koodilab\Models\User;
 
 class PlanetObserver
 {

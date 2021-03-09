@@ -47,7 +47,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "Koodilab\\": "app/"
+            "App\\": "app/"
         },
         "files": [
             "app/Support/helpers.php"

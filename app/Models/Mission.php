@@ -1,33 +1,33 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Mission.
  *
- * @property int                                                                  $id
- * @property int                                                                  $user_id
- * @property int                                                                  $energy
- * @property int                                                                  $experience
- * @property \Illuminate\Support\Carbon                                           $ended_at
- * @property \Illuminate\Support\Carbon|null                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                      $updated_at
- * @property int                                                                  $remaining
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources
- * @property \Koodilab\Models\User                                                $user
+ * @property int                                                             $id
+ * @property int                                                             $user_id
+ * @property int                                                             $energy
+ * @property int                                                             $experience
+ * @property \Illuminate\Support\Carbon                                      $ended_at
+ * @property \Illuminate\Support\Carbon|null                                 $created_at
+ * @property \Illuminate\Support\Carbon|null                                 $updated_at
+ * @property int                                                             $remaining
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[] $resources
+ * @property \App\Models\User                                                $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereEnergy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Mission whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Mission whereUserId($value)
  * @mixin \Eloquent
  */
 class Mission extends Model

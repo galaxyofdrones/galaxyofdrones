@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Models\Queries;
+namespace App\Models\Queries;
 
+use App\Models\Movement;
 use Illuminate\Database\Eloquent\Builder;
-use Koodilab\Models\Movement;
 
 trait FindIncomingUserAttackMovements
 {
@@ -12,7 +12,7 @@ trait FindIncomingUserAttackMovements
      *
      * @param array $columns
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Movement[]
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Models\Movement[]
      */
     public function findIncomingUserAttackMovements($columns = ['*'])
     {

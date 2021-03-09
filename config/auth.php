@@ -67,8 +67,8 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'koodilab',
-            'model' => Koodilab\Models\User::class,
+            'driver' => 'app',
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [

@@ -1,17 +1,17 @@
 @php
     $types = [
-        'scout' => Koodilab\Models\Movement::TYPE_SCOUT,
-        'attack' => Koodilab\Models\Movement::TYPE_ATTACK,
-        'occupy' => Koodilab\Models\Movement::TYPE_OCCUPY,
-        'support' => Koodilab\Models\Movement::TYPE_SUPPORT,
-        'transport' => Koodilab\Models\Movement::TYPE_TRANSPORT,
+        'scout' => App\Models\Movement::TYPE_SCOUT,
+        'attack' => App\Models\Movement::TYPE_ATTACK,
+        'occupy' => App\Models\Movement::TYPE_OCCUPY,
+        'support' => App\Models\Movement::TYPE_SUPPORT,
+        'transport' => App\Models\Movement::TYPE_TRANSPORT,
     ];
     $unitTypes = [
-        'transporter' => Koodilab\Models\Unit::TYPE_TRANSPORTER,
-        'scout' => Koodilab\Models\Unit::TYPE_SCOUT,
-        'fighter' => Koodilab\Models\Unit::TYPE_FIGHTER,
-        'heavyFighter' => Koodilab\Models\Unit::TYPE_HEAVY_FIGHTER,
-        'settler' => Koodilab\Models\Unit::TYPE_SETTLER,
+        'transporter' => App\Models\Unit::TYPE_TRANSPORTER,
+        'scout' => App\Models\Unit::TYPE_SCOUT,
+        'fighter' => App\Models\Unit::TYPE_FIGHTER,
+        'heavyFighter' => App\Models\Unit::TYPE_HEAVY_FIGHTER,
+        'settler' => App\Models\Unit::TYPE_SETTLER,
     ];
     $urls = [
         'scout' => route('api_movement_scout_store', '__planet__'),

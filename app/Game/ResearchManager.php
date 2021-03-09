@@ -1,15 +1,15 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Contracts\Models\Behaviors\Researchable as ResearchableContract;
+use App\Jobs\Research as ResearchJob;
+use App\Models\Research;
+use App\Models\Resource;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
-use Koodilab\Contracts\Models\Behaviors\Researchable as ResearchableContract;
-use Koodilab\Jobs\Research as ResearchJob;
-use Koodilab\Models\Research;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Unit;
 
 class ResearchManager
 {
@@ -45,7 +45,7 @@ class ResearchManager
      */
     public function create(ResearchableContract $researchable)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $user->decrementEnergy($researchable->getResearchCostAttribute());
@@ -95,7 +95,7 @@ class ResearchManager
      */
     public function cancel(Research $research)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $energy = round(

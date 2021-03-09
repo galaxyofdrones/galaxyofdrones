@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Jobs;
+namespace App\Jobs;
 
+use App\Game\UpgradeManager;
+use App\Models\Upgrade as UpgradeModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Game\UpgradeManager;
-use Koodilab\Models\Upgrade as UpgradeModel;
 
 class Upgrade implements ShouldQueue
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 class ProducerTransformer extends Transformer
 {
@@ -22,7 +22,7 @@ class ProducerTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Grid $item
+     * @param \App\Models\Grid $item
      */
     public function transform($item)
     {

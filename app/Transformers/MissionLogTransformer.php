@@ -1,9 +1,9 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\MissionLog;
-use Koodilab\Models\Resource;
+use App\Models\MissionLog;
+use App\Models\Resource;
 
 class MissionLogTransformer extends Transformer
 {

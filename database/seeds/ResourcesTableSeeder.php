@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Resource;
 use Illuminate\Database\Seeder;
-use Koodilab\Models\Resource;
 
 class ResourcesTableSeeder extends Seeder
 {

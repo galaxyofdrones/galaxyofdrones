@@ -1,30 +1,30 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Mission log.
  *
- * @property int                                                                  $id
- * @property int                                                                  $user_id
- * @property int                                                                  $energy
- * @property int                                                                  $experience
- * @property \Illuminate\Support\Carbon|null                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                      $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\Koodilab\Models\Resource[] $resources
- * @property \Koodilab\Models\User                                                $user
+ * @property int                                                             $id
+ * @property int                                                             $user_id
+ * @property int                                                             $energy
+ * @property int                                                             $experience
+ * @property \Illuminate\Support\Carbon|null                                 $created_at
+ * @property \Illuminate\Support\Carbon|null                                 $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Resource[] $resources
+ * @property \App\Models\User                                                $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereEnergy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereExperience($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\MissionLog whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog whereExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MissionLog whereUserId($value)
  * @mixin \Eloquent
  */
 class MissionLog extends Model

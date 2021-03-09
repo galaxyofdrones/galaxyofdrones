@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Console\Commands;
+namespace App\Console\Commands;
 
+use App\Console\Behaviors\PrependTimestamp;
+use App\Game\MissionManager;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Koodilab\Console\Behaviors\PrependTimestamp;
-use Koodilab\Game\MissionManager;
-use Koodilab\Models\User;
 
 class MissionGenerate extends Command
 {

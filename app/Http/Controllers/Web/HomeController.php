@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Web;
+namespace App\Http\Controllers\Web;
 
-use Koodilab\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {

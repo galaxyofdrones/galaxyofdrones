@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Observers;
+namespace App\Observers;
 
-use Koodilab\Support\SettingManager;
+use App\Support\SettingManager;
 
 class SettingObserver
 {

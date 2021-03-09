@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Models\Relations;
+namespace App\Models\Relations;
 
-use Koodilab\Models\Block;
+use App\Models\Block;
 
 trait HasManyBlock
 {

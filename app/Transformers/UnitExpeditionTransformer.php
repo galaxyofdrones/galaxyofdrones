@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 use Illuminate\Contracts\Auth\Factory as Auth;
 
@@ -24,14 +24,14 @@ class UnitExpeditionTransformer extends Transformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Unit $item
+     * @param \App\Models\Unit $item
      */
     public function transform($item)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
-        /** @var \Koodilab\Models\Unit $unit */
+        /** @var \App\Models\Unit $unit */
         $unit = $user->units->firstWhere('id', $item->id);
 
         return [

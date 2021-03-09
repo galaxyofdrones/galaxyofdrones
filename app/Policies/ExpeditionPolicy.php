@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Policies;
+namespace App\Policies;
 
+use App\Models\Expedition;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Koodilab\Models\Expedition;
-use Koodilab\Models\User;
 
 class ExpeditionPolicy
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models\Behaviors;
+namespace App\Models\Behaviors;
 
 trait Sortable
 {

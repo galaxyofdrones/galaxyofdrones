@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 use Illuminate\Contracts\Auth\Factory as Auth;
 
@@ -24,11 +24,11 @@ class ResourceAvailableTransformer extends ResourceTransformer
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Resource $item
+     * @param \App\Models\Resource $item
      */
     public function transform($item)
     {
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = $this->auth->guard()->user();
 
         $research = $user

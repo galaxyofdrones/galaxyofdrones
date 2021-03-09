@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Planet;
+use App\Models\Resource;
+use App\Models\Star;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Koodilab\Models\Planet;
-use Koodilab\Models\Resource;
-use Koodilab\Models\Star;
 use Tests\TestCase;
 
 class StatusTest extends TestCase

@@ -1,14 +1,14 @@
 <?php
 
-namespace Koodilab\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
+use App\Game\TrainingManager;
+use App\Http\Controllers\Controller;
+use App\Models\Building;
+use App\Models\Grid;
+use App\Models\Unit;
+use App\Transformers\TrainerTransformer;
 use Illuminate\Support\Facades\DB;
-use Koodilab\Game\TrainingManager;
-use Koodilab\Http\Controllers\Controller;
-use Koodilab\Models\Building;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Unit;
-use Koodilab\Transformers\TrainerTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TrainerController extends Controller
@@ -56,7 +56,7 @@ class TrainerController extends Controller
 
         $quantity = $this->quantity();
 
-        /** @var \Koodilab\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         if (! $user->hasUnit($unit)) {

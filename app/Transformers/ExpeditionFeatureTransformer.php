@@ -1,8 +1,8 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
-use Koodilab\Models\Expedition;
+use App\Models\Expedition;
 
 class ExpeditionFeatureTransformer extends Transformer
 {

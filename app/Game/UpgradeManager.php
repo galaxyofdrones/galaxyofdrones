@@ -1,14 +1,14 @@
 <?php
 
-namespace Koodilab\Game;
+namespace App\Game;
 
+use App\Jobs\Upgrade as UpgradeJob;
+use App\Models\Grid;
+use App\Models\Upgrade;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Bus\Dispatcher as Bus;
 use Illuminate\Database\Eloquent\Collection;
-use Koodilab\Jobs\Upgrade as UpgradeJob;
-use Koodilab\Models\Grid;
-use Koodilab\Models\Upgrade;
-use Koodilab\Models\User;
 
 class UpgradeManager
 {

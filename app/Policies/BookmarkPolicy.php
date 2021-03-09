@@ -1,10 +1,10 @@
 <?php
 
-namespace Koodilab\Policies;
+namespace App\Policies;
 
+use App\Models\Bookmark;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Koodilab\Models\Bookmark;
-use Koodilab\Models\User;
 
 class BookmarkPolicy
 {

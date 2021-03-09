@@ -1,12 +1,12 @@
 <?php
 
-namespace Koodilab\Http\Requests\Api;
+namespace App\Http\Requests\Api;
 
-use Koodilab\Http\Requests\Request;
-use Koodilab\Models\Message;
-use Koodilab\Models\User;
-use Koodilab\Notifications\MessageSended;
-use Koodilab\Rules\Recipient;
+use App\Http\Requests\Request;
+use App\Models\Message;
+use App\Models\User;
+use App\Notifications\MessageSended;
+use App\Rules\Recipient;
 
 class MessageStoreRequest extends Request
 {

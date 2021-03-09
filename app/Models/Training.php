@@ -1,6 +1,6 @@
 <?php
 
-namespace Koodilab\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,19 +15,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int                             $remaining
- * @property \Koodilab\Models\Grid           $grid
- * @property \Koodilab\Models\Unit           $unit
+ * @property \App\Models\Grid                $grid
+ * @property \App\Models\Unit                $unit
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereEndedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereGridId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereUnitId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Koodilab\Models\Training whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereGridId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereUnitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Training whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Training extends Model

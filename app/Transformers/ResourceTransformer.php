@@ -1,13 +1,13 @@
 <?php
 
-namespace Koodilab\Transformers;
+namespace App\Transformers;
 
 class ResourceTransformer extends Transformer
 {
     /**
      * {@inheritdoc}
      *
-     * @param \Koodilab\Models\Resource $item
+     * @param \App\Models\Resource $item
      */
     public function transform($item)
     {
