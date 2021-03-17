@@ -11,7 +11,7 @@ return [
     | framework when an event needs to be broadcast. You may set this to
     | any of the connections defined in the "connections" array below.
     |
-    | Supported: "pusher", "redis", "log", "null"
+    | Supported: "pusher", "ably", "redis", "log", "null"
     |
     */
 
@@ -42,6 +42,11 @@ return [
                 'port' => env('PUSHER_APP_PORT'),
                 'scheme' => env('PUSHER_APP_SCHEME'),
             ],
+        ],
+
+        'ably' => [
+            'driver' => 'ably',
+            'key' => env('ABLY_KEY'),
         ],
 
         'redis' => [

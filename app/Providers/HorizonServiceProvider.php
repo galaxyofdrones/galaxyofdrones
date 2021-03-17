@@ -4,12 +4,15 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider
 {
     /**
-     * {@inheritdoc}
+     * Bootstrap any application services.
+     *
+     * @return void
      */
     public function boot()
     {
@@ -23,7 +26,11 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Register the Horizon gate.
+     *
+     * This gate determines who can access Horizon in non-local environments.
+     *
+     * @return void
      */
     protected function gate()
     {
