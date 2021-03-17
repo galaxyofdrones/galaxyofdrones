@@ -1,16 +1,35 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Message::class, function (Faker $faker) {
-    return [
-        'sender_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'recipient_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'message' => $faker->text,
-    ];
-});
+use App\Models\Message;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class MessageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Message::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'sender_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'recipient_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'message' => $this->faker->text,
+        ];
+    }
+}

@@ -18,7 +18,7 @@ class UserTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -27,7 +27,7 @@ class UserTest extends TestCase
 
     public function testIfNotPlayer()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
 
@@ -74,7 +74,7 @@ class UserTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 1,
             'y' => 1,
@@ -112,7 +112,7 @@ class UserTest extends TestCase
 
     public function testShow()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $loggedUser = auth()->user();
 
         $this->getJson("/api/user/{$user->id}")->assertStatus(400);
@@ -121,7 +121,7 @@ class UserTest extends TestCase
             'started_at' => Carbon::now(),
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 2,
@@ -197,7 +197,7 @@ class UserTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 3,
             'y' => 3,
@@ -207,7 +207,7 @@ class UserTest extends TestCase
         $this->put('/api/user/capital/not-id')->assertStatus(404);
         $this->put("/api/user/capital/{$planet->id}")->assertStatus(403);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 4,
             'y' => 4,
@@ -215,7 +215,7 @@ class UserTest extends TestCase
 
         $this->put("/api/user/capital/{$planet->id}")->assertStatus(400);
 
-        $capital = factory(Planet::class)->create([
+        $capital = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 5,
             'y' => 5,
@@ -229,7 +229,7 @@ class UserTest extends TestCase
             'last_capital_changed' => Carbon::now()->subMonths(2),
         ]);
 
-        $movement = factory(Movement::class)->create([
+        $movement = Movement::factory()->create([
             'end_id' => $capital->id,
             'type' => Movement::TYPE_PATROL,
         ]);
@@ -237,7 +237,7 @@ class UserTest extends TestCase
         $this->put("/api/user/capital/{$planet->id}")->assertStatus(400);
 
         $movement->update([
-            'end_id' => factory(Planet::class)->create([
+            'end_id' => Planet::factory()->create([
                 'x' => 6,
                 'y' => 6,
             ])->id,
@@ -251,7 +251,7 @@ class UserTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 7,
             'y' => 7,
@@ -261,7 +261,7 @@ class UserTest extends TestCase
         $this->put('/api/user/current/not-id')->assertStatus(404);
         $this->put("/api/user/current/{$planet->id}")->assertStatus(403);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 8,
             'y' => 8,

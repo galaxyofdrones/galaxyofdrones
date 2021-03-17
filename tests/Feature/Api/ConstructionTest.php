@@ -23,11 +23,11 @@ class ConstructionTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 1,
             'y' => 1,
@@ -57,7 +57,7 @@ class ConstructionTest extends TestCase
 
     public function testIndex()
     {
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_DEFENSIVE,
             'end_level' => 10,
             'construction_experience' => 50,
@@ -65,12 +65,12 @@ class ConstructionTest extends TestCase
             'construction_time' => 25,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'building_id' => null,
             'planet_id' => auth()->user()->current->id,
         ]);
 
-        factory(Construction::class)->create([
+        Construction::factory()->create([
             'building_id' => $building->id,
             'grid_id' => $grid->id,
         ]);
@@ -135,23 +135,23 @@ class ConstructionTest extends TestCase
     {
         $user = auth()->user();
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'construction_cost' => 100,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => auth()->user()->id,
             'x' => 800,
             'y' => 800,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'x' => 5,
             'y' => 7,
         ]);
 
-        factory(Construction::class)->create([
+        Construction::factory()->create([
             'grid_id' => $grid->id,
         ]);
 
@@ -164,21 +164,21 @@ class ConstructionTest extends TestCase
         $this->post("/api/construction/{$grid->id}/{$building->id}")
             ->assertStatus(400);
 
-        $building2 = factory(Building::class)->create([
+        $building2 = Building::factory()->create([
             'construction_cost' => 10000,
             'parent_id' => $building->id,
             'type' => Building::TYPE_MINER,
             'limit' => 0,
         ]);
 
-        factory(Grid::class)->create([
+        Grid::factory()->create([
             'building_id' => $building->id,
             'planet_id' => $planet->id,
             'x' => 10,
             'y' => 8,
         ]);
 
-        $grid2 = factory(Grid::class)->create([
+        $grid2 = Grid::factory()->create([
             'building_id' => null,
             'planet_id' => $planet->id,
             'type' => Grid::TYPE_RESOURCE,
@@ -187,7 +187,7 @@ class ConstructionTest extends TestCase
         ]);
 
         for ($i = 1; $i < 10; ++$i) {
-            $tmpPlanet = factory(Planet::class)->create([
+            $tmpPlanet = Planet::factory()->create([
                 'user_id' => null,
                 'x' => $user->capital->x + Planet::PENALTY_STEP + $i,
                 'y' => $user->capital->y + Planet::PENALTY_STEP + $i,
@@ -215,7 +215,7 @@ class ConstructionTest extends TestCase
 
     public function testDestroy()
     {
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => auth()->user()->current->id,
         ]);
 
@@ -228,7 +228,7 @@ class ConstructionTest extends TestCase
         $this->delete("/api/construction/{$grid->id}")
             ->assertStatus(400);
 
-        $construction = factory(Construction::class)->create([
+        $construction = Construction::factory()->create([
             'grid_id' => $grid->id,
         ]);
 

@@ -1,20 +1,40 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Movement::class, function (Faker $faker) {
-    return [
-        'start_id' => function () {
-            return factory(App\Models\Planet::class)->create()->id;
-        },
-        'end_id' => function () {
-            return factory(App\Models\Planet::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'type' => $faker->numberBetween(0, App\Models\Movement::TYPE_PATROL),
-        'ended_at' => $faker->dateTime(),
-    ];
-});
+use App\Models\Movement;
+use App\Models\Planet;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class MovementFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Movement::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'start_id' => function () {
+                return Planet::factory()->create()->id;
+            },
+            'end_id' => function () {
+                return Planet::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'type' => $this->faker->numberBetween(0, Movement::TYPE_PATROL),
+            'ended_at' => $this->faker->dateTime(),
+        ];
+    }
+}

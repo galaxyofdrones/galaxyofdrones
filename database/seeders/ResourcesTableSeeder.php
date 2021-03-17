@@ -1,12 +1,14 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Resource;
 use Illuminate\Database\Seeder;
 
 class ResourcesTableSeeder extends Seeder
 {
     /**
-     * {@inheritdoc}
+     * Run the database seed.
      */
     public function run()
     {

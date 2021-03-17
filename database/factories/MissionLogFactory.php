@@ -1,14 +1,33 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\MissionLog::class, function (Faker $faker) {
-    return [
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'energy' => $faker->numberBetween(1, 1000),
-        'experience' => $faker->numberBetween(1, 100),
-    ];
-});
+use App\Models\MissionLog;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class MissionLogFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = MissionLog::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'energy' => $this->faker->numberBetween(1, 1000),
+            'experience' => $this->faker->numberBetween(1, 100),
+        ];
+    }
+}

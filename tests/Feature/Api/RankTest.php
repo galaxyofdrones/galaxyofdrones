@@ -17,7 +17,7 @@ class RankTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -28,7 +28,7 @@ class RankTest extends TestCase
     {
         $user = auth()->user();
 
-        $rank = factory(Rank::class)->create([
+        $rank = Rank::factory()->create([
             'user_id' => $user->id,
         ]);
 
@@ -66,7 +66,7 @@ class RankTest extends TestCase
     {
         $user = auth()->user();
 
-        $rank = factory(Rank::class)->create([
+        $rank = Rank::factory()->create([
             'user_id' => $user->id,
         ]);
 

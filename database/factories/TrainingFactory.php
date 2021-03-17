@@ -1,17 +1,37 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Training::class, function (Faker $faker) {
-    return [
-        'grid_id' => function () {
-            return factory(App\Models\Grid::class)->create()->id;
-        },
-        'unit_id' => function () {
-            return factory(App\Models\Unit::class)->create()->id;
-        },
-        'quantity' => $faker->numberBetween(1, 50),
-        'ended_at' => $faker->dateTime(),
-    ];
-});
+use App\Models\Grid;
+use App\Models\Training;
+use App\Models\Unit;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class TrainingFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Training::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'grid_id' => function () {
+                return Grid::factory()->create()->id;
+            },
+            'unit_id' => function () {
+                return Unit::factory()->create()->id;
+            },
+            'quantity' => $this->faker->numberBetween(1, 50),
+            'ended_at' => $this->faker->dateTime(),
+        ];
+    }
+}

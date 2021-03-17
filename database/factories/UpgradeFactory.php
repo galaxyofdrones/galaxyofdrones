@@ -1,14 +1,33 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Upgrade::class, function (Faker $faker) {
-    return [
-        'level' => $faker->numberBetween(0, 100),
-        'grid_id' => function () {
-            return factory(App\Models\Star::class)->create()->id;
-        },
-        'ended_at' => $faker->dateTime(),
-    ];
-});
+use App\Models\Star;
+use App\Models\Upgrade;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UpgradeFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Upgrade::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'level' => $this->faker->numberBetween(0, 100),
+            'grid_id' => function () {
+                return Star::factory()->create()->id;
+            },
+            'ended_at' => $this->faker->dateTime(),
+        ];
+    }
+}

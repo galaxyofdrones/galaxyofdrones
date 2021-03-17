@@ -21,12 +21,12 @@ class TrainerTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
             'energy' => 1000,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 12,
             'y' => 17,
@@ -41,28 +41,28 @@ class TrainerTest extends TestCase
 
     public function testIndex()
     {
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => auth()->user()->id,
             'x' => 1,
             'y' => 1,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_TRAINER,
             'train_time_bonus' => 5,
             'end_level' => 1,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'building_id' => $building->id,
             'planet_id' => $planet->id,
         ]);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'train_time' => 10,
         ]);
 
-        $training = factory(Training::class)->create([
+        $training = Training::factory()->create([
             'grid_id' => $grid->id,
             'unit_id' => $unit->id,
         ]);
@@ -119,7 +119,7 @@ class TrainerTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'supply' => 500,
             'x' => 2,
@@ -130,23 +130,23 @@ class TrainerTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_TRAINER,
             'train_time_bonus' => 5,
             'end_level' => 1,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'building_id' => $building->id,
             'planet_id' => $planet->id,
         ]);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'train_cost' => 10,
             'supply' => 10,
         ]);
 
-        $training = factory(Training::class)->create([
+        $training = Training::factory()->create([
             'grid_id' => $grid->id,
             'unit_id' => $unit->id,
         ]);
@@ -171,7 +171,7 @@ class TrainerTest extends TestCase
             ->assertStatus(400);
 
         for ($i = 1; $i < 10; ++$i) {
-            $tmpPlanet = factory(Planet::class)->create([
+            $tmpPlanet = Planet::factory()->create([
                 'user_id' => null,
                 'x' => $user->capital->x + Planet::PENALTY_STEP + $i,
                 'y' => $user->capital->y + Planet::PENALTY_STEP + $i,
@@ -201,17 +201,17 @@ class TrainerTest extends TestCase
 
     public function testDestroy()
     {
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => auth()->user()->id,
             'x' => 3,
             'y' => 3,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
         ]);
 
-        factory(Training::class)->create([
+        Training::factory()->create([
             'grid_id' => $grid->id,
         ]);
 

@@ -21,11 +21,11 @@ class ProducerTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 1,
             'y' => 1,
@@ -42,22 +42,22 @@ class ProducerTest extends TestCase
     {
         $user = auth()->user();
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_PRODUCER,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 2,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $user->resources()->attach($resource, [
             'is_researched' => true,
@@ -98,25 +98,25 @@ class ProducerTest extends TestCase
     {
         $user = auth()->user();
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_PRODUCER,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 3,
             'y' => 3,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
-        factory(Stock::class)->create([
+        Stock::factory()->create([
             'planet_id' => $user->current_id,
             'resource_id' => $resource->id,
             'quantity' => 20,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
         ]);

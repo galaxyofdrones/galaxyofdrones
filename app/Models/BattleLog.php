@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -45,7 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BattleLog extends Model
 {
-    use Relations\BelongsToEnd,
+    use HasFactory,
+        Relations\BelongsToEnd,
         Relations\BelongsToStart;
 
     /**

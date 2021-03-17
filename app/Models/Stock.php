@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -31,7 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Stock extends Model
 {
-    use Concerns\HasResourceQuantity,
+    use HasFactory,
+        Concerns\HasResourceQuantity,
         Relations\BelongsToPlanet,
         Relations\BelongsToResource;
 

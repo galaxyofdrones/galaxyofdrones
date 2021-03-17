@@ -1,29 +1,49 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\BattleLog::class, function (Faker $faker) {
-    return [
-        'start_id' => function () {
-            return factory(App\Models\Planet::class)->create()->id;
-        },
-        'end_id' => function () {
-            return factory(App\Models\Planet::class)->create()->id;
-        },
-        'attacker_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'defender_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'start_name' => function (array $battleLog) {
-            return App\Models\Planet::find($battleLog['start_id'])->name;
-        },
-        'end_name' => function (array $battleLog) {
-            return App\Models\Planet::find($battleLog['end_id'])->name;
-        },
-        'type' => $faker->numberBetween(0, App\Models\BattleLog::TYPE_OCCUPY),
-        'winner' => $faker->numberBetween(0, App\Models\BattleLog::WINNER_DEFENDER),
-    ];
-});
+use App\Models\BattleLog;
+use App\Models\Planet;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class BattleLogFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = BattleLog::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'start_id' => function () {
+                return Planet::factory()->create()->id;
+            },
+            'end_id' => function () {
+                return Planet::factory()->create()->id;
+            },
+            'attacker_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'defender_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'start_name' => function (array $battleLog) {
+                return Planet::find($battleLog['start_id'])->name;
+            },
+            'end_name' => function (array $battleLog) {
+                return Planet::find($battleLog['end_id'])->name;
+            },
+            'type' => $this->faker->numberBetween(0, BattleLog::TYPE_OCCUPY),
+            'winner' => $this->faker->numberBetween(0, BattleLog::WINNER_DEFENDER),
+        ];
+    }
+}

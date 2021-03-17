@@ -23,11 +23,11 @@ class PlanetTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'name' => 'Earth',
             'x' => 1,
@@ -169,7 +169,7 @@ class PlanetTest extends TestCase
         $this->delete('/api/planet/demolish/not-id')
             ->assertStatus(404);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'building_id' => null,
             'level' => null,
         ]);
@@ -184,7 +184,7 @@ class PlanetTest extends TestCase
         $this->delete("/api/planet/demolish/{$grid->id}")
             ->assertStatus(400);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_CENTRAL,
         ]);
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Models\Behaviors\Translatable as TranslatableContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -26,7 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Setting extends Model implements TranslatableContract
 {
-    use Behaviors\Translatable;
+    use HasFactory,
+        Behaviors\Translatable;
 
     /**
      * {@inheritdoc}

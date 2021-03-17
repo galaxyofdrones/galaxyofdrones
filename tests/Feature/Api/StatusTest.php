@@ -14,30 +14,30 @@ class StatusTest extends TestCase
 
     public function testIndex()
     {
-        $star = factory(Star::class)->create();
+        $star = Star::factory()->create();
 
-        $resource = factory(Resource::class)->create([
+        $resource = Resource::factory()->create([
             'is_unlocked' => false,
         ]);
 
-        factory(Planet::class)->create([
+        Planet::factory()->create([
             'user_id' => null,
             'resource_id' => $resource->id,
             'x' => 1,
             'y' => 1,
         ]);
 
-        factory(Planet::class)->create([
+        Planet::factory()->create([
             'resource_id' => $resource->id,
             'x' => 2,
             'y' => 2,
         ]);
 
-        $resource2 = factory(Resource::class)->create([
+        $resource2 = Resource::factory()->create([
             'is_unlocked' => true,
         ]);
 
-        factory(Planet::class)->create([
+        Planet::factory()->create([
             'user_id' => null,
             'resource_id' => $resource2->id,
             'size' => Planet::SIZE_SMALL,

@@ -19,18 +19,18 @@ class MessageTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
         Passport::actingAs($user);
 
-        $sender = factory(User::class)->create([
+        $sender = User::factory()->create([
             'username' => 'Mike',
             'started_at' => Carbon::now(),
         ]);
 
-        $message = factory(Message::class)->create([
+        $message = Message::factory()->create([
             'recipient_id' => $user->id,
             'sender_id' => $sender->id,
         ]);

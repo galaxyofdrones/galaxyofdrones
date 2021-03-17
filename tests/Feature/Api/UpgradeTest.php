@@ -23,11 +23,11 @@ class UpgradeTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 1,
@@ -45,13 +45,13 @@ class UpgradeTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 5,
             'y' => 1,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'end_level' => 100,
             'defense_bonus' => 0,
             'construction_experience' => 0,
@@ -62,16 +62,16 @@ class UpgradeTest extends TestCase
             'type' => Building::TYPE_CENTRAL,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
         ]);
 
-        $upgrade = factory(Upgrade::class)->create([
+        $upgrade = Upgrade::factory()->create([
             'grid_id' => $grid->id,
         ]);
 
-        factory(Training::class)->create([
+        Training::factory()->create([
             'grid_id' => $grid->id,
         ]);
 
@@ -175,7 +175,7 @@ class UpgradeTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 6,
@@ -186,12 +186,12 @@ class UpgradeTest extends TestCase
             'solarion' => 2,
         ]);
 
-        $building1 = factory(Building::class)->create([
+        $building1 = Building::factory()->create([
             'end_level' => 20,
             'construction_cost' => 20,
         ]);
 
-        $grid1 = factory(Grid::class)->create([
+        $grid1 = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building1->id,
             'level' => 9,
@@ -199,12 +199,12 @@ class UpgradeTest extends TestCase
             'y' => 6,
         ]);
 
-        $building2 = factory(Building::class)->create([
+        $building2 = Building::factory()->create([
             'end_level' => 20,
             'construction_cost' => 100,
         ]);
 
-        factory(Grid::class)->create([
+        Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building2->id,
             'level' => 9,
@@ -212,7 +212,7 @@ class UpgradeTest extends TestCase
             'y' => 16,
         ]);
 
-        factory(Grid::class)->create([
+        Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => null,
         ]);
@@ -226,7 +226,7 @@ class UpgradeTest extends TestCase
                 'upgrade_cost' => 30,
             ]);
 
-        factory(Upgrade::class)->create([
+        Upgrade::factory()->create([
             'grid_id' => $grid1->id,
         ]);
 
@@ -250,18 +250,18 @@ class UpgradeTest extends TestCase
             'energy' => 100,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 8,
             'y' => 1,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'end_level' => 0,
             'construction_cost' => 150,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => null,
         ]);
@@ -279,7 +279,7 @@ class UpgradeTest extends TestCase
             'building_id' => $building->id,
         ]);
 
-        $upgrade = factory(Upgrade::class)->create([
+        $upgrade = Upgrade::factory()->create([
             'grid_id' => $grid->id,
         ]);
 
@@ -303,7 +303,7 @@ class UpgradeTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 21,
             'y' => 11,
@@ -315,12 +315,12 @@ class UpgradeTest extends TestCase
             'solarion' => 0,
         ]);
 
-        $building1 = factory(Building::class)->create([
+        $building1 = Building::factory()->create([
             'end_level' => 20,
             'construction_cost' => 20,
         ]);
 
-        $grid1 = factory(Grid::class)->create([
+        $grid1 = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building1->id,
             'level' => 9,
@@ -328,12 +328,12 @@ class UpgradeTest extends TestCase
             'y' => 12,
         ]);
 
-        $building2 = factory(Building::class)->create([
+        $building2 = Building::factory()->create([
             'end_level' => 20,
             'construction_cost' => 100,
         ]);
 
-        factory(Grid::class)->create([
+        Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building2->id,
             'level' => 9,
@@ -341,7 +341,7 @@ class UpgradeTest extends TestCase
             'y' => 11,
         ]);
 
-        factory(Grid::class)->create([
+        Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => null,
         ]);
@@ -349,7 +349,7 @@ class UpgradeTest extends TestCase
         $this->post('/api/upgrade/all')
             ->assertStatus(400);
 
-        factory(Upgrade::class)->create([
+        Upgrade::factory()->create([
             'grid_id' => $grid1->id,
         ]);
 
@@ -379,19 +379,19 @@ class UpgradeTest extends TestCase
             'energy' => 100,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 12,
             'y' => 15,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'end_level' => 50,
             'construction_time' => 200,
             'construction_cost' => 300,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
             'level' => 10,
@@ -406,7 +406,7 @@ class UpgradeTest extends TestCase
         $this->delete("/api/upgrade/{$grid->id}")
             ->assertStatus(400);
 
-        $upgrade = factory(Upgrade::class)->create([
+        $upgrade = Upgrade::factory()->create([
             'grid_id' => $grid->id,
         ]);
 

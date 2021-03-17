@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,8 +33,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Research extends Model
 {
-    use Behaviors\Timeable,
+    use HasFactory,
+        Behaviors\Timeable,
         Relations\BelongsToUser;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'researches';
 
     /**
      * {@inheritdoc}

@@ -18,7 +18,7 @@ class MonitorTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -29,13 +29,13 @@ class MonitorTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 1,
             'y' => 1,
         ]);
 
-        factory(Movement::class)->create([
+        Movement::factory()->create([
             'end_id' => $planet->id,
             'type' => Movement::TYPE_ATTACK,
         ]);
@@ -52,18 +52,18 @@ class MonitorTest extends TestCase
     {
         $user = auth()->user();
 
-        $startPlanet = factory(Planet::class)->create([
+        $startPlanet = Planet::factory()->create([
             'x' => 2,
             'y' => 2,
         ]);
 
-        $endPlanet = factory(Planet::class)->create([
+        $endPlanet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 3,
             'y' => 3,
         ]);
 
-        $movement = factory(Movement::class)->create([
+        $movement = Movement::factory()->create([
             'start_id' => $startPlanet->id,
             'end_id' => $endPlanet->id,
             'type' => Movement::TYPE_ATTACK,

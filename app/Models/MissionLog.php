@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,7 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MissionLog extends Model
 {
-    use Relations\BelongsToUser;
+    use HasFactory,
+        Relations\BelongsToUser;
 
     /**
      * {@inheritdoc}

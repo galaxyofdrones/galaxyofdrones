@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Models\Behaviors\Researchable as ResearchableContract;
 use App\Contracts\Models\Behaviors\Translatable as TranslatableContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -45,7 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Resource extends Model implements ResearchableContract, TranslatableContract
 {
-    use Behaviors\Researchable,
+    use HasFactory,
+        Behaviors\Researchable,
         Behaviors\Sortable,
         Behaviors\Translatable,
         Queries\FindAllByIds,

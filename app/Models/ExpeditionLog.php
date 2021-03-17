@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,7 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ExpeditionLog extends Model
 {
-    use Relations\BelongsToStar,
+    use HasFactory,
+        Relations\BelongsToStar,
         Relations\BelongsToUser;
 
     /**

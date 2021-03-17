@@ -19,7 +19,7 @@ class ResearchTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -30,19 +30,19 @@ class ResearchTest extends TestCase
     {
         $user = auth()->user();
 
-        $resource1 = factory(Resource::class)->create();
-        $resource2 = factory(Resource::class)->create();
+        $resource1 = Resource::factory()->create();
+        $resource2 = Resource::factory()->create();
 
-        $unit1 = factory(Unit::class)->create();
-        $unit2 = factory(Unit::class)->create();
+        $unit1 = Unit::factory()->create();
+        $unit2 = Unit::factory()->create();
 
-        $resourceResearch = factory(Research::class)->create([
+        $resourceResearch = Research::factory()->create([
             'user_id' => $user->id,
             'researchable_type' => Resource::class,
             'researchable_id' => $resource2->id,
         ]);
 
-        $unitResearch = factory(Research::class)->create([
+        $unitResearch = Research::factory()->create([
             'user_id' => $user->id,
             'researchable_type' => Unit::class,
             'researchable_id' => $unit2->id,
@@ -133,13 +133,13 @@ class ResearchTest extends TestCase
         $this->post('/api/research/resource')
             ->assertStatus(400);
 
-        $resource1 = factory(Resource::class)->create([
+        $resource1 = Resource::factory()->create([
             'research_cost' => 50,
         ]);
 
-        $resource2 = factory(Resource::class)->create();
+        $resource2 = Resource::factory()->create();
 
-        factory(Research::class)->create([
+        Research::factory()->create([
             'user_id' => $user->id,
             'researchable_type' => Resource::class,
             'researchable_id' => $resource2->id,
@@ -180,13 +180,13 @@ class ResearchTest extends TestCase
         $this->post('/api/research/not-id')
             ->assertStatus(404);
 
-        $unit1 = factory(Unit::class)->create([
+        $unit1 = Unit::factory()->create([
             'research_cost' => 50,
         ]);
 
-        $unit2 = factory(Unit::class)->create();
+        $unit2 = Unit::factory()->create();
 
-        factory(Research::class)->create([
+        Research::factory()->create([
             'user_id' => $user->id,
             'researchable_type' => Unit::class,
             'researchable_id' => $unit2->id,
@@ -224,12 +224,12 @@ class ResearchTest extends TestCase
         $this->delete('/api/research/resource')
             ->assertStatus(400);
 
-        $resource = factory(Resource::class)->create([
+        $resource = Resource::factory()->create([
             'research_time' => 60,
             'research_cost' => 50,
         ]);
 
-        factory(Research::class)->create([
+        Research::factory()->create([
             'user_id' => $user->id,
             'researchable_type' => Resource::class,
             'researchable_id' => $resource->id,
@@ -249,7 +249,7 @@ class ResearchTest extends TestCase
         $this->delete('/api/research/not-id')
             ->assertStatus(404);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'research_time' => 60,
             'research_cost' => 50,
         ]);
@@ -257,7 +257,7 @@ class ResearchTest extends TestCase
         $this->delete("/api/research/{$unit->id}")
             ->assertStatus(400);
 
-        factory(Research::class)->create([
+        Research::factory()->create([
             'user_id' => $user->id,
             'researchable_type' => Unit::class,
             'researchable_id' => $unit->id,
