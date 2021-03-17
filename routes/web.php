@@ -1,75 +1,82 @@
 <?php
 
-/** @var Illuminate\Routing\Router $router */
-$router->group([
+use App\Http\Controllers\Web\ForgotPasswordController;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\LoginController;
+use App\Http\Controllers\Web\RegisterController;
+use App\Http\Controllers\Web\ResetPasswordController;
+use App\Http\Controllers\Web\StartController;
+use App\Http\Controllers\Web\VerificationController;
+
+Route::group([
     'namespace' => 'Web',
-], function () use ($router) {
-    $router->group([
+], function () {
+    Route::group([
         'prefix' => 'start',
-    ], function () use ($router) {
-        $router->post('/', 'StartController@store')
+    ], function () {
+        Route::post('/', [StartController::class, 'store'])
             ->name('start_store');
 
-        $router->get('/', 'StartController@index')
+        Route::get('/', [StartController::class, 'index'])
             ->name('start');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'register',
-    ], function () use ($router) {
-        $router->get('/', 'RegisterController@showRegistrationForm')
+    ], function () {
+        Route::get('/', [RegisterController::class, 'showRegistrationForm'])
             ->name('register');
 
-        $router->post('/', 'RegisterController@register')
+        Route::post('/', [RegisterController::class, 'register'])
             ->name('register');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'password',
-    ], function () use ($router) {
-        $router->get('reset', 'ForgotPasswordController@showLinkRequestForm')
+    ], function () {
+        Route::get('reset', [ForgotPasswordController::class, 'showLinkRequestForm'])
             ->name('password.request');
 
-        $router->post('email', 'ForgotPasswordController@sendResetLinkEmail')
+        Route::post('email', [ForgotPasswordController::class, 'sendResetLinkEmail'])
             ->name('password.email');
 
-        $router->get('password/reset/{token}', 'ResetPasswordController@showResetForm')
+        Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])
             ->name('password.reset');
 
-        $router->post('reset', 'ResetPasswordController@reset')
+        Route::post('reset', [ResetPasswordController::class, 'reset'])
             ->name('password.update');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'email',
-    ], function () use ($router) {
-        $router->get('verify', 'VerificationController@show')
+    ], function () {
+        Route::get('verify', [VerificationController::class, 'show'])
             ->name('verification.notice');
 
-        $router->get('verify/{id}/{hash}', 'VerificationController@verify')
+        Route::get('verify/{id}/{hash}', [VerificationController::class, 'verify'])
             ->name('verification.verify');
 
-        $router->post('resend', 'VerificationController@resend')
+        Route::post('resend', [VerificationController::class, 'resend'])
             ->name('verification.resend');
 
-        $router->post('update', 'VerificationController@update')
+        Route::post('update', [VerificationController::class, 'update'])
             ->name('verification.update');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'login',
-    ], function () use ($router) {
-        $router->get('/', 'LoginController@showLoginForm')
+    ], function () {
+        Route::get('/', [LoginController::class, 'showLoginForm'])
             ->name('login');
 
-        $router->post('/', 'LoginController@login')
+        Route::post('/', [LoginController::class, 'login'])
             ->name('login');
     });
 
-    $router->get('logout', 'LoginController@logout')
+    Route::get('logout', [LoginController::class, 'logout'])
         ->name('logout');
 
-    $router->get('/{vue?}', 'HomeController@index')
+    Route::get('/{vue?}', [HomeController::class, 'index'])
         ->name('home')
         ->where('vue', 'starmap');
 });

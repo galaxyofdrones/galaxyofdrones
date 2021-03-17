@@ -1,313 +1,338 @@
 <?php
 
-/** @var Illuminate\Routing\Router $router */
-$router->group([
+use App\Http\Controllers\Api\BattleLogController;
+use App\Http\Controllers\Api\BlockController;
+use App\Http\Controllers\Api\BookmarkController;
+use App\Http\Controllers\Api\ConstructionController;
+use App\Http\Controllers\Api\DonationController;
+use App\Http\Controllers\Api\ExpeditionController;
+use App\Http\Controllers\Api\ExpeditionLogController;
+use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\MissionController;
+use App\Http\Controllers\Api\MissionLogController;
+use App\Http\Controllers\Api\MonitorController;
+use App\Http\Controllers\Api\MovementController;
+use App\Http\Controllers\Api\PlanetController;
+use App\Http\Controllers\Api\ProducerController;
+use App\Http\Controllers\Api\RankController;
+use App\Http\Controllers\Api\ResearchController;
+use App\Http\Controllers\Api\ScoutController;
+use App\Http\Controllers\Api\SettingController;
+use App\Http\Controllers\Api\ShieldController;
+use App\Http\Controllers\Api\StarController;
+use App\Http\Controllers\Api\StarmapController;
+use App\Http\Controllers\Api\StatusController;
+use App\Http\Controllers\Api\TrainerController;
+use App\Http\Controllers\Api\UpgradeController;
+use App\Http\Controllers\Api\UserController;
+
+Route::group([
     'as' => 'api_',
     'namespace' => 'Api',
-], function () use ($router) {
-    $router->group([
+], function () {
+    Route::group([
         'prefix' => 'battle-log',
-    ], function () use ($router) {
-        $router->get('/', 'BattleLogController@index')
+    ], function () {
+        Route::get('/', [BattleLogController::class, 'index'])
             ->name('battle_log');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'bookmark',
-    ], function () use ($router) {
-        $router->get('/', 'BookmarkController@index')
+    ], function () {
+        Route::get('/', [BookmarkController::class, 'index'])
             ->name('bookmark');
 
-        $router->post('{star}', 'BookmarkController@store')
+        Route::post('{star}', [BookmarkController::class, 'store'])
             ->name('bookmark_store')
             ->where('star', '\d+');
 
-        $router->delete('{bookmark}', 'BookmarkController@destroy')
+        Route::delete('{bookmark}', [BookmarkController::class, 'destroy'])
             ->name('bookmark_destroy')
             ->where('bookmark', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'shield',
-    ], function () use ($router) {
-        $router->get('/', 'ShieldController@index')
+    ], function () {
+        Route::get('/', [ShieldController::class, 'index'])
             ->name('shield');
 
-        $router->post('{planet}', 'ShieldController@store')
+        Route::post('{planet}', [ShieldController::class, 'store'])
             ->name('shield_store')
             ->where('planet', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'monitor',
-    ], function () use ($router) {
-        $router->get('/', 'MonitorController@index')
+    ], function () {
+        Route::get('/', [MonitorController::class, 'index'])
             ->name('monitor');
 
-        $router->get('show', 'MonitorController@show')
+        Route::get('show', [MonitorController::class, 'show'])
             ->name('monitor_show');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'block',
-    ], function () use ($router) {
-        $router->put('{user}', 'BlockController@update')
+    ], function () {
+        Route::put('{user}', [BlockController::class, 'update'])
             ->name('block_update');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'message',
-    ], function () use ($router) {
-        $router->get('/', 'MessageController@index')
+    ], function () {
+        Route::get('/', [MessageController::class, 'index'])
             ->name('message');
 
-        $router->post('/', 'MessageController@store')
+        Route::post('/', [MessageController::class, 'store'])
             ->name('message_store');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'construction',
-    ], function () use ($router) {
-        $router->get('{grid}', 'ConstructionController@index')
+    ], function () {
+        Route::get('{grid}', [ConstructionController::class, 'index'])
             ->name('construction')
             ->where('grid', '\d+');
 
-        $router->post('{grid}/{building}', 'ConstructionController@store')
+        Route::post('{grid}/{building}', [ConstructionController::class, 'store'])
             ->name('construction_store')
             ->where('grid', '\d+')
             ->where('building', '\d+');
 
-        $router->delete('{grid}', 'ConstructionController@destroy')
+        Route::delete('{grid}', [ConstructionController::class, 'destroy'])
             ->name('construction_destroy')
             ->where('grid', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'planet',
-    ], function () use ($router) {
-        $router->get('/', 'PlanetController@index')
+    ], function () {
+        Route::get('/', [PlanetController::class, 'index'])
             ->name('planet');
 
-        $router->get('all/{user}', 'PlanetController@all')
+        Route::get('all/{user}', [PlanetController::class, 'all'])
             ->name('planet_all');
 
-        $router->get('capital', 'PlanetController@capital')
+        Route::get('capital', [PlanetController::class, 'capital'])
             ->name('planet_capital');
 
-        $router->get('{planet}', 'PlanetController@show')
+        Route::get('{planet}', [PlanetController::class, 'show'])
             ->name('planet_show')
             ->where('planet', '\d+');
 
-        $router->put('name', 'PlanetController@updateName')
+        Route::put('name', [PlanetController::class, 'updateName'])
             ->name('planet_name_update');
 
-        $router->delete('demolish/{grid}', 'PlanetController@demolish')
+        Route::delete('demolish/{grid}', [PlanetController::class, 'demolish'])
             ->name('planet_demolish')
             ->where('grid', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'research',
-    ], function () use ($router) {
-        $router->get('/', 'ResearchController@index')
+    ], function () {
+        Route::get('/', [ResearchController::class, 'index'])
             ->name('research');
 
-        $router->post('/resource', 'ResearchController@storeResource')
+        Route::post('/resource', [ResearchController::class, 'storeResource'])
             ->name('research_resource_store');
 
-        $router->post('{unit}', 'ResearchController@storeUnit')
+        Route::post('{unit}', [ResearchController::class, 'storeUnit'])
             ->name('research_unit_store')
             ->where('unit', '\d+');
 
-        $router->delete('/resource', 'ResearchController@destroyResource')
+        Route::delete('/resource', [ResearchController::class, 'destroyResource'])
             ->name('research_resource_destroy');
 
-        $router->delete('{unit}', 'ResearchController@destroyUnit')
+        Route::delete('{unit}', [ResearchController::class, 'destroyUnit'])
             ->name('research_unit_destroy')
             ->where('unit', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'star',
-    ], function () use ($router) {
-        $router->get('{star}', 'StarController@show')
+    ], function () {
+        Route::get('{star}', [StarController::class, 'show'])
             ->name('star_show')
             ->where('star', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'starmap',
-    ], function () use ($router) {
-        $router->get('geo-json/{zoom}/{bounds}', 'StarmapController@geoJson')
+    ], function () {
+        Route::get('geo-json/{zoom}/{bounds}', [StarmapController::class, 'geoJson'])
             ->name('starmap_geo_json')
             ->where('zoom', '\d')
             ->where('bounds', '[-0-9\.,]+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'expedition',
-    ], function () use ($router) {
-        $router->get('/', 'ExpeditionController@index')
+    ], function () {
+        Route::get('/', [ExpeditionController::class, 'index'])
             ->name('expedition');
 
-        $router->post('{expedition}', 'ExpeditionController@store')
+        Route::post('{expedition}', [ExpeditionController::class, 'store'])
             ->name('expedition_store')
             ->where('expedition', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'expedition-log',
-    ], function () use ($router) {
-        $router->get('/', 'ExpeditionLogController@index')
+    ], function () {
+        Route::get('/', [ExpeditionLogController::class, 'index'])
             ->name('expedition_log');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'mission',
-    ], function () use ($router) {
-        $router->get('/', 'MissionController@index')
+    ], function () {
+        Route::get('/', [MissionController::class, 'index'])
             ->name('mission');
 
-        $router->post('{mission}', 'MissionController@store')
+        Route::post('{mission}', [MissionController::class, 'store'])
             ->name('mission_store')
             ->where('mission', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'mission-log',
-    ], function () use ($router) {
-        $router->get('/', 'MissionLogController@index')
+    ], function () {
+        Route::get('/', [MissionLogController::class, 'index'])
             ->name('mission_log');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'movement',
-    ], function () use ($router) {
-        $router->post('scout/{planet}', 'MovementController@storeScout')
+    ], function () {
+        Route::post('scout/{planet}', [MovementController::class, 'storeScout'])
             ->name('movement_scout_store')
             ->where('planet', '\d+');
 
-        $router->post('attack/{planet}', 'MovementController@storeAttack')
+        Route::post('attack/{planet}', [MovementController::class, 'storeAttack'])
             ->name('movement_attack_store')
             ->where('planet', '\d+');
 
-        $router->post('occupy/{planet}', 'MovementController@storeOccupy')
+        Route::post('occupy/{planet}', [MovementController::class, 'storeOccupy'])
             ->name('movement_occupy_store')
             ->where('planet', '\d+');
 
-        $router->post('support/{planet}', 'MovementController@storeSupport')
+        Route::post('support/{planet}', [MovementController::class, 'storeSupport'])
             ->name('movement_support_store')
             ->where('planet', '\d+');
 
-        $router->post('transport/{planet}', 'MovementController@storeTransport')
+        Route::post('transport/{planet}', [MovementController::class, 'storeTransport'])
             ->name('movement_transport_store')
             ->where('planet', '\d+');
 
-        $router->post('trade/{grid}', 'MovementController@storeTrade')
+        Route::post('trade/{grid}', [MovementController::class, 'storeTrade'])
             ->name('movement_trade_store')
             ->where('grid', '\d+');
 
-        $router->post('patrol/{grid}', 'MovementController@storePatrol')
+        Route::post('patrol/{grid}', [MovementController::class, 'storePatrol'])
             ->name('movement_patrol_store')
             ->where('grid', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'upgrade',
-    ], function () use ($router) {
-        $router->get('{grid}', 'UpgradeController@index')
+    ], function () {
+        Route::get('{grid}', [UpgradeController::class, 'index'])
             ->name('upgrade')
             ->where('grid', '\d+');
 
-        $router->get('all', 'UpgradeController@indexAll')
+        Route::get('all', [UpgradeController::class, 'indexAll'])
             ->name('upgrade_all');
 
-        $router->post('{grid}', 'UpgradeController@store')
+        Route::post('{grid}', [UpgradeController::class, 'store'])
             ->name('upgrade_store')
             ->where('grid', '\d+');
 
-        $router->post('all', 'UpgradeController@storeAll')
+        Route::post('all', [UpgradeController::class, 'storeAll'])
             ->name('upgrade_store_all');
 
-        $router->delete('{grid}', 'UpgradeController@destroy')
+        Route::delete('{grid}', [UpgradeController::class, 'destroy'])
             ->name('upgrade_destroy')
             ->where('grid', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'producer',
-    ], function () use ($router) {
-        $router->get('{grid}', 'ProducerController@index')
+    ], function () {
+        Route::get('{grid}', [ProducerController::class, 'index'])
             ->name('producer')
             ->where('grid', '\d+');
 
-        $router->post('{grid}/{resource}', 'ProducerController@store')
+        Route::post('{grid}/{resource}', [ProducerController::class, 'store'])
             ->name('producer_store')
             ->where('grid', '\d+')
             ->where('resource', '\d+');
     });
 
-    $router->get('scout/{grid}', 'ScoutController@index')
+    Route::get('scout/{grid}', [ScoutController::class, 'index'])
         ->name('scout')
         ->where('grid', '\d+');
 
-    $router->group([
+    Route::group([
         'prefix' => 'trainer',
-    ], function () use ($router) {
-        $router->get('{grid}', 'TrainerController@index')
+    ], function () {
+        Route::get('{grid}', [TrainerController::class, 'index'])
             ->name('trainer')
             ->where('grid', '\d+');
 
-        $router->post('{grid}/{unit}', 'TrainerController@store')
+        Route::post('{grid}/{unit}', [TrainerController::class, 'store'])
             ->name('trainer_store')
             ->where('grid', '\d+')
             ->where('unit', '\d+');
 
-        $router->delete('{grid}', 'TrainerController@destroy')
+        Route::delete('{grid}', [TrainerController::class, 'destroy'])
             ->name('trainer_destroy')
             ->where('grid', '\d+');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'rank',
-    ], function () use ($router) {
-        $router->get('pve', 'RankController@pve')
+    ], function () {
+        Route::get('pve', [RankController::class, 'pve'])
             ->name('rank_pve');
 
-        $router->get('pvp', 'RankController@pvp')
+        Route::get('pvp', [RankController::class, 'pvp'])
             ->name('rank_pvp');
     });
 
-    $router->group([
+    Route::group([
         'prefix' => 'user',
-    ], function () use ($router) {
-        $router->get('/', 'UserController@index')
+    ], function () {
+        Route::get('/', [UserController::class, 'index'])
             ->name('user');
 
-        $router->get('capital', 'UserController@capital')
+        Route::get('capital', [UserController::class, 'capital'])
             ->name('user_capital');
 
-        $router->get('{user}', 'UserController@show')
+        Route::get('{user}', [UserController::class, 'show'])
             ->name('user_show');
 
-        $router->put('/', 'UserController@update')
+        Route::put('/', [UserController::class, 'update'])
             ->name('user_update');
 
-        $router->put('capital/{planet}', 'UserController@updateCapital')
+        Route::put('capital/{planet}', [UserController::class, 'updateCapital'])
             ->name('user_capital_update')
             ->where('planet', '\d+');
 
-        $router->put('current/{planet}', 'UserController@updateCurrent')
+        Route::put('current/{planet}', [UserController::class, 'updateCurrent'])
             ->name('user_current_update')
             ->where('planet', '\d+');
     });
 
-    $router->put('setting', 'SettingController@update')
+    Route::put('setting', [SettingController::class, 'update'])
         ->name('setting_update');
 
-    $router->get('status', 'StatusController@index')
+    Route::get('status', [StatusController::class, 'index'])
         ->name('status');
 
-    $router->post('donation', 'DonationController@index')
+    Route::post('donation', [DonationController::class, 'index'])
         ->name('donation');
 });
