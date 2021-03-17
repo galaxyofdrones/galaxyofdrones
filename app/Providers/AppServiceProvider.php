@@ -23,6 +23,7 @@ use App\Starmap\NameGenerator;
 use App\Starmap\Renderer;
 use App\Support\FlashManager;
 use App\Support\SettingManager;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
     }
 
     /**
