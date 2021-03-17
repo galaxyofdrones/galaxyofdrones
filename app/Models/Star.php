@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Models\Behaviors\Positionable as PositionableContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,7 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Star extends Model implements PositionableContract
 {
-    use Behaviors\Positionable,
+    use HasFactory,
+        Behaviors\Positionable,
         Relations\HasManyBookmark,
         Relations\HasManyExpedition,
         Relations\HasManyExpeditionLog;

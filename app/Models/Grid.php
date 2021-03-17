@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -38,7 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Grid extends Model
 {
-    use Relations\BelongsToBuilding,
+    use HasFactory,
+        Relations\BelongsToBuilding,
         Relations\BelongsToPlanet,
         Relations\HasOneConstruction,
         Relations\HasOneUpgrade,

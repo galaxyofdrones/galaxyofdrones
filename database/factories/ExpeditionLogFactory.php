@@ -1,17 +1,37 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\ExpeditionLog::class, function (Faker $faker) {
-    return [
-        'star_id' => function () {
-            return factory(App\Models\Star::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'experience' => $faker->numberBetween(1, 100),
-        'solarion' => $faker->numberBetween(1, 50),
-    ];
-});
+use App\Models\ExpeditionLog;
+use App\Models\Star;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class ExpeditionLogFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ExpeditionLog::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'star_id' => function () {
+                return Star::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'experience' => $this->faker->numberBetween(1, 100),
+            'solarion' => $this->faker->numberBetween(1, 50),
+        ];
+    }
+}

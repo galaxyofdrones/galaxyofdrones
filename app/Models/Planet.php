@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Models\Behaviors\Positionable as PositionableContract;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -69,7 +70,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Planet extends Model implements PositionableContract
 {
-    use Behaviors\Positionable,
+    use HasFactory,
+        Behaviors\Positionable,
         Concerns\HasCapacity,
         Concerns\HasCustomName,
         Concerns\HasGrid,

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Models\Behaviors\Translatable as TranslatableContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NestedSet;
 
@@ -71,7 +72,8 @@ use Kalnoy\Nestedset\NestedSet;
  */
 class Building extends Model implements TranslatableContract
 {
-    use Behaviors\Categorizable,
+    use HasFactory,
+        Behaviors\Categorizable,
         Behaviors\Modifiable,
         Behaviors\Translatable,
         Concerns\HasLevel,

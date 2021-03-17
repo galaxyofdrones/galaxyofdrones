@@ -1,24 +1,42 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Unit::class, function (Faker $faker) {
-    return [
-        'name' => [
-            'en' => $faker->word,
-        ],
-        'type' => $faker->numberBetween(0, App\Models\Unit::TYPE_SETTLER),
-        'is_unlocked' => $faker->boolean,
-        'speed' => $faker->numberBetween(1, 100),
-        'attack' => $faker->numberBetween(1, 100),
-        'defense' => $faker->numberBetween(1, 100),
-        'supply' => $faker->numberBetween(1, 100),
-        'train_cost' => $faker->numberBetween(1, 100),
-        'train_time' => $faker->numberBetween(1, 100),
-        'description' => [
-            'en' => $faker->word,
-        ],
-        'sort_order' => $faker->numberBetween(1, 4),
-    ];
-});
+use App\Models\Unit;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UnitFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Unit::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => [
+                'en' => $this->faker->word,
+            ],
+            'type' => $this->faker->numberBetween(0, Unit::TYPE_SETTLER),
+            'is_unlocked' => $this->faker->boolean,
+            'speed' => $this->faker->numberBetween(1, 100),
+            'attack' => $this->faker->numberBetween(1, 100),
+            'defense' => $this->faker->numberBetween(1, 100),
+            'supply' => $this->faker->numberBetween(1, 100),
+            'train_cost' => $this->faker->numberBetween(1, 100),
+            'train_time' => $this->faker->numberBetween(1, 100),
+            'description' => [
+                'en' => $this->faker->word,
+            ],
+            'sort_order' => $this->faker->numberBetween(1, 4),
+        ];
+    }
+}

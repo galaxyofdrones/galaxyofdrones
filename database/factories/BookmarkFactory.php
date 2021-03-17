@@ -1,16 +1,35 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Bookmark::class, function (Faker $faker) {
-    return [
-        'name' => $faker->word,
-        'star_id' => function () {
-            return factory(App\Models\Star::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-    ];
-});
+use App\Models\Bookmark;
+use App\Models\Star;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class BookmarkFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Bookmark::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->word,
+            'star_id' => function () {
+                return Star::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return Star::factory()->create()->id;
+            },
+        ];
+    }
+}

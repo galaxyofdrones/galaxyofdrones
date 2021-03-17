@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -34,7 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Rank extends Model
 {
-    use Queries\PaginatePveUsers,
+    use HasFactory,
+        Queries\PaginatePveUsers,
         Queries\PaginatePvpUsers,
         Relations\BelongsToUser;
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,7 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Population extends Model
 {
-    use Concerns\HasUnitQuantity,
+    use HasFactory,
+        Concerns\HasUnitQuantity,
         Relations\BelongsToPlanet,
         Relations\BelongsToUnit;
 

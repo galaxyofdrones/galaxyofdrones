@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,7 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Bookmark extends Model
 {
-    use Queries\FindByStarAndUser,
+    use HasFactory,
+        Queries\FindByStarAndUser,
         Relations\BelongsToStar,
         Relations\BelongsToUser;
 
