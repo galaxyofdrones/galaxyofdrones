@@ -18,7 +18,7 @@ class BookmarkTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -27,9 +27,9 @@ class BookmarkTest extends TestCase
 
     public function testIndex()
     {
-        $star = factory(Star::class)->create();
+        $star = Star::factory()->create();
 
-        $bookmark = factory(Bookmark::class)->create([
+        $bookmark = Bookmark::factory()->create([
             'name' => 'Favorite',
             'user_id' => auth()->user()->id,
             'star_id' => $star->id,
@@ -72,9 +72,9 @@ class BookmarkTest extends TestCase
 
     public function testStore()
     {
-        $star = factory(Star::class)->create();
+        $star = Star::factory()->create();
 
-        $bookmark = factory(Bookmark::class)->create([
+        $bookmark = Bookmark::factory()->create([
             'user_id' => auth()->user()->id,
             'star_id' => $star->id,
         ]);
@@ -95,7 +95,7 @@ class BookmarkTest extends TestCase
 
     public function testDestroy()
     {
-        $bookmark = factory(Bookmark::class)->create([
+        $bookmark = Bookmark::factory()->create([
             'user_id' => auth()->user()->id,
         ]);
 

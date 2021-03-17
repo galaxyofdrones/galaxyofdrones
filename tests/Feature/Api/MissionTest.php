@@ -18,7 +18,7 @@ class MissionTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
             'solarion' => 50,
         ]);
@@ -30,12 +30,12 @@ class MissionTest extends TestCase
     {
         $user = auth()->user();
 
-        $mission = factory(Mission::class)->create([
+        $mission = Mission::factory()->create([
             'user_id' => $user->id,
             'ended_at' => Carbon::now()->addHour(),
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $mission->resources()->attach($resource->id, [
             'quantity' => 10,
@@ -112,11 +112,11 @@ class MissionTest extends TestCase
         $this->post('/api/mission/not-id')
             ->assertStatus(404);
 
-        $mission = factory(Mission::class)->create([
+        $mission = Mission::factory()->create([
             'user_id' => auth()->user()->id,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $mission->resources()->attach($resource->id, [
             'quantity' => 10,

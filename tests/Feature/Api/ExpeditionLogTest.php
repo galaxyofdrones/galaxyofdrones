@@ -20,7 +20,7 @@ class ExpeditionLogTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -31,14 +31,14 @@ class ExpeditionLogTest extends TestCase
     {
         $user = auth()->user();
 
-        $star = factory(Star::class)->create();
+        $star = Star::factory()->create();
 
-        $expeditionLog = factory(ExpeditionLog::class)->create([
+        $expeditionLog = ExpeditionLog::factory()->create([
             'user_id' => $user->id,
             'star_id' => $star->id,
         ]);
 
-        $unit = factory(Unit::class)->create();
+        $unit = Unit::factory()->create();
 
         $expeditionLog->units()->attach($unit->id, [
             'quantity' => 10,

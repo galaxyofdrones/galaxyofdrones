@@ -19,7 +19,7 @@ class StarTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -30,14 +30,14 @@ class StarTest extends TestCase
     {
         $user = auth()->user();
 
-        $star = factory(Star::class)->create();
+        $star = Star::factory()->create();
 
-        factory(Bookmark::class)->create([
+        Bookmark::factory()->create([
             'user_id' => $user->id,
             'star_id' => $star->id,
         ]);
 
-        factory(Expedition::class)->create([
+        Expedition::factory()->create([
             'user_id' => $user->id,
             'star_id' => $star->id,
             'ended_at' => Carbon::now()->addHour(),

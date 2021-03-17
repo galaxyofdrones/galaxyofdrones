@@ -28,7 +28,7 @@ class SettingManagerTest extends TestCase
      */
     public function testAll()
     {
-        factory(Setting::class, 2)->create();
+        Setting::factory(2)->create();
 
         $this->assertCount(2, $this->settingManager->all());
         $this->assertTrue(cache()->has(SettingManager::CACHE_KEY));
@@ -36,14 +36,14 @@ class SettingManagerTest extends TestCase
 
     public function testValue()
     {
-        factory(Setting::class)->create([
+        Setting::factory()->create([
             'key' => 'title',
             'value' => [
                 'en' => 'TestTitle',
             ],
         ]);
 
-        factory(Setting::class)->create([
+        Setting::factory()->create([
             'key' => 'color',
             'value' => [
                 'en' => 'Color',
@@ -62,7 +62,7 @@ class SettingManagerTest extends TestCase
      */
     public function testForget()
     {
-        factory(Setting::class, 2)->create();
+        Setting::factory(2)->create();
 
         $this->assertCount(2, $this->settingManager->all());
         $this->assertTrue(cache()->has(SettingManager::CACHE_KEY));

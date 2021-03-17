@@ -29,7 +29,7 @@ class DonationTest extends TestCase
             'email' => 'invalidemail',
         ])->assertStatus(400);
 
-        factory(User::class)->create([
+        User::factory()->create([
             'email' => 'support@koodilab.com',
             'started_at' => Carbon::now(),
         ]);

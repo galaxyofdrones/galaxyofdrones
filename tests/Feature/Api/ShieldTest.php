@@ -18,7 +18,7 @@ class ShieldTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -29,13 +29,13 @@ class ShieldTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 1,
             'y' => 1,
         ]);
 
-        $shield = factory(Shield::class)->create([
+        $shield = Shield::factory()->create([
             'planet_id' => $planet->id,
             'ended_at' => Carbon::now()->addDay(1),
         ]);
@@ -82,7 +82,7 @@ class ShieldTest extends TestCase
     {
         $user = auth()->user();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 2,

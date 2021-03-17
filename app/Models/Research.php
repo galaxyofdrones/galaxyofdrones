@@ -38,6 +38,13 @@ class Research extends Model
         Relations\BelongsToUser;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'researches';
+
+    /**
      * {@inheritdoc}
      */
     protected $guarded = [

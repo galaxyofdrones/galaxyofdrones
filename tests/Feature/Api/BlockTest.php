@@ -16,7 +16,7 @@ class BlockTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -25,7 +25,7 @@ class BlockTest extends TestCase
 
     public function testUpdate()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 

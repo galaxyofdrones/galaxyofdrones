@@ -41,7 +41,7 @@ class GeneratorTest extends TestCase
      */
     public function testGenerate()
     {
-        factory(Resource::class)->create();
+        Resource::factory()->create();
 
         $this->config->set('starmap.density', 0.001);
         $this->config->set('starmap.ratio', 0.2);

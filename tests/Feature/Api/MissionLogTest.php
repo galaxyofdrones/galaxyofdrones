@@ -19,7 +19,7 @@ class MissionLogTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -30,11 +30,11 @@ class MissionLogTest extends TestCase
     {
         $user = auth()->user();
 
-        $missionLog = factory(MissionLog::class)->create([
+        $missionLog = MissionLog::factory()->create([
             'user_id' => $user->id,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
         $missionLog->resources()->attach($resource->id, [
             'quantity' => 5,

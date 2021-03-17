@@ -22,11 +22,11 @@ class ScoutTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'name' => 'Earth',
             'x' => 1,
@@ -43,25 +43,25 @@ class ScoutTest extends TestCase
     {
         $user = auth()->user();
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_SCOUT,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 2,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
         ]);
 
-        $unit = factory(Unit::class)->create();
-        $resource = factory(Resource::class)->create();
+        $unit = Unit::factory()->create();
+        $resource = Resource::factory()->create();
 
-        $movement = factory(Movement::class)->create([
+        $movement = Movement::factory()->create([
             'start_id' => $user->current_id,
             'end_id' => $planet->id,
             'type' => Movement::TYPE_OCCUPY,
@@ -75,7 +75,7 @@ class ScoutTest extends TestCase
             'quantity' => 10,
         ]);
 
-        $movement2 = factory(Movement::class)->create([
+        $movement2 = Movement::factory()->create([
             'start_id' => $planet->id,
             'end_id' => $user->current_id,
             'user_id' => $user->id,

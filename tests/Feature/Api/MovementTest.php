@@ -26,11 +26,11 @@ class MovementTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'name' => 'Earth',
             'x' => 1,
@@ -54,7 +54,7 @@ class MovementTest extends TestCase
         $this->post('/api/movement/scout/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 2,
             'y' => 2,
@@ -63,18 +63,18 @@ class MovementTest extends TestCase
         $this->post("/api/movement/scout/{$planet->id}")
             ->assertStatus(403);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'type' => Unit::TYPE_SCOUT,
             'speed' => 100,
         ]);
 
-        $population = factory(Population::class)->create([
+        $population = Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
             'quantity' => 5,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 3,
             'y' => 3,
@@ -117,7 +117,7 @@ class MovementTest extends TestCase
         $this->post('/api/movement/attack/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 4,
             'y' => 4,
@@ -126,18 +126,18 @@ class MovementTest extends TestCase
         $this->post("/api/movement/attack/{$planet->id}")
             ->assertStatus(403);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'type' => Unit::TYPE_FIGHTER,
             'speed' => 100,
         ]);
 
-        $population = factory(Population::class)->create([
+        $population = Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
             'quantity' => 5,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 5,
             'y' => 5,
@@ -184,7 +184,7 @@ class MovementTest extends TestCase
         $this->post('/api/movement/occupy/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 6,
             'y' => 6,
@@ -193,9 +193,9 @@ class MovementTest extends TestCase
         $this->post("/api/movement/occupy/{$planet->id}")
             ->assertStatus(403);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'resource_id' => $resource->id,
             'x' => 7,
@@ -209,17 +209,17 @@ class MovementTest extends TestCase
             'quantity' => 10,
         ]);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'type' => Unit::TYPE_SETTLER,
             'speed' => 100,
         ]);
 
-        factory(Population::class)->create([
+        Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
         ]);
 
-        factory(Grid::class)->create([
+        Grid::factory()->create([
             'planet_id' => $planet->id,
             'type' => Grid::TYPE_CENTRAL,
         ]);
@@ -251,7 +251,7 @@ class MovementTest extends TestCase
         $this->post('/api/movement/support/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 8,
             'y' => 8,
@@ -260,17 +260,17 @@ class MovementTest extends TestCase
         $this->post("/api/movement/support/{$planet->id}")
             ->assertStatus(403);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'speed' => 100,
         ]);
 
-        $population = factory(Population::class)->create([
+        $population = Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
             'quantity' => 5,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 9,
             'y' => 9,
@@ -317,7 +317,7 @@ class MovementTest extends TestCase
         $this->post('/api/movement/transport/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 10,
             'y' => 10,
@@ -326,27 +326,27 @@ class MovementTest extends TestCase
         $this->post("/api/movement/transport/{$planet->id}")
             ->assertStatus(403);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'type' => Unit::TYPE_TRANSPORTER,
             'speed' => 100,
             'capacity' => 10,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
-        $population = factory(Population::class)->create([
+        $population = Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
             'quantity' => 5,
         ]);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 11,
             'y' => 11,
         ]);
 
-        $stock = factory(Stock::class)->create([
+        $stock = Stock::factory()->create([
             'planet_id' => $user->current_id,
             'resource_id' => $resource->id,
             'quantity' => 5,
@@ -403,18 +403,18 @@ class MovementTest extends TestCase
         $this->post('/api/movement/trade/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 12,
             'y' => 12,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_TRAINER,
             'trade_time_bonus' => 0.5,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
             'level' => 10,
@@ -438,27 +438,27 @@ class MovementTest extends TestCase
             'type' => Building::TYPE_TRADER,
         ]);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'type' => Unit::TYPE_TRANSPORTER,
             'speed' => 100,
             'capacity' => 10,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
 
-        $population = factory(Population::class)->create([
+        $population = Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
             'quantity' => 5,
         ]);
 
-        factory(Planet::class)->create([
+        Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 13,
             'y' => 13,
         ]);
 
-        $stock = factory(Stock::class)->create([
+        $stock = Stock::factory()->create([
             'planet_id' => $user->current_id,
             'resource_id' => $resource->id,
             'quantity' => 5,
@@ -515,18 +515,18 @@ class MovementTest extends TestCase
         $this->post('/api/movement/patrol/not-id')
             ->assertStatus(404);
 
-        $planet = factory(Planet::class)->create([
+        $planet = Planet::factory()->create([
             'user_id' => null,
             'x' => 14,
             'y' => 14,
         ]);
 
-        $building = factory(Building::class)->create([
+        $building = Building::factory()->create([
             'type' => Building::TYPE_TRAINER,
             'trade_time_bonus' => 0.5,
         ]);
 
-        $grid = factory(Grid::class)->create([
+        $grid = Grid::factory()->create([
             'planet_id' => $planet->id,
             'building_id' => $building->id,
             'level' => 10,
@@ -550,19 +550,19 @@ class MovementTest extends TestCase
             'type' => Building::TYPE_TRADER,
         ]);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'type' => Unit::TYPE_TRANSPORTER,
             'speed' => 100,
             'capacity' => 10,
         ]);
 
-        $population = factory(Population::class)->create([
+        $population = Population::factory()->create([
             'planet_id' => $user->current_id,
             'unit_id' => $unit->id,
             'quantity' => 5,
         ]);
 
-        factory(Planet::class)->create([
+        Planet::factory()->create([
             'user_id' => $user->id,
             'x' => 15,
             'y' => 15,

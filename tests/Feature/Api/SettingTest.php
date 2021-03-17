@@ -17,28 +17,28 @@ class SettingTest extends TestCase
     {
         parent::setUp();
 
-        factory(Setting::class)->create([
+        Setting::factory()->create([
             'key' => 'title',
             'value' => [
                 'en' => 'TestTitle',
             ],
         ]);
 
-        factory(Setting::class)->create([
+        Setting::factory()->create([
             'key' => 'description',
             'value' => [
                 'en' => 'Test Description.',
             ],
         ]);
 
-        factory(Setting::class)->create([
+        Setting::factory()->create([
             'key' => 'author',
             'value' => [
                 'en' => 'TestAuthor',
             ],
         ]);
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => 'support+developer@koodilab.com',
             'started_at' => Carbon::now(),
         ]);

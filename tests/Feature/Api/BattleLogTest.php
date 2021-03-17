@@ -20,7 +20,7 @@ class BattleLogTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -31,30 +31,30 @@ class BattleLogTest extends TestCase
     {
         $user = auth()->user();
 
-        $battleLog = factory(BattleLog::class)->create([
+        $battleLog = BattleLog::factory()->create([
             'attacker_id' => $user->id,
         ]);
 
-        $resource = factory(Resource::class)->create();
+        $resource = Resource::factory()->create();
         $battleLog->resources()->attach($resource, [
             'quantity' => 10,
             'losses' => 5,
         ]);
 
-        $building = factory(Building::class)->create();
+        $building = Building::factory()->create();
         $battleLog->buildings()->attach($building, [
             'level' => 10,
             'losses' => 5,
         ]);
 
-        $attackerUnit = factory(Unit::class)->create();
+        $attackerUnit = Unit::factory()->create();
         $battleLog->attackerUnits()->attach($attackerUnit, [
             'owner' => BattleLog::OWNER_ATTACKER,
             'quantity' => 10,
             'losses' => 5,
         ]);
 
-        $defenderUnit = factory(Unit::class)->create();
+        $defenderUnit = Unit::factory()->create();
         $battleLog->defenderUnits()->attach($defenderUnit, [
             'owner' => BattleLog::OWNER_DEFENDER,
             'quantity' => 10,

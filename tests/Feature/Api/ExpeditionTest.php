@@ -19,7 +19,7 @@ class ExpeditionTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'started_at' => Carbon::now(),
         ]);
 
@@ -30,11 +30,11 @@ class ExpeditionTest extends TestCase
     {
         $user = auth()->user();
 
-        $star = factory(Star::class)->create([
+        $star = Star::factory()->create([
             'name' => 'Voyager',
         ]);
 
-        $unit = factory(Unit::class)->create([
+        $unit = Unit::factory()->create([
             'name' => [
                 'en' => 'Fighter',
             ],
@@ -43,7 +43,7 @@ class ExpeditionTest extends TestCase
             ],
         ]);
 
-        $expedition = factory(Expedition::class)->create([
+        $expedition = Expedition::factory()->create([
             'star_id' => $star->id,
             'user_id' => $user->id,
             'solarion' => 5,
@@ -119,9 +119,9 @@ class ExpeditionTest extends TestCase
     public function testStore()
     {
         $user = auth()->user();
-        $star = factory(Expedition::class)->create();
+        $star = Expedition::factory()->create();
 
-        $expedition = factory(Expedition::class)->create([
+        $expedition = Expedition::factory()->create([
             'star_id' => $star->id,
             'user_id' => $user->id,
         ]);
