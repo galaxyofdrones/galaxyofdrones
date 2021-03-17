@@ -16,7 +16,7 @@ class AppUserProvider extends EloquentUserProvider
     {
         if (empty($credentials) ||
             (count($credentials) === 1 &&
-                array_key_exists('password', $credentials))) {
+                Str::contains($this->firstCredentialKey($credentials), 'password'))) {
             return;
         }
 
