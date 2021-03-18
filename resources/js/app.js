@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 import Bookmark from './app/Bookmark';
 import Construction from './app/Construction';
 import Demolish from './app/Demolish';
-import Donation from './app/Donation';
 import Filters from './app/Filters';
 import Mailbox from './app/Mailbox';
 import Message from './app/Message';
@@ -77,7 +76,6 @@ const app = new Vue({
         Bookmark,
         Construction,
         Demolish,
-        Donation,
         Mailbox,
         Message,
         Monitor,

@@ -278,10 +278,6 @@ export default {
 
         openTrophy() {
             EventBus.$emit('trophy-click');
-        },
-
-        openDonation() {
-            EventBus.$emit('donation-click');
         }
     }
 };
