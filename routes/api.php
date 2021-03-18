@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\BattleLogController;
 use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\BookmarkController;
 use App\Http\Controllers\Api\ConstructionController;
-use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\ExpeditionController;
 use App\Http\Controllers\Api\ExpeditionLogController;
 use App\Http\Controllers\Api\MessageController;
@@ -328,6 +327,3 @@ Route::put('setting', [SettingController::class, 'update'])
 
 Route::get('status', [StatusController::class, 'index'])
     ->name('status');
-
-Route::post('donation', [DonationController::class, 'index'])
-    ->name('donation');
