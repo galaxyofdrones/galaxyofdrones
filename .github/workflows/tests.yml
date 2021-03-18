@@ -12,7 +12,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: galaxyofdrones_test
         options: >-
           --health-cmd="mysqladmin ping"
