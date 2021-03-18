@@ -192,15 +192,6 @@
                         <i class="fas fa-trophy"></i>
                     </a>
                 </li>
-                @if (config('donation.key'))
-                    <li class="nav-item">
-                        <a class="nav-link highlight-warning"
-                           href="#"
-                           @click.prevent="openDonation()">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </li>
-                @endif
             </ul>
         </div>
     </div>
