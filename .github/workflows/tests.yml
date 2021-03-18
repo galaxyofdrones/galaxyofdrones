@@ -82,6 +82,9 @@ jobs:
       - name: Generate Starmap
         run: php artisan starmap:generate --no-render
 
+      - name: Lint via ESLint
+        run: yarn lint
+
       - name: Cache PHP CS Fixer
         uses: actions/cache@v2
         with:
