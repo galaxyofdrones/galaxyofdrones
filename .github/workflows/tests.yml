@@ -11,9 +11,10 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: galaxyofdrones_test
+        ports:
+          - 3306:3306
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
@@ -21,6 +22,8 @@ jobs:
           --health-retries=3
       redis:
         image: redis
+        ports:
+          - 6379:6379
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
