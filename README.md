@@ -3,7 +3,7 @@
 ## Badges
 
 [![Build Status](https://github.com/galaxyofdrones/galaxyofdrones/workflows/tests/badge.svg)](https://github.com/galaxyofdrones/galaxyofdrones/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE.md)
 
 ## Introduction
 
@@ -21,6 +21,6 @@ If you are facing a problem with this package or found any bug, please open an i
 
 ## License
 
-The Galaxy of Drones Online is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Galaxy of Drones Online is open-sourced software licensed under the [MIT license](LICENSE.md).
 
 The Galaxy of Drones Artwork is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
