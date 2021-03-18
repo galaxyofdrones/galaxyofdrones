@@ -82,9 +82,9 @@ window.axios.interceptors.response.use(null, error => {
         window.location.reload();
     } else if (status === 500) {
         Swal.fire({
+            icon: 'error',
             title: Translations.error.whoops,
             text: Translations.error.wrong,
-            type: 'error',
             showConfirmButton: false,
             timer: 1500
         });

@@ -1,42 +1,10 @@
+$swal2-success: $success;
+$swal2-error: $danger;
+$swal2-warning: $warning;
+$swal2-info: $info;
+
 @import '~sweetalert2/src/sweetalert2';
 
 button.styled {
     transition: $base-transition;
-}
-
-.swal2-icon {
-    &.swal2-error {
-        border-color: $danger;
-
-        .line {
-            background-color: $danger;
-        }
-    }
-
-    &.swal2-warning {
-        color: $warning;
-        border-color: $warning;
-    }
-
-    &.swal2-info {
-        color: $info;
-        border-color: $info;
-    }
-
-    &.swal2-question {
-        color: $primary;
-        border-color: $primary;
-    }
-
-    &.swal2-success {
-        border-color: $success;
-
-        .placeholder {
-            border-color: rgba($success, .2);
-        }
-
-        .line {
-            background-color: $success;
-        }
-    }
 }
