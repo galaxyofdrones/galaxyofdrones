@@ -1,9 +1,9 @@
 @if (session()->has('_flash_manager'))
     <script type="text/javascript">
         Swal.fire({
+            icon: '{{ session('_flash_manager.type') }}',
             title: '{{ session('_flash_manager.title') }}',
             text: '{{ session('_flash_manager.message') }}',
-            type: '{{ session('_flash_manager.type') }}',
             showConfirmButton: false,
             timer: 1500
         });
@@ -11,9 +11,9 @@
 @elseif (session()->has('resent'))
     <script type="text/javascript">
         Swal.fire({
+            icon: 'success',
             title: '{{ __('messages.success.singular') }}',
             text: '{{ __('verification.sent') }}',
-            type: 'success',
             showConfirmButton: false,
             timer: 1500
         });
@@ -21,9 +21,9 @@
 @elseif (session()->has('status'))
     <script type="text/javascript">
         Swal.fire({
+            icon: 'success',
             title: '{{ __('messages.success.singular') }}',
             text: '{{ session('status') }}',
-            type: 'success',
             showConfirmButton: false,
             timer: 1500
         });
@@ -31,9 +31,9 @@
 @elseif ($errors->any())
     <script type="text/javascript">
         Swal.fire({
+            icon: 'error',
             title: '{{ __('messages.error.whoops') }}',
             text: '{{ __('messages.error.wrong') }}',
-            type: 'error',
             showConfirmButton: false,
             timer: 1500
         });
