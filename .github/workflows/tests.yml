@@ -70,6 +70,9 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
+      - name: Build Frontend
+        run: yarn prod
+
       - name: Generate Key
         run: php artisan key:generate
 
