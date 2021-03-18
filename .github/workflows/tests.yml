@@ -7,10 +7,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: galaxyofdrones_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
+          extensions: imagick
+          tools: composer:v2, php-cs-fixer
 
       - uses: actions/checkout@v2
 
@@ -18,7 +43,7 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Generate key
         run: php artisan key:generate
@@ -26,8 +51,17 @@ jobs:
       - name: Generate passport keys
         run: php artisan passport:keys
 
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
+      - name: Migrate and seed database
+        run: php artisan migrate --seed --no-interaction
+
+      - name: Generate starmap
+        run: php artisan starmap:generate --no-render
+
+      - name: Lint PHP code
+        run: php-cs-fixer fix --dry-run
+
+      - name: Start Websockets
+        run: php artisan websockets:serve &
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: php artisan test
