@@ -42,28 +42,66 @@ jobs:
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
+      - name: Get Node Cache Directory
+        id: node-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir))"
+
+      - name: Cache Node Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.node-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install Node Dependencies
+        run: yarn install
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
       - name: Install Dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Generate key
+      - name: Build Frontend
+        run: yarn prod
+
+      - name: Generate Key
         run: php artisan key:generate
 
-      - name: Generate passport keys
+      - name: Generate Passport Keys
         run: php artisan passport:keys
 
-      - name: Migrate and seed database
+      - name: Migrate and Seed Database
         run: php artisan migrate --seed --no-interaction
 
-      - name: Generate starmap
+      - name: Generate Starmap
         run: php artisan starmap:generate --no-render
 
-      - name: Lint PHP code
+      - name: Lint via ESLint
+        run: yarn lint
+
+      - name: Cache PHP CS Fixer
+        uses: actions/cache@v2
+        with:
+          path: ~/.php_cs.cache
+          key: ${{ runner.os }}-php-cs-${{ hashFiles('**/.php_cs.cache') }}
+          restore-keys: ${{ runner.os }}-php-cs-
+
+      - name: Lint via PHP CS Fixer
         run: php-cs-fixer fix --dry-run
 
       - name: Start Websockets
         run: php artisan websockets:serve &
 
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
+      - name: Execute Tests (Unit and Feature tests) via PHPUnit
         run: php artisan test
 
       - name: Upgrade Chrome Driver

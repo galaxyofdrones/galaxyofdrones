@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Bookmark from './app/Bookmark';
 import Construction from './app/Construction';

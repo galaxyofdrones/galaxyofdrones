@@ -1,8 +1,6 @@
 <?php
 
-$cacheDir = getenv('CIRCLECI')
-    ? getenv('HOME').'/.php-cs-fixer'
-    : __DIR__;
+$cacheDir = __DIR__;
 
 $finder = PhpCsFixer\Finder::create()->in([
     'app',
