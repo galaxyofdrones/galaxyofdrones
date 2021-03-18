@@ -1,3 +1,5 @@
+![Galaxy of Drones Online](https://user-images.githubusercontent.com/1419087/111707756-ed943980-8844-11eb-8b1b-f4895697f18e.png)
+
 ## Badges
 
 [![Build Status](https://github.com/galaxyofdrones/galaxyofdrones/workflows/tests/badge.svg)](https://github.com/galaxyofdrones/galaxyofdrones/actions)
@@ -9,9 +11,9 @@ The game story takes place in a virtual galaxy where randomly generated planets 
 
 ## Links
 
-The project is available [on Koodilab](https://koodilab.com).
+The project is available on [Koodilab](https://koodilab.com).
 
-The gamer and developer guides is available [on Website](https://galaxyofdrones.com/gamer-guide/).
+The gamer and developer guides is available on [GitHub](https://github.com/galaxyofdrones/docs).
 
 ## Reporting Issues
 
