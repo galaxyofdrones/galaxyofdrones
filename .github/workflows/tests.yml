@@ -42,6 +42,31 @@ jobs:
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
+      - name: Get node.js cache directory
+        id: node-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir))"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.node-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install Node Dependencies
+        run: yarn install
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
       - name: Install Dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
@@ -57,7 +82,13 @@ jobs:
       - name: Generate starmap
         run: php artisan starmap:generate --no-render
 
-      - name: Lint PHP code
+      - uses: actions/cache@v2
+        with:
+          path: ~/.php_cs.cache
+          key: ${{ runner.os }}-php-cs-${{ hashFiles('**/.php_cs.cache') }}
+          restore-keys: ${{ runner.os }}-php-cs-
+
+      - name: Lint via PHP CS Fixer
         run: php-cs-fixer fix --dry-run
 
       - name: Start Websockets
