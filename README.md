@@ -1,5 +1,6 @@
 ## Badges
 
+[![Build Status](https://github.com/galaxyofdrones/galaxyofdrones/workflows/tests/badge.svg)](https://github.com/galaxyofdrones/galaxyofdrones/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 ## Introduction
